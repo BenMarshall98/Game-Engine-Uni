@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameEngineLibraries">
+      <UniqueIdentifier>{37e91711-5a2e-444b-ad72-89573dccb1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode">
+      <UniqueIdentifier>{ecf537a7-b033-4c4c-9556-eafc9f8498aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineLibraries\OpenGL">
+      <UniqueIdentifier>{f7eb6cce-748d-4a97-8227-894cfdd6de0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineLibraries\Utility">
+      <UniqueIdentifier>{95a82282-c449-4b1a-9bec-7ec827c5b8b1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>GameCode</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineWindow.cpp">
+      <Filter>GameEngineLibraries</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL.cpp">
+      <Filter>GameEngineLibraries\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngineWindow.h">
+      <Filter>GameEngineLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="OpenGL.h">
+      <Filter>GameEngineLibraries\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="iModel.h">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameEngine.rc" />
+  </ItemGroup>
+</Project>
