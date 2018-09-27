@@ -97,7 +97,15 @@ void ResourceManager::LoadShader(string shaderName, string vertexProgram, string
 		}
 	}
 
+	unsigned int shaderID = glCreateProgram();
 
+	glAttachShader(shaderID, vertexShader);
+	glAttachShader(shaderID, fragmentShader);
+
+	if (geometryShader != 0)
+	{
+
+	}
 }
 
 void ResourceManager::ReadShader(string fileName, char * shaderProgram)
