@@ -1,4 +1,7 @@
 #include <fstream>
+#include <algorithm>
+
+#include "OpenGL.h"
 
 #include "ResourceManager.h"
 
@@ -26,13 +29,73 @@ void ResourceManager::LoadTexture(string textureName, string fileName)
 
 void ResourceManager::LoadShader(string shaderName, string vertexProgram, string fragmentProgram, string geometryProgram = "")
 {
+	string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
+	if(find(usedShaders.begin(), usedShaders.end(), shaderConcat) == usedShaders.end())
+	{
+		usedShaders.push_back(shaderConcat);
+	}
+	else
+	{
+		//TODO: Log that the shader programs have already exists as a resource
+	}
+
 	if (shaderList.find(shaderName) != shaderList.end())
 	{
-		//TODO: Log that the texture already exists as a resource
-		return;
+		//TODO: Log that the shader mapping name already exists
 	}
 
 	char * shaderProgram = nullptr;
+
+	/*
+	The following code is based from the following resource:
+
+	https://learnopengl.com/Getting-started/Shaders
+	*/
+	unsigned int vertexShader, fragmentShader, geometryShader = 0;
+	int success;
+	char infoLog[512];
+
+	//Compile Vertex Shader
+	ReadShader(vertexProgram, shaderProgram);
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShader, 1, &shaderProgram, NULL);
+	glCompileShader(vertexShader);
+
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		//TODO: Log that the vertexShader failed to be created, showing infoLog
+	}
+
+	//Compile Fragment Shader
+	ReadShader(fragmentProgram, shaderProgram);
+	fragmentProgram = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShader, 1, &shaderProgram, NULL);
+	glCompileShader(fragmentShader);
+
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		//TODO: Log that the fragmentShader failed to be created, showing infoLog
+	}
+
+	//Compile Geometry Shader
+	if (geometryProgram != "")
+	{
+		ReadShader(geometryProgram, shaderProgram);
+		geometryProgram = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(geometryShader, 1, &shaderProgram, NULL);
+		glCompileShader(geometryShader);
+
+		glGetShaderiv(geometryShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(geometryShader, 512, NULL, infoLog);
+			//TODO: Log that the geometryShader failed to be created, showing infoLog
+		}
+	}
 
 
 }
