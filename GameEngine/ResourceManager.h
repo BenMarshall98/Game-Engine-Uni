@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iModel.h"
+#include "Shader.h"
 
 #include <map>
 #include <vector>
@@ -17,7 +18,7 @@ class ResourceManager
 
 		map<string, iModel> modelList;
 		map<string, int> textureList;
-		map<string, int> shaderList;
+		map<string, Shader> shaderList;
 
 		void ReadShader(string fileName, char * shaderProgram);
 	

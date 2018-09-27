@@ -119,6 +119,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

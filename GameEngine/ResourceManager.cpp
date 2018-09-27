@@ -97,15 +97,30 @@ void ResourceManager::LoadShader(string shaderName, string vertexProgram, string
 		}
 	}
 
-	unsigned int shaderID = glCreateProgram();
+	Shader shader = Shader(glCreateProgram());
 
-	glAttachShader(shaderID, vertexShader);
-	glAttachShader(shaderID, fragmentShader);
+	glAttachShader(shader.GetShaderID(), vertexShader);
+	glAttachShader(shader.GetShaderID(), fragmentShader);
 
 	if (geometryShader != 0)
 	{
-
+		glAttachShader(shader.GetShaderID(), geometryShader);
 	}
+
+	glLinkProgram(shader.GetShaderID());
+
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+	glDeleteShader(geometryShader);
+
+	glGetProgramiv(shader.GetShaderID(), GL_LINK_STATUS, &success);
+	if (!success)
+	{
+		glGetProgramInfoLog(shader.GetShaderID(), 512, NULL, infoLog);
+		//TODO: Log that the shaderProgrm failed to be linked, showing infoLog
+	}
+
+	
 }
 
 void ResourceManager::ReadShader(string fileName, char * shaderProgram)

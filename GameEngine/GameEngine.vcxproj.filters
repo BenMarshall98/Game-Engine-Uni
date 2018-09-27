@@ -27,6 +27,9 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -40,6 +43,9 @@
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
     <ClInclude Include="iModel.h">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
   </ItemGroup>
