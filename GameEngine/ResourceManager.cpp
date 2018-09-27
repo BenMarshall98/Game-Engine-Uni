@@ -32,12 +32,28 @@ void ResourceManager::LoadShader(string shaderName, string vertexProgram, string
 		return;
 	}
 
+	char * shaderProgram = nullptr;
+
 
 }
 
-char* ResourceManager::ReadShader(string fileName)
+void ResourceManager::ReadShader(string fileName, char * shaderProgram)
 {
 	ifstream reader(fileName.c_str());
 
+	if (reader.fail())
+	{
+		//TODO: Log that the program does not exist
+		shaderProgram = nullptr;
+		return;
+	}
+
+	reader.seekg(0, ios::end);
+	int length = reader.tellg();
+	delete shaderProgram;
+	shaderProgram = new char[length];
 	
+	reader.seekg(0, ios::beg);
+	reader.read(shaderProgram, length);
+	reader.close();
 }

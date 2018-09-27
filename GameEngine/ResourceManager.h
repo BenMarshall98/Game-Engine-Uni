@@ -13,7 +13,7 @@ class ResourceManager
 		map<string, iModel> modelList;
 		map<string, int> textureList;
 		map<string, int> shaderList;
-		char* ReadShader(string fileName);
+		void ReadShader(string fileName, char * shaderProgram);
 	
 	public:
 		void LoadModel(string modelName, string fileName);
