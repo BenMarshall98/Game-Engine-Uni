@@ -2,6 +2,7 @@
 
 #include "iModel.h"
 #include "Shader.h"
+#include "Texture.h"
 
 #include <map>
 #include <vector>
@@ -17,10 +18,8 @@ class ResourceManager
 		vector<string> usedShaders;
 
 		map<string, iModel> modelList;
-		map<string, int> textureList;
+		map<string, Texture> textureList;
 		map<string, Shader> shaderList;
-
-		void ReadShader(string fileName, char * shaderProgram);
 	
 	public:
 		void LoadModel(string modelName, string fileName);

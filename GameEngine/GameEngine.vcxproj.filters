@@ -30,6 +30,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -46,6 +49,9 @@
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
   </ItemGroup>
