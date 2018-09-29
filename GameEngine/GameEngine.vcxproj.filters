@@ -65,6 +65,7 @@
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="ModelLoader.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

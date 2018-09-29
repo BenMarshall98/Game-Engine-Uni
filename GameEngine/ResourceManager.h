@@ -17,7 +17,7 @@ class ResourceManager
 		vector<string> usedTextures;
 		vector<string> usedShaders;
 
-		map<string, iModel> modelList;
+		map<string, iModel *> modelList;
 		map<string, Texture> textureList;
 		map<string, Shader> shaderList;
 	

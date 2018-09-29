@@ -1,11 +1,11 @@
 #include "Texture.h"
 
-#include "soil.h"
+#include "IL/il.h"
 
 bool Texture::LoadTexture(string fileName)
 {
 
-	//The following code is based on: https://open.gl/textures
+	//The following code is based on: https://r3dux.org/tag/ilutglloadimage/
 	glGenTextures(1, &mTextureID);
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
 
@@ -15,17 +15,21 @@ bool Texture::LoadTexture(string fileName)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int width, height;
+	unsigned int width, height, imageID;
+	bool success;
 
-	unsigned char* image = SOIL_load_image(fileName.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	ilGenImages(1, &imageID);
+	ilBindImage(imageID);
 
-	if (image)
+	success = ilLoadImage(fileName.c_str());
+
+	if (success)
 	{
+		ILinfo ImageInfo
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
-	SOIL_free_image_data(image);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
