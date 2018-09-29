@@ -43,7 +43,7 @@ void ResourceManager::LoadTexture(string textureName, string fileName)
 	textureList.insert(pair<string, Texture>(textureName, texture));
 }
 
-void ResourceManager::LoadShader(string shaderName, string vertexProgram, string fragmentProgram, string geometryProgram = "")
+void ResourceManager::LoadShader(string shaderName, string vertexProgram, string fragmentProgram, string geometryProgram)
 {
 	string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
 	if(find(usedShaders.begin(), usedShaders.end(), shaderConcat) == usedShaders.end())

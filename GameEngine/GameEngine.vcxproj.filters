@@ -13,6 +13,9 @@
     <Filter Include="GameEngineLibraries\Utility">
       <UniqueIdentifier>{95a82282-c449-4b1a-9bec-7ec827c5b8b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Utility\Models">
+      <UniqueIdentifier>{47590f5e-a480-4a20-96f5-b9bf6b7a99e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,6 +36,10 @@
     <ClCompile Include="Texture.cpp">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="StaticModel.cpp">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -45,20 +52,27 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="iModel.h">
-      <Filter>GameEngineLibraries\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="iModel.h">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticModel.h">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Useful Links.txt" />
   </ItemGroup>
 </Project>
