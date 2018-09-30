@@ -1,11 +1,12 @@
-#include "Texture.h"
+#define STB_IMAGE_IMPLEMENTATION
 
-#include "IL/il.h"
+#include "Texture.h"
+#include "stb_image.h"
 
 bool Texture::LoadTexture(string fileName)
 {
 
-	//The following code is based on: https://r3dux.org/tag/ilutglloadimage/
+	//The following code is based on: https://learnopengl.com/Getting-started/Textures
 	glGenTextures(1, &mTextureID);
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
 
@@ -15,23 +16,21 @@ bool Texture::LoadTexture(string fileName)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	unsigned int width, height, imageID;
-	bool success;
+	int width, height, numChannels;
+	stbi_set_flip_vertically_on_load(true);
 
-	ilGenImages(1, &imageID);
-	ilBindImage(imageID);
-
-	success = ilLoadImage(fileName.c_str());
+	unsigned char * image = stbi_load(fileName.c_str(), &width, &height, &numChannels, 3);
+	bool success = image;
 
 	if (success)
 	{
-		ILinfo ImageInfo
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
+	stbi_image_free(image);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return image;
+	return success;
 }

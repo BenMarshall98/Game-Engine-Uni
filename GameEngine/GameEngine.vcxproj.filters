@@ -39,7 +39,9 @@
     <ClCompile Include="StaticModel.cpp">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClCompile>
-    <ClCompile Include="ModelLoader.cpp" />
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -64,8 +66,12 @@
     <ClInclude Include="StaticModel.h">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
-    <ClInclude Include="ModelLoader.h" />
-    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="ModelLoader.h">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>GameEngineLibraries\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
