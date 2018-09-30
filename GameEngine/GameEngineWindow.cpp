@@ -19,12 +19,11 @@ GameEngineWindow::GameEngineWindow()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	gameWindow = glfwCreateWindow(800, 600, "Game Engine", NULL, NULL);
+	gameWindow = glfwCreateWindow(800, 600, "Game Engine", nullptr, nullptr);
 
-	if (gameWindow == NULL)
+	if (gameWindow == nullptr)
 	{
 		//TODO: Change to output to a logging system
-		cout << "Failed to create GLFW window" << endl;
 		glfwTerminate();
 	}
 
@@ -32,10 +31,7 @@ GameEngineWindow::GameEngineWindow()
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
 }
 
-void GameEngineWindow::windowResize(GLFWwindow * window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
+
 
 
 GameEngineWindow::~GameEngineWindow()
@@ -43,12 +39,14 @@ GameEngineWindow::~GameEngineWindow()
 	glfwTerminate();
 }
 
-void GameEngineWindow::Run()
+void GameEngineWindow::Run() const
 {
 	while (!glfwWindowShouldClose(gameWindow))
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		//TODO: limit the game engine to ~60 fps
 
 		glfwSwapBuffers(gameWindow);
 		glfwPollEvents();

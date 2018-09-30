@@ -15,14 +15,11 @@ private:
 	vector<vec3> mNormal;
 	vector<int> mIndices;
 public:
-	StaticModel(vector<vec3> pVertex, vector<vec2> pTexture, vector<vec3> pNormal, vector<int> pIndices) : mVertex(pVertex), mTexture(pTexture), mNormal(pNormal), mIndices(pIndices)
+	StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector<vec3> & pNormal, vector<int> & pIndices) : mVertex(pVertex), mTexture(pTexture), mNormal(pNormal), mIndices(pIndices)
 	{
 
 	}
 	~StaticModel();
-	void Render(void)
-	{
-
-	}
+	void Render(void) override;
 };
 

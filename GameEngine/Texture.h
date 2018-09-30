@@ -10,6 +10,9 @@ class Texture
 private:
 	unsigned int mTextureID;
 
+	Texture(const Texture& texture) = delete;
+	Texture& operator=(const Texture& texture) = delete;
+
 public:
 	Texture() : mTextureID(0)
 	{
@@ -21,6 +24,6 @@ public:
 		glDeleteTextures(1, &mTextureID);
 	}
 
-	bool LoadTexture(string fileName);
+	bool LoadTexture(const string & fileName) const;
 };
 

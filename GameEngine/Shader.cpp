@@ -1,7 +1,7 @@
 #include "Shader.h"
 #include <fstream>
 
-bool Shader::LoadShader(string vertexProgram, string fragmentProgram, string geometryProgram)
+bool Shader::LoadShader(string & vertexProgram, string & fragmentProgram, string & geometryProgram)
 {
 	
 
@@ -38,7 +38,7 @@ bool Shader::LoadShader(string vertexProgram, string fragmentProgram, string geo
 	glGetProgramiv(mShaderID, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(mShaderID, 512, NULL, infoLog);
+		glGetProgramInfoLog(mShaderID, 512, nullptr, infoLog);
 		//TODO: Log that the shaderProgrm failed to be linked, showing infoLog
 	}
 
@@ -56,7 +56,7 @@ bool Shader::LoadShader(string vertexProgram, string fragmentProgram, string geo
 	return success;
 }
 
-void Shader::ReadShader(string fileName, char * shaderProgram)
+void Shader::ReadShader(string & fileName, char * shaderProgram) const
 {
 	ifstream reader(fileName.c_str());
 
@@ -77,7 +77,7 @@ void Shader::ReadShader(string fileName, char * shaderProgram)
 	reader.close();
 }
 
-int Shader::CompileShader(string fileName, GLuint shaderType)
+int Shader::CompileShader(string & fileName, GLuint shaderType) const
 {
 	char * shaderProgram = nullptr;
 	int success, shader;
@@ -85,13 +85,13 @@ int Shader::CompileShader(string fileName, GLuint shaderType)
 
 	ReadShader(fileName, shaderProgram);
 	shader = glCreateShader(shaderType);
-	glShaderSource(shader, 1, &shaderProgram, NULL);
+	glShaderSource(shader, 1, &shaderProgram, nullptr);
 	glCompileShader(shader);
 
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(shader, 512, NULL, infoLog);
+		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
 		//TODO: Log that the vertexShader failed to be created, showing infoLog
 	}
 

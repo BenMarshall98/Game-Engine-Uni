@@ -20,9 +20,11 @@ class ResourceManager
 		map<string, iModel *> modelList;
 		map<string, Texture> textureList;
 		map<string, Shader> shaderList;
+
+		ResourceManager(void) {};
 	
 	public:
-		void LoadModel(string modelName, string fileName);
-		void LoadTexture(string textureName, string fileName);
-		void LoadShader(string shaderName, string vertexProgram, string fragmentProgram, string geometryProgram = "");
+		void LoadModel(const string & modelName, const string & fileName);
+		void LoadTexture(const string & textureName, const string & fileName);
+		void LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram = "");
 };

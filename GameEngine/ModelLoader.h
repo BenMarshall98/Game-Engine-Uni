@@ -12,17 +12,18 @@ class ModelLoader
 private:
 	//The following code is adapted from:
 	//https://thispointer.com/c-how-to-check-if-a-string-ends-with-an-another-given-string/
-	inline static bool EndsWith(string fileName, string fileType)
+	inline static bool EndsWith(const string & fileName, const string & fileType)
 	{
 		return (fileName.size() >= fileType.size() &&
 			fileName.compare(fileName.size() - fileType.size(), fileType.size(), fileType) == 0);
 	}
 
-	static void SimpleFormatExists(string & fileName, string fileType);
-	static int FindInVector(vector<string> & list, string toFind);
-	static StaticModel * LoadOBJ(string fileName);
-	static StaticModel * LoadSME(string fileName);
+	static void SimpleFormatExists(string & fileName, const string & fileType);
+	static int FindInVector(vector<string> & list, const string & toFind);
+	static StaticModel * LoadOBJ(string & fileName);
+	static StaticModel * LoadSME(string & fileName);
+	ModelLoader(void) {};
 public:
-	static iModel * LoadModel(string fileName);
+	static iModel * LoadModel(string & fileName);
 };
 

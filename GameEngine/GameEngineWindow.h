@@ -6,12 +6,17 @@ class GameEngineWindow
 	private:
 		GLFWwindow * gameWindow;
 
-		static void windowResize(GLFWwindow* window, int width, int height);
+		static inline void windowResize(GLFWwindow* window, const int width, const int height)
+		{
+			glViewport(0, 0, width, height);
+		};
+		GameEngineWindow(const GameEngineWindow & window) = delete;
+		GameEngineWindow& operator=(const GameEngineWindow & window) = delete;
 
 	public:
 		GameEngineWindow();
 		~GameEngineWindow();
 
-		void Run();
+		void Run() const;
 };
 

@@ -3,7 +3,7 @@
 #include "Texture.h"
 #include "stb_image.h"
 
-bool Texture::LoadTexture(string fileName)
+bool Texture::LoadTexture(const string & fileName) const
 {
 
 	//The following code is based on: https://learnopengl.com/Getting-started/Textures

@@ -1,0 +1,32 @@
+#Sun Sep 30 17:42:17 GMT+01:00 2018
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.advanced.options=
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.cdt.configuration=CPPTEST_USE_ACTIVE_CONFIG
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.compiler.command.c.win32.x86=cl.exe
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.compiler.command.cpp.win32.x86=cl.exe
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.compiler.family.win32.x86=vc_14_1-64
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.compiler.options.win32.x86=${cpptest\:original_options} -DPARASOFT_CPPTEST -I.
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.connected.6x.projects=
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.dependency.files.paths=${project_loc}/Makefile
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.dsp.env.var.mode=ENV_PATCH_PREPEND_MODE
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.edg.multibyte.chars.is.source.handling=AUTO
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.evc.env.var.mode=ENV_PATCH_PREPEND_MODE
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.extractor.id=vs71_extractor_id
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.linker.command.win32.x86=link.exe
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.linker.options.win32.x86=${cpptest\:original_options} ${cpptest\:project_lib_files}
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.make.command.line=make -i -B CXX\=${CPPTEST_SCAN} CC\=${CPPTEST_SCAN} LD\=${CPPTEST_SCAN}
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.make.scan.hash.code.validation=true
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.make.working.dir=${project_loc}
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.make_always_build=false
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.ode_auto_scan_mode=on_changes
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.ode_delete_bdf_postaction=false
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.ode_incremental_build=false
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.ode_options_dir=${project_loc}/cpptestscan.bdf
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.preference.store.version=1.1
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.run_orig_cmd_for_parallel_proj_bdf=true
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.runtime.location=${cpptest\:engine_loc}/runtime
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.synchronize_with_project_settings=true
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.test.case.location.patterns=*
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.test.ware.location=${workspace_loc}/.cpptest/${project_name}
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.vc71.configuration=CPPTEST_USE_ACTIVE_CONFIG
+GameEngine/GameEngine//com.parasoft.xtest.checkers.api.cpp.options.working.dir=${project_loc}
+project.path.5d68cae3-7845-4e1f-9ca5-1b560135c1eb=GameEngine/GameEngine

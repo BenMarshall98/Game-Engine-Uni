@@ -2,7 +2,7 @@
 
 void main(void)
 {
-	GameEngineWindow entryPoint = GameEngineWindow();
+	const GameEngineWindow entryPoint = GameEngineWindow();
 
 	//Load Game Code into the Game Engine here
 

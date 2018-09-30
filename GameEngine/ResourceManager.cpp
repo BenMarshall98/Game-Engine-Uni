@@ -1,22 +1,39 @@
-#include <fstream>
+#include "ResourceManager.h"
+#include "ModelLoader.h"
+
 #include <algorithm>
 
-#include "OpenGL.h"
 
-#include "ResourceManager.h"
-
-void ResourceManager::LoadModel(string modelName, string fileName)
+void ResourceManager::LoadModel(const string & modelName, const string & fileName)
 {
+	if (find(usedModels.begin(), usedModels.end(), fileName) == usedModels.end())
+	{
+		usedModels.push_back(fileName);
+	}
+	else
+	{
+		//TODO: Log that the texture file already exists as a resource
+		return;
+	}
 	if (modelList.find(modelName) != modelList.end())
 	{
 		//TODO: Log that the model already exists as a resource
 		return;
 	}
 
+	iModel * model = ModelLoader::LoadModel(fileName);
+
+	if (model == nullptr)
+	{
+		//TODO: Log tha the model failed to load
+		return;
+	}
+
+	modelList.insert(pair<string, iModel*>(modelName, model));
 
 }
 
-void ResourceManager::LoadTexture(string textureName, string fileName)
+void ResourceManager::LoadTexture(const string & textureName, const string & fileName)
 {
 	if (find(usedTextures.begin(), usedTextures.end(), fileName) == usedTextures.end())
 	{
@@ -25,6 +42,7 @@ void ResourceManager::LoadTexture(string textureName, string fileName)
 	else
 	{
 		//TODO: Log that the texture file already exists as a resource
+		return;
 	}
 
 	if (textureList.find(textureName) != textureList.end())
@@ -33,19 +51,19 @@ void ResourceManager::LoadTexture(string textureName, string fileName)
 		return;
 	}
 
-	Texture texture = Texture();
+	const Texture texture = Texture();
 	if (!texture.LoadTexture(fileName))
 	{
 		//TODO: Log that the texture failed to load
 		return;
 	}
 
-	textureList.insert(pair<string, Texture>(textureName, texture));
+	textureList.insert(pair<const string, const Texture>(textureName, texture));
 }
 
-void ResourceManager::LoadShader(string shaderName, string vertexProgram, string fragmentProgram, string geometryProgram)
+void ResourceManager::LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram)
 {
-	string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
+	const string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
 	if(find(usedShaders.begin(), usedShaders.end(), shaderConcat) == usedShaders.end())
 	{
 		usedShaders.push_back(shaderConcat);
@@ -53,11 +71,13 @@ void ResourceManager::LoadShader(string shaderName, string vertexProgram, string
 	else
 	{
 		//TODO: Log that the shader programs  already exists as a resource
+		return;
 	}
 
 	if (shaderList.find(shaderName) != shaderList.end())
 	{
 		//TODO: Log that the shader mapping name already exists
+		return;
 	}
 
 	
