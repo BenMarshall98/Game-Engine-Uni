@@ -18,8 +18,8 @@ class ResourceManager
 		vector<string> usedShaders;
 
 		map<string, iModel *> modelList;
-		map<string, Texture> textureList;
-		map<string, Shader> shaderList;
+		map<string, Texture *> textureList;
+		map<string, Shader *> shaderList;
 
 		ResourceManager(void) {};
 	

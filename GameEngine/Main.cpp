@@ -1,10 +1,12 @@
 #include "GameEngineWindow.h"
 
-void main(void)
+int main(void)
 {
-	const GameEngineWindow entryPoint = GameEngineWindow();
+	GameEngineWindow entryPoint;
 
 	//Load Game Code into the Game Engine here
-
+	entryPoint.Load();
 	entryPoint.Run();
+
+	return 0;
 }

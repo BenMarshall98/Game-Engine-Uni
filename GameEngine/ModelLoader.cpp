@@ -7,7 +7,7 @@
 using namespace std;
 using namespace glm;
 
-iModel * ModelLoader::LoadModel(string & fileName)
+iModel * ModelLoader::LoadModel(const string & fileName)
 {
 
 	//TODO Add more file types (COLLADA and custom animated model file format)
@@ -23,8 +23,8 @@ iModel * ModelLoader::LoadModel(string & fileName)
 	return nullptr;
 }
 
-//May get rid of method need to change so that it also returns bool if the fileName has changed
-void ModelLoader::SimpleFormatExists(string & fileName, const string & fileType)
+/*//May get rid of method need to change so that it also returns bool if the fileName has changed
+void ModelLoader::SimpleFormatExists(const string & fileName, const string & fileType)
 {
 	string oldFileName = fileName;
 	fileName.replace(fileName.size() - fileType.size(), fileType.size(), fileType);
@@ -37,9 +37,9 @@ void ModelLoader::SimpleFormatExists(string & fileName, const string & fileType)
 	{
 		fileName = oldFileName;
 	}
-}
+}*/
 
-StaticModel * ModelLoader::LoadOBJ(string & fileName)
+StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 {
 	ifstream reader(fileName.c_str());
 
@@ -156,8 +156,8 @@ int ModelLoader::FindInVector(vector<string> & list, const string & toFind)
 	return -1;
 }
 
-StaticModel * ModelLoader::LoadSME(string & fileName)
+StaticModel * ModelLoader::LoadSME(const string & fileName)
 {
-	fileName = ""; //TODO: Remove this line, this was only placed to remove a parasoft issue
+	//fileName = ""; //TODO: Remove this line, this was only placed to remove a parasoft issue
 	return nullptr;
 }

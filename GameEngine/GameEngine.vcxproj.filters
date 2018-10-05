@@ -16,6 +16,9 @@
     <Filter Include="GameEngineLibraries\Utility\Models">
       <UniqueIdentifier>{47590f5e-a480-4a20-96f5-b9bf6b7a99e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Entity Manager">
+      <UniqueIdentifier>{ceb312ba-5044-4234-bcec-be67352ee446}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -41,6 +44,15 @@
     </ClCompile>
     <ClCompile Include="ModelLoader.cpp">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>GameEngineLibraries\Entity Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>GameEngineLibraries\Entity Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="iComponent.cpp">
+      <Filter>GameEngineLibraries\Entity Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +83,15 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>GameEngineLibraries\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>GameEngineLibraries\Entity Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>GameEngineLibraries\Entity Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="iComponent.h">
+      <Filter>GameEngineLibraries\Entity Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

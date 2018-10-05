@@ -10,8 +10,8 @@ class Shader
 {
 private:
 	int mShaderID;
-	void ReadShader(string & fileName, char * shaderProgram) const;
-	int CompileShader(string & fileName, GLuint shaderType) const;
+	void ReadShader(const string & fileName, char * shaderProgram) const;
+	int CompileShader(const string & fileName, GLuint shaderType) const;
 
 	Shader(const Shader& shader) = delete;
 	Shader& operator=(const Shader& shader) = delete;
@@ -31,7 +31,7 @@ public:
 		glUseProgram(mShaderID);
 	}
 
-	bool LoadShader(string & vertexProgram, string & fragmentProgram, string & geometryProgram);
+	bool LoadShader(const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram);
 	
 };
 

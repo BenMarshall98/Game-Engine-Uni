@@ -6,9 +6,19 @@ using namespace std;
 
 GameEngineWindow::GameEngineWindow()
 {
+	
+}
+
+GameEngineWindow::~GameEngineWindow()
+{
+	glfwTerminate();
+}
+
+void GameEngineWindow::Load()
+{
 	/*
 	The following code was adapted from the following resource:
-		https://learnopengl.com/Getting-started/Hello-Window
+	https://learnopengl.com/Getting-started/Hello-Window
 
 	Adaptations include spliting the code across multiple methods,
 	and making a methods static (windowResize) so that it will work
@@ -29,14 +39,6 @@ GameEngineWindow::GameEngineWindow()
 
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
-}
-
-
-
-
-GameEngineWindow::~GameEngineWindow()
-{
-	glfwTerminate();
 }
 
 void GameEngineWindow::Run() const

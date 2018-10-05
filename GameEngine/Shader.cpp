@@ -1,7 +1,7 @@
 #include "Shader.h"
 #include <fstream>
 
-bool Shader::LoadShader(string & vertexProgram, string & fragmentProgram, string & geometryProgram)
+bool Shader::LoadShader(const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram)
 {
 	
 
@@ -56,7 +56,7 @@ bool Shader::LoadShader(string & vertexProgram, string & fragmentProgram, string
 	return success;
 }
 
-void Shader::ReadShader(string & fileName, char * shaderProgram) const
+void Shader::ReadShader(const string & fileName, char * shaderProgram) const
 {
 	ifstream reader(fileName.c_str());
 
@@ -77,7 +77,7 @@ void Shader::ReadShader(string & fileName, char * shaderProgram) const
 	reader.close();
 }
 
-int Shader::CompileShader(string & fileName, GLuint shaderType) const
+int Shader::CompileShader(const string & fileName, GLuint shaderType) const
 {
 	char * shaderProgram = nullptr;
 	int success, shader;

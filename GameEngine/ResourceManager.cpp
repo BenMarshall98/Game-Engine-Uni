@@ -51,14 +51,14 @@ void ResourceManager::LoadTexture(const string & textureName, const string & fil
 		return;
 	}
 
-	const Texture texture = Texture();
-	if (!texture.LoadTexture(fileName))
+	Texture * texture = new Texture();
+	if (!texture->LoadTexture(fileName))
 	{
 		//TODO: Log that the texture failed to load
 		return;
 	}
 
-	textureList.insert(pair<const string, const Texture>(textureName, texture));
+	textureList.insert(pair<string, Texture *>(textureName, texture));
 }
 
 void ResourceManager::LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram)
@@ -81,13 +81,13 @@ void ResourceManager::LoadShader(const string & shaderName, const string & verte
 	}
 
 	
-	Shader shader = Shader();
-	if (!shader.LoadShader(vertexProgram, fragmentProgram, geometryProgram))
+	Shader * shader = new Shader();
+	if (!shader->LoadShader(vertexProgram, fragmentProgram, geometryProgram))
 	{
 		//TODO: Log that the shader failed to compile
 		return;
 	}
 	
-	shaderList.insert(pair<string, Shader>(shaderName, shader));
+	shaderList.insert(pair<string, Shader *>(shaderName, shader));
 }
 

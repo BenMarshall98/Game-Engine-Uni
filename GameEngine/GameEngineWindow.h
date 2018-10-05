@@ -18,5 +18,6 @@ class GameEngineWindow
 		~GameEngineWindow();
 
 		void Run() const;
+		void Load();
 };
 

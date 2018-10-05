@@ -3,9 +3,10 @@
 class iModel
 {
 private:
-	iModel(void) {};
+	
 public:
-	virtual void Render(void) = 0;
-	virtual ~iModel() = 0;
+	iModel() {};
+	virtual ~iModel() {};
+	virtual void Render() = 0;
 };
 
