@@ -12,7 +12,7 @@ using namespace std;
 class EntityManager
 {
 private:
-	map<string, map<Entity *, iComponent>> ComponentList;
+	map<string, map<Entity *, iComponent *>> ComponentList;
 	vector<Entity *> EntityList;
 public:
 	EntityManager() {};
@@ -21,10 +21,10 @@ public:
 	Entity* GetEntityByName(string entityName);
 	void RemoveEntity(Entity* entity);
 
-	void AddComponentToEntity(Entity entity, iComponent component);
-	void RemoveComponentFromEntity(Entity entity, iComponent component);
-	iComponent GetComponentByNameOfEntity(Entity entity, string componentName);
-	vector<Entity> GetAllEntitiesWithComponent(string componentName);
+	void AddComponentToEntity(Entity * entity, iComponent * component);
+	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
+	iComponent * GetComponentOfEntity(Entity * entity, string componentName);
+	vector<Entity *> GetAllEntitiesWithComponent(string componentName);
 
 	~EntityManager() {};
 };
