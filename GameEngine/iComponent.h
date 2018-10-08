@@ -11,5 +11,6 @@ private:
 public:
 	virtual ~iComponent() = 0;
 	virtual string GetComponentName() = 0;
+	virtual void Swap() = 0;
 };
 
