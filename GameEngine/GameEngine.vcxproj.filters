@@ -19,13 +19,16 @@
     <Filter Include="GameEngineLibraries\Entity Manager">
       <UniqueIdentifier>{ceb312ba-5044-4234-bcec-be67352ee446}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\System Manager">
+      <UniqueIdentifier>{fb7c6b32-3b20-41b0-970a-250a090546cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineLibraries\Scene Manager">
+      <UniqueIdentifier>{87029c81-b448-498b-8d7a-6dc290f771ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>GameCode</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineWindow.cpp">
-      <Filter>GameEngineLibraries</Filter>
     </ClCompile>
     <ClCompile Include="OpenGL.cpp">
       <Filter>GameEngineLibraries\OpenGL</Filter>
@@ -54,11 +57,23 @@
     <ClCompile Include="iComponent.cpp">
       <Filter>GameEngineLibraries\Entity Manager</Filter>
     </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>GameEngineLibraries\System Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="iSystem.cpp">
+      <Filter>GameEngineLibraries\System Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFWWindow.cpp">
+      <Filter>GameEngineLibraries</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>GameEngineLibraries\Scene Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="iScene.cpp">
+      <Filter>GameEngineLibraries\Scene Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameEngineWindow.h">
-      <Filter>GameEngineLibraries</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="OpenGL.h">
       <Filter>GameEngineLibraries\OpenGL</Filter>
@@ -92,6 +107,21 @@
     </ClInclude>
     <ClInclude Include="iComponent.h">
       <Filter>GameEngineLibraries\Entity Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>GameEngineLibraries\System Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="iSystem.h">
+      <Filter>GameEngineLibraries\System Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWWindow.h">
+      <Filter>GameEngineLibraries</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>GameEngineLibraries\Scene Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="iScene.h">
+      <Filter>GameEngineLibraries\Scene Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

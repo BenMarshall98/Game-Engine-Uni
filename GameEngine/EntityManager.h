@@ -24,7 +24,7 @@ public:
 	void AddComponentToEntity(Entity * entity, iComponent * component);
 	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, string componentName);
-	vector<Entity *> GetAllEntitiesWithComponent(string componentName);
+	vector<Entity *> GetAllEntitiesWithComponents(string componentName[], int size);
 
 	~EntityManager() {};
 };

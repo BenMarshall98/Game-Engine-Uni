@@ -16,7 +16,7 @@ Entity * EntityManager::GetEntityByName(string entityName)
 		return nullptr;
 	}
 
-	for (int i = 0; i < EntityList.size; i++)
+	for (int i = 0; i < EntityList.size(); i++)
 	{
 		if (EntityList[i]->GetName() == entityName)
 		{
@@ -43,7 +43,7 @@ void EntityManager::RemoveEntity(Entity* entity)
 		iComponent * Component = find->second;
 		delete Component;
 
-		ComponentList.[it->first].erase(entity);
+		ComponentList[it->first].erase(entity);
 	}
 
 	vector<Entity *>::iterator object = find(EntityList.begin(), EntityList.end(), entity);
@@ -109,7 +109,29 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * entity, string compone
 	return nullptr;
 }
 
-vector<Entity *> EntityManager::GetAllEntitiesWithComponent(string componentName)
+vector<Entity *> EntityManager::GetAllEntitiesWithComponents(string componentName[], int size)
 {
+	vector<Entity *> entities;
 
+	for (int i = 0; i < EntityList.size(); i++)
+	{
+		Entity * entity = EntityList.at(i);
+		bool containsComponents = true;
+
+		for (int j = 0; j < size; j++)
+		{
+			if (GetComponentOfEntity(entity, componentName[j]) == nullptr)
+			{
+				containsComponents = false;
+				break;
+			}
+		}
+
+		if (containsComponents)
+		{
+			entities.push_back(entity);
+		}
+	}
+
+	return entities;
 }

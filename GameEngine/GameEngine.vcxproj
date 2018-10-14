@@ -119,29 +119,37 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="GameEngineWindow.cpp" />
+    <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="iComponent.cpp" />
+    <ClCompile Include="iScene.cpp" />
+    <ClCompile Include="iSystem.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StaticModel.cpp" />
+    <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="GameEngineWindow.h" />
+    <ClInclude Include="GLFWWindow.h" />
     <ClInclude Include="iComponent.h" />
     <ClInclude Include="iModel.h" />
+    <ClInclude Include="iScene.h" />
+    <ClInclude Include="iSystem.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="StaticModel.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #include <GLFW/glfw3.h>
 
 #pragma once
-class GameEngineWindow
+class GLFWWindow
 {
 	private:
 		GLFWwindow * gameWindow;
@@ -10,12 +10,13 @@ class GameEngineWindow
 		{
 			glViewport(0, 0, width, height);
 		};
-		GameEngineWindow(const GameEngineWindow & window) = delete;
-		GameEngineWindow& operator=(const GameEngineWindow & window) = delete;
+
+		GLFWWindow(const GLFWWindow & window) = delete;
+		GLFWWindow& operator=(const GLFWWindow & window) = delete;
 
 	public:
-		GameEngineWindow();
-		~GameEngineWindow();
+		GLFWWindow();
+		~GLFWWindow();
 
 		void Run() const;
 		void Load();

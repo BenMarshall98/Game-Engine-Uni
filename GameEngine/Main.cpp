@@ -1,8 +1,11 @@
-#include "GameEngineWindow.h"
+#include "GLFWWindow.h"
+#include "SceneManager.h"
 
 int main(void)
 {
-	GameEngineWindow entryPoint;
+	SceneManager& sceneManger = SceneManager::instance();
+
+	GLFWWindow entryPoint;
 
 	//Load Game Code into the Game Engine here
 	entryPoint.Load();

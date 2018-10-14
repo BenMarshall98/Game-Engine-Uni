@@ -1,20 +1,20 @@
 #include "OpenGL.h"
-#include "GameEngineWindow.h"
+#include "GLFWWindow.h"
 #include <iostream>
 
 using namespace std;
 
-GameEngineWindow::GameEngineWindow()
+GLFWWindow::GLFWWindow()
 {
 	
 }
 
-GameEngineWindow::~GameEngineWindow()
+GLFWWindow::~GLFWWindow()
 {
 	glfwTerminate();
 }
 
-void GameEngineWindow::Load()
+void GLFWWindow::Load()
 {
 	/*
 	The following code was adapted from the following resource:
@@ -41,7 +41,7 @@ void GameEngineWindow::Load()
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
 }
 
-void GameEngineWindow::Run() const
+void GLFWWindow::Run() const
 {
 	while (!glfwWindowShouldClose(gameWindow))
 	{
