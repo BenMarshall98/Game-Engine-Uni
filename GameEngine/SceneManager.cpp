@@ -10,11 +10,12 @@ SceneManager::~SceneManager()
 
 void SceneManager::Run()
 {
+	sceneRunning = true;
 	unsigned int maxThreads = thread::hardware_concurrency();
 
 	if (maxThreads < 2)
 	{
-		while (currentWindow->IsRunning())
+		while (currentWindow->IsRunning() && windowRunning)
 		{
 			Update();
 			Render();
@@ -24,35 +25,35 @@ void SceneManager::Run()
 	{
 		windowRunning = true;
 
-		thread update = thread(&SceneManager::Update, this);
+		thread update = thread(&SceneManager::ThreadUpdate, this);
 
-		while (currentWindow->IsRunning())
+		while (currentWindow->IsRunning() && windowRunning)
 		{
 			Render();
 		}
 
 		windowRunning = false;
 		update.join();
-
-		cout << "Update: " << updateCount << endl;
-		cout << "Render: " << renderCount << endl;
-
-		int i = 0;
 	}
+
+	sceneRunning = false;
 }
 
 void SceneManager::Update()
 {
-	while (windowRunning)
+	updateCount++;
+}
+
+void SceneManager::ThreadUpdate()
+{
+	while(windowRunning)
 	{
-		updateCount++;
+		Update();
 	}
 }
 
 void SceneManager::Render()
-{
-	static int count = 0;
-	
+{	
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -64,8 +65,21 @@ void SceneManager::Render()
 
 void SceneManager::SetScene(iScene * scene)
 {
+	bool tempRunning = windowRunning;
+	windowRunning = false;
+
+	while (sceneRunning) {}
+
+	currentScene->Close();
 	delete currentScene;
+
 	currentScene = scene;
+	currentScene->Load();
+
+	if (tempRunning)
+	{
+		Run();
+	}
 }
 
 void SceneManager::SetWindow(GLFWWindow * gameWindow)

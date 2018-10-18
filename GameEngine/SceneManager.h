@@ -10,12 +10,14 @@ private:
 	iScene * currentScene;
 	GLFWWindow * currentWindow;
 	bool windowRunning;
+	bool sceneRunning;
 	int updateCount = 0;
 	int renderCount = 0;
 
 	SceneManager() : currentScene(nullptr), currentWindow(nullptr) {};
 
 	void Update();
+	void ThreadUpdate();
 	void Render();
 
 public:
