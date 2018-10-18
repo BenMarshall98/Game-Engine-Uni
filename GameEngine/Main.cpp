@@ -3,13 +3,10 @@
 
 int main(void)
 {
-	SceneManager& sceneManger = SceneManager::instance();
+	SceneManager& sceneManager = SceneManager::instance();
 
-	GLFWWindow entryPoint;
-
-	//Load Game Code into the Game Engine here
-	entryPoint.Load();
-	entryPoint.Run();
+	sceneManager.SetWindow(new GLFWWindow());
+	sceneManager.Run();
 
 	return 0;
 }

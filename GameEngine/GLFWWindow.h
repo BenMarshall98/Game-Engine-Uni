@@ -18,7 +18,9 @@ class GLFWWindow
 		GLFWWindow();
 		~GLFWWindow();
 
-		void Run() const;
 		void Load();
+		void LimitFPS(float FPS);
+		void WindowEvents();
+		bool IsRunning();
 };
 

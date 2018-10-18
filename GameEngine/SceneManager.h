@@ -1,12 +1,20 @@
 #pragma once
 #include "iScene.h"
+#include "GLFWWindow.h"
+
+using namespace std;
 
 class SceneManager
 {
 private:
 	iScene * currentScene;
+	GLFWWindow * currentWindow;
+	static bool windowRunning;
 
-	SceneManager() : currentScene(nullptr) {};
+	SceneManager() : currentScene(nullptr), currentWindow(nullptr) {};
+
+	void Update();
+	void Render();
 
 public:
 
@@ -16,5 +24,6 @@ public:
 
 	void Run();
 	void SetScene(iScene * scene);
+	void SetWindow(GLFWWindow * gameWindow);
 };
 

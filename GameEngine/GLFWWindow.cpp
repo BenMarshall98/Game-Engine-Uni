@@ -1,10 +1,11 @@
 #include "OpenGL.h"
 #include "GLFWWindow.h"
+#include <Windows.h>
 #include <iostream>
 
 using namespace std;
 
-GLFWWindow::GLFWWindow()
+GLFWWindow::GLFWWindow() : gameWindow(nullptr)
 {
 	
 }
@@ -40,17 +41,41 @@ void GLFWWindow::Load()
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
 }
+//
+//void GLFWWindow::Run() const
+//{
+//	while (!glfwWindowShouldClose(gameWindow))
+//	{
+//		
+//
+//		//TODO: limit the game engine to ~60 fps
+//
+//		glfwSwapBuffers(gameWindow);
+//		glfwPollEvents();
+//	}
+//}
 
-void GLFWWindow::Run() const
+void GLFWWindow::WindowEvents()
 {
-	while (!glfwWindowShouldClose(gameWindow))
+	glfwSwapBuffers(gameWindow);
+	glfwPollEvents();
+}
+
+bool GLFWWindow::IsRunning()
+{
+	return !glfwWindowShouldClose(gameWindow);
+}
+
+void GLFWWindow::LimitFPS(float FPS)
+{
+	double timeLapsed = glfwGetTime();
+
+	double timeLeft = (1 / FPS) - timeLapsed;
+
+	if (timeLeft > 0)
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		//TODO: limit the game engine to ~60 fps
-
-		glfwSwapBuffers(gameWindow);
-		glfwPollEvents();
+		Sleep(timeLeft);
 	}
+
+	glfwSetTime(0);
 }
