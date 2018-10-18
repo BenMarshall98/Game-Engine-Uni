@@ -9,7 +9,9 @@ class SceneManager
 private:
 	iScene * currentScene;
 	GLFWWindow * currentWindow;
-	static bool windowRunning;
+	bool windowRunning;
+	int updateCount = 0;
+	int renderCount = 0;
 
 	SceneManager() : currentScene(nullptr), currentWindow(nullptr) {};
 

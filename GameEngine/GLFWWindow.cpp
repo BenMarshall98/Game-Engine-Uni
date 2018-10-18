@@ -74,7 +74,7 @@ void GLFWWindow::LimitFPS(float FPS)
 
 	if (timeLeft > 0)
 	{
-		Sleep(timeLeft);
+		Sleep(timeLeft * 1000);
 	}
 
 	glfwSetTime(0);

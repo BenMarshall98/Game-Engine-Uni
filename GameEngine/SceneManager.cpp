@@ -24,17 +24,29 @@ void SceneManager::Run()
 	{
 		windowRunning = true;
 
-		thread update = thread(Update());
+		thread update = thread(&SceneManager::Update, this);
+
+		while (currentWindow->IsRunning())
+		{
+			Render();
+		}
 
 		windowRunning = false;
+		update.join();
+
+		cout << "Update: " << updateCount << endl;
+		cout << "Render: " << renderCount << endl;
+
+		int i = 0;
 	}
 }
 
 void SceneManager::Update()
 {
-	static int count = 0;
-
-	cout << "Update: " << count++;
+	while (windowRunning)
+	{
+		updateCount++;
+	}
 }
 
 void SceneManager::Render()
@@ -44,7 +56,7 @@ void SceneManager::Render()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	cout << "Render: " << count++;
+	renderCount++;
 
 	currentWindow->LimitFPS(60);
 	currentWindow->WindowEvents();
