@@ -1,10 +1,14 @@
 #include "OpenGL.h"
 #include "SceneManager.h"
 #include <iostream>
-#include <thread>
+
 
 SceneManager::~SceneManager()
 {
+	if (swap.joinable())
+	{
+		swap.join();
+	}
 	delete currentScene;
 }
 
@@ -12,6 +16,8 @@ void SceneManager::Run()
 {
 	sceneRunning = true;
 	unsigned int maxThreads = thread::hardware_concurrency();
+
+	windowRunning = true;
 
 	if (maxThreads < 2)
 	{
@@ -23,7 +29,6 @@ void SceneManager::Run()
 	}
 	else
 	{
-		windowRunning = true;
 
 		thread update = thread(&SceneManager::ThreadUpdate, this);
 
@@ -63,7 +68,7 @@ void SceneManager::Render()
 	currentWindow->WindowEvents();
 }
 
-void SceneManager::SetScene(iScene * scene)
+void SceneManager::SwapScene(iScene * scene)
 {
 	bool tempRunning = windowRunning;
 	windowRunning = false;
@@ -80,6 +85,11 @@ void SceneManager::SetScene(iScene * scene)
 	{
 		Run();
 	}
+}
+
+void SceneManager::SetScene(iScene * scene)
+{
+	swap = thread(&SceneManager::SwapScene, this, scene);
 }
 
 void SceneManager::SetWindow(GLFWWindow * gameWindow)

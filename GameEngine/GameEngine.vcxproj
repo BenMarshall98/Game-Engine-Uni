@@ -131,6 +131,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StaticModel.cpp" />
     <ClCompile Include="SystemManager.cpp" />
+    <ClCompile Include="TestGameScene.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="StaticModel.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SystemManager.h" />
+    <ClInclude Include="TestGameScene.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>

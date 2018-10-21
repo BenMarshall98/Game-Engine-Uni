@@ -25,6 +25,21 @@
     <Filter Include="GameEngineLibraries\Scene Manager">
       <UniqueIdentifier>{87029c81-b448-498b-8d7a-6dc290f771ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameCode\Scenes">
+      <UniqueIdentifier>{1abaae8a-6442-42c6-b8fb-2251cd812e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Textures">
+      <UniqueIdentifier>{bb1475d6-bae7-472f-b042-6ebc8126e95e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Models">
+      <UniqueIdentifier>{04c3f81c-c4b0-486f-8182-693c9608b71e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCode\Shaders">
+      <UniqueIdentifier>{d1be5fae-3c05-44d7-8e23-ccd7c5063eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineLibraries\Components">
+      <UniqueIdentifier>{f61ea21b-977c-4ceb-8763-3d654d337831}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,9 +69,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>GameEngineLibraries\Entity Manager</Filter>
     </ClCompile>
-    <ClCompile Include="iComponent.cpp">
-      <Filter>GameEngineLibraries\Entity Manager</Filter>
-    </ClCompile>
     <ClCompile Include="SystemManager.cpp">
       <Filter>GameEngineLibraries\System Manager</Filter>
     </ClCompile>
@@ -71,6 +83,12 @@
     </ClCompile>
     <ClCompile Include="iScene.cpp">
       <Filter>GameEngineLibraries\Scene Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGameScene.cpp">
+      <Filter>GameCode\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="iComponent.cpp">
+      <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +123,6 @@
     <ClInclude Include="Entity.h">
       <Filter>GameEngineLibraries\Entity Manager</Filter>
     </ClInclude>
-    <ClInclude Include="iComponent.h">
-      <Filter>GameEngineLibraries\Entity Manager</Filter>
-    </ClInclude>
     <ClInclude Include="SystemManager.h">
       <Filter>GameEngineLibraries\System Manager</Filter>
     </ClInclude>
@@ -122,6 +137,12 @@
     </ClInclude>
     <ClInclude Include="iScene.h">
       <Filter>GameEngineLibraries\Scene Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGameScene.h">
+      <Filter>GameCode\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="iComponent.h">
+      <Filter>GameEngineLibraries\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

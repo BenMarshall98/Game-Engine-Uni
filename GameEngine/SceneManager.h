@@ -1,4 +1,6 @@
 #pragma once
+#include <thread>
+
 #include "iScene.h"
 #include "GLFWWindow.h"
 
@@ -13,12 +15,14 @@ private:
 	bool sceneRunning;
 	int updateCount = 0;
 	int renderCount = 0;
+	thread swap;
 
 	SceneManager() : currentScene(nullptr), currentWindow(nullptr) {};
 
 	void Update();
 	void ThreadUpdate();
 	void Render();
+	void SwapScene(iScene * scene);
 
 public:
 
