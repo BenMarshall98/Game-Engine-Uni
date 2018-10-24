@@ -1,5 +1,8 @@
 #pragma once
-class TestGameScene
+
+#include "iScene.h"
+
+class TestGameScene : public iScene
 {
 public:
 	TestGameScene();
