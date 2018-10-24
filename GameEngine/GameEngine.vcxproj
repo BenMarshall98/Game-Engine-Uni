@@ -129,6 +129,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGL.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="iSystem.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="OpenGL.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />

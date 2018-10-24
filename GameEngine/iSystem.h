@@ -5,6 +5,6 @@ public:
 	iSystem();
 	~iSystem();
 
-	void Action() {};
+	virtual void Action() = 0;
 };
 

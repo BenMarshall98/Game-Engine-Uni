@@ -13,18 +13,22 @@ using namespace std;
 class ResourceManager
 {
 	private:
-		vector<string> usedModels;
-		vector<string> usedTextures;
-		vector<string> usedShaders;
+		static vector<string> usedModels;
+		static vector<string> usedTextures;
+		static vector<string> usedShaders;
 
-		map<string, iModel *> modelList;
-		map<string, Texture *> textureList;
-		map<string, Shader *> shaderList;
+		static map<string, iModel *> modelList;
+		static map<string, Texture *> textureList;
+		static map<string, Shader *> shaderList;
 
 		ResourceManager(void) {};
 	
 	public:
-		void LoadModel(const string & modelName, const string & fileName);
-		void LoadTexture(const string & textureName, const string & fileName);
-		void LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram = "");
+		static void LoadModel(const string & modelName, const string & fileName);
+		static void LoadTexture(const string & textureName, const string & fileName);
+		static void LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram = "");
+
+		static iModel * GetModel(string model);
+		static Shader * GetShader(string shader);
+		static Texture * GetTexture(string texture);
 };

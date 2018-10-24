@@ -46,7 +46,7 @@ void SceneManager::Run()
 
 void SceneManager::Update()
 {
-	updateCount++;
+	currentScene->Update();
 }
 
 void SceneManager::ThreadUpdate()
@@ -62,7 +62,7 @@ void SceneManager::Render()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	renderCount++;
+	currentScene->Render();
 
 	currentWindow->LimitFPS(60);
 	currentWindow->WindowEvents();

@@ -2,13 +2,17 @@
 
 #include "iComponent.h"
 #include "iModel.h"
+#include "ResourceManager.h"
 
 class ComponentModel : public iComponent
 {
 private:
 	iModel * model;
 public:
-	ComponentModel(iModel * pModel) : model(pModel) {}
+	ComponentModel(string modelName)
+	{
+		model = ResourceManager::GetModel(modelName);
+	}
 
 	~ComponentModel()
 	{

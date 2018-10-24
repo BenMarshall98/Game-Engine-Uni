@@ -91,3 +91,17 @@ void ResourceManager::LoadShader(const string & shaderName, const string & verte
 	shaderList.insert(pair<string, Shader *>(shaderName, shader));
 }
 
+iModel * ResourceManager::GetModel(string model)
+{
+	return modelList.at(model);
+}
+
+Shader * ResourceManager::GetShader(string shader)
+{
+	return shaderList.at(shader);
+}
+
+Texture * ResourceManager::GetTexture(string texture)
+{
+	return textureList.at(texture);
+}

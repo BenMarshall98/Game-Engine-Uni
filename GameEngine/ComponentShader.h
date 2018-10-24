@@ -2,13 +2,17 @@
 
 #include "iComponent.h"
 #include "Shader.h"
+#include "ResourceManager.h"
 
 class ComponentShader : public iComponent
 {
 private:
 	Shader * shader;
 public:
-	ComponentShader(Shader * pShader) : shader(pShader) {}
+	ComponentShader(string shaderName)
+	{
+		shader = ResourceManager::GetShader(shaderName);
+	}
 
 	~ComponentShader()
 	{
