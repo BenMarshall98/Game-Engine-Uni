@@ -1,5 +1,5 @@
 #pragma once
-#include "OpenGL.h"
+#include "glad.h"
 #include <string>
 
 using namespace std;

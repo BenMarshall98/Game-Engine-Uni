@@ -3,6 +3,13 @@
 
 #include <algorithm>
 
+vector<string> ResourceManager::usedModels;
+vector<string> ResourceManager::usedTextures;
+vector<string> ResourceManager::usedShaders;
+
+map<string, iModel *> ResourceManager::modelList;
+map<string, Texture *> ResourceManager::textureList;
+map<string, Shader *> ResourceManager::shaderList;
 
 void ResourceManager::LoadModel(const string & modelName, const string & fileName)
 {

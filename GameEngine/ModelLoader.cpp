@@ -92,11 +92,12 @@ StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 		int vertex;
 		int texture;
 		int normal;
+		char slash;
 
 		istringstream line(faceString[i]);
 		for (int j = 0; j < 3; j++)
 		{
-			line >> vertex >> texture >> normal;
+			line >> vertex >> slash >> texture >> slash >> normal;
 
 			if (normal == 0)
 			{

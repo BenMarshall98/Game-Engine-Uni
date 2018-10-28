@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OpenGL.h"
+#include "glad.h"
 
 #include <string>
 
@@ -10,8 +10,8 @@ class Shader
 {
 private:
 	int mShaderID;
-	void ReadShader(const string & fileName, char * shaderProgram) const;
-	int CompileShader(const string & fileName, GLuint shaderType) const;
+	void ReadShader(const string & fileName, char ** shaderProgram) const;
+	int CompileShader(const string & fileName, GLenum shaderType) const;
 
 	Shader(const Shader& shader) = delete;
 	Shader& operator=(const Shader& shader) = delete;
@@ -24,6 +24,11 @@ public:
 	~Shader()
 	{
 		glDeleteProgram(mShaderID);
+	}
+
+	inline int ShaderID() const
+	{
+		return mShaderID;
 	}
 
 	inline void UseShader() const

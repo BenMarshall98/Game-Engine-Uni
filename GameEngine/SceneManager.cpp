@@ -1,4 +1,4 @@
-#include "OpenGL.h"
+#include "glad.h"
 #include "SceneManager.h"
 #include <iostream>
 
@@ -14,34 +14,42 @@ SceneManager::~SceneManager()
 
 void SceneManager::Run()
 {
-	sceneRunning = true;
-	unsigned int maxThreads = thread::hardware_concurrency();
-
-	windowRunning = true;
-
-	if (maxThreads < 2)
+	while (tempRunning)
 	{
-		while (currentWindow->IsRunning() && windowRunning)
+		sceneRunning = true;
+		unsigned int maxThreads = thread::hardware_concurrency();
+
+		windowRunning = true;
+
+		if (maxThreads < 2)
 		{
-			Update();
-			Render();
+			while (currentWindow->IsRunning() && windowRunning)
+			{
+				Update();
+				Render();
+			}
+		}
+		else
+		{
+
+			thread update = thread(&SceneManager::ThreadUpdate, this);
+
+			while (currentWindow->IsRunning() && windowRunning)
+			{
+				Render();
+			}
+
+			windowRunning = false;
+			update.join();
+		}
+
+		sceneRunning = false;
+
+		if (currentWindow->IsRunning())
+		{
+			FinishSwapScene();
 		}
 	}
-	else
-	{
-
-		thread update = thread(&SceneManager::ThreadUpdate, this);
-
-		while (currentWindow->IsRunning() && windowRunning)
-		{
-			Render();
-		}
-
-		windowRunning = false;
-		update.join();
-	}
-
-	sceneRunning = false;
 }
 
 void SceneManager::Update()
@@ -68,28 +76,35 @@ void SceneManager::Render()
 	currentWindow->WindowEvents();
 }
 
-void SceneManager::SwapScene(iScene * scene)
+void SceneManager::StartSwapScene(iScene * scene)
 {
-	bool tempRunning = windowRunning;
+	tempRunning = windowRunning;
 	windowRunning = false;
+	newScene = scene;
+}
 
-	while (sceneRunning) {}
+void SceneManager::FinishSwapScene()
+{
+	if (currentScene != nullptr)
+	{
+		currentScene->Close();
+	}
 
-	currentScene->Close();
 	delete currentScene;
 
-	currentScene = scene;
+	currentScene = newScene;
 	currentScene->Load();
-
-	if (tempRunning)
-	{
-		Run();
-	}
 }
 
 void SceneManager::SetScene(iScene * scene)
 {
-	swap = thread(&SceneManager::SwapScene, this, scene);
+	StartSwapScene(scene);
+
+	if (currentScene == nullptr)
+	{
+		tempRunning = true;
+		FinishSwapScene();
+	}
 }
 
 void SceneManager::SetWindow(GLFWWindow * gameWindow)

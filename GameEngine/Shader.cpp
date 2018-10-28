@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include <fstream>
+#include <sstream>
 
 bool Shader::LoadShader(const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram)
 {
@@ -56,7 +57,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	return success;
 }
 
-void Shader::ReadShader(const string & fileName, char * shaderProgram) const
+void Shader::ReadShader(const string & fileName, char ** shaderProgram) const
 {
 	ifstream reader(fileName.c_str());
 
@@ -66,24 +67,25 @@ void Shader::ReadShader(const string & fileName, char * shaderProgram) const
 		shaderProgram = nullptr;
 		return;
 	}
+	ostringstream buffer;
 
-	reader.seekg(0, ios::end);
-	int length = reader.tellg();
-	delete shaderProgram;
-	shaderProgram = new char[length];
+	buffer << reader.rdbuf();
+	buffer.
+	string str = buffer.str();
 
-	reader.seekg(0, ios::beg);
-	reader.read(shaderProgram, length);
+	*shaderProgram = (char *)str.c_str();
 	reader.close();
 }
 
-int Shader::CompileShader(const string & fileName, GLuint shaderType) const
+int Shader::CompileShader(const string & fileName, GLenum shaderType) const
 {
 	char * shaderProgram = nullptr;
 	int success, shader;
 	char infoLog[512];
 
-	ReadShader(fileName, shaderProgram);
+	GLenum test = (GLenum)shaderType;
+
+	ReadShader(fileName, &shaderProgram);
 	shader = glCreateShader(shaderType);
 	glShaderSource(shader, 1, &shaderProgram, nullptr);
 	glCompileShader(shader);
