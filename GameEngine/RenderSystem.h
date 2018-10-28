@@ -6,6 +6,7 @@
 #include "iModel.h"
 #include "glm/glm.hpp"
 #include "Shader.h"
+#include "Texture.h"
 #include <vector>
 
 using namespace glm;
@@ -18,7 +19,7 @@ private:
 public:
 	RenderSystem(EntityManager & entityManager);
 	void Action(void);
-	void Render(Shader * shader, iModel * model, vec3 * position);
+	void Render(Shader * shader, iModel * model, vec3 position, Texture * texture);
 	~RenderSystem();
 };
 

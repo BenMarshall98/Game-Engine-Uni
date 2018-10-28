@@ -7,18 +7,15 @@ using namespace glm;
 class ComponentPosition : public iComponent
 {
 private:
-	vec3 * position;
+	vec3 position;
 public:
-	ComponentPosition(vec3 * pPosition) : position(pPosition) {}
-	~ComponentPosition()
-	{
-		delete position;
-	}
+	ComponentPosition(vec3 pPosition) : position(pPosition) {}
+	~ComponentPosition() {}
 
 	string GetComponentName();
 	void Swap() {}
 
-	inline vec3 * GetPosition()
+	inline vec3 GetPosition()
 	{
 		return position;
 	}

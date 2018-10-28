@@ -7,9 +7,11 @@ class GLFWWindow
 	private:
 		GLFWwindow * gameWindow;
 
-		static inline void windowResize(GLFWwindow* window, const int width, const int height)
+		static inline void windowResize(GLFWwindow* window, const int pWidth, const int pHeight)
 		{
-			glViewport(0, 0, width, height);
+			glViewport(0, 0, pWidth, pHeight);
+			width = pWidth;
+			height = pHeight;
 		};
 
 		GLFWWindow(const GLFWWindow & window) = delete;
@@ -23,5 +25,8 @@ class GLFWWindow
 		void LimitFPS(float FPS);
 		void WindowEvents();
 		bool IsRunning();
+
+		static int width;
+		static int height;
 };
 

@@ -106,8 +106,8 @@ StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 			}
 
 			string lineToAdd = vertexString[vertex - 1] + " " + textureString[texture - 1] + " " + normalString[normal - 1];
-
-			if (int index = FindInVector(modelData, lineToAdd) != -1)
+			int index = FindInVector(modelData, lineToAdd);
+			if (index != -1)
 			{
 				indexes.push_back(index);
 			}

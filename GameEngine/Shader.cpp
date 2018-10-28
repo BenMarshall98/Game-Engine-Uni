@@ -57,7 +57,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	return success;
 }
 
-void Shader::ReadShader(const string & fileName, char ** shaderProgram) const
+void Shader::ReadShader(const string & fileName, string & shaderProgram) const
 {
 	ifstream reader(fileName.c_str());
 
@@ -70,24 +70,22 @@ void Shader::ReadShader(const string & fileName, char ** shaderProgram) const
 	ostringstream buffer;
 
 	buffer << reader.rdbuf();
-	buffer.
-	string str = buffer.str();
-
-	*shaderProgram = (char *)str.c_str();
+	shaderProgram = buffer.str();
 	reader.close();
 }
 
 int Shader::CompileShader(const string & fileName, GLenum shaderType) const
 {
-	char * shaderProgram = nullptr;
+	string shaderProgram;
 	int success, shader;
 	char infoLog[512];
 
 	GLenum test = (GLenum)shaderType;
 
-	ReadShader(fileName, &shaderProgram);
+	ReadShader(fileName, shaderProgram);
 	shader = glCreateShader(shaderType);
-	glShaderSource(shader, 1, &shaderProgram, nullptr);
+	const char * program = shaderProgram.c_str();
+	glShaderSource(shader, 1, &program, nullptr);
 	glCompileShader(shader);
 
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
@@ -96,8 +94,6 @@ int Shader::CompileShader(const string & fileName, GLenum shaderType) const
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
 		//TODO: Log that the vertexShader failed to be created, showing infoLog
 	}
-
-	delete shaderProgram;
 
 	return shader;
 }

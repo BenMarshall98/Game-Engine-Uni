@@ -4,6 +4,9 @@
 
 using namespace std;
 
+int GLFWWindow::height = 600;
+int GLFWWindow::width = 800;
+
 GLFWWindow::GLFWWindow() : gameWindow(nullptr)
 {
 	

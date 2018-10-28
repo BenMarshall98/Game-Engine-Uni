@@ -3,3 +3,5 @@ http://www.wazim.com/Collada_Tutorial_1.htm
 
 //TBN Matrix
 http://www.terathon.com/code/tangent.html
+
+//TODO: Swpa the OpenGL loading library back to galogen

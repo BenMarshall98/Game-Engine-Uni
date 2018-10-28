@@ -103,6 +103,7 @@
       <Filter>GameEngineLibraries\Systems</Filter>
     </ClCompile>
     <ClCompile Include="glad.c" />
+    <ClCompile Include="ComponentTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -168,6 +169,7 @@
     </ClInclude>
     <ClInclude Include="glad.h" />
     <ClInclude Include="khrplatform.h" />
+    <ClInclude Include="ComponentTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
@@ -188,5 +190,10 @@
     <Resource Include="cube.obj">
       <Filter>GameCode\Models</Filter>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="container.jpg">
+      <Filter>GameCode\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

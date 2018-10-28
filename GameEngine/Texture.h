@@ -24,5 +24,10 @@ public:
 	}
 
 	bool LoadTexture(const string & fileName);
+
+	inline int TextureID()
+	{
+		return mTextureID;
+	}
 };
 

@@ -3,7 +3,9 @@
 #include "ComponentModel.h"
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
+#include "ComponentTexture.h"
 #include "RenderSystem.h"
+#include "glad.h"
 
 TestGameScene::TestGameScene()
 {
@@ -18,11 +20,31 @@ void TestGameScene::Load()
 {
 	ResourceManager::LoadModel("Cube", "cube.obj");
 	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
+	ResourceManager::LoadTexture("Box", "container.jpg");
 
 	Entity * newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(new vec3(0.0f, 0.0f, 0.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+
+	newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, -0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+
+	newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, -0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+
+	newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
 	RenderSystem * render = new RenderSystem(mEntityManager);
 	mSystemManager.AddRenderSystem(render);
@@ -30,6 +52,7 @@ void TestGameScene::Load()
 
 void TestGameScene::Render()
 {
+	glEnable(GL_DEPTH_TEST);
 	mSystemManager.Render();
 }
 

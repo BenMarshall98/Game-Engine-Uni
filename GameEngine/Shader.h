@@ -10,7 +10,7 @@ class Shader
 {
 private:
 	int mShaderID;
-	void ReadShader(const string & fileName, char ** shaderProgram) const;
+	void ReadShader(const string & fileName, string & shaderProgram) const;
 	int CompileShader(const string & fileName, GLenum shaderType) const;
 
 	Shader(const Shader& shader) = delete;
