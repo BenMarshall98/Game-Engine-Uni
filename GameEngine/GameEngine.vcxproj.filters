@@ -104,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="glad.c" />
     <ClCompile Include="ComponentTexture.cpp" />
+    <ClCompile Include="AnimatedModel.cpp">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -170,6 +173,9 @@
     <ClInclude Include="glad.h" />
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="ComponentTexture.h" />
+    <ClInclude Include="AnimatedModel.h">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
