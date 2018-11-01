@@ -21,6 +21,10 @@ struct Bone
 
 class AnimatedModel : public iModel
 {
+private:
+	unsigned int VAO, EBO;
+	unsigned int VBO[3];
+
 public:
 	vector<vec3> vertex;
 	vector<vec2> texture;
@@ -41,6 +45,8 @@ public:
 //Make above privates
 	AnimatedModel();
 	~AnimatedModel();
+
+	void Load();
 
 	virtual void Render()
 	{

@@ -16,7 +16,7 @@ private:
 	vector<int> mIndices;
 
 	unsigned int VAO, EBO;
-	unsigned int VBO[3];
+	unsigned int VBO[5];
 public:
 	StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector<vec3> & pNormal, vector<int> & pIndices);
 	~StaticModel();
