@@ -20,6 +20,6 @@ private:
 public:
 	StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector<vec3> & pNormal, vector<int> & pIndices);
 	~StaticModel();
-	void Render(void) override;
+	void Render(Shader * shader) override;
 };
 

@@ -2,7 +2,6 @@
 
 
 #include "assimp/Importer.hpp"
-
 #include "assimp/postprocess.h"
 
 #include <fstream>
@@ -186,7 +185,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			}
 		}
 
-		model->globalInverse = inverse(AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
+		model->globalInverse = inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
 
 		const aiMesh* mesh = scene->mMeshes[0];
 
@@ -241,7 +240,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			Bone * newBone = new Bone;
 			
 			newBone->name = bone->mName.data;
-			newBone->offsetMatrix = transpose(AiMatrixtoGLMMatrix(bone->mOffsetMatrix));
+			newBone->offsetMatrix = transpose(AnimatedModel::AiMatrixtoGLMMatrix(bone->mOffsetMatrix));
 			newBone->node = FindNode(newBone->name, model);
 			newBone->animNode = FindAnimNode(newBone->name, model);
 

@@ -29,32 +29,6 @@ private:
 	static StaticModel * LoadSME(const string & fileName);
 	static AnimatedModel * LoadDAE(const string & fileName);
 
-	static mat4 AiMatrixtoGLMMatrix(aiMatrix4x4& matrix)
-	{
-		mat4 newMatrix;
-		newMatrix[0][0] = matrix.a1;
-		newMatrix[1][0] = matrix.b1;
-		newMatrix[2][0] = matrix.c1;
-		newMatrix[3][0] = matrix.d1;
-
-		newMatrix[0][1] = matrix.a2;
-		newMatrix[1][1] = matrix.b2;
-		newMatrix[2][1] = matrix.c2;
-		newMatrix[3][1] = matrix.d2;
-
-		newMatrix[0][2] = matrix.a3;
-		newMatrix[1][2] = matrix.b3;
-		newMatrix[2][2] = matrix.c3;
-		newMatrix[3][2] = matrix.d3;
-
-		newMatrix[0][3] = matrix.a4;
-		newMatrix[1][3] = matrix.b4;
-		newMatrix[2][3] = matrix.c4;
-		newMatrix[3][3] = matrix.d4;
-
-		return newMatrix;
-	}
-
 	static void recursiveNodeProcess(aiNode* node, AnimatedModel * model);
 
 	static Bone* FindBone(string name, AnimatedModel * model)

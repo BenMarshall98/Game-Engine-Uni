@@ -52,7 +52,7 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Textur
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
 
-	model->Render();
+	model->Render(shader);
 	glUseProgram(0);
 }
 
