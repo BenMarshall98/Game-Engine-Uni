@@ -177,12 +177,18 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 	{
 		recursiveNodeProcess(scene->mRootNode, model);
 
-		if (scene->mNumAnimations != 0)
+		for (int i = 0 ; i < scene->mNumAnimations; i++)
 		{
-			for (int i = 0; i < scene->mAnimations[0]->mNumChannels; i++)
+			Animation * animation = new Animation();
+			animation->framesPerSecond = scene->mAnimations[i]->mTicksPerSecond;
+			animation->duration = scene->mAnimations[i]->mDuration;
+			for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++)
 			{
-				model->nodesAnim.push_back(scene->mAnimations[0]->mChannels[i]);
+				animation->nodesAnim.push_back(scene->mAnimations[i]->mChannels[j]);
+
 			}
+
+			model->animations.push_back(animation);
 		}
 
 		model->globalInverse = inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
@@ -192,8 +198,18 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 		for (int i = 0; i < mesh->mNumVertices; i++)
 		{
 			aiVector3D vertex = mesh->mVertices[i];
-			aiVector3D texCoord = mesh->mTextureCoords[0][i];
-			aiVector3D normal = mesh->mNormals[i];
+			aiVector3D texCoord(0.5f, 0.5f, 0);
+			aiVector3D normal(0, 0, 0);
+
+			if (mesh->HasTextureCoords(0))
+			{
+				texCoord = mesh->mTextureCoords[0][i];
+			}
+
+			if (mesh->HasNormals())
+			{
+				normal = mesh->mNormals[i];
+			}
 
 			vec3 vert = vec3(vertex.x, vertex.y, vertex.z);
 			vec2 text = vec2(texCoord.x, texCoord.y);
@@ -242,7 +258,11 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			newBone->name = bone->mName.data;
 			newBone->offsetMatrix = transpose(AnimatedModel::AiMatrixtoGLMMatrix(bone->mOffsetMatrix));
 			newBone->node = FindNode(newBone->name, model);
-			newBone->animNode = FindAnimNode(newBone->name, model);
+
+			for (int k = 0; k < model->animations.size(); k++)
+			{
+				newBone->animNode.push_back(FindAnimNode(newBone->name, model->animations.at(k)));
+			}
 
 			model->bones.push_back(newBone);
 
@@ -258,6 +278,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			model->bones.at(i)->parent = parentBone;
 		}
 
+		model->Load();
 		return model;
 	}
 	else

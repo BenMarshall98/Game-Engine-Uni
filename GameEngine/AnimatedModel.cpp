@@ -15,6 +15,7 @@ void AnimatedModel::Load()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) *vertex.size(), &vertex[0], GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * texture.size(), &texture[0], GL_STATIC_DRAW);
@@ -28,7 +29,7 @@ void AnimatedModel::Load()
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[3]);
+	/*glBindBuffer(GL_ARRAY_BUFFER, VBO[3]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(int) * ID.size(), &ID[0], GL_STATIC_DRAW);
 	
 	glVertexAttribIPointer(3, 1, GL_INT, GL_FALSE, (void*)0);
@@ -38,7 +39,7 @@ void AnimatedModel::Load()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * weight.size(), &weight[0], GL_STATIC_DRAW);
 
 	glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)0);
-	glEnableVertexAttribArray(4);
+	glEnableVertexAttribArray(4);*/
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -50,11 +51,12 @@ void AnimatedModel::Load()
 
 void AnimatedModel::Render(Shader * shader)
 {
+	/*
 	Update();
 
 	int boneMatrixLocation = glGetUniformLocation(shader->ShaderID(), "BoneMatrix");
 	glUniformMatrix4fv(boneMatrixLocation, boneMatrix.size(), GL_FALSE, value_ptr(boneMatrix[0]));
-
+	*/
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }

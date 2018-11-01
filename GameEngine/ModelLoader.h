@@ -55,13 +55,13 @@ private:
 		return nullptr;
 	}
 
-	static aiNodeAnim *FindAnimNode(string name, AnimatedModel * model)
+	static aiNodeAnim *FindAnimNode(string name, Animation * animation)
 	{
-		for (int i = 0; i < model->nodesAnim.size(); i++)
+		for (int i = 0; i < animation->nodesAnim.size(); i++)
 		{
-			if (model->nodesAnim.at(i)->mNodeName.data == name)
+			if (animation->nodesAnim.at(i)->mNodeName.data == name)
 			{
-				return model->nodesAnim.at(i);
+				return animation->nodesAnim.at(i);
 			}
 		}
 		return nullptr;

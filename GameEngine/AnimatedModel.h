@@ -14,10 +14,18 @@ struct Bone
 {
 	string name;
 	aiNode* node;
-	aiNodeAnim* animNode;
+	vector<aiNodeAnim*> animNode;
 	Bone* parent;
 	mat4 parentTransforms;
 	mat4 offsetMatrix;
+};
+
+struct Animation
+{
+	string name;
+	vector<aiNodeAnim*> nodesAnim;
+	double framesPerSecond;
+	double duration;
 };
 
 class AnimatedModel : public iModel
@@ -42,11 +50,13 @@ public:
 	vector<unsigned int> ID;
 
 	vector<Bone*> bones;
+	vector<Animation*> animations;
 
 	vector<aiNode*> nodes;
-	vector<aiNodeAnim*> nodesAnim;
 
 	mat4 globalInverse;
+	
+	double currentTime;
 
 	static mat4 AiMatrixtoGLMMatrix(aiMatrix4x4& matrix)
 	{
