@@ -1,11 +1,12 @@
 #include "ModelLoader.h"
-#include "glm/glm.hpp"
+
+
+#include "assimp/Importer.hpp"
+
+#include "assimp/postprocess.h"
 
 #include <fstream>
 #include <sstream>
-
-using namespace std;
-using namespace glm;
 
 iModel * ModelLoader::LoadModel(const string & fileName)
 {
@@ -18,6 +19,10 @@ iModel * ModelLoader::LoadModel(const string & fileName)
 	else if (EndsWith(fileName, ".sme"))
 	{
 		return LoadSME(fileName);
+	}
+	else if (EndsWith(fileName, ".dae"))
+	{
+		return LoadDAE(fileName);
 	}
 	//TODO Log that the file does not exist
 	return nullptr;
@@ -161,4 +166,114 @@ StaticModel * ModelLoader::LoadSME(const string & fileName)
 {
 	//fileName = ""; //TODO: Remove this line, this was only placed to remove a parasoft issue
 	return nullptr;
+}
+AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
+{
+	AnimatedModel * model = new AnimatedModel;
+
+	Importer importer;
+	const aiScene * scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+
+	if (scene)
+	{
+		recursiveNodeProcess(scene->mRootNode, model);
+
+		if (scene->mNumAnimations != 0)
+		{
+			for (int i = 0; i < scene->mAnimations[0]->mNumChannels; i++)
+			{
+				model->nodesAnim.push_back(scene->mAnimations[0]->mChannels[i]);
+			}
+		}
+
+		model->globalInverse = inverse(AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
+
+		const aiMesh* mesh = scene->mMeshes[0];
+
+		for (int i = 0; i < mesh->mNumVertices; i++)
+		{
+			aiVector3D vertex = mesh->mVertices[i];
+			aiVector3D texCoord = mesh->mTextureCoords[0][i];
+			aiVector3D normal = mesh->mNormals[i];
+
+			vec3 vert = vec3(vertex.x, vertex.y, vertex.z);
+			vec2 text = vec2(texCoord.x, texCoord.y);
+			vec3 norm = vec3(normal.x, normal.y, normal.z);
+
+			model->vertex.push_back(vert);
+			model->texture.push_back(text);
+			model->normal.push_back(norm);
+		}
+
+		for (int i = 0; i < mesh->mNumFaces; i++)
+		{
+			const aiFace& face = mesh->mFaces[i];
+
+			model->indices.push_back(face.mIndices[0]);
+			model->indices.push_back(face.mIndices[1]);
+			model->indices.push_back(face.mIndices[2]);
+		}
+
+		model->ID.resize(mesh->mNumVertices * 4);
+		model->weight.resize(mesh->mNumVertices * 4);
+
+		for (int i = 0; i < mesh->mNumBones; i++)
+		{
+			aiBone * bone = mesh->mBones[i];
+
+			for (int j = 0; j < bone->mNumWeights; j++)
+			{
+				aiVertexWeight weight = bone->mWeights[j];
+				unsigned int vertexStart = weight.mVertexId * 4;
+
+				for (int k = 0; k < 4; k++)
+				{
+					if (model->weight.at(vertexStart + k) == 0)
+					{
+						model->weight.at(vertexStart + k) = weight.mWeight;
+						model->ID.at(vertexStart + k) = i;
+						break;
+					}
+				}
+
+			}
+
+			Bone * newBone = new Bone;
+			
+			newBone->name = bone->mName.data;
+			newBone->offsetMatrix = transpose(AiMatrixtoGLMMatrix(bone->mOffsetMatrix));
+			newBone->node = FindNode(newBone->name, model);
+			newBone->animNode = FindAnimNode(newBone->name, model);
+
+			model->bones.push_back(newBone);
+
+		}
+
+		for (int i = 0; i < model->bones.size(); i++)
+		{
+			string name = model->bones.at(i)->name;
+			string parentName = FindNode(name, model)->mParent->mName.data;
+
+			Bone * parentBone = FindBone(parentName, model);
+
+			model->bones.at(i)->parent = parentBone;
+		}
+
+		return model;
+	}
+	else
+	{
+		//TODO: Log error occured
+		return nullptr;
+	}
+}
+
+void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
+{
+	model->nodes.push_back(node);
+
+	for (int i = 0; i < node->mNumChildren; i++)
+	{
+		recursiveNodeProcess(node->mChildren[i], model);
+	}
 }

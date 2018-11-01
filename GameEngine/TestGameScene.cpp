@@ -19,6 +19,7 @@ TestGameScene::~TestGameScene()
 void TestGameScene::Load()
 {
 	ResourceManager::LoadModel("Cube", "cube.obj");
+	ResourceManager::LoadModel("Test", "Monster_1.dae");
 	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
 	ResourceManager::LoadTexture("Box", "container.jpg");
 
