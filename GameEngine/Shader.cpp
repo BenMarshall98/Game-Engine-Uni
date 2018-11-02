@@ -64,7 +64,7 @@ void Shader::ReadShader(const string & fileName, string & shaderProgram) const
 	if (reader.fail())
 	{
 		//TODO: Log that the program does not exist
-		shaderProgram = nullptr;
+		shaderProgram = "";
 		return;
 	}
 	ostringstream buffer;

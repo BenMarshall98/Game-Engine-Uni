@@ -192,6 +192,12 @@
     <None Include="TestFragment.frag">
       <Filter>GameCode\Shaders</Filter>
     </None>
+    <None Include="RiggedFragment.frag">
+      <Filter>GameCode\Shaders</Filter>
+    </None>
+    <None Include="RiggedVertex.vert">
+      <Filter>GameCode\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Useful Links.txt" />

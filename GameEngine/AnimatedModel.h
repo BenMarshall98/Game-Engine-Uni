@@ -75,8 +75,6 @@ public:
 	vector<aiNode*> nodes;
 
 	mat4 globalInverse;
-	
-	double currentTime;
 
 	static mat4 AiMatrixtoGLMMatrix(aiMatrix4x4& matrix)
 	{

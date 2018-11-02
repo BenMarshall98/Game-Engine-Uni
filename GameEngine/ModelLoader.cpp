@@ -293,7 +293,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 
 void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
 {
-	model->nodes.push_back(node);
+	model->nodes.push_back(new aiNode(*node));
 
 	for (int i = 0; i < node->mNumChildren; i++)
 	{
