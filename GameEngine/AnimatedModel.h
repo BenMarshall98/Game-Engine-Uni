@@ -25,7 +25,8 @@ struct Animation
 	string name;
 	vector<aiNodeAnim*> nodesAnim;
 	double framesPerSecond;
-	double duration;
+	double frameDuration;
+	double timeDuration;
 };
 
 class AnimatedModel : public iModel
@@ -34,10 +35,29 @@ private:
 	unsigned int VAO, EBO;
 	unsigned int VBO[5];
 
+	double currentTime;
+
+	unsigned int FindPosition(Bone * bone);
+	unsigned int FindRotation(Bone * bone);
+
+	vec3 CalcInterpolatedPosition(Bone * bone);
+	quat CalcInterpolatedRotation(Bone * bone);
+
+	unsigned int currentAnimation = -1;;
+
 	vector<mat4> boneMatrix;
 
 	void UpdateBoneMatrixVector();
+	void UpdateBoneTransform(Bone * bone);
 	mat4 GetBoneParentTransform(Bone * currentBone);
+
+	static aiMatrix4x4 GLMMatrixtoAiMatrix(mat4& matrix)
+	{
+		return aiMatrix4x4(matrix[0][0], matrix[0][1], matrix[0][2], matrix[0][3],
+			matrix[1][0], matrix[1][1], matrix[1][2], matrix[1][3],
+			matrix[2][0], matrix[2][1], matrix[2][2], matrix[2][3],
+			matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3]);
+	}
 
 public:
 	vector<vec3> vertex;
@@ -85,7 +105,10 @@ public:
 	}
 
 //Make above privates
-	AnimatedModel() {}
+	AnimatedModel()
+	{
+		boneMatrix.resize(100);
+	}
 	~AnimatedModel();
 
 	void Load();

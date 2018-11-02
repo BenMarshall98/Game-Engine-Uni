@@ -168,7 +168,7 @@ StaticModel * ModelLoader::LoadSME(const string & fileName)
 }
 AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 {
-	AnimatedModel * model = new AnimatedModel;
+	AnimatedModel * model = new AnimatedModel();
 
 	Importer importer;
 	const aiScene * scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
@@ -181,11 +181,14 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 		{
 			Animation * animation = new Animation();
 			animation->framesPerSecond = scene->mAnimations[i]->mTicksPerSecond;
-			animation->duration = scene->mAnimations[i]->mDuration;
+			animation->frameDuration = scene->mAnimations[i]->mDuration;
+
+			double secondsPerFrame = 1 / animation->framesPerSecond;
+
+			animation->timeDuration = secondsPerFrame * animation->frameDuration;
 			for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++)
 			{
 				animation->nodesAnim.push_back(scene->mAnimations[i]->mChannels[j]);
-
 			}
 
 			model->animations.push_back(animation);
