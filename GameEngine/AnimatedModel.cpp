@@ -56,10 +56,10 @@ void AnimatedModel::Render(Shader * shader)
 {
 	Update();
 
-	for (int i = 0; i < boneMatrix.size(); i++)
+	/*for (int i = 1; i < boneMatrix.size(); i++)
 	{
 		boneMatrix.at(i) = mat4(1.0);
-	}
+	}*/
 
 	int boneMatrixLocation = glGetUniformLocation(shader->ShaderID(), "BoneMatrix");
 	glUniformMatrix4fv(boneMatrixLocation, boneMatrix.size(), GL_FALSE, value_ptr(boneMatrix[0]));
@@ -88,14 +88,15 @@ void AnimatedModel::UpdateBoneMatrixVector()
 		else
 		{
 			mat4 transforms = GetBoneParentTransform(bones.at(i)->parent) * AiMatrixtoGLMMatrix(bones.at(i)->node->mTransformation);
-
-			boneMatrix.push_back(globalInverse * transforms * bones.at(i)->offsetMatrix);
+			mat4 backToOrigin = globalInverse * transforms * bones.at(i)->offsetMatrix;
+			boneMatrix.push_back(backToOrigin);
 		}
 	}
 }
 
 mat4 AnimatedModel::GetBoneParentTransform(Bone * currentBone)
 {
+
 	if (currentBone == nullptr)
 	{
 		return mat4(1.0);

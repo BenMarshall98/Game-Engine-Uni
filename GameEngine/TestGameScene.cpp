@@ -51,7 +51,7 @@ void TestGameScene::Load()
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Test"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("RiggedShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0, 0, -25.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0, 0, -50.0f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
 	RenderSystem * render = new RenderSystem(mEntityManager);
