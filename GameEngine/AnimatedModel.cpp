@@ -56,7 +56,7 @@ void AnimatedModel::Render(Shader * shader)
 {
 	Update();
 
-	/*for (int i = 1; i < boneMatrix.size(); i++)
+	/*for (int i = 0; i < boneMatrix.size(); i++)
 	{
 		boneMatrix.at(i) = mat4(1.0);
 	}*/
