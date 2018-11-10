@@ -5,7 +5,7 @@
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
 #include "RenderSystem.h"
-#include "glad.h"
+#include "OpenGL.h"
 
 TestGameScene::TestGameScene()
 {
@@ -18,6 +18,7 @@ TestGameScene::~TestGameScene()
 
 void TestGameScene::Load()
 {
+	camera = new Camera();
 	ResourceManager::LoadModel("Cube", "cube.obj");
 	ResourceManager::LoadModel("Test", "Monster_1.dae");
 	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
@@ -71,5 +72,5 @@ void TestGameScene::Update()
 
 void TestGameScene::Close()
 {
-
+	delete camera;
 }

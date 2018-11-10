@@ -1,4 +1,4 @@
-#include "glad.h"
+#include "OpenGL.h"
 #include "SceneManager.h"
 #include <iostream>
 

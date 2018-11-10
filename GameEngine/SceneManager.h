@@ -4,7 +4,7 @@
 
 #include "iScene.h"
 #include "GLFWWindow.h"
-#include "glad.h"
+#include "OpenGL.h"
 
 using namespace std;
 

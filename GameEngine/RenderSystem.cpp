@@ -3,7 +3,7 @@
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
-#include "glad.h"
+#include "OpenGL.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "GLFWWindow.h"

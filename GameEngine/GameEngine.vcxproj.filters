@@ -43,6 +43,9 @@
     <Filter Include="GameEngineLibraries\Systems">
       <UniqueIdentifier>{2fdbc526-47d8-46ca-9dca-4c93a5b27624}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Camera">
+      <UniqueIdentifier>{482caee8-fef9-4cc8-b4fc-2918ccce631e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -102,12 +105,17 @@
     <ClCompile Include="RenderSystem.cpp">
       <Filter>GameEngineLibraries\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="glad.c" />
     <ClCompile Include="AnimatedModel.cpp">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClCompile>
     <ClCompile Include="ComponentTexture.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Projection.cpp">
+      <Filter>GameEngineLibraries\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL.cpp">
+      <Filter>GameEngineLibraries\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,13 +180,20 @@
     <ClInclude Include="RenderSystem.h">
       <Filter>GameEngineLibraries\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="glad.h" />
-    <ClInclude Include="khrplatform.h" />
     <ClInclude Include="AnimatedModel.h">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="ComponentTexture.h">
       <Filter>GameEngineLibraries\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameEngineLibraries\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
+      <Filter>GameEngineLibraries\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL.h">
+      <Filter>GameEngineLibraries\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

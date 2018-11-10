@@ -1,4 +1,4 @@
-#include "glad.h"
+#include "OpenGL.h"
 #include <GLFW/glfw3.h>
 
 #pragma once

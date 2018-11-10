@@ -42,12 +42,6 @@ void GLFWWindow::Load()
 
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
-	
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		glfwTerminate();
-	}
 }
 //
 //void GLFWWindow::Run() const

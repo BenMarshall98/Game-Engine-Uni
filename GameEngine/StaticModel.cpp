@@ -1,5 +1,5 @@
 #include "StaticModel.h"
-#include "glad.h"
+#include "OpenGL.h"
 
 StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector<vec3> & pNormal, vector<int> & pIndices) :
 	mVertex(pVertex), mTexture(pTexture), mNormal(pNormal), mIndices(pIndices), VAO(0), EBO(0)
