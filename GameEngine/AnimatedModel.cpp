@@ -35,13 +35,13 @@ void AnimatedModel::Load()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[3]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(int) * 4 * ID.size(), &ID[0], GL_STATIC_DRAW);
 	
-	glVertexAttribIPointer(3, 1, GL_INT, GL_FALSE, (void*)0);
+	glVertexAttribIPointer(3, 4, GL_INT, 4 * sizeof(int), (void*)0);
 	glEnableVertexAttribArray(3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[4]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4 * weight.size(), &weight[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)0);
+	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(4);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
