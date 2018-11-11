@@ -1,4 +1,5 @@
 #include "InputFunction.h"
+#include "InputManager.h"
 #include <algorithm>
 
 void InputFunction::AddInput(GameInput input)
@@ -29,7 +30,9 @@ void InputFunction::SwapFunction(GameInputFunction pInputFunction)
 
 void InputFunction::Update()
 {
-	//TODO: Implement
+	InputManager * inputManager = InputManager::Instance();
+	float value = inputManager->GetInputValue(Inputs);
+	inputFunction(value);
 }
 
 InputFunction::~InputFunction()

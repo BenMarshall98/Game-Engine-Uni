@@ -9,7 +9,6 @@ class InputFunction
 private:
 	typedef void(*GameInputFunction)(float);
 	GameInputFunction inputFunction;
-
 	vector<GameInput> Inputs;
 
 public:
