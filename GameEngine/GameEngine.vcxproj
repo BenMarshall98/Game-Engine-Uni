@@ -126,6 +126,8 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="iComponent.cpp" />
+    <ClCompile Include="InputFunction.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="iScene.cpp" />
     <ClCompile Include="iSystem.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -153,6 +155,9 @@
     <ClInclude Include="GLFWWindow.h" />
     <ClInclude Include="iComponent.h" />
     <ClInclude Include="iModel.h" />
+    <ClInclude Include="InputFunction.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InputMapping.h" />
     <ClInclude Include="iScene.h" />
     <ClInclude Include="iSystem.h" />
     <ClInclude Include="ModelLoader.h" />

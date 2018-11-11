@@ -46,6 +46,9 @@
     <Filter Include="GameEngineLibraries\Camera">
       <UniqueIdentifier>{482caee8-fef9-4cc8-b4fc-2918ccce631e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Input Manager">
+      <UniqueIdentifier>{4fba9a28-1da2-494c-b0c4-8de3c540d5fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -116,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="OpenGL.cpp">
       <Filter>GameEngineLibraries\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>GameEngineLibraries\Input Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputFunction.cpp">
+      <Filter>GameEngineLibraries\Input Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +203,15 @@
     </ClInclude>
     <ClInclude Include="OpenGL.h">
       <Filter>GameEngineLibraries\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>GameEngineLibraries\Input Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputFunction.h">
+      <Filter>GameEngineLibraries\Input Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMapping.h">
+      <Filter>GameEngineLibraries\Input Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
