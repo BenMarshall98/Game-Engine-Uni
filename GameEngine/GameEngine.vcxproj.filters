@@ -127,6 +127,9 @@
       <Filter>GameEngineLibraries\Input Manager</Filter>
     </ClCompile>
     <ClCompile Include="GLFWInput.cpp" />
+    <ClCompile Include="ComponentInput.cpp">
+      <Filter>GameEngineLibraries\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -215,6 +218,9 @@
       <Filter>GameEngineLibraries\Input Manager</Filter>
     </ClInclude>
     <ClInclude Include="GLFWInput.h" />
+    <ClInclude Include="ComponentInput.h">
+      <Filter>GameEngineLibraries\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

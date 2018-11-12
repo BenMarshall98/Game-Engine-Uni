@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedModel.cpp" />
+    <ClCompile Include="ComponentInput.cpp" />
     <ClCompile Include="ComponentModel.cpp" />
     <ClCompile Include="ComponentPosition.cpp" />
     <ClCompile Include="ComponentShader.cpp" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedModel.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ComponentInput.h" />
     <ClInclude Include="ComponentModel.h" />
     <ClInclude Include="ComponentPosition.h" />
     <ClInclude Include="ComponentShader.h" />
