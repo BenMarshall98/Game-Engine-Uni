@@ -1,5 +1,7 @@
 #include "OpenGL.h"
 #include "LightManager.h"
+#include "glm/gtc/type_ptr.hpp"
+#include <string>
 #include <algorithm>
 
 void LightManager::SetDirectionalLight(vec3 direction, vec3 lightColour)
@@ -154,5 +156,64 @@ void LightManager::Update(vec3 pViewLocation)
 
 void LightManager::Render(int ShaderID)
 {
+	int useDirectionLight = glGetUniformLocation(ShaderID, "DirectionLightUsed");
 
+	if (directional != nullptr)
+	{
+		glUniform1i(useDirectionLight, GL_TRUE);
+
+		int directionalDirection = glGetUniformLocation(ShaderID, "DirectionLightDirection");
+		glUniform3fv(directionalDirection, 1, value_ptr(directional->direction));
+
+		int directionalLightColour = glGetUniformLocation(ShaderID, "DirectionLightColour");
+		glUniform3fv(directionalLightColour, 1, value_ptr(directional->direction));
+	}
+	else
+	{
+		glUniform1i(useDirectionLight, GL_FALSE);
+	}
+
+	int totalPointLight = glGetUniformLocation(ShaderID, "TotalPointLights");
+	glUniform1i(totalPointLight, renderPointLights.size());
+
+	for (int i = 0; i < renderPointLights.size(); i++)
+	{
+		string gllocation = "pointLights[" + to_string(i) + "].location";
+		int PointLightLocation = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform3fv(PointLightLocation, 1, value_ptr(renderPointLights.at(i)->location));
+
+		gllocation = "pointLights[" + to_string(i) + "].lightColour";
+		int PointLightColour = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform3fv(PointLightColour, 1, value_ptr(renderPointLights.at(i)->lightColour));
+
+		gllocation = "pointLights[" + to_string(i) + "].attenuation";
+		int PointLightAttenuation = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform1f(PointLightAttenuation, renderPointLights.at(i)->attenuation);
+	}
+
+	int totalSpotLight = glGetUniformLocation(ShaderID, "TotalSpotLights");
+	glUniform1i(totalSpotLight, renderSpotLights.size());
+
+	for (int i = 0; i < renderSpotLights.size(); i++)
+	{
+		string gllocation = "spotLights[" + to_string(i) + "].location";
+		int SpotLightLocation = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform3fv(SpotLightLocation, 1, value_ptr(renderSpotLights.at(i)->location));
+
+		gllocation = "spotLights[" + to_string(i) + "].lightColour";
+		int SpotLightColour = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform3fv(SpotLightColour, 1, value_ptr(renderSpotLights.at(i)->lightColour));
+
+		gllocation = "spotLights[" + to_string(i) + "].direction";
+		int SpotLightDirection = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform3fv(SpotLightDirection, 1, value_ptr(renderSpotLights.at(i)->direction));
+
+		gllocation = "spotLights[" + to_string(i) + "].angleInner";
+		int SpotLightAngleInner = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform1f(SpotLightAngleInner, renderSpotLights.at(i)->angleInner);
+
+		gllocation = "spotLights[" + to_string(i) + "].angleOuter";
+		int SpotLightAngleOuter = glGetUniformLocation(ShaderID, gllocation.c_str());
+		glUniform1f(SpotLightAngleOuter, renderSpotLights.at(i)->angleOutside);
+	}
 }
