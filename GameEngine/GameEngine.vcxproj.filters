@@ -130,6 +130,9 @@
     <ClCompile Include="ComponentInput.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>GameEngineLibraries\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -220,6 +223,9 @@
     <ClInclude Include="GLFWInput.h" />
     <ClInclude Include="ComponentInput.h">
       <Filter>GameEngineLibraries\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>GameEngineLibraries\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
