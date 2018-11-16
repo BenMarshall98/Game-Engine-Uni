@@ -4,6 +4,7 @@
 #include "EntityManager.h"
 #include "SystemManager.h"
 #include "Camera.h"
+#include "Projection.h"
 
 class TestGameScene : public iScene
 {
@@ -11,6 +12,7 @@ private:
 	EntityManager mEntityManager;
 	SystemManager mSystemManager;
 	Camera * camera;
+	Projection * projection;
 
 public:
 	TestGameScene();

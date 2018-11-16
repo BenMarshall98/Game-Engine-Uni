@@ -1,18 +1,21 @@
 #include "Projection.h"
 
-Projection::Projection(ProjectionType pProjection, float pWidth, float pHeight, float pNear, float pFar) : projection(pProjection), width(pWidth), height(pHeight), near(pNear), far(pFar)
+
+
+Projection::Projection(ProjectionType pProjection, float pWidth, float pHeight, float pNear, float pFar) : projectionType(pProjection), mWidth(pWidth), mHeight(pHeight), mNear(pNear), mFar(pFar)
 {
 	Update();
 }
 
+
 void Projection::Update()
 {
-	if (projection == ProjectionType::Orthographic)
+	if (projectionType == ProjectionType::Orthographic)
 	{
-		projectionMatrix = ortho(0.0f, width, 0.0f, height, near, far);
+		projectionMat = ortho(0.0f, mWidth, 0.0f, mHeight, mNear, mFar);
 	}
-	else if (projection == ProjectionType::Perspective)
+	else if (projectionType == ProjectionType::Perspective)
 	{
-		projectionMatrix = perspective(radians(45.0f), width / height, near, far);
+		projectionMat = perspective(radians(45.0f), mWidth / mHeight, mNear, mFar);
 	}
 }

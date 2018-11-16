@@ -1,7 +1,7 @@
+#pragma once
+
 #include "OpenGL.h"
 #include <GLFW/glfw3.h>
-
-#pragma once
 
 //TODO: Make the Window generic
 class GLFWWindow

@@ -49,6 +49,9 @@
     <Filter Include="GameEngineLibraries\Input Manager">
       <UniqueIdentifier>{4fba9a28-1da2-494c-b0c4-8de3c540d5fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Light Manager">
+      <UniqueIdentifier>{7b0eab55-f561-4d5f-97fe-aba99eef52b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -114,9 +117,6 @@
     <ClCompile Include="ComponentTexture.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Projection.cpp">
-      <Filter>GameEngineLibraries\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGL.cpp">
       <Filter>GameEngineLibraries\OpenGL</Filter>
     </ClCompile>
@@ -133,6 +133,10 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>GameEngineLibraries\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Projection.cpp">
+      <Filter>GameEngineLibraries\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -205,9 +209,6 @@
     <ClInclude Include="Camera.h">
       <Filter>GameEngineLibraries\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Projection.h">
-      <Filter>GameEngineLibraries\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="OpenGL.h">
       <Filter>GameEngineLibraries\OpenGL</Filter>
     </ClInclude>
@@ -227,6 +228,10 @@
     <ClInclude Include="InputSystem.h">
       <Filter>GameEngineLibraries\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Projection.h">
+      <Filter>GameEngineLibraries\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

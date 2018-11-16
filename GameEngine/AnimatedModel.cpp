@@ -1,7 +1,6 @@
 #define GLM_ENABLE_EXPERIMENTAL
 
 #include "AnimatedModel.h"
-#include "OpenGL.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtx/transform.hpp"
 

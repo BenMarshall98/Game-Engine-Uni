@@ -1,6 +1,4 @@
 #include "GLFWInput.h"
-#include "GLFWWindow.h"
-
 
 GLFWInput::~GLFWInput()
 {

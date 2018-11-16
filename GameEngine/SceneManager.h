@@ -4,7 +4,6 @@
 
 #include "iScene.h"
 #include "GLFWWindow.h"
-#include "OpenGL.h"
 
 using namespace std;
 

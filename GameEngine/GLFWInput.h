@@ -1,4 +1,5 @@
 #pragma once
+#include "GLFWWindow.h"
 #include <GLFW/glfw3.h>
 
 //TODO: Make the input generic

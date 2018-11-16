@@ -18,7 +18,7 @@ private:
 public:
 	InputSystem(EntityManager & entityManager);
 	void Action(void);
-	void Input(vector<InputFunction> inputs)
+	void Input(vector<InputFunction> inputs);
 	~InputSystem();
 };
 

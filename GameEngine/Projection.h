@@ -4,6 +4,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 using namespace glm;
+using namespace std;
 
 enum ProjectionType
 {
@@ -14,51 +15,52 @@ enum ProjectionType
 class Projection
 {
 private:
-	ProjectionType projection;
-	mat4 projectionMatrix;
-	float width;
-	float height;
-	float near;
-	float far;
+	ProjectionType projectionType;
+	mat4 projectionMat;
+	float mWidth;
+	float mHeight;
+	float mNear;
+	float mFar;
 
 public:
 	Projection(ProjectionType pProjection, float pWidth, float pHeight, float pNear, float pFar);
-	~Projection() {}
+	~Projection() {};
 
 	void Update();
 
 	inline mat4 GetProjection()
 	{
-		return projectionMatrix;
+		return projectionMat;
 	}
 
 	inline float GetWidth()
 	{
-		return width;
+		return mWidth;
 	}
 
 	inline float GetHeight()
 	{
-		return height;
+		return mHeight;
 	}
 
 	inline void SetWidth(float pWidth)
 	{
-		width = pWidth;
+		mWidth = pWidth;
 	}
 
 	inline void SetHeight(float pHeight)
 	{
-		height = pHeight;
+		mHeight = pHeight;
 	}
 
 	inline void SetNear(float pNear)
 	{
-		near = pNear;
+		mNear = pNear;
 	}
 
 	inline void SetFar(float pFar)
 	{
-		far = pFar;
+		mFar = pFar;
 	}
 };
+

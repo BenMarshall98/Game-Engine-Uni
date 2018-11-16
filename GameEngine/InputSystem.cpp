@@ -13,7 +13,7 @@ InputSystem::InputSystem(EntityManager & pEntityManager) : entityManager(pEntity
 
 void InputSystem::Action(void)
 {
-	for (int i = 0; i < )
+	//for (int i = 0; i < )
 }
 
 InputSystem::~InputSystem()

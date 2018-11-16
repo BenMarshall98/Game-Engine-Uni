@@ -1,3 +1,5 @@
+#include "OpenGL.h"
+#include "GLFWWindow.h"
 #include "TestGameScene.h"
 #include "ResourceManager.h"
 #include "ComponentModel.h"
@@ -5,7 +7,6 @@
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
 #include "RenderSystem.h"
-#include "OpenGL.h"
 
 TestGameScene::TestGameScene()
 {
@@ -19,8 +20,10 @@ TestGameScene::~TestGameScene()
 void TestGameScene::Load()
 {
 	camera = new Camera();
+	projection = new Projection(ProjectionType::Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
+
 	ResourceManager::LoadModel("Cube", "cube.obj");
-	ResourceManager::LoadModel("Test", "Monster_1.dae");
+	//ResourceManager::LoadModel("Test", "Monster_1.dae");
 	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
 	ResourceManager::LoadShader("RiggedShader", "RiggedVertex.vert", "RiggedFragment.frag");
 	ResourceManager::LoadTexture("Box", "container.jpg");
@@ -49,13 +52,13 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, 0.5f, -3.0f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
-	newEntity = mEntityManager.CreateEntity();
+	/*newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Test"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("RiggedShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0, 0, -50.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));*/
 
-	RenderSystem * render = new RenderSystem(mEntityManager);
+	RenderSystem * render = new RenderSystem(mEntityManager, camera, projection);
 	mSystemManager.AddRenderSystem(render);
 }
 
