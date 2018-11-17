@@ -19,5 +19,10 @@ public:
 	{
 		return position;
 	}
+
+	inline void SetPosition(vec3 pPosition)
+	{
+		position = pPosition;
+	}
 };
 

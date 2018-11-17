@@ -25,6 +25,7 @@ public:
 
 	inline mat4 GetViewMatrix()
 	{
+		Update(); //TODO: Remove this and update in the scene itself
 		return viewMatrix;
 	}
 

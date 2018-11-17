@@ -28,11 +28,11 @@ void InputFunction::SwapFunction(GameInputFunction pInputFunction)
 	inputFunction = pInputFunction;
 }
 
-void InputFunction::Update()
+void InputFunction::Update(Entity * entity)
 {
 	InputManager * inputManager = InputManager::Instance();
 	float value = inputManager->GetInputValue(Inputs);
-	inputFunction(value);
+	inputFunction(value, entity);
 }
 
 InputFunction::~InputFunction()

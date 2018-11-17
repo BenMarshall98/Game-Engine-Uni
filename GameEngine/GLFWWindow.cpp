@@ -1,4 +1,5 @@
 #include "GLFWWindow.h"
+#include "InputManager.h"
 #include <Windows.h>
 #include <iostream>
 
@@ -42,6 +43,8 @@ void GLFWWindow::Load()
 
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
+
+	InputManager * inputManager = InputManager::Instance(new GLFWInput(gameWindow));
 }
 //
 //void GLFWWindow::Run() const

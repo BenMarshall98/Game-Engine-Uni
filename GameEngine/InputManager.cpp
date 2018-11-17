@@ -15,17 +15,17 @@ float InputManager::GetInputValue(vector<GameInput> gameInputs)
 		float newValue = 0;
 		if ((gameInputs.at(i) & KEYBOARD << DEVICE) == KEYBOARD << DEVICE)
 		{
-			int key = (gameInputs.at(i) - KEYBOARD << DEVICE) >> CODE;
+			int key = (gameInputs.at(i) - (KEYBOARD << DEVICE)) >> CODE;
 			newValue = inputDevice->KeyboardInput(key);
 		}
 		else if ((gameInputs.at(i) & MOUSE << DEVICE) == MOUSE << DEVICE)
 		{
-			int key = (gameInputs.at(i) - MOUSE << DEVICE) >> CODE;
+			int key = (gameInputs.at(i) - (MOUSE << DEVICE)) >> CODE;
 			newValue = inputDevice->MouseInput(key);
 		}
 		else
 		{
-			int key = (gameInputs.at(i) - GAMEPAD << DEVICE) >> CODE;
+			int key = (gameInputs.at(i) - (GAMEPAD << DEVICE)) >> CODE;
 			newValue = inputDevice->GamePadInput(key);
 		}
 

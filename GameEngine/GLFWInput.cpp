@@ -24,19 +24,19 @@ float GLFWInput::MouseInput(int key)
 
 		if (key == 0 && YPos < GLFWWindow::height / 2)
 		{
-			return YPos / (GLFWWindow::height / 2);
+			return (float)((GLFWWindow::height / 2) - YPos) / (GLFWWindow::height / 2);
 		}
 		else if (key == 1 && YPos > GLFWWindow::height / 2)
 		{
-			return (YPos - (GLFWWindow::height / 2)) / (GLFWWindow::height / 2);
+			return (float)(YPos - (GLFWWindow::height / 2)) / (GLFWWindow::height / 2);
 		}
 		else if (key == 2 && XPos < GLFWWindow::width / 2)
 		{
-			return XPos / (GLFWWindow::width / 2);
+			return (float)((GLFWWindow::width / 2) - XPos) / (GLFWWindow::width / 2);
 		}
 		else if (key == 3 && XPos > GLFWWindow::width / 2)
 		{
-			return (XPos - (GLFWWindow::width / 2)) / (GLFWWindow::width / 2);
+			return (float)(XPos - (GLFWWindow::width / 2)) / (GLFWWindow::width / 2);
 		}
 	}
 	else

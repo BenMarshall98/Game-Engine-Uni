@@ -1,5 +1,6 @@
 #pragma once
 #include "InputMapping.h"
+#include "Entity.h"
 #include <vector>
 
 using namespace std;
@@ -7,7 +8,7 @@ using namespace std;
 class InputFunction
 {
 private:
-	typedef void(*GameInputFunction)(float);
+	typedef void(*GameInputFunction)(float, Entity *);
 	GameInputFunction inputFunction;
 	vector<GameInput> Inputs;
 
@@ -17,7 +18,7 @@ public:
 	void AddInput(GameInput input);
 	void RemoveInput(GameInput input);
 	void SwapFunction(GameInputFunction pInputFunction);
-	void Update();
+	void Update(Entity * entity);
 
 	~InputFunction();
 };
