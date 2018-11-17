@@ -4,6 +4,8 @@
 #include <string>
 #include <algorithm>
 
+LightManager * LightManager::instance = nullptr;
+
 void LightManager::SetDirectionalLight(vec3 direction, vec3 lightColour)
 {
 	delete directional;
@@ -12,7 +14,7 @@ void LightManager::SetDirectionalLight(vec3 direction, vec3 lightColour)
 	directional->lightColour = lightColour;
 }
 
-void LightManager::SetDirectionLight(Directional * pDirectional)
+void LightManager::SetDirectionalLight(Directional * pDirectional)
 {
 	delete directional;
 	directional = pDirectional;
@@ -108,7 +110,6 @@ void LightManager::Update(vec3 pViewLocation)
 		if ((renderPointLights.size() + renderSpotLights.size()) < MAX_LIGHTS)
 		{
 			renderSpotLights.push_back(spotLights.at(i));
-			renderSpotLights.push_back(spotLights.at(i));
 		}
 		else
 		{
@@ -166,7 +167,7 @@ void LightManager::Render(int ShaderID)
 		glUniform3fv(directionalDirection, 1, value_ptr(directional->direction));
 
 		int directionalLightColour = glGetUniformLocation(ShaderID, "DirectionLightColour");
-		glUniform3fv(directionalLightColour, 1, value_ptr(directional->direction));
+		glUniform3fv(directionalLightColour, 1, value_ptr(directional->lightColour));
 	}
 	else
 	{
@@ -210,10 +211,10 @@ void LightManager::Render(int ShaderID)
 
 		gllocation = "spotLights[" + to_string(i) + "].angleInner";
 		int SpotLightAngleInner = glGetUniformLocation(ShaderID, gllocation.c_str());
-		glUniform1f(SpotLightAngleInner, renderSpotLights.at(i)->angleInner);
+		glUniform1f(SpotLightAngleInner, cos(radians(renderSpotLights.at(i)->angleInner)));
 
 		gllocation = "spotLights[" + to_string(i) + "].angleOuter";
 		int SpotLightAngleOuter = glGetUniformLocation(ShaderID, gllocation.c_str());
-		glUniform1f(SpotLightAngleOuter, renderSpotLights.at(i)->angleOutside);
+		glUniform1f(SpotLightAngleOuter, cos(radians(renderSpotLights.at(i)->angleOutside)));
 	}
 }

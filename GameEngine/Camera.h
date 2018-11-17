@@ -13,7 +13,10 @@ private:
 	vec3 lookAt;
 	vec3 up;
 public:
-	Camera(vec3 pPosition = vec3(0, 0, 0), vec3 pLookAt = vec3(0, 0, 1), vec3 pUp = vec3(0, 1, 0)) : position(pPosition), lookAt(pLookAt), up(pUp) {}
+	Camera(vec3 pPosition = vec3(0, 0, 0), vec3 pLookAt = vec3(0, 0, -1), vec3 pUp = vec3(0, 1, 0)) : position(pPosition), lookAt(pLookAt), up(pUp)
+	{
+		Update();
+	}
 
 	inline void Update()
 	{

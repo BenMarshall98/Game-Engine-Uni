@@ -21,7 +21,7 @@ private:
 	Camera * camera;
 	Projection * projection;
 
-	void Render(Shader * shader, iModel * model, vec3 position, Texture * texture, mat4 perspectiveMatrix, mat4 viewMatrix);
+	void Render(Shader * shader, iModel * model, vec3 position, Texture * texture, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos);
 
 public:
 

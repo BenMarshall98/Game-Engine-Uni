@@ -55,7 +55,7 @@ public:
 	}
 
 	void SetDirectionalLight(vec3 pDirection, vec3 pLightColour);
-	void SetDirectionLight(Directional * pDirectional);
+	void SetDirectionalLight(Directional * pDirectional);
 
 	void AddPointLight(PointLight * pPointLight);
 	void AddPointLight(vec3 pLocation, vec3 pLightColour, float pAttenuation = 0);

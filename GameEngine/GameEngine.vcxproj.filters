@@ -136,7 +136,9 @@
     <ClCompile Include="Projection.cpp">
       <Filter>GameEngineLibraries\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="LightManager.cpp">
+      <Filter>GameEngineLibraries\Light Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -231,7 +233,9 @@
     <ClInclude Include="Projection.h">
       <Filter>GameEngineLibraries\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="LightManager.h" />
+    <ClInclude Include="LightManager.h">
+      <Filter>GameEngineLibraries\Light Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

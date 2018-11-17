@@ -6,6 +6,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "GLFWWindow.h"
+#include "LightManager.h"
 #include <string>
 
 RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection)
@@ -18,6 +19,11 @@ void RenderSystem::Action(void)
 {
 	mat4 perspectiveMatrix = projection->GetProjection();
 	mat4 viewMatrix = camera->GetViewMatrix();
+	vec3 viewPos = camera->GetPosition();
+
+	LightManager * lightManager = LightManager::Instance();
+	lightManager->Update(camera->GetPosition());
+
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * componentShader = entityManager.GetComponentOfEntity(EntityList[i], "ComponentShader");
@@ -30,13 +36,16 @@ void RenderSystem::Action(void)
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
 		Texture * texture = ((ComponentTexture *)componentTexture)->GetTexture();
 
-		Render(shader, model, position, texture, perspectiveMatrix, viewMatrix);
+		Render(shader, model, position, texture, perspectiveMatrix, viewMatrix, viewPos);
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Texture * texture, mat4 perspectiveMatrix, mat4 viewMatrix)
+void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Texture * texture, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
 {
 	shader->UseShader();
+
+	LightManager * lightManager = LightManager::Instance();
+	lightManager->Render(shader->ShaderID());
 
 	mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
@@ -51,6 +60,9 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Textur
 
 	int textureLocation = glGetUniformLocation(shader->ShaderID(), "texture");
 	glUniform1i(textureLocation, 0);
+
+	int viewPosLocation = glGetUniformLocation(shader->ShaderID(), "viewPos");
+	glUniform3fv(viewPosLocation, 1, value_ptr(viewPos));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
