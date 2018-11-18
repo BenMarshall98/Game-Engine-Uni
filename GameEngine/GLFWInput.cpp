@@ -6,6 +6,11 @@ GLFWInput::~GLFWInput()
 
 float GLFWInput::KeyboardInput(int key)
 {
+	if (!keyboardAllowed)
+	{
+		return 0;
+	}
+
 	int state = glfwGetKey(gameWindow, key);
 
 	if (state == GLFW_PRESS)
@@ -17,24 +22,29 @@ float GLFWInput::KeyboardInput(int key)
 
 float GLFWInput::MouseInput(int key)
 {
+	if (!mouseAllowed)
+	{
+		return 0;
+	}
+
 	if (key < 4)
 	{
 		double XPos, YPos;
 		glfwGetCursorPos(gameWindow, &XPos, &YPos);
 
-		if (key == 0 && YPos < GLFWWindow::height / 2)
+		if (key == 0 && YPos < GLFWWindow::height / 2 && YPos >= 0)
 		{
 			return (float)((GLFWWindow::height / 2) - YPos) / (GLFWWindow::height / 2);
 		}
-		else if (key == 1 && YPos > GLFWWindow::height / 2)
+		else if (key == 1 && YPos > GLFWWindow::height / 2 && YPos <= GLFWWindow::height)
 		{
 			return (float)(YPos - (GLFWWindow::height / 2)) / (GLFWWindow::height / 2);
 		}
-		else if (key == 2 && XPos < GLFWWindow::width / 2)
+		else if (key == 2 && XPos < GLFWWindow::width / 2 && XPos >= 0)
 		{
 			return (float)((GLFWWindow::width / 2) - XPos) / (GLFWWindow::width / 2);
 		}
-		else if (key == 3 && XPos > GLFWWindow::width / 2)
+		else if (key == 3 && XPos > GLFWWindow::width / 2 && XPos <= GLFWWindow::width)
 		{
 			return (float)(XPos - (GLFWWindow::width / 2)) / (GLFWWindow::width / 2);
 		}
@@ -53,6 +63,11 @@ float GLFWInput::MouseInput(int key)
 
 float GLFWInput::GamePadInput(int key)
 {
+	if (!gamepadAllowed)
+	{
+		return 0;
+	}
+
 	int present = glfwJoystickPresent(GLFW_JOYSTICK_1);
 
 	if (present == GLFW_FALSE)
@@ -95,4 +110,20 @@ float GLFWInput::GamePadInput(int key)
 		return -axes[keySlot];
 	}
 	return 0;
+}
+
+
+void GLFWInput::MouseInput(bool allowMouse)
+{
+	mouseAllowed = allowMouse;
+}
+
+void GLFWInput::KeyboardInput(bool allowKeyboard)
+{
+	keyboardAllowed = allowKeyboard;
+}
+
+void GLFWInput::GamePadInput(bool allowGamePad)
+{
+	gamepadAllowed = allowGamePad;
 }

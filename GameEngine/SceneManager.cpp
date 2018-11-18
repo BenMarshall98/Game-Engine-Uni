@@ -97,6 +97,11 @@ void SceneManager::FinishSwapScene()
 
 	currentScene = newScene;
 	currentScene->Load();
+
+	if (loggingManager->HasSevereMessage())
+	{
+		tempRunning = false;
+	}
 }
 
 void SceneManager::SetScene(iScene * scene)
@@ -122,8 +127,21 @@ void SceneManager::SetWindow(GLFWWindow * gameWindow)
 	}	
 }
 
-SceneManager& SceneManager::instance()
+SceneManager * SceneManager::Instance()
 {
-	static SceneManager *instance = new SceneManager();
-	return *instance;
+	if (instance == nullptr)
+	{
+		instance = new SceneManager();
+	}
+	return instance;
 }
+
+void SceneManager::Resize(int width, int height)
+{
+	if (currentScene != nullptr)
+	{
+		currentScene->Resize(width, height);
+	}
+}
+
+SceneManager * SceneManager::instance = nullptr;

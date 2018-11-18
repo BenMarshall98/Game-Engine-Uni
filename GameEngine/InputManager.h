@@ -27,6 +27,11 @@ public:
 
 	float GetInputValue(vector<GameInput> gameInputs);
 
+	inline GLFWInput * GetInputReader()
+	{
+		return inputDevice;
+	}
+
 	~InputManager();
 };
 

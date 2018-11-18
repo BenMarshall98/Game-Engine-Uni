@@ -19,6 +19,8 @@ private:
 	Projection * projection;
 	vector<GameInput> cameraLeftInputs;
 	vector<GameInput> cameraRightInputs;
+	vector<GameInput> cameraUpInputs;
+	vector<GameInput> cameraDownInputs;
 
 public:
 	TestGameScene();
@@ -29,9 +31,13 @@ public:
 	void Update();
 	void Close();
 
+	void Resize(int width, int height);
+
 	void UpdateCamera();
 
 	static void CubeLeft(float value, Entity * entity);
 	static void CubeRight(float value, Entity * entity);
+	static void CubeUp(float value, Entity * entity);
+	static void CubeDown(float value, Entity * entity);
 };
 

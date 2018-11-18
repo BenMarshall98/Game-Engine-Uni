@@ -26,7 +26,13 @@ TestGameScene::~TestGameScene()
 
 void TestGameScene::Load()
 {
-	
+	InputManager * inputManager = InputManager::Instance();
+	GLFWInput * inputReader = inputManager->GetInputReader();
+
+	inputReader->GamePadInput(true);
+	inputReader->MouseInput(true);
+	inputReader->KeyboardInput(true);
+
 	camera = new Camera();
 	projection = new Projection(ProjectionType::Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
 
@@ -38,23 +44,47 @@ void TestGameScene::Load()
 
 	InputFunction cubeOneLeft = InputFunction(CubeLeft);
 	cubeOneLeft.AddInput(KEYBOARD_A);
+	cubeOneLeft.AddInput(GAMEPAD_L_LEFT);
 
 	InputFunction cubeOneRight = InputFunction(CubeRight);
 	cubeOneRight.AddInput(KEYBOARD_D);
+	cubeOneRight.AddInput(GAMEPAD_L_RIGHT);
+
+	InputFunction cubeOneUp = InputFunction(CubeUp);
+	cubeOneUp.AddInput(KEYBOARD_W);
+	cubeOneRight.AddInput(GAMEPAD_L_UP);
+
+	InputFunction cubeOneDown = InputFunction(CubeDown);
+	cubeOneDown.AddInput(KEYBOARD_S);
+	cubeOneDown.AddInput(GAMEPAD_L_DOWN);
 
 	vector<InputFunction> cubeOneInputs;
 	cubeOneInputs.push_back(cubeOneLeft);
 	cubeOneInputs.push_back(cubeOneRight);
+	cubeOneInputs.push_back(cubeOneUp);
+	cubeOneInputs.push_back(cubeOneDown);
 
 	InputFunction cubeTwoLeft = InputFunction(CubeLeft);
 	cubeTwoLeft.AddInput(KEYBOARD_H);
+	cubeOneLeft.AddInput(GAMEPAD_R_LEFT);
 
 	InputFunction cubeTwoRight = InputFunction(CubeRight);
 	cubeTwoRight.AddInput(KEYBOARD_K);
+	cubeTwoRight.AddInput(GAMEPAD_R_RIGHT);
+
+	InputFunction cubeTwoUp = InputFunction(CubeUp);
+	cubeTwoUp.AddInput(KEYBOARD_U);
+	cubeTwoUp.AddInput(GAMEPAD_R_UP);
+
+	InputFunction cubeTwoDown = InputFunction(CubeDown);
+	cubeTwoDown.AddInput(KEYBOARD_J);
+	cubeTwoDown.AddInput(GAMEPAD_R_DOWN);
 
 	vector<InputFunction> cubeTwoInputs;
 	cubeTwoInputs.push_back(cubeTwoLeft);
 	cubeTwoInputs.push_back(cubeTwoRight);
+	cubeTwoInputs.push_back(cubeTwoUp);
+	cubeTwoInputs.push_back(cubeTwoDown);
 
 	Entity * newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
@@ -104,9 +134,19 @@ void TestGameScene::Load()
 
 	cameraLeftInputs.push_back(KEYBOARD_LEFT);
 	cameraLeftInputs.push_back(MOUSE_LEFT);
+	cameraLeftInputs.push_back(GAMEPAD_LEFT);
 
 	cameraRightInputs.push_back(KEYBOARD_RIGHT);
 	cameraRightInputs.push_back(MOUSE_RIGHT);
+	cameraRightInputs.push_back(GAMEPAD_RIGHT);
+
+	cameraUpInputs.push_back(KEYBOARD_UP);
+	cameraUpInputs.push_back(MOUSE_UP);
+	cameraUpInputs.push_back(GAMEPAD_UP);
+
+	cameraDownInputs.push_back(KEYBOARD_DOWN);
+	cameraDownInputs.push_back(MOUSE_DOWN);
+	cameraDownInputs.push_back(GAMEPAD_DOWN);
 }
 
 void TestGameScene::Render()
@@ -128,6 +168,12 @@ void TestGameScene::Close()
 	delete camera;
 }
 
+void TestGameScene::Resize(int width, int height)
+{
+	projection->SetHeight(height);
+	projection->SetWidth(width);
+}
+
 void TestGameScene::UpdateCamera()
 {
 	const float angle = 30 * (1 / 60.0f); //TODO: replace
@@ -135,18 +181,34 @@ void TestGameScene::UpdateCamera()
 
 	float leftValue = inputManager->GetInputValue(cameraLeftInputs);
 	float rightValue = inputManager->GetInputValue(cameraRightInputs);
+	float upValue = inputManager->GetInputValue(cameraUpInputs);
+	float downValue = inputManager->GetInputValue(cameraDownInputs);
 
 	if (leftValue > 0.2)
 	{
 		vec3 view = camera->GetLookAt();
-		view = view * mat3(rotate(radians(angle * leftValue), vec3(0, 1, 0)));
+		view = view * mat3(rotate(radians(-angle * leftValue), vec3(0, 1, 0)));
 		camera->SetLookAt(view);
 	}
 
 	if (rightValue > 0.2)
 	{
 		vec3 view = camera->GetLookAt();
-		view = view * mat3(rotate(radians(-angle * rightValue), vec3(0, 1, 0)));
+		view = view * mat3(rotate(radians(angle * rightValue), vec3(0, 1, 0)));
+		camera->SetLookAt(view);
+	}
+
+	if (upValue > 0.2)
+	{
+		vec3 view = camera->GetLookAt();
+		view = view * mat3(rotate(radians(-angle * upValue), vec3(1, 0, 0)));
+		camera->SetLookAt(view);
+	}
+
+	if (downValue > 0.2)
+	{
+		vec3 view = camera->GetLookAt();
+		view = view * mat3(rotate(radians(angle * downValue), vec3(1, 0, 0)));
 		camera->SetLookAt(view);
 	}
 }
@@ -158,7 +220,7 @@ void TestGameScene::CubeLeft(float value, Entity * entity)
 		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
 		
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		position.x = position.x - ((1 / 60.0f) * value);
+		position.x -= ((1 / 60.0f) * value);
 		((ComponentPosition *)componentPosition)->SetPosition(position);
 	}
 }
@@ -170,7 +232,31 @@ void TestGameScene::CubeRight(float value, Entity * entity)
 		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
 
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		position.x = position.x + ((1 / 60.0f) * value);
+		position.x += ((1 / 60.0f) * value);
+		((ComponentPosition *)componentPosition)->SetPosition(position);
+	}
+}
+
+void TestGameScene::CubeUp(float value, Entity * entity)
+{
+	if (value > 0.2f)
+	{
+		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
+
+		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
+		position.y += ((1 / 60.0f) * value);
+		((ComponentPosition *)componentPosition)->SetPosition(position);
+	}
+}
+
+void TestGameScene::CubeDown(float value, Entity * entity)
+{
+	if (value > 0.2f)
+	{
+		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
+
+		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
+		position.y -= ((1 / 60.0f) * value);
 		((ComponentPosition *)componentPosition)->SetPosition(position);
 	}
 }

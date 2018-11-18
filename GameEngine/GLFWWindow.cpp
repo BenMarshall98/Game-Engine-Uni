@@ -1,4 +1,5 @@
 #include "GLFWWindow.h"
+#include "SceneManager.h"
 #include "InputManager.h"
 #include <Windows.h>
 #include <iostream>
@@ -17,6 +18,15 @@ GLFWWindow::~GLFWWindow()
 {
 	glfwTerminate();
 }
+
+void GLFWWindow::windowResize(GLFWwindow* window, const int pWidth, const int pHeight)
+{
+	glViewport(0, 0, pWidth, pHeight);
+	height = pHeight;
+	width = pWidth;
+	SceneManager * sceneManager = SceneManager::Instance();
+	sceneManager->Resize(pWidth, pHeight);
+};
 
 void GLFWWindow::Load()
 {
@@ -46,19 +56,6 @@ void GLFWWindow::Load()
 
 	InputManager * inputManager = InputManager::Instance(new GLFWInput(gameWindow));
 }
-//
-//void GLFWWindow::Run() const
-//{
-//	while (!glfwWindowShouldClose(gameWindow))
-//	{
-//		
-//
-//		//TODO: limit the game engine to ~60 fps
-//
-//		glfwSwapBuffers(gameWindow);
-//		glfwPollEvents();
-//	}
-//}
 
 void GLFWWindow::WindowEvents()
 {

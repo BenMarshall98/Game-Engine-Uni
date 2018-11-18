@@ -100,15 +100,33 @@ void ResourceManager::LoadShader(const string & shaderName, const string & verte
 
 iModel * ResourceManager::GetModel(string model)
 {
-	return modelList.at(model);
+	map<string, iModel *>::iterator it = modelList.find(model);
+
+	if (it != modelList.end())
+	{
+		return it->second;
+	}
+	return nullptr;
 }
 
 Shader * ResourceManager::GetShader(string shader)
 {
-	return shaderList.at(shader);
+	map<string, Shader *>::iterator it = shaderList.find(shader);
+
+	if (it != shaderList.end())
+	{
+		return it->second;
+	}
+	return nullptr;
 }
 
 Texture * ResourceManager::GetTexture(string texture)
 {
-	return textureList.at(texture);
+	map<string, Texture *>::iterator it = textureList.find(texture);
+
+	if (it != textureList.end())
+	{
+		return it->second;
+	}
+	return nullptr;
 }

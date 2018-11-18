@@ -52,6 +52,15 @@
     <Filter Include="GameEngineLibraries\Light Manager">
       <UniqueIdentifier>{7b0eab55-f561-4d5f-97fe-aba99eef52b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Window">
+      <UniqueIdentifier>{40040610-bfaa-4fb6-ac9f-4a258317c9f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineLibraries\Window\GLFW">
+      <UniqueIdentifier>{16af0385-b6a9-4bc0-8545-e30f74096ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngineLibraries\Logging Manager">
+      <UniqueIdentifier>{567f75f0-c8b0-46a5-9ae1-124e6632364f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -80,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="SystemManager.cpp">
       <Filter>GameEngineLibraries\System Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GLFWWindow.cpp">
-      <Filter>GameEngineLibraries</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>GameEngineLibraries\Scene Manager</Filter>
@@ -126,7 +132,6 @@
     <ClCompile Include="InputFunction.cpp">
       <Filter>GameEngineLibraries\Input Manager</Filter>
     </ClCompile>
-    <ClCompile Include="GLFWInput.cpp" />
     <ClCompile Include="ComponentInput.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
@@ -138,6 +143,15 @@
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
       <Filter>GameEngineLibraries\Light Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFWWindow.cpp">
+      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFWInput.cpp">
+      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggingManager.cpp">
+      <Filter>GameEngineLibraries\Logging Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +185,6 @@
     </ClInclude>
     <ClInclude Include="SystemManager.h">
       <Filter>GameEngineLibraries\System Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="GLFWWindow.h">
-      <Filter>GameEngineLibraries</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>GameEngineLibraries\Scene Manager</Filter>
@@ -223,7 +234,6 @@
     <ClInclude Include="InputMapping.h">
       <Filter>GameEngineLibraries\Input Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GLFWInput.h" />
     <ClInclude Include="ComponentInput.h">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClInclude>
@@ -235,6 +245,15 @@
     </ClInclude>
     <ClInclude Include="LightManager.h">
       <Filter>GameEngineLibraries\Light Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWWindow.h">
+      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWInput.h">
+      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingManager.h">
+      <Filter>GameEngineLibraries\Logging Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

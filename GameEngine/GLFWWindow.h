@@ -9,12 +9,7 @@ class GLFWWindow
 	private:
 		GLFWwindow * gameWindow;
 
-		static inline void windowResize(GLFWwindow* window, const int pWidth, const int pHeight)
-		{
-			glViewport(0, 0, pWidth, pHeight);
-			width = pWidth;
-			height = pHeight;
-		};
+		static inline void windowResize(GLFWwindow* window, const int pWidth, const int pHeight);
 
 		GLFWWindow(const GLFWWindow & window) = delete;
 		GLFWWindow& operator=(const GLFWWindow & window) = delete;

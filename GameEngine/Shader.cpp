@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "LoggingManager.h"
 #include <fstream>
 #include <sstream>
 
@@ -40,7 +41,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	if (!success)
 	{
 		glGetProgramInfoLog(mShaderID, 512, nullptr, infoLog);
-		//TODO: Log that the shaderProgrm failed to be linked, showing infoLog
+		LoggingManager::LogMessage(SEVERE, "Failed to Link Shaders:" + string(infoLog));
 	}
 
 	glDetachShader(mShaderID, vertexShader);
@@ -63,7 +64,7 @@ void Shader::ReadShader(const string & fileName, string & shaderProgram) const
 
 	if (reader.fail())
 	{
-		//TODO: Log that the program does not exist
+		LoggingManager::LogMessage(SEVERE, "File" + fileName + "does not exist");
 		shaderProgram = "";
 		return;
 	}
@@ -92,7 +93,7 @@ int Shader::CompileShader(const string & fileName, GLenum shaderType) const
 	if (!success)
 	{
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-		//TODO: Log that the vertexShader failed to be created, showing infoLog
+		LoggingManager::LogMessage(SEVERE, "Failed to Compile Shader: " + fileName + "\n" + infoLog);
 	}
 
 	return shader;

@@ -29,6 +29,8 @@ private:
 	static StaticModel * LoadSME(const string & fileName);
 	static AnimatedModel * LoadDAE(const string & fileName);
 
+	static void TangentSpace(vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & normals, vector<vec3> & tangent);
+
 	static void recursiveNodeProcess(aiNode* node, AnimatedModel * model);
 
 	static Bone* FindBone(string name, AnimatedModel * model)

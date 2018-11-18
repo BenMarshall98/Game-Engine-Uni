@@ -300,3 +300,8 @@ void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
 		recursiveNodeProcess(node->mChildren[i], model);
 	}
 }
+
+void ModelLoader::TangentSpace(vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & normals, vector<vec3> & tangent)
+{
+
+}
