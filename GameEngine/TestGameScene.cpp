@@ -8,6 +8,7 @@
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
+#include "ComponentNormal.h"
 #include "RenderSystem.h"
 #include "InputSystem.h"
 #include "LightManager.h"
@@ -39,8 +40,10 @@ void TestGameScene::Load()
 	ResourceManager::LoadModel("Cube", "cube.obj");
 	//ResourceManager::LoadModel("Test", "Monster_1.dae");
 	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
+	ResourceManager::LoadShader("NormalShader", "NormalVertex.vert", "NormalFragment.frag");
 	ResourceManager::LoadShader("RiggedShader", "RiggedVertex.vert", "RiggedFragment.frag");
 	ResourceManager::LoadTexture("Box", "container.jpg");
+	ResourceManager::LoadTexture("BoxNormal", "containerNormal.jpg");
 
 	InputFunction cubeOneLeft = InputFunction(CubeLeft);
 	cubeOneLeft.AddInput(KEYBOARD_A);
@@ -91,6 +94,7 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, 0.5f, -3.0f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentNormal("BoxNormal"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeOneInputs));
 
 	newEntity = mEntityManager.CreateEntity();

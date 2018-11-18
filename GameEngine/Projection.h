@@ -30,6 +30,7 @@ public:
 
 	inline mat4 GetProjection()
 	{
+		Update(); //TODO: Remove
 		return projectionMat;
 	}
 

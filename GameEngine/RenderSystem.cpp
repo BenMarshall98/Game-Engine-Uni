@@ -3,6 +3,7 @@
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
+#include "ComponentNormal.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "GLFWWindow.h"
@@ -36,11 +37,15 @@ void RenderSystem::Action(void)
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
 		Texture * texture = ((ComponentTexture *)componentTexture)->GetTexture();
 
-		Render(shader, model, position, texture, perspectiveMatrix, viewMatrix, viewPos);
+		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], "ComponentNormal");
+
+		Texture * normal = (componentNormal == nullptr) ? nullptr : ((ComponentNormal *)componentNormal)->GetTexture();
+
+		Render(shader, model, position, texture, normal, perspectiveMatrix, viewMatrix, viewPos);
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Texture * texture, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
+void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
 {
 	shader->UseShader();
 
@@ -60,12 +65,19 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Textur
 
 	int textureLocation = glGetUniformLocation(shader->ShaderID(), "texture");
 	glUniform1i(textureLocation, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
+
+	if (normal != nullptr)
+	{
+		int normalLocation = glGetUniformLocation(shader->ShaderID(), "normalTexture");
+		glUniform1i(normalLocation, 1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, normal->TextureID());
+	}
 
 	int viewPosLocation = glGetUniformLocation(shader->ShaderID(), "viewPos");
 	glUniform3fv(viewPosLocation, 1, value_ptr(viewPos));
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
 
 	model->Render(shader);
 	glUseProgram(0);

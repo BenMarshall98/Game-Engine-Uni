@@ -111,11 +111,11 @@ StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 
 			string lineToAdd = vertexString[vertex - 1] + " " + textureString[texture - 1] + " " + normalString[normal - 1];
 			int index = FindInVector(modelData, lineToAdd);
-			if (index != -1)
+			/*if (index != -1)
 			{
 				indexes.push_back(index);
 			}
-			else
+			else*/
 			{
 				indexes.push_back(modelData.size());
 				modelData.push_back(lineToAdd);
@@ -146,7 +146,11 @@ StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 		normal.push_back(vec3(normalX, normalY, normalZ));
 	}
 
-	return new StaticModel(vertex, texture, normal, indexes);
+	vector<vec3> tangents;
+
+	TangentSpace(indexes, vertex, texture, tangents);
+
+	return new StaticModel(vertex, texture, normal, indexes, tangents);
 }
 
 int ModelLoader::FindInVector(vector<string> & list, const string & toFind)
@@ -301,7 +305,26 @@ void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
 	}
 }
 
-void ModelLoader::TangentSpace(vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & normals, vector<vec3> & tangent)
+void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents)
 {
+	for (int i = 0; i < indices.size(); i = i + 3)
+	{
+		vec3 edge1 = vertex[indices.at(i + 1)] - vertex[indices.at(i)];
+		vec3 edge2 = vertex[indices.at(i + 2)] - vertex[indices.at(i)];
 
+		vec2 deltaUV1 = texture[indices.at(i + 1)] - texture[indices.at(i)];
+		vec2 deltaUV2 = texture[indices.at(i + 2)] - texture[indices.at(i)];
+
+		float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+		
+		vec3 tangent;
+		tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+		tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+		tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+		tangent = normalize(tangent);
+
+		tangents.push_back(tangent);
+		tangents.push_back(tangent);
+		tangents.push_back(tangent);
+	}
 }

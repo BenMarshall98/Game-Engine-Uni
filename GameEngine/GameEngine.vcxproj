@@ -120,6 +120,7 @@
     <ClCompile Include="AnimatedModel.cpp" />
     <ClCompile Include="ComponentInput.cpp" />
     <ClCompile Include="ComponentModel.cpp" />
+    <ClCompile Include="ComponentNormal.cpp" />
     <ClCompile Include="ComponentPosition.cpp" />
     <ClCompile Include="ComponentShader.cpp" />
     <ClCompile Include="ComponentTexture.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentInput.h" />
     <ClInclude Include="ComponentModel.h" />
+    <ClInclude Include="ComponentNormal.h" />
     <ClInclude Include="ComponentPosition.h" />
     <ClInclude Include="ComponentShader.h" />
     <ClInclude Include="ComponentTexture.h" />
@@ -190,6 +192,8 @@
     <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NormalFragment.frag" />
+    <None Include="NormalVertex.vert" />
     <None Include="packages.config" />
     <None Include="RiggedFragment.frag" />
     <None Include="RiggedVertex.vert" />
@@ -208,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="container.jpg" />
+    <Image Include="containerNormal.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

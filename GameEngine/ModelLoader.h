@@ -29,7 +29,7 @@ private:
 	static StaticModel * LoadSME(const string & fileName);
 	static AnimatedModel * LoadDAE(const string & fileName);
 
-	static void TangentSpace(vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & normals, vector<vec3> & tangent);
+	static void TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangent);
 
 	static void recursiveNodeProcess(aiNode* node, AnimatedModel * model);
 
