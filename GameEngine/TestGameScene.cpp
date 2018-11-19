@@ -31,7 +31,7 @@ void TestGameScene::Load()
 	GLFWInput * inputReader = inputManager->GetInputReader();
 
 	inputReader->GamePadInput(true);
-	inputReader->MouseInput(true);
+	inputReader->MouseInput(false);
 	inputReader->KeyboardInput(true);
 
 	camera = new Camera();
@@ -55,7 +55,7 @@ void TestGameScene::Load()
 
 	InputFunction cubeOneUp = InputFunction(CubeUp);
 	cubeOneUp.AddInput(KEYBOARD_W);
-	cubeOneRight.AddInput(GAMEPAD_L_UP);
+	cubeOneUp.AddInput(GAMEPAD_L_UP);
 
 	InputFunction cubeOneDown = InputFunction(CubeDown);
 	cubeOneDown.AddInput(KEYBOARD_S);
@@ -69,7 +69,7 @@ void TestGameScene::Load()
 
 	InputFunction cubeTwoLeft = InputFunction(CubeLeft);
 	cubeTwoLeft.AddInput(KEYBOARD_H);
-	cubeOneLeft.AddInput(GAMEPAD_R_LEFT);
+	cubeTwoLeft.AddInput(GAMEPAD_R_LEFT);
 
 	InputFunction cubeTwoRight = InputFunction(CubeRight);
 	cubeTwoRight.AddInput(KEYBOARD_K);
@@ -139,18 +139,22 @@ void TestGameScene::Load()
 	cameraLeftInputs.push_back(KEYBOARD_LEFT);
 	cameraLeftInputs.push_back(MOUSE_LEFT);
 	cameraLeftInputs.push_back(GAMEPAD_LEFT);
+	cameraLeftInputs.push_back(GAMEPAD_LT);
 
 	cameraRightInputs.push_back(KEYBOARD_RIGHT);
 	cameraRightInputs.push_back(MOUSE_RIGHT);
 	cameraRightInputs.push_back(GAMEPAD_RIGHT);
+	cameraRightInputs.push_back(GAMEPAD_RT);
 
 	cameraUpInputs.push_back(KEYBOARD_UP);
 	cameraUpInputs.push_back(MOUSE_UP);
 	cameraUpInputs.push_back(GAMEPAD_UP);
+	cameraUpInputs.push_back(GAMEPAD_LB);
 
 	cameraDownInputs.push_back(KEYBOARD_DOWN);
 	cameraDownInputs.push_back(MOUSE_DOWN);
 	cameraDownInputs.push_back(GAMEPAD_DOWN);
+	cameraDownInputs.push_back(GAMEPAD_RB);
 }
 
 void TestGameScene::Render()

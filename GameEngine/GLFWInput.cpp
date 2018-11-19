@@ -1,4 +1,6 @@
 #include "GLFWInput.h"
+#include <iostream>
+using namespace std;
 
 GLFWInput::~GLFWInput()
 {
@@ -31,20 +33,24 @@ float GLFWInput::MouseInput(int key)
 	{
 		double XPos, YPos;
 		glfwGetCursorPos(gameWindow, &XPos, &YPos);
+		if (YPos < 0 || YPos > GLFWWindow::height || XPos < 0 || XPos > GLFWWindow::width)
+		{
+			return 0;
+		}
 
-		if (key == 0 && YPos < GLFWWindow::height / 2 && YPos >= 0)
+		if (key == 0 && YPos < GLFWWindow::height / 2)
 		{
 			return (float)((GLFWWindow::height / 2) - YPos) / (GLFWWindow::height / 2);
 		}
-		else if (key == 1 && YPos > GLFWWindow::height / 2 && YPos <= GLFWWindow::height)
+		else if (key == 1 && YPos > GLFWWindow::height / 2)
 		{
 			return (float)(YPos - (GLFWWindow::height / 2)) / (GLFWWindow::height / 2);
 		}
-		else if (key == 2 && XPos < GLFWWindow::width / 2 && XPos >= 0)
+		else if (key == 2 && XPos < GLFWWindow::width / 2)
 		{
 			return (float)((GLFWWindow::width / 2) - XPos) / (GLFWWindow::width / 2);
 		}
-		else if (key == 3 && XPos > GLFWWindow::width / 2 && XPos <= GLFWWindow::width)
+		else if (key == 3 && XPos > GLFWWindow::width / 2)
 		{
 			return (float)(XPos - (GLFWWindow::width / 2)) / (GLFWWindow::width / 2);
 		}
@@ -92,7 +98,7 @@ float GLFWInput::GamePadInput(int key)
 		return 0;
 	}
 
-	int keySlot = key - (key % 2) - 14;
+	int keySlot = (key - 14) / 2;
 
 	const float * axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &count);
 
