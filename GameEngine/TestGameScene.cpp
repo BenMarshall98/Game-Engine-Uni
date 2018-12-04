@@ -30,8 +30,8 @@ void TestGameScene::Load()
 	InputManager * inputManager = InputManager::Instance();
 	GLFWInput * inputReader = inputManager->GetInputReader();
 
-	inputReader->GamePadInput(true);
-	inputReader->MouseInput(false);
+	inputReader->GamePadInput(false);
+	inputReader->MouseInput(true);
 	inputReader->KeyboardInput(true);
 
 	camera = new Camera();
