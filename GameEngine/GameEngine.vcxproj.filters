@@ -64,6 +64,9 @@
     <Filter Include="GameEngineLibraries\Physics Manager">
       <UniqueIdentifier>{ed7564d2-a891-422f-b9b4-adedfe974c89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngineLibraries\Physics Manager\CollisionShpaes">
+      <UniqueIdentifier>{294a5ecc-e10d-4698-837b-80757ea04515}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -164,6 +167,24 @@
     </ClCompile>
     <ClCompile Include="ComponentPhysics.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>GameEngineLibraries\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>GameEngineLibraries\Physics Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPhysicsEngine.cpp">
+      <Filter>GameEngineLibraries\Physics Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionShape.cpp">
+      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionSphere.cpp">
+      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionCuboid.cpp">
+      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,6 +296,24 @@
     </ClInclude>
     <ClInclude Include="ComponentPhysics.h">
       <Filter>GameEngineLibraries\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>GameEngineLibraries\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>GameEngineLibraries\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPhysicsEngine.h">
+      <Filter>GameEngineLibraries\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionShape.h">
+      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSphere.h">
+      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionCuboid.h">
+      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "iComponent.h"
+#include "CollisionShape.h"
 #include "glm/glm.hpp"
 
 using namespace glm;
@@ -7,11 +8,15 @@ using namespace glm;
 class ComponentPhysics : public iComponent
 {
 private:
+	CollisionShape * shape;
 	vec3 force = vec3(0);
 	float rotation = 0;
+	float mass;
+	void* rigidBody;
+
 public:
-	ComponentPhysics();
-	~ComponentPhysics();
+	ComponentPhysics(CollisionShape * pShape, float pMass) : shape(pShape), mass(pMass) {}
+	~ComponentPhysics() {}
 
 	string GetComponentName();
 	void Swap() {}
@@ -34,6 +39,26 @@ public:
 	inline void SetRotation(float pRotation)
 	{
 		rotation = pRotation;
+	}
+
+	inline CollisionShape* GetShape()
+	{
+		return shape;
+	}
+
+	inline float GetMass()
+	{
+		return mass;
+	}
+
+	inline void SetRigidBody(void* pRigidBody)
+	{
+		rigidBody = pRigidBody;
+	}
+
+	inline void* GetRigidBody()
+	{
+		return rigidBody;
 	}
 };
 

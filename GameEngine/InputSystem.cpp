@@ -1,10 +1,8 @@
 #include "InputSystem.h"
 #include "InputManager.h"
-
 #include "ComponentInput.h"
+
 #include <string>
-
-
 
 InputSystem::InputSystem(EntityManager & pEntityManager) : entityManager(pEntityManager)
 {
