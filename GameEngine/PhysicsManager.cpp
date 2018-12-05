@@ -4,8 +4,3 @@ void* PhysicsManager::AddRigidBody(float mass, vec3 position, vec3 direction, fl
 {
 	return engine->AddRigidBody(mass, position, direction, angle, shape);
 }
-
-
-PhysicsManager::~PhysicsManager()
-{
-}

@@ -30,7 +30,7 @@ BUILD_CPU_DEMOS:BOOL=ON
 BUILD_ENET:BOOL=ON
 
 //Set when you want to build the extras
-BUILD_EXTRAS:BOOL=OFF
+BUILD_EXTRAS:BOOL=ON
 
 //Set when you want to build Bullet 3 OpenGL3+ demos
 BUILD_OPENGL3_DEMOS:BOOL=ON
@@ -42,7 +42,7 @@ BUILD_PYBULLET:BOOL=OFF
 BUILD_SHARED_LIBS:BOOL=OFF
 
 //Build Unit Tests
-BUILD_UNIT_TESTS:BOOL=OFF
+BUILD_UNIT_TESTS:BOOL=ON
 
 //Build Bullet 2 libraries with mutex locking around certain operations
 // (required for multi-threading)
@@ -52,7 +52,16 @@ BULLET2_USE_THREAD_LOCKS:BOOL=OFF
 BULLET_PHYSICS_BINARY_DIR:STATIC=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib
 
 //Value Computed by CMake
-BULLET_PHYSICS_SOURCE_DIR:STATIC=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src
+BULLET_PHYSICS_SOURCE_DIR:STATIC=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics
+
+//Dependencies for the target
+BulletRobotics_LIB_DEPENDS:STATIC=general;opengl32;general;glu32;
+
+//Build for use inside other CMake projects as dependency.
+CLSOCKET_DEP_ONLY:BOOL=OFF
+
+//Build clsocket lib as shared.
+CLSOCKET_SHARED:BOOL=OFF
 
 //For backwards compatibility, what version of CMake commands and
 // syntax should this version of CMake try to support.
@@ -118,7 +127,7 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/Project
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/BULLET_PHYSICS
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.14.26428/bin/Hostx86/x86/link.exe
@@ -192,10 +201,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=OFF
+CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=OFF
+CMAKE_SKIP_RPATH:BOOL=NO
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -221,7 +230,7 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
-CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
+CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Require Python and match PYTHON_VERSION_PYBULLET exactly, e.g.
 // 2.7.12
@@ -249,7 +258,7 @@ INTERNAL_CREATE_MSVC_RELATIVE_PATH_PROJECTFILES:BOOL=OFF
 INTERNAL_UPDATE_SERIALIZATION_STRUCTURES:BOOL=OFF
 
 //Single output directory for building all libraries.
-LIBRARY_OUTPUT_PATH:PATH=
+LIBRARY_OUTPUT_PATH:PATH=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/lib
 
 //OpenGL library for win32
 OPENGL_gl_LIBRARY:STRING=opengl32
@@ -257,14 +266,11 @@ OPENGL_gl_LIBRARY:STRING=opengl32
 //GLU library for win32
 OPENGL_glu_LIBRARY:STRING=glu32
 
-//Path to a library.
-PYTHON_DEBUG_LIBRARY:FILEPATH=PYTHON_DEBUG_LIBRARY-NOTFOUND
-
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=PYTHON_EXECUTABLE-NOTFOUND
 
-//Path to a library.
-PYTHON_LIBRARY:FILEPATH=PYTHON_LIBRARY-NOTFOUND
+//Path to where Python.h is found
+PYTHON_INCLUDE_DIR:PATH=
 
 //Path to a library.
 PYTHON_LIBRARY_DEBUG:FILEPATH=PYTHON_LIBRARY_DEBUG-NOTFOUND
@@ -274,12 +280,6 @@ PYTHON_LIBRARY_RELEASE:FILEPATH=PYTHON_LIBRARY_RELEASE-NOTFOUND
 
 //Python version pybullet will use.
 PYTHON_VERSION_PYBULLET:STRING=
-
-//Value Computed by CMake
-Project_BINARY_DIR:STATIC=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib
-
-//Value Computed by CMake
-Project_SOURCE_DIR:STATIC=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src
 
 //Use custom vectormath library
 USE_CUSTOM_VECTOR_MATH:BOOL=OFF
@@ -328,6 +328,12 @@ USE_MSVC_STRING_POOLING:BOOL=ON
 
 //Use btSoftMultiBodyDynamicsWorld
 USE_SOFT_BODY_MULTI_BODY_DYNAMICS_WORLD:BOOL=OFF
+
+//Path to a file.
+_FIND_LIB_PYTHON_PY:FILEPATH=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/build3/cmake/FindLibPython.py
+
+//Dependencies for the target
+clsocket_LIB_DEPENDS:STATIC=general;Ws2_32.lib;
 
 
 ########################
@@ -396,7 +402,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src
+CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
@@ -410,7 +416,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=13
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=41
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER
@@ -460,12 +466,10 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[opengl32][c ][v()]
 OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_glu_LIBRARY
 OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PYTHON_DEBUG_LIBRARY
-PYTHON_DEBUG_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_EXECUTABLE
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: PYTHON_LIBRARY
-PYTHON_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PYTHON_INCLUDE_DIR
+PYTHON_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_LIBRARY_DEBUG
 PYTHON_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_LIBRARY_RELEASE

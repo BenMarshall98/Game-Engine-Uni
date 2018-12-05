@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Bullet3Collision.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Bullet3Collision_Debug</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Bullet3Collision.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Bullet3Collision</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Bullet3Collision.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Bullet3Collision_MinsizeRel</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Bullet3Collision.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Bullet3Collision_RelWithDebugInfo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -97,10 +97,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
@@ -135,10 +135,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,7 +151,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
@@ -173,10 +173,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -189,7 +189,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -210,10 +210,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -225,10 +225,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -236,12 +236,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -249,12 +249,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -262,12 +262,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/Bullet3Collision/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -275,45 +275,45 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/Bullet3Collision/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Collision\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvh.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvhBroadphase.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3OverlappingPairCache.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3ConvexUtility.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3CpuNarrowPhase.cpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3BroadphaseCallback.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvh.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvhBroadphase.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3OverlappingPair.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\b3OverlappingPairCache.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\BroadPhaseCollision\shared\b3Aabb.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3BvhSubtreeInfoData.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3BvhTraversal.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ClipFaces.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3Collidable.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3Contact4Data.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ContactConvexConvexSAT.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ContactSphereSphere.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ConvexPolyhedronData.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3FindConcaveSatAxis.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3FindSeparatingAxis.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3MprPenetration.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3NewContactReduction.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3QuantizedBvhNodeData.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ReduceContacts.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3RigidBodyData.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\shared\b3UpdateAabbs.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3Config.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3Contact4.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3ConvexUtility.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3CpuNarrowPhase.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3RaycastInfo.h" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\Bullet3Collision\NarrowPhaseCollision\b3RigidBodyCL.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvh.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvhBroadphase.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3OverlappingPairCache.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3ConvexUtility.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3CpuNarrowPhase.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3BroadphaseCallback.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvh.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3DynamicBvhBroadphase.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3OverlappingPair.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\b3OverlappingPairCache.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\BroadPhaseCollision\shared\b3Aabb.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3BvhSubtreeInfoData.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3BvhTraversal.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ClipFaces.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3Collidable.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3Contact4Data.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ContactConvexConvexSAT.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ContactSphereSphere.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ConvexPolyhedronData.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3FindConcaveSatAxis.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3FindSeparatingAxis.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3MprPenetration.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3NewContactReduction.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3QuantizedBvhNodeData.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3ReduceContacts.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3RigidBodyData.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\shared\b3UpdateAabbs.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3Config.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3Contact4.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3ConvexUtility.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3CpuNarrowPhase.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3RaycastInfo.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\Bullet3Collision\NarrowPhaseCollision\b3RigidBodyCL.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\ZERO_CHECK.vcxproj">

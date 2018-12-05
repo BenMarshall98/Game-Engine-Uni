@@ -123,9 +123,6 @@
     <ClCompile Include="RenderSystem.cpp">
       <Filter>GameEngineLibraries\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedModel.cpp">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentTexture.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
@@ -186,6 +183,9 @@
     <ClCompile Include="CollisionCuboid.cpp">
       <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatedModel.cpp">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -245,9 +245,6 @@
     </ClInclude>
     <ClInclude Include="RenderSystem.h">
       <Filter>GameEngineLibraries\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedModel.h">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="ComponentTexture.h">
       <Filter>GameEngineLibraries\Components</Filter>
@@ -314,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="CollisionCuboid.h">
       <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModel.h">
+      <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

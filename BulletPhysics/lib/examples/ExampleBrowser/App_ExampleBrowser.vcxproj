@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6F3974F2-762B-3957-93B3-2839E0D29778}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>App_ExampleBrowser</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ExampleBrowser\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">App_ExampleBrowser.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">App_ExampleBrowser</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ExampleBrowser\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">App_ExampleBrowser.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">App_ExampleBrowser</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ExampleBrowser\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">App_ExampleBrowser.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">App_ExampleBrowser</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ExampleBrowser\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">App_ExampleBrowser.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">App_ExampleBrowser</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/data C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Debug\BulletExampleBrowserLib_Debug.lib;..\..\lib\Debug\Bullet3Common_Debug.lib;..\..\lib\Debug\BulletSoftBody_Debug.lib;..\..\lib\Debug\BulletDynamics_Debug.lib;..\..\lib\Debug\BulletCollision_Debug.lib;..\..\lib\Debug\BulletInverseDynamicsUtils_Debug.lib;..\..\lib\Debug\BulletInverseDynamics_Debug.lib;..\..\lib\Debug\LinearMath_Debug.lib;..\..\lib\Debug\OpenGLWindow_Debug.lib;..\..\lib\Debug\gwen_Debug.lib;..\..\lib\Debug\BussIK_Debug.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/Debug/App_ExampleBrowser.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/Debug/App_ExampleBrowser.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/data C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Release\BulletExampleBrowserLib.lib;..\..\lib\Release\Bullet3Common.lib;..\..\lib\Release\BulletSoftBody.lib;..\..\lib\Release\BulletDynamics.lib;..\..\lib\Release\BulletCollision.lib;..\..\lib\Release\BulletInverseDynamicsUtils.lib;..\..\lib\Release\BulletInverseDynamics.lib;..\..\lib\Release\LinearMath.lib;..\..\lib\Release\OpenGLWindow.lib;..\..\lib\Release\gwen.lib;..\..\lib\Release\BussIK.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/Release/App_ExampleBrowser.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/Release/App_ExampleBrowser.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/data C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\lib\MinSizeRel\BulletExampleBrowserLib_MinsizeRel.lib;..\..\lib\MinSizeRel\Bullet3Common_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletSoftBody_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletDynamics_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletCollision_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletInverseDynamicsUtils_MinsizeRel.lib;..\..\lib\MinSizeRel\BulletInverseDynamics_MinsizeRel.lib;..\..\lib\MinSizeRel\LinearMath_MinsizeRel.lib;..\..\lib\MinSizeRel\OpenGLWindow_MinsizeRel.lib;..\..\lib\MinSizeRel\gwen_MinsizeRel.lib;..\..\lib\MinSizeRel\BussIK_MinsizeRel.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/MinSizeRel/App_ExampleBrowser.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/MinSizeRel/App_ExampleBrowser.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\.;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/data C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/data
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>..\..\lib\RelWithDebInfo\BulletExampleBrowserLib_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\Bullet3Common_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletSoftBody_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletDynamics_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletCollision_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletInverseDynamicsUtils_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BulletInverseDynamics_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\LinearMath_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\OpenGLWindow_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\gwen_RelWithDebugInfo.lib;..\..\lib\RelWithDebInfo\BussIK_RelWithDebugInfo.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/RelWithDebInfo/App_ExampleBrowser.lib</ImportLibrary>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDataBaseFile>C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/ExampleBrowser/RelWithDebInfo/App_ExampleBrowser.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\main.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\ExampleEntries.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\ExampleEntries.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\Chain.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\Chain.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\Bridge.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\Bridge.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\RigidBodyFromObj.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\RigidBodyFromObj.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\SimpleBox.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\SimpleBox.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\MultipleBoxes.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\MultipleBoxes.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\SimpleCloth.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\SimpleCloth.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\SimpleJoint.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\SimpleJoint.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\NewtonsCradle.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\NewtonsCradle.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\InclinedPlane.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\InclinedPlane.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\MultiPendulum.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\MultiPendulum.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\TinyRenderer\geometry.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\TinyRenderer\model.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\TinyRenderer\tgaimage.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\TinyRenderer\our_gl.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\TinyRenderer\TinyRenderer.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\TinyRendererVisualShapeConverter.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\TinyRendererVisualShapeConverter.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\IKTrajectoryHelper.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\IKTrajectoryHelper.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsServer.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsClientSharedMemory.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsClientSharedMemory_C_API.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsClient.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsClientC_API.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsServerExample.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsServerExampleBullet2.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsClientExample.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PosixSharedMemory.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\Win32SharedMemory.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\InProcessMemory.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsServerSharedMemory.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsDirect.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsDirect.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsDirectC_API.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsDirectC_API.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\SharedMemoryInProcessPhysicsC_API.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsLoopBack.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsLoopBack.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsLoopBackC_API.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsLoopBackC_API.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsServerCommandProcessor.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\PhysicsServerCommandProcessor.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\SharedMemoryCommands.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\SharedMemoryPublic.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\SharedMemory\b3PluginManager.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RobotSimulator\b3RobotSimulatorClientAPI.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RobotSimulator\b3RobotSimulatorClientAPI.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\BasicDemo\BasicExample.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\BasicDemo\BasicExample.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\InverseDynamics\InverseDynamicsExample.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\InverseDynamics\InverseDynamicsExample.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\InverseKinematics\InverseKinematicsExample.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\InverseKinematics\InverseKinematicsExample.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ForkLift\ForkLiftDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ForkLift\ForkLiftDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreadedDemo\MultiThreadedDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreadedDemo\MultiThreadedDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreadedDemo\CommonRigidBodyMTBase.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreadedDemo\CommonRigidBodyMTBase.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Tutorial\Tutorial.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Tutorial\Tutorial.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Tutorial\Dof6ConstraintTutorial.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Tutorial\Dof6ConstraintTutorial.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Evolution\NN3DWalkers.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Evolution\NN3DWalkers.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Evolution\NN3DWalkersTimeWarpBase.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\NewtonsRopeCradle.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExtendedTutorials\NewtonsRopeCradle.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\CollisionSdkC_Api.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\CollisionSdkC_Api.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\CollisionTutorialBullet2.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\CollisionTutorialBullet2.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\Internal\Bullet2CollisionSdk.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\Internal\Bullet2CollisionSdk.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\Internal\CollisionSdkInterface.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\Internal\RealTimeBullet3CollisionSdk.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Collision\Internal\RealTimeBullet3CollisionSdk.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\GyroscopicDemo\GyroscopicSetup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\GyroscopicDemo\GyroscopicSetup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Planar2D\Planar2D.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Planar2D\Planar2D.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RollingFrictionDemo\RollingFrictionDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RollingFrictionDemo\RollingFrictionDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\FractureDemo\FractureDemo.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\FractureDemo\btFractureBody.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\FractureDemo\btFractureDynamicsWorld.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\FractureDemo\FractureDemo.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\FractureDemo\btFractureBody.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\FractureDemo\btFractureDynamicsWorld.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\DynamicControlDemo\MotorDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\DynamicControlDemo\MotorDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreading\MultiThreadingExample.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreading\b3PosixThreadSupport.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreading\b3Win32ThreadSupport.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreading\b3ThreadSupportInterface.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiThreading\btTaskScheduler.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TinyRendererSetup.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TimeSeriesCanvas.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TimeSeriesCanvas.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TimeSeriesFontData.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TimeSeriesFontData.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\DynamicTexturedCubeDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\DynamicTexturedCubeDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TinyVRGui.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TinyVRGui.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RoboticsLearning\GripperGraspExample.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RoboticsLearning\GripperGraspExample.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RoboticsLearning\R2D2GraspExample.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RoboticsLearning\R2D2GraspExample.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RoboticsLearning\KukaGraspExample.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RoboticsLearning\KukaGraspExample.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\CoordinateSystemDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\CoordinateSystemDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\RaytracerSetup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\RaytracerSetup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\RenderInstancingDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\RenderInstancingDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RenderingExamples\TimeSeriesExample.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Benchmarks\BenchmarkDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Benchmarks\BenchmarkDemo.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Benchmarks\landscapeData.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Benchmarks\TaruData.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Raycast\RaytestDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBsp\BspConverter.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBullet\SerializeSetup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBullet\SerializeSetup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportMeshUtility\b3ImportMeshUtility.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportMeshUtility\b3ImportMeshUtility.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\Extras\Serialize\BulletWorldImporter\btWorldImporter.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\Extras\Serialize\BulletWorldImporter\btBulletWorldImporter.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\Extras\Serialize\BulletFileLoader\bChunk.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\Extras\Serialize\BulletFileLoader\bFile.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\Extras\Serialize\BulletFileLoader\bDNA.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\Extras\Serialize\BulletFileLoader\btBulletFile.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBsp\BspLoader.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBsp\ImportBspExample.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportColladaDemo\btMatrix4x4.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportColladaDemo\ColladaGraphicsInstance.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportColladaDemo\ImportColladaSetup.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportColladaDemo\LoadMeshFromCollada.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportObjDemo\ImportObjExample.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportObjDemo\LoadMeshFromObj.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportObjDemo\Wavefront2GLInstanceGraphicsShape.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportSTLDemo\ImportSTLSetup.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportSTLDemo\LoadMeshFromSTL.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\ConvertRigidBodies2MultiBody.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\ImportURDFSetup.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\URDF2Bullet.h" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\urdf_samples.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportMJCFDemo\ImportMJCFSetup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportMJCFDemo\ImportMJCFSetup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBsp\BspConverter.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBsp\BspLoader.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportBsp\ImportBspExample.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportColladaDemo\ImportColladaSetup.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportColladaDemo\LoadMeshFromCollada.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportObjDemo\ImportObjExample.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportObjDemo\LoadMeshFromObj.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportObjDemo\Wavefront2GLInstanceGraphicsShape.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportSTLDemo\ImportSTLSetup.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportSDFDemo\ImportSDFSetup.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\ImportURDFSetup.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\URDF2Bullet.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\UrdfParser.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Utils\RobotLoggingUtil.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Utils\RobotLoggingUtil.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\urdfStringSplit.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\urdfStringSplit.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\BulletUrdfImporter.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Importers\ImportURDFDemo\BulletUrdfImporter.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\VoronoiFracture\VoronoiFractureDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\VoronoiFracture\VoronoiFractureDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\VoronoiFracture\btConvexConvexMprAlgorithm.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\VoronoiFracture\btConvexConvexMprAlgorithm.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Vehicles\Hinge2Vehicle.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Vehicles\Hinge2Vehicle.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\Pendulum.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\MultiBodySoftContact.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\TestJointTorqueSetup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\TestJointTorqueSetup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\InvertedPendulumPDControl.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\InvertedPendulumPDControl.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\MultiBodyConstraintFeedback.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\MultiDofDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\MultiBody\MultiDofDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\RigidBody\RigidBodySoftContact.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\TestHingeTorque.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\TestHingeTorque.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\ConstraintDemo.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\ConstraintDemo.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\Dof6Spring2Setup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\Dof6Spring2Setup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\ConstraintPhysicsSetup.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\Constraints\ConstraintPhysicsSetup.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\stb_image\stb_image.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\stb_image\stb_image.h" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\Wavefront\tiny_obj_loader.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\tinyxml\tinystr.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ThirdPartyLibs\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\examples\ExampleBrowser\InProcessExampleBrowser.cpp" />
+    <ResourceCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\build3\bullet.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\ZERO_CHECK.vcxproj">
+      <Project>{729ACC78-3816-3C8C-A4D1-373F71EA39C0}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\Bullet3Common\Bullet3Common.vcxproj">
+      <Project>{BEC5C81A-1D9E-3DC6-8FBD-EF22C0077747}</Project>
+      <Name>Bullet3Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletCollision\BulletCollision.vcxproj">
+      <Project>{EE4A234E-C63B-3AE1-A91B-B166879BAEDA}</Project>
+      <Name>BulletCollision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{98DF1FE3-9F28-3F34-B76C-30E8B4C20405}</Project>
+      <Name>BulletDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ExampleBrowser\BulletExampleBrowserLib.vcxproj">
+      <Project>{7ABF5688-32A8-3D3F-93D6-3B2D636156A5}</Project>
+      <Name>BulletExampleBrowserLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\BulletInverseDynamics.vcxproj">
+      <Project>{228EF192-EF0D-3391-B73C-19635F9AED6C}</Project>
+      <Name>BulletInverseDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\Extras\InverseDynamics\BulletInverseDynamicsUtils.vcxproj">
+      <Project>{69F93F50-3C1B-30F6-9167-A44D8A64BBF1}</Project>
+      <Name>BulletInverseDynamicsUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletSoftBody\BulletSoftBody.vcxproj">
+      <Project>{8CFC97FF-2840-3E72-A717-F8400C80DDC6}</Project>
+      <Name>BulletSoftBody</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ThirdPartyLibs\BussIK\BussIK.vcxproj">
+      <Project>{F088968D-A904-31CD-9EC5-26F3DD6E99B3}</Project>
+      <Name>BussIK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\LinearMath\LinearMath.vcxproj">
+      <Project>{C215FD85-BD67-3809-B5C9-D1C2D4B173AF}</Project>
+      <Name>LinearMath</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\OpenGLWindow\OpenGLWindow.vcxproj">
+      <Project>{23819264-FD9E-3294-A2A1-CA73A836FE45}</Project>
+      <Name>OpenGLWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\examples\ThirdPartyLibs\Gwen\gwen.vcxproj">
+      <Project>{CA69B585-EF8A-309D-9DDC-38C259665558}</Project>
+      <Name>gwen</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -3,6 +3,7 @@
 #include "BulletPhysicsEngine.h"
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
+#include "glm/gtc/quaternion.hpp"
 
 using namespace glm;
 

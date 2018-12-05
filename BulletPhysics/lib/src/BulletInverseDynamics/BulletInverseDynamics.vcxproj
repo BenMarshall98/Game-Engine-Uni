@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">BulletInverseDynamics.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">BulletInverseDynamics_Debug</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">BulletInverseDynamics.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">BulletInverseDynamics</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">BulletInverseDynamics.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">BulletInverseDynamics_MinsizeRel</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\lib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">BulletInverseDynamics.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">BulletInverseDynamics_RelWithDebugInfo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -97,10 +97,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
@@ -135,10 +135,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,7 +151,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
@@ -173,10 +173,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -189,7 +189,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -210,10 +210,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -225,10 +225,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -236,12 +236,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -249,12 +249,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -262,12 +262,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics -BC:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib --check-stamp-file C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/BulletInverseDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -275,27 +275,27 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/BulletInverseDynamics/CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\src\BulletInverseDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDMath.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\MultiBodyTree.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.cpp" />
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDConfig.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDConfigEigen.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDMath.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDConfigBuiltin.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDErrorMessages.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\MultiBodyTree.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\IDEigenInterface.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\IDMatVec.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\IDLinearMathInterface.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeImpl.hpp" />
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.hpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDMath.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\MultiBodyTree.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.cpp" />
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDConfig.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDConfigEigen.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDMath.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDConfigBuiltin.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDErrorMessages.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\MultiBodyTree.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\IDEigenInterface.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\IDMatVec.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\IDLinearMathInterface.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeImpl.hpp" />
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\lib\ZERO_CHECK.vcxproj">

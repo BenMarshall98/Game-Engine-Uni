@@ -1,5 +1,8 @@
 #pragma once
 #include "CollisionShape.h"
+#include "glm/glm.hpp"
+
+using namespace glm;
 
 class CollisionCuboid : public CollisionShape
 {

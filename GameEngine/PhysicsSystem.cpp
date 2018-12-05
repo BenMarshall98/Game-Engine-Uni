@@ -2,6 +2,9 @@
 #include "ComponentPosition.h"
 #include "ComponentDirection.h"
 #include "ComponentPhysics.h"
+#include "glm/glm.hpp"
+
+using namespace glm;
 
 
 PhysicsSystem::PhysicsSystem(EntityManager & pEntityManager, PhysicsManager & pPhysicsManager) : entityManager(pEntityManager), physicsManager(pPhysicsManager)
@@ -13,7 +16,7 @@ PhysicsSystem::PhysicsSystem(EntityManager & pEntityManager, PhysicsManager & pP
 
 void PhysicsSystem::Action(void)
 {
-	for (int i = 0; i < newEntities.size; i++)
+	for (int i = 0; i < newEntities.size(); i++)
 	{
 		iComponent * componentPosition = entityManager.GetComponentOfEntity(newEntities[i], "ComponentPosition");
 		iComponent * componentDirection = entityManager.GetComponentOfEntity(newEntities[i], "ComponentDirection");
@@ -34,7 +37,7 @@ void PhysicsSystem::Action(void)
 
 	physicsManager.Update(1 / 60.0);
 
-	for (int i = 0; i < EntityList.size; i++)
+	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], "ComponentPosition");
 		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], "ComponentDirection");
@@ -47,9 +50,12 @@ void PhysicsSystem::Action(void)
 void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
 {
 	void * rigidBody = physics->GetRigidBody();
-	vec3 position = physicsManager.GetPositionOfRigidBody(rigidBody);
+	vec3 positionVec = physicsManager.GetPositionOfRigidBody(rigidBody);
 	quat directionQuat = physicsManager.GetDirectionOfRigidBody(rigidBody);
 
+	//TODO: Sort out direction
+
+	position->SetPosition(positionVec);
 }
 
 PhysicsSystem::~PhysicsSystem()

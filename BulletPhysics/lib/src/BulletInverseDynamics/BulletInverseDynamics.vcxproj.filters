@@ -1,56 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDMath.cpp">
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\MultiBodyTree.cpp">
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\MultiBodyTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.cpp">
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp">
+    <ClCompile Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDConfig.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDConfig.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDConfigEigen.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDConfigEigen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDMath.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDMath.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDConfigBuiltin.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDConfigBuiltin.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\IDErrorMessages.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\IDErrorMessages.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\MultiBodyTree.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\MultiBodyTree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\IDEigenInterface.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\IDEigenInterface.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\IDMatVec.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\IDMatVec.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\IDLinearMathInterface.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\IDLinearMathInterface.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeImpl.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.hpp">
+    <ClInclude Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\details\MultiBodyTreeInitCache.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\src\BulletInverseDynamics\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\BulletPhysics\src\BulletInverseDynamics\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -15,6 +15,12 @@
 #include "InputManager.h"
 #include "glm/gtx/transform.hpp"
 #include "ComponentInput.h"
+#include "ComponentDirection.h"
+#include "ComponentPhysics.h"
+#include "CollisionCuboid.h"
+
+#include "BulletPhysicsEngine.h"
+#include "PhysicsSystem.h"
 
 TestGameScene::TestGameScene()
 {
@@ -93,6 +99,8 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentNormal("BoxNormal"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeOneInputs));
@@ -101,12 +109,16 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, -0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, -0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeTwoInputs));
 
@@ -114,6 +126,8 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
 	/*newEntity = mEntityManager.CreateEntity();
@@ -122,11 +136,16 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0, 0, -50.0f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));*/
 
+	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
+
 	RenderSystem * render = new RenderSystem(mEntityManager, camera, projection);
 	mSystemManager.AddRenderSystem(render);
 
 	InputSystem * input = new InputSystem(mEntityManager);
 	mSystemManager.AddRenderSystem(input); //TODO: change to a update system
+
+	PhysicsSystem * physics = new PhysicsSystem(mEntityManager, *mPhysicsManager);
+	mSystemManager.AddRenderSystem(physics);
 
 	LightManager * lightManager = LightManager::Instance();
 	lightManager->SetDirectionalLight(vec3(0, -1, 0), vec3(1.0, 1.0, 1.0));

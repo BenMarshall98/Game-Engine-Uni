@@ -1,3 +1,4 @@
+
 #include "BulletPhysicsEngine.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
@@ -18,7 +19,7 @@ BulletPhysicsEngine::BulletPhysicsEngine()
 
 	//The world.
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
+	dynamicsWorld->setGravity(btVector3(0, -1.0f, 0));
 }
 
 
@@ -32,20 +33,22 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, vec3 d
 
 	switch (shape->GetShape())
 	{
-		case SPHERE:
+		case CUBOID:
 			{
 				CollisionCuboid * cuboid = dynamic_cast<CollisionCuboid *>(shape);
 				vec3 size = cuboid->GetSize();
 				collisionShape = new btBoxShape(btVector3(size.x, size.y, size.z));
 			}
 			break;
-		case CUBOID:
+		case SPHERE:
 			{
 				CollisionSphere * sphere = dynamic_cast<CollisionSphere *>(shape);
 				float radius = sphere->GetRadius();
 				collisionShape = new btSphereShape(radius);
 			}
 			break;
+		default:
+			collisionShape = nullptr;
 	}
 
 	quat directionQuat = angleAxis(radians(angle), direction);
@@ -71,7 +74,7 @@ vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
 	btTransform transform = rigidBody->getWorldTransform();
 	btVector3 origin = transform.getOrigin();
 
-	return vec3(origin.x, origin.y, origin.z);
+	return vec3(origin.x(), origin.y(), origin.z());
 }
 
 quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
@@ -81,5 +84,5 @@ quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
 	btTransform transform = rigidBody->getWorldTransform();
 	btQuaternion rotation = transform.getRotation();
 
-	return quat(rotation.x, rotation.y, rotation.z, rotation.w);
+	return quat(rotation.x(), rotation.y(), rotation.z(), rotation.w());
 }

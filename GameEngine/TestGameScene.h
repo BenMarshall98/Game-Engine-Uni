@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Projection.h"
 #include "InputMapping.h"
+#include "PhysicsManager.h"
 #include <vector>
 
 using namespace std;
@@ -15,6 +16,7 @@ class TestGameScene : public iScene
 private:
 	static EntityManager mEntityManager; //TODO: make into a singleton
 	SystemManager mSystemManager;
+	PhysicsManager * mPhysicsManager;
 	Camera * camera;
 	Projection * projection;
 	vector<GameInput> cameraLeftInputs;

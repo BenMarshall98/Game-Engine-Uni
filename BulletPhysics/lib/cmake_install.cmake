@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src
+# Install script for directory: C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Project")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/BULLET_PHYSICS")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,14 +34,17 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/bullet" TYPE FILE FILES
-    "C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/src/UseBullet.cmake"
+    "C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/UseBullet.cmake"
     "C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/BulletConfig.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/examples/cmake_install.cmake")
+  include("C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/Extras/cmake_install.cmake")
   include("C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/src/cmake_install.cmake")
+  include("C:/Users/ben32/source/repos/BenMarshall98/Game-Engine/BulletPhysics/lib/test/cmake_install.cmake")
 
 endif()
 
