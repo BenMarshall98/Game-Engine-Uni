@@ -40,6 +40,5 @@ public:
 	static void CubeLeft(float value, Entity * entity);
 	static void CubeRight(float value, Entity * entity);
 	static void CubeUp(float value, Entity * entity);
-	static void CubeDown(float value, Entity * entity);
 };
 

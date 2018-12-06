@@ -73,6 +73,8 @@ vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody* )pRigidBody;
 
+	rigidBody->activate();
+
 	btTransform transform = rigidBody->getWorldTransform();
 	btVector3 origin = transform.getOrigin();
 
@@ -87,4 +89,22 @@ quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
 	btQuaternion rotation = transform.getRotation();
 
 	return quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
+}
+
+void BulletPhysicsEngine::ApplyForce(void * pRigidBody, vec3 pForce)
+{
+	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
+
+	btVector3 origin(0.0, 0.0, 0.0);
+	btVector3 force(pForce.x, pForce.y, pForce.z);
+	rigidBody->applyForce(force, origin);
+}
+
+void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
+{
+	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
+
+	btVector3 origin(0.0, 0.0, 0.0);
+	btVector3 impulse(pImpulse.x, pImpulse.y, pImpulse.z);
+	rigidBody->applyImpulse(impulse, origin);
 }

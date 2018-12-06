@@ -31,5 +31,15 @@ public:
 	{
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
+
+	inline void ApplyForce(void * pRigidBody, vec3 force)
+	{
+		engine->ApplyForce(pRigidBody, force);
+	}
+
+	inline void ApplyImpulse(void * pRigidBody, vec3 impulse)
+	{
+		engine->ApplyImpulse(pRigidBody, impulse);
+	}
 };
 

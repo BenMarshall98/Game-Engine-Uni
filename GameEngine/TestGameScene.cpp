@@ -63,15 +63,10 @@ void TestGameScene::Load()
 	cubeOneUp.AddInput(KEYBOARD_W);
 	cubeOneUp.AddInput(GAMEPAD_L_UP);
 
-	InputFunction cubeOneDown = InputFunction(CubeDown);
-	cubeOneDown.AddInput(KEYBOARD_S);
-	cubeOneDown.AddInput(GAMEPAD_L_DOWN);
-
 	vector<InputFunction> cubeOneInputs;
 	cubeOneInputs.push_back(cubeOneLeft);
 	cubeOneInputs.push_back(cubeOneRight);
 	cubeOneInputs.push_back(cubeOneUp);
-	cubeOneInputs.push_back(cubeOneDown);
 
 	InputFunction cubeTwoLeft = InputFunction(CubeLeft);
 	cubeTwoLeft.AddInput(KEYBOARD_H);
@@ -85,22 +80,18 @@ void TestGameScene::Load()
 	cubeTwoUp.AddInput(KEYBOARD_U);
 	cubeTwoUp.AddInput(GAMEPAD_R_UP);
 
-	InputFunction cubeTwoDown = InputFunction(CubeDown);
-	cubeTwoDown.AddInput(KEYBOARD_J);
-	cubeTwoDown.AddInput(GAMEPAD_R_DOWN);
 
 	vector<InputFunction> cubeTwoInputs;
 	cubeTwoInputs.push_back(cubeTwoLeft);
 	cubeTwoInputs.push_back(cubeTwoRight);
 	cubeTwoInputs.push_back(cubeTwoUp);
-	cubeTwoInputs.push_back(cubeTwoDown);
 
 	Entity * newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.25f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, 10.0f, -7.5f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentNormal("BoxNormal"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeOneInputs));
@@ -108,51 +99,52 @@ void TestGameScene::Load()
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, -0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(1.0f, -1.0f, -7.5f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, -0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-1.0f, -1.0f, -7.5f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+
+	newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, 10.0f, -7.5f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 1));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+
+	newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.0f, 15.0f, -7.5f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeTwoInputs));
 
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.75f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.05f, 5.0f, -7.5f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
-
-	/*Entity * newEntity = mEntityManager.CreateEntity();
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.0f, -0.2f, -2.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(1, 0, 0), 0));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentNormal("BoxNormal"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeOneInputs));
+	
 
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.2f, 0.5f, -2.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(1, 1, 1), 0.7));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));*/
-
-	/*newEntity = mEntityManager.CreateEntity();
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Test"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("RiggedShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0, 0, -50.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));*/
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(2.0f, -1.0f, -7.5f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
@@ -262,11 +254,11 @@ void TestGameScene::CubeLeft(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
-		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
+		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, "ComponentPhysics");
 		
-		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		position.x -= ((1 / 60.0f) * value);
-		((ComponentPosition *)componentPosition)->SetPosition(position);
+		vec3 force = ((ComponentPhysics *)componentPhysics)->GetForce();
+		force.x -= ((1 / 60.0f) * value * 100);
+		((ComponentPhysics *)componentPhysics)->SetForce(force);
 	}
 }
 
@@ -274,11 +266,11 @@ void TestGameScene::CubeRight(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
-		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
+		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, "ComponentPhysics");
 
-		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		position.x += ((1 / 60.0f) * value);
-		((ComponentPosition *)componentPosition)->SetPosition(position);
+		vec3 force = ((ComponentPhysics *)componentPhysics)->GetForce();
+		force.x += ((1 / 60.0f) * value * 100);
+		((ComponentPhysics *)componentPhysics)->SetForce(force);
 	}
 }
 
@@ -286,23 +278,11 @@ void TestGameScene::CubeUp(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
-		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
+		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, "ComponentPhysics");
 
-		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		position.y += ((1 / 60.0f) * value);
-		((ComponentPosition *)componentPosition)->SetPosition(position);
-	}
-}
-
-void TestGameScene::CubeDown(float value, Entity * entity)
-{
-	if (value > 0.2f)
-	{
-		iComponent * componentPosition = mEntityManager.GetComponentOfEntity(entity, "ComponentPosition");
-
-		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		position.y -= ((1 / 60.0f) * value);
-		((ComponentPosition *)componentPosition)->SetPosition(position);
+		vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetImpulse();
+		impulse.y += ((1 / 60.0f) * value * 10);
+		((ComponentPhysics *)componentPhysics)->SetImpulse(impulse);
 	}
 }
 

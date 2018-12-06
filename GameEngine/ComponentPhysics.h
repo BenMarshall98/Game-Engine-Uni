@@ -10,6 +10,7 @@ class ComponentPhysics : public iComponent
 private:
 	CollisionShape * shape;
 	vec3 force = vec3(0);
+	vec3 impulse = vec3(0);
 	float rotation = 0;
 	float mass;
 	void* rigidBody;
@@ -29,6 +30,16 @@ public:
 	inline void SetForce(vec3 pForce)
 	{
 		force = pForce;
+	}
+
+	inline vec3 GetImpulse()
+	{
+		return impulse;
+	}
+
+	inline void SetImpulse(vec3 pImpulse)
+	{
+		impulse = pImpulse;
 	}
 
 	inline float GetRotation()

@@ -52,6 +52,14 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	vec3 positionVec = physicsManager.GetPositionOfRigidBody(rigidBody);
 	quat directionQuat = physicsManager.GetDirectionOfRigidBody(rigidBody);
 
+	vec3 force = physics->GetForce();
+	physicsManager.ApplyForce(rigidBody, force);
+	physics->SetForce(vec3(0));
+
+	vec3 impulse = physics->GetImpulse();
+	physicsManager.ApplyImpulse(rigidBody, impulse);
+	physics->SetImpulse(vec3(0));
+
 	position->SetPosition(positionVec);
 	direction->SetDirection(directionQuat);
 }

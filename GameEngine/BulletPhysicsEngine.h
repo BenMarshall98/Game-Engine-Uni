@@ -23,5 +23,7 @@ public:
 
 	vec3 GetPositionOfRigidBody(void * pRigidBody);
 	quat GetDirectionOfRigidBody(void * pRigidBody);
+	void ApplyForce(void * pRigidBody, vec3 force);
+	void ApplyImpulse(void * pRigidBody, vec3 impulse);
 };
 
