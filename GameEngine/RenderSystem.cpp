@@ -1,18 +1,22 @@
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include "RenderSystem.h"
 #include "ComponentModel.h"
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
 #include "ComponentNormal.h"
+#include "ComponentDirection.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/quaternion.hpp"
 #include "GLFWWindow.h"
 #include "LightManager.h"
 #include <string>
 
 RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection)
 {
-	string componentTypes[] = { "ComponentModel", "ComponentShader", "ComponentPosition", "ComponentTexture" };
+	string componentTypes[] = { "ComponentModel", "ComponentShader", "ComponentPosition", "ComponentTexture", "ComponentDirection" };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 }
 
@@ -31,21 +35,23 @@ void RenderSystem::Action(void)
 		iComponent * componentModel = entityManager.GetComponentOfEntity(EntityList[i], "ComponentModel");
 		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], "ComponentPosition");
 		iComponent * componentTexture = entityManager.GetComponentOfEntity(EntityList[i], "ComponentTexture");
+		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], "ComponentDirection");
 
 		Shader * shader = ((ComponentShader *)componentShader)->GetShader();
 		iModel * model = ((ComponentModel *)componentModel)->GetModel();
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
 		Texture * texture = ((ComponentTexture *)componentTexture)->GetTexture();
+		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
 
 		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], "ComponentNormal");
 
 		Texture * normal = (componentNormal == nullptr) ? nullptr : ((ComponentNormal *)componentNormal)->GetTexture();
 
-		Render(shader, model, position, texture, normal, perspectiveMatrix, viewMatrix, viewPos);
+		Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos);
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
+void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, quat direction, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
 {
 	shader->UseShader();
 
@@ -54,6 +60,8 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Textur
 
 	mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
+	modelMatrix *= toMat4(direction);
+
 	int modelLocation = glGetUniformLocation(shader->ShaderID(), "model");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(modelMatrix));
 

@@ -23,12 +23,11 @@ void PhysicsSystem::Action(void)
 		iComponent * componentPhysics = entityManager.GetComponentOfEntity(newEntities[i], "ComponentPhysics");
 
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		vec3 direction = ((ComponentDirection *)componentDirection)->GetDirection();
-		float angle = ((ComponentDirection *)componentDirection)->GetAngle();
+		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
 		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetShape();
 		float mass = ((ComponentPhysics *)componentPhysics)->GetMass();
 
-		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, angle, shape);
+		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape);
 
 		((ComponentPhysics *)componentPhysics)->SetRigidBody(rigidBody);
 	}
@@ -53,9 +52,8 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	vec3 positionVec = physicsManager.GetPositionOfRigidBody(rigidBody);
 	quat directionQuat = physicsManager.GetDirectionOfRigidBody(rigidBody);
 
-	//TODO: Sort out direction
-
 	position->SetPosition(positionVec);
+	direction->SetDirection(directionQuat);
 }
 
 PhysicsSystem::~PhysicsSystem()

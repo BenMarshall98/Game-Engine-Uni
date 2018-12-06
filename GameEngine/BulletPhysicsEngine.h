@@ -14,7 +14,7 @@ public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
 	
-	btRigidBody* AddRigidBody(float mass, vec3 position, vec3 direction, float angle, CollisionShape * shape);
+	btRigidBody* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape);
 
 	inline void Update(float pDeltaTime)
 	{

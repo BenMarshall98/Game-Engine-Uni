@@ -27,7 +27,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, vec3 direction, float angle, CollisionShape * shape)
+btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape)
 {
 	btCollisionShape* collisionShape;
 
@@ -51,10 +51,9 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, vec3 d
 			collisionShape = nullptr;
 	}
 
-	quat directionQuat = angleAxis(radians(angle), direction);
 
 	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(
-		btQuaternion(directionQuat.x, directionQuat.y, directionQuat.z, directionQuat.w),
+		btQuaternion(direction.x, direction.y, direction.z, direction.w),
 		btVector3(position.x, position.y, position.z)
 	));
 
@@ -87,5 +86,5 @@ quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
 	btTransform transform = rigidBody->getWorldTransform();
 	btQuaternion rotation = transform.getRotation();
 
-	return quat(rotation.x(), rotation.y(), rotation.z(), rotation.w());
+	return quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
 }

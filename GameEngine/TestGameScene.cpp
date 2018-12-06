@@ -98,8 +98,8 @@ void TestGameScene::Load()
 	Entity * newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, 0.5f, -3.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.25f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentNormal("BoxNormal"));
@@ -109,7 +109,7 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.5f, -0.5f, -3.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 
@@ -117,7 +117,7 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, -0.5f, -3.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeTwoInputs));
@@ -126,9 +126,27 @@ void TestGameScene::Load()
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.75f, 0.5f, -3.0f)));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+
+	/*Entity * newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.0f, -0.2f, -2.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(1, 0, 0), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 0));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentNormal("BoxNormal"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentInput(cubeOneInputs));
+
+	newEntity = mEntityManager.CreateEntity();
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(0.2f, 0.5f, -2.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(1, 1, 1), 0.7));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));*/
 
 	/*newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Test"));

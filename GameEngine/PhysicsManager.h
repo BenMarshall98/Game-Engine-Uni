@@ -15,7 +15,7 @@ public:
 	PhysicsManager(BulletPhysicsEngine* pEngine) : engine(pEngine) {}
 	~PhysicsManager() {}
 
-	void* AddRigidBody(float mass, vec3 position, vec3 direction, float angle, CollisionShape * shape);
+	void* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape);
 
 	inline void Update(float pDeltaTime)
 	{
