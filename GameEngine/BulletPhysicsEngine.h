@@ -1,10 +1,6 @@
 #pragma once
 
-#pragma comment(lib, "LinearMath_Debug.lib")
-#pragma comment(lib, "BulletCollision_Debug.lib")
-#pragma comment(lib, "BulletDynamics_Debug.lib")
-
-#include "../BulletPhysics/src/btBulletDynamicsCommon.h"
+#include "..\BulletPhysics\btBulletDynamicsCommon.h"
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
 

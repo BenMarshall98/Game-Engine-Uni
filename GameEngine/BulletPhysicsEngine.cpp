@@ -58,7 +58,10 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, vec3 d
 		btVector3(position.x, position.y, position.z)
 	));
 
-	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass, motionState, collisionShape, btVector3(0, 0, 0));
+	btVector3 inertia;
+	collisionShape->calculateLocalInertia(mass, inertia);
+
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(mass, motionState, collisionShape, inertia);
 
 	btRigidBody * rigidBody = new btRigidBody(rigidBodyCI);
 

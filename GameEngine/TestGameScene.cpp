@@ -125,7 +125,7 @@ void TestGameScene::Load()
 	newEntity = mEntityManager.CreateEntity();
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.5f, 0.5f, -3.0f)));
+	mEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(-0.75f, 0.5f, -3.0f)));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.2f, 0.2f, 0.2f)), 1));
 	mEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));

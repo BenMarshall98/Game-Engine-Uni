@@ -21,7 +21,7 @@ in vec2 oTex;
 in vec3 oPos;
 in mat3 oTBN;
 
-uniform sampler2D texture;
+uniform sampler2D texture_map;
 uniform sampler2D normalTexture;
 uniform vec3 viewPos;
 
@@ -125,6 +125,6 @@ void main()
 
 	//lightColour = lightColour / (int(DirectionLightUsed) + TotalPointLights + TotalSpotLights);
 
-	FragColor = vec4(texture(texture, oTex).rgb * lightColour, 1.0);
+	FragColor = vec4(texture(texture_map, oTex).rgb * lightColour, 1.0);
 	FragColor = vec4(norm, 1.0);
 }

@@ -63,7 +63,7 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, Textur
 	int viewLocation = glGetUniformLocation(shader->ShaderID(), "view");
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(viewMatrix));
 
-	int textureLocation = glGetUniformLocation(shader->ShaderID(), "texture");
+	int textureLocation = glGetUniformLocation(shader->ShaderID(), "texture_map");
 	glUniform1i(textureLocation, 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
