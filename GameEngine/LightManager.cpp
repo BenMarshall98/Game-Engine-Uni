@@ -179,16 +179,13 @@ void LightManager::Render(int ShaderID)
 
 	for (int i = 0; i < renderPointLights.size(); i++)
 	{
-		string gllocation = "pointLights[" + to_string(i) + "].location";
-		int PointLightLocation = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int PointLightLocation = glGetUniformLocation(ShaderID, ("pointLights[" + to_string(i) + "].location").c_str());
 		glUniform3fv(PointLightLocation, 1, value_ptr(renderPointLights.at(i)->location));
 
-		gllocation = "pointLights[" + to_string(i) + "].lightColour";
-		int PointLightColour = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int PointLightColour = glGetUniformLocation(ShaderID, ("pointLights[" + to_string(i) + "].lightColour").c_str());
 		glUniform3fv(PointLightColour, 1, value_ptr(renderPointLights.at(i)->lightColour));
 
-		gllocation = "pointLights[" + to_string(i) + "].attenuation";
-		int PointLightAttenuation = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int PointLightAttenuation = glGetUniformLocation(ShaderID, ("pointLights[" + to_string(i) + "].attenuation").c_str());
 		glUniform1f(PointLightAttenuation, renderPointLights.at(i)->attenuation);
 	}
 
@@ -197,24 +194,19 @@ void LightManager::Render(int ShaderID)
 
 	for (int i = 0; i < renderSpotLights.size(); i++)
 	{
-		string gllocation = "spotLights[" + to_string(i) + "].location";
-		int SpotLightLocation = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int SpotLightLocation = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].location").c_str());
 		glUniform3fv(SpotLightLocation, 1, value_ptr(renderSpotLights.at(i)->location));
 
-		gllocation = "spotLights[" + to_string(i) + "].lightColour";
-		int SpotLightColour = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int SpotLightColour = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].lightColour").c_str());
 		glUniform3fv(SpotLightColour, 1, value_ptr(renderSpotLights.at(i)->lightColour));
 
-		gllocation = "spotLights[" + to_string(i) + "].direction";
-		int SpotLightDirection = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int SpotLightDirection = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].direction").c_str());
 		glUniform3fv(SpotLightDirection, 1, value_ptr(renderSpotLights.at(i)->direction));
 
-		gllocation = "spotLights[" + to_string(i) + "].angleInner";
-		int SpotLightAngleInner = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int SpotLightAngleInner = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].angleInner").c_str());
 		glUniform1f(SpotLightAngleInner, cos(radians(renderSpotLights.at(i)->angleInner)));
 
-		gllocation = "spotLights[" + to_string(i) + "].angleOuter";
-		int SpotLightAngleOuter = glGetUniformLocation(ShaderID, gllocation.c_str());
+		int SpotLightAngleOuter = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].angleOuter").c_str());
 		glUniform1f(SpotLightAngleOuter, cos(radians(renderSpotLights.at(i)->angleOutside)));
 	}
 }

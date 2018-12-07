@@ -19,7 +19,7 @@ BulletPhysicsEngine::BulletPhysicsEngine()
 
 	//The world.
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, -1.0f, 0));
+	dynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
 }
 
 
@@ -64,6 +64,8 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat d
 
 	btRigidBody * rigidBody = new btRigidBody(rigidBodyCI);
 
+	rigidBody->setAngularFactor(btVector3(0, 0, 1));
+
 	dynamicsWorld->addRigidBody(rigidBody);
 
 	return rigidBody;
@@ -72,8 +74,6 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat d
 vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody* )pRigidBody;
-
-	rigidBody->activate();
 
 	btTransform transform = rigidBody->getWorldTransform();
 	btVector3 origin = transform.getOrigin();

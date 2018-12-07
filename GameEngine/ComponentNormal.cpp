@@ -1,6 +1,6 @@
 #include "ComponentNormal.h"
 
-string ComponentNormal::GetComponentName()
+ComponentType ComponentNormal::GetComponentName()
 {
-	return "ComponentNormal";
+	return ComponentType::COMPONENT_NORMAL;
 }

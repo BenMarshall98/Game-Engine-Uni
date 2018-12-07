@@ -29,7 +29,7 @@ Entity * EntityManager::GetEntityByName(string entityName)
 
 void EntityManager::RemoveEntity(Entity* entity)
 {
-	map<string, map<Entity *, iComponent *>>::iterator it;
+	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); it++)
 	{
 		map<Entity *, iComponent *> entities = it->second;
@@ -58,8 +58,8 @@ void EntityManager::RemoveEntity(Entity* entity)
 
 void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component)
 {
-	string componentType = component->GetComponentName();
-	map<string, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
+	ComponentType componentType = component->GetComponentName();
+	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
 
 	if (it != ComponentList.end())
 	{
@@ -68,15 +68,15 @@ void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component
 	else
 	{
 		map<Entity *, iComponent *> ComponentDetails;
-		ComponentList.insert(pair<string, map<Entity *, iComponent *>>(componentType, ComponentDetails));
+		ComponentList.insert(pair<ComponentType, map<Entity *, iComponent *>>(componentType, ComponentDetails));
 		ComponentList[componentType].insert(pair<Entity *, iComponent *>(entity, component));
 	}
 }
 
 void EntityManager::RemoveComponentFromEntity(Entity * entity, iComponent * component)
 {
-	string componentType = component->GetComponentName();
-	map<string, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
+	ComponentType componentType = component->GetComponentName();
+	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
 
 	if (it != ComponentList.end())
 	{
@@ -91,13 +91,13 @@ void EntityManager::RemoveComponentFromEntity(Entity * entity, iComponent * comp
 	}
 }
 
-iComponent * EntityManager::GetComponentOfEntity(Entity * entity, string componentName)
+iComponent * EntityManager::GetComponentOfEntity(Entity * entity, ComponentType componentName)
 {
-	map<string, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentName);
+	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentName);
 
 	if (it != ComponentList.end())
 	{
-		map<Entity *, iComponent *> entities = it->second;
+		map<Entity *, iComponent *> & entities = it->second;
 		map<Entity *, iComponent *>::iterator find = entities.find(entity);
 
 		if (find != entities.end())
@@ -109,7 +109,7 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * entity, string compone
 	return nullptr;
 }
 
-vector<Entity *> EntityManager::GetAllEntitiesWithComponents(string * componentName, int size)
+vector<Entity *> EntityManager::GetAllEntitiesWithComponents(ComponentType * componentName, int size)
 {
 	vector<Entity *> entities;
 

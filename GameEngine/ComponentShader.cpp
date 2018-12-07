@@ -1,6 +1,6 @@
 #include "ComponentShader.h"
 
-string ComponentShader::GetComponentName()
+ComponentType ComponentShader::GetComponentName()
 {
-	return "ComponentShader";
+	return ComponentType::COMPONENT_SHADER;
 }

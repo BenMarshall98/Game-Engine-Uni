@@ -16,7 +16,7 @@ public:
 	ComponentInput(vector<InputFunction> pInputs) : inputs(pInputs) {}
 	~ComponentInput() {}
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline vector<InputFunction> GetInputs()

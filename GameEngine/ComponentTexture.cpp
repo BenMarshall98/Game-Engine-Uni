@@ -1,6 +1,6 @@
 #include "ComponentTexture.h"
 
-string ComponentTexture::GetComponentName()
+ComponentType ComponentTexture::GetComponentName()
 {
-	return "ComponentTexture";
+	return ComponentType::COMPONENT_TEXTURE;
 }

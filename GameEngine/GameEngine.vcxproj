@@ -149,6 +149,7 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="iScene.cpp" />
     <ClCompile Include="iSystem.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="LoggingManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="iScene.h" />
     <ClInclude Include="iSystem.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="LoggingManager.h" />
     <ClInclude Include="ModelLoader.h" />
@@ -224,6 +226,7 @@
     <None Include="TestVertex.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Level.txt" />
     <Text Include="Useful Links.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +250,12 @@
     <ProjectReference Include="..\BulletPhysics\LinearMath\LinearMath.vcxproj">
       <Project>{e84feff4-3162-4800-befc-dd5e20ff315d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sphere.obj">
+      <FileType>Text</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Resource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

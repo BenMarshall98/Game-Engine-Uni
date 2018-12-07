@@ -1,6 +1,6 @@
 #include "ComponentPosition.h"
 
-string ComponentPosition::GetComponentName()
+ComponentType ComponentPosition::GetComponentName()
 {
-	return "ComponentPosition";
+	return ComponentType::COMPONENT_POSITION;
 }

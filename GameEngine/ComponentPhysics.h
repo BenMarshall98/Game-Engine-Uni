@@ -19,7 +19,7 @@ public:
 	ComponentPhysics(CollisionShape * pShape, float pMass) : shape(pShape), mass(pMass) {}
 	~ComponentPhysics() {}
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline vec3 GetForce()

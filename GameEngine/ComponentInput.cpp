@@ -1,6 +1,6 @@
 #include "ComponentInput.h"
 
-string ComponentInput::GetComponentName()
+ComponentType ComponentInput::GetComponentName()
 {
-	return "ComponentInput";
+	return ComponentType::COMPONENT_INPUT;
 }

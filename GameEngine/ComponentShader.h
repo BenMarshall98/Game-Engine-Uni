@@ -19,7 +19,7 @@ public:
 		delete shader;
 	}
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline Shader * GetShader()

@@ -12,7 +12,7 @@ public:
 	ComponentPosition(vec3 pPosition) : position(pPosition) {}
 	~ComponentPosition() {}
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline vec3 GetPosition()

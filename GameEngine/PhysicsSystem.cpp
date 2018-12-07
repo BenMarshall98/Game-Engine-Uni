@@ -9,7 +9,7 @@ using namespace glm;
 
 PhysicsSystem::PhysicsSystem(EntityManager & pEntityManager, PhysicsManager & pPhysicsManager) : entityManager(pEntityManager), physicsManager(pPhysicsManager)
 {
-	string componentTypes[] = { "ComponentPosition", "ComponentDirection", "ComponentPhysics" };
+	ComponentType componentTypes[] = { COMPONENT_POSITION, COMPONENT_DIRECTION, COMPONENT_PHYSICS };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 	newEntities = EntityList;
 }
@@ -18,9 +18,9 @@ void PhysicsSystem::Action(void)
 {
 	for (int i = 0; i < newEntities.size(); i++)
 	{
-		iComponent * componentPosition = entityManager.GetComponentOfEntity(newEntities[i], "ComponentPosition");
-		iComponent * componentDirection = entityManager.GetComponentOfEntity(newEntities[i], "ComponentDirection");
-		iComponent * componentPhysics = entityManager.GetComponentOfEntity(newEntities[i], "ComponentPhysics");
+		iComponent * componentPosition = entityManager.GetComponentOfEntity(newEntities[i], COMPONENT_POSITION);
+		iComponent * componentDirection = entityManager.GetComponentOfEntity(newEntities[i], COMPONENT_DIRECTION);
+		iComponent * componentPhysics = entityManager.GetComponentOfEntity(newEntities[i], COMPONENT_PHYSICS);
 
 		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
 		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
@@ -38,9 +38,9 @@ void PhysicsSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], "ComponentPosition");
-		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], "ComponentDirection");
-		iComponent * componentPhysics = entityManager.GetComponentOfEntity(EntityList[i], "ComponentPhysics");
+		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_POSITION);
+		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
+		iComponent * componentPhysics = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_PHYSICS);
 
 		Motion(((ComponentPosition *)componentPosition), ((ComponentDirection *)componentDirection), ((ComponentPhysics *)componentPhysics));
 	}

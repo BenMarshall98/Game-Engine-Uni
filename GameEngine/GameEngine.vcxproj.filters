@@ -67,6 +67,9 @@
     <Filter Include="GameEngineLibraries\Physics Manager\CollisionShpaes">
       <UniqueIdentifier>{294a5ecc-e10d-4698-837b-80757ea04515}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameCode\Levels">
+      <UniqueIdentifier>{fd2d928f-d141-4f6c-9db6-e87b8e750dad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -186,6 +189,7 @@
     <ClCompile Include="AnimatedModel.cpp">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -315,6 +319,7 @@
     <ClInclude Include="AnimatedModel.h">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
+    <ClInclude Include="LevelLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
@@ -342,9 +347,15 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Useful Links.txt" />
+    <Text Include="Level.txt">
+      <Filter>GameCode\Levels</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="cube.obj">
+      <Filter>GameCode\Models</Filter>
+    </Resource>
+    <Resource Include="sphere.obj">
       <Filter>GameCode\Models</Filter>
     </Resource>
   </ItemGroup>

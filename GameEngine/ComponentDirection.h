@@ -18,7 +18,7 @@ public:
 	}
 	~ComponentDirection() {};
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline quat GetDirection()

@@ -18,7 +18,7 @@ public:
 		delete texture;
 	}
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline Texture * GetTexture()

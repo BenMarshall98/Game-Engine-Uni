@@ -1,6 +1,6 @@
 #include "ComponentModel.h"
 
-string ComponentModel::GetComponentName()
+ComponentType ComponentModel::GetComponentName()
 {
-	return "ComponentModel";
+	return ComponentType::COMPONENT_MODEL;
 }

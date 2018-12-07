@@ -19,7 +19,7 @@ public:
 		delete model;
 	}
 
-	string GetComponentName();
+	ComponentType GetComponentName();
 	void Swap() {}
 
 	inline iModel * GetModel()

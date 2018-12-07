@@ -1,6 +1,6 @@
 #include "ComponentPhysics.h"
 
-string ComponentPhysics::GetComponentName()
+ComponentType ComponentPhysics::GetComponentName()
 {
-	return "ComponentPhysics";
+	return ComponentType::COMPONENT_PHYSICS;
 }

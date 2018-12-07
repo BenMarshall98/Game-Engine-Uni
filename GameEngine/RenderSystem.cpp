@@ -16,7 +16,7 @@
 
 RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection)
 {
-	string componentTypes[] = { "ComponentModel", "ComponentShader", "ComponentPosition", "ComponentTexture", "ComponentDirection" };
+	ComponentType componentTypes[] = { COMPONENT_MODEL, COMPONENT_SHADER, COMPONENT_POSITION, COMPONENT_TEXTURE, COMPONENT_DIRECTION };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 }
 
@@ -31,11 +31,11 @@ void RenderSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentShader = entityManager.GetComponentOfEntity(EntityList[i], "ComponentShader");
-		iComponent * componentModel = entityManager.GetComponentOfEntity(EntityList[i], "ComponentModel");
-		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], "ComponentPosition");
-		iComponent * componentTexture = entityManager.GetComponentOfEntity(EntityList[i], "ComponentTexture");
-		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], "ComponentDirection");
+		iComponent * componentShader = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_SHADER);
+		iComponent * componentModel = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_MODEL);
+		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_POSITION);
+		iComponent * componentTexture = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_TEXTURE);
+		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
 
 		Shader * shader = ((ComponentShader *)componentShader)->GetShader();
 		iModel * model = ((ComponentModel *)componentModel)->GetModel();
@@ -43,7 +43,7 @@ void RenderSystem::Action(void)
 		Texture * texture = ((ComponentTexture *)componentTexture)->GetTexture();
 		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
 
-		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], "ComponentNormal");
+		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
 
 		Texture * normal = (componentNormal == nullptr) ? nullptr : ((ComponentNormal *)componentNormal)->GetTexture();
 
