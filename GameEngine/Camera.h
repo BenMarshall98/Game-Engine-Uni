@@ -9,16 +9,19 @@ class Camera
 {
 private:
 	mat4 viewMatrix;
+
+protected:
 	vec3 position;
 	vec3 lookAt;
 	vec3 up;
+
 public:
 	Camera(vec3 pPosition = vec3(0, 0, 0), vec3 pLookAt = vec3(0, 0, -1), vec3 pUp = vec3(0, 1, 0)) : position(pPosition), lookAt(pLookAt), up(pUp)
 	{
 		Update();
 	}
 
-	inline void Update()
+	virtual void Update()
 	{
 		viewMatrix = glm::lookAt(position, position + lookAt, up);
 	}

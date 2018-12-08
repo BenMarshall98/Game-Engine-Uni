@@ -122,4 +122,5 @@ void main()
 	//lightColour = lightColour / (int(DirectionLightUsed) + TotalPointLights + TotalSpotLights);
 
 	FragColor = vec4(texture(texture_map, oTex).rgb * lightColour, 1.0);
+	FragColor = vec4(oNormal, 1.0);
 }

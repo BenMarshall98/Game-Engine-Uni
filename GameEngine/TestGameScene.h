@@ -37,8 +37,8 @@ public:
 
 	void UpdateCamera();
 
-	static void CubeLeft(float value, Entity * entity);
-	static void CubeRight(float value, Entity * entity);
-	static void CubeUp(float value, Entity * entity);
+	static void PlayerLeft(float value, Entity * entity);
+	static void PlayerRight(float value, Entity * entity);
+	static void PlayerJump(float value, Entity * entity);
 };
 

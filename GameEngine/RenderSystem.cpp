@@ -66,7 +66,7 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, quat d
 
 	mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
-	modelMatrix *= toMat4(direction);
+	//modelMatrix *= toMat4(direction);
 
 	int modelLocation = glGetUniformLocation(shader->ShaderID(), "model");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(modelMatrix));

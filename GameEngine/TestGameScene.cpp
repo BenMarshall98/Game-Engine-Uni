@@ -18,6 +18,7 @@
 #include "ComponentDirection.h"
 #include "ComponentPhysics.h"
 #include "CollisionCuboid.h"
+#include "FollowPlaneCamera.h"
 
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
@@ -41,8 +42,7 @@ void TestGameScene::Load()
 	inputReader->MouseInput(true);
 	inputReader->KeyboardInput(true);
 
-	camera = new Camera();
-	projection = new Projection(ProjectionType::Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
+	projection = new Projection(Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
 
 	ResourceManager::LoadModel("Cube", "cube.obj");
 	ResourceManager::LoadModel("Sphere", "sphere.obj");
@@ -52,42 +52,32 @@ void TestGameScene::Load()
 	ResourceManager::LoadShader("RiggedShader", "RiggedVertex.vert", "RiggedFragment.frag");
 	ResourceManager::LoadTexture("Box", "container.jpg");
 	ResourceManager::LoadTexture("BoxNormal", "containerNormal.jpg");
+	ResourceManager::LoadTexture("Earth", "2k_earth_daymap.jpg");
 
-	InputFunction cubeOneLeft = InputFunction(CubeLeft);
-	cubeOneLeft.AddInput(KEYBOARD_A);
-	cubeOneLeft.AddInput(GAMEPAD_L_LEFT);
+	InputFunction playerLeft = InputFunction(PlayerLeft);
+	playerLeft.AddInput(KEYBOARD_A);
+	playerLeft.AddInput(GAMEPAD_L_LEFT);
 
-	InputFunction cubeOneRight = InputFunction(CubeRight);
-	cubeOneRight.AddInput(KEYBOARD_D);
-	cubeOneRight.AddInput(GAMEPAD_L_RIGHT);
+	InputFunction playerRight = InputFunction(PlayerRight);
+	playerRight.AddInput(KEYBOARD_D);
+	playerRight.AddInput(GAMEPAD_L_RIGHT);
 
-	InputFunction cubeOneUp = InputFunction(CubeUp);
-	cubeOneUp.AddInput(KEYBOARD_W);
-	cubeOneUp.AddInput(GAMEPAD_L_UP);
+	InputFunction playerJump = InputFunction(PlayerJump);
+	playerJump.AddInput(KEYBOARD_SPACE);
+	playerJump.AddInput(GAMEPAD_X);
 
-	vector<InputFunction> cubeOneInputs;
-	cubeOneInputs.push_back(cubeOneLeft);
-	cubeOneInputs.push_back(cubeOneRight);
-	cubeOneInputs.push_back(cubeOneUp);
+	vector<InputFunction> playerInputs;
+	playerInputs.push_back(playerLeft);
+	playerInputs.push_back(playerRight);
+	playerInputs.push_back(playerJump);
 
-	InputFunction cubeTwoLeft = InputFunction(CubeLeft);
-	cubeTwoLeft.AddInput(KEYBOARD_H);
-	cubeTwoLeft.AddInput(GAMEPAD_R_LEFT);
-
-	InputFunction cubeTwoRight = InputFunction(CubeRight);
-	cubeTwoRight.AddInput(KEYBOARD_K);
-	cubeTwoRight.AddInput(GAMEPAD_R_RIGHT);
-
-	InputFunction cubeTwoUp = InputFunction(CubeUp);
-	cubeTwoUp.AddInput(KEYBOARD_U);
-	cubeTwoUp.AddInput(GAMEPAD_R_UP);
-
-	vector<InputFunction> cubeTwoInputs;
-	cubeTwoInputs.push_back(cubeTwoLeft);
-	cubeTwoInputs.push_back(cubeTwoRight);
-	cubeTwoInputs.push_back(cubeTwoUp);
 
 	LevelLoader::LoadLevel("Level.txt", mEntityManager);
+
+	Entity * entity = mEntityManager.GetEntityByName("Player");
+	mEntityManager.AddComponentToEntity(entity, new ComponentInput(playerInputs));
+
+	camera = new FollowPlaneCamera(entity, mEntityManager, XY, 2, 50, 7, 0.1);
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
@@ -133,7 +123,8 @@ void TestGameScene::Render()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	UpdateCamera();
+	//camera->Update();
+	//UpdateCamera();
 
 	mSystemManager.Render();
 }
@@ -193,38 +184,38 @@ void TestGameScene::UpdateCamera()
 	}
 }
 
-void TestGameScene::CubeLeft(float value, Entity * entity)
+void TestGameScene::PlayerLeft(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 		
 		vec3 force = ((ComponentPhysics *)componentPhysics)->GetForce();
-		force.x -= ((1 / 60.0f) * value * 100);
+		force.x -= ((1 / 60.0f) * value * 500);
 		((ComponentPhysics *)componentPhysics)->SetForce(force);
 	}
 }
 
-void TestGameScene::CubeRight(float value, Entity * entity)
+void TestGameScene::PlayerRight(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
 		vec3 force = ((ComponentPhysics *)componentPhysics)->GetForce();
-		force.x += ((1 / 60.0f) * value * 100);
+		force.x += ((1 / 60.0f) * value * 500);
 		((ComponentPhysics *)componentPhysics)->SetForce(force);
 	}
 }
 
-void TestGameScene::CubeUp(float value, Entity * entity)
+void TestGameScene::PlayerJump(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
 		vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetImpulse();
-		impulse.y += ((1 / 60.0f) * value * 10);
+		impulse.y += ((1 / 60.0f) * value * 100);
 		((ComponentPhysics *)componentPhysics)->SetImpulse(impulse);
 	}
 }

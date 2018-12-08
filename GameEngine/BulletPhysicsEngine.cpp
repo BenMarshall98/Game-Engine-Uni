@@ -75,6 +75,8 @@ vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody* )pRigidBody;
 
+	rigidBody->activate();
+
 	btTransform transform = rigidBody->getWorldTransform();
 	btVector3 origin = transform.getOrigin();
 
