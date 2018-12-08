@@ -53,10 +53,16 @@ void RenderSystem::Action(void)
 
 void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, quat direction, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
 {
+	static int lastShader = -1;
+
 	shader->UseShader();
 
-	LightManager * lightManager = LightManager::Instance();
-	lightManager->Render(shader->ShaderID());
+	if (lastShader != shader->ShaderID())
+	{
+		LightManager * lightManager = LightManager::Instance();
+		lightManager->Render(shader->ShaderID());
+		lastShader = shader->ShaderID();
+	}
 
 	mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);

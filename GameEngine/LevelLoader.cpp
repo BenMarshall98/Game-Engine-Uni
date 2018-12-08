@@ -34,10 +34,10 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 	{
 		char letter = in.get();
 
-		if (letter == '/n')
+		if (letter == '\n')
 		{
-			x = 0;
-			y++;
+			x = -1;
+			y--;
 		}
 		else if (letter == 'w')
 		{
@@ -56,7 +56,7 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, -1), 0));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 0));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 		}
 		x++;
