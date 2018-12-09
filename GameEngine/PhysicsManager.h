@@ -7,12 +7,15 @@
 
 using namespace glm;
 
+template <typename E>
 class PhysicsManager
 {
 private:
-	BulletPhysicsEngine* engine;
+	
+	BulletPhysicsEngine<E>* engine;
 public:
-	PhysicsManager(BulletPhysicsEngine* pEngine) : engine(pEngine) {}
+
+	PhysicsManager(BulletPhysicsEngine<E>* pEngine) : engine(pEngine) {}
 	~PhysicsManager() {}
 
 	void* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape);
@@ -32,9 +35,9 @@ public:
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
 
-	inline void ApplyForce(void * pRigidBody, vec3 force)
+	inline void ApplyVelocity(void * pRigidBody, vec3 velocity)
 	{
-		engine->ApplyForce(pRigidBody, force);
+		engine->ApplyVelocity(pRigidBody, velocity);
 	}
 
 	inline void ApplyImpulse(void * pRigidBody, vec3 impulse)

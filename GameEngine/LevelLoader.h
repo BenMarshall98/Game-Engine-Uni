@@ -5,6 +5,7 @@
 
 using namespace std;
 
+template<typename E>
 class LevelLoader
 {
 public:

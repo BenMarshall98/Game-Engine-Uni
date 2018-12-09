@@ -32,7 +32,7 @@ void EntityManager::RemoveEntity(Entity* entity)
 	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); it++)
 	{
-		map<Entity *, iComponent *> entities = it->second;
+		map<Entity *, iComponent *> & entities = it->second;
 		map<Entity *, iComponent *>::iterator find = entities.find(entity);
 
 		if (find == entities.end())

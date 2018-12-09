@@ -145,78 +145,42 @@ void TestGameScene::Resize(int width, int height)
 	projection->SetWidth(width);
 }
 
-void TestGameScene::UpdateCamera()
-{
-	const float angle = 30 * (1 / 60.0f); //TODO: replace
-	InputManager * inputManager = InputManager::Instance();
-
-	float leftValue = inputManager->GetInputValue(cameraLeftInputs);
-	float rightValue = inputManager->GetInputValue(cameraRightInputs);
-	float upValue = inputManager->GetInputValue(cameraUpInputs);
-	float downValue = inputManager->GetInputValue(cameraDownInputs);
-
-	if (leftValue > 0.2)
-	{
-		vec3 view = camera->GetLookAt();
-		view = view * mat3(rotate(radians(-angle * leftValue), vec3(0, 1, 0)));
-		camera->SetLookAt(view);
-	}
-
-	if (rightValue > 0.2)
-	{
-		vec3 view = camera->GetLookAt();
-		view = view * mat3(rotate(radians(angle * rightValue), vec3(0, 1, 0)));
-		camera->SetLookAt(view);
-	}
-
-	if (upValue > 0.2)
-	{
-		vec3 view = camera->GetLookAt();
-		view = view * mat3(rotate(radians(-angle * upValue), vec3(1, 0, 0)));
-		camera->SetLookAt(view);
-	}
-
-	if (downValue > 0.2)
-	{
-		vec3 view = camera->GetLookAt();
-		view = view * mat3(rotate(radians(angle * downValue), vec3(1, 0, 0)));
-		camera->SetLookAt(view);
-	}
-}
-
+template <typename E>
 void TestGameScene::PlayerLeft(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 		
-		vec3 force = ((ComponentPhysics *)componentPhysics)->GetForce();
-		force.x -= ((1 / 60.0f) * value * 500);
-		((ComponentPhysics *)componentPhysics)->SetForce(force);
+		vec3 velocity = ((ComponentPhysics<E> *)componentPhysics)->GetVelocity();
+		velocity.x -= ((1 / 60.0f) * value * 1000);
+		((ComponentPhysics<E> *)componentPhysics)->SetVelocity(velocity);
 	}
 }
 
+template <typename E>
 void TestGameScene::PlayerRight(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
-		vec3 force = ((ComponentPhysics *)componentPhysics)->GetForce();
-		force.x += ((1 / 60.0f) * value * 500);
-		((ComponentPhysics *)componentPhysics)->SetForce(force);
+		vec3 velocity = ((ComponentPhysics<E> *)componentPhysics)->GetVelocity();
+		velocity.x += ((1 / 60.0f) * value * 1000);
+		((ComponentPhysics<E> *)componentPhysics)->SetVelocity(velocity);
 	}
 }
 
+template <typename E>
 void TestGameScene::PlayerJump(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
-		vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetImpulse();
+		vec3 impulse = ((ComponentPhysics<E> *)componentPhysics)->GetImpulse();
 		impulse.y += ((1 / 60.0f) * value * 100);
-		((ComponentPhysics *)componentPhysics)->SetImpulse(impulse);
+		((ComponentPhysics<E> *)componentPhysics)->SetImpulse(impulse);
 	}
 }
 

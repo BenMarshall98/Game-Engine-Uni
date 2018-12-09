@@ -13,7 +13,8 @@
 
 #include <fstream>
 
-void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
+template <typename E>
+void LevelLoader<E>::LoadLevel(string fileName, EntityManager & pEntityManager)
 {
 
 	ResourceManager::LoadModel("Cube", "cube.obj");
@@ -47,7 +48,7 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics<E>(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
 		}
 		else if (letter == 'p')
@@ -57,7 +58,7 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics<E>(new CollisionSphere(0.5f), 1));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
 		}
 		x++;

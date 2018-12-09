@@ -2,10 +2,12 @@
 #include "BulletPhysicsEngine.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
+#include "ComponentPhysics.h"
 
 #include "glm/gtc/quaternion.hpp"
 
-BulletPhysicsEngine::BulletPhysicsEngine()
+template<typename E>
+BulletPhysicsEngine<E>::BulletPhysicsEngine()
 {
 	//Build the broadphase
 	btBroadphaseInterface* broadphase = new btDbvtBroadphase();
@@ -20,14 +22,17 @@ BulletPhysicsEngine::BulletPhysicsEngine()
 	//The world.
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
+
+	gContactAddedCallback = collisionCallback;
 }
 
-
-BulletPhysicsEngine::~BulletPhysicsEngine()
+template<typename E>
+BulletPhysicsEngine<E>::~BulletPhysicsEngine()
 {
 }
 
-btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape)
+template<typename E>
+btRigidBody* BulletPhysicsEngine<E>::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, ComponentPhysics<E> * componentPhysics)
 {
 	btCollisionShape* collisionShape;
 
@@ -65,13 +70,15 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat d
 	btRigidBody * rigidBody = new btRigidBody(rigidBodyCI);
 
 	rigidBody->setAngularFactor(btVector3(0, 0, 1));
+	rigidBody->setUserPointer(componentPhysics);
 
 	dynamicsWorld->addRigidBody(rigidBody);
 
 	return rigidBody;
 }
 
-vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
+template<typename E>
+vec3 BulletPhysicsEngine<E>::GetPositionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody* )pRigidBody;
 
@@ -83,7 +90,8 @@ vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
 	return vec3(origin.x(), origin.y(), origin.z());
 }
 
-quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
+template<typename E>
+quat BulletPhysicsEngine<E>::GetDirectionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
@@ -93,20 +101,36 @@ quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
 	return quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
 }
 
-void BulletPhysicsEngine::ApplyForce(void * pRigidBody, vec3 pForce)
+template<typename E>
+void BulletPhysicsEngine<E>::ApplyVelocity(void * pRigidBody, vec3 pVelocity)
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
-	btVector3 origin(0.0, 0.0, 0.0);
-	btVector3 force(pForce.x, pForce.y, pForce.z);
-	rigidBody->applyForce(force, origin);
+	btVector3 currentVel = rigidBody->getLinearVelocity();
+	vec3 currentVelocity(currentVel.x(), currentVel.y(), currentVel.z());
+	vec3 desiredVelocity(pVelocity.x, currentVel.y(), pVelocity.z);
+
+	vec3 velocity = mix(currentVelocity, desiredVelocity, 0.1);
+
+	btVector3 vel(velocity.x, velocity.y, velocity.z);
+	
+	rigidBody->setLinearVelocity(vel);
 }
 
-void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
+template<typename E>
+void BulletPhysicsEngine<E>::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
 	btVector3 origin(0.0, 0.0, 0.0);
 	btVector3 impulse(pImpulse.x, pImpulse.y, pImpulse.z);
 	rigidBody->applyImpulse(impulse, origin);
+}
+
+template<typename E>
+bool BulletPhysicsEngine<E>::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+{
+	
+	ComponentPhysics<E> * physicsComponent1 = (ComponentPhysics<E> *)((btRigidBody *)obj1)->getUserPointer();
+	ComponentPhysics<E> * physicsComponent2 = (ComponentPhysics<E> *)((btRigidBody *)obj2)->getUserPointer();
 }

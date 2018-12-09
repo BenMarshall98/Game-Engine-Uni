@@ -11,12 +11,20 @@
 
 using namespace std;
 
+enum EntityTypes
+{
+	PLAYER,
+	WALL,
+	COLLECTABLE
+};
+
 class TestGameScene : public iScene
 {
 private:
+	
 	static EntityManager mEntityManager; //TODO: make into a singleton
 	SystemManager mSystemManager;
-	PhysicsManager * mPhysicsManager;
+	PhysicsManager<EntityTypes> * mPhysicsManager;
 	Camera * camera;
 	Projection * projection;
 	vector<GameInput> cameraLeftInputs;
@@ -34,8 +42,6 @@ public:
 	void Close();
 
 	void Resize(int width, int height);
-
-	void UpdateCamera();
 
 	static void PlayerLeft(float value, Entity * entity);
 	static void PlayerRight(float value, Entity * entity);

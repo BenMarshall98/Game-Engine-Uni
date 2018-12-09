@@ -2,34 +2,45 @@
 #include "iComponent.h"
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
+#include <map>
+#include <vector>
+#include <algorithm>
 
 using namespace glm;
+using namespace std;
 
+template <typename E>
 class ComponentPhysics : public iComponent
 {
 private:
+	typedef void(*GameCollisionFunction)(void);
+	map<E, GameCollisionFunction> collisionFunctions;
+	map<ComponentPhysics *, E> unresolvedCollisions = map<ComponentPhysics *, E>();
+	E entityType;
 	CollisionShape * shape;
-	vec3 force = vec3(0);
+	vec3 velocity = vec3(0);
 	vec3 impulse = vec3(0);
 	float rotation = 0;
 	float mass;
 	void* rigidBody;
 
 public:
-	ComponentPhysics(CollisionShape * pShape, float pMass) : shape(pShape), mass(pMass) {}
+	ComponentPhysics(CollisionShape * pShape, float pMass, E pEntityType, map<E, GameCollisionFunction> pCollisionFunctions = map<E, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) {}
 	~ComponentPhysics() {}
 
 	ComponentType GetComponentName();
+	void AddCollision(ComponentPhysics * physicsComponent, E entityType);
+	void ResolveCollisions();
 	void Swap() {}
 
-	inline vec3 GetForce()
+	inline vec3 GetVelocity()
 	{
-		return force;
+		return velocity;
 	}
 
-	inline void SetForce(vec3 pForce)
+	inline void SetVelocity(vec3 pVelocity)
 	{
-		force = pForce;
+		velocity = pVelocity;
 	}
 
 	inline vec3 GetImpulse()
@@ -70,6 +81,11 @@ public:
 	inline void* GetRigidBody()
 	{
 		return rigidBody;
+	}
+
+	inline E GetEntityType()
+	{
+		return entityType;
 	}
 };
 
