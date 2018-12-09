@@ -28,6 +28,7 @@ void RenderSystem::Action(void)
 
 	LightManager * lightManager = LightManager::Instance();
 	lightManager->Update(camera->GetPosition());
+	updateFirst = true;
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
@@ -57,16 +58,17 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, quat d
 
 	shader->UseShader();
 
-	if (lastShader != shader->ShaderID())
+	if (lastShader != shader->ShaderID() || updateFirst)
 	{
 		LightManager * lightManager = LightManager::Instance();
 		lightManager->Render(shader->ShaderID());
 		lastShader = shader->ShaderID();
+		updateFirst = false;
 	}
 
 	mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
-	//modelMatrix *= toMat4(direction);
+	modelMatrix *= toMat4(direction);
 
 	int modelLocation = glGetUniformLocation(shader->ShaderID(), "model");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(modelMatrix));

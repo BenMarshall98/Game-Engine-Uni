@@ -20,6 +20,7 @@ private:
 	EntityManager & entityManager;
 	Camera * camera;
 	Projection * projection;
+	bool updateFirst;
 
 	void Render(Shader * shader, iModel * model, vec3 position, quat direciton, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos);
 
