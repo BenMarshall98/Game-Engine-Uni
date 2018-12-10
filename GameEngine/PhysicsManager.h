@@ -4,21 +4,21 @@
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
+#include "Entity.h"
 
 using namespace glm;
 
-template <typename E>
 class PhysicsManager
 {
 private:
 	
-	BulletPhysicsEngine<E>* engine;
+	BulletPhysicsEngine* engine;
 public:
 
-	PhysicsManager(BulletPhysicsEngine<E>* pEngine) : engine(pEngine) {}
+	PhysicsManager(BulletPhysicsEngine* pEngine) : engine(pEngine) {}
 	~PhysicsManager() {}
 
-	void* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape);
+	void* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity);
 
 	inline void Update(float pDeltaTime)
 	{

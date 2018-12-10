@@ -1,33 +1,30 @@
 #include "ComponentPhysics.h"
 
-template <typename E>
-ComponentType ComponentPhysics<E>::GetComponentName()
+ComponentType ComponentPhysics::GetComponentName()
 {
 	return ComponentType::COMPONENT_PHYSICS;
 }
 
-template <typename E>
-void ComponentPhysics<E>::AddCollision(ComponentPhysics * physicsComponent, E entityType)
+void ComponentPhysics::AddCollision(Entity * physicsComponent, EntityType entityType)
 {
-	typename map<ComponentPhysics *, E>::iterator it;
+	map<Entity *, EntityType>::iterator it;
 	it = unresolvedCollisions.find(physicsComponent);
 
-	if (it == unresolvedCollision.end())
+	if (it == unresolvedCollisions.end())
 	{
-		unresolvedCollision.insert(pair<ComponentPhysics *, E>(physicsComponent, entityType));
+		unresolvedCollisions.insert(pair<Entity *, EntityType>(physicsComponent, entityType));
 	}
 }
 
-template <typename E>
-void ComponentPhysics<E>::ResolveCollisions()
+void ComponentPhysics::ResolveCollisions()
 {
-	typename map<ComponentPhysics *, E>::iterator it;
+	 map<Entity *, EntityType>::iterator it;
 
-	for (it = unresolvedCollision.begin(); it != unsolvedCollision.end(); it++)
+	for (it = unresolvedCollisions.begin(); it != unresolvedCollisions.end(); it++)
 	{
-		E entityType = it->second;
+		EntityType entityType = it->second;
 
-		typename map<E, GameCollisionFunction>::iterator collision = collisionFunctions.find(entityType);
+		map<EntityType, GameCollisionFunction>::iterator collision = collisionFunctions.find(entityType);
 		
 		if (collision != collisionFunctions.end())
 		{
@@ -35,4 +32,6 @@ void ComponentPhysics<E>::ResolveCollisions()
 			function();
 		}
 	}
+
+	unresolvedCollisions.clear();
 }

@@ -11,20 +11,11 @@
 
 using namespace std;
 
-enum EntityTypes
-{
-	PLAYER,
-	WALL,
-	COLLECTABLE
-};
-
 class TestGameScene : public iScene
 {
 private:
-	
-	static EntityManager mEntityManager; //TODO: make into a singleton
 	SystemManager mSystemManager;
-	PhysicsManager<EntityTypes> * mPhysicsManager;
+	PhysicsManager * mPhysicsManager;
 	Camera * camera;
 	Projection * projection;
 	vector<GameInput> cameraLeftInputs;
@@ -33,6 +24,8 @@ private:
 	vector<GameInput> cameraDownInputs;
 
 public:
+	static EntityManager mEntityManager; //TODO: make into a singleton and make private
+
 	TestGameScene();
 	~TestGameScene();
 

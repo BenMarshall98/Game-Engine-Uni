@@ -2,12 +2,12 @@
 #include "BulletPhysicsEngine.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
-#include "ComponentPhysics.h"
+#include "TestGameScene.h"
+#include <iostream>
 
 #include "glm/gtc/quaternion.hpp"
 
-template<typename E>
-BulletPhysicsEngine<E>::BulletPhysicsEngine()
+BulletPhysicsEngine::BulletPhysicsEngine()
 {
 	//Build the broadphase
 	btBroadphaseInterface* broadphase = new btDbvtBroadphase();
@@ -26,13 +26,11 @@ BulletPhysicsEngine<E>::BulletPhysicsEngine()
 	gContactAddedCallback = collisionCallback;
 }
 
-template<typename E>
-BulletPhysicsEngine<E>::~BulletPhysicsEngine()
+BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-template<typename E>
-btRigidBody* BulletPhysicsEngine<E>::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, ComponentPhysics<E> * componentPhysics)
+btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity)
 {
 	btCollisionShape* collisionShape;
 
@@ -70,15 +68,14 @@ btRigidBody* BulletPhysicsEngine<E>::AddRigidBody(float mass, vec3 position, qua
 	btRigidBody * rigidBody = new btRigidBody(rigidBodyCI);
 
 	rigidBody->setAngularFactor(btVector3(0, 0, 1));
-	rigidBody->setUserPointer(componentPhysics);
+	rigidBody->setUserPointer(entity);
 
 	dynamicsWorld->addRigidBody(rigidBody);
 
 	return rigidBody;
 }
 
-template<typename E>
-vec3 BulletPhysicsEngine<E>::GetPositionOfRigidBody(void * pRigidBody)
+vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody* )pRigidBody;
 
@@ -90,8 +87,7 @@ vec3 BulletPhysicsEngine<E>::GetPositionOfRigidBody(void * pRigidBody)
 	return vec3(origin.x(), origin.y(), origin.z());
 }
 
-template<typename E>
-quat BulletPhysicsEngine<E>::GetDirectionOfRigidBody(void * pRigidBody)
+quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
@@ -101,8 +97,7 @@ quat BulletPhysicsEngine<E>::GetDirectionOfRigidBody(void * pRigidBody)
 	return quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
 }
 
-template<typename E>
-void BulletPhysicsEngine<E>::ApplyVelocity(void * pRigidBody, vec3 pVelocity)
+void BulletPhysicsEngine::ApplyVelocity(void * pRigidBody, vec3 pVelocity)
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
@@ -117,8 +112,7 @@ void BulletPhysicsEngine<E>::ApplyVelocity(void * pRigidBody, vec3 pVelocity)
 	rigidBody->setLinearVelocity(vel);
 }
 
-template<typename E>
-void BulletPhysicsEngine<E>::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
+void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
@@ -127,10 +121,65 @@ void BulletPhysicsEngine<E>::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
 	rigidBody->applyImpulse(impulse, origin);
 }
 
-template<typename E>
-bool BulletPhysicsEngine<E>::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
+	cout << "Collision!" << endl;
 	
-	ComponentPhysics<E> * physicsComponent1 = (ComponentPhysics<E> *)((btRigidBody *)obj1)->getUserPointer();
-	ComponentPhysics<E> * physicsComponent2 = (ComponentPhysics<E> *)((btRigidBody *)obj2)->getUserPointer();
+	Entity * entity1 = (Entity *)((btRigidBody *)obj1)->getUserPointer();
+	Entity * entity2 = (Entity *)((btRigidBody *)obj2)->getUserPointer();
+
+	iComponent * physicsComponent1 = TestGameScene::mEntityManager.GetComponentOfEntity(entity1, COMPONENT_PHYSICS);
+	iComponent * physicsComponent2 = TestGameScene::mEntityManager.GetComponentOfEntity(entity2, COMPONENT_PHYSICS);
+
+	ComponentPhysics * componentPhysics1 = (ComponentPhysics *)physicsComponent1;
+	ComponentPhysics * componentPhysics2 = (ComponentPhysics *)physicsComponent2;
+
+	componentPhysics1->AddCollision(entity2, componentPhysics2->GetEntityType());
+	componentPhysics2->AddCollision(entity1, componentPhysics1->GetEntityType());
+
+	if (componentPhysics1->GetMass() != 0)
+	{
+		bool touchingGround = TouchingGround((btRigidBody *)obj1, (btRigidBody *)obj2, componentPhysics2);
+		componentPhysics1->SetTouchingGround(touchingGround);
+	}
+
+	if (componentPhysics2->GetMass() != 0)
+	{
+		bool touchingGround = TouchingGround((btRigidBody *)obj2, (btRigidBody *)obj1, componentPhysics1);
+		componentPhysics2->SetTouchingGround(touchingGround);
+	}
+
+	return false;
 }
+
+bool BulletPhysicsEngine::TouchingGround(void * pRigidBody1, void * pRigidBody2, ComponentPhysics * componentPhysics2)
+{
+	btRigidBody * rigidBody = (btRigidBody*)pRigidBody1;
+	btCollisionShape * collisionShape = rigidBody->getCollisionShape();
+
+	btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
+	btVector3 offset;
+	btScalar radius;
+	collisionShape->getBoundingSphere(offset, radius);
+
+	btVector3 rayEnd = btVector3(rayStart.x(), rayStart.y() - radius, rayStart.z());
+
+	btCollisionWorld::ClosestRayResultCallback res(rayStart, rayEnd);
+
+	dynamicsWorld->rayTest(rayStart, rayEnd, res);
+
+	if (res.hasHit())
+	{
+		const btCollisionObject * object = res.m_collisionObject;
+		const btRigidBody * collideRigidBody = (btRigidBody *)object;
+
+		if (collideRigidBody == pRigidBody2)
+		{
+			return componentPhysics2->GetEntityType() == WALL;
+		}
+	}
+
+	return false;
+}
+
+btDiscreteDynamicsWorld * BulletPhysicsEngine::dynamicsWorld = nullptr;

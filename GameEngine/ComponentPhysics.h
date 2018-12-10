@@ -1,6 +1,7 @@
 #pragma once
 #include "iComponent.h"
 #include "CollisionShape.h"
+#include "Entity.h"
 #include "glm/glm.hpp"
 #include <map>
 #include <vector>
@@ -9,27 +10,36 @@
 using namespace glm;
 using namespace std;
 
-template <typename E>
+enum EntityType
+{
+	NONE,
+	WALL,
+	PLAYER,
+	COLLECTABLE
+};
+
 class ComponentPhysics : public iComponent
 {
 private:
 	typedef void(*GameCollisionFunction)(void);
-	map<E, GameCollisionFunction> collisionFunctions;
-	map<ComponentPhysics *, E> unresolvedCollisions = map<ComponentPhysics *, E>();
-	E entityType;
+	map<EntityType, GameCollisionFunction> collisionFunctions;
+	map<Entity *, EntityType> unresolvedCollisions = map<Entity *, EntityType>();
+	EntityType entityType;
 	CollisionShape * shape;
 	vec3 velocity = vec3(0);
 	vec3 impulse = vec3(0);
 	float rotation = 0;
 	float mass;
 	void* rigidBody;
+	Entity * thisEntity;
+	bool touchingGround = true;
 
 public:
-	ComponentPhysics(CollisionShape * pShape, float pMass, E pEntityType, map<E, GameCollisionFunction> pCollisionFunctions = map<E, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) {}
+	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, map<EntityType, GameCollisionFunction> pCollisionFunctions = map<EntityType, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) , thisEntity(pThisEntity), collisionFunctions(pCollisionFunctions) {}
 	~ComponentPhysics() {}
 
 	ComponentType GetComponentName();
-	void AddCollision(ComponentPhysics * physicsComponent, E entityType);
+	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
 	void Swap() {}
 
@@ -83,9 +93,19 @@ public:
 		return rigidBody;
 	}
 
-	inline E GetEntityType()
+	inline EntityType GetEntityType()
 	{
 		return entityType;
+	}
+
+	inline bool GetTouchingGround()
+	{
+		return touchingGround;
+	}
+
+	inline void SetTouchingGround(bool pTouchingGround)
+	{
+		touchingGround = pTouchingGround;
 	}
 };
 

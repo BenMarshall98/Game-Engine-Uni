@@ -145,42 +145,42 @@ void TestGameScene::Resize(int width, int height)
 	projection->SetWidth(width);
 }
 
-template <typename E>
 void TestGameScene::PlayerLeft(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 		
-		vec3 velocity = ((ComponentPhysics<E> *)componentPhysics)->GetVelocity();
+		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetVelocity();
 		velocity.x -= ((1 / 60.0f) * value * 1000);
-		((ComponentPhysics<E> *)componentPhysics)->SetVelocity(velocity);
+		((ComponentPhysics *)componentPhysics)->SetVelocity(velocity);
 	}
 }
 
-template <typename E>
 void TestGameScene::PlayerRight(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
-		vec3 velocity = ((ComponentPhysics<E> *)componentPhysics)->GetVelocity();
+		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetVelocity();
 		velocity.x += ((1 / 60.0f) * value * 1000);
-		((ComponentPhysics<E> *)componentPhysics)->SetVelocity(velocity);
+		((ComponentPhysics *)componentPhysics)->SetVelocity(velocity);
 	}
 }
 
-template <typename E>
 void TestGameScene::PlayerJump(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
 		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
-		vec3 impulse = ((ComponentPhysics<E> *)componentPhysics)->GetImpulse();
-		impulse.y += ((1 / 60.0f) * value * 100);
-		((ComponentPhysics<E> *)componentPhysics)->SetImpulse(impulse);
+		if (((ComponentPhysics *)componentPhysics)->GetTouchingGround())
+		{
+ 			vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetImpulse();
+			impulse.y += ((1 / 60.0f) * value * 100);
+			((ComponentPhysics *)componentPhysics)->SetImpulse(impulse);
+		}
 	}
 }
 

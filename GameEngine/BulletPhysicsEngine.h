@@ -3,24 +3,25 @@
 #include "..\BulletPhysics\btBulletDynamicsCommon.h"
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
+#include "Entity.h"
 #include "ComponentPhysics.h"
+
 
 using namespace glm;
 
-template<typename E>
 class BulletPhysicsEngine
 {
 private:
-	
-	btDiscreteDynamicsWorld * dynamicsWorld;
+
+	static btDiscreteDynamicsWorld * dynamicsWorld;
 
 	static bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2);
-
+	static bool TouchingGround(void * pRigidBody1, void * pRigidBody2, ComponentPhysics * componentPhysics2);
 public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
-	
-	btRigidBody* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, ComponentPhysics<E> * componentPhysics);
+
+	btRigidBody* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity);
 
 	inline void Update(float pDeltaTime)
 	{
@@ -32,4 +33,3 @@ public:
 	void ApplyVelocity(void * pRigidBody, vec3 velocity);
 	void ApplyImpulse(void * pRigidBody, vec3 impulse);
 };
-

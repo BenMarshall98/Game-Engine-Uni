@@ -72,6 +72,9 @@ void GLFWWindow::LimitFPS(float FPS)
 {
 	double timeLapsed = glfwGetTime();
 
+	cout << timeLapsed << endl; //TODO: Remove
+	timeLapsed = glfwGetTime();
+
 	double timeLeft = (1 / FPS) - timeLapsed;
 
 	if (timeLeft > 0)
