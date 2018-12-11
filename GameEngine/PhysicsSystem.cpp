@@ -64,6 +64,12 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	direction->SetDirection(directionQuat);
 
 	physics->ResolveCollisions();
+
+	if (physics->GetMass() != 0)
+	{
+		bool touchingGround = physicsManager.TouchingGround(rigidBody);
+		physics->SetTouchingGround(touchingGround);
+	}
 }
 
 PhysicsSystem::~PhysicsSystem()

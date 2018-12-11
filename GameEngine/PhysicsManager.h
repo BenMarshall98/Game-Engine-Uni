@@ -44,5 +44,10 @@ public:
 	{
 		engine->ApplyImpulse(pRigidBody, impulse);
 	}
+
+	inline bool TouchingGround(void * pRigidBody)
+	{
+		return engine->TouchingGround(pRigidBody);
+	}
 };
 

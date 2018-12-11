@@ -70,6 +70,11 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat d
 	rigidBody->setAngularFactor(btVector3(0, 0, 1));
 	rigidBody->setUserPointer(entity);
 
+	if (mass != 0)
+	{
+		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	}
+
 	dynamicsWorld->addRigidBody(rigidBody);
 
 	return rigidBody;
@@ -125,8 +130,8 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 {
 	cout << "Collision!" << endl;
 	
-	Entity * entity1 = (Entity *)((btRigidBody *)obj1)->getUserPointer();
-	Entity * entity2 = (Entity *)((btRigidBody *)obj2)->getUserPointer();
+	Entity * entity1 = (Entity *)obj1->getCollisionObject()->getUserPointer();
+	Entity * entity2 = (Entity *)obj2->getCollisionObject()->getUserPointer();
 
 	iComponent * physicsComponent1 = TestGameScene::mEntityManager.GetComponentOfEntity(entity1, COMPONENT_PHYSICS);
 	iComponent * physicsComponent2 = TestGameScene::mEntityManager.GetComponentOfEntity(entity2, COMPONENT_PHYSICS);
@@ -136,25 +141,13 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 
 	componentPhysics1->AddCollision(entity2, componentPhysics2->GetEntityType());
 	componentPhysics2->AddCollision(entity1, componentPhysics1->GetEntityType());
-
-	if (componentPhysics1->GetMass() != 0)
-	{
-		bool touchingGround = TouchingGround((btRigidBody *)obj1, (btRigidBody *)obj2, componentPhysics2);
-		componentPhysics1->SetTouchingGround(touchingGround);
-	}
-
-	if (componentPhysics2->GetMass() != 0)
-	{
-		bool touchingGround = TouchingGround((btRigidBody *)obj2, (btRigidBody *)obj1, componentPhysics1);
-		componentPhysics2->SetTouchingGround(touchingGround);
-	}
-
 	return false;
 }
 
-bool BulletPhysicsEngine::TouchingGround(void * pRigidBody1, void * pRigidBody2, ComponentPhysics * componentPhysics2)
+bool BulletPhysicsEngine::TouchingGround(void * pRigidBody)
 {
-	btRigidBody * rigidBody = (btRigidBody*)pRigidBody1;
+	btRigidBody * rigidBody = (btRigidBody *)pRigidBody;
+
 	btCollisionShape * collisionShape = rigidBody->getCollisionShape();
 
 	btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
@@ -171,12 +164,14 @@ bool BulletPhysicsEngine::TouchingGround(void * pRigidBody1, void * pRigidBody2,
 	if (res.hasHit())
 	{
 		const btCollisionObject * object = res.m_collisionObject;
-		const btRigidBody * collideRigidBody = (btRigidBody *)object;
+		btRigidBody * collisionRigidBody = (btRigidBody *)object;
 
-		if (collideRigidBody == pRigidBody2)
-		{
-			return componentPhysics2->GetEntityType() == WALL;
-		}
+		Entity * entity = (Entity *)collisionRigidBody->getUserPointer();
+
+		iComponent * physicsComponent = TestGameScene::mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
+		ComponentPhysics * componentPhysics = (ComponentPhysics *)physicsComponent;
+
+		return componentPhysics->GetEntityType() == WALL;
 	}
 
 	return false;

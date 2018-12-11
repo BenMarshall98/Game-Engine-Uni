@@ -16,7 +16,7 @@ private:
 	static btDiscreteDynamicsWorld * dynamicsWorld;
 
 	static bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2);
-	static bool TouchingGround(void * pRigidBody1, void * pRigidBody2, ComponentPhysics * componentPhysics2);
+	
 public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
@@ -32,4 +32,5 @@ public:
 	quat GetDirectionOfRigidBody(void * pRigidBody);
 	void ApplyVelocity(void * pRigidBody, vec3 velocity);
 	void ApplyImpulse(void * pRigidBody, vec3 impulse);
+	bool TouchingGround(void * pRigidBody);
 };
