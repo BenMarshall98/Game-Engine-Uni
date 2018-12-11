@@ -128,8 +128,6 @@ void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
 
 bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
-	cout << "Collision!" << endl;
-	
 	Entity * entity1 = (Entity *)obj1->getCollisionObject()->getUserPointer();
 	Entity * entity2 = (Entity *)obj2->getCollisionObject()->getUserPointer();
 
@@ -141,9 +139,53 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 
 	componentPhysics1->AddCollision(entity2, componentPhysics2->GetEntityType());
 	componentPhysics2->AddCollision(entity1, componentPhysics1->GetEntityType());
+
+	if (componentPhysics1->GetMass() != 0 && componentPhysics2->GetEntityType() == WALL)
+	{
+		//TODO: Implement
+	}
+	if (componentPhysics2->GetMass() != 0 && componentPhysics1->GetEntityType() == WALL)
+	{
+		//TODO: Implemenet
+	}
 	return false;
 }
 
+bool BulletPhysicsEngine::TouchingGround(void * pRigidBody1, void * pRigidBody2)
+{
+	btRigidBody * rigidBody = (btRigidBody *)pRigidBody1;
+
+	btCollisionShape * collisionShape = rigidBody->getCollisionShape();
+
+	btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
+	btVector3 offset;
+	btScalar radius;
+	collisionShape->getBoundingSphere(offset, radius);
+
+	btVector3 rayEnd = btVector3(rayStart.x(), rayStart.y() - radius, rayStart.z());
+
+	btCollisionWorld::AllHitsRayResultCallback res(rayStart, rayEnd);
+
+	dynamicsWorld->rayTest(rayStart, rayEnd, res);
+
+	if (res.hasHit())
+	{
+		btAlignedObjectArray<const btCollisionObject *> collisionObjects = res.m_collisionObjects;
+
+		for (int i = 0; i < collisionObjects.size(); i++)
+		{
+			if (collisionObjects.at(i) == pRigidBody2)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+//TODO: Remove below
 bool BulletPhysicsEngine::TouchingGround(void * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody *)pRigidBody;
@@ -164,14 +206,16 @@ bool BulletPhysicsEngine::TouchingGround(void * pRigidBody)
 	if (res.hasHit())
 	{
 		const btCollisionObject * object = res.m_collisionObject;
-		btRigidBody * collisionRigidBody = (btRigidBody *)object;
 
-		Entity * entity = (Entity *)collisionRigidBody->getUserPointer();
+		Entity * entity = (Entity *)object->getUserPointer();
 
 		iComponent * physicsComponent = TestGameScene::mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 		ComponentPhysics * componentPhysics = (ComponentPhysics *)physicsComponent;
 
-		return componentPhysics->GetEntityType() == WALL;
+		if (componentPhysics->GetEntityType() == WALL)
+		{
+			return true;
+		}
 	}
 
 	return false;
