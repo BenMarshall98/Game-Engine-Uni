@@ -44,5 +44,10 @@ public:
 	{
 		engine->ApplyImpulse(pRigidBody, impulse);
 	}
+
+	inline void RemoveRigidBody(void * pRigidBody)
+	{
+		engine->RemoveRigidBody(pRigidBody);
+	}
 };
 

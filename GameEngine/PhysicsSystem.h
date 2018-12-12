@@ -24,6 +24,7 @@ private:
 public:
 	PhysicsSystem(EntityManager & pEntityManager, PhysicsManager & pPhysicsManager);
 	void Action(void);
+	void RemoveEntity(Entity * pEntity);
 	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);
 	~PhysicsSystem();
 };

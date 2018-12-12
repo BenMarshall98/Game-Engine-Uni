@@ -1,5 +1,4 @@
 #include "EntityManager.h"
-
 Entity * EntityManager::CreateEntity(string entityName)
 {
 	Entity * entity = new Entity(entityName);
@@ -134,4 +133,20 @@ vector<Entity *> EntityManager::GetAllEntitiesWithComponents(ComponentType * com
 	}
 
 	return entities;
+}
+
+void EntityManager::AddToDeleteList(Entity * entity)
+{
+	ToDeleteList.push_back(entity);
+}
+
+void EntityManager::Update(SystemManager & systemManager)
+{
+	for (int i = 0; i < ToDeleteList.size(); i++)
+	{
+		systemManager.RemoveEntityFromSystems(ToDeleteList[i]);
+		RemoveEntity(ToDeleteList[i]);
+	}
+
+	ToDeleteList.clear();
 }

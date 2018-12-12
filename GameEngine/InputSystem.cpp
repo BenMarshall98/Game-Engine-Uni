@@ -3,11 +3,22 @@
 #include "ComponentInput.h"
 
 #include <string>
+#include <algorithm>
 
 InputSystem::InputSystem(EntityManager & pEntityManager) : entityManager(pEntityManager)
 {
 	ComponentType componentTypes[] = { COMPONENT_INPUT };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+}
+
+void InputSystem::RemoveEntity(Entity * pEntity)
+{
+	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	
+	if (it != EntityList.end())
+	{
+		EntityList.erase(it);
+	}
 }
 
 void InputSystem::Action(void)

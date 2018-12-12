@@ -127,6 +127,8 @@ void TestGameScene::Render()
 	//UpdateCamera();
 
 	mSystemManager.Render();
+
+	mEntityManager.Update(mSystemManager);
 }
 
 void TestGameScene::Update()

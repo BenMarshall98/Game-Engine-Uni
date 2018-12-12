@@ -10,6 +10,7 @@
 #include "ComponentTexture.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
+#include "TestGameScene.h"
 
 #include <fstream>
 #include <iostream>
@@ -81,5 +82,5 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 
 void LevelLoader::CoinHitPlayer(Entity * pEntity)
 {
-	cout << "The Coin has hit the Player! I Repeat, the Coin has hit the Player!" << endl;
+	TestGameScene::mEntityManager.AddToDeleteList(pEntity);
 }

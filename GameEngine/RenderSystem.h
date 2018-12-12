@@ -28,6 +28,7 @@ public:
 
 	RenderSystem(EntityManager & entityManager, Camera * pCamera, Projection * pProjection);
 	void Action(void);
+	void RemoveEntity(Entity * pEntity);
 	
 	~RenderSystem();
 };

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "iSystem.h"
+#include "Entity.h"
 
 using namespace std;
 
@@ -22,5 +23,7 @@ public:
 	void Update();
 
 	void ClearSystems();
+
+	void RemoveEntityFromSystems(Entity * pEntity);
 };
 

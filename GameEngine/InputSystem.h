@@ -18,6 +18,7 @@ private:
 public:
 	InputSystem(EntityManager & entityManager);
 	void Action(void);
+	void RemoveEntity(Entity * pEntity);
 	void Input(vector<InputFunction> inputs, Entity * entity);
 	~InputSystem();
 };

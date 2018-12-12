@@ -191,4 +191,9 @@ bool BulletPhysicsEngine::TouchingGround(const void * pRigidBody1, const void * 
 	return false;
 }
 
+void BulletPhysicsEngine::RemoveRigidBody(void * pRigidBody)
+{
+	dynamicsWorld->removeRigidBody((btRigidBody *)pRigidBody);
+}
+
 btDiscreteDynamicsWorld * BulletPhysicsEngine::dynamicsWorld = nullptr;

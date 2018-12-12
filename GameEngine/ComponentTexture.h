@@ -13,10 +13,7 @@ public:
 		texture = ResourceManager::GetTexture(textureName);
 	}
 
-	~ComponentTexture()
-	{
-		delete texture;
-	}
+	~ComponentTexture() {}
 
 	ComponentType GetComponentName();
 	void Swap() {}

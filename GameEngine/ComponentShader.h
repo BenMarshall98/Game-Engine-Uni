@@ -14,10 +14,7 @@ public:
 		shader = ResourceManager::GetShader(shaderName);
 	}
 
-	~ComponentShader()
-	{
-		delete shader;
-	}
+	~ComponentShader() {}
 
 	ComponentType GetComponentName();
 	void Swap() {}

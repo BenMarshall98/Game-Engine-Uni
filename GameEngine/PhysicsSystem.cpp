@@ -4,6 +4,8 @@
 #include "ComponentPhysics.h"
 #include "glm/glm.hpp"
 
+#include <algorithm>
+
 using namespace glm;
 
 
@@ -12,6 +14,20 @@ PhysicsSystem::PhysicsSystem(EntityManager & pEntityManager, PhysicsManager & pP
 	ComponentType componentTypes[] = { COMPONENT_POSITION, COMPONENT_DIRECTION, COMPONENT_PHYSICS };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 	newEntities = EntityList;
+}
+
+void PhysicsSystem::RemoveEntity(Entity * pEntity)
+{
+	iComponent * componentPhysics = entityManager.GetComponentOfEntity(pEntity, COMPONENT_PHYSICS);
+	void * rigidBody = ((ComponentPhysics *)componentPhysics)->GetRigidBody();
+	physicsManager.RemoveRigidBody(rigidBody);
+
+	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		EntityList.erase(it);
+	}
 }
 
 void PhysicsSystem::Action(void)

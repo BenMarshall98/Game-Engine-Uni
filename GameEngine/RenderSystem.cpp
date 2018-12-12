@@ -13,11 +13,22 @@
 #include "GLFWWindow.h"
 #include "LightManager.h"
 #include <string>
+#include <algorithm>
 
 RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection)
 {
 	ComponentType componentTypes[] = { COMPONENT_MODEL, COMPONENT_SHADER, COMPONENT_POSITION, COMPONENT_TEXTURE, COMPONENT_DIRECTION };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+}
+
+void RenderSystem::RemoveEntity(Entity * pEntity)
+{
+	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		EntityList.erase(it);
+	}
 }
 
 void RenderSystem::Action(void)
