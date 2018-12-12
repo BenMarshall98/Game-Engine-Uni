@@ -30,19 +30,16 @@ void SceneManager::Run()
 		}
 		else
 		{
-
-			thread update = thread(&SceneManager::ThreadUpdate, this);
-
 			while (currentWindow->IsRunning() && windowRunning)
 			{
+				thread update = thread(&SceneManager::Update, this);
 				Render();
+				update.join();
+
+				currentWindow->LimitFPS(60);
+				currentWindow->WindowEvents();
 			}
-
-			windowRunning = false;
-			update.join();
 		}
-
-		sceneRunning = false;
 
 		if (currentWindow->IsRunning())
 		{
@@ -60,23 +57,12 @@ void SceneManager::Update()
 	currentScene->Update();
 }
 
-void SceneManager::ThreadUpdate()
-{
-	while(windowRunning)
-	{
-		Update();
-	}
-}
-
 void SceneManager::Render()
 {	
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	currentScene->Render();
-
-	currentWindow->LimitFPS(60);
-	currentWindow->WindowEvents();
 }
 
 void SceneManager::StartSwapScene(iScene * scene)

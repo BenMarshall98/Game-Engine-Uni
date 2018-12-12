@@ -31,7 +31,6 @@ private:
 	};
 
 	void Update();
-	void ThreadUpdate();
 	void Render();
 	void StartSwapScene(iScene * scene);
 	void FinishSwapScene();
