@@ -12,12 +12,14 @@
 #include "CollisionSphere.h"
 
 #include <fstream>
+#include <iostream>
 
 void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 {
 
 	ResourceManager::LoadModel("Cube", "cube.obj");
 	ResourceManager::LoadModel("Sphere", "sphere.obj");
+	ResourceManager::LoadModel("Collectable", "Collectable.obj");
 	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
 	ResourceManager::LoadShader("NormalShader", "NormalVertex.vert", "NormalFragment.frag");
 	ResourceManager::LoadShader("RiggedShader", "RiggedVertex.vert", "RiggedFragment.frag");
@@ -60,6 +62,24 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
 		}
+		else if (letter == 'c')
+		{
+			map<EntityType, GameCollisionFunction> * collisionFunctions = new map<EntityType, GameCollisionFunction>();
+			collisionFunctions->insert(pair<EntityType, GameCollisionFunction>(PLAYER, CoinHitPlayer));
+
+			Entity * newEntity = pEntityManager.CreateEntity();
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Collectable"));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.25f), 0, COLLECTABLE, newEntity, false, collisionFunctions));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
+		}
 		x++;
 	}
+}
+
+void LevelLoader::CoinHitPlayer(Entity * pEntity)
+{
+	cout << "The Coin has hit the Player! I Repeat, the Coin has hit the Player!" << endl;
 }

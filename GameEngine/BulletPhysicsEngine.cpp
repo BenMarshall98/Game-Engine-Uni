@@ -30,7 +30,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity)
+btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity, bool collisionResponse)
 {
 	btCollisionShape* collisionShape;
 
@@ -73,6 +73,11 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat d
 	if (mass != 0)
 	{
 		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	}
+
+	if (!collisionResponse)
+	{
+		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	}
 
 	dynamicsWorld->addRigidBody(rigidBody);

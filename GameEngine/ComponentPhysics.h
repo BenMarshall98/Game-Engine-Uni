@@ -10,6 +10,8 @@
 using namespace glm;
 using namespace std;
 
+typedef void(*GameCollisionFunction)(Entity *);
+
 enum EntityType
 {
 	NONE,
@@ -21,8 +23,7 @@ enum EntityType
 class ComponentPhysics : public iComponent
 {
 private:
-	typedef void(*GameCollisionFunction)(void);
-	map<EntityType, GameCollisionFunction> collisionFunctions;
+	map<EntityType, GameCollisionFunction> * collisionFunctions;
 	map<Entity *, EntityType> unresolvedCollisions = map<Entity *, EntityType>();
 	EntityType entityType;
 	CollisionShape * shape;
@@ -34,9 +35,10 @@ private:
 	Entity * thisEntity;
 	bool touchingGround = true;
 	bool nextTouchingGround = false;
+	bool collisionResponse;
 
 public:
-	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, map<EntityType, GameCollisionFunction> pCollisionFunctions = map<EntityType, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) , thisEntity(pThisEntity), collisionFunctions(pCollisionFunctions) {}
+	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, bool pCollisionResponse = true, map<EntityType, GameCollisionFunction> * pCollisionFunctions = new map<EntityType, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) , thisEntity(pThisEntity), collisionResponse(pCollisionResponse), collisionFunctions(pCollisionFunctions) {}
 	~ComponentPhysics() {}
 
 	ComponentType GetComponentName();
@@ -46,6 +48,11 @@ public:
 	{
 		touchingGround = nextTouchingGround;
 		nextTouchingGround = false;
+	}
+
+	inline bool GetCollisionResponse()
+	{
+		return collisionResponse;
 	}
 
 	inline vec3 GetVelocity()

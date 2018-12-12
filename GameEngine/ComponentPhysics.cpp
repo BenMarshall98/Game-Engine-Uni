@@ -24,12 +24,12 @@ void ComponentPhysics::ResolveCollisions()
 	{
 		EntityType entityType = it->second;
 
-		map<EntityType, GameCollisionFunction>::iterator collision = collisionFunctions.find(entityType);
+		map<EntityType, GameCollisionFunction>::iterator collision = collisionFunctions->find(entityType);
 		
-		if (collision != collisionFunctions.end())
+		if (collision != collisionFunctions->end())
 		{
 			GameCollisionFunction function = collision->second;
-			function();
+			function(thisEntity);
 		}
 	}
 

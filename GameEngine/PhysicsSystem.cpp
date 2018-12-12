@@ -26,8 +26,9 @@ void PhysicsSystem::Action(void)
 		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
 		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetShape();
 		float mass = ((ComponentPhysics *)componentPhysics)->GetMass();
+		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetCollisionResponse();
 
-		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape, newEntities[i]);
+		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse);
 
 		((ComponentPhysics *)componentPhysics)->SetRigidBody(rigidBody);
 	}
