@@ -33,6 +33,7 @@ private:
 	void* rigidBody;
 	Entity * thisEntity;
 	bool touchingGround = true;
+	bool nextTouchingGround = false;
 
 public:
 	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, map<EntityType, GameCollisionFunction> pCollisionFunctions = map<EntityType, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) , thisEntity(pThisEntity), collisionFunctions(pCollisionFunctions) {}
@@ -41,7 +42,11 @@ public:
 	ComponentType GetComponentName();
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
-	void Swap() {}
+	void Swap()
+	{
+		touchingGround = nextTouchingGround;
+		nextTouchingGround = false;
+	}
 
 	inline vec3 GetVelocity()
 	{
@@ -100,12 +105,12 @@ public:
 
 	inline bool GetTouchingGround()
 	{
-		return touchingGround;
+  		return touchingGround;
 	}
 
 	inline void SetTouchingGround(bool pTouchingGround)
 	{
-		touchingGround = pTouchingGround;
+		nextTouchingGround = nextTouchingGround || pTouchingGround;
 	}
 };
 

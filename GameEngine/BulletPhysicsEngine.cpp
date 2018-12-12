@@ -142,16 +142,18 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 
 	if (componentPhysics1->GetMass() != 0 && componentPhysics2->GetEntityType() == WALL)
 	{
-		//TODO: Implement
+		bool touchingGround = TouchingGround(obj1->getCollisionObject(), obj2->getCollisionObject());
+		componentPhysics1->SetTouchingGround(touchingGround);
 	}
 	if (componentPhysics2->GetMass() != 0 && componentPhysics1->GetEntityType() == WALL)
 	{
-		//TODO: Implemenet
+		bool touchingGround = TouchingGround(obj2->getCollisionObject(), obj1->getCollisionObject());
+		componentPhysics2->SetTouchingGround(touchingGround);
 	}
 	return false;
 }
 
-bool BulletPhysicsEngine::TouchingGround(void * pRigidBody1, void * pRigidBody2)
+bool BulletPhysicsEngine::TouchingGround(const void * pRigidBody1, const void * pRigidBody2)
 {
 	btRigidBody * rigidBody = (btRigidBody *)pRigidBody1;
 
@@ -178,43 +180,6 @@ bool BulletPhysicsEngine::TouchingGround(void * pRigidBody1, void * pRigidBody2)
 			{
 				return true;
 			}
-		}
-	}
-
-	return false;
-}
-
-
-//TODO: Remove below
-bool BulletPhysicsEngine::TouchingGround(void * pRigidBody)
-{
-	btRigidBody * rigidBody = (btRigidBody *)pRigidBody;
-
-	btCollisionShape * collisionShape = rigidBody->getCollisionShape();
-
-	btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
-	btVector3 offset;
-	btScalar radius;
-	collisionShape->getBoundingSphere(offset, radius);
-
-	btVector3 rayEnd = btVector3(rayStart.x(), rayStart.y() - radius, rayStart.z());
-
-	btCollisionWorld::ClosestRayResultCallback res(rayStart, rayEnd);
-
-	dynamicsWorld->rayTest(rayStart, rayEnd, res);
-
-	if (res.hasHit())
-	{
-		const btCollisionObject * object = res.m_collisionObject;
-
-		Entity * entity = (Entity *)object->getUserPointer();
-
-		iComponent * physicsComponent = TestGameScene::mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
-		ComponentPhysics * componentPhysics = (ComponentPhysics *)physicsComponent;
-
-		if (componentPhysics->GetEntityType() == WALL)
-		{
-			return true;
 		}
 	}
 
