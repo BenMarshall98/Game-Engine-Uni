@@ -80,6 +80,7 @@ void GLFWWindow::LimitFPS(float FPS)
 	if (timeLeft > 0)
 	{
 		Sleep(timeLeft * 1000);
+		cout << 
 	}
 
 	glfwSetTime(0);

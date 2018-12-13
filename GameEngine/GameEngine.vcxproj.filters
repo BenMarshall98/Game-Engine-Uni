@@ -159,9 +159,6 @@
     <ClCompile Include="LoggingManager.cpp">
       <Filter>GameEngineLibraries\Logging Manager</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentNormal.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentDirection.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
@@ -192,6 +189,9 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="FollowPlaneCamera.cpp">
       <Filter>GameEngineLibraries\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentNormalTexture.cpp">
+      <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,9 +292,6 @@
     <ClInclude Include="LoggingManager.h">
       <Filter>GameEngineLibraries\Logging Manager</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentNormal.h">
-      <Filter>GameEngineLibraries\Components</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentDirection.h">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClInclude>
@@ -325,6 +322,9 @@
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="FollowPlaneCamera.h">
       <Filter>GameEngineLibraries\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentNormalTexture.h">
+      <Filter>GameEngineLibraries\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

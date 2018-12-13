@@ -5,7 +5,7 @@
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
-#include "ComponentNormal.h"
+#include "ComponentNormalTexture.h"
 #include "ComponentDirection.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -57,7 +57,7 @@ void RenderSystem::Action(void)
 
 		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
 
-		Texture * normal = (componentNormal == nullptr) ? nullptr : ((ComponentNormal *)componentNormal)->GetTexture();
+		Texture * normal = (componentNormal == nullptr) ? nullptr : ((ComponentNormalTexture *)componentNormal)->GetTexture();
 
 		Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos);
 	}

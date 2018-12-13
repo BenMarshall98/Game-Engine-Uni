@@ -8,7 +8,7 @@
 #include "ComponentPosition.h"
 #include "ComponentShader.h"
 #include "ComponentTexture.h"
-#include "ComponentNormal.h"
+#include "ComponentNormalTexture.h"
 #include "RenderSystem.h"
 #include "InputSystem.h"
 #include "LightManager.h"
@@ -85,10 +85,10 @@ void TestGameScene::Load()
 	mSystemManager.AddRenderSystem(render);
 
 	InputSystem * input = new InputSystem(mEntityManager);
-	mSystemManager.AddRenderSystem(input); //TODO: change to a update system
+	mSystemManager.AddUpdateSystem(input); //TODO: change to a update system
 
 	PhysicsSystem * physics = new PhysicsSystem(mEntityManager, *mPhysicsManager);
-	mSystemManager.AddRenderSystem(physics);
+	mSystemManager.AddUpdateSystem(physics);
 
 	LightManager * lightManager = LightManager::Instance();
 	lightManager->SetDirectionalLight(vec3(0, -1, 0), vec3(1.0, 1.0, 1.0));
@@ -133,7 +133,7 @@ void TestGameScene::Render()
 
 void TestGameScene::Update()
 {
-
+	mSystemManager.Update();
 }
 
 void TestGameScene::Close()

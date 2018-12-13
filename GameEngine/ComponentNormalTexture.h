@@ -3,18 +3,18 @@
 #include "iComponent.h"
 #include "ResourceManager.h"
 
-class ComponentNormal : public iComponent
+class ComponentNormalTexture : public iComponent
 {
 private:
 	Texture * texture;
 
 public:
-	ComponentNormal(string textureName)
+	ComponentNormalTexture(string textureName)
 	{
 		texture = ResourceManager::GetTexture(textureName);
 	}
 
-	~ComponentNormal()
+	~ComponentNormalTexture()
 	{
 		delete texture;
 	}
