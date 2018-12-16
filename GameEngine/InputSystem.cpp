@@ -27,19 +27,17 @@ void InputSystem::Action(void)
 	{
 		iComponent * componentInput = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_INPUT);
 
-		vector<InputFunction> inputs = ((ComponentInput *)componentInput)->GetInputs();
+		vector<InputFunction> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetInputs();
 
 		Input(inputs, EntityList[i]);
 	}
 }
 
-void InputSystem::Input(vector<InputFunction> inputs, Entity * entity)
-{
-	InputManager * inputManager = InputManager::Instance();
-	
-	for (int i = 0; i < inputs.size(); i++)
+void InputSystem::Input(vector<InputFunction>  * inputs, Entity * entity)
+{	
+	for (int i = 0; i < inputs->size(); i++)
 	{
-		inputs.at(i).Update(entity);
+		inputs->at(i).Update(entity);
 	}
 }
 

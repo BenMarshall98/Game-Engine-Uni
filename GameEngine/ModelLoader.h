@@ -29,11 +29,11 @@ private:
 	static StaticModel * LoadSME(const string & fileName);
 	static AnimatedModel * LoadDAE(const string & fileName);
 
-	static void TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangent);
+	static void TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents);
 
 	static void recursiveNodeProcess(aiNode* node, AnimatedModel * model);
 
-	static Bone* FindBone(string name, AnimatedModel * model)
+	static Bone* FindBone(string & name, AnimatedModel * model)
 	{
 		for (int i = 0; i < model->bones.size(); i++)
 		{
@@ -45,7 +45,7 @@ private:
 		}
 	}
 
-	static aiNode* FindNode(string name, AnimatedModel * model)
+	static aiNode* FindNode(string & name, AnimatedModel * model)
 	{
 		for (int i = 0; i < model->nodes.size(); i++)
 		{
@@ -57,7 +57,7 @@ private:
 		return nullptr;
 	}
 
-	static aiNodeAnim *FindAnimNode(string name, Animation * animation)
+	static aiNodeAnim *FindAnimNode(string & name, Animation * animation)
 	{
 		for (int i = 0; i < animation->nodesAnim.size(); i++)
 		{
@@ -69,7 +69,7 @@ private:
 		return nullptr;
 	}
 
-	static int FindBoneIDByName(string name, AnimatedModel * model)
+	static int FindBoneIDByName(string & name, AnimatedModel * model)
 	{
 		for (int i = 0; i < model->bones.size(); i++)
 		{
@@ -81,7 +81,6 @@ private:
 		return -1;
 	}
 
-	ModelLoader(void) {};
 public:
 	static iModel * LoadModel(const string & fileName);
 };

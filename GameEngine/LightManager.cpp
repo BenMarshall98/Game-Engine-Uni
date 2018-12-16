@@ -6,12 +6,12 @@
 
 LightManager * LightManager::instance = nullptr;
 
-void LightManager::SetDirectionalLight(vec3 direction, vec3 lightColour)
+void LightManager::SetDirectionalLight(vec3 pDirection, vec3 pLightColour)
 {
 	delete directional;
 	directional = new Directional();
-	directional->direction = direction;
-	directional->lightColour = lightColour;
+	directional->direction = pDirection;
+	directional->lightColour = pLightColour;
 }
 
 void LightManager::SetDirectionalLight(Directional * pDirectional)
@@ -155,18 +155,18 @@ void LightManager::Update(vec3 pViewLocation)
 	}
 }
 
-void LightManager::Render(int ShaderID)
+void LightManager::Render(int pShaderID)
 {
-	int useDirectionLight = glGetUniformLocation(ShaderID, "DirectionLightUsed");
+	int useDirectionLight = glGetUniformLocation(pShaderID, "DirectionLightUsed");
 
 	if (directional != nullptr)
 	{
 		glUniform1i(useDirectionLight, GL_TRUE);
 
-		int directionalDirection = glGetUniformLocation(ShaderID, "DirectionLightDirection");
+		int directionalDirection = glGetUniformLocation(pShaderID, "DirectionLightDirection");
 		glUniform3fv(directionalDirection, 1, value_ptr(directional->direction));
 
-		int directionalLightColour = glGetUniformLocation(ShaderID, "DirectionLightColour");
+		int directionalLightColour = glGetUniformLocation(pShaderID, "DirectionLightColour");
 		glUniform3fv(directionalLightColour, 1, value_ptr(directional->lightColour));
 	}
 	else
@@ -174,39 +174,39 @@ void LightManager::Render(int ShaderID)
 		glUniform1i(useDirectionLight, GL_FALSE);
 	}
 
-	int totalPointLight = glGetUniformLocation(ShaderID, "TotalPointLights");
+	int totalPointLight = glGetUniformLocation(pShaderID, "TotalPointLights");
 	glUniform1i(totalPointLight, renderPointLights.size());
 
 	for (int i = 0; i < renderPointLights.size(); i++)
 	{
-		int PointLightLocation = glGetUniformLocation(ShaderID, ("pointLights[" + to_string(i) + "].location").c_str());
+		int PointLightLocation = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].location").c_str());
 		glUniform3fv(PointLightLocation, 1, value_ptr(renderPointLights.at(i)->location));
 
-		int PointLightColour = glGetUniformLocation(ShaderID, ("pointLights[" + to_string(i) + "].lightColour").c_str());
+		int PointLightColour = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].lightColour").c_str());
 		glUniform3fv(PointLightColour, 1, value_ptr(renderPointLights.at(i)->lightColour));
 
-		int PointLightAttenuation = glGetUniformLocation(ShaderID, ("pointLights[" + to_string(i) + "].attenuation").c_str());
+		int PointLightAttenuation = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].attenuation").c_str());
 		glUniform1f(PointLightAttenuation, renderPointLights.at(i)->attenuation);
 	}
 
-	int totalSpotLight = glGetUniformLocation(ShaderID, "TotalSpotLights");
+	int totalSpotLight = glGetUniformLocation(pShaderID, "TotalSpotLights");
 	glUniform1i(totalSpotLight, renderSpotLights.size());
 
 	for (int i = 0; i < renderSpotLights.size(); i++)
 	{
-		int SpotLightLocation = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].location").c_str());
+		int SpotLightLocation = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].location").c_str());
 		glUniform3fv(SpotLightLocation, 1, value_ptr(renderSpotLights.at(i)->location));
 
-		int SpotLightColour = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].lightColour").c_str());
+		int SpotLightColour = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].lightColour").c_str());
 		glUniform3fv(SpotLightColour, 1, value_ptr(renderSpotLights.at(i)->lightColour));
 
-		int SpotLightDirection = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].direction").c_str());
+		int SpotLightDirection = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].direction").c_str());
 		glUniform3fv(SpotLightDirection, 1, value_ptr(renderSpotLights.at(i)->direction));
 
-		int SpotLightAngleInner = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].angleInner").c_str());
+		int SpotLightAngleInner = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].angleInner").c_str());
 		glUniform1f(SpotLightAngleInner, cos(radians(renderSpotLights.at(i)->angleInner)));
 
-		int SpotLightAngleOuter = glGetUniformLocation(ShaderID, ("spotLights[" + to_string(i) + "].angleOuter").c_str());
+		int SpotLightAngleOuter = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].angleOuter").c_str());
 		glUniform1f(SpotLightAngleOuter, cos(radians(renderSpotLights.at(i)->angleOutside)));
 	}
 }

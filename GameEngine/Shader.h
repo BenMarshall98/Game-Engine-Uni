@@ -10,8 +10,8 @@ class Shader
 {
 private:
 	int mShaderID;
-	void ReadShader(const string & fileName, string & shaderProgram) const;
-	int CompileShader(const string & fileName, GLenum shaderType) const;
+	static void ReadShader(const string & fileName, string & shaderProgram);
+	static int CompileShader(const string & fileName, GLenum shaderType);
 
 	Shader(const Shader& shader) = delete;
 	Shader& operator=(const Shader& shader) = delete;

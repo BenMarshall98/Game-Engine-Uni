@@ -9,7 +9,7 @@ private:
 	Texture * texture;
 
 public:
-	ComponentNormalTexture(string textureName)
+	explicit ComponentNormalTexture(string textureName)
 	{
 		texture = ResourceManager::GetTexture(textureName);
 	}
@@ -19,8 +19,8 @@ public:
 		delete texture;
 	}
 
-	ComponentType GetComponentName();
-	void Swap() {}
+	ComponentType GetComponentName() override;
+	void Swap() override {}
 
 	inline Texture * GetTexture()
 	{

@@ -22,13 +22,13 @@ private:
 	Projection * projection;
 	bool updateFirst;
 
-	void Render(Shader * shader, iModel * model, vec3 position, quat direciton, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos);
+	void Render(Shader * shader, iModel * model, vec3 position, quat direction, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos);
 
 public:
 
-	RenderSystem(EntityManager & entityManager, Camera * pCamera, Projection * pProjection);
-	void Action(void);
-	void RemoveEntity(Entity * pEntity);
+	RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection);
+	void Action(void) override;
+	void RemoveEntity(Entity * pEntity) override;
 	
 	~RenderSystem();
 };

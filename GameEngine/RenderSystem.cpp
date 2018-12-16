@@ -15,7 +15,7 @@
 #include <string>
 #include <algorithm>
 
-RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection)
+RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection), updateFirst(true)
 {
 	ComponentType componentTypes[] = { COMPONENT_MODEL, COMPONENT_SHADER, COMPONENT_POSITION, COMPONENT_TEXTURE, COMPONENT_DIRECTION };
 	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
@@ -49,15 +49,15 @@ void RenderSystem::Action(void)
 		iComponent * componentTexture = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_TEXTURE);
 		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
 
-		Shader * shader = ((ComponentShader *)componentShader)->GetShader();
-		iModel * model = ((ComponentModel *)componentModel)->GetModel();
-		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		Texture * texture = ((ComponentTexture *)componentTexture)->GetTexture();
-		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
+		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetShader();
+		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetModel();
+		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetPosition();
+		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetTexture();
+		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetDirection();
 
 		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
 
-		Texture * normal = (componentNormal == nullptr) ? nullptr : ((ComponentNormalTexture *)componentNormal)->GetTexture();
+		Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetTexture();
 
 		Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos);
 	}

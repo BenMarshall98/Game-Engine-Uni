@@ -53,8 +53,6 @@ void GLFWWindow::Load()
 
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
-
-	InputManager * inputManager = InputManager::Instance(new GLFWInput(gameWindow));
 }
 
 void GLFWWindow::WindowEvents()
@@ -72,15 +70,11 @@ void GLFWWindow::LimitFPS(float FPS)
 {
 	double timeLapsed = glfwGetTime();
 
-	cout << timeLapsed << endl; //TODO: Remove
-	timeLapsed = glfwGetTime();
-
 	double timeLeft = (1 / FPS) - timeLapsed;
 
 	if (timeLeft > 0)
 	{
 		Sleep(timeLeft * 1000);
-		cout << 
 	}
 
 	glfwSetTime(0);

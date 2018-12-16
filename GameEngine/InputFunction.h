@@ -13,7 +13,7 @@ private:
 	vector<GameInput> Inputs;
 
 public:
-	InputFunction(GameInputFunction pInputFunction) : inputFunction(pInputFunction) {}
+	explicit InputFunction(GameInputFunction pInputFunction) : inputFunction(pInputFunction) {}
 
 	void AddInput(GameInput input);
 	void RemoveInput(GameInput input);

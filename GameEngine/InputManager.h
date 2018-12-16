@@ -12,7 +12,7 @@ private:
 	static InputManager * instance;
 	GLFWInput * inputDevice;
 
-	InputManager(GLFWInput * pInputDevice) : inputDevice(pInputDevice) {}
+	explicit InputManager(GLFWInput * pInputDevice) : inputDevice(pInputDevice) {}
 
 public:
 

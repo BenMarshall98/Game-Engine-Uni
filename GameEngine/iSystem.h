@@ -4,7 +4,7 @@ class iSystem
 {
 public:
 	iSystem();
-	~iSystem();
+	virtual ~iSystem();
 
 	virtual void Action() = 0;
 	virtual void RemoveEntity(Entity * pEntity) = 0;

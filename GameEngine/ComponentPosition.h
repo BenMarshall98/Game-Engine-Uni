@@ -9,13 +9,13 @@ class ComponentPosition : public iComponent
 private:
 	vec3 position;
 public:
-	ComponentPosition(vec3 pPosition) : position(pPosition) {}
+	explicit ComponentPosition(vec3 pPosition) : position(pPosition) {}
 	~ComponentPosition() {}
 
-	ComponentType GetComponentName();
-	void Swap() {}
+	ComponentType GetComponentName() override;
+	void Swap() override {}
 
-	inline vec3 GetPosition()
+	inline vec3 GetPosition() const
 	{
 		return position;
 	}

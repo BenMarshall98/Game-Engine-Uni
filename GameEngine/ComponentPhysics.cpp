@@ -20,7 +20,7 @@ void ComponentPhysics::ResolveCollisions()
 {
 	 map<Entity *, EntityType>::iterator it;
 
-	for (it = unresolvedCollisions.begin(); it != unresolvedCollisions.end(); it++)
+	for (it = unresolvedCollisions.begin(); it != unresolvedCollisions.end(); ++it)
 	{
 		EntityType entityType = it->second;
 

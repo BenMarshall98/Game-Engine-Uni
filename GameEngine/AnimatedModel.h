@@ -103,7 +103,7 @@ public:
 	}
 
 //Make above privates
-	AnimatedModel()
+	AnimatedModel() : VAO(-1), EBO(-1), VBO(), currentTime(0)
 	{
 		boneMatrix.resize(100);
 	}

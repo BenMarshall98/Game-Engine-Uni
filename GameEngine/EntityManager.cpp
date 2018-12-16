@@ -1,5 +1,5 @@
 #include "EntityManager.h"
-Entity * EntityManager::CreateEntity(string entityName)
+Entity * EntityManager::CreateEntity(string * entityName)
 {
 	Entity * entity = new Entity(entityName);
 
@@ -8,7 +8,7 @@ Entity * EntityManager::CreateEntity(string entityName)
 	return entity;
 }
 
-Entity * EntityManager::GetEntityByName(string entityName)
+Entity * EntityManager::GetEntityByName(string & entityName)
 {
 	if (entityName == "")
 	{
@@ -17,7 +17,7 @@ Entity * EntityManager::GetEntityByName(string entityName)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		if (EntityList[i]->GetName() == entityName)
+		if (EntityList[i]->GetName()->compare(entityName))
 		{
 			return EntityList[i];
 		}
@@ -29,7 +29,7 @@ Entity * EntityManager::GetEntityByName(string entityName)
 void EntityManager::RemoveEntity(Entity* entity)
 {
 	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
-	for (it = ComponentList.begin(); it != ComponentList.end(); it++)
+	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
 	{
 		map<Entity *, iComponent *> & entities = it->second;
 		map<Entity *, iComponent *>::iterator find = entities.find(entity);

@@ -14,8 +14,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	*/
 	unsigned int vertexShader, fragmentShader, geometryShader = 0;
 	int success;
-	char infoLog[512];
-
+	
 	vertexShader = CompileShader(vertexProgram, GL_VERTEX_SHADER);
 	fragmentShader = CompileShader(fragmentProgram, GL_FRAGMENT_SHADER);
 
@@ -40,8 +39,10 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	glGetProgramiv(mShaderID, GL_LINK_STATUS, &success);
 	if (!success)
 	{
+		char infoLog[512];
 		glGetProgramInfoLog(mShaderID, 512, nullptr, infoLog);
-		LoggingManager::LogMessage(SEVERE, "Failed to Link Shaders:" + string(infoLog));
+		string message = "Failed to Link Shaders:" + string(infoLog);
+		LoggingManager::LogMessage(SEVERE, message);
 	}
 
 	glDetachShader(mShaderID, vertexShader);
@@ -64,7 +65,8 @@ void Shader::ReadShader(const string & fileName, string & shaderProgram) const
 
 	if (reader.fail())
 	{
-		LoggingManager::LogMessage(SEVERE, "File" + fileName + "does not exist");
+		string message = "File" + fileName + "does not exist";
+		LoggingManager::LogMessage(SEVERE, message);
 		shaderProgram = "";
 		return;
 	}
@@ -79,9 +81,6 @@ int Shader::CompileShader(const string & fileName, GLenum shaderType) const
 {
 	string shaderProgram;
 	int success, shader;
-	char infoLog[512];
-
-	GLenum test = (GLenum)shaderType;
 
 	ReadShader(fileName, shaderProgram);
 	shader = glCreateShader(shaderType);
@@ -92,8 +91,10 @@ int Shader::CompileShader(const string & fileName, GLenum shaderType) const
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
+		char infoLog[512];
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-		LoggingManager::LogMessage(SEVERE, "Failed to Compile Shader: " + fileName + "\n" + infoLog);
+		string message = "Failed to Compile Shader: " + fileName + "\n" + infoLog;
+		LoggingManager::LogMessage(SEVERE, message);
 	}
 
 	return shader;

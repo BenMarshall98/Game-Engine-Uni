@@ -8,15 +8,15 @@ private:
 	Texture * texture;
 
 public:
-	ComponentTexture(string textureName)
+	explicit ComponentTexture(string textureName)
 	{
 		texture = ResourceManager::GetTexture(textureName);
 	}
 
 	~ComponentTexture() {}
 
-	ComponentType GetComponentName();
-	void Swap() {}
+	ComponentType GetComponentName() override;
+	void Swap() override{}
 
 	inline Texture * GetTexture()
 	{

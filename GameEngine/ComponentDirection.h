@@ -12,16 +12,13 @@ private:
 	quat direction;
 
 public:
-	ComponentDirection(vec3 pDirection, float pAngle)
-	{
-		direction = angleAxis(pAngle, pDirection);
-	}
+	ComponentDirection(vec3 pDirection, float pAngle) : direction(angleAxis(pAngle, pDirection)) {}
 	~ComponentDirection() {};
+	
+	ComponentType GetComponentName() override;
+	void Swap() override {}
 
-	ComponentType GetComponentName();
-	void Swap() {}
-
-	inline quat GetDirection()
+	inline quat GetDirection() const
 	{
 		return direction;
 	}

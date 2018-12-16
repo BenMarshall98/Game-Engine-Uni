@@ -34,12 +34,12 @@ public:
 		return projectionMat;
 	}
 
-	inline float GetWidth()
+	inline float GetWidth() const
 	{
 		return mWidth;
 	}
 
-	inline float GetHeight()
+	inline float GetHeight() const
 	{
 		return mHeight;
 	}

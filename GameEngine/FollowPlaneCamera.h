@@ -25,6 +25,6 @@ public:
 	FollowPlaneCamera(Entity * pEntity, EntityManager & pEntityManager, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate);
 	~FollowPlaneCamera();
 
-	void Update();
+	void Update() override;
 };
 

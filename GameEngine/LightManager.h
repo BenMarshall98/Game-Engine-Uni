@@ -41,7 +41,7 @@ private:
 	vector<PointLight *>renderPointLights;
 	vector<SpotLight *>renderSpotLights;
 
-	LightManager() {}
+	LightManager() : directional(nullptr) {}
 
 public:
 

@@ -13,23 +13,14 @@ enum MESSAGE_TYPE
 
 class LoggingManager
 {
+private:
 	static LoggingManager * instance;
 	static bool hasSevereMessage;
-	LoggingManager();
 public:
-	
-	static LoggingManager * Instance()
-	{
-		if (instance == nullptr)
-		{
-			instance = new LoggingManager();
-		}
-		return instance;
-	}
 
-	static void LogMessage(MESSAGE_TYPE type, string message);
+	static void LogMessage(MESSAGE_TYPE type, string & message);
 
-	inline bool HasSevereMessage()
+	static inline bool HasSevereMessage()
 	{
 		if (hasSevereMessage)
 		{
@@ -39,7 +30,5 @@ public:
 
 		return hasSevereMessage;
 	}
-
-	~LoggingManager();
 };
 

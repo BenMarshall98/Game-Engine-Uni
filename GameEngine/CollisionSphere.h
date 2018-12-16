@@ -7,10 +7,10 @@ private:
 	float radius;
 
 public:
-	CollisionSphere(float pRadius) : CollisionShape(SPHERE), radius(pRadius) {}
+	explicit CollisionSphere(float pRadius) : CollisionShape(SPHERE), radius(pRadius) {}
 	~CollisionSphere();
 
-	inline float GetRadius()
+	inline float GetRadius() const
 	{
 		return radius;
 	}

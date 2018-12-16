@@ -67,7 +67,7 @@ float GLFWInput::MouseInput(int key)
 	}
 }
 
-float GLFWInput::GamePadInput(int key)
+float GLFWInput::GamePadInput(int key) const
 {
 	if (!gamepadAllowed)
 	{

@@ -10,16 +10,16 @@ using namespace std;
 class ComponentInput : public iComponent
 {
 private:
-	vector<InputFunction> inputs;
+	vector<InputFunction> * inputs;
 
 public:
-	ComponentInput(vector<InputFunction> pInputs) : inputs(pInputs) {}
+	explicit ComponentInput(vector<InputFunction> * pInputs) : inputs(pInputs) {}
 	~ComponentInput() {}
 
-	ComponentType GetComponentName();
-	void Swap() {}
+	ComponentType GetComponentName() override;
+	void Swap() override {}
 
-	inline vector<InputFunction> GetInputs()
+	inline vector<InputFunction> * GetInputs()
 	{
 		return inputs;
 	}

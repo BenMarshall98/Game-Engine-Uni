@@ -18,7 +18,6 @@ protected:
 public:
 	Camera(vec3 pPosition = vec3(0, 0, 0), vec3 pLookAt = vec3(0, 0, -1), vec3 pUp = vec3(0, 1, 0)) : position(pPosition), lookAt(pLookAt), up(pUp)
 	{
-		Update();
 	}
 
 	virtual void Update()
@@ -32,17 +31,17 @@ public:
 		return viewMatrix;
 	}
 
-	inline vec3 GetPosition()
+	inline vec3 GetPosition() const
 	{
 		return position;
 	}
 
-	inline vec3 GetLookAt()
+	inline vec3 GetLookAt() const
 	{
 		return lookAt;
 	}
 
-	inline vec3 GetUp()
+	inline vec3 GetUp() const
 	{
 		return up;
 	}
@@ -62,6 +61,6 @@ public:
 		up = pUp;
 	}
 
-	~Camera() {}
+	virtual ~Camera() {}
 };
 

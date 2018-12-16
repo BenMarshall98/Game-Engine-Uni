@@ -31,31 +31,32 @@ private:
 	vec3 impulse = vec3(0);
 	float rotation = 0;
 	float mass;
-	void* rigidBody;
+	void * rigidBody;
 	Entity * thisEntity;
 	bool touchingGround = true;
 	bool nextTouchingGround = false;
 	bool collisionResponse;
 
 public:
-	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, bool pCollisionResponse = true, map<EntityType, GameCollisionFunction> * pCollisionFunctions = new map<EntityType, GameCollisionFunction>()) : shape(pShape), mass(pMass), entityType(pEntityType) , thisEntity(pThisEntity), collisionResponse(pCollisionResponse), collisionFunctions(pCollisionFunctions) {}
+	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, bool pCollisionResponse = true, map<EntityType, GameCollisionFunction> * pCollisionFunctions = new map<EntityType, GameCollisionFunction>())
+		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics() {}
 
-	ComponentType GetComponentName();
+	ComponentType GetComponentName() override;
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
-	void Swap()
+	void Swap() override
 	{
 		touchingGround = nextTouchingGround;
 		nextTouchingGround = false;
 	}
 
-	inline bool GetCollisionResponse()
+	inline bool GetCollisionResponse() const
 	{
 		return collisionResponse;
 	}
 
-	inline vec3 GetVelocity()
+	inline vec3 GetVelocity() const
 	{
 		return velocity;
 	}
@@ -65,7 +66,7 @@ public:
 		velocity = pVelocity;
 	}
 
-	inline vec3 GetImpulse()
+	inline vec3 GetImpulse() const
 	{
 		return impulse;
 	}
@@ -75,7 +76,7 @@ public:
 		impulse = pImpulse;
 	}
 
-	inline float GetRotation()
+	inline float GetRotation() const
 	{
 		return rotation;
 	}
@@ -85,12 +86,12 @@ public:
 		rotation = pRotation;
 	}
 
-	inline CollisionShape* GetShape()
+	inline CollisionShape* GetShape() const
 	{
 		return shape;
 	}
 
-	inline float GetMass()
+	inline float GetMass() const
 	{
 		return mass;
 	}
@@ -100,17 +101,17 @@ public:
 		rigidBody = pRigidBody;
 	}
 
-	inline void* GetRigidBody()
+	inline void* GetRigidBody() const
 	{
 		return rigidBody;
 	}
 
-	inline EntityType GetEntityType()
+	inline EntityType GetEntityType() const
 	{
 		return entityType;
 	}
 
-	inline bool GetTouchingGround()
+	inline bool GetTouchingGround() const
 	{
   		return touchingGround;
 	}

@@ -2,7 +2,8 @@
 #include "ComponentPosition.h"
 
 
-FollowPlaneCamera::FollowPlaneCamera(Entity * pEntity, EntityManager & pEntityManager, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) : mEntity(pEntity), mEntityManager(pEntityManager), mPlane(pPlane), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
+FollowPlaneCamera::FollowPlaneCamera(Entity * pEntity, EntityManager & pEntityManager, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
+	mEntityManager(pEntityManager), mEntity(pEntity), mPlane(pPlane), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
 {
 	Update();
 }
@@ -16,7 +17,7 @@ void FollowPlaneCamera::Update()
 {
 	iComponent * componentPosition = mEntityManager.GetComponentOfEntity(mEntity, COMPONENT_POSITION);
 
-	vec3 playerPosition = ((ComponentPosition *)componentPosition)->GetPosition();
+	vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetPosition();
 
 	vec3 cameraPosition;
 	vec3 upDirection;

@@ -16,10 +16,10 @@ private:
 	EntityManager & entityManager;
 
 public:
-	InputSystem(EntityManager & entityManager);
-	void Action(void);
-	void RemoveEntity(Entity * pEntity);
-	void Input(vector<InputFunction> inputs, Entity * entity);
+	explicit InputSystem(EntityManager & pEntityManager);
+	void Action(void) override;
+	void RemoveEntity(Entity * pEntity) override;
+	static void Input(vector<InputFunction> * inputs, Entity * entity);
 	~InputSystem();
 };
 

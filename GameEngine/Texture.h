@@ -25,7 +25,7 @@ public:
 
 	bool LoadTexture(const string & fileName);
 
-	inline int TextureID()
+	inline int TextureID() const
 	{
 		return mTextureID;
 	}

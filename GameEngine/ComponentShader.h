@@ -9,15 +9,15 @@ class ComponentShader : public iComponent
 private:
 	Shader * shader;
 public:
-	ComponentShader(string shaderName)
+	explicit ComponentShader(string shaderName)
 	{
 		shader = ResourceManager::GetShader(shaderName);
 	}
 
 	~ComponentShader() {}
 
-	ComponentType GetComponentName();
-	void Swap() {}
+	ComponentType GetComponentName() override;
+	void Swap() override {}
 
 	inline Shader * GetShader()
 	{

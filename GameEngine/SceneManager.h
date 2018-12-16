@@ -25,7 +25,7 @@ private:
 	int renderCount = 0;
 	thread swap;
 
-	SceneManager() : currentScene(nullptr), currentWindow(nullptr)
+	SceneManager() : currentScene(nullptr), newScene(nullptr), currentWindow(nullptr), windowRunning(true), sceneRunning(true), tempRunning(true)
 	{
 		loggingManager = LoggingManager::Instance();
 	};

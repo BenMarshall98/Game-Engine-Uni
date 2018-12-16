@@ -9,23 +9,27 @@ class Entity
 private:
 	static int nextID;
 
-	string mEntityName;
+	string * mEntityName;
 	int mEntityID;
 	
 
 public:
-	Entity(string entityName) : mEntityName(entityName), mEntityID(nextID)
+	explicit Entity(string * entityName) : mEntityName(entityName), mEntityID(nextID)
 	{
 		nextID++;
 	}
-	~Entity() {};
 
-	inline int GetID()
+	~Entity()
+	{
+		delete mEntityName;
+	}
+
+	inline int GetID() const
 	{
 		return mEntityID;
 	}
 
-	inline string GetName()
+	inline string * GetName() const
 	{
 		return mEntityName;
 	}

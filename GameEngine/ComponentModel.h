@@ -9,7 +9,7 @@ private:
 	iModel * model;
 
 public:
-	ComponentModel(string modelName)
+	explicit ComponentModel(string modelName)
 	{
 		model = ResourceManager::GetModel(modelName);
 	}
@@ -19,8 +19,8 @@ public:
 		delete model;
 	}
 
-	ComponentType GetComponentName();
-	void Swap() {}
+	ComponentType GetComponentName() override;
+	void Swap() override {}
 
 	inline iModel * GetModel()
 	{

@@ -10,12 +10,12 @@ class CollisionShape
 {
 protected:
 	Shape shape;
-	CollisionShape(Shape pShape) : shape(pShape) {}
+	explicit CollisionShape(Shape pShape) : shape(pShape) {}
 
 public:
 	virtual ~CollisionShape();
 
-	inline Shape GetShape()
+	inline Shape GetShape() const
 	{
 		return shape;
 	}
