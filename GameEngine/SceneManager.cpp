@@ -84,7 +84,7 @@ void SceneManager::FinishSwapScene()
 	currentScene = newScene;
 	currentScene->Load();
 
-	if (loggingManager->HasSevereMessage())
+	if (LoggingManager::HasSevereMessage())
 	{
 		tempRunning = false;
 	}

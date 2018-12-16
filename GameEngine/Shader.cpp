@@ -59,7 +59,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	return success;
 }
 
-void Shader::ReadShader(const string & fileName, string & shaderProgram) const
+void Shader::ReadShader(const string & fileName, string & shaderProgram)
 {
 	ifstream reader(fileName.c_str());
 
@@ -77,7 +77,7 @@ void Shader::ReadShader(const string & fileName, string & shaderProgram) const
 	reader.close();
 }
 
-int Shader::CompileShader(const string & fileName, GLenum shaderType) const
+int Shader::CompileShader(const string & fileName, GLenum shaderType)
 {
 	string shaderProgram;
 	int success, shader;

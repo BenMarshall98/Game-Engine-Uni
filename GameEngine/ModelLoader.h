@@ -41,8 +41,8 @@ private:
 			{
 				return model->bones.at(i);
 			}
-			return nullptr;
 		}
+		return nullptr;
 	}
 
 	static aiNode* FindNode(string & name, AnimatedModel * model)

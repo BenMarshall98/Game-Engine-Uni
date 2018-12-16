@@ -119,17 +119,17 @@ float GLFWInput::GamePadInput(int key) const
 }
 
 
-void GLFWInput::MouseInput(bool allowMouse)
+void GLFWInput::AllowMouseInput(bool allowMouse)
 {
 	mouseAllowed = allowMouse;
 }
 
-void GLFWInput::KeyboardInput(bool allowKeyboard)
+void GLFWInput::AllowKeyboardInput(bool allowKeyboard)
 {
 	keyboardAllowed = allowKeyboard;
 }
 
-void GLFWInput::GamePadInput(bool allowGamePad)
+void GLFWInput::AllowGamePadInput(bool allowGamePad)
 {
 	gamepadAllowed = allowGamePad;
 }

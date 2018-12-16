@@ -38,9 +38,9 @@ void TestGameScene::Load()
 	InputManager * inputManager = InputManager::Instance();
 	GLFWInput * inputReader = inputManager->GetInputReader();
 
-	inputReader->GamePadInput(false);
-	inputReader->MouseInput(true);
-	inputReader->KeyboardInput(true);
+	inputReader->AllowGamePadInput(false);
+	inputReader->AllowMouseInput(true);
+	inputReader->AllowKeyboardInput(true);
 
 	projection = new Projection(Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
 
@@ -66,15 +66,15 @@ void TestGameScene::Load()
 	playerJump.AddInput(KEYBOARD_SPACE);
 	playerJump.AddInput(GAMEPAD_X);
 
-	vector<InputFunction> playerInputs;
-	playerInputs.push_back(playerLeft);
-	playerInputs.push_back(playerRight);
-	playerInputs.push_back(playerJump);
+	vector<InputFunction> * playerInputs = new vector<InputFunction>;
+	playerInputs->push_back(playerLeft);
+	playerInputs->push_back(playerRight);
+	playerInputs->push_back(playerJump);
 
 
 	LevelLoader::LoadLevel("Level.txt", mEntityManager);
 
-	Entity * entity = mEntityManager.GetEntityByName("Player");
+	Entity * entity = mEntityManager.GetEntityByName(new string("Player"));
 	mEntityManager.AddComponentToEntity(entity, new ComponentInput(playerInputs));
 
 	camera = new FollowPlaneCamera(entity, mEntityManager, XY, 2, 50, 7, 0.1);

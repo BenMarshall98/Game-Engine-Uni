@@ -22,7 +22,7 @@ public:
 	EntityManager() {};
 
 	Entity* CreateEntity(string * entityName = new string(""));
-	Entity* GetEntityByName(string & entityName);
+	Entity* GetEntityByName(string * entityName);
 	
 	void AddToDeleteList(Entity * entity);
 	void AddComponentToEntity(Entity * entity, iComponent * component);

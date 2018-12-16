@@ -17,9 +17,9 @@ public:
 	float MouseInput(int key);
 	float GamePadInput(int key) const;
 
-	void MouseInput(bool allowMouse);
-	void KeyboardInput(bool allowKeyboard);
-	void GamePadInput(bool allowGamePad);
+	void AllowMouseInput(bool allowMouse);
+	void AllowKeyboardInput(bool allowKeyboard);
+	void AllowGamePadInput(bool allowGamePad);
 
 	~GLFWInput();
 };

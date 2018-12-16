@@ -1,15 +1,5 @@
 #include "LoggingManager.h"
 
-
-LoggingManager::LoggingManager()
-{
-}
-
-
-LoggingManager::~LoggingManager()
-{
-}
-
 void LoggingManager::LogMessage(MESSAGE_TYPE type, string & message)
 {
 	if (type == SEVERE)

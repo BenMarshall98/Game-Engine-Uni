@@ -8,16 +8,16 @@ Entity * EntityManager::CreateEntity(string * entityName)
 	return entity;
 }
 
-Entity * EntityManager::GetEntityByName(string & entityName)
+Entity * EntityManager::GetEntityByName(string * entityName)
 {
-	if (entityName == "")
+	if (entityName->compare(""))
 	{
 		return nullptr;
 	}
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		if (EntityList[i]->GetName()->compare(entityName))
+		if (EntityList[i]->GetName()->compare(*entityName))
 		{
 			return EntityList[i];
 		}

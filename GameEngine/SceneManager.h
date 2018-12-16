@@ -17,7 +17,6 @@ private:
 	iScene * currentScene;
 	iScene * newScene;
 	GLFWWindow * currentWindow;
-	LoggingManager * loggingManager;
 	bool windowRunning;
 	bool sceneRunning;
 	bool tempRunning;
@@ -27,7 +26,6 @@ private:
 
 	SceneManager() : currentScene(nullptr), newScene(nullptr), currentWindow(nullptr), windowRunning(true), sceneRunning(true), tempRunning(true)
 	{
-		loggingManager = LoggingManager::Instance();
 	};
 
 	void Update();
