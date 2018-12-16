@@ -53,6 +53,8 @@ void GLFWWindow::Load()
 
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
+
+	InputManager * inputManager = InputManager::Instance(new GLFWInput(gameWindow));
 }
 
 void GLFWWindow::WindowEvents()

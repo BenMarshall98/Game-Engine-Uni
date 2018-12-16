@@ -55,7 +55,7 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 		}
 		else if (letter == 'p')
 		{
-			Entity * newEntity = pEntityManager.CreateEntity(new string("Player"));
+			Entity * newEntity = pEntityManager.CreateEntity("Player");
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));

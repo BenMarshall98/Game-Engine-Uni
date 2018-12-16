@@ -74,7 +74,7 @@ void TestGameScene::Load()
 
 	LevelLoader::LoadLevel("Level.txt", mEntityManager);
 
-	Entity * entity = mEntityManager.GetEntityByName(new string("Player"));
+	Entity * entity = mEntityManager.GetEntityByName("Player");
 	mEntityManager.AddComponentToEntity(entity, new ComponentInput(playerInputs));
 
 	camera = new FollowPlaneCamera(entity, mEntityManager, XY, 2, 50, 7, 0.1);
@@ -134,6 +134,7 @@ void TestGameScene::Render()
 void TestGameScene::Update()
 {
 	mSystemManager.Update();
+	camera->Update();
 }
 
 void TestGameScene::Close()

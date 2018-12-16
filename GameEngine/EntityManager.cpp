@@ -1,5 +1,5 @@
 #include "EntityManager.h"
-Entity * EntityManager::CreateEntity(string * entityName)
+Entity * EntityManager::CreateEntity(string entityName)
 {
 	Entity * entity = new Entity(entityName);
 
@@ -8,16 +8,16 @@ Entity * EntityManager::CreateEntity(string * entityName)
 	return entity;
 }
 
-Entity * EntityManager::GetEntityByName(string * entityName)
+Entity * EntityManager::GetEntityByName(string entityName)
 {
-	if (entityName->compare(""))
+	if (entityName.compare("") == 0)
 	{
 		return nullptr;
 	}
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		if (EntityList[i]->GetName()->compare(*entityName))
+		if (EntityList[i]->GetName().compare(entityName) == 0)
 		{
 			return EntityList[i];
 		}
