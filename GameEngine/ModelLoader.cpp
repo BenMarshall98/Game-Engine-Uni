@@ -111,11 +111,11 @@ StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 
 			string lineToAdd = vertexString[vertex - 1] + " " + textureString[texture - 1] + " " + normalString[normal - 1];
 			int index = FindInVector(modelData, lineToAdd);
-			/*if (index != -1)
+			if (index != -1)
 			{
 				indexes.push_back(index);
 			}
-			else*/
+			else
 			{
 				indexes.push_back(modelData.size());
 				modelData.push_back(lineToAdd);
@@ -307,9 +307,23 @@ void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
 
 void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents)
 {
+	vector<int> numTimesUsed;
+
+	for (int i = 0; i < vertex.size(); i++)
+	{
+		numTimesUsed.push_back(0);
+		tangents.push_back(vec3(0));
+	}
+
 	for (int i = 0; i < indices.size(); i = i + 3)
 	{
-		vec3 edge1 = vertex[indices.at(i + 1)] - vertex[indices.at(i)];
+		CalculateTangent(vertex[indices.at(i)], vertex[indices.at(i + 1)], vertex[indices.at(i + 2)],
+			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i)], numTimesUsed[indices.at(i)]);
+		CalculateTangent(vertex[indices.at(i + 1)], vertex[indices.at(i)], vertex[indices.at(i + 2)],
+			texture[indices.at(i + 1)], texture[indices.at(i)], texture[indices.at(i + 2)], tangents[indices.at(i + 1)], numTimesUsed[indices.at(i + 1)]);
+		CalculateTangent(vertex[indices.at(i + 2)], vertex[indices.at(i + 1)], vertex[indices.at(i)],
+			texture[indices.at(i + 2)], texture[indices.at(i + 1)], texture[indices.at(i)], tangents[indices.at(i + 2)], numTimesUsed[indices.at(i + 2)]);
+		/*vec3 edge1 = vertex[indices.at(i + 1)] - vertex[indices.at(i)];
 		vec3 edge2 = vertex[indices.at(i + 2)] - vertex[indices.at(i)];
 
 		vec2 deltaUV1 = texture[indices.at(i + 1)] - texture[indices.at(i)];
@@ -321,10 +335,27 @@ void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vec
 		tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
 		tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
 		tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
-		tangent = normalize(tangent);
-
-		tangents.push_back(tangent);
-		tangents.push_back(tangent);
-		tangents.push_back(tangent);
+		tangent = normalize(tangent);*/
 	}
+}
+
+void ModelLoader::CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex3, vec2 & texture1, vec2 & texture2, vec2 & texture3, vec3 & tangent, int & numTimesUsed)
+{
+	vec3 edge1 = vertex2 - vertex1;
+	vec3 edge2 = vertex3 - vertex1;
+
+	vec2 deltaUV1 = texture2 - texture1;
+	vec2 deltaUV2 = texture3 - texture1;
+
+	float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+	vec3 newTangent;
+	newTangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+	newTangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+	newTangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+	newTangent = normalize(newTangent);
+
+	tangent *= numTimesUsed;
+	tangent = normalize(tangent + newTangent);
+	numTimesUsed++;
 }
