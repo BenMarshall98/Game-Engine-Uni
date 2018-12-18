@@ -42,7 +42,7 @@ void main()
 {
 	vec3 lightColour = vec3(0,0,0);
 
-	vec3 norm = texture(normalTexture, oTex).rbg;
+	vec3 norm = texture(normalTexture, oTex).rgb;
 	norm = normalize(norm * 2.0 - 1.0);
 	//norm = normalize(norm * oTBN);
 
@@ -127,4 +127,6 @@ void main()
 	//lightColour = lightColour / (int(DirectionLightUsed) + TotalPointLights + TotalSpotLights);
 
 	FragColor = vec4(texture(texture_map, oTex).rgb * lightColour, 1.0);
+	norm = normalize(norm * oTBN);
+	FragColor = vec4((oN + 1.0) / 2.0, 1.0);
 }
