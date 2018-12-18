@@ -77,7 +77,7 @@ void TestGameScene::Load()
 	Entity * entity = mEntityManager.GetEntityByName("Player");
 	mEntityManager.AddComponentToEntity(entity, new ComponentInput(playerInputs));
 
-	camera = new FollowPlaneCamera(entity, mEntityManager, XY, 2, 50, 7, 0.1);
+	camera = new FollowPlaneCamera(entity, mEntityManager, XY, 2, 50, 3, 0.1);
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 

@@ -2,7 +2,7 @@
 #include "BulletPhysicsEngine.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
-#include "TestGameScene.h"
+#include "EntityManager.h"
 #include <iostream>
 
 #include "glm/gtc/quaternion.hpp"
@@ -136,8 +136,8 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 	Entity * entity1 = (Entity *)obj1->getCollisionObject()->getUserPointer();
 	Entity * entity2 = (Entity *)obj2->getCollisionObject()->getUserPointer();
 
-	iComponent * physicsComponent1 = TestGameScene::mEntityManager.GetComponentOfEntity(entity1, COMPONENT_PHYSICS);
-	iComponent * physicsComponent2 = TestGameScene::mEntityManager.GetComponentOfEntity(entity2, COMPONENT_PHYSICS);
+	iComponent * physicsComponent1 = EntityManager::Instance()->GetComponentOfEntity(entity1, COMPONENT_PHYSICS);
+	iComponent * physicsComponent2 = EntityManager::Instance()->GetComponentOfEntity(entity2, COMPONENT_PHYSICS);
 
 	ComponentPhysics * componentPhysics1 = (ComponentPhysics *)physicsComponent1;
 	ComponentPhysics * componentPhysics2 = (ComponentPhysics *)physicsComponent2;

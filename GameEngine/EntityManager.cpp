@@ -150,3 +150,5 @@ void EntityManager::Update(SystemManager & systemManager)
 
 	ToDeleteList.clear();
 }
+
+EntityManager * EntityManager::instance = nullptr;

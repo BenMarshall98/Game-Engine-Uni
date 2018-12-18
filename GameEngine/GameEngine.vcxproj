@@ -39,13 +39,13 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -151,7 +151,6 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="LoggingManager.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
@@ -163,7 +162,6 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StaticModel.cpp" />
     <ClCompile Include="SystemManager.cpp" />
-    <ClCompile Include="TestGameScene.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -210,37 +208,16 @@
     <ClInclude Include="StaticModel.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SystemManager.h" />
-    <ClInclude Include="TestGameScene.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NormalFragment.frag" />
-    <None Include="NormalVertex.vert" />
     <None Include="packages.config" />
-    <None Include="RiggedFragment.frag" />
-    <None Include="RiggedVertex.vert" />
-    <None Include="TestFragment.frag" />
-    <None Include="TestVertex.vert" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Level.txt" />
     <Text Include="Useful Links.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="cube.obj">
-      <FileType>Text</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="2k_earth_daymap.jpg" />
-    <Image Include="container.jpg" />
-    <Image Include="containerNormal.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BulletPhysics\BulletCollision\BulletCollision.vcxproj">
@@ -252,19 +229,6 @@
     <ProjectReference Include="..\BulletPhysics\LinearMath\LinearMath.vcxproj">
       <Project>{e84feff4-3162-4800-befc-dd5e20ff315d}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="sphere.obj">
-      <FileType>Text</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Collectable.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

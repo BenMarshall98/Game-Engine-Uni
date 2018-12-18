@@ -13,13 +13,24 @@ using namespace std;
 class EntityManager
 {
 private:
+	static EntityManager * instance;
 	map<ComponentType, map<Entity *, iComponent *>> ComponentList;
 	vector<Entity *> EntityList;
 	vector<Entity *> ToDeleteList;
 
 	void RemoveEntity(Entity* entity);
-public:
+
 	EntityManager() {};
+public:
+	
+	inline static EntityManager * Instance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new EntityManager();
+		}
+		return instance;
+	}
 
 	Entity* CreateEntity(string entityName = "");
 	Entity* GetEntityByName(string entityName);

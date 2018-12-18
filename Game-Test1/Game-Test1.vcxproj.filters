@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Levels">
+      <UniqueIdentifier>{5fc87f17-9025-4fbd-9c2c-1e6c9ab2b45c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{17267a8e-a6d2-4e6c-a70e-1f98d5bacd17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{c80f53cb-ac2e-4189-866b-2b92e4c3ada3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{a1df2660-304f-4159-8155-a871857bdcb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{79556bd9-8744-40a0-a7c0-d7b78b3a8d27}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TestGameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="2k_earth_daymap.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="container.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="containerNormal.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cube.obj">
+      <Filter>Models</Filter>
+    </Resource>
+    <Resource Include="sphere.obj">
+      <Filter>Models</Filter>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NormalFragment.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="NormalVertex.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="RiggedFragment.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="RiggedVertex.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="TestFragment.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="TestVertex.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Collectable.obj">
+      <Filter>Models</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Level.txt">
+      <Filter>Levels</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestGameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

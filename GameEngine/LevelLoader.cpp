@@ -8,9 +8,10 @@
 #include "ComponentDirection.h"
 #include "ComponentPhysics.h"
 #include "ComponentTexture.h"
+#include "ComponentNormalTexture.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
-#include "TestGameScene.h"
+#include "EntityManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -47,11 +48,12 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 		{
 			Entity * newEntity = pEntityManager.CreateEntity();
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0, WALL, newEntity));
 			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+			pEntityManager.AddComponentToEntity(newEntity, new ComponentNormalTexture("BoxNormal"));
 		}
 		else if (letter == 'p')
 		{
@@ -82,5 +84,5 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 
 void LevelLoader::CoinHitPlayer(Entity * pEntity)
 {
-	TestGameScene::mEntityManager.AddToDeleteList(pEntity);
+	EntityManager::Instance()->AddToDeleteList(pEntity);
 }

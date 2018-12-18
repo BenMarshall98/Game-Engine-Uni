@@ -4,9 +4,6 @@
     <Filter Include="GameEngineLibraries">
       <UniqueIdentifier>{37e91711-5a2e-444b-ad72-89573dccb1ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameCode">
-      <UniqueIdentifier>{ecf537a7-b033-4c4c-9556-eafc9f8498aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngineLibraries\OpenGL">
       <UniqueIdentifier>{f7eb6cce-748d-4a97-8227-894cfdd6de0e}</UniqueIdentifier>
     </Filter>
@@ -24,18 +21,6 @@
     </Filter>
     <Filter Include="GameEngineLibraries\Scene Manager">
       <UniqueIdentifier>{87029c81-b448-498b-8d7a-6dc290f771ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameCode\Scenes">
-      <UniqueIdentifier>{1abaae8a-6442-42c6-b8fb-2251cd812e75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameCode\Textures">
-      <UniqueIdentifier>{bb1475d6-bae7-472f-b042-6ebc8126e95e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameCode\Models">
-      <UniqueIdentifier>{04c3f81c-c4b0-486f-8182-693c9608b71e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameCode\Shaders">
-      <UniqueIdentifier>{d1be5fae-3c05-44d7-8e23-ccd7c5063eec}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngineLibraries\Components">
       <UniqueIdentifier>{f61ea21b-977c-4ceb-8763-3d654d337831}</UniqueIdentifier>
@@ -67,14 +52,8 @@
     <Filter Include="GameEngineLibraries\Physics Manager\CollisionShpaes">
       <UniqueIdentifier>{294a5ecc-e10d-4698-837b-80757ea04515}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameCode\Levels">
-      <UniqueIdentifier>{fd2d928f-d141-4f6c-9db6-e87b8e750dad}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>GameCode</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>GameEngineLibraries\Utility</Filter>
     </ClCompile>
@@ -104,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="iScene.cpp">
       <Filter>GameEngineLibraries\Scene Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TestGameScene.cpp">
-      <Filter>GameCode\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="iComponent.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
@@ -186,13 +162,13 @@
     <ClCompile Include="AnimatedModel.cpp">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="FollowPlaneCamera.cpp">
       <Filter>GameEngineLibraries\Camera</Filter>
     </ClCompile>
     <ClCompile Include="ComponentNormalTexture.cpp">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -231,9 +207,6 @@
     </ClInclude>
     <ClInclude Include="iScene.h">
       <Filter>GameEngineLibraries\Scene Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TestGameScene.h">
-      <Filter>GameCode\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="iComponent.h">
       <Filter>GameEngineLibraries\Components</Filter>
@@ -319,66 +292,21 @@
     <ClInclude Include="AnimatedModel.h">
       <Filter>GameEngineLibraries\Utility\Models</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="FollowPlaneCamera.h">
       <Filter>GameEngineLibraries\Camera</Filter>
     </ClInclude>
     <ClInclude Include="ComponentNormalTexture.h">
       <Filter>GameEngineLibraries\Components</Filter>
     </ClInclude>
+    <ClInclude Include="LevelLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TestVertex.vert">
-      <Filter>GameCode\Shaders</Filter>
-    </None>
-    <None Include="TestFragment.frag">
-      <Filter>GameCode\Shaders</Filter>
-    </None>
-    <None Include="RiggedFragment.frag">
-      <Filter>GameCode\Shaders</Filter>
-    </None>
-    <None Include="RiggedVertex.vert">
-      <Filter>GameCode\Shaders</Filter>
-    </None>
-    <None Include="NormalVertex.vert">
-      <Filter>GameCode\Shaders</Filter>
-    </None>
-    <None Include="NormalFragment.frag">
-      <Filter>GameCode\Shaders</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Useful Links.txt" />
-    <Text Include="Level.txt">
-      <Filter>GameCode\Levels</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="cube.obj">
-      <Filter>GameCode\Models</Filter>
-    </Resource>
-    <Resource Include="sphere.obj">
-      <Filter>GameCode\Models</Filter>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="container.jpg">
-      <Filter>GameCode\Textures</Filter>
-    </Image>
-    <Image Include="containerNormal.jpg">
-      <Filter>GameCode\Textures</Filter>
-    </Image>
-    <Image Include="2k_earth_daymap.jpg">
-      <Filter>GameCode\Textures</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Collectable.obj">
-      <Filter>GameCode\Models</Filter>
-    </Object>
   </ItemGroup>
 </Project>
