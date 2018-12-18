@@ -35,6 +35,7 @@ TestGameScene::~TestGameScene()
 
 void TestGameScene::Load()
 {
+	mEntityManager = EntityManager::Instance();
 	InputManager * inputManager = InputManager::Instance();
 	GLFWInput * inputReader = inputManager->GetInputReader();
 
@@ -72,22 +73,22 @@ void TestGameScene::Load()
 	playerInputs->push_back(playerJump);
 
 
-	LevelLoader::LoadLevel("Level.txt", mEntityManager);
+	LevelLoader::LoadLevel("Level.txt");
 
-	Entity * entity = mEntityManager.GetEntityByName("Player");
-	mEntityManager.AddComponentToEntity(entity, new ComponentInput(playerInputs));
+	Entity * entity = mEntityManager->GetEntityByName("Player");
+	mEntityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
 
-	camera = new FollowPlaneCamera(entity, mEntityManager, XY, 2, 50, 3, 0.1);
+	camera = new FollowPlaneCamera(entity, XY, 2, 50, 4, 0.1);
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
-	RenderSystem * render = new RenderSystem(mEntityManager, camera, projection);
+	RenderSystem * render = new RenderSystem(camera, projection);
 	mSystemManager.AddRenderSystem(render);
 
-	InputSystem * input = new InputSystem(mEntityManager);
+	InputSystem * input = new InputSystem();
 	mSystemManager.AddUpdateSystem(input); //TODO: change to a update system
 
-	PhysicsSystem * physics = new PhysicsSystem(mEntityManager, *mPhysicsManager);
+	PhysicsSystem * physics = new PhysicsSystem(*mPhysicsManager);
 	mSystemManager.AddUpdateSystem(physics);
 
 	LightManager * lightManager = LightManager::Instance();
@@ -128,7 +129,7 @@ void TestGameScene::Render()
 
 	mSystemManager.Render();
 
-	mEntityManager.Update(mSystemManager);
+	mEntityManager->Update(mSystemManager);
 }
 
 void TestGameScene::Update()
@@ -152,7 +153,7 @@ void TestGameScene::PlayerLeft(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
-		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
+		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 		
 		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetVelocity();
 		velocity.x -= ((1 / 60.0f) * value * 1000);
@@ -164,7 +165,7 @@ void TestGameScene::PlayerRight(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
-		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
+		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
 		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetVelocity();
 		velocity.x += ((1 / 60.0f) * value * 1000);
@@ -176,7 +177,7 @@ void TestGameScene::PlayerJump(float value, Entity * entity)
 {
 	if (value > 0.2f)
 	{
-		iComponent * componentPhysics = mEntityManager.GetComponentOfEntity(entity, COMPONENT_PHYSICS);
+		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
 		if (((ComponentPhysics *)componentPhysics)->GetTouchingGround())
 		{
@@ -186,5 +187,3 @@ void TestGameScene::PlayerJump(float value, Entity * entity)
 		}
 	}
 }
-
-EntityManager TestGameScene::mEntityManager = EntityManager();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EntityManager.h"
+#include "Entity.h"
 #include <string>
 
 using namespace std;
@@ -8,7 +8,7 @@ using namespace std;
 class LevelLoader
 {
 public:
-	static void LoadLevel(string fileName, EntityManager & entityManager);
+	static void LoadLevel(string fileName);
 	static void CoinHitPlayer(Entity * pEntity);
 };
 

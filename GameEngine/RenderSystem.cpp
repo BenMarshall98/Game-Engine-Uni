@@ -15,10 +15,11 @@
 #include <string>
 #include <algorithm>
 
-RenderSystem::RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection) : entityManager(pEntityManager), camera(pCamera), projection(pProjection), updateFirst(true)
+RenderSystem::RenderSystem(Camera * pCamera, Projection * pProjection) : camera(pCamera), projection(pProjection), updateFirst(true)
 {
+	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { COMPONENT_MODEL, COMPONENT_SHADER, COMPONENT_POSITION, COMPONENT_TEXTURE, COMPONENT_DIRECTION };
-	EntityList = entityManager.GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 }
 
 void RenderSystem::RemoveEntity(Entity * pEntity)
@@ -43,11 +44,11 @@ void RenderSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentShader = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_SHADER);
-		iComponent * componentModel = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_MODEL);
-		iComponent * componentPosition = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_POSITION);
-		iComponent * componentTexture = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_TEXTURE);
-		iComponent * componentDirection = entityManager.GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
+		iComponent * componentShader = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_SHADER);
+		iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_MODEL);
+		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_POSITION);
+		iComponent * componentTexture = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_TEXTURE);
+		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
 
 		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetShader();
 		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetModel();
@@ -55,7 +56,7 @@ void RenderSystem::Action(void)
 		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetTexture();
 		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetDirection();
 
-		iComponent * componentNormal = entityManager.GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
+		iComponent * componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
 
 		Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetTexture();
 

@@ -61,6 +61,7 @@
     <None Include="TestVertex.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Collectable.obj">

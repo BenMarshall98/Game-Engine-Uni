@@ -13,10 +13,10 @@ class InputSystem : public iSystem
 {
 private:
 	vector<Entity *> EntityList;
-	EntityManager & entityManager;
+	EntityManager * entityManager;
 
 public:
-	explicit InputSystem(EntityManager & pEntityManager);
+	explicit InputSystem();
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
 	static void Input(vector<InputFunction> * inputs, Entity * entity);

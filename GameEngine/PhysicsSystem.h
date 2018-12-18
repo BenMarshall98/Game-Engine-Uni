@@ -18,11 +18,11 @@ class PhysicsSystem : public iSystem
 private:
 	vector<Entity *> EntityList;
 	vector<Entity *> newEntities;
-	EntityManager & entityManager;
+	EntityManager * entityManager;
 	PhysicsManager & physicsManager;
 
 public:
-	PhysicsSystem(EntityManager & pEntityManager, PhysicsManager & pPhysicsManager);
+	PhysicsSystem(PhysicsManager & pPhysicsManager);
 	void Action(void);
 	void RemoveEntity(Entity * pEntity);
 	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);

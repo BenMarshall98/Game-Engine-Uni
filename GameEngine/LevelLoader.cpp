@@ -16,7 +16,7 @@
 #include <fstream>
 #include <iostream>
 
-void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
+void LevelLoader::LoadLevel(string fileName)
 {
 
 	ResourceManager::LoadModel("Cube", "cube.obj");
@@ -32,6 +32,8 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 	int x = 0;
 	int y = 0;
 
+	EntityManager * entityManager = EntityManager::Instance();
+
 	ifstream in;
 	in.open(fileName);
 
@@ -46,37 +48,37 @@ void LevelLoader::LoadLevel(string fileName, EntityManager & pEntityManager)
 		}
 		else if (letter == 'w')
 		{
-			Entity * newEntity = pEntityManager.CreateEntity();
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Cube"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0, WALL, newEntity));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Box"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentNormalTexture("BoxNormal"));
+			Entity * newEntity = entityManager->CreateEntity();
+			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Cube"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
+			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0, WALL, newEntity));
+			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Box"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("BoxNormal"));
 		}
 		else if (letter == 'p')
 		{
-			Entity * newEntity = pEntityManager.CreateEntity("Player");
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
+			Entity * newEntity = entityManager->CreateEntity("Player");
+			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
+			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
+			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
 		}
 		else if (letter == 'c')
 		{
 			map<EntityType, GameCollisionFunction> * collisionFunctions = new map<EntityType, GameCollisionFunction>();
 			collisionFunctions->insert(pair<EntityType, GameCollisionFunction>(PLAYER, CoinHitPlayer));
 
-			Entity * newEntity = pEntityManager.CreateEntity();
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentModel("Collectable"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.25f), 0, COLLECTABLE, newEntity, false, collisionFunctions));
-			pEntityManager.AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
+			Entity * newEntity = entityManager->CreateEntity();
+			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Collectable"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
+			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.25f), 0, COLLECTABLE, newEntity, false, collisionFunctions));
+			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
 		}
 		x++;
 	}

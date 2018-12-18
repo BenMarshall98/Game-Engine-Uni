@@ -24,7 +24,7 @@ private:
 	vector<GameInput> cameraDownInputs;
 
 public:
-	static EntityManager mEntityManager; //TODO: make into a singleton and make private
+	EntityManager * mEntityManager; //TODO: make into a singleton and make private
 
 	TestGameScene();
 	~TestGameScene();

@@ -17,7 +17,7 @@ class RenderSystem : public iSystem
 {
 private:
 	vector<Entity *> EntityList;
-	EntityManager & entityManager;
+	EntityManager * entityManager;
 	Camera * camera;
 	Projection * projection;
 	bool updateFirst;
@@ -26,7 +26,7 @@ private:
 
 public:
 
-	RenderSystem(EntityManager & pEntityManager, Camera * pCamera, Projection * pProjection);
+	RenderSystem(Camera * pCamera, Projection * pProjection);
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
 	
