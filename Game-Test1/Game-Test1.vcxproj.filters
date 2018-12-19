@@ -33,6 +33,9 @@
     <Image Include="containerNormal.jpg">
       <Filter>Textures</Filter>
     </Image>
+    <Image Include="Earth_Normal.jpg">
+      <Filter>Textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="cube.obj">

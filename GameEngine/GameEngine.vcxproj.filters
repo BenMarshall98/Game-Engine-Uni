@@ -1,304 +1,308 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="GameEngineLibraries">
-      <UniqueIdentifier>{37e91711-5a2e-444b-ad72-89573dccb1ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\OpenGL">
-      <UniqueIdentifier>{f7eb6cce-748d-4a97-8227-894cfdd6de0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Utility">
-      <UniqueIdentifier>{95a82282-c449-4b1a-9bec-7ec827c5b8b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Utility\Models">
-      <UniqueIdentifier>{47590f5e-a480-4a20-96f5-b9bf6b7a99e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Entity Manager">
-      <UniqueIdentifier>{ceb312ba-5044-4234-bcec-be67352ee446}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\System Manager">
-      <UniqueIdentifier>{fb7c6b32-3b20-41b0-970a-250a090546cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Scene Manager">
-      <UniqueIdentifier>{87029c81-b448-498b-8d7a-6dc290f771ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Components">
-      <UniqueIdentifier>{f61ea21b-977c-4ceb-8763-3d654d337831}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Systems">
-      <UniqueIdentifier>{2fdbc526-47d8-46ca-9dca-4c93a5b27624}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Camera">
+    <Filter Include="Camera">
       <UniqueIdentifier>{482caee8-fef9-4cc8-b4fc-2918ccce631e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngineLibraries\Input Manager">
+    <Filter Include="Components">
+      <UniqueIdentifier>{f61ea21b-977c-4ceb-8763-3d654d337831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity Manager">
+      <UniqueIdentifier>{ceb312ba-5044-4234-bcec-be67352ee446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input Manager">
       <UniqueIdentifier>{4fba9a28-1da2-494c-b0c4-8de3c540d5fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngineLibraries\Light Manager">
+    <Filter Include="Light Manager">
       <UniqueIdentifier>{7b0eab55-f561-4d5f-97fe-aba99eef52b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngineLibraries\Window">
-      <UniqueIdentifier>{40040610-bfaa-4fb6-ac9f-4a258317c9f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Window\GLFW">
-      <UniqueIdentifier>{16af0385-b6a9-4bc0-8545-e30f74096ea3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngineLibraries\Logging Manager">
+    <Filter Include="Logging Manager">
       <UniqueIdentifier>{567f75f0-c8b0-46a5-9ae1-124e6632364f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngineLibraries\Physics Manager">
+    <Filter Include="OpenGL">
+      <UniqueIdentifier>{f7eb6cce-748d-4a97-8227-894cfdd6de0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics Manager">
       <UniqueIdentifier>{ed7564d2-a891-422f-b9b4-adedfe974c89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngineLibraries\Physics Manager\CollisionShpaes">
+    <Filter Include="Physics Manager\CollisionShpaes">
       <UniqueIdentifier>{294a5ecc-e10d-4698-837b-80757ea04515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Manager">
+      <UniqueIdentifier>{87029c81-b448-498b-8d7a-6dc290f771ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System Manager">
+      <UniqueIdentifier>{fb7c6b32-3b20-41b0-970a-250a090546cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{2fdbc526-47d8-46ca-9dca-4c93a5b27624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{95a82282-c449-4b1a-9bec-7ec827c5b8b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Models">
+      <UniqueIdentifier>{47590f5e-a480-4a20-96f5-b9bf6b7a99e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{40040610-bfaa-4fb6-ac9f-4a258317c9f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\GLFW">
+      <UniqueIdentifier>{16af0385-b6a9-4bc0-8545-e30f74096ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level Loaders">
+      <UniqueIdentifier>{68f96209-94ac-42bb-ad9b-4642a67e437a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClCompile>
     <ClCompile Include="StaticModel.cpp">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClCompile>
     <ClCompile Include="ModelLoader.cpp">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClCompile>
     <ClCompile Include="EntityManager.cpp">
-      <Filter>GameEngineLibraries\Entity Manager</Filter>
+      <Filter>Entity Manager</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>GameEngineLibraries\Entity Manager</Filter>
+      <Filter>Entity Manager</Filter>
     </ClCompile>
     <ClCompile Include="SystemManager.cpp">
-      <Filter>GameEngineLibraries\System Manager</Filter>
+      <Filter>System Manager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>GameEngineLibraries\Scene Manager</Filter>
+      <Filter>Scene Manager</Filter>
     </ClCompile>
     <ClCompile Include="iScene.cpp">
-      <Filter>GameEngineLibraries\Scene Manager</Filter>
+      <Filter>Scene Manager</Filter>
     </ClCompile>
     <ClCompile Include="iComponent.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ComponentPosition.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ComponentModel.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ComponentShader.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="iSystem.cpp">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="ComponentTexture.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="OpenGL.cpp">
-      <Filter>GameEngineLibraries\OpenGL</Filter>
+      <Filter>OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>GameEngineLibraries\Input Manager</Filter>
+      <Filter>Input Manager</Filter>
     </ClCompile>
     <ClCompile Include="InputFunction.cpp">
-      <Filter>GameEngineLibraries\Input Manager</Filter>
+      <Filter>Input Manager</Filter>
     </ClCompile>
     <ClCompile Include="ComponentInput.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Projection.cpp">
-      <Filter>GameEngineLibraries\Camera</Filter>
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
-      <Filter>GameEngineLibraries\Light Manager</Filter>
+      <Filter>Light Manager</Filter>
     </ClCompile>
     <ClCompile Include="GLFWWindow.cpp">
-      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+      <Filter>Window\GLFW</Filter>
     </ClCompile>
     <ClCompile Include="GLFWInput.cpp">
-      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+      <Filter>Window\GLFW</Filter>
     </ClCompile>
     <ClCompile Include="LoggingManager.cpp">
-      <Filter>GameEngineLibraries\Logging Manager</Filter>
+      <Filter>Logging Manager</Filter>
     </ClCompile>
     <ClCompile Include="ComponentDirection.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ComponentPhysics.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsSystem.cpp">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
-      <Filter>GameEngineLibraries\Physics Manager</Filter>
+      <Filter>Physics Manager</Filter>
     </ClCompile>
     <ClCompile Include="BulletPhysicsEngine.cpp">
-      <Filter>GameEngineLibraries\Physics Manager</Filter>
+      <Filter>Physics Manager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionShape.cpp">
-      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClCompile>
     <ClCompile Include="CollisionSphere.cpp">
-      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClCompile>
     <ClCompile Include="CollisionCuboid.cpp">
-      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedModel.cpp">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClCompile>
     <ClCompile Include="FollowPlaneCamera.cpp">
-      <Filter>GameEngineLibraries\Camera</Filter>
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="ComponentNormalTexture.cpp">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Level Loaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="iModel.h">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="StaticModel.h">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="ModelLoader.h">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
-      <Filter>GameEngineLibraries\Utility</Filter>
+      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
-      <Filter>GameEngineLibraries\Entity Manager</Filter>
+      <Filter>Entity Manager</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>GameEngineLibraries\Entity Manager</Filter>
+      <Filter>Entity Manager</Filter>
     </ClInclude>
     <ClInclude Include="SystemManager.h">
-      <Filter>GameEngineLibraries\System Manager</Filter>
+      <Filter>System Manager</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>GameEngineLibraries\Scene Manager</Filter>
+      <Filter>Scene Manager</Filter>
     </ClInclude>
     <ClInclude Include="iScene.h">
-      <Filter>GameEngineLibraries\Scene Manager</Filter>
+      <Filter>Scene Manager</Filter>
     </ClInclude>
     <ClInclude Include="iComponent.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ComponentPosition.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ComponentModel.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ComponentShader.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="iSystem.h">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="RenderSystem.h">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="ComponentTexture.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>GameEngineLibraries\Camera</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL.h">
-      <Filter>GameEngineLibraries\OpenGL</Filter>
+      <Filter>OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>GameEngineLibraries\Input Manager</Filter>
+      <Filter>Input Manager</Filter>
     </ClInclude>
     <ClInclude Include="InputFunction.h">
-      <Filter>GameEngineLibraries\Input Manager</Filter>
+      <Filter>Input Manager</Filter>
     </ClInclude>
     <ClInclude Include="InputMapping.h">
-      <Filter>GameEngineLibraries\Input Manager</Filter>
+      <Filter>Input Manager</Filter>
     </ClInclude>
     <ClInclude Include="ComponentInput.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
-      <Filter>GameEngineLibraries\Camera</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="LightManager.h">
-      <Filter>GameEngineLibraries\Light Manager</Filter>
+      <Filter>Light Manager</Filter>
     </ClInclude>
     <ClInclude Include="GLFWWindow.h">
-      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+      <Filter>Window\GLFW</Filter>
     </ClInclude>
     <ClInclude Include="GLFWInput.h">
-      <Filter>GameEngineLibraries\Window\GLFW</Filter>
+      <Filter>Window\GLFW</Filter>
     </ClInclude>
     <ClInclude Include="LoggingManager.h">
-      <Filter>GameEngineLibraries\Logging Manager</Filter>
+      <Filter>Logging Manager</Filter>
     </ClInclude>
     <ClInclude Include="ComponentDirection.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ComponentPhysics.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsSystem.h">
-      <Filter>GameEngineLibraries\Systems</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsManager.h">
-      <Filter>GameEngineLibraries\Physics Manager</Filter>
+      <Filter>Physics Manager</Filter>
     </ClInclude>
     <ClInclude Include="BulletPhysicsEngine.h">
-      <Filter>GameEngineLibraries\Physics Manager</Filter>
+      <Filter>Physics Manager</Filter>
     </ClInclude>
     <ClInclude Include="CollisionShape.h">
-      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClInclude>
     <ClInclude Include="CollisionSphere.h">
-      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClInclude>
     <ClInclude Include="CollisionCuboid.h">
-      <Filter>GameEngineLibraries\Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedModel.h">
-      <Filter>GameEngineLibraries\Utility\Models</Filter>
+      <Filter>Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="FollowPlaneCamera.h">
-      <Filter>GameEngineLibraries\Camera</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="ComponentNormalTexture.h">
-      <Filter>GameEngineLibraries\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Level Loaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

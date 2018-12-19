@@ -5,7 +5,7 @@ StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector
 {
 	//The following code is based from learnopengl
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(4, VBO);
+	glGenBuffers(5, VBO);
 	glGenBuffers(1, &EBO);
 
 	glBindVertexArray(VAO);

@@ -28,6 +28,7 @@ void LevelLoader::LoadLevel(string fileName)
 	ResourceManager::LoadTexture("Box", "container.jpg");
 	ResourceManager::LoadTexture("BoxNormal", "containerNormal.jpg");
 	ResourceManager::LoadTexture("Earth", "2k_earth_daymap.jpg");
+	ResourceManager::LoadTexture("EarthNormal", "Earth_Normal.jpg");
 
 	int x = 0;
 	int y = 0;
@@ -61,11 +62,12 @@ void LevelLoader::LoadLevel(string fileName)
 		{
 			Entity * newEntity = entityManager->CreateEntity("Player");
 			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
 			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
 			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
 			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
 			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
+			entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
 		}
 		else if (letter == 'c')
 		{

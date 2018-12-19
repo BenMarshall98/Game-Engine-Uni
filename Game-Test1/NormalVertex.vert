@@ -14,8 +14,10 @@ uniform vec3 viewPos;
 
 out vec2 oTex;
 out vec3 oPos;
+out vec3 oNormal;
+out vec3 oTangent;
+out vec3 oBitangent;
 out mat3 oTBN;
-out vec3 oN;
 
 void main()
 {
@@ -26,9 +28,7 @@ void main()
 	vec3 N = normalize(vec3(model * vec4(aNormal, 0.0)));
 	vec3 B = normalize(vec3(model * vec4(aBitangent, 0.0)));
 
-	mat3 oTBN = mat3(T, B, N);
-
-	oN = N;
+	oTBN = transpose(mat3(T, B, N));
 
     gl_Position = perspective * view * model * vec4(aPos, 1.0f);
 }

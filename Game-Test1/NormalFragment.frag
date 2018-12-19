@@ -19,8 +19,10 @@ const int MAX_LIGHTS = 20;
 
 in vec2 oTex;
 in vec3 oPos;
+in vec3 oNormal;
+in vec3 oTangent;
+in vec3 oBitangent;
 in mat3 oTBN;
-in vec3 oN;
 
 uniform sampler2D texture_map;
 uniform sampler2D normalTexture;
@@ -44,7 +46,7 @@ void main()
 
 	vec3 norm = texture(normalTexture, oTex).rgb;
 	norm = normalize(norm * 2.0 - 1.0);
-	//norm = normalize(norm * oTBN);
+	norm = normalize(norm * oTBN);
 
 	vec3 viewDir = normalize(viewPos - oPos);
 	float ambientStrength = 0.1;
@@ -127,6 +129,4 @@ void main()
 	//lightColour = lightColour / (int(DirectionLightUsed) + TotalPointLights + TotalSpotLights);
 
 	FragColor = vec4(texture(texture_map, oTex).rgb * lightColour, 1.0);
-	norm = normalize(norm * oTBN);
-	FragColor = vec4((oN + 1.0) / 2.0, 1.0);
 }

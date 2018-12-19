@@ -127,6 +127,7 @@
     <Image Include="2k_earth_daymap.jpg" />
     <Image Include="container.jpg" />
     <Image Include="containerNormal.jpg" />
+    <Image Include="Earth_Normal.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Collectable.obj">
