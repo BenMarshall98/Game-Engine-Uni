@@ -1,11 +1,11 @@
 #include "StaticModel.h"
 
-StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector<vec3> & pNormal, vector<int> & pIndices, vector<vec3> & pTangents, vector<vec3> & pBitangents) :
-	mVertex(pVertex), mTexture(pTexture), mNormal(pNormal), mTangents(pTangents), mBitangents(pBitangents), mIndices(pIndices), VAO(0), EBO(0)
+StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector<vec3> & pNormal, vector<int> & pIndices, vector<vec3> & pTangents/*, vector<vec3> & pBitangents*/) :
+	mVertex(pVertex), mTexture(pTexture), mNormal(pNormal), mTangents(pTangents)/*, mBitangents(pBitangents)*/, mIndices(pIndices), VAO(0), EBO(0)
 {
 	//The following code is based from learnopengl
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(5, VBO);
+	glGenBuffers(4, VBO);
 	glGenBuffers(1, &EBO);
 
 	glBindVertexArray(VAO);
@@ -34,11 +34,11 @@ StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(3);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[4]);
+	/*glBindBuffer(GL_ARRAY_BUFFER, VBO[4]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * mBitangents.size(), &mBitangents[0], GL_STATIC_DRAW);
 
 	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(4);
+	glEnableVertexAttribArray(4);*/
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 

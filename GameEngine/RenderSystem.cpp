@@ -60,11 +60,14 @@ void RenderSystem::Action(void)
 
 		Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetTexture();
 
-		Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos);
+		if (length(position - viewPos) < (projection->GetFar() * 1.1f))
+		{
+			Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos, updateFirst);
+		}
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 position, quat direction, Texture * texture, Texture * normal, mat4 perspectiveMatrix, mat4 viewMatrix, vec3 viewPos)
+void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat & direction, Texture * texture, Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
 {
 	static int lastShader = -1;
 

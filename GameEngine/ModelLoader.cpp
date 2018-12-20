@@ -147,11 +147,11 @@ StaticModel * ModelLoader::LoadOBJ(const string & fileName)
 	}
 
 	vector<vec3> tangents;
-	vector<vec3> bitangents;
+	/*vector<vec3> bitangents;*/
 
-	TangentSpace(indexes, vertex, texture, tangents, bitangents);
+	TangentSpace(indexes, vertex, texture, tangents/*, bitangents*/);
 
-	return new StaticModel(vertex, texture, normal, indexes, tangents, bitangents);
+	return new StaticModel(vertex, texture, normal, indexes, tangents/*, bitangents*/);
 }
 
 int ModelLoader::FindInVector(vector<string> & list, const string & toFind)
@@ -306,7 +306,7 @@ void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
 	}
 }
 
-void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents, vector<vec3> & bitangents)
+void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents/*, vector<vec3> & bitangents*/)
 {
 	vector<int> numTimesUsed;
 
@@ -314,17 +314,17 @@ void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vec
 	{
 		numTimesUsed.push_back(0);
 		tangents.push_back(vec3(0));
-		bitangents.push_back(vec3(0));
+		/*bitangents.push_back(vec3(0));*/
 	}
 
 	for (int i = 0; i < indices.size(); i = i + 3)
 	{
 		CalculateTangent(vertex[indices.at(i)], vertex[indices.at(i + 1)], vertex[indices.at(i + 2)],
-			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i)], bitangents[indices.at(i)], numTimesUsed[indices.at(i)]);
+			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i)]/*, bitangents[indices.at(i)]*/, numTimesUsed[indices.at(i)]);
 		CalculateTangent(vertex[indices.at(i)], vertex[indices.at(i + 1)], vertex[indices.at(i + 2)],
-			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i + 1)], bitangents[indices.at(i + 1)], numTimesUsed[indices.at(i + 1)]);
+			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i + 1)]/*, bitangents[indices.at(i + 1)]*/, numTimesUsed[indices.at(i + 1)]);
 		CalculateTangent(vertex[indices.at(i)], vertex[indices.at(i + 1)], vertex[indices.at(i + 2)],
-			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i + 2)], bitangents[indices.at(i + 2)], numTimesUsed[indices.at(i + 2)]);
+			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i + 2)]/*, bitangents[indices.at(i + 2)]*/, numTimesUsed[indices.at(i + 2)]);
 		/*vec3 edge1 = vertex[indices.at(i + 1)] - vertex[indices.at(i)];
 		vec3 edge2 = vertex[indices.at(i + 2)] - vertex[indices.at(i)];
 
@@ -341,7 +341,7 @@ void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vec
 	}
 }
 
-void ModelLoader::CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex3, vec2 & texture1, vec2 & texture2, vec2 & texture3, vec3 & tangent, vec3 & bitangent, int & numTimesUsed)
+void ModelLoader::CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex3, vec2 & texture1, vec2 & texture2, vec2 & texture3, vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed)
 {
 	vec3 edge1 = vertex2 - vertex1;
 	vec3 edge2 = vertex3 - vertex1;
@@ -357,16 +357,16 @@ void ModelLoader::CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex
 	newTangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
 	newTangent = normalize(newTangent);
 
-	vec3 newBitangent;
+	/*vec3 newBitangent;
 	newBitangent.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
 	newBitangent.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
 	newBitangent.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
-	newBitangent = normalize(newBitangent);
+	newBitangent = normalize(newBitangent);*/
 
 	tangent *= numTimesUsed;
 	tangent = normalize(tangent + newTangent);
 
-	bitangent *= numTimesUsed;
-	bitangent = normalize(bitangent + newBitangent);
+	/*bitangent *= numTimesUsed;
+	bitangent = normalize(bitangent + newBitangent);*/
 	numTimesUsed++;
 }

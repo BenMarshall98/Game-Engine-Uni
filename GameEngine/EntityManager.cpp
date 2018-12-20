@@ -151,4 +151,19 @@ void EntityManager::Update(SystemManager & systemManager)
 	ToDeleteList.clear();
 }
 
+void EntityManager::Swap()
+{
+	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
+	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
+	{
+		map<Entity *, iComponent *> & entities = it->second;
+		map<Entity *, iComponent *>::iterator component;
+
+		for (component = entities.begin(); component != entities.end(); ++component)
+		{
+			component->second->Swap();
+		}
+	}
+}
+
 EntityManager * EntityManager::instance = nullptr;

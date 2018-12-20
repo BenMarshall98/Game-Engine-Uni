@@ -44,6 +44,11 @@ public:
 		return mHeight;
 	}
 
+	inline float GetFar() const
+	{
+		return mFar;
+	}
+
 	inline void SetWidth(float pWidth)
 	{
 		mWidth = pWidth;

@@ -82,11 +82,6 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	direction->SetDirection(directionQuat);
 
 	physics->ResolveCollisions();
-
-	if (physics->GetMass() != 0)
-	{
-		physics->Swap();
-	}
 }
 
 PhysicsSystem::~PhysicsSystem()

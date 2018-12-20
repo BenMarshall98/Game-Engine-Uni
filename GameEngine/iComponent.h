@@ -25,6 +25,6 @@ public:
 	{
 	}
 	virtual ComponentType GetComponentName() = 0;
-	virtual void Swap() = 0;
+	virtual void Swap() {};
 };
 

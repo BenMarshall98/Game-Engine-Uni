@@ -7,7 +7,6 @@ Projection::Projection(ProjectionType pProjection, float pWidth, float pHeight, 
 	Update();
 }
 
-
 void Projection::Update()
 {
 	if (projectionType == ProjectionType::Orthographic)

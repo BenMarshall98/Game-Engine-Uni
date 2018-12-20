@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include "EntityManager.h"
 #include <iostream>
 
 
@@ -36,6 +37,7 @@ void SceneManager::Run()
 				Render();
 				update.join();
 
+				EntityManager::Instance()->Swap();
 				currentWindow->LimitFPS(60);
 				currentWindow->WindowEvents();
 			}

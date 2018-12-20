@@ -42,6 +42,7 @@ public:
 	vector<Entity *> GetAllEntitiesWithComponents(ComponentType * componentName, int size);
 
 	void Update(SystemManager & systemManager);
+	void Swap();
 
 	~EntityManager() {};
 };

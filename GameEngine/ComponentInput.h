@@ -17,7 +17,6 @@ public:
 	~ComponentInput() {}
 
 	ComponentType GetComponentName() override;
-	void Swap() override {}
 
 	inline vector<InputFunction> * GetInputs()
 	{

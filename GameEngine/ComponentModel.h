@@ -20,7 +20,6 @@ public:
 	}
 
 	ComponentType GetComponentName() override;
-	void Swap() override {}
 
 	inline iModel * GetModel()
 	{
