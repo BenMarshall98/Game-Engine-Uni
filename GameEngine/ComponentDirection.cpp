@@ -5,7 +5,7 @@ ComponentType ComponentDirection::GetComponentName()
 	return ComponentType::COMPONENT_DIRECTION;
 }
 
-void ComponentDirection::Swap()
+void ComponentDirection::RenderSwap()
 {
-	currentDirection = newDirection;
+	renderDirection = updateDirection;
 }

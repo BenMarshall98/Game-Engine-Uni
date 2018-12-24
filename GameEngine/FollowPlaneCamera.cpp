@@ -18,7 +18,7 @@ void FollowPlaneCamera::Update()
 {
 	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(mEntity, COMPONENT_POSITION);
 
-	vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetPosition();
+	vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
 	vec3 cameraPosition;
 	vec3 upDirection;

@@ -21,7 +21,9 @@ public:
 
 	ComponentType GetComponentName() override;
 
-	inline Texture * GetTexture()
+	void RenderSwap() override {};
+
+	inline Texture * GetRenderTexture()
 	{
 		return texture;
 	}

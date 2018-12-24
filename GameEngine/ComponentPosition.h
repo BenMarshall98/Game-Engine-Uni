@@ -7,24 +7,29 @@ using namespace glm;
 class ComponentPosition : public iComponent
 {
 private:
-	vec3 currentPosition;
-	vec3 newPosition;
+	vec3 updatePosition;
+	vec3 renderPosition;
 
 public:
-	explicit ComponentPosition(vec3 pPosition) : currentPosition(pPosition), newPosition(pPosition) {}
+	explicit ComponentPosition(vec3 pPosition) : updatePosition(pPosition), renderPosition(pPosition) {}
 	~ComponentPosition() {}
 
 	ComponentType GetComponentName() override;
-	void Swap() override;
+	void RenderSwap() override;
 
-	inline vec3 GetPosition() const
+	inline vec3 GetUpdatePosition() const
 	{
-		return currentPosition;
+		return updatePosition;
 	}
 
-	inline void SetPosition(vec3 pPosition)
+	inline void SetUpdatePosition(vec3 pPosition)
 	{
-		newPosition = pPosition;
+		updatePosition = pPosition;
+	}
+
+	inline vec3 GetRenderPosition()
+	{
+		return renderPosition;
 	}
 };
 

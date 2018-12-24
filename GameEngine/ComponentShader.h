@@ -17,9 +17,9 @@ public:
 	~ComponentShader() {}
 
 	ComponentType GetComponentName() override;
-	void Swap() override {}
+	void RenderSwap() override {}
 
-	inline Shader * GetShader()
+	inline Shader * GetRenderShader()
 	{
 		return shader;
 	}

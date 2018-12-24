@@ -9,25 +9,30 @@ using namespace glm;
 class ComponentDirection : public iComponent
 {
 private:
-	quat currentDirection;
-	quat newDirection;
+	quat updateDirection;
+	quat renderDirection;
 
 public:
-	ComponentDirection(vec3 pDirection, float pAngle) : currentDirection(angleAxis(pAngle, pDirection)), newDirection(angleAxis(pAngle, pDirection)) {}
+	ComponentDirection(vec3 pDirection, float pAngle) : updateDirection(angleAxis(pAngle, pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
 	~ComponentDirection() {};
 	
 	ComponentType GetComponentName() override;
 
-	void Swap() override;
+	void RenderSwap() override;
 
-	inline quat GetDirection() const
+	inline quat GetUpdateDirection() const
 	{
-		return currentDirection;
+		return updateDirection;
 	}
 
-	inline void SetDirection(quat pDirection)
+	inline void SetUpdateDirection(quat pDirection)
 	{
-		newDirection = pDirection;
+		updateDirection = pDirection;
+	}
+
+	inline quat GetRenderDirection() const
+	{
+		return renderDirection;
 	}
 };
 

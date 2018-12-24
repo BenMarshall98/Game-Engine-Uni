@@ -21,7 +21,9 @@ public:
 
 	ComponentType GetComponentName() override;
 
-	inline iModel * GetModel()
+	void RenderSwap() override {};
+
+	inline iModel * GetRenderModel()
 	{
 		return model;
 	}

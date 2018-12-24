@@ -50,15 +50,15 @@ void RenderSystem::Action(void)
 		iComponent * componentTexture = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_TEXTURE);
 		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
 
-		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetShader();
-		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetModel();
-		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetPosition();
-		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetTexture();
-		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetDirection();
+		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetRenderShader();
+		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetRenderTexture();
+		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
 		iComponent * componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
 
-		Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetTexture();
+		Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
 
 		if (length(position - viewPos) < (projection->GetFar() * 1.1f))
 		{

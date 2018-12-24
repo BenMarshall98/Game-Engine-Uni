@@ -45,78 +45,80 @@ public:
 	ComponentType GetComponentName() override;
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
-	void Swap() override
+	void GroundSwap()
 	{
 		touchingGround = nextTouchingGround;
 		nextTouchingGround = false;
 	}
 
-	inline bool GetCollisionResponse() const
+	void RenderSwap() override {};
+
+	inline bool GetUpdateCollisionResponse() const
 	{
 		return collisionResponse;
 	}
 
-	inline vec3 GetVelocity() const
+	inline vec3 GetUpdateVelocity() const
 	{
 		return velocity;
 	}
 
-	inline void SetVelocity(vec3 pVelocity)
+	inline void SetUpdateVelocity(vec3 pVelocity)
 	{
 		velocity = pVelocity;
 	}
 
-	inline vec3 GetImpulse() const
+	inline vec3 GetUpdateImpulse() const
 	{
 		return impulse;
 	}
 
-	inline void SetImpulse(vec3 pImpulse)
+	inline void SetUpdateImpulse(vec3 pImpulse)
 	{
 		impulse = pImpulse;
 	}
 
-	inline float GetRotation() const
+	inline float GetUpdateRotation() const
 	{
 		return rotation;
 	}
 
-	inline void SetRotation(float pRotation)
+	inline void SetUpdateRotation(float pRotation)
 	{
 		rotation = pRotation;
 	}
 
-	inline CollisionShape* GetShape() const
+	inline CollisionShape* GetUpdateShape() const
 	{
 		return shape;
 	}
 
-	inline float GetMass() const
+	inline float GetUpdateMass() const
 	{
 		return mass;
 	}
 
-	inline void SetRigidBody(void* pRigidBody)
+	inline void SetUpdateRigidBody(void* pRigidBody)
 	{
 		rigidBody = pRigidBody;
 	}
 
-	inline void* GetRigidBody() const
+	inline void* GetUpdateRigidBody() const
 	{
 		return rigidBody;
 	}
 
-	inline EntityType GetEntityType() const
+	inline EntityType GetUpdateEntityType() const
 	{
 		return entityType;
 	}
 
-	inline bool GetTouchingGround() const
+	inline bool GetUpdateTouchingGround() const
 	{
   		return touchingGround;
 	}
 
-	inline void SetTouchingGround(bool pTouchingGround)
+	inline void SetUpdateTouchingGround(bool pTouchingGround)
 	{
 		nextTouchingGround = nextTouchingGround || pTouchingGround;
 	}

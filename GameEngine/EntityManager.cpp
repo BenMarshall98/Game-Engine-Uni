@@ -161,7 +161,7 @@ void EntityManager::Swap()
 
 		for (component = entities.begin(); component != entities.end(); ++component)
 		{
-			component->second->Swap();
+			component->second->RenderSwap();
 		}
 	}
 }

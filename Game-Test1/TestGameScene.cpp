@@ -155,9 +155,9 @@ void TestGameScene::PlayerLeft(float value, Entity * entity)
 	{
 		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 		
-		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetVelocity();
+		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetUpdateVelocity();
 		velocity.x -= ((1 / 60.0f) * value * 1000);
-		((ComponentPhysics *)componentPhysics)->SetVelocity(velocity);
+		((ComponentPhysics *)componentPhysics)->SetUpdateVelocity(velocity);
 	}
 }
 
@@ -167,9 +167,9 @@ void TestGameScene::PlayerRight(float value, Entity * entity)
 	{
 		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
-		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetVelocity();
+		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetUpdateVelocity();
 		velocity.x += ((1 / 60.0f) * value * 1000);
-		((ComponentPhysics *)componentPhysics)->SetVelocity(velocity);
+		((ComponentPhysics *)componentPhysics)->SetUpdateVelocity(velocity);
 	}
 }
 
@@ -179,11 +179,11 @@ void TestGameScene::PlayerJump(float value, Entity * entity)
 	{
 		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
 
-		if (((ComponentPhysics *)componentPhysics)->GetTouchingGround())
+		if (((ComponentPhysics *)componentPhysics)->GetUpdateTouchingGround())
 		{
- 			vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetImpulse();
+ 			vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetUpdateImpulse();
 			impulse.y += ((1 / 60.0f) * value * 100);
-			((ComponentPhysics *)componentPhysics)->SetImpulse(impulse);
+			((ComponentPhysics *)componentPhysics)->SetUpdateImpulse(impulse);
 		}
 	}
 }

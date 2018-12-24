@@ -18,7 +18,9 @@ public:
 
 	ComponentType GetComponentName() override;
 
-	inline vector<InputFunction> * GetInputs()
+	void RenderSwap() override {};
+
+	inline vector<InputFunction> * GetUpdateInputs()
 	{
 		return inputs;
 	}

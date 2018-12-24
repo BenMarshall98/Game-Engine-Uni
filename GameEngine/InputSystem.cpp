@@ -28,7 +28,7 @@ void InputSystem::Action(void)
 	{
 		iComponent * componentInput = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_INPUT);
 
-		vector<InputFunction> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetInputs();
+		vector<InputFunction> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
 
 		Input(inputs, EntityList[i]);
 	}

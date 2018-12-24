@@ -16,9 +16,9 @@ public:
 	~ComponentTexture() {}
 
 	ComponentType GetComponentName() override;
-	void Swap() override{}
+	void RenderSwap() override {}
 
-	inline Texture * GetTexture()
+	inline Texture * GetRenderTexture()
 	{
 		return texture;
 	}

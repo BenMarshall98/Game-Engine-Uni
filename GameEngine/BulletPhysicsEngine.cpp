@@ -142,18 +142,18 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 	ComponentPhysics * componentPhysics1 = (ComponentPhysics *)physicsComponent1;
 	ComponentPhysics * componentPhysics2 = (ComponentPhysics *)physicsComponent2;
 
-	componentPhysics1->AddCollision(entity2, componentPhysics2->GetEntityType());
-	componentPhysics2->AddCollision(entity1, componentPhysics1->GetEntityType());
+	componentPhysics1->AddCollision(entity2, componentPhysics2->GetUpdateEntityType());
+	componentPhysics2->AddCollision(entity1, componentPhysics1->GetUpdateEntityType());
 
-	if (componentPhysics1->GetMass() != 0 && componentPhysics2->GetEntityType() == WALL)
+	if (componentPhysics1->GetUpdateMass() != 0 && componentPhysics2->GetUpdateEntityType() == WALL)
 	{
 		bool touchingGround = TouchingGround(obj1->getCollisionObject(), obj2->getCollisionObject());
-		componentPhysics1->SetTouchingGround(touchingGround);
+		componentPhysics1->SetUpdateTouchingGround(touchingGround);
 	}
-	if (componentPhysics2->GetMass() != 0 && componentPhysics1->GetEntityType() == WALL)
+	if (componentPhysics2->GetUpdateMass() != 0 && componentPhysics1->GetUpdateEntityType() == WALL)
 	{
 		bool touchingGround = TouchingGround(obj2->getCollisionObject(), obj1->getCollisionObject());
-		componentPhysics2->SetTouchingGround(touchingGround);
+		componentPhysics2->SetUpdateTouchingGround(touchingGround);
 	}
 	return false;
 }

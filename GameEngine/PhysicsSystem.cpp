@@ -20,7 +20,7 @@ PhysicsSystem::PhysicsSystem(PhysicsManager & pPhysicsManager) : physicsManager(
 void PhysicsSystem::RemoveEntity(Entity * pEntity)
 {
 	iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, COMPONENT_PHYSICS);
-	void * rigidBody = ((ComponentPhysics *)componentPhysics)->GetRigidBody();
+	void * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
 	physicsManager.RemoveRigidBody(rigidBody);
 
 	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
@@ -39,15 +39,15 @@ void PhysicsSystem::Action(void)
 		iComponent * componentDirection = entityManager->GetComponentOfEntity(newEntities[i], COMPONENT_DIRECTION);
 		iComponent * componentPhysics = entityManager->GetComponentOfEntity(newEntities[i], COMPONENT_PHYSICS);
 
-		vec3 position = ((ComponentPosition *)componentPosition)->GetPosition();
-		quat direction = ((ComponentDirection *)componentDirection)->GetDirection();
-		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetShape();
-		float mass = ((ComponentPhysics *)componentPhysics)->GetMass();
-		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetCollisionResponse();
+		vec3 position = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
+		quat direction = ((ComponentDirection *)componentDirection)->GetUpdateDirection();
+		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
+		float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
+		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
 
 		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse);
 
-		((ComponentPhysics *)componentPhysics)->SetRigidBody(rigidBody);
+		((ComponentPhysics *)componentPhysics)->SetUpdateRigidBody(rigidBody);
 	}
 
 	newEntities.clear();
@@ -66,22 +66,27 @@ void PhysicsSystem::Action(void)
 
 void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
 {
-	void * rigidBody = physics->GetRigidBody();
+	void * rigidBody = physics->GetUpdateRigidBody();
 	vec3 positionVec = physicsManager.GetPositionOfRigidBody(rigidBody);
 	quat directionQuat = physicsManager.GetDirectionOfRigidBody(rigidBody);
 
-	vec3 velocity = physics->GetVelocity();
+	vec3 velocity = physics->GetUpdateVelocity();
 	physicsManager.ApplyVelocity(rigidBody, velocity);
-	physics->SetVelocity(vec3(0));
+	physics->SetUpdateVelocity(vec3(0));
 
-	vec3 impulse = physics->GetImpulse();
+	vec3 impulse = physics->GetUpdateImpulse();
 	physicsManager.ApplyImpulse(rigidBody, impulse);
-	physics->SetImpulse(vec3(0));
+	physics->SetUpdateImpulse(vec3(0));
 
-	position->SetPosition(positionVec);
-	direction->SetDirection(directionQuat);
+	position->SetUpdatePosition(positionVec);
+	direction->SetUpdateDirection(directionQuat);
 
 	physics->ResolveCollisions();
+
+	if (physics->GetUpdateMass() > 0)
+	{
+		physics->GroundSwap();
+	}
 }
 
 PhysicsSystem::~PhysicsSystem()
