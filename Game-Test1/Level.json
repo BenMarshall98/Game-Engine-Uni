@@ -1,0 +1,94 @@
+{
+  "Resources": [
+    {
+      "Type": "Texture",
+      "Name": "Box",
+      "Texture": "container.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "BoxNormal",
+      "Texture": "containerNormal.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "Earth",
+      "Texture": "2k_earth_daymap.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "EarthNormal",
+      "Texture": "Earth_Normal.jpg"
+    },
+    {
+      "Type": "Model",
+      "Name": "Cube",
+      "Model": "cube.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "Sphere",
+      "Model": "sphere.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "Collectable",
+      "Model": "Collectable.obj"
+    },
+    {
+      "Type": "Shader",
+      "Name": "TestShader",
+      "Vertex": "TestVertex.vert",
+      "Fragment": "TestFragment.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "NormalShader",
+      "Vertex": "NormalVertex.vert",
+      "Fragment": "NormalFragment.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "RiggedShader",
+      "Vertex": "RiggedVertex.vert",
+      "Fragment": "RiggedFragment.frag"
+    }
+  ],
+  "EntityTemplate": [
+    {
+      "Name": "w",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Cube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 0,
+          "Type": "WALL"
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        }
+      ]
+    }
+  ]
+}

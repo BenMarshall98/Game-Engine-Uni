@@ -18,18 +18,6 @@
 
 void LevelLoader::LoadLevel(string fileName)
 {
-
-	ResourceManager::LoadModel("Cube", "cube.obj");
-	ResourceManager::LoadModel("Sphere", "sphere.obj");
-	ResourceManager::LoadModel("Collectable", "Collectable.obj");
-	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
-	ResourceManager::LoadShader("NormalShader", "NormalVertex.vert", "NormalFragment.frag");
-	ResourceManager::LoadShader("RiggedShader", "RiggedVertex.vert", "RiggedFragment.frag");
-	ResourceManager::LoadTexture("Box", "container.jpg");
-	ResourceManager::LoadTexture("BoxNormal", "containerNormal.jpg");
-	ResourceManager::LoadTexture("Earth", "2k_earth_daymap.jpg");
-	ResourceManager::LoadTexture("EarthNormal", "Earth_Normal.jpg");
-
 	int x = 0;
 	int y = 0;
 
@@ -89,4 +77,77 @@ void LevelLoader::LoadLevel(string fileName)
 void LevelLoader::CoinHitPlayer(Entity * pEntity)
 {
 	EntityManager::Instance()->AddToDeleteList(pEntity);
+}
+
+void LevelLoader::LoadLevelJSON(string fileName)
+{
+	ifstream in(fileName);
+
+	string fullFile;
+
+	while (!in.eof())
+	{
+		char c = in.get();
+		if (c == -1)
+		{
+			break;
+		}
+		fullFile += c;
+	}
+
+	Document d;
+	d.Parse(fullFile.c_str());
+
+	if (d.HasMember("Resources"))
+	{
+		if (d["Resources"].IsArray())
+		{
+			LoadResourcesJSON(d["Resources"]);
+		}
+	}
+
+	if (d.HasMember("EntityTemplate"))
+	{
+		if (d["EntityTemplate"].IsArray())
+		{
+
+		}
+	}
+}
+
+void LevelLoader::LoadResourcesJSON(const Value& Resources)
+{
+	Value::ConstValueIterator it;
+
+	for (it = Resources.Begin(); it != Resources.End(); it++)
+	{
+		string type = (*it)["Type"].GetString();
+		string name = (*it)["Name"].GetString();
+
+		if (type == "Texture")
+		{
+			string texture = (*it)["Texture"].GetString();
+			ResourceManager::LoadTexture(name, texture);
+		}
+		else if (type == "Model")
+		{
+			string model = (*it)["Model"].GetString();
+			ResourceManager::LoadModel(name, model);
+		}
+		else if (type == "Shader")
+		{
+			string vertex = (*it)["Vertex"].GetString();
+			string fragment = (*it)["Fragment"].GetString();
+
+			if (it->HasMember("Geometry"))
+			{
+				string geometry = (*it)["Geometry"].GetString();
+				ResourceManager::LoadShader(name, vertex, fragment, geometry);
+			}
+			else
+			{
+				ResourceManager::LoadShader(name, vertex, fragment);
+			}
+		}
+	}
 }

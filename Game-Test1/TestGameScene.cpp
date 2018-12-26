@@ -45,16 +45,6 @@ void TestGameScene::Load()
 
 	projection = new Projection(Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
 
-	ResourceManager::LoadModel("Cube", "cube.obj");
-	ResourceManager::LoadModel("Sphere", "sphere.obj");
-	//ResourceManager::LoadModel("Test", "Monster_1.dae");
-	ResourceManager::LoadShader("TestShader", "TestVertex.vert", "TestFragment.frag");
-	ResourceManager::LoadShader("NormalShader", "NormalVertex.vert", "NormalFragment.frag");
-	ResourceManager::LoadShader("RiggedShader", "RiggedVertex.vert", "RiggedFragment.frag");
-	ResourceManager::LoadTexture("Box", "container.jpg");
-	ResourceManager::LoadTexture("BoxNormal", "containerNormal.jpg");
-	ResourceManager::LoadTexture("Earth", "2k_earth_daymap.jpg");
-
 	InputFunction playerLeft = InputFunction(PlayerLeft);
 	playerLeft.AddInput(KEYBOARD_A);
 	playerLeft.AddInput(GAMEPAD_L_LEFT);
@@ -72,7 +62,7 @@ void TestGameScene::Load()
 	playerInputs->push_back(playerRight);
 	playerInputs->push_back(playerJump);
 
-
+	LevelLoader::LoadLevelJSON("Level.json");
 	LevelLoader::LoadLevel("Level.txt");
 
 	Entity * entity = mEntityManager->GetEntityByName("Player");

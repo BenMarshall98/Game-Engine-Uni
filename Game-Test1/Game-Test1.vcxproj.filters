@@ -65,6 +65,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="Level.json">
+      <Filter>Levels</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Collectable.obj">

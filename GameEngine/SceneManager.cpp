@@ -27,6 +27,8 @@ void SceneManager::Run()
 		{
 			while (currentWindow->IsRunning() && windowRunning)
 			{
+				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				EntityManager::Instance()->Swap();
 				Update();
 				Render();
@@ -36,35 +38,14 @@ void SceneManager::Run()
 		{
 			while (currentWindow->IsRunning() && windowRunning)
 			{
-
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-				cout << "1" << endl;
-				Entity * entity = EntityManager::Instance()->GetEntityByName("Player");
-				iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_POSITION);
-				vec3 updatePosition = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
-				vec3 renderPosition = ((ComponentPosition *)componentPosition)->GetRenderPosition();
-
-				if (updatePosition == renderPosition)
-				{
-					cout << "They should be different" << endl;
-				}
-
 				EntityManager::Instance()->Swap();
-
-				updatePosition = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
-				renderPosition = ((ComponentPosition *)componentPosition)->GetRenderPosition();
-
-				if (updatePosition != renderPosition)
-				{
-					cout << "They should be the same" << endl;
-				}
 
 				thread update = thread(&SceneManager::Update, this);
 				Render();
 				update.join();
-				cout << "Update Thread Joined" << endl;
 				currentWindow->LimitFPS(60);
 				currentWindow->WindowEvents();
 			}
@@ -84,15 +65,11 @@ void SceneManager::Run()
 void SceneManager::Update()
 {
 	currentScene->Update();
-	cout << "Update Done" << endl;
 }
 
 void SceneManager::Render()
-{	
-
+{
 	currentScene->Render();
-
-	cout << "Render Done" << endl;
 }
 
 void SceneManager::StartSwapScene(iScene * scene)
