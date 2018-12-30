@@ -89,6 +89,51 @@
           "Texture": "BoxNormal"
         }
       ]
+    },
+    {
+      "Name": "c",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Collectable"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "TestShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Sphere",
+            "Radius": 0.25
+          },
+          "Mass": 0,
+          "Type": "COLLECTABLE",
+          "CollisionResponse": false
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Earth"
+        }
+      ]
     }
-  ]
+  ],
+  "Map": {
+    "Type": "Platformer",
+    "File": "Level.txt",
+    "Plane": "XY",
+    "TopLeftCoord": [0, 0],
+    "Camera": {
+      "Type": "FollowPlane",
+      "DefaultDistance": 5,
+      "MinDistance": 2,
+      "MaxDistance": 10,
+      "FollowRate":  0.1
+    }
+  }
 }

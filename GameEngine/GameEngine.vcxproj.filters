@@ -52,6 +52,9 @@
     <Filter Include="Level Loaders">
       <UniqueIdentifier>{68f96209-94ac-42bb-ad9b-4642a67e437a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripting Manager">
+      <UniqueIdentifier>{50985445-f885-4060-a80c-415b1ad545ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
       <Filter>Level Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptingManager.cpp">
+      <Filter>Scripting Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="LevelLoader.h">
       <Filter>Level Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptingManager.h">
+      <Filter>Scripting Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

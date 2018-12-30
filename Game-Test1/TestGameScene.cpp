@@ -63,7 +63,7 @@ void TestGameScene::Load()
 	playerInputs->push_back(playerJump);
 
 	LevelLoader::LoadLevelJSON("Level.json");
-	LevelLoader::LoadLevel("Level.txt");
+	//LevelLoader::LoadLevel("Level.txt");
 
 	Entity * entity = mEntityManager->GetEntityByName("Player");
 	mEntityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
