@@ -318,6 +318,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Vector3.lua">
+      <Filter>Scripting Manager</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Useful Links.txt" />

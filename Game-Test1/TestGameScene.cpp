@@ -23,6 +23,7 @@
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
 #include "LevelLoader.h"
+#include "ScriptingManager.h"
 
 TestGameScene::TestGameScene()
 {
@@ -35,6 +36,11 @@ TestGameScene::~TestGameScene()
 
 void TestGameScene::Load()
 {
+	ScriptingManager * scriptingManager = ScriptingManager::Instance();
+
+	scriptingManager->LoadLuaFromFile("../GameEngine/Vector3.lua");
+	scriptingManager->LoadLuaFromFile("../GameEngine/Vector3.lua");
+
 	mEntityManager = EntityManager::Instance();
 	InputManager * inputManager = InputManager::Instance();
 	GLFWInput * inputReader = inputManager->GetInputReader();

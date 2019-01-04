@@ -5,3 +5,5 @@ http://www.wazim.com/Collada_Tutorial_1.htm
 http://www.terathon.com/code/tangent.html
 
 //TODO: Swpa the OpenGL loading library back to galogen
+
+https://www.gamedev.net/articles/programming/general-and-gameplay-programming/the-lua-tutorial-r2999/
