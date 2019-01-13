@@ -157,47 +157,17 @@ int ScriptingManager::lua_GetPosition(lua_State * luaState)
 	lua_pushnumber(luaState, vector.y);
 	lua_pushnumber(luaState, vector.z);
 
-	int i;
-	int top = lua_gettop(luaState);
-	printf("---- Begin Stack ----\n");
-	printf("Stack size: %i\n\n", top);
-	for (i = top; i >= 1; i--)
-	{
-		int t = lua_type(luaState, i);
-		switch (t)
-		{
-		case LUA_TSTRING:
-			printf("%i -- (%i) ---- `%s'", i, i - (top + 1), lua_tostring(luaState, i));
-			break;
-
-		case LUA_TBOOLEAN:
-			printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_toboolean(luaState, i) ? "true" : "false");
-			break;
-
-		case LUA_TNUMBER:
-			printf("%i -- (%i) ---- %g", i, i - (top + 1), lua_tonumber(luaState, i));
-			break;
-
-		default:
-			printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_typename(luaState, t));
-			break;
-		}
-		printf("\n");
-	}
-	printf("---- End Stack ----\n");
-	printf("\n");
-
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
 		string message = lua_tostring(luaState, -1);
-		message = "Error running function: 'Vector3.new'" + message;
+		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
 	}
 
 	if (!lua_istable(luaState, -1))
 	{
-		lua_pushstring(luaState, "Wrong value passed back in function: 'Vector.new'");
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewVector3'");
 		lua_error(luaState);
 	}
 	return 1;
@@ -225,36 +195,6 @@ int ScriptingManager::lua_SetPosition(lua_State * luaState)
 	lua_getfield(luaState, 2, "y");
 	lua_getfield(luaState, 2, "z");
 
-	int i;
-	int top = lua_gettop(luaState);
-	printf("---- Begin Stack ----\n");
-	printf("Stack size: %i\n\n", top);
-	for (i = top; i >= 1; i--)
-	{
-		int t = lua_type(luaState, i);
-		switch (t)
-		{
-		case LUA_TSTRING:
-			printf("%i -- (%i) ---- `%s'", i, i - (top + 1), lua_tostring(luaState, i));
-			break;
-
-		case LUA_TBOOLEAN:
-			printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_toboolean(luaState, i) ? "true" : "false");
-			break;
-
-		case LUA_TNUMBER:
-			printf("%i -- (%i) ---- %g", i, i - (top + 1), lua_tonumber(luaState, i));
-			break;
-
-		default:
-			printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_typename(luaState, t));
-			break;
-		}
-		printf("\n");
-	}
-	printf("---- End Stack ----\n");
-	printf("\n");
-
 	double x = lua_tonumber(luaState, -3);
 	double y = lua_tonumber(luaState, -2);
 	double z = lua_tonumber(luaState, -1);
@@ -262,6 +202,79 @@ int ScriptingManager::lua_SetPosition(lua_State * luaState)
 	lua_pop(luaState, 3);
 
 	positionComponent->SetUpdatePosition(vec3(x, y, z));
+
+	return 0;
+}
+
+int ScriptingManager::lua_GetVelocity(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: GetVelocity");
+		lua_error(luaState);
+	}
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetVelocity");
+		lua_error(luaState);
+	}
+
+	vec3 vector = physicsComponent->GetUpdateVelocity();
+
+	lua_getglobal(luaState, "NewVector3");
+	lua_pushnumber(luaState, vector.x);
+	lua_pushnumber(luaState, vector.y);
+	lua_pushnumber(luaState, vector.z);
+
+	if (lua_pcall(luaState, 3, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewVector3'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewVector3'");
+		lua_error(luaState);
+	}
+	return 1;
+}
+
+int ScriptingManager::lua_SetVelocity(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: SetVelocity");
+		lua_error(luaState);
+	}
+
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Wronmg Parameters Passed in: SetVelocity");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	physicsComponent->SetUpdateVelocity(vec3(x, y, z));
 
 	return 0;
 }

@@ -115,6 +115,8 @@ void TestGameScene::Load()
 	Entity * pEntity = mEntityManager->GetEntityByName("Collectable");
 
 	scriptingManager->LoadLuaFromFile("Vector3.lua");
+	scriptingManager->LoadLuaFromFile("Matrix4.lua");
+	scriptingManager->LoadLuaFromFile("Quaternion.lua");
 	scriptingManager->LoadLuaFromFile("TestFunctions.lua");
 	scriptingManager->RunScriptFromFunction("TestFunction", pEntity);
 }
