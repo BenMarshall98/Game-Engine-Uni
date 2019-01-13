@@ -16,6 +16,9 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{79556bd9-8744-40a0-a7c0-d7b78b3a8d27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{77085c74-32d8-4558-8cd9-7f55378d567b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -67,6 +70,9 @@
     <None Include="packages.config" />
     <None Include="Level.json">
       <Filter>Levels</Filter>
+    </None>
+    <None Include="TestFunctions.lua">
+      <Filter>Scripts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

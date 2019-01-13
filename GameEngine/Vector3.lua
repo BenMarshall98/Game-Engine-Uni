@@ -1,7 +1,7 @@
 local Vector3 = {}
 Vector3.__index = Vector3
 
-function Vector3.new(pX, pY, pZ)
+function Vector3:new(pX, pY, pZ)
 	local self = setmetatable({}, Vector3)
 	self.x = pX
 	self.y = pY
@@ -37,28 +37,28 @@ function Vector3:add(pVector)
 	local x = self.x + pVector:getX()
 	local y = self.y + pVector:getY()
 	local z = self.z + pVector:getZ()
-	return Vector3.new(x, y, z)
+	return Vector3:new(x, y, z)
 end
 
 function Vector3:subtract(pVector)
 	local x = self.x - pVector:getX()
 	local y = self.y - pVector:getY()
 	local z = self.z - pVector:getZ()
-	return Vector3.new(x, y, z)
+	return Vector3:new(x, y, z)
 end
 
 function Vector3:multiply(pScalar)
 	local x = self.x * pScalar
 	local y = self.y * pScalar
 	local z = self.z * pScalar
-	return Vector3.new(x, y, z)
+	return Vector3:new(x, y, z)
 end
 
-function Vector3.divide(pScalar)
+function Vector3:divide(pScalar)
 	local x = self.x / pScalar
 	local y = self.y / pScalar
 	local z = self.z / pScalar
-	return Vector3.new(x, y, z)
+	return Vector3:new(x, y, z)
 end
 
 function Vector3:magnitude()
@@ -78,4 +78,10 @@ function Vector3:dotProduct(pVector)
 	local y = self.y + pVector:getY()
 	local z = self.z + pVector:getZ()
 	return x + y + z
-end	
+end
+
+function NewVector3(x, y, z)
+	return Vector3:new(x, y, z);
+end
+
+return Vector3;

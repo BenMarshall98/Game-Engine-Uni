@@ -38,8 +38,7 @@ void TestGameScene::Load()
 {
 	ScriptingManager * scriptingManager = ScriptingManager::Instance();
 
-	scriptingManager->LoadLuaFromFile("../GameEngine/Vector3.lua");
-	scriptingManager->LoadLuaFromFile("../GameEngine/Vector3.lua");
+	
 
 	mEntityManager = EntityManager::Instance();
 	InputManager * inputManager = InputManager::Instance();
@@ -114,6 +113,12 @@ void TestGameScene::Load()
 	cameraDownInputs.push_back(MOUSE_DOWN);
 	cameraDownInputs.push_back(GAMEPAD_DOWN);
 	cameraDownInputs.push_back(GAMEPAD_RB);
+
+	Entity * pEntity = mEntityManager->GetEntityByName("Collectable");
+
+	scriptingManager->LoadLuaFromFile("../GameEngine/Vector3.lua");
+	scriptingManager->LoadLuaFromFile("TestFunctions.lua");
+	scriptingManager->RunScriptFromFunction("TestFunction", pEntity);
 }
 
 void TestGameScene::Render()

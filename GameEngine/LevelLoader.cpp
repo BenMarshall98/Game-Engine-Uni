@@ -249,6 +249,14 @@ void LevelLoader::LoadPlatformerMap(string file, string plane, vec2 topLeftCoord
 	entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
 	entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
 	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
+
+	newEntity = entityManager->CreateEntity("Collectable");
+	entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
+	entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
+	entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(2, -38, 0)));
+	entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
+	entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
+	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
 }
 
 void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& components)

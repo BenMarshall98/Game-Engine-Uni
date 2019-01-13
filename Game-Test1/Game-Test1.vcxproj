@@ -161,6 +161,7 @@
     <None Include="RiggedFragment.frag" />
     <None Include="RiggedVertex.vert" />
     <None Include="TestFragment.frag" />
+    <None Include="TestFunctions.lua" />
     <None Include="TestVertex.vert" />
   </ItemGroup>
   <ItemGroup>
