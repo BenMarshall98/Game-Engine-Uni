@@ -153,15 +153,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Level.json" />
+    <None Include="Matrix4.lua" />
     <None Include="NormalFragment.frag" />
     <None Include="NormalVertex.vert" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Quaternion.lua" />
     <None Include="RiggedFragment.frag" />
     <None Include="RiggedVertex.vert" />
     <None Include="TestFragment.frag" />
-    <None Include="TestFunctions.lua" />
+    <Content Include="TestFunctions.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vector3.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="TestVertex.vert" />
   </ItemGroup>
   <ItemGroup>

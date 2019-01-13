@@ -38,8 +38,6 @@ void TestGameScene::Load()
 {
 	ScriptingManager * scriptingManager = ScriptingManager::Instance();
 
-	
-
 	mEntityManager = EntityManager::Instance();
 	InputManager * inputManager = InputManager::Instance();
 	GLFWInput * inputReader = inputManager->GetInputReader();
@@ -116,7 +114,7 @@ void TestGameScene::Load()
 
 	Entity * pEntity = mEntityManager->GetEntityByName("Collectable");
 
-	scriptingManager->LoadLuaFromFile("../GameEngine/Vector3.lua");
+	scriptingManager->LoadLuaFromFile("Vector3.lua");
 	scriptingManager->LoadLuaFromFile("TestFunctions.lua");
 	scriptingManager->RunScriptFromFunction("TestFunction", pEntity);
 }

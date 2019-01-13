@@ -81,7 +81,7 @@ function Vector3:dotProduct(pVector)
 end
 
 function NewVector3(x, y, z)
-	return Vector3:new(x, y, z);
+	return Vector3:new(x, y, z)
 end
 
-return Vector3;
+return Vector3

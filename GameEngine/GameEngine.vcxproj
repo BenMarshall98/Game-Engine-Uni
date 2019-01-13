@@ -222,7 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Vector3.lua" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Useful Links.txt" />

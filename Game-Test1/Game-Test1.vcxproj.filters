@@ -71,7 +71,16 @@
     <None Include="Level.json">
       <Filter>Levels</Filter>
     </None>
-    <None Include="TestFunctions.lua">
+    <Content Include="TestFunctions.lua">
+      <Filter>Scripts</Filter>
+    </Content>
+    <Content Include="Vector3.lua">
+      <Filter>Scripts</Filter>
+    </Content>
+    <None Include="Quaternion.lua">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="Matrix4.lua">
       <Filter>Scripts</Filter>
     </None>
   </ItemGroup>

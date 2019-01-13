@@ -7,7 +7,3 @@ function TestFunction(entity)
 	local newPosition = currentPosition:add(positionIncrease)
 	SetPosition(ComponentPosition, newPosition)
 end
-
-function TestFunction2()
-	print "Hello World"
-end
