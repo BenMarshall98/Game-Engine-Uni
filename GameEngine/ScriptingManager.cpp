@@ -33,6 +33,15 @@ ScriptingManager::ScriptingManager()
 	lua_register(luaVM, "GetComponentDirection", lua_GetComponentDirection);
 	lua_register(luaVM, "GetPosition", lua_GetPosition);
 	lua_register(luaVM, "SetPosition", lua_SetPosition);
+	lua_register(luaVM, "GetVelocity", lua_GetVelocity);
+	lua_register(luaVM, "SetVelocity", lua_SetVelocity);
+	lua_register(luaVM, "GetImpulse", lua_GetImpulse);
+	lua_register(luaVM, "SetImpulse", lua_SetImpulse);
+	lua_register(luaVM, "GetTouchingGround", lua_GetTouchingGround);
+	
+	LoadLuaFromFile("Vector3.lua");
+	LoadLuaFromFile("Matrix4.lua");
+	LoadLuaFromFile("Quaternion.lua");
 }
 
 void ScriptingManager::LoadLuaFromFile(string file)
@@ -215,6 +224,7 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 		lua_pushstring(luaState, "Wrong Number Of Args: GetVelocity");
 		lua_error(luaState);
 	}
+	
 	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
 
 	if (!physicsComponent)
@@ -279,12 +289,126 @@ int ScriptingManager::lua_SetVelocity(lua_State * luaState)
 	return 0;
 }
 
+int ScriptingManager::lua_GetImpulse(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: GetImpluse");
+		lua_error(luaState);
+	}
+
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetImpluse");
+		lua_error(luaState);
+	}
+
+	vec3 vector = physicsComponent->GetUpdateImpulse();
+
+	lua_getglobal(luaState, "NewVector3");
+	lua_pushnumber(luaState, vector.x);
+	lua_pushnumber(luaState, vector.y);
+	lua_pushnumber(luaState, vector.z);
+
+	if (lua_pcall(luaState, 3, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewVector3'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewVector3'");
+		lua_error(luaState);
+	}
+	return 1;
+}
+
+int ScriptingManager::lua_SetImpulse(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: SetImpluse");
+		lua_error(luaState);
+	}
+
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Worong Parameters Passed in: SetImpluse");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	physicsComponent->SetUpdateImpulse(vec3(x, y, z));
+
+	return 0;
+}
+
+int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: GetTouchingGround");
+		lua_error(luaState);
+	}
+
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetTouchingGround");
+		lua_error(luaState);
+	}
+
+	bool touchingGround = physicsComponent->GetUpdateTouchingGround();
+
+	lua_pushboolean(luaState, touchingGround);
+
+	return 1;
+}
+
 void ScriptingManager::RunScriptFromFunction(string function, Entity * entity)
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
 
 	if (lua_pcall(luaVM, 1, 0, 0) != 0)
+	{
+		string message = lua_tostring(luaVM, -1);
+		message = "Error running lua script: " + message;
+		LoggingManager::LogMessage(LOG, message);
+	}
+}
+
+void ScriptingManager::RunScriptFromInput(string function, Entity * entity, float inputValue, float deltaTime)
+{
+	lua_getglobal(luaVM, function.c_str());
+	lua_pushlightuserdata(luaVM, entity);
+	lua_pushnumber(luaVM, inputValue);
+	lua_pushnumber(luaVM, deltaTime);
+
+	if (lua_pcall(luaVM, 3, 0, 0) != 0)
 	{
 		string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;

@@ -12,6 +12,7 @@ using namespace std;
 
 class ScriptingManager
 {
+private:
 	static ScriptingManager * instance;
 
 	static int lua_GetComponentDirection(lua_State * luaState);
@@ -21,8 +22,8 @@ class ScriptingManager
 	static int lua_SetPosition(lua_State * luaState);
 	static int lua_GetVelocity(lua_State * luaState);
 	static int lua_SetVelocity(lua_State * luaState);
-	static int lua_GetImpluse(lua_State * luaState);
-	static int lua_SetImpluse(lua_State * luaState);
+	static int lua_GetImpulse(lua_State * luaState);
+	static int lua_SetImpulse(lua_State * luaState);
 	static int lua_GetTouchingGround(lua_State * luaState);
 
 	ScriptingManager();
@@ -42,6 +43,8 @@ public:
 	void LoadLuaFromFile(string fileName);
 
 	void RunScriptFromFunction(string function, Entity * entity);
+
+	void RunScriptFromInput(string function, Entity * entity, float inputValue, float deltaTime);
 
 	~ScriptingManager();
 };

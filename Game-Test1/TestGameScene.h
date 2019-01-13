@@ -18,10 +18,6 @@ private:
 	PhysicsManager * mPhysicsManager;
 	Camera * camera;
 	Projection * projection;
-	vector<GameInput> cameraLeftInputs;
-	vector<GameInput> cameraRightInputs;
-	vector<GameInput> cameraUpInputs;
-	vector<GameInput> cameraDownInputs;
 
 public:
 	EntityManager * mEntityManager; //TODO: make into a singleton and make private
@@ -35,9 +31,5 @@ public:
 	void Close();
 
 	void Resize(int width, int height);
-
-	static void PlayerLeft(float value, Entity * entity);
-	static void PlayerRight(float value, Entity * entity);
-	static void PlayerJump(float value, Entity * entity);
 };
 

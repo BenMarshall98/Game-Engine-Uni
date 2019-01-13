@@ -1,5 +1,6 @@
 #include "InputFunction.h"
 #include "InputManager.h"
+#include "ScriptingManager.h"
 #include <algorithm>
 
 void InputFunction::AddInput(GameInput input)
@@ -23,7 +24,7 @@ void InputFunction::RemoveInput(GameInput input)
 	}
 }
 
-void InputFunction::SwapFunction(GameInputFunction pInputFunction)
+void InputFunction::SwapFunction(string pInputFunction)
 {
 	inputFunction = pInputFunction;
 }
@@ -32,7 +33,7 @@ void InputFunction::Update(Entity * entity)
 {
 	InputManager * inputManager = InputManager::Instance();
 	float value = inputManager->GetInputValue(Inputs);
-	inputFunction(value, entity);
+	ScriptingManager::Instance()->RunScriptFromInput(inputFunction, entity, value, (1 / 60.0));
 }
 
 InputFunction::~InputFunction()

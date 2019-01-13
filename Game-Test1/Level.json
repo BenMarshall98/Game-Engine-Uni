@@ -126,14 +126,23 @@
   "Map": {
     "Type": "Platformer",
     "File": "Level.txt",
+    "Entities": "Entities.json",
     "Plane": "XY",
-    "TopLeftCoord": [0, 0],
-    "Camera": {
-      "Type": "FollowPlane",
-      "DefaultDistance": 5,
-      "MinDistance": 2,
-      "MaxDistance": 10,
-      "FollowRate":  0.1
+    "TopLeftCoord": [ 0, 0 ],
+    "View": {
+      "Perspective": {
+        "Type": "Perspective",
+        "MinDistance": 0.1,
+        "MaxDistance": 100
+      },
+      "Camera": {
+        "Type": "FollowPlane",
+        "Follow": "Player",
+        "DefaultDistance": 5,
+        "MinDistance": 2,
+        "MaxDistance": 10,
+        "FollowRate": 0.1
+      }
     }
   }
 }

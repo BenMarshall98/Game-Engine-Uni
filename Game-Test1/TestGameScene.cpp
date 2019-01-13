@@ -39,24 +39,18 @@ void TestGameScene::Load()
 	ScriptingManager * scriptingManager = ScriptingManager::Instance();
 
 	mEntityManager = EntityManager::Instance();
-	InputManager * inputManager = InputManager::Instance();
-	GLFWInput * inputReader = inputManager->GetInputReader();
-
-	inputReader->AllowGamePadInput(false);
-	inputReader->AllowMouseInput(true);
-	inputReader->AllowKeyboardInput(true);
 
 	projection = new Projection(Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
 
-	InputFunction playerLeft = InputFunction(PlayerLeft);
+	InputFunction playerLeft = InputFunction("PlayerLeft");
 	playerLeft.AddInput(KEYBOARD_A);
 	playerLeft.AddInput(GAMEPAD_L_LEFT);
 
-	InputFunction playerRight = InputFunction(PlayerRight);
+	InputFunction playerRight = InputFunction("PlayerRight");
 	playerRight.AddInput(KEYBOARD_D);
 	playerRight.AddInput(GAMEPAD_L_RIGHT);
 
-	InputFunction playerJump = InputFunction(PlayerJump);
+	InputFunction playerJump = InputFunction("PlayerJump");
 	playerJump.AddInput(KEYBOARD_SPACE);
 	playerJump.AddInput(GAMEPAD_X);
 
@@ -66,7 +60,6 @@ void TestGameScene::Load()
 	playerInputs->push_back(playerJump);
 
 	LevelLoader::LoadLevelJSON("Level.json");
-	//LevelLoader::LoadLevel("Level.txt");
 
 	Entity * entity = mEntityManager->GetEntityByName("Player");
 	mEntityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
@@ -92,41 +85,12 @@ void TestGameScene::Load()
 	lightManager->AddSpotLight(vec3(-0.5f, -0.5f, -1.0f), vec3(0, 0, -1), vec3(0.0, 1.0, 0.0), 2.5f, 5);
 	lightManager->AddSpotLight(vec3(-0.5f, 0.5f, -1.0f), vec3(0, 0, -1), vec3(1.0, 0.0, 0.0), 2.5f, 5);
 
-	cameraLeftInputs.push_back(KEYBOARD_LEFT);
-	cameraLeftInputs.push_back(MOUSE_LEFT);
-	cameraLeftInputs.push_back(GAMEPAD_LEFT);
-	cameraLeftInputs.push_back(GAMEPAD_LT);
-
-	cameraRightInputs.push_back(KEYBOARD_RIGHT);
-	cameraRightInputs.push_back(MOUSE_RIGHT);
-	cameraRightInputs.push_back(GAMEPAD_RIGHT);
-	cameraRightInputs.push_back(GAMEPAD_RT);
-
-	cameraUpInputs.push_back(KEYBOARD_UP);
-	cameraUpInputs.push_back(MOUSE_UP);
-	cameraUpInputs.push_back(GAMEPAD_UP);
-	cameraUpInputs.push_back(GAMEPAD_LB);
-
-	cameraDownInputs.push_back(KEYBOARD_DOWN);
-	cameraDownInputs.push_back(MOUSE_DOWN);
-	cameraDownInputs.push_back(GAMEPAD_DOWN);
-	cameraDownInputs.push_back(GAMEPAD_RB);
-
-	Entity * pEntity = mEntityManager->GetEntityByName("Collectable");
-
-	scriptingManager->LoadLuaFromFile("Vector3.lua");
-	scriptingManager->LoadLuaFromFile("Matrix4.lua");
-	scriptingManager->LoadLuaFromFile("Quaternion.lua");
 	scriptingManager->LoadLuaFromFile("TestFunctions.lua");
-	scriptingManager->RunScriptFromFunction("TestFunction", pEntity);
 }
 
 void TestGameScene::Render()
 {
 	glEnable(GL_DEPTH_TEST);
-
-	//camera->Update();
-	//UpdateCamera();
 
 	mSystemManager.Render();
 
@@ -148,43 +112,4 @@ void TestGameScene::Resize(int width, int height)
 {
 	projection->SetHeight(height);
 	projection->SetWidth(width);
-}
-
-void TestGameScene::PlayerLeft(float value, Entity * entity)
-{
-	if (value > 0.2f)
-	{
-		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
-		
-		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetUpdateVelocity();
-		velocity.x -= ((1 / 60.0f) * value * 1000);
-		((ComponentPhysics *)componentPhysics)->SetUpdateVelocity(velocity);
-	}
-}
-
-void TestGameScene::PlayerRight(float value, Entity * entity)
-{
-	if (value > 0.2f)
-	{
-		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
-
-		vec3 velocity = ((ComponentPhysics *)componentPhysics)->GetUpdateVelocity();
-		velocity.x += ((1 / 60.0f) * value * 1000);
-		((ComponentPhysics *)componentPhysics)->SetUpdateVelocity(velocity);
-	}
-}
-
-void TestGameScene::PlayerJump(float value, Entity * entity)
-{
-	if (value > 0.2f)
-	{
-		iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
-
-		if (((ComponentPhysics *)componentPhysics)->GetUpdateTouchingGround())
-		{
- 			vec3 impulse = ((ComponentPhysics *)componentPhysics)->GetUpdateImpulse();
-			impulse.y += ((1 / 60.0f) * value * 100);
-			((ComponentPhysics *)componentPhysics)->SetUpdateImpulse(impulse);
-		}
-	}
 }

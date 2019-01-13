@@ -8,16 +8,15 @@ using namespace std;
 class InputFunction
 {
 private:
-	typedef void(*GameInputFunction)(float, Entity *);
-	GameInputFunction inputFunction;
+	string inputFunction;
 	vector<GameInput> Inputs;
 
 public:
-	explicit InputFunction(GameInputFunction pInputFunction) : inputFunction(pInputFunction) {}
+	explicit InputFunction(string pInputFunction) : inputFunction(pInputFunction) {}
 
 	void AddInput(GameInput input);
 	void RemoveInput(GameInput input);
-	void SwapFunction(GameInputFunction pInputFunction);
+	void SwapFunction(string pInputFunction);
 	void Update(Entity * entity);
 
 	~InputFunction();

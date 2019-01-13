@@ -12,6 +12,10 @@
 #include "CollisionSphere.h"
 #include "CollisionShape.h"
 #include "EntityManager.h"
+#include "Projection.h"
+#include "GLFWWindow.h"
+#include "FollowPlaneCamera.h"
+#include "Camera.h"
 
 #include <fstream>
 #include <iostream>
@@ -176,11 +180,12 @@ void LevelLoader::LoadEntityTemplatesJSON(const Value& EntityTemplates)
 void LevelLoader::LoadMapJSON(const Value& Map)
 {
 	string type = Map["Type"].GetString();
+	string plane = "";
 	
 	if (type == "Platformer")
 	{
 		string file = Map["File"].GetString();
-		string plane = Map["Plane"].GetString();
+		plane = Map["Plane"].GetString();
 		vec2 topLeftCoord = vec2(0);
 
 		const Value& position = Map["TopLeftCoord"];
@@ -192,6 +197,90 @@ void LevelLoader::LoadMapJSON(const Value& Map)
 
 		LoadPlatformerMap(file, plane, topLeftCoord);
 	}
+
+	if (Map.HasMember("View"))
+	{
+		if (Map["View"].IsObject())
+		{
+			LoadViewJSON(Map["View"], plane);
+		}
+	}
+}
+
+void LevelLoader::LoadViewJSON(const Value& View, string plane)
+{
+	if (View.HasMember("Perspective"))
+	{
+		if (View["Perspective"].IsObject())
+		{
+			LoadPerspectiveJSON(View["Perspective"], plane);
+		}
+	}
+
+	if (View.HasMember("Camera"))
+	{
+		if (View["Camera"].IsObject())
+		{
+			LoadCameraJSON(View["Camera"], plane);
+		}
+	}
+}
+
+void LevelLoader::LoadPerspectiveJSON(const Value& Perspective, string plane)
+{
+	string type = Perspective["Type"].GetString();
+
+	float minDist = Perspective["MinDistance"].GetFloat();
+	float maxDist = Perspective["MaxDistance"].GetFloat();
+
+	//TODO: get projection into a camera manager
+
+	if (type == "Perspective")
+	{
+		Projection projection = Projection(ProjectionType::Perspective, GLFWWindow::width, GLFWWindow::height,  minDist, maxDist);
+	}
+	else if (type == "Orthographic")
+	{
+		Projection projection = Projection(ProjectionType::Orthographic, GLFWWindow::width, GLFWWindow::height, minDist, maxDist);
+	}
+}
+
+void LevelLoader::LoadCameraJSON(const Value& pCamera, string pPlane)
+{
+	//TODO: get camera into a camera manager
+
+	string type = pCamera["Type"].GetString();
+
+	float minDist = pCamera["MinDistance"].GetFloat();
+	float maxDist = pCamera["MaxDistance"].GetFloat();
+	float defDist = pCamera["DefaultDistance"].GetFloat();
+
+	if (type == "FollowPlane")
+	{
+		float followRate = pCamera["FollowRate"].GetFloat();
+		string follow = pCamera["Follow"].GetString();
+
+		Entity * entity = EntityManager::Instance()->GetEntityByName(follow);
+
+		Plane plane;
+
+		if (pPlane == "XY")
+		{
+			plane = Plane::XY;
+		}
+		else if (pPlane == "XZ")
+		{
+			plane = Plane::XZ;
+		}
+		else
+		{
+			plane = Plane::ZY;
+		}
+
+		Camera * camera = new FollowPlaneCamera(entity, plane, minDist, maxDist, defDist, followRate);
+	}
+
+	
 }
 
 void LevelLoader::LoadPlatformerMap(string file, string plane, vec2 topLeftCoord)
@@ -247,14 +336,6 @@ void LevelLoader::LoadPlatformerMap(string file, string plane, vec2 topLeftCoord
 	entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(1, -1, 0)));
 	entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
 	entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
-	entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
-
-	newEntity = entityManager->CreateEntity("Collectable");
-	entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(2, -38, 0)));
-	entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
 	entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
 	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
 }

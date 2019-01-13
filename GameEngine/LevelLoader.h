@@ -17,6 +17,9 @@ private:
 	static void LoadResourcesJSON(const Value& Resources);
 	static void LoadEntityTemplatesJSON(const Value& EntityTemplates);
 	static void LoadMapJSON(const Value& Map);
+	static void LoadViewJSON(const Value& View, string plane);
+	static void LoadPerspectiveJSON(const Value& Perspective, string plane);
+	static void LoadCameraJSON(const Value& Camera, string plane);
 	static void LoadPlatformerMap(string file, string plane, vec2 topLeftCoord);
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
 public:
