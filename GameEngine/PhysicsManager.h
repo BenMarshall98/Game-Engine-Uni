@@ -16,6 +16,10 @@ private:
 public:
 
 	PhysicsManager(BulletPhysicsEngine* pEngine) : engine(pEngine) {}
+
+	PhysicsManager& operator= (const PhysicsManager&) = delete;
+	PhysicsManager(PhysicsManager&) = delete;
+
 	~PhysicsManager() {}
 
 	void* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity, bool collisionResponse);

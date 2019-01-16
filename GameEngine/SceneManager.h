@@ -17,19 +17,30 @@ private:
 	iScene * currentScene;
 	iScene * newScene;
 	GLFWWindow * currentWindow;
+	thread swap;
+
+	int updateCount = 0;
+	int renderCount = 0;
 	bool windowRunning;
 	bool sceneRunning;
 	bool tempRunning;
-	int updateCount = 0;
-	int renderCount = 0;
-	thread swap;
+	
+	
 
 	SceneManager() : currentScene(nullptr), newScene(nullptr), currentWindow(nullptr), windowRunning(true), sceneRunning(true), tempRunning(true)
 	{
 	};
 
-	void Update();
-	void Render();
+	inline void Update()
+	{
+		currentScene->Update();
+	}
+
+	inline void Render()
+	{
+		currentScene->Render();
+	}
+
 	void StartSwapScene(iScene * scene);
 	void FinishSwapScene();
 
@@ -37,11 +48,36 @@ public:
 
 	static SceneManager * Instance();
 
-	~SceneManager();
+	SceneManager& operator= (const SceneManager&) = delete;
+	SceneManager(SceneManager&) = delete;
+
+	~SceneManager() throw();
 
 	void Run();
-	void SetScene(iScene * scene);
-	void SetWindow(GLFWWindow * gameWindow);
+
+	inline void SetScene(iScene * scene)
+	{
+		StartSwapScene(scene);
+
+		if (currentScene == nullptr)
+		{
+			tempRunning = true;
+			FinishSwapScene();
+		}
+	}
+
+	inline void SetWindow(GLFWWindow * gameWindow)
+	{
+		static bool firstTime = true;
+
+		if (firstTime)
+		{
+			currentWindow = gameWindow;
+			currentWindow->Load();
+			firstTime = false;
+		}
+	}
+
 	void Resize(int width, int height);
 };
 

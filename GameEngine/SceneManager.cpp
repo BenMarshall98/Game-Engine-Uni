@@ -62,16 +62,6 @@ void SceneManager::Run()
 	}
 }
 
-void SceneManager::Update()
-{
-	currentScene->Update();
-}
-
-void SceneManager::Render()
-{
-	currentScene->Render();
-}
-
 void SceneManager::StartSwapScene(iScene * scene)
 {
 	tempRunning = windowRunning;
@@ -95,29 +85,6 @@ void SceneManager::FinishSwapScene()
 	{
 		tempRunning = false;
 	}
-}
-
-void SceneManager::SetScene(iScene * scene)
-{
-	StartSwapScene(scene);
-
-	if (currentScene == nullptr)
-	{
-		tempRunning = true;
-		FinishSwapScene();
-	}
-}
-
-void SceneManager::SetWindow(GLFWWindow * gameWindow)
-{
-	static bool firstTime = true;
-
-	if (firstTime)
-	{
-		currentWindow = gameWindow;
-		currentWindow->Load();
-		firstTime = false;
-	}	
 }
 
 SceneManager * SceneManager::Instance()

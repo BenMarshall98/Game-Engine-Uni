@@ -6,7 +6,6 @@
 FollowPlaneCamera::FollowPlaneCamera(Entity * pEntity, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
 	mEntity(pEntity), mPlane(pPlane), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
 {
-	Update();
 }
 
 

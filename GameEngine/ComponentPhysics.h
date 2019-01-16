@@ -42,6 +42,9 @@ public:
 		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics() {}
 
+	ComponentPhysics& operator=(const ComponentPhysics&) = delete;
+	ComponentPhysics(ComponentPhysics&) = delete;
+
 	ComponentType GetComponentName() override;
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();

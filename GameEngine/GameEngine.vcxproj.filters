@@ -177,6 +177,12 @@
     <ClCompile Include="ScriptingManager.cpp">
       <Filter>Scripting Manager</Filter>
     </ClCompile>
+    <ClCompile Include="InputMapping.cpp">
+      <Filter>Input Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="iModel.cpp">
+      <Filter>Utility\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

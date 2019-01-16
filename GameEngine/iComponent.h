@@ -4,7 +4,7 @@
 
 using namespace std;
 
-enum ComponentType
+enum class ComponentType
 {
 	COMPONENT_DIRECTION,
 	COMPONENT_INPUT,
@@ -18,12 +18,10 @@ enum ComponentType
 
 class iComponent
 {
-private:
-
+protected:
+	//iComponent() {}
 public:
-	virtual ~iComponent()
-	{
-	}
+	//virtual ~iComponent();
 	virtual ComponentType GetComponentName() = 0;
 	virtual void RenderSwap() = 0;
 };

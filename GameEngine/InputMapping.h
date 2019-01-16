@@ -1,10 +1,15 @@
 #pragma once
 
 #include <string>
+#include <map>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
 //http://www.cplusplus.com/forum/beginner/174993/
+
+
 enum DeviceType
 {
 	KEYBOARD = 1,
@@ -97,10 +102,20 @@ enum OffSet
 	I(GAMEPAD_R_RIGHT = GAMEPAD << DEVICE | 19 << CODE)
 
 #define I(e) e
-static enum GameInput { GAMEINPUT(I), NumInputs };
+static enum GameInput { GAMEINPUT(I) };
 #undef I
+
+class InputConverter
+{
+private:
 
 #define I(s) #s
-static string GameInputName[] = { GAMEINPUT(I) };
+	static vector<string> GameInputName;
 #undef I
 
+	static void FirstTimeMapSetUp();
+	static map<string, int> GameInputMappings;
+
+public:
+	static GameInput StringToEnum(string input);
+};

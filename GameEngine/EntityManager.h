@@ -39,7 +39,7 @@ public:
 	void AddComponentToEntity(Entity * entity, iComponent * component);
 	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
-	vector<Entity *> GetAllEntitiesWithComponents(ComponentType * componentName, int size);
+	vector<Entity *> GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
 
 	void Update(SystemManager & systemManager);
 	void Swap();

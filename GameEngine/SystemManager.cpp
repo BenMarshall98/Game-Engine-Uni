@@ -11,16 +11,6 @@ SystemManager::~SystemManager()
 {
 }
 
-void SystemManager::AddRenderSystem(iSystem * system)
-{
-	RenderSystems.push_back(system);
-}
-
-void SystemManager::AddUpdateSystem(iSystem * system)
-{
-	UpdateSystems.push_back(system);
-}
-
 void SystemManager::Render()
 {
 	for (int i = 0; i < RenderSystems.size(); i++)

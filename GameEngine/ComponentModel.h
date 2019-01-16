@@ -14,6 +14,9 @@ public:
 		model = ResourceManager::GetModel(modelName);
 	}
 
+	ComponentModel& operator=(const ComponentModel&) = delete;
+	ComponentModel(ComponentModel&) = delete;
+
 	~ComponentModel()
 	{
 		delete model;

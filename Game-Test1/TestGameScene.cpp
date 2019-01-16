@@ -23,9 +23,8 @@
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
 #include "LevelLoader.h"
-#include "ScriptingManager.h"
 
-TestGameScene::TestGameScene()
+TestGameScene::TestGameScene() : mPhysicsManager(nullptr), camera(nullptr), projection(nullptr)
 {
 }
 
@@ -36,11 +35,9 @@ TestGameScene::~TestGameScene()
 
 void TestGameScene::Load()
 {
-	ScriptingManager * scriptingManager = ScriptingManager::Instance();
+	shared_ptr<EntityManager> mEntityManager(EntityManager::Instance());
 
-	mEntityManager = EntityManager::Instance();
-
-	projection = new Projection(Perspective, GLFWWindow::width, GLFWWindow::height, 0.1f, 100.0f);
+	projection = new Projection(Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(), 0.1f, 100.0f);
 
 	InputFunction playerLeft = InputFunction("PlayerLeft");
 	playerLeft.AddInput(KEYBOARD_A);
@@ -77,15 +74,13 @@ void TestGameScene::Load()
 	PhysicsSystem * physics = new PhysicsSystem(*mPhysicsManager);
 	mSystemManager.AddUpdateSystem(physics);
 
-	LightManager * lightManager = LightManager::Instance();
+	shared_ptr<LightManager> lightManager(LightManager::Instance());
 	lightManager->SetDirectionalLight(vec3(0, -1, 0), vec3(1.0, 1.0, 1.0));
 	lightManager->AddPointLight(vec3(0, 0, -3.0f), vec3(1, 1, 1), 0.1f);
 	lightManager->AddSpotLight(vec3(0.5f, 0.5f, -1.0f), vec3(0, 0, -1), vec3(1.0, 1.0, 1.0), 2.5f, 5);
 	lightManager->AddSpotLight(vec3(0.5f, -0.5f, -1.0f), vec3(0, 0, -1), vec3(0.0, 0.0, 1.0), 2.5f, 5);
 	lightManager->AddSpotLight(vec3(-0.5f, -0.5f, -1.0f), vec3(0, 0, -1), vec3(0.0, 1.0, 0.0), 2.5f, 5);
 	lightManager->AddSpotLight(vec3(-0.5f, 0.5f, -1.0f), vec3(0, 0, -1), vec3(1.0, 0.0, 0.0), 2.5f, 5);
-
-	scriptingManager->LoadLuaFromFile("TestFunctions.lua");
 }
 
 void TestGameScene::Render()
@@ -94,7 +89,7 @@ void TestGameScene::Render()
 
 	mSystemManager.Render();
 
-	mEntityManager->Update(mSystemManager);
+	EntityManager::Instance()->Update(mSystemManager);
 }
 
 void TestGameScene::Update()
@@ -112,4 +107,11 @@ void TestGameScene::Resize(int width, int height)
 {
 	projection->SetHeight(height);
 	projection->SetWidth(width);
+}
+
+TestGameScene::~TestGameScene()
+{
+	delete mPhysicsManager;
+	delete camera;
+	delete projection;
 }

@@ -20,16 +20,18 @@ private:
 	Projection * projection;
 
 public:
-	EntityManager * mEntityManager; //TODO: make into a singleton and make private
 
 	TestGameScene();
 	~TestGameScene();
 
-	void Load();
-	void Render();
-	void Update();
-	void Close();
+	TestGameScene& operator=(const TestGameScene&) = delete;
+	TestGameScene(TestGameScene&) = delete;
 
-	void Resize(int width, int height);
+	void Load() override;
+	void Render() override;
+	void Update() override;
+	void Close() override;
+
+	void Resize(int width, int height) override;
 };
 

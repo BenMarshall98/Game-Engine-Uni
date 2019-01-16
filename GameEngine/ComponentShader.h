@@ -14,6 +14,9 @@ public:
 		shader = ResourceManager::GetShader(shaderName);
 	}
 
+	ComponentShader& operator=(const ComponentShader&) = delete;
+	ComponentShader(ComponentShader&) = delete;
+
 	~ComponentShader() {}
 
 	ComponentType GetComponentName() override;

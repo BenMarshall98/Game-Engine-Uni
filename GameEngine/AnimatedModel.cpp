@@ -16,31 +16,31 @@ void AnimatedModel::Load()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) *vertex.size(), &vertex[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)nullptr);
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * texture.size(), &texture[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)nullptr);
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[2]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * normal.size(), &normal[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)nullptr);
 	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[3]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(int) * 4 * ID.size(), &ID[0], GL_STATIC_DRAW);
 	
-	glVertexAttribIPointer(3, 4, GL_INT, 4 * sizeof(int), (void*)0);
+	glVertexAttribIPointer(3, 4, GL_INT, 4 * sizeof(int), (void*)nullptr);
 	glEnableVertexAttribArray(3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO[4]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4 * weight.size(), &weight[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)nullptr);
 	glEnableVertexAttribArray(4);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -64,7 +64,7 @@ void AnimatedModel::Render(Shader * shader)
 	glUniformMatrix4fv(boneMatrixLocation, boneMatrix.size(), GL_FALSE, value_ptr(boneMatrix[0]));
 	
 	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
 AnimatedModel::~AnimatedModel()
@@ -145,7 +145,7 @@ void AnimatedModel::Update()
 	}
 }
 
-unsigned int AnimatedModel::FindPosition(Bone * bone)
+unsigned int AnimatedModel::FindPosition(Bone * bone) const
 {
 	aiNodeAnim* animNode = bone->animNode.at(currentAnimation);
 
@@ -162,7 +162,7 @@ unsigned int AnimatedModel::FindPosition(Bone * bone)
 	return 0;
 }
 
-unsigned int AnimatedModel::FindRotation(Bone * bone)
+unsigned int AnimatedModel::FindRotation(Bone * bone) const
 {
 	aiNodeAnim* animNode = bone->animNode.at(currentAnimation);
 
@@ -179,7 +179,7 @@ unsigned int AnimatedModel::FindRotation(Bone * bone)
 	return 0;
 }
 
-vec3 AnimatedModel::CalcInterpolatedPosition(Bone * bone)
+vec3 AnimatedModel::CalcInterpolatedPosition(Bone * bone) const
 {
 	aiNodeAnim * node = bone->animNode.at(currentAnimation);
 	if (node->mNumPositionKeys == 1)
@@ -206,7 +206,7 @@ vec3 AnimatedModel::CalcInterpolatedPosition(Bone * bone)
 	return mix(start, finish, interpolation);
 }
 
-quat AnimatedModel::CalcInterpolatedRotation(Bone * bone)
+quat AnimatedModel::CalcInterpolatedRotation(Bone * bone) const
 {
 	aiNodeAnim * node = bone->animNode.at(currentAnimation);
 	if (node->mNumRotationKeys == 1)

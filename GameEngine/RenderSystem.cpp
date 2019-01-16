@@ -67,7 +67,7 @@ void RenderSystem::Action(void)
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat & direction, Texture * texture, Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
+void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
 {
 	static int lastShader = -1;
 

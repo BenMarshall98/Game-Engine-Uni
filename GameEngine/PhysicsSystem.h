@@ -23,6 +23,10 @@ private:
 
 public:
 	PhysicsSystem(PhysicsManager & pPhysicsManager);
+
+	PhysicsSystem& operator=(const PhysicsSystem&) = delete;
+	PhysicsSystem(PhysicsSystem&) = delete;
+
 	void Action(void);
 	void RemoveEntity(Entity * pEntity);
 	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);

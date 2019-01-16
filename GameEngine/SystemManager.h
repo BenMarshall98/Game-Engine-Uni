@@ -16,8 +16,16 @@ public:
 	SystemManager();
 	~SystemManager();
 
-	void AddRenderSystem(iSystem * system);
-	void AddUpdateSystem(iSystem * system);
+	inline void AddRenderSystem(iSystem * const system)
+	{
+		RenderSystems.push_back(system);
+	}
+
+	inline void AddUpdateSystem(iSystem * const system)
+	{
+		UpdateSystems.push_back(system);
+	}
+
 
 	void Render();
 	void Update();

@@ -13,6 +13,9 @@ private:
 public:
 	explicit GLFWInput(GLFWwindow * pGameWindow) : gameWindow(pGameWindow) {}
 
+	GLFWInput& operator= (const GLFWInput&) = delete;
+	GLFWInput(GLFWInput&) = delete;
+
 	float KeyboardInput(int key);
 	float MouseInput(int key);
 	float GamePadInput(int key) const;

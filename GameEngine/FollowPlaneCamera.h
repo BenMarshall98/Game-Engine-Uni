@@ -23,6 +23,9 @@ public:
 	FollowPlaneCamera(Entity * pEntity, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate);
 	~FollowPlaneCamera();
 
+	FollowPlaneCamera& operator=(const FollowPlaneCamera&) = delete;
+	FollowPlaneCamera(FollowPlaneCamera&) = delete;
+
 	void Update() override;
 };
 

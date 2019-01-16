@@ -196,10 +196,10 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 				animation->nodesAnim.push_back(scene->mAnimations[i]->mChannels[j]);
 			}
 
-			model->animations.push_back(animation);
+			model->AddAnimation(animation);
 		}
 
-		model->globalInverse = inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
+		model->SetGlobalInverse(inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation)));
 
 		const aiMesh* mesh = scene->mMeshes[0];
 
@@ -223,22 +223,22 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			vec2 text = vec2(texCoord.x, texCoord.y);
 			vec3 norm = vec3(normal.x, normal.y, normal.z);
 
-			model->vertex.push_back(vert);
-			model->texture.push_back(text);
-			model->normal.push_back(norm);
+			model->AddVertex(vert);
+			model->AddTexture(text);
+			model->AddNormal(norm);
 		}
 
 		for (int i = 0; i < mesh->mNumFaces; i++)
 		{
 			const aiFace& face = mesh->mFaces[i];
 
-			model->indices.push_back(face.mIndices[0]);
-			model->indices.push_back(face.mIndices[1]);
-			model->indices.push_back(face.mIndices[2]);
+			model->AddIndex(face.mIndices[0]);
+			model->AddIndex(face.mIndices[1]);
+			model->AddIndex(face.mIndices[2]);
 		}
 
-		model->ID.resize(mesh->mNumVertices * 4);
-		model->weight.resize(mesh->mNumVertices * 4);
+		model->ResizeIDs(mesh->mNumVertices * 4);
+		model->ResizeWeights(mesh->mNumVertices * 4);
 
 		for (int i = 0; i < mesh->mNumBones; i++)
 		{
@@ -251,10 +251,10 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 
 				for (int k = 0; k < 4; k++)
 				{
-					if (model->weight.at(vertexStart + k) == 0)
+					if (model->GetWeightAt(vertexStart + k) == 0)
 					{
-						model->weight.at(vertexStart + k) = weight.mWeight;
-						model->ID.at(vertexStart + k) = i;
+						model->SetWeightAt(vertexStart + k, weight.mWeight);
+						model->SetIDAt(vertexStart + k, i);
 						break;
 					}
 				}
@@ -267,23 +267,23 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			newBone->offsetMatrix = transpose(AnimatedModel::AiMatrixtoGLMMatrix(bone->mOffsetMatrix));
 			newBone->node = FindNode(newBone->name, model);
 
-			for (int k = 0; k < model->animations.size(); k++)
+			for (int k = 0; k < model->GetAnimationCount(); k++)
 			{
-				newBone->animNode.push_back(FindAnimNode(newBone->name, model->animations.at(k)));
+				newBone->animNode.push_back(FindAnimNode(newBone->name, model->GetAnimation(k)));
 			}
 
-			model->bones.push_back(newBone);
+			model->AddBone(newBone);
 
 		}
 
-		for (int i = 0; i < model->bones.size(); i++)
+		for (int i = 0; i < model->GetBoneCount(); i++)
 		{
-			string name = model->bones.at(i)->name;
+			string name = model->GetBone(i)->name;
 			string parentName = FindNode(name, model)->mParent->mName.data;
 
 			Bone * parentBone = FindBone(parentName, model);
 
-			model->bones.at(i)->parent = parentBone;
+			model->GetBone(i)->parent = parentBone;
 		}
 
 		model->Load();
@@ -298,7 +298,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 
 void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
 {
-	model->nodes.push_back(new aiNode(*node));
+	model->AddNode(new aiNode(*node));
 
 	for (int i = 0; i < node->mNumChildren; i++)
 	{

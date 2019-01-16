@@ -54,6 +54,9 @@
       "Fragment": "RiggedFragment.frag"
     }
   ],
+  "Scripts": [
+    "TestFunctions.lua"
+  ],
   "EntityTemplate": [
     {
       "Name": "w",

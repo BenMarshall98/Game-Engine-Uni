@@ -13,6 +13,9 @@ public:
 		texture = ResourceManager::GetTexture(textureName);
 	}
 
+	ComponentTexture& operator=(const ComponentTexture&) = delete;
+	ComponentTexture(ComponentTexture&) = delete;
+
 	~ComponentTexture() {}
 
 	ComponentType GetComponentName() override;

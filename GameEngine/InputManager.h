@@ -16,6 +16,9 @@ private:
 
 public:
 
+	InputManager & operator=(const InputManager&) = delete;
+	InputManager(InputManager&) = delete;
+
 	inline static InputManager * Instance(GLFWInput * pInputDevice = nullptr)
 	{
 		if (instance == nullptr)

@@ -36,11 +36,11 @@ private:
 
 	static Bone* FindBone(string & name, AnimatedModel * model)
 	{
-		for (int i = 0; i < model->bones.size(); i++)
+		for (int i = 0; i < model->GetBoneCount(); i++)
 		{
-			if (model->bones.at(i)->name == name)
+			if (model->GetBone(i)->name == name)
 			{
-				return model->bones.at(i);
+				return model->GetBone(i);
 			}
 		}
 		return nullptr;
@@ -48,11 +48,11 @@ private:
 
 	static aiNode* FindNode(string & name, AnimatedModel * model)
 	{
-		for (int i = 0; i < model->nodes.size(); i++)
+		for (int i = 0; i < model->GetNodeCount(); i++)
 		{
-			if (model->nodes.at(i)->mName.data == name)
+			if (model->GetNode(i)->mName.data == name)
 			{
-				return model->nodes.at(i);
+				return model->GetNode(i);
 			}
 		}
 		return nullptr;
@@ -72,9 +72,9 @@ private:
 
 	static int FindBoneIDByName(string & name, AnimatedModel * model)
 	{
-		for (int i = 0; i < model->bones.size(); i++)
+		for (int i = 0; i < model->GetBoneCount(); i++)
 		{
-			if (model->bones.at(i)->name == name)
+			if (model->GetBone(i)->name == name)
 			{
 				return i;
 			}

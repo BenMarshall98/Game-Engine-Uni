@@ -15,6 +15,7 @@ class LevelLoader
 private:
 	static map<string, const Value&> templates;
 	static void LoadResourcesJSON(const Value& Resources);
+	static void LoadScriptsJSON(const Value& Scripts);
 	static void LoadEntityTemplatesJSON(const Value& EntityTemplates);
 	static void LoadMapJSON(const Value& Map);
 	static void LoadViewJSON(const Value& View, string plane);

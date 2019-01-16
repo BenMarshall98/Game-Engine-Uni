@@ -33,26 +33,26 @@ float GLFWInput::MouseInput(int key)
 	{
 		double XPos, YPos;
 		glfwGetCursorPos(gameWindow, &XPos, &YPos);
-		if (YPos < 0 || YPos > GLFWWindow::height || XPos < 0 || XPos > GLFWWindow::width)
+		if (YPos < 0 || YPos > GLFWWindow::GetHeight() || XPos < 0 || XPos > GLFWWindow::GetWidth())
 		{
 			return 0;
 		}
 
-		if (key == 0 && YPos < GLFWWindow::height / 2)
+		if (key == 0 && YPos < GLFWWindow::GetHeight() / 2)
 		{
-			return (float)((GLFWWindow::height / 2) - YPos) / (GLFWWindow::height / 2);
+			return (float)((GLFWWindow::GetHeight() / 2) - YPos) / (GLFWWindow::GetHeight() / 2);
 		}
-		else if (key == 1 && YPos > GLFWWindow::height / 2)
+		else if (key == 1 && YPos > GLFWWindow::GetHeight() / 2)
 		{
-			return (float)(YPos - (GLFWWindow::height / 2)) / (GLFWWindow::height / 2);
+			return (float)(YPos - (GLFWWindow::GetHeight() / 2)) / (GLFWWindow::GetHeight() / 2);
 		}
-		else if (key == 2 && XPos < GLFWWindow::width / 2)
+		else if (key == 2 && XPos < GLFWWindow::GetWidth() / 2)
 		{
-			return (float)((GLFWWindow::width / 2) - XPos) / (GLFWWindow::width / 2);
+			return (float)((GLFWWindow::GetWidth() / 2) - XPos) / (GLFWWindow::GetWidth() / 2);
 		}
-		else if (key == 3 && XPos > GLFWWindow::width / 2)
+		else if (key == 3 && XPos > GLFWWindow::GetWidth() / 2)
 		{
-			return (float)(XPos - (GLFWWindow::width / 2)) / (GLFWWindow::width / 2);
+			return (float)(XPos - (GLFWWindow::GetWidth() / 2)) / (GLFWWindow::GetWidth() / 2);
 		}
 	}
 	else

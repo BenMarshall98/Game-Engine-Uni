@@ -39,12 +39,17 @@ ScriptingManager::ScriptingManager()
 	lua_register(luaVM, "SetImpulse", lua_SetImpulse);
 	lua_register(luaVM, "GetTouchingGround", lua_GetTouchingGround);
 	
-	LoadLuaFromFile("Vector3.lua");
-	LoadLuaFromFile("Matrix4.lua");
-	LoadLuaFromFile("Quaternion.lua");
+	string file = "Vector3.lua";
+	LoadLuaFromFile(file);
+
+	file = "Matrix4.lua";
+	LoadLuaFromFile(file);
+
+	file = "Quaternion.lua";
+	LoadLuaFromFile(file);
 }
 
-void ScriptingManager::LoadLuaFromFile(string file)
+void ScriptingManager::LoadLuaFromFile(string & file)
 {
 	int iStatus = luaL_loadfile(luaVM, file.c_str());
 	if (iStatus)
@@ -388,7 +393,7 @@ int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
 	return 1;
 }
 
-void ScriptingManager::RunScriptFromFunction(string function, Entity * entity)
+void ScriptingManager::RunScriptFromFunction(string & function, Entity * entity)
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
@@ -401,7 +406,7 @@ void ScriptingManager::RunScriptFromFunction(string function, Entity * entity)
 	}
 }
 
-void ScriptingManager::RunScriptFromInput(string function, Entity * entity, float inputValue, float deltaTime)
+void ScriptingManager::RunScriptFromInput(string & function, Entity * entity, float inputValue, float deltaTime)
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);

@@ -22,11 +22,15 @@ private:
 	Projection * projection;
 	bool updateFirst;
 
-	static void Render(Shader * shader, iModel * model, vec3 & position, quat & direction, Texture * texture, Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst);
+	static void Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst);
 
 public:
 
 	RenderSystem(Camera * pCamera, Projection * pProjection);
+
+	RenderSystem& operator=(const RenderSystem&) = delete;
+	RenderSystem(RenderSystem&) = delete;
+
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
 	

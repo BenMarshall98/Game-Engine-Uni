@@ -14,6 +14,9 @@ public:
 		texture = ResourceManager::GetTexture(textureName);
 	}
 
+	ComponentNormalTexture& operator= (const ComponentNormalTexture&) = delete;
+	ComponentNormalTexture(ComponentNormalTexture&);
+
 	~ComponentNormalTexture()
 	{
 		delete texture;

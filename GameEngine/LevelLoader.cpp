@@ -16,7 +16,7 @@
 #include "GLFWWindow.h"
 #include "FollowPlaneCamera.h"
 #include "Camera.h"
-
+#include "ScriptingManager.h"
 #include <fstream>
 #include <iostream>
 
@@ -110,6 +110,14 @@ void LevelLoader::LoadLevelJSON(string fileName)
 		}
 	}
 
+	if (d.HasMember("Scripts"))
+	{
+		if (d["Scripts"].IsArray())
+		{
+			LoadScriptsJSON(d["Scripts"]);
+		}
+	}
+
 	if (d.HasMember("EntityTemplate"))
 	{
 		if (d["EntityTemplate"].IsArray())
@@ -161,6 +169,20 @@ void LevelLoader::LoadResourcesJSON(const Value& Resources)
 				ResourceManager::LoadShader(name, vertex, fragment);
 			}
 		}
+	}
+}
+
+void LevelLoader::LoadScriptsJSON(const Value& Scripts)
+{
+	ScriptingManager * scriptingManager = ScriptingManager::Instance();
+
+	Value::ConstValueIterator it;
+
+	for (it = Scripts.Begin(); it != Scripts.End(); it++)
+	{
+		string script = (*it).GetString();
+
+		scriptingManager->LoadLuaFromFile(script);
 	}
 }
 
@@ -237,11 +259,11 @@ void LevelLoader::LoadPerspectiveJSON(const Value& Perspective, string plane)
 
 	if (type == "Perspective")
 	{
-		Projection projection = Projection(ProjectionType::Perspective, GLFWWindow::width, GLFWWindow::height,  minDist, maxDist);
+		Projection projection = Projection(ProjectionType::Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(),  minDist, maxDist);
 	}
 	else if (type == "Orthographic")
 	{
-		Projection projection = Projection(ProjectionType::Orthographic, GLFWWindow::width, GLFWWindow::height, minDist, maxDist);
+		Projection projection = Projection(ProjectionType::Orthographic, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(), minDist, maxDist);
 	}
 }
 

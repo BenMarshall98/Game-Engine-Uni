@@ -40,11 +40,14 @@ public:
 		return instance;
 	}
 
-	void LoadLuaFromFile(string fileName);
+	ScriptingManager& operator=(const ScriptingManager&) = delete;
+	ScriptingManager(ScriptingManager&) = delete;
 
-	void RunScriptFromFunction(string function, Entity * entity);
+	void LoadLuaFromFile(string & fileName);
 
-	void RunScriptFromInput(string function, Entity * entity, float inputValue, float deltaTime);
+	void RunScriptFromFunction(string & function, Entity * entity);
+
+	void RunScriptFromInput(string & function, Entity * entity, float inputValue, float deltaTime);
 
 	~ScriptingManager();
 };

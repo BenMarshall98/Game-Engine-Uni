@@ -16,6 +16,9 @@ public:
 	explicit ComponentInput(vector<InputFunction> * pInputs) : inputs(pInputs) {}
 	~ComponentInput() {}
 
+	ComponentInput& operator=(const ComponentInput&) = delete;
+	ComponentInput(ComponentInput&) = delete;
+
 	ComponentType GetComponentName() override;
 
 	void RenderSwap() override {};

@@ -146,10 +146,12 @@
     <ClCompile Include="GLFWInput.cpp" />
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="iComponent.cpp" />
+    <ClCompile Include="iModel.cpp" />
     <ClCompile Include="InputFunction.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="InputMapping.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="iScene.cpp" />
     <ClCompile Include="iSystem.cpp" />

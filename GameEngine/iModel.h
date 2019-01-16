@@ -7,7 +7,6 @@ private:
 	
 public:
 	iModel() {};
-	virtual ~iModel() {};
+	virtual ~iModel();
 	virtual void Render(Shader * shader) = 0;
 };
-

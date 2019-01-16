@@ -32,14 +32,17 @@ struct SpotLight
 class LightManager
 {
 private:
-	static LightManager * instance;
-	const int MAX_LIGHTS = 20;
-	Directional * directional;
-	vector<PointLight *> pointLights;
+	vector<SpotLight *>renderSpotLights;
 	vector<SpotLight *> spotLights;
 
+	vector<PointLight *> pointLights;
 	vector<PointLight *>renderPointLights;
-	vector<SpotLight *>renderSpotLights;
+
+	Directional * directional;
+
+	const int MAX_LIGHTS = 20;
+
+	static LightManager * instance;
 
 	LightManager() : directional(nullptr) {}
 
@@ -54,20 +57,45 @@ public:
 		return instance;
 	}
 
-	void SetDirectionalLight(vec3 pDirection, vec3 pLightColour);
-	void SetDirectionalLight(Directional * pDirectional);
+	LightManager& operator=(const LightManager&) = delete;
+	LightManager(LightManager&) = delete;
 
-	void AddPointLight(PointLight * pPointLight);
-	void AddPointLight(vec3 pLocation, vec3 pLightColour, float pAttenuation = 0);
-	void RemovePointLight(PointLight * pPointLight);
+	inline void SetDirectionalLight(const vec3 & pDirection, const vec3 & pLightColour)
+	{
+		delete directional;
+		directional = new Directional();
+		directional->direction = pDirection;
+		directional->lightColour = pLightColour;
+	}
 
-	void AddSpotLight(SpotLight * pSpotLight);
-	void AddSpotLight(vec3 pLocation, vec3 pDirection, vec3 pLightColour, float pAngleInner = 30, float pAngleOutside = 60);
-	void RemoveSpotLight(SpotLight * pSpotLight);
+	inline void SetDirectionalLight(Directional * const pDirectional)
+	{
+		delete directional;
+		directional = pDirectional;
+	}
 
-	void Update(vec3 pViewLocation);
-	void Render(int pShaderID);
+	inline void AddPointLight(PointLight * const pPointLight)
+	{
+		pointLights.push_back(pPointLight);
+	}
 
-	~LightManager() {};
+	void AddPointLight(const vec3 & pLocation, const vec3 & pLightColour, const float pAttenuation = 0);
+	void RemovePointLight(PointLight * const pPointLight);
+
+	inline void AddSpotLight(SpotLight * const pSpotLight)
+	{
+		spotLights.push_back(pSpotLight);
+	}
+
+	void AddSpotLight(const vec3 & pLocation, const vec3 & pDirection, const vec3 & pLightColour, const float pAngleInner = 30, const float pAngleOutside = 60);
+	void RemoveSpotLight(SpotLight * const pSpotLight);
+
+	void Update(const vec3 & pViewLocation);
+	void Render(const int pShaderID);
+
+	~LightManager()
+	{
+		delete directional;
+	};
 };
 

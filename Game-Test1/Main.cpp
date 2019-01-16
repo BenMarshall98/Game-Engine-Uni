@@ -4,7 +4,7 @@
 
 int main(void)
 {
-	SceneManager * sceneManager = SceneManager::Instance();
+	SceneManager * const sceneManager = SceneManager::Instance();
 
 	sceneManager->SetWindow(new GLFWWindow());
 	sceneManager->SetScene(new TestGameScene());

@@ -14,6 +14,9 @@ class GLFWWindow
 		GLFWWindow(const GLFWWindow & window) = delete;
 		GLFWWindow& operator=(const GLFWWindow & window) = delete;
 
+		static int width;
+		static int height;
+
 	public:
 		GLFWWindow();
 		~GLFWWindow();
@@ -23,7 +26,14 @@ class GLFWWindow
 		void WindowEvents();
 		bool IsRunning();
 
-		static int width;
-		static int height;
+		static inline int GetWidth()
+		{
+			return width;
+		}
+
+		static inline int GetHeight()
+		{
+			return height;
+		}
 };
 
