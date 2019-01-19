@@ -16,7 +16,9 @@
 #include "GLFWWindow.h"
 #include "FollowPlaneCamera.h"
 #include "Camera.h"
+#include "InputMapping.h"
 #include "ScriptingManager.h"
+#include "ComponentInput.h"
 #include <fstream>
 #include <iostream>
 
@@ -126,6 +128,14 @@ void LevelLoader::LoadLevelJSON(string fileName)
 		}
 	}
 
+	if (d.HasMember("Entities"))
+	{
+		if (d["Entities"].IsArray())
+		{
+			LoadEntity(d["Entities"]);
+		}
+	}
+
 	if (d.HasMember("Map"))
 	{
 		if (d["Map"].IsObject())
@@ -196,6 +206,33 @@ void LevelLoader::LoadEntityTemplatesJSON(const Value& EntityTemplates)
 		const Value& components = (*it)["Components"];
 
 		templates.insert(pair<string, const Value&>(name, components));
+	}
+}
+
+void LevelLoader::LoadEntity(const Value& Entities)
+{
+	Value::ConstValueIterator it;
+
+	EntityManager * entityManager = EntityManager::Instance();
+
+	for (it = Entities.Begin(); it != Entities.End(); it++)
+	{
+		string name = (*it)["Name"].GetString();
+
+		Entity * entity = entityManager->CreateEntity(name);
+
+		if ((*it).HasMember("Template"))
+		{
+			string templateName = (*it)["Template"].GetString();
+
+			map<string, const Value&>::iterator it = templates.find(templateName);
+			if (it != templates.end())
+			{
+				AddComponentsToEntityJSON(entity, it->second);
+			}
+		}
+
+		AddComponentsToEntityJSON(entity, (*it)["Components"]);
 	}
 }
 
@@ -352,14 +389,14 @@ void LevelLoader::LoadPlatformerMap(string file, string plane, vec2 topLeftCoord
 		x++;
 	}
 
-	Entity * newEntity = entityManager->CreateEntity("Player");
+	/*Entity * newEntity = entityManager->CreateEntity("Player");
 	entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
 	entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
 	entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(1, -1, 0)));
 	entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
 	entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
 	entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
+	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));*/
 }
 
 void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& components)
@@ -381,6 +418,19 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		{
 			string shader = (*it)["Shader"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentShader(shader));
+		}
+		else if (component == "Position")
+		{
+			vec3 position = vec3(0);
+
+			const Value& pos = (*it)["Position"];
+
+			for (SizeType i = 0; i < pos.Size(); i++)
+			{
+				position[i] = pos[i].GetFloat();
+			}
+
+			entityManager->AddComponentToEntity(entity, new ComponentPosition(position));
 		}
 		else if (component == "Direction")
 		{
@@ -465,7 +515,40 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			string texture = (*it)["Texture"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentNormalTexture(texture));
 		}
+		else if (component == "Input")
+		{
+			vector<InputFunction> * playerInputs = LoadInputsJSON((*it)["Inputs"]);
+			entityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
+		}
 	}
+}
+
+vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
+{
+	vector<InputFunction> * playerInputs = new vector<InputFunction>();
+
+	Value::ConstValueIterator it;
+
+	for (it = Inputs.Begin(); it != Inputs.End(); it++)
+	{
+		string function = (*it)["Function"].GetString();
+
+		InputFunction inputFunction = InputFunction(function);
+
+		const Value& keys = (*it)["Input"];
+
+		Value::ConstValueIterator key;
+
+		for (key = keys.Begin(); key != keys.End(); key++)
+		{
+			GameInput gameInput = InputConverter::StringToEnum(key->GetString());
+			inputFunction.AddInput(gameInput);
+		}
+
+		playerInputs->push_back(inputFunction);
+	}
+
+	return playerInputs;
 }
 
 map<string, const Value&> LevelLoader::templates;

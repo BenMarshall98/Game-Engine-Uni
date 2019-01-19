@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "RapidJSON/document.h"
 #include "glm/glm.hpp"
+#include "InputFunction.h"
 #include <string>
 #include <map>
 
@@ -17,12 +18,14 @@ private:
 	static void LoadResourcesJSON(const Value& Resources);
 	static void LoadScriptsJSON(const Value& Scripts);
 	static void LoadEntityTemplatesJSON(const Value& EntityTemplates);
+	static void LoadEntity(const Value& Entities);
 	static void LoadMapJSON(const Value& Map);
 	static void LoadViewJSON(const Value& View, string plane);
 	static void LoadPerspectiveJSON(const Value& Perspective, string plane);
 	static void LoadCameraJSON(const Value& Camera, string plane);
 	static void LoadPlatformerMap(string file, string plane, vec2 topLeftCoord);
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
+	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
 public:
 	static void LoadLevel(string fileName);
 	static void CoinHitPlayer(Entity * pEntity);

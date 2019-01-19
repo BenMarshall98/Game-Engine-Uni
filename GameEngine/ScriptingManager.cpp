@@ -90,7 +90,7 @@ int ScriptingManager::lua_GetComponentDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentDirection = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_DIRECTION);
+	iComponent * componentDirection = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_DIRECTION);
 	ComponentDirection * directionComponent = dynamic_cast<ComponentDirection *>(componentDirection);
 
 	lua_pushlightuserdata(luaState, directionComponent);
@@ -115,7 +115,7 @@ int ScriptingManager::lua_GetComponentPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_POSITION);
+	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
 	ComponentPosition * positionComponent = dynamic_cast<ComponentPosition *>(componentPosition);
 
 	lua_pushlightuserdata(luaState, positionComponent);
@@ -140,7 +140,7 @@ int ScriptingManager::lua_GetComponentPhysics(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, COMPONENT_PHYSICS);
+	iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_PHYSICS);
 	ComponentPhysics * physicsComponent = dynamic_cast<ComponentPhysics *>(componentPhysics);
 
 	lua_pushlightuserdata(luaState, physicsComponent);

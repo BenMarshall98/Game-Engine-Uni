@@ -32,11 +32,11 @@ struct SpotLight
 class LightManager
 {
 private:
-	vector<SpotLight *>renderSpotLights;
+	vector<SpotLight *> renderSpotLights;
 	vector<SpotLight *> spotLights;
 
 	vector<PointLight *> pointLights;
-	vector<PointLight *>renderPointLights;
+	vector<PointLight *> renderPointLights;
 
 	Directional * directional;
 

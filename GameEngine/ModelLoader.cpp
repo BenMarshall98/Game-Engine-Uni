@@ -199,7 +199,8 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 			model->AddAnimation(animation);
 		}
 
-		model->SetGlobalInverse(inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation)));
+		mat4 globalInverse = inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
+		model->SetGlobalInverse(globalInverse);
 
 		const aiMesh* mesh = scene->mMeshes[0];
 

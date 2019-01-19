@@ -8,7 +8,7 @@
 InputSystem::InputSystem()
 {
 	entityManager = EntityManager::Instance();
-	ComponentType componentTypes[] = { COMPONENT_INPUT };
+	ComponentType componentTypes[] = { ComponentType::COMPONENT_INPUT };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 }
 
@@ -26,7 +26,7 @@ void InputSystem::Action(void)
 {
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentInput = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_INPUT);
+		iComponent * componentInput = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_INPUT);
 
 		vector<InputFunction> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
 

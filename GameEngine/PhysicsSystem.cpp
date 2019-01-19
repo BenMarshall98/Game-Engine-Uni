@@ -12,14 +12,14 @@ using namespace glm;
 PhysicsSystem::PhysicsSystem(PhysicsManager & pPhysicsManager) : physicsManager(pPhysicsManager)
 {
 	entityManager = EntityManager::Instance();
-	ComponentType componentTypes[] = { COMPONENT_POSITION, COMPONENT_DIRECTION, COMPONENT_PHYSICS };
+	ComponentType componentTypes[] = { ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_PHYSICS };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 	newEntities = EntityList;
 }
 
 void PhysicsSystem::RemoveEntity(Entity * pEntity)
 {
-	iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, COMPONENT_PHYSICS);
+	iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, ComponentType::COMPONENT_PHYSICS);
 	void * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
 	physicsManager.RemoveRigidBody(rigidBody);
 
@@ -35,9 +35,9 @@ void PhysicsSystem::Action(void)
 {
 	for (int i = 0; i < newEntities.size(); i++)
 	{
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(newEntities[i], COMPONENT_POSITION);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(newEntities[i], COMPONENT_DIRECTION);
-		iComponent * componentPhysics = entityManager->GetComponentOfEntity(newEntities[i], COMPONENT_PHYSICS);
+		iComponent * componentPosition = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_POSITION);
+		iComponent * componentDirection = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_DIRECTION);
+		iComponent * componentPhysics = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_PHYSICS);
 
 		vec3 position = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
 		quat direction = ((ComponentDirection *)componentDirection)->GetUpdateDirection();
@@ -56,9 +56,9 @@ void PhysicsSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_POSITION);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
-		iComponent * componentPhysics = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_PHYSICS);
+		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
+		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
+		iComponent * componentPhysics = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_PHYSICS);
 
 		Motion(((ComponentPosition *)componentPosition), ((ComponentDirection *)componentDirection), ((ComponentPhysics *)componentPhysics));
 	}

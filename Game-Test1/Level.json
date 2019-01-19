@@ -126,6 +126,73 @@
       ]
     }
   ],
+  "Entities": [
+    {
+      "Name": "Player",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Sphere"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Position",
+          "Position": [ 1, -1, 0 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Sphere",
+            "Radius": 0.5
+          },
+          "Mass": 1,
+          "Type": "PLAYER"
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Earth"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "EarthNormal"
+        },
+        {
+          "Component": "Input",
+          "Inputs": [
+            {
+              "Function": "PlayerLeft",
+              "Input": [
+                "KEYBOARD_A",
+                "GAMEPAD_L_LEFT"
+              ]
+            },
+            {
+              "Function": "PlayerRight",
+              "Input": [
+                "KEYBOARD_D",
+                "GAMEPAD_L_RIGHT"
+              ]
+            },
+            {
+              "Function": "PlayerJump",
+              "Input": [
+                "KEYBOARD_SPACE",
+                "GAMEPAD_X"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "Map": {
     "Type": "Platformer",
     "File": "Level.txt",

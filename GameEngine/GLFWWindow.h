@@ -26,12 +26,12 @@ class GLFWWindow
 		void WindowEvents();
 		bool IsRunning();
 
-		static inline int GetWidth()
+		static int GetWidth()
 		{
 			return width;
 		}
 
-		static inline int GetHeight()
+		static int GetHeight()
 		{
 			return height;
 		}

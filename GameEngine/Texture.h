@@ -23,7 +23,7 @@ public:
 		glDeleteTextures(1, &mTextureID);
 	}
 
-	bool LoadTexture(const string & fileName) const;
+	bool LoadTexture(const string & fileName);
 
 	inline int TextureID() const
 	{

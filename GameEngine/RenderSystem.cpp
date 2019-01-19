@@ -18,7 +18,8 @@
 RenderSystem::RenderSystem(Camera * pCamera, Projection * pProjection) : camera(pCamera), projection(pProjection), updateFirst(true)
 {
 	entityManager = EntityManager::Instance();
-	ComponentType componentTypes[] = { COMPONENT_MODEL, COMPONENT_SHADER, COMPONENT_POSITION, COMPONENT_TEXTURE, COMPONENT_DIRECTION };
+	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_SHADER, ComponentType::COMPONENT_POSITION,
+		ComponentType::COMPONENT_TEXTURE, ComponentType::COMPONENT_DIRECTION };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 }
 
@@ -44,11 +45,11 @@ void RenderSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentShader = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_SHADER);
-		iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_MODEL);
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_POSITION);
-		iComponent * componentTexture = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_TEXTURE);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], COMPONENT_DIRECTION);
+		iComponent * componentShader = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_SHADER);
+		iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
+		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
+		iComponent * componentTexture = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_TEXTURE);
+		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
 
 		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetRenderShader();
 		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
