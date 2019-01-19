@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{482caee8-fef9-4cc8-b4fc-2918ccce631e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{f61ea21b-977c-4ceb-8763-3d654d337831}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,9 @@
     </Filter>
     <Filter Include="Scripting Manager">
       <UniqueIdentifier>{50985445-f885-4060-a80c-415b1ad545ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera Manager">
+      <UniqueIdentifier>{482caee8-fef9-4cc8-b4fc-2918ccce631e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +124,7 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Projection.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Camera Manager</Filter>
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
       <Filter>Light Manager</Filter>
@@ -166,7 +166,7 @@
       <Filter>Utility\Models</Filter>
     </ClCompile>
     <ClCompile Include="FollowPlaneCamera.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Camera Manager</Filter>
     </ClCompile>
     <ClCompile Include="ComponentNormalTexture.cpp">
       <Filter>Components</Filter>
@@ -182,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="iModel.cpp">
       <Filter>Utility\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Camera Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,7 +247,7 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Camera</Filter>
+      <Filter>Camera Manager</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL.h">
       <Filter>OpenGL</Filter>
@@ -265,7 +268,7 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
-      <Filter>Camera</Filter>
+      <Filter>Camera Manager</Filter>
     </ClInclude>
     <ClInclude Include="LightManager.h">
       <Filter>Light Manager</Filter>
@@ -307,7 +310,7 @@
       <Filter>Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="FollowPlaneCamera.h">
-      <Filter>Camera</Filter>
+      <Filter>Camera Manager</Filter>
     </ClInclude>
     <ClInclude Include="ComponentNormalTexture.h">
       <Filter>Components</Filter>
@@ -317,6 +320,9 @@
     </ClInclude>
     <ClInclude Include="ScriptingManager.h">
       <Filter>Scripting Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Camera Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

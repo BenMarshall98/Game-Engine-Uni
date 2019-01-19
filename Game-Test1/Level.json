@@ -171,6 +171,7 @@
               "Function": "PlayerLeft",
               "Input": [
                 "KEYBOARD_A",
+                "KEYBOARD_LEFT",
                 "GAMEPAD_L_LEFT"
               ]
             },
@@ -178,6 +179,7 @@
               "Function": "PlayerRight",
               "Input": [
                 "KEYBOARD_D",
+                "KEYBOARD_RIGHT",
                 "GAMEPAD_L_RIGHT"
               ]
             },
@@ -201,11 +203,13 @@
     "TopLeftCoord": [ 0, 0 ],
     "View": {
       "Perspective": {
+        "Name": "Default",
         "Type": "Perspective",
         "MinDistance": 0.1,
         "MaxDistance": 100
       },
       "Camera": {
+        "Name": "Default",
         "Type": "FollowPlane",
         "Follow": "Player",
         "DefaultDistance": 5,

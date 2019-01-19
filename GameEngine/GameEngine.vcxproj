@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedModel.cpp" />
     <ClCompile Include="BulletPhysicsEngine.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollisionCuboid.cpp" />
     <ClCompile Include="CollisionShape.cpp" />
     <ClCompile Include="CollisionSphere.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="AnimatedModel.h" />
     <ClInclude Include="BulletPhysicsEngine.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollisionCuboid.h" />
     <ClInclude Include="CollisionShape.h" />
     <ClInclude Include="CollisionSphere.h" />
