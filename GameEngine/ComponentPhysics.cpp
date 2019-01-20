@@ -1,4 +1,10 @@
 #include "ComponentPhysics.h"
+#include "ScriptingManager.h"
+#include <algorithm>
+
+#define E(s) #s
+vector<string> ComponentPhysics::EntityTypeNames = { ENTITYTYPES(E) };
+#undef E
 
 ComponentType ComponentPhysics::GetComponentName()
 {
@@ -18,20 +24,35 @@ void ComponentPhysics::AddCollision(Entity * physicsComponent, EntityType pEntit
 
 void ComponentPhysics::ResolveCollisions()
 {
-	 map<Entity *, EntityType>::iterator it;
+	map<Entity *, EntityType>::iterator it;
+
+	ScriptingManager * scriptingManager = ScriptingManager::Instance();
 
 	for (it = unresolvedCollisions.begin(); it != unresolvedCollisions.end(); ++it)
 	{
 		EntityType pEntityType = it->second;
 
-		map<EntityType, GameCollisionFunction>::iterator collision = collisionFunctions->find(pEntityType);
+		map<EntityType, string>::iterator collision = collisionFunctions->find(pEntityType);
 		
 		if (collision != collisionFunctions->end())
 		{
-			GameCollisionFunction function = collision->second;
-			function(thisEntity);
+			string function = collision->second;
+			scriptingManager->RunScriptFromCollision(function, thisEntity);
 		}
 	}
 
 	unresolvedCollisions.clear();
+}
+
+EntityType ComponentPhysics::StringToEnum(string entityName)
+{
+	for (int i = 0; i < EntityTypeNames.size(); i++)
+	{
+		if (EntityTypeNames.at(i) == entityName)
+		{
+			return EntityType(i);
+		}
+	}
+
+	return NONE;
 }

@@ -25,6 +25,7 @@ private:
 	static int lua_GetImpulse(lua_State * luaState);
 	static int lua_SetImpulse(lua_State * luaState);
 	static int lua_GetTouchingGround(lua_State * luaState);
+	static int lua_DeleteEntity(lua_State * luaState);
 
 	ScriptingManager();
 
@@ -45,7 +46,7 @@ public:
 
 	void LoadLuaFromFile(string & fileName);
 
-	void RunScriptFromFunction(string & function, Entity * entity);
+	void RunScriptFromCollision(string & function, Entity * entity);
 
 	void RunScriptFromInput(string & function, Entity * entity, float inputValue, float deltaTime);
 

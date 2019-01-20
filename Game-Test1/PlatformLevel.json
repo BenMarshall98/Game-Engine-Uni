@@ -1,0 +1,271 @@
+{
+  "Resources": [
+    {
+      "Type": "Texture",
+      "Name": "Box",
+      "Texture": "container.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "BoxNormal",
+      "Texture": "containerNormal.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "Earth",
+      "Texture": "2k_earth_daymap.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "EarthNormal",
+      "Texture": "Earth_Normal.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "Concrete",
+      "Texture": "concrete.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "ConcreteNormal",
+      "Texture": "concreteNormal.jpg"
+    },
+    {
+      "Type": "Model",
+      "Name": "Cube",
+      "Model": "cube.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "Sphere",
+      "Model": "sphere.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "Collectable",
+      "Model": "Collectable.obj"
+    },
+    {
+      "Type": "Shader",
+      "Name": "TestShader",
+      "Vertex": "TestVertex.vert",
+      "Fragment": "TestFragment.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "NormalShader",
+      "Vertex": "NormalVertex.vert",
+      "Fragment": "NormalFragment.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "RiggedShader",
+      "Vertex": "RiggedVertex.vert",
+      "Fragment": "RiggedFragment.frag"
+    }
+  ],
+  "Scripts": [
+    "PlatformerFunctions.lua"
+  ],
+  "EntityTemplate": [
+    {
+      "Name": "w",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Cube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 0,
+          "Type": "WALL"
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Concrete"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "ConcreteNormal"
+        }
+      ]
+    },
+    {
+      "Name": "m",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Cube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL"
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        }
+      ]
+    },
+    {
+      "Name": "c",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Collectable"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "TestShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Sphere",
+            "Radius": 0.25
+          },
+          "Mass": 0,
+          "Type": "COLLECTABLE",
+          "CollisionResponse": false,
+          "CollisionFunctions": [
+            {
+              "EntityType": "PLAYER",
+              "Function": "DeleteCoin"
+            }
+          ]
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Earth"
+        }
+      ]
+    }
+  ],
+  "Entities": [
+    {
+      "Name": "Player",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Sphere"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Position",
+          "Position": [ 1, -1, 0 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Sphere",
+            "Radius": 0.5
+          },
+          "Mass": 1,
+          "Type": "PLAYER"
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Earth"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "EarthNormal"
+        },
+        {
+          "Component": "Input",
+          "Inputs": [
+            {
+              "Function": "PlayerLeft",
+              "Input": [
+                "KEYBOARD_A",
+                "KEYBOARD_LEFT",
+                "GAMEPAD_L_LEFT"
+              ]
+            },
+            {
+              "Function": "PlayerRight",
+              "Input": [
+                "KEYBOARD_D",
+                "KEYBOARD_RIGHT",
+                "GAMEPAD_L_RIGHT"
+              ]
+            },
+            {
+              "Function": "PlayerJump",
+              "Input": [
+                "KEYBOARD_SPACE",
+                "GAMEPAD_X"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Map": {
+    "Type": "Platformer",
+    "File": "Level.txt",
+    "Entities": "Entities.json",
+    "Plane": "XY",
+    "TopLeftCoord": [ 0, 0 ],
+    "View": {
+      "Perspective": {
+        "Type": "Perspective",
+        "MinDistance": 0.1,
+        "MaxDistance": 100
+      },
+      "Camera": {
+        "Type": "FollowPlane",
+        "Follow": "Player",
+        "DefaultDistance": 5,
+        "MinDistance": 2,
+        "MaxDistance": 10,
+        "FollowRate": 0.1
+      }
+    }
+  }
+}

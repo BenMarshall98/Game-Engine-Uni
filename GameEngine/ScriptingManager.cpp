@@ -38,6 +38,7 @@ ScriptingManager::ScriptingManager()
 	lua_register(luaVM, "GetImpulse", lua_GetImpulse);
 	lua_register(luaVM, "SetImpulse", lua_SetImpulse);
 	lua_register(luaVM, "GetTouchingGround", lua_GetTouchingGround);
+	lua_register(luaVM, "DeleteEntity", lua_DeleteEntity);
 	
 	string file = "Vector3.lua";
 	LoadLuaFromFile(file);
@@ -393,7 +394,30 @@ int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
 	return 1;
 }
 
-void ScriptingManager::RunScriptFromFunction(string & function, Entity * entity)
+int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: DeleteEntity");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: DeleteEntity");
+		lua_error(luaState);
+	}
+
+	EntityManager::Instance()->AddToDeleteList(entity);
+
+	return 0;
+}
+
+void ScriptingManager::RunScriptFromCollision(string & function, Entity * entity)
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);

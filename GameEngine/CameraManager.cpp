@@ -1,5 +1,7 @@
 #include "CameraManager.h"
 
+CameraManager * CameraManager::instance = nullptr;
+
 void CameraManager::SetCamera(Camera * pCamera)
 {
 	camera = pCamera;

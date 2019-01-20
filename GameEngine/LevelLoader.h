@@ -27,7 +27,6 @@ private:
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
 	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
 public:
-	static void LoadLevel(string fileName);
 	static void CoinHitPlayer(Entity * pEntity);
 	static void LoadLevelJSON(string fileName);
 	

@@ -26,7 +26,7 @@ private:
 
 public:
 
-	RenderSystem(Camera * pCamera, Projection * pProjection);
+	RenderSystem();
 
 	RenderSystem& operator=(const RenderSystem&) = delete;
 	RenderSystem(RenderSystem&) = delete;

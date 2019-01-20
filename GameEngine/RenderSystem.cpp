@@ -12,12 +12,15 @@
 #include "glm/gtx/quaternion.hpp"
 #include "GLFWWindow.h"
 #include "LightManager.h"
+#include "CameraManager.h"
 #include <string>
 #include <algorithm>
 
-RenderSystem::RenderSystem(Camera * pCamera, Projection * pProjection) : camera(pCamera), projection(pProjection), updateFirst(true)
+RenderSystem::RenderSystem() : updateFirst(true)
 {
 	entityManager = EntityManager::Instance();
+	camera = CameraManager::Instance()->GetCamera();
+	projection = CameraManager::Instance()->GetProjection();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_SHADER, ComponentType::COMPONENT_POSITION,
 		ComponentType::COMPONENT_TEXTURE, ComponentType::COMPONENT_DIRECTION };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));

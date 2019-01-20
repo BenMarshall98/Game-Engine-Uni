@@ -2,6 +2,7 @@
 #include "EntityManager.h"
 #include "glm/glm.hpp"
 #include "ComponentPosition.h"
+#include "CameraManager.h"
 #include <iostream>
 
 
@@ -102,6 +103,8 @@ void SceneManager::Resize(int width, int height)
 	{
 		currentScene->Resize(width, height);
 	}
+
+	CameraManager::Instance()->Resize(width, height);
 }
 
 SceneManager * SceneManager::instance = nullptr;

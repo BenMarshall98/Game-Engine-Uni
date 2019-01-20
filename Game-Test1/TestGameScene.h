@@ -16,8 +16,6 @@ class TestGameScene : public iScene
 private:
 	SystemManager mSystemManager;
 	PhysicsManager * mPhysicsManager;
-	Camera * camera;
-	Projection * projection;
 
 public:
 

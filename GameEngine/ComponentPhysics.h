@@ -4,26 +4,32 @@
 #include "Entity.h"
 #include "glm/glm.hpp"
 #include <map>
+#include <string>
 #include <vector>
-#include <algorithm>
+
 
 using namespace glm;
 using namespace std;
 
-typedef void(*GameCollisionFunction)(Entity *);
+#define ENTITYTYPES(E) \
+	E(NONE), \
+	E(WALL), \
+	E(PLAYER), \
+	E(COLLECTABLE)
 
-enum EntityType
-{
-	NONE,
-	WALL,
-	PLAYER,
-	COLLECTABLE
-};
+#define E(e) e
+static enum EntityType { ENTITYTYPES(E) };
+#undef E
 
 class ComponentPhysics : public iComponent
 {
 private:
-	map<EntityType, GameCollisionFunction> * collisionFunctions;
+
+#define E(s) #s
+	static vector<string> EntityTypeNames;
+#undef E
+
+	map<EntityType, string> * collisionFunctions;
 	map<Entity *, EntityType> unresolvedCollisions = map<Entity *, EntityType>();
 	EntityType entityType;
 	CollisionShape * shape;
@@ -38,7 +44,7 @@ private:
 	bool collisionResponse;
 
 public:
-	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, bool pCollisionResponse = true, map<EntityType, GameCollisionFunction> * pCollisionFunctions = new map<EntityType, GameCollisionFunction>())
+	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, bool pCollisionResponse = true, map<EntityType, string> * pCollisionFunctions = new map<EntityType, string>())
 		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics() {}
 
@@ -46,6 +52,9 @@ public:
 	ComponentPhysics(ComponentPhysics&) = delete;
 
 	ComponentType GetComponentName() override;
+
+	static EntityType StringToEnum(string entityType);
+
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
 	void GroundSwap()

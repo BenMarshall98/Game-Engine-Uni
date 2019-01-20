@@ -125,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="2k_earth_daymap.jpg" />
+    <Image Include="concrete.jpg" />
+    <Image Include="concreteNormal.jpg" />
     <Image Include="container.jpg" />
     <Image Include="containerNormal.jpg" />
     <Image Include="Earth_Normal.jpg" />
@@ -152,7 +154,8 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Level.json" />
+    <None Include="3DLevel.json" />
+    <None Include="PlatformLevel.json" />
     <None Include="Matrix4.lua" />
     <None Include="NormalFragment.frag" />
     <None Include="NormalVertex.vert" />
@@ -163,7 +166,7 @@
     <None Include="RiggedFragment.frag" />
     <None Include="RiggedVertex.vert" />
     <None Include="TestFragment.frag" />
-    <Content Include="TestFunctions.lua">
+    <Content Include="PlatformerFunctions.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Vector3.lua">

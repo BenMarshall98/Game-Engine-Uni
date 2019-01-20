@@ -21,6 +21,16 @@
       "Texture": "Earth_Normal.jpg"
     },
     {
+      "Type": "Texture",
+      "Name": "Concrete",
+      "Texture": "concrete.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "ConcreteNormal",
+      "Texture": "concreteNormal.jpg"
+    },
+    {
       "Type": "Model",
       "Name": "Cube",
       "Model": "cube.obj"
@@ -85,6 +95,41 @@
         },
         {
           "Component": "Texture",
+          "Texture": "Concrete"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "ConcreteNormal"
+        }
+      ]
+    },
+    {
+      "Name": "m",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Cube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL"
+        },
+        {
+          "Component": "Texture",
           "Texture": "Box"
         },
         {
@@ -117,7 +162,13 @@
           },
           "Mass": 0,
           "Type": "COLLECTABLE",
-          "CollisionResponse": false
+          "CollisionResponse": false,
+          "CollisionFunctions": [
+            {
+              "EntityType": "PLAYER",
+              "Function": "DeleteCoin"
+            }
+          ]
         },
         {
           "Component": "Texture",
@@ -203,13 +254,11 @@
     "TopLeftCoord": [ 0, 0 ],
     "View": {
       "Perspective": {
-        "Name": "Default",
         "Type": "Perspective",
         "MinDistance": 0.1,
         "MaxDistance": 100
       },
       "Camera": {
-        "Name": "Default",
         "Type": "FollowPlane",
         "Follow": "Player",
         "DefaultDistance": 5,

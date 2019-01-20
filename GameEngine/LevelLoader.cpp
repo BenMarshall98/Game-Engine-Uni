@@ -19,66 +19,9 @@
 #include "InputMapping.h"
 #include "ScriptingManager.h"
 #include "ComponentInput.h"
+#include "CameraManager.h"
 #include <fstream>
 #include <iostream>
-
-void LevelLoader::LoadLevel(string fileName)
-{
-	int x = 0;
-	int y = 0;
-
-	EntityManager * entityManager = EntityManager::Instance();
-
-	ifstream in;
-	in.open(fileName);
-
-	while (!in.eof())
-	{
-		char letter = in.get();
-
-		if (letter == '\n')
-		{
-			x = -1;
-			y--;
-		}
-		else if (letter == 'w')
-		{
-			Entity * newEntity = entityManager->CreateEntity();
-			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Cube"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
-			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionCuboid(vec3(0.5f, 0.5f, 0.5f)), 0, WALL, newEntity));
-			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Box"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("BoxNormal"));
-		}
-		else if (letter == 'p')
-		{
-			Entity * newEntity = entityManager->CreateEntity("Player");
-			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
-			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
-			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));
-		}
-		else if (letter == 'c')
-		{
-			map<EntityType, GameCollisionFunction> * collisionFunctions = new map<EntityType, GameCollisionFunction>();
-			collisionFunctions->insert(pair<EntityType, GameCollisionFunction>(PLAYER, CoinHitPlayer));
-
-			Entity * newEntity = entityManager->CreateEntity();
-			entityManager->AddComponentToEntity(newEntity, new ComponentModel("Collectable"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentShader("TestShader"));
-			entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(x, y, -7.5f)));
-			entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-			entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.25f), 0, COLLECTABLE, newEntity, false, collisionFunctions));
-			entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
-		}
-		x++;
-	}
-}
 
 void LevelLoader::CoinHitPlayer(Entity * pEntity)
 {
@@ -296,11 +239,13 @@ void LevelLoader::LoadPerspectiveJSON(const Value& Perspective, string plane)
 
 	if (type == "Perspective")
 	{
-		Projection projection = Projection(ProjectionType::Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(),  minDist, maxDist);
+		Projection * projection = new Projection(ProjectionType::Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(),  minDist, maxDist);
+		CameraManager::Instance()->SetProjection(projection);
 	}
 	else if (type == "Orthographic")
 	{
-		Projection projection = Projection(ProjectionType::Orthographic, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(), minDist, maxDist);
+		Projection * projection = new Projection(ProjectionType::Orthographic, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(), minDist, maxDist);
+		CameraManager::Instance()->SetProjection(projection);
 	}
 }
 
@@ -337,6 +282,7 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera, string pPlane)
 		}
 
 		Camera * camera = new FollowPlaneCamera(entity, plane, minDist, maxDist, defDist, followRate);
+		CameraManager::Instance()->SetCamera(camera);
 	}
 
 	
@@ -475,28 +421,30 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			float mass = (*it)["Mass"].GetFloat();
 			string type = (*it)["Type"].GetString();
 
-			EntityType eType;
-
-			if (type == "WALL")
-			{
-				eType = EntityType::WALL;
-			}
-			else if (type == "COLLECTABLE")
-			{
-				eType = EntityType::COLLECTABLE;
-			}
-			else if (type == "PLAYER")
-			{
-				eType = EntityType::PLAYER;
-			}
-			else
-			{
-				eType = EntityType::NONE;
-			}
+			EntityType eType = ComponentPhysics::StringToEnum(type);
 
 			if ((*it).HasMember("CollisionResponse"))
 			{
 				bool response = (*it)["CollisionResponse"].GetBool();
+
+				if ((*it).HasMember("CollisionFunctions"))
+				{
+					map<EntityType, string> * collisionFunctions = new map<EntityType, string>();
+
+					Value::ConstValueIterator col;
+
+					for (col = (*it)["CollisionFunctions"].Begin(); col != (*it)["CollisionFunctions"].End(); col++)
+					{
+						string entityType = (*col)["EntityType"].GetString();
+						string function = (*col)["Function"].GetString();
+
+						EntityType cEntityType = ComponentPhysics::StringToEnum(entityType);
+
+						collisionFunctions->insert(pair<EntityType, string>(cEntityType, function));
+					}
+
+					entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, response, collisionFunctions));
+				}
 
 				entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, response));
 			}
