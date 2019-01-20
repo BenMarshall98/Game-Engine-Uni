@@ -30,6 +30,9 @@ public:
 	void SetCamera(Camera * pCamera);
 	void SetProjection(Projection * pProjection);
 
+	void Update();
+	void Resize(float width, float height);
+
 	Camera * GetCamera();
 	Projection * GetProjection();
 

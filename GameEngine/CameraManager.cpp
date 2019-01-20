@@ -19,3 +19,15 @@ Projection * CameraManager::GetProjection()
 {
 	return projection;
 }
+
+void CameraManager::Update()
+{
+	camera->Update();
+}
+
+void CameraManager::Resize(float width, float height)
+{
+	projection->SetHeight(height);
+	projection->SetWidth(width);
+	projection->Update();
+}
