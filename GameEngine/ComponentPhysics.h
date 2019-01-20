@@ -35,7 +35,7 @@ private:
 	CollisionShape * shape;
 	vec3 velocity = vec3(0);
 	vec3 impulse = vec3(0);
-	float rotation = 0;
+	vec3 rotation = vec3(0);
 	float mass;
 	void * rigidBody;
 	Entity * thisEntity;
@@ -90,12 +90,12 @@ public:
 		impulse = pImpulse;
 	}
 
-	inline float GetUpdateRotation() const
+	inline vec3 GetUpdateRotation() const
 	{
 		return rotation;
 	}
 
-	inline void SetUpdateRotation(float pRotation)
+	inline void SetUpdateRotation(vec3 pRotation)
 	{
 		rotation = pRotation;
 	}

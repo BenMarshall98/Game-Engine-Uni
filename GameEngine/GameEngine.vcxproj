@@ -144,6 +144,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="FollowPlaneCamera.cpp" />
+    <ClCompile Include="FollowPlayerCamera.cpp" />
     <ClCompile Include="GLFWInput.cpp" />
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="iComponent.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="FollowPlaneCamera.h" />
+    <ClInclude Include="FollowPlayerCamera.h" />
     <ClInclude Include="GLFWInput.h" />
     <ClInclude Include="GLFWWindow.h" />
     <ClInclude Include="iComponent.h" />

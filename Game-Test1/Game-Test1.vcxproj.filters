@@ -89,9 +89,15 @@
     <None Include="3DLevel.json">
       <Filter>Levels</Filter>
     </None>
+    <None Include="3DLevelFunctions.lua">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Collectable.obj">
+      <Filter>Models</Filter>
+    </Object>
+    <Object Include="Floor.obj">
       <Filter>Models</Filter>
     </Object>
   </ItemGroup>

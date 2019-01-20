@@ -249,7 +249,6 @@
   "Map": {
     "Type": "Platformer",
     "File": "Level.txt",
-    "Entities": "Entities.json",
     "Plane": "XY",
     "TopLeftCoord": [ 0, 0 ],
     "View": {

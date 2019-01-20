@@ -31,5 +31,6 @@ public:
 	quat GetDirectionOfRigidBody(void * pRigidBody);
 	void ApplyVelocity(void * pRigidBody, vec3 velocity);
 	void ApplyImpulse(void * pRigidBody, vec3 impulse);
+	void ApplyRotation(void * pRigidBody, vec3 rotation);
 	void RemoveRigidBody(void * pRigidBody);
 };

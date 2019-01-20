@@ -24,6 +24,8 @@ private:
 	static int lua_SetVelocity(lua_State * luaState);
 	static int lua_GetImpulse(lua_State * luaState);
 	static int lua_SetImpulse(lua_State * luaState);
+	static int lua_GetRotation(lua_State * luaState);
+	static int lua_SetRotation(lua_State * luaState);
 	static int lua_GetTouchingGround(lua_State * luaState);
 	static int lua_DeleteEntity(lua_State * luaState);
 

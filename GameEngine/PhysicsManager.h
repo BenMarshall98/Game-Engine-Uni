@@ -53,5 +53,10 @@ public:
 	{
 		engine->RemoveRigidBody(pRigidBody);
 	}
+
+	inline void ApplyRotation(void * pRigidBody, vec3 rotation)
+	{
+		engine->ApplyRotation(pRigidBody, rotation);
+	}
 };
 

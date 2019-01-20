@@ -67,7 +67,6 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat d
 
 	btRigidBody * rigidBody = new btRigidBody(rigidBodyCI);
 
-	rigidBody->setAngularFactor(btVector3(0, 0, 1));
 	rigidBody->setUserPointer(entity);
 
 	if (mass != 0)
@@ -129,6 +128,21 @@ void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
 	btVector3 origin(0.0, 0.0, 0.0);
 	btVector3 impulse(pImpulse.x, pImpulse.y, pImpulse.z);
 	rigidBody->applyImpulse(impulse, origin);
+}
+
+void BulletPhysicsEngine::ApplyRotation(void * pRigidBody, vec3 pRotation)
+{
+	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
+
+	btVector3 currentRot = rigidBody->getAngularVelocity();
+	vec3 currentRotation(currentRot.x(), currentRot.y(), currentRot.z());
+	vec3 desiredRotation(pRotation.x, pRotation.y, pRotation.z);
+
+	vec3 rotation = mix(currentRotation, desiredRotation, 0.1);
+
+	btVector3 rot(rotation.x, rotation.y, rotation.z);
+
+	rigidBody->setAngularVelocity(rot);
 }
 
 bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)

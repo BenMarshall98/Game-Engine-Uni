@@ -15,6 +15,7 @@
 #include "Projection.h"
 #include "GLFWWindow.h"
 #include "FollowPlaneCamera.h"
+#include "FollowPlayerCamera.h"
 #include "Camera.h"
 #include "InputMapping.h"
 #include "ScriptingManager.h"
@@ -258,14 +259,13 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera, string pPlane)
 	float minDist = pCamera["MinDistance"].GetFloat();
 	float maxDist = pCamera["MaxDistance"].GetFloat();
 	float defDist = pCamera["DefaultDistance"].GetFloat();
+	float followRate = pCamera["FollowRate"].GetFloat();
+	string follow = pCamera["Follow"].GetString();
+
+	Entity * entity = EntityManager::Instance()->GetEntityByName(follow);
 
 	if (type == "FollowPlane")
 	{
-		float followRate = pCamera["FollowRate"].GetFloat();
-		string follow = pCamera["Follow"].GetString();
-
-		Entity * entity = EntityManager::Instance()->GetEntityByName(follow);
-
 		Plane plane;
 
 		if (pPlane == "XY")
@@ -284,7 +284,28 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera, string pPlane)
 		Camera * camera = new FollowPlaneCamera(entity, plane, minDist, maxDist, defDist, followRate);
 		CameraManager::Instance()->SetCamera(camera);
 	}
+	else if (type == "FollowPlayer")
+	{
+		LockPlane plane;
 
+		string pPlane = pCamera["Lock"].GetString();
+
+		if (pPlane == "X")
+		{
+			plane = LockPlane::X;
+		}
+		else if (pPlane == "Y")
+		{
+			plane = LockPlane::Y;
+		}
+		else
+		{
+			plane = LockPlane::Z;
+		}
+
+		Camera * camera = new FollowPlayerCamera(entity, plane, minDist, maxDist, defDist, followRate);
+		CameraManager::Instance()->SetCamera(camera);
+	}
 	
 }
 

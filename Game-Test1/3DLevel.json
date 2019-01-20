@@ -37,6 +37,11 @@
     },
     {
       "Type": "Model",
+      "Name": "Floor",
+      "Model": "Floor.obj"
+    },
+    {
+      "Type": "Model",
       "Name": "Sphere",
       "Model": "sphere.obj"
     },
@@ -65,11 +70,46 @@
     }
   ],
   "Scripts": [
-    "TestFunctions.lua"
+    "3DLevelFunctions.lua"
   ],
   "EntityTemplate": [
     {
-      "Name": "w",
+      "Name": "Floor",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Floor"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 50, 0, 50 ]
+          },
+          "Mass": 0,
+          "Type": "WALL"
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Concrete"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "ConcreteNormal"
+        }
+      ]
+    },
+    {
+      "Name": "Wall",
       "Components": [
         {
           "Component": "Model",
@@ -104,7 +144,26 @@
       ]
     },
     {
-      "Name": "m",
+      "Name": "InvisibleWall",
+      "Components": [
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0 ]
+          },
+          "Mass": 0,
+          "Type": "WALL"
+        }
+      ]
+    },
+    {
+      "Name": "Container",
       "Components": [
         {
           "Component": "Model",
@@ -139,7 +198,7 @@
       ]
     },
     {
-      "Name": "c",
+      "Name": "Collectable",
       "Components": [
         {
           "Component": "Model",
@@ -183,7 +242,7 @@
       "Components": [
         {
           "Component": "Model",
-          "Model": "Sphere"
+          "Model": "Cube"
         },
         {
           "Component": "Shader",
@@ -191,7 +250,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ 1, -1, 0 ]
+          "Position": [ 0, 1, 0 ]
         },
         {
           "Component": "Direction",
@@ -244,14 +303,20 @@
           ]
         }
       ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 0, 0, 0 ]
+        }
+      ]
     }
   ],
   "Map": {
-    "Type": "Platformer",
-    "File": "Level.txt",
-    "Entities": "Entities.json",
-    "Plane": "XY",
-    "TopLeftCoord": [ 0, 0 ],
+    "Type": "3DLevel",
     "View": {
       "Perspective": {
         "Type": "Perspective",
@@ -259,7 +324,8 @@
         "MaxDistance": 100
       },
       "Camera": {
-        "Type": "FollowPlane",
+        "Type": "FollowPlayer",
+        "Lock": "Y",
         "Follow": "Player",
         "DefaultDistance": 5,
         "MinDistance": 2,

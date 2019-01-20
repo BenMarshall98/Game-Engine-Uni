@@ -78,6 +78,10 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	physicsManager.ApplyImpulse(rigidBody, impulse);
 	physics->SetUpdateImpulse(vec3(0));
 
+	vec3 rotation = physics->GetUpdateRotation();
+	physicsManager.ApplyRotation(rigidBody, rotation);
+	physics->SetUpdateRotation(vec3(0));
+
 	position->SetUpdatePosition(positionVec);
 	direction->SetUpdateDirection(directionQuat);
 

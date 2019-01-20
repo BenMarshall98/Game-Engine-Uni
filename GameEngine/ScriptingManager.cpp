@@ -37,6 +37,8 @@ ScriptingManager::ScriptingManager()
 	lua_register(luaVM, "SetVelocity", lua_SetVelocity);
 	lua_register(luaVM, "GetImpulse", lua_GetImpulse);
 	lua_register(luaVM, "SetImpulse", lua_SetImpulse);
+	lua_register(luaVM, "GetRotation", lua_GetRotation);
+	lua_register(luaVM, "SetRotation", lua_SetRotation);
 	lua_register(luaVM, "GetTouchingGround", lua_GetTouchingGround);
 	lua_register(luaVM, "DeleteEntity", lua_DeleteEntity);
 	
