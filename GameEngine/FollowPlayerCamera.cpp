@@ -26,24 +26,37 @@ void FollowPlayerCamera::Update()
 	vec3 cameraPosition;
 	vec3 upDirection;
 
-	vec3 playerAxis = axis(playerRotation);
-
 	switch (mPlane)
 	{
 		case X:
-			playerAxis = normalize(playerAxis * vec3(0, 1, 1));
-			cameraPosition = vec3(playerPosition.x, playerPosition.y + (playerAxis.y * mDistanceCurrent), playerPosition.z + (playerAxis.z * mDistanceCurrent));
-			upDirection = vec3(1, 0, 0);
+			{
+				vec3 forwardAxis = vec3(0, 0, 1);
+				mat4 rotation = mat4_cast(playerRotation);
+				vec3 newDirection = vec4(forwardAxis, 1) * rotation;
+				newDirection = newDirection * mDistanceCurrent;
+				cameraPosition = playerPosition + newDirection;
+				upDirection = vec3(1, 0, 0);
+			}
 			break;
 		case Y:
-			playerAxis = normalize(playerAxis * vec3(1, 0, 1));
-			cameraPosition = vec3(playerPosition.x + 5, playerPosition.y + 5, playerPosition.z + 5);
-			upDirection = vec3(0, 1, 0);
+			{
+				vec3 forwardAxis = vec3(1, 0, 0);
+				vec3 newDirection = forwardAxis * playerRotation;
+				newDirection = newDirection * mDistanceCurrent;
+				cameraPosition = playerPosition + newDirection;
+				//cameraPosition = playerPosition + vec3(5, 5, 5);
+				upDirection = vec3(0, 1, 0);
+			}
 			break;
 		case Z:
-			playerAxis = normalize(playerAxis * vec3(1, 1, 0));
-			cameraPosition = vec3(playerPosition.x + (playerAxis.x * mDistanceCurrent), playerPosition.y + (playerAxis.y * mDistanceCurrent), playerPosition.z);
-			upDirection = vec3(0, 0, 1);
+			{
+				vec3 forwardAxis = vec3(1, 0, 0);
+				mat4 rotation = mat4_cast(playerRotation);
+				vec3 newDirection = vec4(forwardAxis, 1) * rotation;
+				newDirection = newDirection * mDistanceCurrent;
+				cameraPosition = playerPosition + newDirection;
+				upDirection = vec3(0, 0, 1);
+			}
 			break;
 	}
 
