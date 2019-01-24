@@ -6,6 +6,7 @@
 #include "ComponentPosition.h"
 #include "ComponentPhysics.h"
 #include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 using namespace glm;
 
@@ -551,6 +552,349 @@ int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
 
 	lua_pushboolean(luaState, touchingGround);
 
+	return 1;
+}
+
+int ScriptingManager::lua_CreateTranslationMatrix(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateTranslationMatrix");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x");
+	lua_getfield(luaState, 1, "y");
+	lua_getfield(luaState, 1, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	mat4 translationMatrix = translate(mat4(1), vec3(x, y, z));
+
+	lua_getglobal(luaState, "NewMatrix4");
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			lua_pushnumber(luaState, translationMatrix[i][j]);
+		}
+	}
+
+	if (lua_pcall(luaState, 16, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewMatrix4'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewMatrix4'");
+		lua_error(luaState);
+	}
+	return 1;
+}
+
+int ScriptingManager::lua_CreateScaleMatrix(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateScaleMatrix");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x");
+	lua_getfield(luaState, 1, "y");
+	lua_getfield(luaState, 1, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	mat4 scaleMatrix = scale(mat4(1), vec3(x, y, z));
+
+	lua_getglobal(luaState, "NewMatrix4");
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			lua_pushnumber(luaState, scaleMatrix[i][j]);
+		}
+	}
+
+	if (lua_pcall(luaState, 16, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewMatrix4'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewMatrix4'");
+		lua_error(luaState);
+	}
+	return 1;
+}
+
+int ScriptingManager::lua_CreateRotationMatrix(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateRotationMatrix");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x");
+	lua_getfield(luaState, 1, "y");
+	lua_getfield(luaState, 1, "z");
+	lua_getfield(luaState, 1, "w");
+
+	double x = lua_tonumber(luaState, -4);
+	double y = lua_tonumber(luaState, -3);
+	double z = lua_tonumber(luaState, -2);
+	double w = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 4);
+
+	mat4 rotationMatrix = mat4_cast(quat(x, y, z, w));
+
+	lua_getglobal(luaState, "NewMatrix4");
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			lua_pushnumber(luaState, rotationMatrix[i][j]);
+		}
+	}
+
+	if (lua_pcall(luaState, 16, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewMatrix4'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewMatrix4'");
+		lua_error(luaState);
+	}
+	return 1;
+}
+
+int ScriptingManager::lua_MultiplyMatrices(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: MultiplyMatrices");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x1");
+	lua_getfield(luaState, 1, "y1");
+	lua_getfield(luaState, 1, "z1");
+	lua_getfield(luaState, 1, "w1");
+	lua_getfield(luaState, 1, "x2");
+	lua_getfield(luaState, 1, "y2");
+	lua_getfield(luaState, 1, "z2");
+	lua_getfield(luaState, 1, "w2");
+	lua_getfield(luaState, 1, "x3");
+	lua_getfield(luaState, 1, "y3");
+	lua_getfield(luaState, 1, "z3");
+	lua_getfield(luaState, 1, "w3");
+	lua_getfield(luaState, 1, "x4");
+	lua_getfield(luaState, 1, "y4");
+	lua_getfield(luaState, 1, "z4");
+	lua_getfield(luaState, 1, "w4");
+
+	double x1 = lua_tonumber(luaState, -16);
+	double y1 = lua_tonumber(luaState, -15);
+	double z1 = lua_tonumber(luaState, -14);
+	double w1 = lua_tonumber(luaState, -13);
+	double x2 = lua_tonumber(luaState, -12);
+	double y2 = lua_tonumber(luaState, -11);
+	double z2 = lua_tonumber(luaState, -10);
+	double w2 = lua_tonumber(luaState, -9);
+	double x3 = lua_tonumber(luaState, -8);
+	double y3 = lua_tonumber(luaState, -7);
+	double z3 = lua_tonumber(luaState, -6);
+	double w3 = lua_tonumber(luaState, -5);
+	double x4 = lua_tonumber(luaState, -4);
+	double y4 = lua_tonumber(luaState, -3);
+	double z4 = lua_tonumber(luaState, -2);
+	double w4 = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 16);
+
+	mat4 matrix1 = mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+
+	lua_getfield(luaState, 2, "x1");
+	lua_getfield(luaState, 2, "y1");
+	lua_getfield(luaState, 2, "z1");
+	lua_getfield(luaState, 2, "w1");
+	lua_getfield(luaState, 2, "x2");
+	lua_getfield(luaState, 2, "y2");
+	lua_getfield(luaState, 2, "z2");
+	lua_getfield(luaState, 2, "w2");
+	lua_getfield(luaState, 2, "x3");
+	lua_getfield(luaState, 2, "y3");
+	lua_getfield(luaState, 2, "z3");
+	lua_getfield(luaState, 2, "w3");
+	lua_getfield(luaState, 2, "x4");
+	lua_getfield(luaState, 2, "y4");
+	lua_getfield(luaState, 2, "z4");
+	lua_getfield(luaState, 2, "w4");
+
+	x1 = lua_tonumber(luaState, -16);
+	y1 = lua_tonumber(luaState, -15);
+	z1 = lua_tonumber(luaState, -14);
+	w1 = lua_tonumber(luaState, -13);
+	x2 = lua_tonumber(luaState, -12);
+	y2 = lua_tonumber(luaState, -11);
+	z2 = lua_tonumber(luaState, -10);
+	w2 = lua_tonumber(luaState, -9);
+	x3 = lua_tonumber(luaState, -8);
+	y3 = lua_tonumber(luaState, -7);
+	z3 = lua_tonumber(luaState, -6);
+	w3 = lua_tonumber(luaState, -5);
+	x4 = lua_tonumber(luaState, -4);
+	y4 = lua_tonumber(luaState, -3);
+	z4 = lua_tonumber(luaState, -2);
+	w4 = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 16);
+
+	mat4 matrix2 = mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+
+	mat4 matrix3 = matrix1 * matrix2;
+
+	lua_getglobal(luaState, "NewMatrix4");
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			lua_pushnumber(luaState, matrix3[i][j]);
+		}
+	}
+
+	if (lua_pcall(luaState, 16, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewMatrix4'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewMatrix4'");
+		lua_error(luaState);
+	}
+	return 1;
+}
+
+int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: MultiplyMatrixVector");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x1");
+	lua_getfield(luaState, 1, "y1");
+	lua_getfield(luaState, 1, "z1");
+	lua_getfield(luaState, 1, "w1");
+	lua_getfield(luaState, 1, "x2");
+	lua_getfield(luaState, 1, "y2");
+	lua_getfield(luaState, 1, "z2");
+	lua_getfield(luaState, 1, "w2");
+	lua_getfield(luaState, 1, "x3");
+	lua_getfield(luaState, 1, "y3");
+	lua_getfield(luaState, 1, "z3");
+	lua_getfield(luaState, 1, "w3");
+	lua_getfield(luaState, 1, "x4");
+	lua_getfield(luaState, 1, "y4");
+	lua_getfield(luaState, 1, "z4");
+	lua_getfield(luaState, 1, "w4");
+
+	double x1 = lua_tonumber(luaState, -16);
+	double y1 = lua_tonumber(luaState, -15);
+	double z1 = lua_tonumber(luaState, -14);
+	double w1 = lua_tonumber(luaState, -13);
+	double x2 = lua_tonumber(luaState, -12);
+	double y2 = lua_tonumber(luaState, -11);
+	double z2 = lua_tonumber(luaState, -10);
+	double w2 = lua_tonumber(luaState, -9);
+	double x3 = lua_tonumber(luaState, -8);
+	double y3 = lua_tonumber(luaState, -7);
+	double z3 = lua_tonumber(luaState, -6);
+	double w3 = lua_tonumber(luaState, -5);
+	double x4 = lua_tonumber(luaState, -4);
+	double y4 = lua_tonumber(luaState, -3);
+	double z4 = lua_tonumber(luaState, -2);
+	double w4 = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 16);
+
+	mat4 matrix = mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec4 vector1 = vec4(x, y, z, 1);
+
+	vec3 vector2 = vector1 * matrix;
+
+	lua_getglobal(luaState, "NewVector3");
+	lua_pushnumber(luaState, vector2.x);
+	lua_pushnumber(luaState, vector2.y);
+	lua_pushnumber(luaState, vector2.z);
+
+	if (lua_pcall(luaState, 3, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "error running function: 'NewVector3'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewVector3'");
+		lua_error(luaState);
+	}
 	return 1;
 }
 
