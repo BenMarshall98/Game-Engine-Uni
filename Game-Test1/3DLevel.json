@@ -93,7 +93,7 @@
           "Component": "Physics",
           "Shape": {
             "Type": "Cuboid",
-            "Size": [ 50, 0, 50 ]
+            "Size": [ 25, 0, 25 ]
           },
           "Mass": 0,
           "Type": "WALL"
@@ -260,8 +260,8 @@
         {
           "Component": "Physics",
           "Shape": {
-            "Type": "Sphere",
-            "Radius": 0.5
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
           },
           "Mass": 1,
           "Type": "PLAYER"
@@ -291,6 +291,22 @@
                 "KEYBOARD_D",
                 "KEYBOARD_RIGHT",
                 "GAMEPAD_L_RIGHT"
+              ]
+            },
+            {
+              "Function": "PlayerForward",
+              "Input": [
+                "KEYBOARD_W",
+                "KEYBOARD_UP",
+                "GAMEPAD_L_UP"
+              ]
+            },
+            {
+              "Function": "PlayerBackward",
+              "Input": [
+                "KEYBOARD_S",
+                "KEYBOARD_DOWN",
+                "GAMEPAD_L_DOWN"
               ]
             },
             {

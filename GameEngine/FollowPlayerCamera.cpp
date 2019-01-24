@@ -37,7 +37,7 @@ void FollowPlayerCamera::Update()
 			break;
 		case Y:
 			playerAxis = normalize(playerAxis * vec3(1, 0, 1));
-			cameraPosition = vec3(playerPosition.x + (playerAxis.x * mDistanceCurrent), playerPosition.y, playerPosition.z + (playerAxis.z * mDistanceCurrent));
+			cameraPosition = vec3(playerPosition.x + 5, playerPosition.y + 5, playerPosition.z + 5);
 			upDirection = vec3(0, 1, 0);
 			break;
 		case Z:
