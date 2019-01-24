@@ -22,4 +22,8 @@ function Quaternion:angleAxis(pAngle, pVector)
 	return Quaternion:new(x, y, z, w)
 end
 
+function NewQuaternion(pX, pY, pZ, pW)
+	return Quaternion:new(pX, pY, pZ, pW)
+end
+
 return Quaternion

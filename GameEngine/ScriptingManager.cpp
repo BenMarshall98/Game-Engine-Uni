@@ -473,7 +473,7 @@ int ScriptingManager::lua_GetDirection(lua_State * luaState)
 
 	quat quaterion = directionComponent->GetUpdateDirection();
 
-	lua_getglobal(luaState, "NewQuaterion");
+	lua_getglobal(luaState, "NewQuaternion");
 	lua_pushnumber(luaState, quaterion.x);
 	lua_pushnumber(luaState, quaterion.y);
 	lua_pushnumber(luaState, quaterion.z);

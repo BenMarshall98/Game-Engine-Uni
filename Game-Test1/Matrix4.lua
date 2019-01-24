@@ -22,4 +22,8 @@ function Matrix4:new(pX1, pY1, pZ1, pW1, pX2, pY2, pZ2, pW2, pX3, pY3, pZ3, pW3,
 	return self
 end
 
+function NewMatrix4(pX1, pY1, pZ1, pW1, pX2, pY2, pZ2, pW2, pX3, pY3, pZ3, pW3, pX4, pY4, pZ4, pW4)
+	return Matrix4:new(pX1, pY1, pZ1, pW1, pX2, pY2, pZ2, pW2, pX3, pY3, pZ3, pW3, pX4, pY4, pZ4, pW4)
+end
+
 return Matrix4
