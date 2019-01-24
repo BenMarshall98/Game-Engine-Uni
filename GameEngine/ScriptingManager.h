@@ -26,7 +26,14 @@ private:
 	static int lua_SetImpulse(lua_State * luaState);
 	static int lua_GetRotation(lua_State * luaState);
 	static int lua_SetRotation(lua_State * luaState);
+	static int lua_GetDirection(lua_State * luaState);
+	static int lua_SetDirection(lua_State * luaState);
 	static int lua_GetTouchingGround(lua_State * luaState);
+	static int lua_CreateTranslationMatrix(lua_State * luaState);
+	static int lua_CreateScaleMatrix(lua_State * luaState);
+	static int lua_CreateRotationMatrix(lua_State * luaState);
+	static int lua_MultiplyMatrices(lua_State * luaState);
+	static int lua_MultiplyMatrixVector(lua_State * luaState);
 	static int lua_DeleteEntity(lua_State * luaState);
 
 	ScriptingManager();
