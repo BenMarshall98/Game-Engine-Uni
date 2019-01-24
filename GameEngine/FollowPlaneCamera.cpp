@@ -3,8 +3,8 @@
 #include "EntityManager.h"
 
 
-FollowPlaneCamera::FollowPlaneCamera(Entity * pEntity, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
-	mEntity(pEntity), mPlane(pPlane), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
+FollowPlaneCamera::FollowPlaneCamera(Entity * pEntity, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
+	mEntity(pEntity), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
 {
 }
 
@@ -19,28 +19,8 @@ void FollowPlaneCamera::Update()
 
 	vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
-	vec3 cameraPosition;
-	vec3 upDirection;
-
-	switch (mPlane)
-	{
-		case XY:
-			cameraPosition = vec3(playerPosition.x, playerPosition.y, playerPosition.z + mDistanceCurrent);
-			upDirection = vec3(0, 1, 0);
-			break;
-		case XZ:
-			cameraPosition = vec3(playerPosition.x, playerPosition.y + mDistanceCurrent, playerPosition.z);
-			upDirection = vec3(0, 0, 1);
-			break;
-		case ZY:
-			cameraPosition = vec3(playerPosition.x + mDistanceCurrent, playerPosition.y, playerPosition.z);
-			upDirection = vec3(0, 0, 1);
-			break;
-		default:
-			cameraPosition = playerPosition;
-			upDirection = vec3(0, 1, 0);
-			break;
-	}
+	vec3 cameraPosition = vec3(playerPosition.x, playerPosition.y, playerPosition.z + mDistanceCurrent);
+	vec3 upDirection = vec3(0, 1, 0);
 
 	static bool firstTime = true;
 

@@ -20,10 +20,10 @@ private:
 	static void LoadEntityTemplatesJSON(const Value& EntityTemplates);
 	static void LoadEntity(const Value& Entities);
 	static void LoadMapJSON(const Value& Map);
-	static void LoadViewJSON(const Value& View, string plane);
-	static void LoadPerspectiveJSON(const Value& Perspective, string plane);
-	static void LoadCameraJSON(const Value& Camera, string plane);
-	static void LoadPlatformerMap(string file, string plane, vec2 topLeftCoord);
+	static void LoadViewJSON(const Value& View);
+	static void LoadPerspectiveJSON(const Value& Perspective);
+	static void LoadCameraJSON(const Value& Camera);
+	static void LoadPlatformerMap(string file, vec2 topLeftCoord);
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
 	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
 public:

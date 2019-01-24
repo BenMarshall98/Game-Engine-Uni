@@ -5,8 +5,8 @@
 #include "glm/gtc/quaternion.hpp"
 
 
-FollowPlayerCamera::FollowPlayerCamera(Entity * pEntity, LockPlane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
-	mEntity(pEntity), mPlane(pPlane), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
+FollowPlayerCamera::FollowPlayerCamera(Entity * pEntity, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
+	mEntity(pEntity), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
 {
 }
 
@@ -23,42 +23,12 @@ void FollowPlayerCamera::Update()
 	vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 	quat playerRotation = dynamic_cast<ComponentDirection *>(componentDirection)->GetUpdateDirection();
 
-	vec3 cameraPosition;
-	vec3 upDirection;
-
-	switch (mPlane)
-	{
-		case X:
-			{
-				vec3 forwardAxis = vec3(0, 0, 1);
-				mat4 rotation = mat4_cast(playerRotation);
-				vec3 newDirection = vec4(forwardAxis, 1) * rotation;
-				newDirection = newDirection * mDistanceCurrent;
-				cameraPosition = playerPosition + newDirection;
-				upDirection = vec3(1, 0, 0);
-			}
-			break;
-		case Y:
-			{
-				vec3 forwardAxis = vec3(1, 0, 0);
-				vec3 newDirection = forwardAxis * playerRotation;
-				newDirection = newDirection * mDistanceCurrent;
-				cameraPosition = playerPosition + newDirection;
-				//cameraPosition = playerPosition + vec3(5, 5, 5);
-				upDirection = vec3(0, 1, 0);
-			}
-			break;
-		case Z:
-			{
-				vec3 forwardAxis = vec3(1, 0, 0);
-				mat4 rotation = mat4_cast(playerRotation);
-				vec3 newDirection = vec4(forwardAxis, 1) * rotation;
-				newDirection = newDirection * mDistanceCurrent;
-				cameraPosition = playerPosition + newDirection;
-				upDirection = vec3(0, 0, 1);
-			}
-			break;
-	}
+	vec3 forwardAxis = vec3(1, 0, 0);
+	vec3 newDirection = forwardAxis * inverse(playerRotation);
+	newDirection = newDirection * mDistanceCurrent;
+	vec3 cameraPosition = playerPosition + newDirection;
+	cameraPosition.y += 2;
+	vec3 upDirection = vec3(0, 1, 0);
 
 	static bool firstTime = true;
 

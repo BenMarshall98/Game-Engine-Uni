@@ -8,7 +8,8 @@ using namespace glm;
 class Camera
 {
 private:
-	mat4 viewMatrix;
+	mat4 renderViewMatrix;
+	mat4 updateViewMatrix;
 
 protected:
 	vec3 position;
@@ -22,12 +23,17 @@ public:
 
 	virtual void Update()
 	{
-		viewMatrix = glm::lookAt(position, position + lookAt, up);
+		updateViewMatrix = glm::lookAt(position, position + lookAt, up);
+	}
+
+	inline void Swap()
+	{
+		renderViewMatrix = updateViewMatrix;
 	}
 
 	inline mat4 GetViewMatrix()
 	{
-		return viewMatrix;
+		return renderViewMatrix;
 	}
 
 	inline vec3 GetPosition() const

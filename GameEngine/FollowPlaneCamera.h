@@ -2,17 +2,10 @@
 #include "Camera.h"
 #include "Entity.h"
 
-enum Plane
-{
-	XY,
-	XZ,
-	ZY
-};
 class FollowPlaneCamera : public Camera
 {
 private:
 	Entity * mEntity;
-	Plane mPlane;
 	float mDistanceMin;
 	float mDistanceMax;
 	float mDistanceCurrent;
@@ -20,7 +13,7 @@ private:
 	vec3 lastPosition;
 
 public:
-	FollowPlaneCamera(Entity * pEntity, Plane pPlane, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate);
+	FollowPlaneCamera(Entity * pEntity, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate);
 	~FollowPlaneCamera();
 
 	FollowPlaneCamera& operator=(const FollowPlaneCamera&) = delete;

@@ -341,7 +341,6 @@
       },
       "Camera": {
         "Type": "FollowPlayer",
-        "Lock": "Y",
         "Follow": "Player",
         "DefaultDistance": 5,
         "MinDistance": 2,

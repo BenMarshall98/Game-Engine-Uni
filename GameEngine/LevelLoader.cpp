@@ -183,12 +183,10 @@ void LevelLoader::LoadEntity(const Value& Entities)
 void LevelLoader::LoadMapJSON(const Value& Map)
 {
 	string type = Map["Type"].GetString();
-	string plane = "";
 	
 	if (type == "Platformer")
 	{
 		string file = Map["File"].GetString();
-		plane = Map["Plane"].GetString();
 		vec2 topLeftCoord = vec2(0);
 
 		const Value& position = Map["TopLeftCoord"];
@@ -198,25 +196,25 @@ void LevelLoader::LoadMapJSON(const Value& Map)
 			topLeftCoord[i] = position[i].GetFloat();
 		}
 
-		LoadPlatformerMap(file, plane, topLeftCoord);
+		LoadPlatformerMap(file, topLeftCoord);
 	}
 
 	if (Map.HasMember("View"))
 	{
 		if (Map["View"].IsObject())
 		{
-			LoadViewJSON(Map["View"], plane);
+			LoadViewJSON(Map["View"]);
 		}
 	}
 }
 
-void LevelLoader::LoadViewJSON(const Value& View, string plane)
+void LevelLoader::LoadViewJSON(const Value& View)
 {
 	if (View.HasMember("Perspective"))
 	{
 		if (View["Perspective"].IsObject())
 		{
-			LoadPerspectiveJSON(View["Perspective"], plane);
+			LoadPerspectiveJSON(View["Perspective"]);
 		}
 	}
 
@@ -224,12 +222,12 @@ void LevelLoader::LoadViewJSON(const Value& View, string plane)
 	{
 		if (View["Camera"].IsObject())
 		{
-			LoadCameraJSON(View["Camera"], plane);
+			LoadCameraJSON(View["Camera"]);
 		}
 	}
 }
 
-void LevelLoader::LoadPerspectiveJSON(const Value& Perspective, string plane)
+void LevelLoader::LoadPerspectiveJSON(const Value& Perspective)
 {
 	string type = Perspective["Type"].GetString();
 
@@ -250,7 +248,7 @@ void LevelLoader::LoadPerspectiveJSON(const Value& Perspective, string plane)
 	}
 }
 
-void LevelLoader::LoadCameraJSON(const Value& pCamera, string pPlane)
+void LevelLoader::LoadCameraJSON(const Value& pCamera)
 {
 	//TODO: get camera into a camera manager
 
@@ -266,50 +264,18 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera, string pPlane)
 
 	if (type == "FollowPlane")
 	{
-		Plane plane;
-
-		if (pPlane == "XY")
-		{
-			plane = Plane::XY;
-		}
-		else if (pPlane == "XZ")
-		{
-			plane = Plane::XZ;
-		}
-		else
-		{
-			plane = Plane::ZY;
-		}
-
-		Camera * camera = new FollowPlaneCamera(entity, plane, minDist, maxDist, defDist, followRate);
+		Camera * camera = new FollowPlaneCamera(entity, minDist, maxDist, defDist, followRate);
 		CameraManager::Instance()->SetCamera(camera);
 	}
 	else if (type == "FollowPlayer")
 	{
-		LockPlane plane;
-
-		string pPlane = pCamera["Lock"].GetString();
-
-		if (pPlane == "X")
-		{
-			plane = LockPlane::X;
-		}
-		else if (pPlane == "Y")
-		{
-			plane = LockPlane::Y;
-		}
-		else
-		{
-			plane = LockPlane::Z;
-		}
-
-		Camera * camera = new FollowPlayerCamera(entity, plane, minDist, maxDist, defDist, followRate);
+		Camera * camera = new FollowPlayerCamera(entity, minDist, maxDist, defDist, followRate);
 		CameraManager::Instance()->SetCamera(camera);
 	}
 	
 }
 
-void LevelLoader::LoadPlatformerMap(string file, string plane, vec2 topLeftCoord)
+void LevelLoader::LoadPlatformerMap(string file, vec2 topLeftCoord)
 {
 	int x = 0;
 	int y = 0;
@@ -336,34 +302,13 @@ void LevelLoader::LoadPlatformerMap(string file, string plane, vec2 topLeftCoord
 				Entity * newEntity = entityManager->CreateEntity();
 				AddComponentsToEntityJSON(newEntity, it->second);
 
-				vec3 position = vec3(0);
+				vec3 position = position = vec3(x, y, 0);
 
-				if (plane == "XY")
-				{
-					position = vec3(x, y, 0);
-				}
-				else if (plane == "XZ")
-				{
-					position = vec3(x, 0, y);
-				}
-				else if (plane == "ZY")
-				{
-					position = vec3(0, y, x);
-				}
 				entityManager->AddComponentToEntity(newEntity, new ComponentPosition(position));
 			}
 		}
 		x++;
 	}
-
-	/*Entity * newEntity = entityManager->CreateEntity("Player");
-	entityManager->AddComponentToEntity(newEntity, new ComponentModel("Sphere"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentShader("NormalShader"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentPosition(vec3(1, -1, 0)));
-	entityManager->AddComponentToEntity(newEntity, new ComponentDirection(vec3(0, 0, 1), 0));
-	entityManager->AddComponentToEntity(newEntity, new ComponentPhysics(new CollisionSphere(0.5f), 1, PLAYER, newEntity));
-	entityManager->AddComponentToEntity(newEntity, new ComponentTexture("Earth"));
-	entityManager->AddComponentToEntity(newEntity, new ComponentNormalTexture("EarthNormal"));*/
 }
 
 void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& components)

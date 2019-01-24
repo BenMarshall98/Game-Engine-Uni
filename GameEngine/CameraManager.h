@@ -33,6 +33,11 @@ public:
 	void Update();
 	void Resize(float width, float height);
 
+	void Swap()
+	{
+		camera->Swap();
+	}
+
 	Camera * GetCamera();
 	Projection * GetProjection();
 

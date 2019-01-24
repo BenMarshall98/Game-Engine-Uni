@@ -43,6 +43,7 @@ void SceneManager::Run()
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 				EntityManager::Instance()->Swap();
+				CameraManager::Instance()->Swap();
 
 				thread update = thread(&SceneManager::Update, this);
 				Render();
