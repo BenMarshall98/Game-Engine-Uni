@@ -12,7 +12,7 @@ private:
 	static InputManager * instance;
 	GLFWInput * inputDevice;
 
-	explicit InputManager(GLFWInput * pInputDevice) : inputDevice(pInputDevice) {}
+	explicit InputManager(GLFWInput * const pInputDevice) : inputDevice(pInputDevice) {}
 
 public:
 
@@ -28,9 +28,9 @@ public:
 		return instance;
 	}
 
-	float GetInputValue(vector<GameInput> gameInputs);
+	float GetInputValue(vector<GameInput> & gameInputs);
 
-	inline GLFWInput * GetInputReader()
+	inline GLFWInput * GetInputReader() const
 	{
 		return inputDevice;
 	}

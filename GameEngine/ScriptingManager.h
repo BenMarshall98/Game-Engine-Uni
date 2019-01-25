@@ -53,11 +53,11 @@ public:
 	ScriptingManager& operator=(const ScriptingManager&) = delete;
 	ScriptingManager(ScriptingManager&) = delete;
 
-	void LoadLuaFromFile(string & fileName);
+	void LoadLuaFromFile(const string & fileName) const;
 
-	void RunScriptFromCollision(string & function, Entity * entity);
+	void RunScriptFromCollision(const string & function, Entity * entity) const;
 
-	void RunScriptFromInput(string & function, Entity * entity, float inputValue, float deltaTime);
+	void RunScriptFromInput(const string & function, Entity * entity, float inputValue, float deltaTime) const;
 
 	~ScriptingManager();
 };

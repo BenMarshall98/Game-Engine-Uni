@@ -17,14 +17,12 @@ extern "C"
 	#include "Lua/lualib.h"
 }
 
-ScriptingManager::ScriptingManager()
+ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 {
-	luaVM = luaL_newstate();
-
 	if (luaVM == nullptr)
 	{
 		string message = "Failed to Initialize lua";
-		LoggingManager::LogMessage(SEVERE, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
 	luaL_openlibs(luaVM);
@@ -60,21 +58,21 @@ ScriptingManager::ScriptingManager()
 	LoadLuaFromFile(file);
 }
 
-void ScriptingManager::LoadLuaFromFile(string & file)
+void ScriptingManager::LoadLuaFromFile(const string & file) const
 {
 	int iStatus = luaL_loadfile(luaVM, file.c_str());
 	if (iStatus)
 	{
 		string message = lua_tostring(luaVM, -1);
 		message = "Error: " + message;
-		LoggingManager::LogMessage(SEVERE, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
 	if (lua_pcall(luaVM, 0, 0, 0))
 	{
 		string message = lua_tostring(luaVM, -1);
 		message = "Error: " + message;
-		LoggingManager::LogMessage(SEVERE, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 }
 
@@ -226,7 +224,8 @@ int ScriptingManager::lua_SetPosition(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	positionComponent->SetUpdatePosition(vec3(x, y, z));
+	vec3 position(x, y, z);
+	positionComponent->SetUpdatePosition(position);
 
 	return 0;
 }
@@ -300,7 +299,8 @@ int ScriptingManager::lua_SetVelocity(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	physicsComponent->SetUpdateVelocity(vec3(x, y, z));
+	vec3 velocity(x, y, z);
+	physicsComponent->SetUpdateVelocity(velocity);
 
 	return 0;
 }
@@ -374,7 +374,8 @@ int ScriptingManager::lua_SetImpulse(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	physicsComponent->SetUpdateImpulse(vec3(x, y, z));
+	vec3 impulse(x, y, z);
+	physicsComponent->SetUpdateImpulse(impulse);
 
 	return 0;
 }
@@ -448,7 +449,8 @@ int ScriptingManager::lua_SetRotation(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	physicsComponent->SetUpdateRotation(vec3(x, y, z));
+	vec3 rotation(x, y, z);
+	physicsComponent->SetUpdateRotation(rotation);
 
 	return 0;
 }
@@ -921,7 +923,7 @@ int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
 	return 0;
 }
 
-void ScriptingManager::RunScriptFromCollision(string & function, Entity * entity)
+void ScriptingManager::RunScriptFromCollision(const string & function, Entity * entity) const
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
@@ -930,11 +932,11 @@ void ScriptingManager::RunScriptFromCollision(string & function, Entity * entity
 	{
 		string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;
-		LoggingManager::LogMessage(LOG, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
 	}
 }
 
-void ScriptingManager::RunScriptFromInput(string & function, Entity * entity, float inputValue, float deltaTime)
+void ScriptingManager::RunScriptFromInput(const string & function, Entity * entity, float inputValue, float deltaTime) const
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
@@ -945,7 +947,7 @@ void ScriptingManager::RunScriptFromInput(string & function, Entity * entity, fl
 	{
 		string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;
-		LoggingManager::LogMessage(LOG, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
 	}
 }
 

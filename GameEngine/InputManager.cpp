@@ -6,7 +6,7 @@ InputManager::~InputManager()
 {
 }
 
-float InputManager::GetInputValue(vector<GameInput> gameInputs)
+float InputManager::GetInputValue(vector<GameInput> & gameInputs)
 {
 	float value = 0;
 
@@ -15,17 +15,17 @@ float InputManager::GetInputValue(vector<GameInput> gameInputs)
 		float newValue = 0;
 		if ((gameInputs.at(i) & GAMEPAD << DEVICE) == GAMEPAD << DEVICE)
 		{
-			int key = (gameInputs.at(i) - (GAMEPAD << DEVICE)) >> CODE;
+			const int key = (gameInputs.at(i) - (GAMEPAD << DEVICE)) >> CODE;
 			newValue = inputDevice->GamePadInput(key);
 		}
 		else if ((gameInputs.at(i) & KEYBOARD << DEVICE) == KEYBOARD << DEVICE)
 		{
-			int key = (gameInputs.at(i) - (KEYBOARD << DEVICE)) >> CODE;
+			const int key = (gameInputs.at(i) - (KEYBOARD << DEVICE)) >> CODE;
 			newValue = inputDevice->KeyboardInput(key);
 		}
 		else if ((gameInputs.at(i) & MOUSE << DEVICE) == MOUSE << DEVICE)
 		{
-			int key = (gameInputs.at(i) - (MOUSE << DEVICE)) >> CODE;
+			const int key = (gameInputs.at(i) - (MOUSE << DEVICE)) >> CODE;
 			newValue = inputDevice->MouseInput(key);
 		}
 

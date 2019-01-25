@@ -18,7 +18,7 @@ using namespace std;
 	E(COLLECTABLE)
 
 #define E(e) e
-static enum EntityType { ENTITYTYPES(E) };
+static enum class EntityType { ENTITYTYPES(E) };
 #undef E
 
 class ComponentPhysics : public iComponent
@@ -29,31 +29,34 @@ private:
 	static vector<string> EntityTypeNames;
 #undef E
 
-	map<EntityType, string> * collisionFunctions;
 	map<Entity *, EntityType> unresolvedCollisions = map<Entity *, EntityType>();
-	EntityType entityType;
-	CollisionShape * shape;
+	
 	vec3 velocity = vec3(0);
 	vec3 impulse = vec3(0);
 	vec3 rotation = vec3(0);
-	float mass;
+	
+	map<EntityType, string> * collisionFunctions;
+	CollisionShape * shape;
 	void * rigidBody;
 	Entity * thisEntity;
+
+	EntityType entityType;
+	float mass;
 	bool touchingGround = true;
 	bool nextTouchingGround = false;
 	bool collisionResponse;
 
 public:
-	ComponentPhysics(CollisionShape * pShape, float pMass, EntityType pEntityType, Entity * pThisEntity, bool pCollisionResponse = true, map<EntityType, string> * pCollisionFunctions = new map<EntityType, string>())
+	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const bool pCollisionResponse = true, map<EntityType, string> * const pCollisionFunctions = new map<EntityType, string>())
 		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
-	~ComponentPhysics() {}
+	~ComponentPhysics();
 
 	ComponentPhysics& operator=(const ComponentPhysics&) = delete;
 	ComponentPhysics(ComponentPhysics&) = delete;
 
 	ComponentType GetComponentName() override;
 
-	static EntityType StringToEnum(string entityType);
+	static EntityType StringToEnum(string & entityType);
 
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
@@ -63,39 +66,39 @@ public:
 		nextTouchingGround = false;
 	}
 
-	void RenderSwap() override {};
+	void RenderSwap() override;
 
 	inline bool GetUpdateCollisionResponse() const
 	{
 		return collisionResponse;
 	}
 
-	inline vec3 GetUpdateVelocity() const
+	inline const vec3 & GetUpdateVelocity() const
 	{
 		return velocity;
 	}
 
-	inline void SetUpdateVelocity(vec3 pVelocity)
+	inline void SetUpdateVelocity(vec3 & pVelocity)
 	{
 		velocity = pVelocity;
 	}
 
-	inline vec3 GetUpdateImpulse() const
+	inline const vec3 & GetUpdateImpulse() const
 	{
 		return impulse;
 	}
 
-	inline void SetUpdateImpulse(vec3 pImpulse)
+	inline void SetUpdateImpulse(vec3 & pImpulse)
 	{
 		impulse = pImpulse;
 	}
 
-	inline vec3 GetUpdateRotation() const
+	inline const vec3 & GetUpdateRotation() const
 	{
 		return rotation;
 	}
 
-	inline void SetUpdateRotation(vec3 pRotation)
+	inline void SetUpdateRotation(vec3 & pRotation)
 	{
 		rotation = pRotation;
 	}
@@ -110,7 +113,7 @@ public:
 		return mass;
 	}
 
-	inline void SetUpdateRigidBody(void* pRigidBody)
+	inline void SetUpdateRigidBody(void * const pRigidBody)
 	{
 		rigidBody = pRigidBody;
 	}
@@ -130,7 +133,7 @@ public:
   		return touchingGround;
 	}
 
-	inline void SetUpdateTouchingGround(bool pTouchingGround)
+	inline void SetUpdateTouchingGround(const bool pTouchingGround)
 	{
 		nextTouchingGround = nextTouchingGround || pTouchingGround;
 	}

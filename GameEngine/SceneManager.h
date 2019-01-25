@@ -13,19 +13,17 @@ class SceneManager
 {
 private:
 	static SceneManager * instance;
+	thread swap;
 
 	iScene * currentScene;
 	iScene * newScene;
 	GLFWWindow * currentWindow;
-	thread swap;
 
 	int updateCount = 0;
 	int renderCount = 0;
 	bool windowRunning;
 	bool sceneRunning;
 	bool tempRunning;
-	
-	
 
 	SceneManager() : currentScene(nullptr), newScene(nullptr), currentWindow(nullptr), windowRunning(true), sceneRunning(true), tempRunning(true)
 	{

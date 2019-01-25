@@ -22,9 +22,9 @@ class GLFWWindow
 		~GLFWWindow();
 
 		void Load();
-		void LimitFPS(float FPS);
-		void WindowEvents();
-		bool IsRunning();
+		void LimitFPS(float FPS) const;
+		void WindowEvents() const;
+		bool IsRunning() const;
 
 		static int GetWidth()
 		{

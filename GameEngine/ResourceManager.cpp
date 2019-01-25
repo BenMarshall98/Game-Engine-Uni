@@ -98,7 +98,7 @@ void ResourceManager::LoadShader(const string & shaderName, const string & verte
 	shaderList.insert(pair<string, Shader *>(shaderName, shader));
 }
 
-iModel * ResourceManager::GetModel(string model)
+iModel * ResourceManager::GetModel(string & model)
 {
 	map<string, iModel *>::iterator it = modelList.find(model);
 
@@ -109,7 +109,7 @@ iModel * ResourceManager::GetModel(string model)
 	return nullptr;
 }
 
-Shader * ResourceManager::GetShader(string shader)
+Shader * ResourceManager::GetShader(string & shader)
 {
 	map<string, Shader *>::iterator it = shaderList.find(shader);
 
@@ -120,7 +120,7 @@ Shader * ResourceManager::GetShader(string shader)
 	return nullptr;
 }
 
-Texture * ResourceManager::GetTexture(string texture)
+Texture * ResourceManager::GetTexture(string & texture)
 {
 	map<string, Texture *>::iterator it = textureList.find(texture);
 

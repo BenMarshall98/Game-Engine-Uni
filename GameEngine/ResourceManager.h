@@ -28,7 +28,7 @@ class ResourceManager
 		static void LoadTexture(const string & textureName, const string & fileName);
 		static void LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram = "");
 
-		static iModel * GetModel(string model);
-		static Shader * GetShader(string shader);
-		static Texture * GetTexture(string texture);
+		static iModel * GetModel(string & model);
+		static Shader * GetShader(string & shader);
+		static Texture * GetTexture(string & texture);
 };

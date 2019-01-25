@@ -31,22 +31,21 @@ TestGameScene::TestGameScene() : mPhysicsManager(nullptr)
 
 void TestGameScene::Load()
 {
-	EntityManager * mEntityManager = EntityManager::Instance();
 
 	LevelLoader::LoadLevelJSON("3DLevel.json");
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
-	RenderSystem * render = new RenderSystem();
+	RenderSystem * const render = new RenderSystem();
 	mSystemManager.AddRenderSystem(render);
 
-	InputSystem * input = new InputSystem();
+	InputSystem * const input = new InputSystem();
 	mSystemManager.AddUpdateSystem(input);
 
-	PhysicsSystem * physics = new PhysicsSystem(*mPhysicsManager);
+	PhysicsSystem * const physics = new PhysicsSystem(*mPhysicsManager);
 	mSystemManager.AddUpdateSystem(physics);
 
-	LightManager * lightManager = LightManager::Instance();
+	LightManager * const lightManager = LightManager::Instance();
 	lightManager->SetDirectionalLight(vec3(0, -1, 0), vec3(1.0, 1.0, 1.0));
 	lightManager->AddPointLight(vec3(0, 0, -3.0f), vec3(1, 1, 1), 0.1f);
 	lightManager->AddSpotLight(vec3(0.5f, 0.5f, -1.0f), vec3(0, 0, -1), vec3(1.0, 1.0, 1.0), 2.5f, 5);
@@ -75,7 +74,7 @@ void TestGameScene::Close()
 {
 }
 
-void TestGameScene::Resize(int width, int height)
+void TestGameScene::Resize(const int width, const int height)
 {
 }
 

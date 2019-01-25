@@ -1,5 +1,10 @@
 #include "ComponentPosition.h"
 
+ComponentPosition::~ComponentPosition()
+{
+
+}
+
 ComponentType ComponentPosition::GetComponentName()
 {
 	return ComponentType::COMPONENT_POSITION;

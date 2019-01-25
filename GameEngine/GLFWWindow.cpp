@@ -19,7 +19,7 @@ GLFWWindow::~GLFWWindow()
 	glfwTerminate();
 }
 
-void GLFWWindow::windowResize(GLFWwindow* window, const int pWidth, const int pHeight)
+void GLFWWindow::windowResize(GLFWwindow* const window, const int pWidth, const int pHeight)
 {
 	glViewport(0, 0, pWidth, pHeight);
 	height = pHeight;
@@ -54,21 +54,21 @@ void GLFWWindow::Load()
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
 
-	InputManager * inputManager = InputManager::Instance(new GLFWInput(gameWindow));
+	InputManager::Instance(new GLFWInput(gameWindow));
 }
 
-void GLFWWindow::WindowEvents()
+void GLFWWindow::WindowEvents() const
 {
 	glfwSwapBuffers(gameWindow);
 	glfwPollEvents();
 }
 
-bool GLFWWindow::IsRunning()
+bool GLFWWindow::IsRunning() const
 {
 	return !glfwWindowShouldClose(gameWindow);
 }
 
-void GLFWWindow::LimitFPS(float FPS)
+void GLFWWindow::LimitFPS(float FPS) const
 {
 	double timeLapsed = glfwGetTime();
 

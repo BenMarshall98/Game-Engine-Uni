@@ -1,5 +1,10 @@
 #include "ComponentDirection.h"
 
+ComponentDirection::~ComponentDirection()
+{
+
+}
+
 ComponentType ComponentDirection::GetComponentName()
 {
 	return ComponentType::COMPONENT_DIRECTION;

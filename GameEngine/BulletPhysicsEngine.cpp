@@ -30,7 +30,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity, bool collisionResponse)
+btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse)
 {
 	btCollisionShape* collisionShape;
 
@@ -106,7 +106,7 @@ quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
 	return quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
 }
 
-void BulletPhysicsEngine::ApplyVelocity(void * pRigidBody, vec3 pVelocity)
+void BulletPhysicsEngine::ApplyVelocity(void * pRigidBody, vec3 & pVelocity) const
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
@@ -121,7 +121,7 @@ void BulletPhysicsEngine::ApplyVelocity(void * pRigidBody, vec3 pVelocity)
 	rigidBody->setLinearVelocity(vel);
 }
 
-void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
+void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 & pImpulse) const
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 
@@ -130,7 +130,7 @@ void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 pImpulse)
 	rigidBody->applyImpulse(impulse, origin);
 }
 
-void BulletPhysicsEngine::ApplyRotation(void * pRigidBody, vec3 pRotation)
+void BulletPhysicsEngine::ApplyRotation(void * pRigidBody, vec3 & pRotation) const
 {
 	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
 

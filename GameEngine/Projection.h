@@ -6,7 +6,7 @@
 using namespace glm;
 using namespace std;
 
-enum ProjectionType
+enum class ProjectionType
 {
 	Orthographic,
 	Perspective
@@ -28,9 +28,8 @@ public:
 
 	void Update();
 
-	inline mat4 GetProjection()
+	inline const mat4 & GetProjection() const
 	{
-		Update(); //TODO: Remove
 		return projectionMat;
 	}
 

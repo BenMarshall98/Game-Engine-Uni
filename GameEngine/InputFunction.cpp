@@ -3,7 +3,7 @@
 #include "ScriptingManager.h"
 #include <algorithm>
 
-void InputFunction::AddInput(GameInput input)
+void InputFunction::AddInput(const GameInput input)
 {
 	if (find(Inputs.begin(), Inputs.end(), input) == Inputs.end())
 	{
@@ -12,7 +12,7 @@ void InputFunction::AddInput(GameInput input)
 	
 }
 
-void InputFunction::RemoveInput(GameInput input)
+void InputFunction::RemoveInput(const GameInput input)
 {
 	vector<GameInput>::iterator it;
 
@@ -24,15 +24,10 @@ void InputFunction::RemoveInput(GameInput input)
 	}
 }
 
-void InputFunction::SwapFunction(string pInputFunction)
+void InputFunction::Update(Entity * const entity) const
 {
-	inputFunction = pInputFunction;
-}
-
-void InputFunction::Update(Entity * entity)
-{
-	InputManager * inputManager = InputManager::Instance();
-	float value = inputManager->GetInputValue(Inputs);
+	InputManager * const inputManager = InputManager::Instance();
+	const float value = inputManager->GetInputValue(Inputs);
 	ScriptingManager::Instance()->RunScriptFromInput(inputFunction, entity, value, (1 / 60.0));
 }
 

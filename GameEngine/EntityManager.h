@@ -32,14 +32,18 @@ public:
 		return instance;
 	}
 
-	Entity* CreateEntity(string entityName = "");
-	Entity* GetEntityByName(string entityName);
+	Entity* CreateEntity(const string & entityName = string(""));
+	Entity* GetEntityByName(const string & entityName);
 	
-	void AddToDeleteList(Entity * entity);
+	inline void AddToDeleteList(Entity * entity)
+	{
+		ToDeleteList.push_back(entity);
+	}
+
 	void AddComponentToEntity(Entity * entity, iComponent * component);
 	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
-	vector<Entity *> GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
+	vector<Entity *> & GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
 
 	void Update(SystemManager & systemManager);
 	void Swap();

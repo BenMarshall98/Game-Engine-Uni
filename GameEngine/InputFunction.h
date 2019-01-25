@@ -16,8 +16,11 @@ public:
 
 	void AddInput(GameInput input);
 	void RemoveInput(GameInput input);
-	void SwapFunction(string pInputFunction);
-	void Update(Entity * entity);
+	inline void SwapFunction(const string pInputFunction)
+	{
+		inputFunction = pInputFunction;
+	}
+	void Update(Entity * entity) const;
 
 	~InputFunction();
 };

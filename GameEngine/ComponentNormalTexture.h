@@ -9,24 +9,20 @@ private:
 	Texture * texture;
 
 public:
-	explicit ComponentNormalTexture(string textureName)
+	explicit ComponentNormalTexture(string & textureName) : texture(ResourceManager::GetTexture(textureName))
 	{
-		texture = ResourceManager::GetTexture(textureName);
 	}
 
 	ComponentNormalTexture& operator= (const ComponentNormalTexture&) = delete;
-	ComponentNormalTexture(ComponentNormalTexture&);
+	ComponentNormalTexture(ComponentNormalTexture&) = delete;
 
-	~ComponentNormalTexture()
-	{
-		delete texture;
-	}
+	~ComponentNormalTexture();
 
 	ComponentType GetComponentName() override;
 
-	void RenderSwap() override {};
+	void RenderSwap() override;
 
-	inline Texture * GetRenderTexture()
+	inline const Texture * GetRenderTexture() const
 	{
 		return texture;
 	}

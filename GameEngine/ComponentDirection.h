@@ -13,24 +13,24 @@ private:
 	quat renderDirection;
 
 public:
-	ComponentDirection(vec3 pDirection, float pAngle) : updateDirection(angleAxis(pAngle, pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
-	~ComponentDirection() {};
+	ComponentDirection(vec3 & pDirection, float pAngle) : updateDirection(angleAxis(pAngle, pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
+	~ComponentDirection();
 	
 	ComponentType GetComponentName() override;
 
 	void RenderSwap() override;
 
-	inline quat GetUpdateDirection() const
+	inline const quat & GetUpdateDirection() const
 	{
 		return updateDirection;
 	}
 
-	inline void SetUpdateDirection(quat pDirection)
+	inline void SetUpdateDirection(const quat & pDirection)
 	{
 		updateDirection = pDirection;
 	}
 
-	inline quat GetRenderDirection() const
+	inline const quat & GetRenderDirection() const
 	{
 		return renderDirection;
 	}

@@ -34,12 +34,6 @@ StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)nullptr);
 	glEnableVertexAttribArray(3);
 
-	/*glBindBuffer(GL_ARRAY_BUFFER, VBO[4]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * mBitangents.size(), &mBitangents[0], GL_STATIC_DRAW);
-
-	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(4);*/
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

@@ -20,17 +20,17 @@ public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
 
-	btRigidBody* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity, bool collisionResponse);
+	btRigidBody* AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse);
 
-	inline void Update(float pDeltaTime)
+	inline void Update(float pDeltaTime) const
 	{
 		dynamicsWorld->stepSimulation(pDeltaTime);
 	}
 
 	vec3 GetPositionOfRigidBody(void * pRigidBody);
 	quat GetDirectionOfRigidBody(void * pRigidBody);
-	void ApplyVelocity(void * pRigidBody, vec3 velocity);
-	void ApplyImpulse(void * pRigidBody, vec3 impulse);
-	void ApplyRotation(void * pRigidBody, vec3 rotation);
+	void ApplyVelocity(void * pRigidBody, vec3 & velocity) const;
+	void ApplyImpulse(void * pRigidBody, vec3 & impulse) const;
+	void ApplyRotation(void * pRigidBody, vec3 & rotation) const;
 	void RemoveRigidBody(void * pRigidBody);
 };

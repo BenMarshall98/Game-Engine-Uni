@@ -2,70 +2,83 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include <map>
+#include <vector>
+#include "InputMapping.h"
 
 using namespace glm;
 
 class Camera
 {
+	using CameraFunction = void(*)(Camera *, float, float);
+
 private:
 	mat4 renderViewMatrix;
 	mat4 updateViewMatrix;
-
-protected:
 	vec3 position;
 	vec3 lookAt;
 	vec3 up;
 
+	map<CameraFunction, vector<GameInput>> * mCameraFunctions;
+
+protected:
+
+	//TODO: Member functions for position, lookat, up
+
 public:
-	explicit Camera(vec3 pPosition = vec3(0, 0, 0), vec3 pLookAt = vec3(0, 0, -1), vec3 pUp = vec3(0, 1, 0)) : position(pPosition), lookAt(pLookAt), up(pUp)
+	explicit Camera(map<CameraFunction, vector<GameInput>> * pCameraFunctions) : mCameraFunctions(pCameraFunctions), position(vec3(0, 0, 0)), lookAt(vec3(0, 0, -1)), up(vec3(0, 1, 0))
 	{
 	}
 
-	virtual void Update()
+	explicit Camera(map<CameraFunction, vector<GameInput>> * pCameraFunctions, vec3 & pPosition, vec3 & pLookAt, vec3 & pUp) : mCameraFunctions(pCameraFunctions), position(pPosition), lookAt(pLookAt), up(pUp)
 	{
-		updateViewMatrix = glm::lookAt(position, position + lookAt, up);
 	}
+
+	Camera(const Camera&) = delete;
+	Camera& operator=(const Camera&) = delete;
+
+	virtual void Update();
 
 	inline void Swap()
 	{
 		renderViewMatrix = updateViewMatrix;
 	}
 
-	inline mat4 GetViewMatrix()
+	inline const mat4 & GetViewMatrix() const
 	{
 		return renderViewMatrix;
 	}
 
-	inline vec3 GetPosition() const
+	inline const vec3 & GetPosition() const
 	{
 		return position;
 	}
 
-	inline vec3 GetLookAt() const
+	inline const vec3 & GetLookAt() const
 	{
 		return lookAt;
 	}
 
-	inline vec3 GetUp() const
+	inline const vec3 & GetUp() const
 	{
 		return up;
 	}
 
-	inline void SetPosition(vec3 pPosition)
+	inline void SetPosition(const vec3 & pPosition)
 	{
 		position = pPosition;
 	}
 
-	inline void SetLookAt(vec3 pLookAt)
+	inline void SetLookAt(const vec3 & pLookAt)
 	{
 		lookAt = pLookAt;
 	}
 
-	inline void SetUp(vec3 pUp)
+	inline void SetUp(const vec3 & pUp)
 	{
 		up = pUp;
 	}
 
-	virtual ~Camera() {}
+	virtual ~Camera();
 };
 

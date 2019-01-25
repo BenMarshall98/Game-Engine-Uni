@@ -1,6 +1,6 @@
 #pragma once
 
-enum Shape
+enum class Shape
 {
 	SPHERE,
 	CUBOID
@@ -8,9 +8,11 @@ enum Shape
 
 class CollisionShape
 {
-protected:
+private:
 	Shape shape;
-	explicit CollisionShape(Shape pShape) : shape(pShape) {}
+
+protected:
+	explicit CollisionShape(const Shape pShape) : shape(pShape) {}
 
 public:
 	virtual ~CollisionShape();

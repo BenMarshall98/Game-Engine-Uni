@@ -22,13 +22,13 @@ private:
 	PhysicsManager & physicsManager;
 
 public:
-	PhysicsSystem(PhysicsManager & pPhysicsManager);
+	explicit PhysicsSystem(PhysicsManager & pPhysicsManager);
 
 	PhysicsSystem& operator=(const PhysicsSystem&) = delete;
 	PhysicsSystem(PhysicsSystem&) = delete;
 
-	void Action(void);
-	void RemoveEntity(Entity * pEntity);
+	void Action(void) override;
+	void RemoveEntity(Entity * pEntity) override;
 	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);
 	~PhysicsSystem();
 };

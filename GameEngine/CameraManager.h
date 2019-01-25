@@ -15,7 +15,7 @@ private:
 
 	static CameraManager * instance;
 
-	CameraManager() {}
+	CameraManager() : camera(nullptr), projection(nullptr) {}
 
 public:
 	static CameraManager * Instance()
@@ -27,8 +27,18 @@ public:
 		return instance;
 	}
 
-	void SetCamera(Camera * pCamera);
-	void SetProjection(Projection * pProjection);
+	CameraManager(const CameraManager&) = delete;
+	CameraManager& operator=(const CameraManager&) = delete;
+
+	inline void SetCamera(Camera * pCamera)
+	{
+		camera = pCamera;
+	}
+
+	inline void SetProjection(Projection * pProjection)
+	{
+		projection = pProjection;
+	}
 
 	void Update();
 	void Resize(float width, float height);
@@ -38,8 +48,15 @@ public:
 		camera->Swap();
 	}
 
-	Camera * GetCamera();
-	Projection * GetProjection();
+	inline Camera * GetCamera()
+	{
+		return camera;
+	}
+
+	inline Projection * GetProjection()
+	{
+		camera->Update();
+	}
 
 	~CameraManager() {};
 };

@@ -19,9 +19,9 @@ enum class ComponentType
 class iComponent
 {
 protected:
-	//iComponent() {}
+	iComponent() {}
 public:
-	//virtual ~iComponent();
+	virtual ~iComponent();
 	virtual ComponentType GetComponentName() = 0;
 	virtual void RenderSwap() = 0;
 };

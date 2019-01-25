@@ -13,17 +13,17 @@ private:
 	vector<InputFunction> * inputs;
 
 public:
-	explicit ComponentInput(vector<InputFunction> * pInputs) : inputs(pInputs) {}
-	~ComponentInput() {}
+	explicit ComponentInput(vector<InputFunction> * const pInputs) : inputs(pInputs) {}
+	~ComponentInput();
 
 	ComponentInput& operator=(const ComponentInput&) = delete;
 	ComponentInput(ComponentInput&) = delete;
 
 	ComponentType GetComponentName() override;
 
-	void RenderSwap() override {};
+	void RenderSwap() override;
 
-	inline vector<InputFunction> * GetUpdateInputs()
+	inline vector<InputFunction> * const GetUpdateInputs() const
 	{
 		return inputs;
 	}

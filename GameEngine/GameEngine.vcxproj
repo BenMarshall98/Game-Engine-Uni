@@ -170,6 +170,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScriptingManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="StaticModel.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Texture.cpp" />

@@ -22,9 +22,12 @@ public:
 
 	~PhysicsManager() {}
 
-	void* AddRigidBody(float mass, vec3 position, quat direction, CollisionShape * shape, Entity * entity, bool collisionResponse);
+	inline void* AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse)
+	{
+		return engine->AddRigidBody(mass, position, direction, shape, entity, collisionResponse);
+	}
 
-	inline void Update(float pDeltaTime)
+	inline void Update(float pDeltaTime) const
 	{
 		engine->Update(pDeltaTime);
 	}
@@ -39,12 +42,12 @@ public:
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
 
-	inline void ApplyVelocity(void * pRigidBody, vec3 velocity)
+	inline void ApplyVelocity(void * pRigidBody, vec3 & velocity) const
 	{
 		engine->ApplyVelocity(pRigidBody, velocity);
 	}
 
-	inline void ApplyImpulse(void * pRigidBody, vec3 impulse)
+	inline void ApplyImpulse(void * pRigidBody, vec3 & impulse) const
 	{
 		engine->ApplyImpulse(pRigidBody, impulse);
 	}
@@ -54,7 +57,7 @@ public:
 		engine->RemoveRigidBody(pRigidBody);
 	}
 
-	inline void ApplyRotation(void * pRigidBody, vec3 rotation)
+	inline void ApplyRotation(void * pRigidBody, vec3 & rotation) const
 	{
 		engine->ApplyRotation(pRigidBody, rotation);
 	}

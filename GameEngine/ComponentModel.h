@@ -9,24 +9,20 @@ private:
 	iModel * model;
 
 public:
-	explicit ComponentModel(string modelName)
+	explicit ComponentModel(string & modelName) : model(ResourceManager::GetModel(modelName))
 	{
-		model = ResourceManager::GetModel(modelName);
 	}
 
 	ComponentModel& operator=(const ComponentModel&) = delete;
 	ComponentModel(ComponentModel&) = delete;
 
-	~ComponentModel()
-	{
-		delete model;
-	}
+	~ComponentModel();
 
 	ComponentType GetComponentName() override;
 
-	void RenderSwap() override {};
+	void RenderSwap() override;
 
-	inline iModel * GetRenderModel()
+	inline const iModel * GetRenderModel() const
 	{
 		return model;
 	}

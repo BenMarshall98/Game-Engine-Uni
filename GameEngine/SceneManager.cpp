@@ -10,7 +10,13 @@ SceneManager::~SceneManager()
 {
 	if (swap.joinable())
 	{
-		swap.join();
+		try {
+			swap.join();
+		}
+		catch (...)
+		{
+
+		}
 	}
 	delete currentScene;
 }

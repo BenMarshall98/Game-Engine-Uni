@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum MESSAGE_TYPE
+enum class MESSAGE_TYPE
 {
 	SEVERE,
 	LOG
@@ -16,9 +16,11 @@ class LoggingManager
 private:
 	static LoggingManager * instance;
 	static bool hasSevereMessage;
+
+	LoggingManager() {}
 public:
 
-	static void LogMessage(MESSAGE_TYPE type, string & message);
+	static void LogMessage(const MESSAGE_TYPE type, const string & message);
 
 	static inline bool HasSevereMessage()
 	{

@@ -40,7 +40,7 @@ void InputConverter::FirstTimeMapSetUp()
 	}
 }
 
-GameInput InputConverter::StringToEnum(string input)
+GameInput InputConverter::StringToEnum(const string & input)
 {
 	static bool firstTime = true;
 
@@ -50,10 +50,10 @@ GameInput InputConverter::StringToEnum(string input)
 		firstTime = false;
 	}
 
-	map<string, int>::iterator it = GameInputMappings.find(input);
+	const map<string, int>::iterator it = GameInputMappings.find(input);
 
 	if (it != GameInputMappings.end())
 	{
-		return GameInput(it->second);
+		return static_cast<GameInput>(it->second);
 	}
 }

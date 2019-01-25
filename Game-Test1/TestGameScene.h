@@ -30,6 +30,6 @@ public:
 	void Update() override;
 	void Close() override;
 
-	void Resize(int width, int height) override;
+	void Resize(const int width, const int height) override;
 };
 

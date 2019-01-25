@@ -11,23 +11,23 @@ private:
 	vec3 renderPosition;
 
 public:
-	explicit ComponentPosition(vec3 pPosition) : updatePosition(pPosition), renderPosition(pPosition) {}
-	~ComponentPosition() {}
+	explicit ComponentPosition(vec3 & pPosition) : updatePosition(pPosition), renderPosition(pPosition) {}
+	~ComponentPosition();
 
 	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
-	inline vec3 GetUpdatePosition() const
+	inline const vec3 & GetUpdatePosition() const
 	{
 		return updatePosition;
 	}
 
-	inline void SetUpdatePosition(vec3 pPosition)
+	inline void SetUpdatePosition(vec3 & pPosition)
 	{
 		updatePosition = pPosition;
 	}
 
-	inline vec3 GetRenderPosition()
+	inline const vec3 & GetRenderPosition()
 	{
 		return renderPosition;
 	}

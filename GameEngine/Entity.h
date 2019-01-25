@@ -14,7 +14,7 @@ private:
 	
 
 public:
-	explicit Entity(string entityName) : mEntityName(entityName), mEntityID(nextID)
+	explicit Entity(const string & entityName) : mEntityName(entityName), mEntityID(nextID)
 	{
 		nextID++;
 	}
@@ -28,7 +28,7 @@ public:
 		return mEntityID;
 	}
 
-	inline string GetName() const
+	inline const string & GetName() const
 	{
 		return mEntityName;
 	}

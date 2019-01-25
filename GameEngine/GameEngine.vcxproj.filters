@@ -189,6 +189,9 @@
     <ClCompile Include="FollowPlayerCamera.cpp">
       <Filter>Camera Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

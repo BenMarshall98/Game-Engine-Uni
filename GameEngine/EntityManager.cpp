@@ -1,14 +1,14 @@
 #include "EntityManager.h"
-Entity * EntityManager::CreateEntity(string entityName)
+Entity * EntityManager::CreateEntity(const string & entityName)
 {
-	Entity * entity = new Entity(entityName);
+	Entity * const entity = new Entity(entityName);
 
 	EntityList.push_back(entity);
 
 	return entity;
 }
 
-Entity * EntityManager::GetEntityByName(string entityName)
+Entity * EntityManager::GetEntityByName(const string & entityName)
 {
 	if (entityName.compare("") == 0)
 	{
@@ -26,26 +26,26 @@ Entity * EntityManager::GetEntityByName(string entityName)
 	return nullptr;
 }
 
-void EntityManager::RemoveEntity(Entity* entity)
+void EntityManager::RemoveEntity(Entity * const entity)
 {
 	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
 	{
 		map<Entity *, iComponent *> & entities = it->second;
-		map<Entity *, iComponent *>::iterator find = entities.find(entity);
+		const map<Entity *, iComponent *>::iterator find = entities.find(entity);
 
 		if (find == entities.end())
 		{
 			continue;
 		}
 
-		iComponent * Component = find->second;
+		iComponent * const Component = find->second;
 		delete Component;
 
 		ComponentList[it->first].erase(entity);
 	}
 
-	vector<Entity *>::iterator object = find(EntityList.begin(), EntityList.end(), entity);
+	const vector<Entity *>::iterator object = find(EntityList.begin(), EntityList.end(), entity);
 
 	if (object != EntityList.end())
 	{
@@ -58,7 +58,7 @@ void EntityManager::RemoveEntity(Entity* entity)
 void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component)
 {
 	ComponentType componentType = component->GetComponentName();
-	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
+	const map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
 
 	if (it != ComponentList.end())
 	{
@@ -72,7 +72,7 @@ void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component
 	}
 }
 
-void EntityManager::RemoveComponentFromEntity(Entity * entity, iComponent * component)
+void EntityManager::RemoveComponentFromEntity(Entity * const entity, iComponent * const component)
 {
 	ComponentType componentType = component->GetComponentName();
 	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
@@ -108,7 +108,7 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * entity, ComponentType 
 	return nullptr;
 }
 
-vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * componentName, int size)
+vector<Entity *> & EntityManager::GetAllEntitiesWithComponents(const ComponentType * componentName, int size)
 {
 	vector<Entity *> entities;
 
@@ -133,11 +133,6 @@ vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType
 	}
 
 	return entities;
-}
-
-void EntityManager::AddToDeleteList(Entity * entity)
-{
-	ToDeleteList.push_back(entity);
 }
 
 void EntityManager::Update(SystemManager & systemManager)
