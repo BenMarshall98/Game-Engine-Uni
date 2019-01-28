@@ -4,6 +4,7 @@ struct PointLight
 	vec3 location;
 	vec3 lightColour;
 	float attenuation;
+	float farPlane;
 };
 
 struct SpotLight
@@ -13,6 +14,7 @@ struct SpotLight
 	vec3 direction;
 	float angleInner;
 	float angleOuter;
+	float farPlane;
 };
 
 const int MAX_LIGHTS = 20;
@@ -35,12 +37,15 @@ uniform sampler2D DirLightShadow;
 uniform int TotalPointLights;
 uniform PointLight pointLights[MAX_LIGHTS];
 
+uniform samplerCube depthMaps[MAX_LIGHTS];
+
 uniform int TotalSpotLights;
 uniform SpotLight spotLights[MAX_LIGHTS];
 
 out vec4 FragColor;
 
-float ShadowCalculation(vec4 LightPos, sampler2D shadowTexture, vec3 normal, vec3 lightDir);
+float DirectionalShadowCalculation(vec4 LightPos, sampler2D shadowTexture, vec3 normal, vec3 lightDir);
+float PointShadowCalculation(vec3 lightPos, vec3 fragPos, samplerCube shadowTexture, float farPlane);
 
 void main()
 {
@@ -70,9 +75,11 @@ void main()
 		float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
 		vec3 specular = DirectionLightColour * spec;
 
-		float shadow = ShadowCalculation(oDirLightPos, DirLightShadow, normal, lightDir);
+		float shadow = DirectionalShadowCalculation(oDirLightPos, DirLightShadow, normal, lightDir);
 		lightColour = ambient + ((1.0 - shadow) * (diffuse + specular));
 	}
+
+	int mapNumber = 0;
 
 	for(int i = 0; i < MAX_LIGHTS; i++)
 	{
@@ -99,7 +106,9 @@ void main()
 			diffuse *= attenuation;
 			specular *= attenuation;
 
-			lightColour += ambient + diffuse + specular;
+			float shadow = PointShadowCalculation(pointLights[i].location, oPos, depthMaps[mapNumber], pointLights[i].farPlane);
+			mapNumber++;
+			lightColour += ambient + ((1.0 - shadow) * diffuse + specular);
 		}
 	}
 
@@ -127,7 +136,9 @@ void main()
 			diffuse *= intensity;
 			specular *= intensity;
 
-			lightColour += ambient + diffuse + specular;
+			float shadow = PointShadowCalculation(spotLights[i].location, oPos, depthMaps[mapNumber], spotLights[i].farPlane);
+			mapNumber++;
+			lightColour += ambient + ((1.0 - shadow) * diffuse + specular);
 		}
 	}
 
@@ -136,7 +147,7 @@ void main()
 	FragColor = vec4(texture(texture_map, oTex).rgb * lightColour, 1.0);
 }
 
-float ShadowCalculation(vec4 LightPos, sampler2D shadowTexture, vec3 normal, vec3 lightDir)
+float DirectionalShadowCalculation(vec4 LightPos, sampler2D shadowTexture, vec3 normal, vec3 lightDir)
 {
 	vec3 projCoords = LightPos.xyz / LightPos.w;
 
@@ -165,5 +176,23 @@ float ShadowCalculation(vec4 LightPos, sampler2D shadowTexture, vec3 normal, vec
 
 	shadow = shadow / 25.0;
 
+	return shadow;
+}
+
+
+float PointShadowCalculation(vec3 lightPos, vec3 fragPos, samplerCube shadowTexture, float farPlane)
+{
+	vec3 fragToLight = fragPos - lightPos;
+	
+	float closestDepth = texture(shadowTexture, fragToLight).r;
+	
+	closestDepth *= farPlane;
+	
+	float currentDepth = length(fragToLight);
+	
+	float bias = 0.05;
+	
+	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+	
 	return shadow;
 }

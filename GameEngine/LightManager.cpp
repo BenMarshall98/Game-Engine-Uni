@@ -199,6 +199,20 @@ void LightManager::Update(const vec3 & pViewLocation)
 			}
 		}
 	}
+
+	int light = 0;
+
+	for (int i = 0; i < renderPointLights.size(); i++)
+	{
+		renderPointLights[i]->shadowTexture = pointShadowTexture[light];
+		light++;
+	}
+	
+	for (int i = 0; i < renderSpotLights.size(); i++)
+	{
+		renderSpotLights[i]->shadowTexture = pointShadowTexture[light];
+		light++;
+	}
 }
 
 void LightManager::Render(const int pShaderID)
@@ -234,6 +248,8 @@ void LightManager::Render(const int pShaderID)
 	const int totalPointLight = glGetUniformLocation(pShaderID, "TotalPointLights");
 	glUniform1i(totalPointLight, renderPointLights.size());
 
+	unsigned int currentLight = 0;
+
 	for (int i = 0; i < renderPointLights.size(); i++)
 	{
 		const int PointLightLocation = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].location").c_str());
@@ -244,6 +260,15 @@ void LightManager::Render(const int pShaderID)
 
 		const int PointLightAttenuation = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].attenuation").c_str());
 		glUniform1f(PointLightAttenuation, renderPointLights.at(i)->attenuation);
+
+		const int PointLightFarDepth = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].farDepth").c_str());
+		glUniform1f(PointLightFarDepth, renderPointLights.at(i)->farPlane);
+
+		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + to_string(currentLight) + "]").c_str());
+		glUniform1i(directionalLightTexture, 3 + currentLight);
+		glActiveTexture(GL_TEXTURE3 + currentLight);
+		currentLight++;
+		glBindTexture(GL_TEXTURE_CUBE_MAP, renderPointLights.at(i)->shadowTexture->ShadowTexture);
 	}
 
 	const int totalSpotLight = glGetUniformLocation(pShaderID, "TotalSpotLights");
@@ -265,5 +290,14 @@ void LightManager::Render(const int pShaderID)
 
 		const int SpotLightAngleOuter = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].angleOuter").c_str());
 		glUniform1f(SpotLightAngleOuter, cos(radians(renderSpotLights.at(i)->angleOutside)));
+
+		const int SpotLightFarDepth = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].farPlane").c_str());
+		glUniform1f(SpotLightFarDepth, renderSpotLights.at(i)->farPlane);
+
+		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + to_string(currentLight) + "]").c_str());
+		glUniform1i(directionalLightTexture, 3 + currentLight);
+		glActiveTexture(GL_TEXTURE3 + currentLight);
+		currentLight++;
+		glBindTexture(GL_TEXTURE_CUBE_MAP, renderSpotLights.at(i)->shadowTexture->ShadowTexture);
 	}
 }

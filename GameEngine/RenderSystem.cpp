@@ -44,7 +44,6 @@ void RenderSystem::Action(void)
 	vec3 viewPos = camera->GetPosition();
 
 	LightManager * lightManager = LightManager::Instance();
-	lightManager->Update(camera->GetPosition());
 	updateFirst = true;
 
 	for (int i = 0; i < EntityList.size(); i++)

@@ -23,7 +23,8 @@ struct Directional
 
 struct PointLight
 {
-	unsigned int shadowTexture;
+	ShadowFrameBuffer * shadowTexture;
+	float farPlane;
 	vec3 location;
 	vec3 lightColour;
 	float attenuation;
@@ -31,7 +32,8 @@ struct PointLight
 
 struct SpotLight
 {
-	unsigned int shadowTexture;
+	ShadowFrameBuffer * shadowTexture;
+	float farPlane;
 	vec3 location;
 	vec3 direction;
 	vec3 lightColour;
@@ -74,6 +76,16 @@ public:
 
 	LightManager& operator=(const LightManager&) = delete;
 	LightManager(LightManager&) = delete;
+
+	inline vector<SpotLight*> & GetRenderSpotLights()
+	{
+		return renderSpotLights;
+	}
+
+	inline vector<PointLight*> & GetRenderPointLights()
+	{
+		return renderPointLights;
+	}
 
 	inline void SetDirectionalLight(const vec3 & pDirection, const vec3 & pLightColour)
 	{

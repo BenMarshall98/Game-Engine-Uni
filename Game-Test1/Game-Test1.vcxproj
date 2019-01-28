@@ -169,6 +169,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="PointShadow.frag" />
+    <None Include="PointShadow.geom" />
+    <None Include="PointShadow.vert" />
     <None Include="Quaternion.lua" />
     <None Include="RiggedFragment.frag" />
     <None Include="RiggedVertex.vert" />

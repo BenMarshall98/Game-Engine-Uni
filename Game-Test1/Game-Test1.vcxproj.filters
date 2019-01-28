@@ -98,6 +98,15 @@
     <None Include="ShadowMapping.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="PointShadow.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="PointShadow.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="PointShadow.geom">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Collectable.obj">

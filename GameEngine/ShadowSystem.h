@@ -23,6 +23,8 @@ private:
 
 	void RenderDirectional(const iModel * model, vec3 & position, quat & direction, Directional * directional);
 
+	void RenderPoint(const iModel * model, vec3 & position, quat & direction, vector<mat4> views, vec3 & lightPos, float farPlane);
+
 public:
 	ShadowSystem(vec3 & topLeftFrontCoord, vec3 & bottomRightBackCoord, Shader * directionalShadow, Shader * pointShadow);
 
