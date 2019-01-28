@@ -70,17 +70,18 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	vec3 positionVec = physicsManager.GetPositionOfRigidBody(rigidBody);
 	quat directionQuat = physicsManager.GetDirectionOfRigidBody(rigidBody);
 
+	vec3 zero = vec3(0);
 	vec3 velocity = physics->GetUpdateVelocity();
 	physicsManager.ApplyVelocity(rigidBody, velocity);
-	physics->SetUpdateVelocity(vec3(0));
+	physics->SetUpdateVelocity(zero);
 
 	vec3 impulse = physics->GetUpdateImpulse();
 	physicsManager.ApplyImpulse(rigidBody, impulse);
-	physics->SetUpdateImpulse(vec3(0));
+	physics->SetUpdateImpulse(zero);
 
 	vec3 rotation = physics->GetUpdateRotation();
 	physicsManager.ApplyRotation(rigidBody, rotation);
-	physics->SetUpdateRotation(vec3(0));
+	physics->SetUpdateRotation(zero);
 
 	position->SetUpdatePosition(positionVec);
 	direction->SetUpdateDirection(directionQuat);

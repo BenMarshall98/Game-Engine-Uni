@@ -21,10 +21,6 @@ private:
 
 	map<CameraFunction, vector<GameInput>> * mCameraFunctions;
 
-protected:
-
-	//TODO: Member functions for position, lookat, up
-
 public:
 	explicit Camera(map<CameraFunction, vector<GameInput>> * pCameraFunctions) : mCameraFunctions(pCameraFunctions), position(vec3(0, 0, 0)), lookAt(vec3(0, 0, -1)), up(vec3(0, 1, 0))
 	{

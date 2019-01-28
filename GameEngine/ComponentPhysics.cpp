@@ -64,5 +64,5 @@ EntityType ComponentPhysics::StringToEnum(string & entityName)
 		}
 	}
 
-	return NONE;
+	return EntityType::NONE;
 }

@@ -11,6 +11,7 @@
 #include "ComponentNormalTexture.h"
 #include "RenderSystem.h"
 #include "InputSystem.h"
+#include "ShadowSystem.h"
 #include "LightManager.h"
 #include "InputManager.h"
 #include "glm/gtx/transform.hpp"
@@ -31,10 +32,19 @@ TestGameScene::TestGameScene() : mPhysicsManager(nullptr)
 
 void TestGameScene::Load()
 {
-
 	LevelLoader::LoadLevelJSON("3DLevel.json");
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
+
+	ResourceManager::LoadShader("DirectionalShadow", "ShadowMapping.vert", "ShadowMapping.frag");
+	Shader * directionalShadow = ResourceManager::GetShader("DirectionalShadow");
+	Shader * pointLightShadow = nullptr;
+
+	vec3 topLeftCoord = vec3(-15, 15, 15);
+	vec3 bottomRightCoord = vec3(15, -15, -15);
+
+	ShadowSystem * const shadow = new ShadowSystem(topLeftCoord, bottomRightCoord, directionalShadow, pointLightShadow);
+	mSystemManager.AddRenderSystem(shadow);
 
 	RenderSystem * const render = new RenderSystem();
 	mSystemManager.AddRenderSystem(render);
@@ -46,7 +56,7 @@ void TestGameScene::Load()
 	mSystemManager.AddUpdateSystem(physics);
 
 	LightManager * const lightManager = LightManager::Instance();
-	lightManager->SetDirectionalLight(vec3(0, -1, 0), vec3(1.0, 1.0, 1.0));
+	lightManager->SetDirectionalLight(vec3(-1, -1, -1), vec3(1.0, 1.0, 1.0));
 	lightManager->AddPointLight(vec3(0, 0, -3.0f), vec3(1, 1, 1), 0.1f);
 	lightManager->AddSpotLight(vec3(0.5f, 0.5f, -1.0f), vec3(0, 0, -1), vec3(1.0, 1.0, 1.0), 2.5f, 5);
 	lightManager->AddSpotLight(vec3(0.5f, -0.5f, -1.0f), vec3(0, 0, -1), vec3(0.0, 0.0, 1.0), 2.5f, 5);

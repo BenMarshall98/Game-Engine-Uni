@@ -6,7 +6,7 @@ InputManager::~InputManager()
 {
 }
 
-float InputManager::GetInputValue(vector<GameInput> & gameInputs)
+float InputManager::GetInputValue(const vector<GameInput> & gameInputs) const
 {
 	float value = 0;
 

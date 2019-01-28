@@ -40,7 +40,12 @@ public:
 		projection = pProjection;
 	}
 
-	void Update();
+	inline void Update()
+	{
+		camera->Update();
+		projection->Update();
+	}
+
 	void Resize(float width, float height);
 
 	void Swap()
@@ -55,7 +60,7 @@ public:
 
 	inline Projection * GetProjection()
 	{
-		camera->Update();
+		return projection;
 	}
 
 	~CameraManager() {};

@@ -1,10 +1,80 @@
 #include "OpenGL.h"
 #include "LightManager.h"
 #include "glm/gtc/type_ptr.hpp"
+#include "OpenGL.h"
 #include <string>
 #include <algorithm>
 
 LightManager * LightManager::instance = nullptr;
+
+LightManager::LightManager() : directional(nullptr) 
+{
+	unsigned int FBO;
+	glGenFramebuffers(1, &FBO);
+
+	unsigned int Texture;
+
+	glGenTextures(1, &Texture);
+	glBindTexture(GL_TEXTURE_2D, Texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+		shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+
+	float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, Texture, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	directionalShadowTexture.FrameBuffer = FBO;
+	directionalShadowTexture.ShadowTexture = Texture;
+
+	for (int i = 0; i < MAX_LIGHTS; i++)
+	{
+		unsigned int pointFBO;
+		glGenFramebuffers(1, &pointFBO);
+
+		unsigned int pointCubemap;
+		glGenTextures(1, &pointCubemap);
+
+		glBindTexture(GL_TEXTURE_CUBE_MAP, pointCubemap);
+
+		for (int i = 0; i < 6; i++)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT,
+				shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		}
+
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+		float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+		glTexParameterfv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, pointFBO);
+		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, pointCubemap, 0);
+		glDrawBuffer(GL_NONE);
+		glReadBuffer(GL_NONE);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		ShadowFrameBuffer * shadow = new ShadowFrameBuffer;
+		shadow->FrameBuffer = pointFBO;
+		shadow->ShadowTexture = pointCubemap;
+		
+		pointShadowTexture.push_back(shadow);
+	}
+}
 
 void LightManager::AddPointLight(const vec3 & pLocation,const vec3 & pLightColour, const float pAttenuation)
 {
@@ -144,6 +214,17 @@ void LightManager::Render(const int pShaderID)
 
 		const int directionalLightColour = glGetUniformLocation(pShaderID, "DirectionLightColour");
 		glUniform3fv(directionalLightColour, 1, value_ptr(directional->lightColour));
+
+		const int directionalLightPerspective = glGetUniformLocation(pShaderID, "dirLightPerspective");
+		glUniformMatrix4fv(directionalLightPerspective, 1, GL_FALSE, value_ptr(directional->perspective));
+
+		const int directionalLightView = glGetUniformLocation(pShaderID, "dirLightView");
+		glUniformMatrix4fv(directionalLightView, 1, GL_FALSE, value_ptr(directional->view));
+
+		const int directionalLightTexture = glGetUniformLocation(pShaderID, "DirLightShadow");
+		glUniform1i(directionalLightTexture, 2);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, directionalShadowTexture.ShadowTexture);
 	}
 	else
 	{

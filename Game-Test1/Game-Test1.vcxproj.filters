@@ -92,6 +92,12 @@
     <None Include="3DLevelFunctions.lua">
       <Filter>Scripts</Filter>
     </None>
+    <None Include="ShadowMapping.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="ShadowMapping.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Collectable.obj">

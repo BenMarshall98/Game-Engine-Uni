@@ -6,7 +6,7 @@
 
 
 FollowPlayerCamera::FollowPlayerCamera(Entity * pEntity, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate) :
-	mEntity(pEntity), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
+	Camera(nullptr), mEntity(pEntity), mDistanceMin(pDistanceMin), mDistanceMax(pDistanceMax), mDistanceCurrent(pDistanceCurrent), mInterpolateRate(pInterpolateRate)
 {
 }
 
@@ -43,9 +43,9 @@ void FollowPlayerCamera::Update()
 
 	vec3 direction = normalize(playerPosition - cameraPosition);
 
-	lookAt = direction;
-	position = cameraPosition;
-	up = upDirection;
+	SetLookAt(direction);
+	SetPosition(cameraPosition);
+	SetUp(upDirection);
 
 	lastPosition = cameraPosition;
 

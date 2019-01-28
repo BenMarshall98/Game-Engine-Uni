@@ -7,14 +7,23 @@
 using namespace glm;
 using namespace std;
 
+struct ShadowFrameBuffer
+{
+	unsigned int FrameBuffer;
+	unsigned int ShadowTexture;
+};
+
 struct Directional
 {
 	vec3 direction;
 	vec3 lightColour;
+	mat4 perspective;
+	mat4 view;
 };
 
 struct PointLight
 {
+	unsigned int shadowTexture;
 	vec3 location;
 	vec3 lightColour;
 	float attenuation;
@@ -22,6 +31,7 @@ struct PointLight
 
 struct SpotLight
 {
+	unsigned int shadowTexture;
 	vec3 location;
 	vec3 direction;
 	vec3 lightColour;
@@ -38,15 +48,20 @@ private:
 	vector<PointLight *> pointLights;
 	vector<PointLight *> renderPointLights;
 
+	ShadowFrameBuffer directionalShadowTexture;
+	vector<ShadowFrameBuffer *> pointShadowTexture;
+
 	Directional * directional;
 
 	const int MAX_LIGHTS = 20;
 
 	static LightManager * instance;
 
-	LightManager() : directional(nullptr) {}
+	LightManager();
 
 public:
+
+	static const unsigned int shadowWidth = 1024, shadowHeight = 1024;
 
 	inline static LightManager * Instance()
 	{
@@ -77,6 +92,16 @@ public:
 	inline void AddPointLight(PointLight * const pPointLight)
 	{
 		pointLights.push_back(pPointLight);
+	}
+
+	inline Directional * GetDirectionalLight()
+	{
+		return directional;
+	}
+
+	inline ShadowFrameBuffer GetDirectionalFramebuffer()
+	{
+		return directionalShadowTexture;
 	}
 
 	void AddPointLight(const vec3 & pLocation, const vec3 & pLightColour, const float pAttenuation = 0);

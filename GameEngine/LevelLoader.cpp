@@ -455,7 +455,8 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 
 		for (key = keys.Begin(); key != keys.End(); key++)
 		{
-			GameInput gameInput = InputConverter::StringToEnum(key->GetString());
+			string inputName = key->GetString();
+			GameInput gameInput = InputConverter::StringToEnum(inputName);
 			inputFunction.AddInput(gameInput);
 		}
 

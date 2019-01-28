@@ -22,7 +22,7 @@ private:
 	Projection * projection;
 	bool updateFirst;
 
-	static void Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst);
+	static void Render(Shader * shader, const iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst);
 
 public:
 

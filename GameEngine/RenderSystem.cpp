@@ -38,6 +38,7 @@ void RenderSystem::RemoveEntity(Entity * pEntity)
 
 void RenderSystem::Action(void)
 {
+	glViewport(0, 0, GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
 	mat4 perspectiveMatrix = projection->GetProjection();
 	mat4 viewMatrix = camera->GetViewMatrix();
 	vec3 viewPos = camera->GetPosition();
@@ -55,14 +56,14 @@ void RenderSystem::Action(void)
 		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
 
 		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetRenderShader();
-		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+		const iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
 		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetRenderTexture();
 		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
 		iComponent * componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
 
-		Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
+		const Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
 
 		if (length(position - viewPos) < (projection->GetFar() * 1.1f))
 		{
@@ -71,7 +72,7 @@ void RenderSystem::Action(void)
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
+void RenderSystem::Render(Shader * shader, const iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
 {
 	static int lastShader = -1;
 

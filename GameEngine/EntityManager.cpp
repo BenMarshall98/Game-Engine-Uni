@@ -108,7 +108,7 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * entity, ComponentType 
 	return nullptr;
 }
 
-vector<Entity *> & EntityManager::GetAllEntitiesWithComponents(const ComponentType * componentName, int size)
+vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * componentName, int size)
 {
 	vector<Entity *> entities;
 

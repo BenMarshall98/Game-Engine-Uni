@@ -36,14 +36,14 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat
 
 	switch (shape->GetShape())
 	{
-		case CUBOID:
+		case Shape::CUBOID:
 			{
 				CollisionCuboid * cuboid = dynamic_cast<CollisionCuboid *>(shape);
 				vec3 size = cuboid->GetSize();
 				collisionShape = new btBoxShape(btVector3(size.x, size.y, size.z));
 			}
 			break;
-		case SPHERE:
+		case Shape::SPHERE:
 			{
 				CollisionSphere * sphere = dynamic_cast<CollisionSphere *>(shape);
 				float radius = sphere->GetRadius();
@@ -159,12 +159,12 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 	componentPhysics1->AddCollision(entity2, componentPhysics2->GetUpdateEntityType());
 	componentPhysics2->AddCollision(entity1, componentPhysics1->GetUpdateEntityType());
 
-	if (componentPhysics1->GetUpdateMass() != 0 && componentPhysics2->GetUpdateEntityType() == WALL)
+	if (componentPhysics1->GetUpdateMass() != 0 && componentPhysics2->GetUpdateEntityType() == EntityType::WALL)
 	{
 		bool touchingGround = TouchingGround(obj1->getCollisionObject(), obj2->getCollisionObject());
 		componentPhysics1->SetUpdateTouchingGround(touchingGround);
 	}
-	if (componentPhysics2->GetUpdateMass() != 0 && componentPhysics1->GetUpdateEntityType() == WALL)
+	if (componentPhysics2->GetUpdateMass() != 0 && componentPhysics1->GetUpdateEntityType() == EntityType::WALL)
 	{
 		bool touchingGround = TouchingGround(obj2->getCollisionObject(), obj1->getCollisionObject());
 		componentPhysics2->SetUpdateTouchingGround(touchingGround);

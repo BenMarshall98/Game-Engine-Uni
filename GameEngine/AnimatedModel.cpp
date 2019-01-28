@@ -51,14 +51,14 @@ void AnimatedModel::Load()
 	glBindVertexArray(0);
 }
 
-void AnimatedModel::Render(Shader * shader)
+void AnimatedModel::Render(Shader * shader) const
 {
-	Update();
+	//Update();
 
-	for (unsigned int i = 0; i < boneMatrix.size(); i++)
-	{
-		boneMatrix.at(i) = mat4(1.0);
-	}
+	//for (unsigned int i = 0; i < boneMatrix.size(); i++)
+	//{
+	//	boneMatrix.at(i) = mat4(1.0);
+	//}
 
 	int boneMatrixLocation = glGetUniformLocation(shader->ShaderID(), "BoneMatrix");
 	glUniformMatrix4fv(boneMatrixLocation, boneMatrix.size(), GL_FALSE, value_ptr(boneMatrix[0]));

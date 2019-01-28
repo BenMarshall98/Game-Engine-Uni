@@ -216,6 +216,6 @@ public:
 	void Load();
 	void Update();
 
-	void Render(Shader * shader) override;
+	void Render(Shader * shader) const override;
 };
 

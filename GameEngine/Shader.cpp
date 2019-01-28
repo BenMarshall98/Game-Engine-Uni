@@ -42,7 +42,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 		char infoLog[512];
 		glGetProgramInfoLog(mShaderID, 512, nullptr, infoLog);
 		string message = "Failed to Link Shaders:" + string(infoLog);
-		LoggingManager::LogMessage(SEVERE, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
 	glDetachShader(mShaderID, vertexShader);
@@ -66,7 +66,7 @@ void Shader::ReadShader(const string & fileName, string & shaderProgram)
 	if (reader.fail())
 	{
 		string message = "File" + fileName + "does not exist";
-		LoggingManager::LogMessage(SEVERE, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 		shaderProgram = "";
 		return;
 	}
@@ -94,7 +94,7 @@ int Shader::CompileShader(const string & fileName, GLenum shaderType)
 		char infoLog[512];
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
 		string message = "Failed to Compile Shader: " + fileName + "\n" + infoLog;
-		LoggingManager::LogMessage(SEVERE, message);
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
 	return shader;

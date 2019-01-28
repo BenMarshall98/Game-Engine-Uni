@@ -8,6 +8,8 @@ layout (location = 3) in vec3 aTangent;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 perspective;
+uniform mat4 dirLightPerspective;
+uniform mat4 dirLightView;
 
 uniform vec3 lightPos;
 uniform vec3 viewPos;
@@ -15,8 +17,7 @@ uniform vec3 viewPos;
 out vec2 oTex;
 out vec3 oPos;
 out vec3 oNormal;
-out vec3 oTangent;
-out vec3 oBitangent;
+out vec4 oDirLightPos;
 out mat3 oTBN;
 
 void main()
@@ -32,5 +33,9 @@ void main()
 
 	oTBN = transpose(mat3(T, B, N));
 
+	oNormal = N;
+
     gl_Position = perspective * view * model * vec4(aPos, 1.0f);
+
+	oDirLightPos = dirLightPerspective * dirLightView * model * vec4(aPos, 1.0f);
 }

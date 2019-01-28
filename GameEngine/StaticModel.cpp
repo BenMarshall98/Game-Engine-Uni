@@ -42,7 +42,7 @@ StaticModel::StaticModel(vector<vec3> & pVertex, vector<vec2> & pTexture, vector
 	glBindVertexArray(0);
 }
 
-void StaticModel::Render(Shader * shader)
+void StaticModel::Render(Shader * shader) const
 {
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, nullptr);

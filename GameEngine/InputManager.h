@@ -28,7 +28,7 @@ public:
 		return instance;
 	}
 
-	float GetInputValue(vector<GameInput> & gameInputs);
+	float GetInputValue(const vector<GameInput> & gameInputs) const;
 
 	inline GLFWInput * GetInputReader() const
 	{

@@ -172,6 +172,8 @@
     <None Include="Quaternion.lua" />
     <None Include="RiggedFragment.frag" />
     <None Include="RiggedVertex.vert" />
+    <None Include="ShadowMapping.frag" />
+    <None Include="ShadowMapping.vert" />
     <None Include="TestFragment.frag" />
     <Content Include="PlatformerFunctions.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
