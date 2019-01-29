@@ -58,10 +58,6 @@ LightManager::LightManager() : directional(nullptr)
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-		float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-		glTexParameterfv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_BORDER_COLOR, borderColor);
-
 		glBindFramebuffer(GL_FRAMEBUFFER, pointFBO);
 		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, pointCubemap, 0);
 		glDrawBuffer(GL_NONE);

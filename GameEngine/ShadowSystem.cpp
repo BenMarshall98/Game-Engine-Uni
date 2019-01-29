@@ -58,6 +58,8 @@ void ShadowSystem::Action(void)
 		RenderDirectional(model, position, direction, directional);
 	}
 
+	mPointShadow->UseShader();
+
 	vector<PointLight *> pointLights = LightManager::Instance()->GetRenderPointLights();
 
 	for (int i = 0; i < pointLights.size(); i++)
@@ -81,6 +83,19 @@ void ShadowSystem::Action(void)
 		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 0.0, 1.0), vec3(0.0, -1.0, 0.0)));
 		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 0.0, -1.0), vec3(0.0, -1.0, 0.0)));
 
+		int lightPosLocation = glGetUniformLocation(mPointShadow->ShaderID(), "lightPos");
+		glUniform3fv(lightPosLocation, 1, value_ptr(pointLights[i]->location));
+
+		int farPlaneLocation = glGetUniformLocation(mPointShadow->ShaderID(), "farPlane");
+		glUniform1f(farPlaneLocation, farPlane);
+
+		for (int i = 0; i < shadowTransforms.size(); i++)
+		{
+			string view = "shadowView[" + to_string(i) + ']';
+			int viewLocation = glGetUniformLocation(mPointShadow->ShaderID(), view.c_str());
+			glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(shadowTransforms.at(i)));
+		}
+
 		for (int j = 0; j < EntityList.size(); j++)
 		{
 			iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_MODEL);
@@ -91,7 +106,7 @@ void ShadowSystem::Action(void)
 			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
-			RenderPoint(model, position, direction, shadowTransforms, pointLights[i]->location, pointLights[i]->farPlane);
+			RenderPoint(model, position, direction);
 		}
 	}
 
@@ -118,6 +133,19 @@ void ShadowSystem::Action(void)
 		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 0.0, 1.0), vec3(0.0, -1.0, 0.0)));
 		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 0.0, -1.0), vec3(0.0, -1.0, 0.0)));
 
+		int lightPosLocation = glGetUniformLocation(mPointShadow->ShaderID(), "lightPos");
+		glUniform3fv(lightPosLocation, 1, value_ptr(spotLights[i]->location));
+
+		int farPlaneLocation = glGetUniformLocation(mPointShadow->ShaderID(), "farPlane");
+		glUniform1f(farPlaneLocation, farPlane);
+
+		for (int j = 0; j < shadowTransforms.size(); j++)
+		{
+			string view = "shadowView[" + to_string(j) + ']';
+			int viewLocation = glGetUniformLocation(mPointShadow->ShaderID(), view.c_str());
+			glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(shadowTransforms.at(j)));
+		}
+
 		for (int j = 0; j < EntityList.size(); j++)
 		{
 			iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_MODEL);
@@ -128,10 +156,11 @@ void ShadowSystem::Action(void)
 			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
-			RenderPoint(model, position, direction, shadowTransforms, spotLights[i]->location, spotLights[i]->farPlane);
+			RenderPoint(model, position, direction);
 		}
 	}
 
+	glUseProgram(0);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glCullFace(GL_BACK);
 }
@@ -157,7 +186,7 @@ void ShadowSystem::RenderDirectional(const iModel * model, vec3 & position, quat
 	glUseProgram(0);
 }
 
-void ShadowSystem::RenderPoint(const iModel * model, vec3 & position, quat & direction, vector<mat4> views, vec3 & lightPos, float farPlane)
+void ShadowSystem::RenderPoint(const iModel * model, vec3 & position, quat & direction)
 {
 	mPointShadow->UseShader();
 
@@ -168,21 +197,7 @@ void ShadowSystem::RenderPoint(const iModel * model, vec3 & position, quat & dir
 	int modelLocation = glGetUniformLocation(mPointShadow->ShaderID(), "model");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(modelMatrix));
 
-	int lightPosLocation = glGetUniformLocation(mPointShadow->ShaderID(), "lightPos");
-	glUniform3fv(lightPosLocation, 1, value_ptr(lightPos));
-
-	int farPlaneLocation = glGetUniformLocation(mPointShadow->ShaderID(), "farPlane");
-	glUniform1f(farPlaneLocation, farPlane);
-
-	for (int i = 0; i < views.size(); i++)
-	{
-		string view = "shadowView[" + i + ']';
-		int viewLocation = glGetUniformLocation(mPointShadow->ShaderID(), view.c_str());
-		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(views[i]));
-	}
-
 	model->Render(mDirectionalShadow);
-	glUseProgram(0);
 }
 
 ShadowSystem::~ShadowSystem()
