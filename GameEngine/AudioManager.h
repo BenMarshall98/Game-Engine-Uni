@@ -3,6 +3,7 @@
 #include <string>
 #include "OpenAL/include/al.h"
 #include "OpenAL/include/alc.h"
+#include <vector>
 
 using namespace std;
 
@@ -12,8 +13,11 @@ private:
 	ALCdevice * device;
 	ALCcontext * context;
 
-	static AudioManager * instance;
+	vector<ALuint> buffers;
+	vector<ALuint> sources;
 
+	static AudioManager * instance;
+	static void LoadWAVFile(string & fileName, ALenum * channels, void * data, unsigned int * size, unsigned int * frequency);
 	AudioManager();
 public:
 	
@@ -27,8 +31,8 @@ public:
 		return instance;
 	}
 
-	int GenerateBuffer(string fileName);
-	int GenerateSource(int buffer);
+	unsigned int GenerateBuffer(string fileName);
+	//int GenerateSource(int buffer);
 	~AudioManager();
 };
 
