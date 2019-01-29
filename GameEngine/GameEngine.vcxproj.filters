@@ -55,6 +55,9 @@
     <Filter Include="Camera Manager">
       <UniqueIdentifier>{482caee8-fef9-4cc8-b4fc-2918ccce631e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio Manager">
+      <UniqueIdentifier>{f72519cc-02eb-446c-b7d6-c791bd55cadc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="ShadowSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Audio Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="ShadowSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Audio Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

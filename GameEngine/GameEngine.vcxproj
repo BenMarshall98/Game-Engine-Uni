@@ -87,7 +87,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\538704\source\repos\Game-Engine\packages\openal.redist.2.0.7.0\build\native\bin\x64;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Link />
@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedModel.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BulletPhysicsEngine.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollisionCuboid.cpp" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedModel.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BulletPhysicsEngine.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
