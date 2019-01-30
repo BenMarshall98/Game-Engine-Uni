@@ -54,6 +54,7 @@ void LevelLoader::LoadLevelJSON(string fileName)
 	{
 		int loc = d.GetErrorOffset();
 		string error = GetParseError_En(d.GetParseError());
+		int line = GetLine(fullFile, loc);
 		return;
 	}
 
@@ -563,6 +564,21 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 	}
 
 	return playerInputs;
+}
+
+int LevelLoader::GetLine(string & file, int location)
+{
+	int count = 0;
+
+	for (int i = 0; i < location; i++)
+	{
+		if (file[i] == '\n')
+		{
+			count++;
+		}
+	}
+
+	return count;
 }
 
 map<string, const Value&> LevelLoader::templates;
