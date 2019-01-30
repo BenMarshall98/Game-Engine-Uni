@@ -16,10 +16,12 @@ class ResourceManager
 		static vector<string> usedModels;
 		static vector<string> usedTextures;
 		static vector<string> usedShaders;
+		static vector<string> usedAudios;
 
 		static map<string, iModel *> modelList;
 		static map<string, Texture *> textureList;
 		static map<string, Shader *> shaderList;
+		static map<string, unsigned int> audioBufferList;
 
 		ResourceManager(void) {};
 	
@@ -27,8 +29,10 @@ class ResourceManager
 		static void LoadModel(const string & modelName, const string & fileName);
 		static void LoadTexture(const string & textureName, const string & fileName);
 		static void LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram = "");
+		static void LoadAudio(const string & audioName, const string & fileName);
 
 		static iModel * GetModel(const string & model);
 		static Shader * GetShader(const string & shader);
 		static Texture * GetTexture(const string & texture);
+		static unsigned int GetAudio(const string & audio);
 };

@@ -1,15 +1,17 @@
 #include "ResourceManager.h"
 #include "ModelLoader.h"
-
+#include "AudioManager.h"
 #include <algorithm>
 
 vector<string> ResourceManager::usedModels;
 vector<string> ResourceManager::usedTextures;
 vector<string> ResourceManager::usedShaders;
+vector<string> ResourceManager::usedAudios;
 
 map<string, iModel *> ResourceManager::modelList;
 map<string, Texture *> ResourceManager::textureList;
 map<string, Shader *> ResourceManager::shaderList;
+map<string, unsigned int> ResourceManager::audioBufferList;
 
 void ResourceManager::LoadModel(const string & modelName, const string & fileName)
 {
@@ -19,7 +21,7 @@ void ResourceManager::LoadModel(const string & modelName, const string & fileNam
 	}
 	else
 	{
-		//TODO: Log that the texture file already exists as a resource
+		//TODO: Log that the model file already exists as a resource
 		return;
 	}
 	if (modelList.find(modelName) != modelList.end())
@@ -32,12 +34,11 @@ void ResourceManager::LoadModel(const string & modelName, const string & fileNam
 
 	if (model == nullptr)
 	{
-		//TODO: Log tha the model failed to load
+		//TODO: Log that the model failed to load
 		return;
 	}
 
 	modelList.insert(pair<string, iModel*>(modelName, model));
-
 }
 
 void ResourceManager::LoadTexture(const string & textureName, const string & fileName)
@@ -98,6 +99,35 @@ void ResourceManager::LoadShader(const string & shaderName, const string & verte
 	shaderList.insert(pair<string, Shader *>(shaderName, shader));
 }
 
+void ResourceManager::LoadAudio(const string & audioName, const string & fileName)
+{
+	if (find(usedAudios.begin(), usedAudios.end(), fileName) == usedAudios.end())
+	{
+		usedAudios.push_back(fileName);
+	}
+	else
+	{
+		//TODO: Log that the  audio file already exists as a resource
+		return;
+	}
+
+	if (audioBufferList.find(audioName) != audioBufferList.end())
+	{
+		//TODO: Log that the audio already exists as a resource
+		return;
+	}
+
+	unsigned int buffer = AudioManager::Instance()->GenerateBuffer(fileName);
+
+	if (buffer == 0)
+	{
+		//TODO: Log that the audio failed to load
+		return;
+	}
+
+	audioBufferList.insert(pair<string, unsigned int>(audioName, buffer));
+}
+
 iModel * ResourceManager::GetModel(const string & model)
 {
 	map<string, iModel *>::iterator it = modelList.find(model);
@@ -129,4 +159,16 @@ Texture * ResourceManager::GetTexture(const string & texture)
 		return it->second;
 	}
 	return nullptr;
+}
+
+unsigned int ResourceManager::GetAudio(const string & audio)
+{
+	map<string, unsigned int>::iterator it = audioBufferList.find(audio);
+
+	if (it != audioBufferList.end())
+	{
+		unsigned int source = AudioManager::Instance()->GenerateSource(it->second);
+		return source;
+	}
+	return 0;
 }

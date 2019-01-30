@@ -3,7 +3,7 @@
 
 AudioManager * AudioManager::instance = nullptr;
 
-AudioManager::AudioManager()
+AudioManager::AudioManager() : mCamera(nullptr)
 {
 	device = alcOpenDevice(0);
 
@@ -49,11 +49,41 @@ unsigned int AudioManager::GenerateBuffer(string fileName)
 	if ((error = alGetError()) != AL_NO_ERROR)
 	{
 		//TODO: Log error
+		delete data;
 		alDeleteBuffers(1, &buffer);
 		return 0;
 	}
 
+	delete data;
+
+	buffers.push_back(buffer);
 	return buffer;
+}
+
+unsigned int AudioManager::GenerateSource(unsigned int buffer)
+{
+	unsigned int source;
+
+	ALenum error;
+	alGenSources(1, &source);
+	if ((error = alGetError()) != AL_NO_ERROR)
+	{
+		//TODO: Log error
+		alDeleteSources(1, &source);
+		return 0;
+	}
+
+	alSourcei(source, AL_BUFFER, buffer);
+
+	if ((error = alGetError()) != AL_NO_ERROR)
+	{
+		//TODO: Log error
+		alDeleteSources(1, &source);
+		return 0;
+	}
+
+	sources.push_back(source);
+	return source;
 }
 
 void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void * allData, unsigned int * size, unsigned int * frequency)

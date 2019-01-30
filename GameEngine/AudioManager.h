@@ -4,6 +4,7 @@
 #include "OpenAL/include/al.h"
 #include "OpenAL/include/alc.h"
 #include <vector>
+#include "Camera.h"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ private:
 
 	vector<ALuint> buffers;
 	vector<ALuint> sources;
+
+	Camera * mCamera;
 
 	static AudioManager * instance;
 	static void LoadWAVFile(string & fileName, ALenum * channels, void * data, unsigned int * size, unsigned int * frequency);
@@ -31,8 +34,13 @@ public:
 		return instance;
 	}
 
+	inline void SetCamera(Camera * pCamera)
+	{
+		mCamera = pCamera;
+	}
+
 	unsigned int GenerateBuffer(string fileName);
-	//int GenerateSource(int buffer);
+	unsigned int GenerateSource(unsigned int buffer);
 	~AudioManager();
 };
 
