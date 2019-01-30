@@ -44,8 +44,9 @@ void PhysicsSystem::Action(void)
 		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
 		float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
 		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
+		vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
 
-		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse);
+		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
 
 		((ComponentPhysics *)componentPhysics)->SetUpdateRigidBody(rigidBody);
 	}

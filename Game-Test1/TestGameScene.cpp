@@ -25,6 +25,7 @@
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
 #include "LevelLoader.h"
+#include <iostream>
 
 TestGameScene::TestGameScene() : mPhysicsManager(nullptr)
 {
@@ -32,7 +33,24 @@ TestGameScene::TestGameScene() : mPhysicsManager(nullptr)
 
 void TestGameScene::Load()
 {
-	LevelLoader::LoadLevelJSON("3DLevel.json");
+	cout << "Please pick a level:" << endl;
+	cout << "   1. 3DLevel" << endl;
+	cout << "   2. PlatformLevel" << endl;
+
+	unsigned int level = 0;
+
+	while (level > 2 || level == 0)
+	{
+		cin >> level;
+	}
+
+	string levelName = "3DLevel.json";
+
+	if (level == 2)
+	{
+		levelName = "PlatformLevel.json";
+	}
+	LevelLoader::LoadLevelJSON(levelName);
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
@@ -55,14 +73,6 @@ void TestGameScene::Load()
 
 	PhysicsSystem * const physics = new PhysicsSystem(*mPhysicsManager);
 	mSystemManager.AddUpdateSystem(physics);
-
-	LightManager * const lightManager = LightManager::Instance();
-	lightManager->SetDirectionalLight(vec3(-1, -1, -1), vec3(1.0, 1.0, 1.0));
-	lightManager->AddPointLight(vec3(0.0, 5.0, 0.0), vec3(1, 1, 1));
-	lightManager->AddSpotLight(vec3(5.0, 10.0, 5.0), vec3(0, -1, 0), vec3(1.0, 1.0, 1.0), 5.0f, 25);
-	lightManager->AddSpotLight(vec3(5.0, 10.0, -5.0), vec3(0, -1, 0), vec3(0.0, 0.0, 1.0), 5.0f, 25);
-	lightManager->AddSpotLight(vec3(-5.0, 10.0, -5.0), vec3(0, -1, 0), vec3(0.0, 1.0, 0.0), 5.0f, 25);
-	lightManager->AddSpotLight(vec3(-5.0, 10.0, 5.0), vec3(0, -1, 0), vec3(1.0, 0.0, 0.0), 5.0f, 25);
 }
 
 void TestGameScene::Render()

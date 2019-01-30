@@ -21,6 +21,8 @@
 #include "ScriptingManager.h"
 #include "ComponentInput.h"
 #include "CameraManager.h"
+#include "RapidJSON/error/en.h"
+#include "LightManager.h"
 #include <fstream>
 #include <iostream>
 
@@ -47,6 +49,13 @@ void LevelLoader::LoadLevelJSON(string fileName)
 
 	Document d;
 	d.Parse(fullFile.c_str());
+
+	if (d.HasParseError())
+	{
+		int loc = d.GetErrorOffset();
+		string error = GetParseError_En(d.GetParseError());
+		return;
+	}
 
 	if (d.HasMember("Resources"))
 	{
@@ -85,6 +94,14 @@ void LevelLoader::LoadLevelJSON(string fileName)
 		if (d["Map"].IsObject())
 		{
 			LoadMapJSON(d["Map"]);
+		}
+	}
+
+	if (d.HasMember("Lights"))
+	{
+		if (d["Lights"].IsArray())
+		{
+			LoadLights(d["Lights"]);
 		}
 	}
 }
@@ -177,6 +194,79 @@ void LevelLoader::LoadEntity(const Value& Entities)
 		}
 
 		AddComponentsToEntityJSON(entity, (*it)["Components"]);
+	}
+}
+
+void LevelLoader::LoadLights(const Value& Lights)
+{
+	Value::ConstValueIterator it;
+
+	LightManager * lightManager = LightManager::Instance();
+
+	for (it = Lights.Begin(); it != Lights.End(); it++)
+	{
+		string type = (*it)["Type"].GetString();
+
+		vec3 colour = vec3(0);
+
+		const Value& col = (*it)["Colour"];
+
+		for (SizeType i = 0; i < col.Size(); i++)
+		{
+			colour[i] = col[i].GetFloat();
+		}
+
+		if (type == "Directional")
+		{
+			vec3 direction = vec3(0);
+
+			const Value& dir = (*it)["Direction"];
+
+			for (SizeType i = 0; i < dir.Size(); i++)
+			{
+				direction[i] = dir[i].GetFloat();
+			}
+
+			lightManager->SetDirectionalLight(direction, colour);
+		}
+		else if (type == "Point")
+		{
+			vec3 location = vec3(0);
+
+			const Value& loc = (*it)["Location"];
+
+			for (SizeType i = 0; i < loc.Size(); i++)
+			{
+				location[i] = loc[i].GetFloat();
+			}
+
+			lightManager->AddPointLight(location, colour);
+		}
+		else if (type == "Spot")
+		{
+			vec3 location = vec3(0);
+
+			const Value& loc = (*it)["Location"];
+
+			for (SizeType i = 0; i < loc.Size(); i++)
+			{
+				location[i] = loc[i].GetFloat();
+			}
+			
+			vec3 direction = vec3(0);
+
+			const Value& dir = (*it)["Direction"];
+
+			for (SizeType i = 0; i < dir.Size(); i++)
+			{
+				direction[i] = dir[i].GetFloat();
+			}
+
+			float innerCone = (*it)["InnerCone"].GetFloat();
+			float outerCone = (*it)["OuterCone"].GetFloat();
+
+			lightManager->AddSpotLight(location, direction, colour, innerCone, outerCone);
+		}
 	}
 }
 
@@ -387,6 +477,15 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			float mass = (*it)["Mass"].GetFloat();
 			string type = (*it)["Type"].GetString();
 
+			vec3 angularLimit = vec3(0);
+
+			const Value& angLimit = (*it)["AngularLimit"];
+
+			for (SizeType i = 0; i < angLimit.Size(); i++)
+			{
+				angularLimit[i] = angLimit[i].GetFloat();
+			}
+
 			EntityType eType = ComponentPhysics::StringToEnum(type);
 
 			if ((*it).HasMember("CollisionResponse"))
@@ -409,14 +508,14 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 						collisionFunctions->insert(pair<EntityType, string>(cEntityType, function));
 					}
 
-					entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, response, collisionFunctions));
+					entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit, response, collisionFunctions));
 				}
 
-				entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, response));
+				entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit, response));
 			}
 			else
 			{
-				entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity));
+				entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit));
 			}
 		}
 		else if (component == "Texture")

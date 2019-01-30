@@ -38,7 +38,7 @@ unsigned int AudioManager::GenerateBuffer(string fileName)
 	}
 
 	ALenum channels;
-	void * data;
+	void * data = nullptr;
 	unsigned int size;
 	unsigned int frequency;
 
@@ -60,7 +60,7 @@ void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void * allD
 {
 	ifstream file(fileName, ios::binary);
 
-	if (file.fail)
+	if (file.fail())
 	{
 		//TODO: log error opening file
 		return;

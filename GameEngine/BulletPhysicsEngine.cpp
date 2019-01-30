@@ -30,7 +30,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse)
+btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
 {
 	btCollisionShape* collisionShape;
 
@@ -78,6 +78,10 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat
 	{
 		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	}
+
+	btVector3 angLimit = btVector3(angularLimit.x, angularLimit.y, angularLimit.z);
+
+	rigidBody->setAngularFactor(angLimit);
 
 	dynamicsWorld->addRigidBody(rigidBody);
 

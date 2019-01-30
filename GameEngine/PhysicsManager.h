@@ -22,9 +22,9 @@ public:
 
 	~PhysicsManager() {}
 
-	inline void* AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse)
+	inline void* AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
 	{
-		return engine->AddRigidBody(mass, position, direction, shape, entity, collisionResponse);
+		return engine->AddRigidBody(mass, position, direction, shape, entity, collisionResponse, angularLimit);
 	}
 
 	inline void Update(float pDeltaTime) const

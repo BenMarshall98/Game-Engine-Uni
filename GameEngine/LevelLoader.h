@@ -19,6 +19,7 @@ private:
 	static void LoadScriptsJSON(const Value& Scripts);
 	static void LoadEntityTemplatesJSON(const Value& EntityTemplates);
 	static void LoadEntity(const Value& Entities);
+	static void LoadLights(const Value& Lights);
 	static void LoadMapJSON(const Value& Map);
 	static void LoadViewJSON(const Value& View);
 	static void LoadPerspectiveJSON(const Value& Perspective);

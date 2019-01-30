@@ -12,16 +12,6 @@
     },
     {
       "Type": "Texture",
-      "Name": "Earth",
-      "Texture": "2k_earth_daymap.jpg"
-    },
-    {
-      "Type": "Texture",
-      "Name": "EarthNormal",
-      "Texture": "Earth_Normal.jpg"
-    },
-    {
-      "Type": "Texture",
       "Name": "Concrete",
       "Texture": "concrete.jpg"
     },
@@ -41,32 +31,10 @@
       "Model": "Floor.obj"
     },
     {
-      "Type": "Model",
-      "Name": "Sphere",
-      "Model": "sphere.obj"
-    },
-    {
-      "Type": "Model",
-      "Name": "Collectable",
-      "Model": "Collectable.obj"
-    },
-    {
-      "Type": "Shader",
-      "Name": "TestShader",
-      "Vertex": "TestVertex.vert",
-      "Fragment": "TestFragment.frag"
-    },
-    {
       "Type": "Shader",
       "Name": "NormalShader",
       "Vertex": "NormalVertex.vert",
       "Fragment": "NormalFragment.frag"
-    },
-    {
-      "Type": "Shader",
-      "Name": "RiggedShader",
-      "Vertex": "RiggedVertex.vert",
-      "Fragment": "RiggedFragment.frag"
     }
   ],
   "Scripts": [
@@ -96,7 +64,8 @@
             "Size": [ 25, 0, 25 ]
           },
           "Mass": 0,
-          "Type": "WALL"
+          "Type": "WALL",
+          "AngularLimit": [0.0, 0.0, 0.0]
         },
         {
           "Component": "Texture",
@@ -105,133 +74,6 @@
         {
           "Component": "NormalTexture",
           "Texture": "ConcreteNormal"
-        }
-      ]
-    },
-    {
-      "Name": "Wall",
-      "Components": [
-        {
-          "Component": "Model",
-          "Model": "Cube"
-        },
-        {
-          "Component": "Shader",
-          "Shader": "NormalShader"
-        },
-        {
-          "Component": "Direction",
-          "Direction": [ 0, 0, 1 ],
-          "Angle": 0
-        },
-        {
-          "Component": "Physics",
-          "Shape": {
-            "Type": "Cuboid",
-            "Size": [ 0.5, 0.5, 0.5 ]
-          },
-          "Mass": 0,
-          "Type": "WALL"
-        },
-        {
-          "Component": "Texture",
-          "Texture": "Concrete"
-        },
-        {
-          "Component": "NormalTexture",
-          "Texture": "ConcreteNormal"
-        }
-      ]
-    },
-    {
-      "Name": "InvisibleWall",
-      "Components": [
-        {
-          "Component": "Direction",
-          "Direction": [ 0, 0, 1 ],
-          "Angle": 0
-        },
-        {
-          "Component": "Physics",
-          "Shape": {
-            "Type": "Cuboid",
-            "Size": [ 0.5, 0.5, 0 ]
-          },
-          "Mass": 0,
-          "Type": "WALL"
-        }
-      ]
-    },
-    {
-      "Name": "Container",
-      "Components": [
-        {
-          "Component": "Model",
-          "Model": "Cube"
-        },
-        {
-          "Component": "Shader",
-          "Shader": "NormalShader"
-        },
-        {
-          "Component": "Direction",
-          "Direction": [ 0, 0, 1 ],
-          "Angle": 0
-        },
-        {
-          "Component": "Physics",
-          "Shape": {
-            "Type": "Cuboid",
-            "Size": [ 0.5, 0.5, 0.5 ]
-          },
-          "Mass": 1,
-          "Type": "WALL"
-        },
-        {
-          "Component": "Texture",
-          "Texture": "Box"
-        },
-        {
-          "Component": "NormalTexture",
-          "Texture": "BoxNormal"
-        }
-      ]
-    },
-    {
-      "Name": "Collectable",
-      "Components": [
-        {
-          "Component": "Model",
-          "Model": "Collectable"
-        },
-        {
-          "Component": "Shader",
-          "Shader": "TestShader"
-        },
-        {
-          "Component": "Direction",
-          "Direction": [ 0, 0, 1 ],
-          "Angle": 0
-        },
-        {
-          "Component": "Physics",
-          "Shape": {
-            "Type": "Sphere",
-            "Radius": 0.25
-          },
-          "Mass": 0,
-          "Type": "COLLECTABLE",
-          "CollisionResponse": false,
-          "CollisionFunctions": [
-            {
-              "EntityType": "PLAYER",
-              "Function": "DeleteCoin"
-            }
-          ]
-        },
-        {
-          "Component": "Texture",
-          "Texture": "Earth"
         }
       ]
     }
@@ -264,15 +106,16 @@
             "Size": [ 0.5, 0.5, 0.5 ]
           },
           "Mass": 1,
-          "Type": "PLAYER"
+          "Type": "PLAYER",
+          "AngularLimit": [0.0, 1.0, 0.0]
         },
         {
           "Component": "Texture",
-          "Texture": "Earth"
+          "Texture": "Box"
         },
         {
           "Component": "NormalTexture",
-          "Texture": "EarthNormal"
+          "Texture": "BoxNormal"
         },
         {
           "Component": "Input",
@@ -348,5 +191,49 @@
         "FollowRate": 0.1
       }
     }
-  }
+  },
+  "Lights": [
+    {
+      "Type": "Directional",
+      "Direction": [ -1.0, -1.0, -1.0 ],
+      "Colour": [ 1.0, 1.0, 1.0 ]
+    },
+    {
+      "Type": "Point",
+      "Location": [ 0.0, 5.0, 0.0 ],
+      "Colour": [ 1.0, 1.0, 1.0 ]
+    },
+    {
+      "Type": "Spot",
+      "Location": [ 5.0, 10.0, 5.0 ],
+      "Direction": [ 0.0, -1.0, 0.0 ],
+      "Colour": [ 1.0, 1.0, 1.0 ],
+      "InnerCone": 5.0,
+      "OuterCone": 25.0
+    },
+    {
+      "Type": "Spot",
+      "Location": [ 5.0, 10.0, -5.0 ],
+      "Direction": [ 0.0, -1.0, 0.0 ],
+      "Colour": [ 0.0, 0.0, 1.0 ],
+      "InnerCone": 5.0,
+      "OuterCone": 25.0
+    },
+    {
+      "Type": "Spot",
+      "Location": [ -5.0, 10.0, -5.0 ],
+      "Direction": [ 0.0, -1.0, 0.0 ],
+      "Colour": [ 0.0, 1.0, 0.0 ],
+      "InnerCone": 5.0,
+      "OuterCone": 25.0
+    },
+    {
+      "Type": "Spot",
+      "Location": [ -5.0, 10.0, 5.0 ],
+      "Direction": [ 0.0, -1.0, 0.0 ],
+      "Colour": [ 1.0, 0.0, 0.0 ],
+      "InnerCone": 5.0,
+      "OuterCone": 25.0
+    }
+  ]
 }

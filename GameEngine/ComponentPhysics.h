@@ -34,6 +34,7 @@ private:
 	vec3 velocity = vec3(0);
 	vec3 impulse = vec3(0);
 	vec3 rotation = vec3(0);
+	vec3 angularLimits = vec3(1);
 	
 	map<EntityType, string> * collisionFunctions;
 	CollisionShape * shape;
@@ -47,8 +48,8 @@ private:
 	bool collisionResponse;
 
 public:
-	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const bool pCollisionResponse = true, map<EntityType, string> * const pCollisionFunctions = new map<EntityType, string>())
-		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
+	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const vec3 & pAngularLimits, const bool pCollisionResponse = true, map<EntityType, string> * const pCollisionFunctions = new map<EntityType, string>())
+		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), angularLimits(pAngularLimits), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics();
 
 	ComponentPhysics& operator=(const ComponentPhysics&) = delete;
@@ -67,6 +68,11 @@ public:
 	}
 
 	void RenderSwap() override;
+
+	inline vec3 GetUpdateAngularLimits() const
+	{
+		return angularLimits;
+	}
 
 	inline bool GetUpdateCollisionResponse() const
 	{
