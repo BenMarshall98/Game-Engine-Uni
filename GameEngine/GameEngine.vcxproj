@@ -134,6 +134,7 @@
     <ClCompile Include="CollisionCuboid.cpp" />
     <ClCompile Include="CollisionShape.cpp" />
     <ClCompile Include="CollisionSphere.cpp" />
+    <ClCompile Include="ComponentAudio.cpp" />
     <ClCompile Include="ComponentDirection.cpp" />
     <ClCompile Include="ComponentInput.cpp" />
     <ClCompile Include="ComponentModel.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="CollisionCuboid.h" />
     <ClInclude Include="CollisionShape.h" />
     <ClInclude Include="CollisionSphere.h" />
+    <ClInclude Include="ComponentAudio.h" />
     <ClInclude Include="ComponentDirection.h" />
     <ClInclude Include="ComponentInput.h" />
     <ClInclude Include="ComponentModel.h" />

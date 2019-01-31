@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib, "../OpenAL/libs/Win64/OpenAL32.lib")
 
 #include <string>
 #include "OpenAL/include/al.h"

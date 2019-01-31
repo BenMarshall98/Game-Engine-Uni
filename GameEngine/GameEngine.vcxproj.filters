@@ -201,6 +201,9 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Audio Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentAudio.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -347,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Audio Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentAudio.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
