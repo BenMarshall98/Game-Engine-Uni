@@ -8,7 +8,7 @@ http://www.terathon.com/code/tangent.html
 
 https://www.gamedev.net/articles/programming/general-and-gameplay-programming/the-lua-tutorial-r2999/
 
-
+//TODO: have a look at angular limits in physics engine, especially the 3D level
 
 int i;
 	int top = lua_gettop(luaState);

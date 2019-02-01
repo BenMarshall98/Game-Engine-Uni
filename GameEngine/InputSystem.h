@@ -16,7 +16,7 @@ private:
 	EntityManager * entityManager;
 
 public:
-	explicit InputSystem();
+	InputSystem();
 
 	InputSystem& operator=(const InputSystem&) = delete;
 	InputSystem(InputSystem&) = delete;

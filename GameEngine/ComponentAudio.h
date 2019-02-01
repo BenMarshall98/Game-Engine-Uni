@@ -1,17 +1,12 @@
 #pragma once
 
 #include "iComponent.h"
+#include "AudioManager.h"
 #include <string>
 
 using namespace std;
 
-enum class AudioPlayback
-{
-	START,
-	STOP,
-	PAUSE,
-	NONE
-};
+
 
 class ComponentAudio : public iComponent
 {

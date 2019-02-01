@@ -1,9 +1,10 @@
 #include "AudioManager.h"
+#include "CameraManager.h"
 #include <fstream>
 
 AudioManager * AudioManager::instance = nullptr;
 
-AudioManager::AudioManager() : mCamera(nullptr)
+AudioManager::AudioManager()
 {
 	device = alcOpenDevice(0);
 
@@ -55,8 +56,6 @@ unsigned int AudioManager::GenerateBuffer(string fileName)
 	}
 
 	delete data;
-
-	buffers.push_back(buffer);
 	return buffer;
 }
 
@@ -81,8 +80,6 @@ unsigned int AudioManager::GenerateSource(unsigned int buffer)
 		alDeleteSources(1, &source);
 		return 0;
 	}
-
-	sources.push_back(source);
 	return source;
 }
 
@@ -164,4 +161,49 @@ void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void * allD
 		file >> allData;
 		*channels = AL_FORMAT_MONO16;
 	}
+}
+
+void AudioManager::UpdateComponentSound(unsigned int source, const vec3 & position, AudioPlayback playback)
+{
+	alSource3f(source, AL_POSITION, position.x, position.y, position.z);
+
+	if (playback == AudioPlayback::PAUSE)
+	{
+		alSourcePause(source);
+	}
+	else if (playback == AudioPlayback::STOP)
+	{
+		alSourceStop(source);
+	}
+	else if (playback == AudioPlayback::START)
+	{
+		int value;
+		alGetSourcei(source, AL_SOURCE_STATE, &value);
+		if (value != AL_PLAYING)
+		{
+			alSourcePlay(source);
+			alSourcei(source, AL_LOOPING, AL_TRUE);
+		}
+	}
+}
+
+void AudioManager::Update()
+{
+	Camera * camera = CameraManager::Instance()->GetCamera();
+
+	vec3 pos = camera->GetPosition();
+	vec3 up = camera->GetUp();
+	vec3 lookAt = camera->GetLookAt();
+
+	float position[] = { pos.x, pos.y, pos.z };
+	float orientation[] = { lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z };
+
+	alListenerfv(AL_POSITION, position);
+	alListenerfv(AL_ORIENTATION, orientation);
+}
+
+void AudioManager::DeleteSource(unsigned int source)
+{
+	alSourceStop(source);
+	alDeleteSources(1, &source);
 }
