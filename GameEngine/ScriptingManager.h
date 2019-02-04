@@ -18,6 +18,7 @@ private:
 	static int lua_GetComponentDirection(lua_State * luaState);
 	static int lua_GetComponentPosition(lua_State * luaState);
 	static int lua_GetComponentPhysics(lua_State * luaState);
+	static int lua_GetComponentAudio(lua_State * luaState);
 	static int lua_GetPosition(lua_State * luaState);
 	static int lua_SetPosition(lua_State * luaState);
 	static int lua_GetVelocity(lua_State * luaState);
@@ -34,6 +35,10 @@ private:
 	static int lua_CreateRotationMatrix(lua_State * luaState);
 	static int lua_MultiplyMatrices(lua_State * luaState);
 	static int lua_MultiplyMatrixVector(lua_State * luaState);
+	static int lua_ChangePlayback(lua_State * luaState);
+	static int lua_PlayAudio(lua_State * luaState);
+	static int lua_PlayAudioAtLocation(lua_State * luaState);
+	static int lua_PlayAudioAtEntityLocation(lua_State * luaState);
 	static int lua_DeleteEntity(lua_State * luaState);
 
 	ScriptingManager();

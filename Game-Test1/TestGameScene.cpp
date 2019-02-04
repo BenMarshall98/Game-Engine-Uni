@@ -21,6 +21,8 @@
 #include "CollisionCuboid.h"
 #include "FollowPlaneCamera.h"
 #include "CameraManager.h"
+#include "AudioManager.h"
+#include "AudioSystem.h"
 
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
@@ -73,6 +75,9 @@ void TestGameScene::Load()
 
 	PhysicsSystem * const physics = new PhysicsSystem(*mPhysicsManager);
 	mSystemManager.AddUpdateSystem(physics);
+
+	AudioSystem * const audio = new AudioSystem();
+	mSystemManager.AddUpdateSystem(audio);
 }
 
 void TestGameScene::Render()
@@ -92,7 +97,7 @@ void TestGameScene::Update()
 	mSystemManager.Update();
 	
 	CameraManager::Instance()->Update();
-
+	AudioManager::Instance()->Update();
 }
 
 void TestGameScene::Close()

@@ -62,6 +62,21 @@
       "Name": "RiggedShader",
       "Vertex": "RiggedVertex.vert",
       "Fragment": "RiggedFragment.frag"
+    },
+    {
+      "Type": "Audio",
+      "Name": "Collectable",
+      "Audio": "Collectable.wav"
+    },
+    {
+      "Type": "Audio",
+      "Name": "CollectableNear",
+      "Audio": "CollectableNear.wav"
+    },
+    {
+      "Type": "Audio",
+      "Name": "Thump",
+      "Audio": "Thump.wav"
     }
   ],
   "Scripts": [
@@ -176,6 +191,11 @@
         {
           "Component": "Texture",
           "Texture": "Earth"
+        },
+        {
+          "Component": "Audio",
+          "Audio": "CollectableNear",
+          "Playback": "Play"
         }
       ]
     }
@@ -208,8 +228,15 @@
             "Radius": 0.5
           },
           "Mass": 1,
-          "AngularLimit": [0.0,0.0,1.0],
-          "Type": "PLAYER"
+          "AngularLimit": [ 0.0, 0.0, 1.0 ],
+          "Type": "PLAYER",
+          "CollisionResponse": true,
+          "CollisionFunctions": [
+            {
+              "EntityType": "WALL",
+              "Function": "HitGround"
+            }
+          ]
         },
         {
           "Component": "Texture",

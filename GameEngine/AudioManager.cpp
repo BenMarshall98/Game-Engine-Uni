@@ -1,5 +1,8 @@
 #include "AudioManager.h"
 #include "CameraManager.h"
+#include "ResourceManager.h"
+#include "EntityManager.h"
+#include "ComponentPosition.h"
 #include <fstream>
 
 AudioManager * AudioManager::instance = nullptr;
@@ -26,6 +29,7 @@ AudioManager::~AudioManager()
 
 unsigned int AudioManager::GenerateBuffer(string fileName)
 {
+	alGetError();
 	ALuint buffer;
 
 	alGenBuffers(1, &buffer);
@@ -43,7 +47,7 @@ unsigned int AudioManager::GenerateBuffer(string fileName)
 	unsigned int size;
 	unsigned int frequency;
 
-	LoadWAVFile(fileName, &channels, data, &size, &frequency);
+	LoadWAVFile(fileName, &channels, &data, &size, &frequency);
 
 	alBufferData(buffer, channels, data, size, frequency);
 
@@ -61,6 +65,7 @@ unsigned int AudioManager::GenerateBuffer(string fileName)
 
 unsigned int AudioManager::GenerateSource(unsigned int buffer)
 {
+	alGetError();
 	unsigned int source;
 
 	ALenum error;
@@ -83,7 +88,7 @@ unsigned int AudioManager::GenerateSource(unsigned int buffer)
 	return source;
 }
 
-void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void * allData, unsigned int * size, unsigned int * frequency)
+void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void ** allData, unsigned int * size, unsigned int * frequency)
 {
 	ifstream file(fileName, ios::binary);
 
@@ -93,38 +98,45 @@ void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void * allD
 		return;
 	}
 
-	char riff[4];
-	file >> riff;
+	char riff[5] = "";
+	file.read(riff, 4);
 
-	if (riff != "RIFF")
+	if (strcmp(riff, "RIFF") != 0)
 	{
 		//TODO: log error with file, not RIFF format
 		return;
 	}
 
-	unsigned int fileSize;
-	char wave[4];
-	file >> fileSize >> wave;
+	long fileSize;
+	char wave[5] = "";
+	file.read(reinterpret_cast<char *>(&fileSize), sizeof(long));
+	file.read(wave, 4);
 
-	if (wave != "WAVE")
+	if (strcmp(wave, "WAVE") != 0)
 	{
 		//TODO: log error with file, not WAVE file
 		return;
 	}
 
-	char fmt[4];
-	file >> fmt;
+	char fmt[5] = "";
+	file.read(fmt, 4);
 
-	if (fmt != "fmt ")
+	if (strcmp(fmt, "fmt ") != 0)
 	{
 		//TODO: log error with file, no data format
 		return;
 	}
 
-	unsigned int fmtChunkSize, avgBytesPerSec;
-	unsigned short formatTag, blockAlign, bitsPerSample;
+	long fmtChunkSize, avgBytesPerSec, mFrequency;
+	short mChannels, formatTag, blockAlign, bitsPerSample;
 
-	file >> fmtChunkSize >> formatTag >> *channels >> *frequency >> avgBytesPerSec >> blockAlign >> bitsPerSample;
+	file.read(reinterpret_cast<char *>(&fmtChunkSize), sizeof(long));
+	file.read(reinterpret_cast<char *>(&formatTag), sizeof(short));
+	file.read(reinterpret_cast<char *>(&mChannels), sizeof(short));
+	file.read(reinterpret_cast<char *>(&mFrequency), sizeof(long));
+	file.read(reinterpret_cast<char *>(&avgBytesPerSec), sizeof(long));
+	file.read(reinterpret_cast<char *>(&blockAlign), sizeof(short));
+	file.read(reinterpret_cast<char *>(&bitsPerSample), sizeof(short));
 
 	if (fmtChunkSize != 16)
 	{
@@ -132,33 +144,39 @@ void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void * allD
 		return;
 	}
 
-	if (*channels != 1)
+	if (mChannels != 1)
 	{
 		//TODO: Log that there should only be one channel;
 		return;
 	}
 
-	char data[4];
-	file >> data;
+	char data[5] = "";
+	file.read(data, 4);
 
-	if (data != "data")
+	if (strcmp(data, "data") != 0)
 	{
 		//TODO: log error with file, no data in file
 		return;
 	}
 
-	file >> *size;
+	long mSize;
+	file.read(reinterpret_cast<char *>(&mSize), sizeof(long));
+
+	*frequency = mFrequency;
+	*size = mSize;
 
 	if (bitsPerSample == 8)
 	{
-		allData = new char[*size];
-		file >> allData;
+		char * data = new char[mSize];
+		file >> data;
+		*allData = data;
 		*channels = AL_FORMAT_MONO8;
 	}
 	else if (bitsPerSample == 16)
 	{
-		allData = new short[*size];
-		file >> allData;
+		short * data = new short[mSize];
+		file.read(reinterpret_cast<char *>(data), sizeof(short) * mSize);
+		*allData = data;
 		*channels = AL_FORMAT_MONO16;
 	}
 }
@@ -175,7 +193,7 @@ void AudioManager::UpdateComponentSound(unsigned int source, const vec3 & positi
 	{
 		alSourceStop(source);
 	}
-	else if (playback == AudioPlayback::START)
+	else if (playback == AudioPlayback::PLAY)
 	{
 		int value;
 		alGetSourcei(source, AL_SOURCE_STATE, &value);
@@ -200,6 +218,106 @@ void AudioManager::Update()
 
 	alListenerfv(AL_POSITION, position);
 	alListenerfv(AL_ORIENTATION, orientation);
+
+	for (int i = 0; i < cameraSounds.size(); i++)
+	{
+		ALenum playing;
+		alGetSourcei(cameraSounds.at(i), AL_SOURCE_STATE, &playing);
+
+		if (playing == AL_STOPPED)
+		{
+			DeleteSource(cameraSounds.at(i));
+			cameraSounds.erase(cameraSounds.begin() + i);
+			i--;
+			continue;
+		}
+
+		alSource3f(cameraSounds.at(i), AL_POSITION, pos.x, pos.y, pos.z);
+	}
+
+	for (int i = 0; i < locationSounds.size(); i++)
+	{
+		ALenum playing;
+		alGetSourcei(locationSounds.at(i)->source, AL_SOURCE_STATE, &playing);
+
+		if (playing == AL_STOPPED)
+		{
+			DeleteSource(locationSounds.at(i)->source);
+			delete locationSounds.at(i);
+			locationSounds.erase(locationSounds.begin() + i);
+			i--;
+			continue;
+		}
+	}
+
+	for (int i = 0; i < entitySounds.size(); i++)
+	{
+		ALenum playing;
+		alGetSourcei(entitySounds.at(i)->source, AL_SOURCE_STATE, &playing);
+
+		if (playing == AL_STOPPED)
+		{
+			DeleteSource(entitySounds.at(i)->source);
+			delete entitySounds.at(i);
+			entitySounds.erase(entitySounds.begin() + i);
+			i--;
+			continue;
+		}
+
+		iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entitySounds.at(i)->entity, ComponentType::COMPONENT_POSITION);
+
+		vec3 entPos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
+
+		alSource3f(entitySounds.at(i)->source, AL_POSITION, entPos.x, entPos.y, entPos.z);
+	}
+}
+
+void AudioManager::PlayAudio(string & sound)
+{
+	unsigned int source = ResourceManager::GetAudio(sound);
+	alSourcePlay(source);
+	alSourcei(source, AL_LOOPING, AL_FALSE);
+
+	Camera * camera = CameraManager::Instance()->GetCamera();
+
+	vec3 pos = camera->GetPosition();
+	alSource3f(source, AL_POSITION, pos.x, pos.y, pos.z);
+
+	cameraSounds.push_back(source);
+}
+
+void AudioManager::PlayAudioAtLocation(string & sound, vec3 & location)
+{
+	unsigned int source = ResourceManager::GetAudio(sound);
+	alSourcePlay(source);
+	alSourcei(source, AL_LOOPING, AL_FALSE);
+
+	alSource3f(source, AL_POSITION, location.x, location.y, location.z);
+
+	LocationSound * locSound = new LocationSound();
+	locSound->location = location;
+	locSound->source = source;
+
+	locationSounds.push_back(locSound);
+}
+
+void AudioManager::PlayAudioAtEntityLocation(string & sound, Entity * entity)
+{
+	unsigned int source = ResourceManager::GetAudio(sound);
+	alSourcePlay(source);
+	alSourcei(source, AL_LOOPING, AL_FALSE);
+
+	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
+
+	vec3 pos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
+
+	alSource3f(source, AL_POSITION, pos.x, pos.y, pos.z);
+
+	EntitySound * entSound = new EntitySound();
+	entSound->entity = entity;
+	entSound->source = source;
+
+	entitySounds.push_back(entSound);
 }
 
 void AudioManager::DeleteSource(unsigned int source)

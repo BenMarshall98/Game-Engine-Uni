@@ -7,15 +7,28 @@
 #include "glm/glm.hpp"
 #include <vector>
 #include "Camera.h"
+#include "Entity.h"
 
 using namespace std;
 
 enum class AudioPlayback
 {
-	START,
+	PLAY,
 	STOP,
 	PAUSE,
 	NONE
+};
+
+struct LocationSound
+{
+	unsigned int source;
+	vec3 location;
+};
+
+struct EntitySound
+{
+	unsigned int source;
+	Entity * entity;
 };
 
 class AudioManager
@@ -24,8 +37,12 @@ private:
 	ALCdevice * device;
 	ALCcontext * context;
 
+	vector<unsigned int> cameraSounds;
+	vector<LocationSound *> locationSounds;
+	vector<EntitySound *> entitySounds;
+
 	static AudioManager * instance;
-	static void LoadWAVFile(string & fileName, ALenum * channels, void * data, unsigned int * size, unsigned int * frequency);
+	static void LoadWAVFile(string & fileName, ALenum * channels, void ** data, unsigned int * size, unsigned int * frequency);
 	AudioManager();
 public:
 	
@@ -46,6 +63,10 @@ public:
 
 	void DeleteSource(unsigned int source);
 	void UpdateComponentSound(unsigned int source, const vec3 & position, AudioPlayback playback);
+
+	void PlayAudio(string & sound);
+	void PlayAudioAtLocation(string & sound, vec3 & location);
+	void PlayAudioAtEntityLocation(string & sound, Entity * entity);
 	~AudioManager();
 };
 

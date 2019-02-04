@@ -5,6 +5,8 @@
 #include "ComponentDirection.h"
 #include "ComponentPosition.h"
 #include "ComponentPhysics.h"
+#include "ComponentAudio.h"
+#include "AudioManager.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -30,6 +32,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "GetComponentPhysics", lua_GetComponentPhysics);
 	lua_register(luaVM, "GetComponentPosition", lua_GetComponentPosition);
 	lua_register(luaVM, "GetComponentDirection", lua_GetComponentDirection);
+	lua_register(luaVM, "GetComponentAudio", lua_GetComponentAudio);
 	lua_register(luaVM, "GetPosition", lua_GetPosition);
 	lua_register(luaVM, "SetPosition", lua_SetPosition);
 	lua_register(luaVM, "GetVelocity", lua_GetVelocity);
@@ -46,6 +49,10 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "CreateRotationMatrix", lua_CreateRotationMatrix);
 	lua_register(luaVM, "MultiplyMatrices", lua_MultiplyMatrices);
 	lua_register(luaVM, "MultiplyMatrixVector", lua_MultiplyMatrixVector);
+	lua_register(luaVM, "ChangePlayback", lua_ChangePlayback);
+	lua_register(luaVM, "PlayAudio", lua_PlayAudio);
+	lua_register(luaVM, "PlayAudioAtLocation", lua_PlayAudioAtLocation);
+	lua_register(luaVM, "PlayAudioAtEntityLocation", lua_PlayAudioAtEntityLocation);
 	lua_register(luaVM, "DeleteEntity", lua_DeleteEntity);
 	
 	string file = "Vector3.lua";
@@ -153,6 +160,31 @@ int ScriptingManager::lua_GetComponentPhysics(lua_State * luaState)
 	ComponentPhysics * physicsComponent = dynamic_cast<ComponentPhysics *>(componentPhysics);
 
 	lua_pushlightuserdata(luaState, physicsComponent);
+	return 1;
+}
+
+int ScriptingManager::lua_GetComponentAudio(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: GetComponentAudio");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetComponentAudio");
+		lua_error(luaState);
+	}
+
+	iComponent * componentAudio = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_AUDIO);
+	ComponentAudio * audioComponent = dynamic_cast<ComponentAudio *>(componentAudio);
+
+	lua_pushlightuserdata(luaState, audioComponent);
 	return 1;
 }
 
@@ -898,6 +930,117 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 		lua_error(luaState);
 	}
 	return 1;
+}
+
+int ScriptingManager::lua_ChangePlayback(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: ChangePlayback");
+		lua_error(luaState);
+	}
+
+	ComponentAudio * audioComponent = (ComponentAudio *)lua_touserdata(luaState, 1);
+
+	if (!audioComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: ChangePlayback");
+		lua_error(luaState);
+	}
+
+	string playback = lua_tostring(luaState, 2);
+
+	if (playback == "Play")
+	{
+		audioComponent->SetUpdateAudioPlayback(AudioPlayback::PLAY);
+	}
+	else if (playback == "Pause")
+	{
+		audioComponent->SetUpdateAudioPlayback(AudioPlayback::PAUSE);
+	}
+	else if (playback == "Stop")
+	{
+		audioComponent->SetUpdateAudioPlayback(AudioPlayback::STOP);
+	}
+	else
+	{
+		lua_pushstring(luaState, "Wrong playback state passed in: ChangePlayback");
+	}
+
+	return 0;
+}
+
+int ScriptingManager::lua_PlayAudio(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: PlayAudio");
+		lua_error(luaState);
+	}
+
+	string sound = lua_tostring(luaState, 1);
+
+	AudioManager::Instance()->PlayAudio(sound);
+
+	return 0;
+}
+
+int ScriptingManager::lua_PlayAudioAtLocation(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "wrong Numberr of Args: PlayAudioAtLocation");
+		lua_error(luaState);
+	}
+
+	string sound = lua_tostring(luaState, 1);
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 position(x, y, z);
+	
+	AudioManager::Instance()->PlayAudioAtLocation(sound, position);
+
+	return 0;
+}
+
+int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: PlayAudioAtEntityLocation");
+		lua_error(luaState);
+	}
+
+	string sound = lua_tostring(luaState, 1);
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 2);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: PlayAudioAtEntityLocation");
+		lua_error(luaState);
+	}
+
+	AudioManager::Instance()->PlayAudioAtEntityLocation(sound, entity);
+
+	return 0;
 }
 
 int ScriptingManager::lua_DeleteEntity(lua_State * luaState)

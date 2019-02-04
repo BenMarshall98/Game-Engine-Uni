@@ -1,7 +1,21 @@
 local Vector3 = require("Vector3")
+local wasTouchingGround = false
 
 function DeleteCoin(entity)
+	PlayAudio("Collectable")
 	DeleteEntity(entity)
+end
+
+function HitGround(entity)
+	if wasTouchingGround == false then
+		local ComponentPhysics = GetComponentPhysics(entity)
+		if GetTouchingGround(ComponentPhysics) then
+			local ComponentPosition = GetComponentPosition(entity)
+			local currentPosition = GetPosition(ComponentPosition)
+			PlayAudioAtLocation("Thump", currentPosition)
+			wasTouchingGround = true
+		end
+	end
 end
 
 function PlayerLeft(entity, inputValue, deltaTime)
@@ -35,6 +49,7 @@ function PlayerJump(entity, inputValue, deltaTime)
 			y = y + (deltaTime * inputValue * 100)
 			currentImpulse:setY(y)
 			SetImpulse(ComponentPhysics, currentImpulse)
+			wasTouchingGround = false
 		end
 	end
 end

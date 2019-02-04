@@ -4,11 +4,12 @@ http://www.wazim.com/Collada_Tutorial_1.htm
 //TBN Matrix
 http://www.terathon.com/code/tangent.html
 
-//TODO: Swpa the OpenGL loading library back to galogen
+//TODO: Swap the OpenGL loading library back to galogen
 
 https://www.gamedev.net/articles/programming/general-and-gameplay-programming/the-lua-tutorial-r2999/
 
 //TODO: have a look at angular limits in physics engine, especially the 3D level
+//TODO: have a look at collisions in the physics engine, see if it is possible to fine tune them
 
 int i;
 	int top = lua_gettop(luaState);

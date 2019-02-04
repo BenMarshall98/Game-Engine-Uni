@@ -19,6 +19,9 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{77085c74-32d8-4558-8cd9-7f55378d567b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{06ed896a-55cd-42b5-a3f8-7f1d0d595d2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -130,5 +133,16 @@
     <Content Include="PlatformerFunctions.lua">
       <Filter>Scripts</Filter>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Collectable.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="CollectableNear.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="Thump.wav">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

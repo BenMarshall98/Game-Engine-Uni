@@ -7,6 +7,7 @@
 #include "ComponentDirection.h"
 #include "ComponentPhysics.h"
 #include "ComponentTexture.h"
+#include "ComponentAudio.h"
 #include "ComponentNormalTexture.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
@@ -140,6 +141,11 @@ void LevelLoader::LoadResourcesJSON(const Value& Resources)
 			{
 				ResourceManager::LoadShader(name, vertex, fragment);
 			}
+		}
+		else if (type == "Audio")
+		{
+			string audio = (*it)["Audio"].GetString();
+			ResourceManager::LoadAudio(name, audio);
 		}
 	}
 }
@@ -448,6 +454,24 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 			float angle = (*it)["Angle"].GetFloat();
 			entityManager->AddComponentToEntity(entity, new ComponentDirection(direction, angle));
+		}
+		else if (component == "Audio")
+		{
+			string name = (*it)["Audio"].GetString();
+			string playback = (*it)["Playback"].GetString();
+
+			if (playback == "Play")
+			{
+				entityManager->AddComponentToEntity(entity, new ComponentAudio(AudioPlayback::PLAY, name));
+			}
+			else if (playback == "Pause")
+			{
+				entityManager->AddComponentToEntity(entity, new ComponentAudio(AudioPlayback::PAUSE, name));
+			}
+			else if (playback == "Stop")
+			{
+				entityManager->AddComponentToEntity(entity, new ComponentAudio(AudioPlayback::STOP, name));
+			}
 		}
 		else if (component == "Physics")
 		{
