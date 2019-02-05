@@ -119,12 +119,6 @@ void ResourceManager::LoadAudio(const string & audioName, const string & fileNam
 
 	unsigned int buffer = AudioManager::Instance()->GenerateBuffer(fileName);
 
-	if (buffer == 0)
-	{
-		//TODO: Log that the audio failed to load
-		return;
-	}
-
 	audioBufferList.insert(pair<string, unsigned int>(audioName, buffer));
 }
 
