@@ -17,6 +17,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RapidJSON", "RapidJSON\Rapi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lua", "Lua\Lua.vcxproj", "{7FCCE334-42B1-4CF3-8F96-04CAFE83F7C0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{536562B6-3CA6-4AA4-978C-57423D6C78E2}"
+	ProjectSection(SolutionItems) = preProject
+		irrKlang-64bit-1.6.0\bin\irrKlang.dll = irrKlang-64bit-1.6.0\bin\irrKlang.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
