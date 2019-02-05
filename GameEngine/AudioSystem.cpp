@@ -28,7 +28,7 @@ void AudioSystem::Action(void)
 		iComponent * componentAudio = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_AUDIO);
 
 		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
-		unsigned int source = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioSource();
+		void * source = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioSource();
 		AudioPlayback playback = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioPlayback();
 
 		Audio(position, source, playback);
@@ -37,7 +37,7 @@ void AudioSystem::Action(void)
 	}
 }
 
-void AudioSystem::Audio(const vec3 & position, unsigned int source, AudioPlayback playback)
+void AudioSystem::Audio(const vec3 & position, void * source, AudioPlayback playback)
 {
 	AudioManager::Instance()->UpdateComponentSound(source, position, playback);
 }

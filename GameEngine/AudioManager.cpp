@@ -9,198 +9,56 @@ AudioManager * AudioManager::instance = nullptr;
 
 AudioManager::AudioManager()
 {
-	device = alcOpenDevice(0);
-
-	if (device)
-	{
-		context = alcCreateContext(device, 0);
-		alcMakeContextCurrent(context);
-	}
-
-	alGetError();
+	engine = createIrrKlangDevice();
 }
+
 
 AudioManager::~AudioManager()
 {
-	alcMakeContextCurrent(0);
-	alcDestroyContext(context);
-	alcCloseDevice(device);
+	engine->drop();
 }
 
-unsigned int AudioManager::GenerateBuffer(string fileName)
+void * AudioManager::GenerateBuffer(string fileName)
 {
-	alGetError();
-	ALuint buffer;
+	ISoundSource * buffer = engine->addSoundSourceFromFile(fileName.c_str());
 
-	alGenBuffers(1, &buffer);
-
-	ALenum error;
-	if ((error = alGetError()) != AL_NO_ERROR)
-	{
-		//TODO: Log error
-		alDeleteBuffers(1, &buffer);
-		return 0;
-	}
-
-	ALenum channels;
-	void * data = nullptr;
-	unsigned int size;
-	unsigned int frequency;
-
-	LoadWAVFile(fileName, &channels, &data, &size, &frequency);
-
-	alBufferData(buffer, channels, data, size, frequency);
-
-	if ((error = alGetError()) != AL_NO_ERROR)
-	{
-		//TODO: Log error
-		delete data;
-		alDeleteBuffers(1, &buffer);
-		return 0;
-	}
-
-	delete data;
 	return buffer;
 }
 
-unsigned int AudioManager::GenerateSource(unsigned int buffer)
+void * AudioManager::GenerateSource(void * pBuffer)
 {
-	alGetError();
-	unsigned int source;
+	ISoundSource * mBuffer = (ISoundSource *)(pBuffer);
+	ISound * source = engine->play3D(mBuffer, vec3df(0, 0, 0), false, true, true);
 
-	ALenum error;
-	alGenSources(1, &source);
-	if ((error = alGetError()) != AL_NO_ERROR)
-	{
-		//TODO: Log error
-		alDeleteSources(1, &source);
-		return 0;
-	}
-
-	alSourcei(source, AL_BUFFER, buffer);
-
-	if ((error = alGetError()) != AL_NO_ERROR)
-	{
-		//TODO: Log error
-		alDeleteSources(1, &source);
-		return 0;
-	}
 	return source;
 }
 
-void AudioManager::LoadWAVFile(string & fileName, ALenum * channels, void ** allData, unsigned int * size, unsigned int * frequency)
+void AudioManager::UpdateComponentSound(void * pSource, const vec3 & position, AudioPlayback playback)
 {
-	ifstream file(fileName, ios::binary);
+	ISound * mSource = (ISound *)(pSource);
 
-	if (file.fail())
+	if (!mSource)
 	{
-		//TODO: log error opening file
 		return;
 	}
-
-	char riff[5] = "";
-	file.read(riff, 4);
-
-	if (strcmp(riff, "RIFF") != 0)
-	{
-		//TODO: log error with file, not RIFF format
-		return;
-	}
-
-	long fileSize;
-	char wave[5] = "";
-	file.read(reinterpret_cast<char *>(&fileSize), sizeof(long));
-	file.read(wave, 4);
-
-	if (strcmp(wave, "WAVE") != 0)
-	{
-		//TODO: log error with file, not WAVE file
-		return;
-	}
-
-	char fmt[5] = "";
-	file.read(fmt, 4);
-
-	if (strcmp(fmt, "fmt ") != 0)
-	{
-		//TODO: log error with file, no data format
-		return;
-	}
-
-	long fmtChunkSize, avgBytesPerSec, mFrequency;
-	short mChannels, formatTag, blockAlign, bitsPerSample;
-
-	file.read(reinterpret_cast<char *>(&fmtChunkSize), sizeof(long));
-	file.read(reinterpret_cast<char *>(&formatTag), sizeof(short));
-	file.read(reinterpret_cast<char *>(&mChannels), sizeof(short));
-	file.read(reinterpret_cast<char *>(&mFrequency), sizeof(long));
-	file.read(reinterpret_cast<char *>(&avgBytesPerSec), sizeof(long));
-	file.read(reinterpret_cast<char *>(&blockAlign), sizeof(short));
-	file.read(reinterpret_cast<char *>(&bitsPerSample), sizeof(short));
-
-	if (fmtChunkSize != 16)
-	{
-		//TODO: Log that fmt section of the file is wrong size;
-		return;
-	}
-
-	if (mChannels != 1)
-	{
-		//TODO: Log that there should only be one channel;
-		return;
-	}
-
-	char data[5] = "";
-	file.read(data, 4);
-
-	if (strcmp(data, "data") != 0)
-	{
-		//TODO: log error with file, no data in file
-		return;
-	}
-
-	long mSize;
-	file.read(reinterpret_cast<char *>(&mSize), sizeof(long));
-
-	*frequency = mFrequency;
-	*size = mSize;
-
-	if (bitsPerSample == 8)
-	{
-		char * data = new char[mSize];
-		file >> data;
-		*allData = data;
-		*channels = AL_FORMAT_MONO8;
-	}
-	else if (bitsPerSample == 16)
-	{
-		short * data = new short[mSize];
-		file.read(reinterpret_cast<char *>(data), sizeof(short) * mSize);
-		*allData = data;
-		*channels = AL_FORMAT_MONO16;
-	}
-}
-
-void AudioManager::UpdateComponentSound(unsigned int source, const vec3 & position, AudioPlayback playback)
-{
-	alSource3f(source, AL_POSITION, position.x, position.y, position.z);
+	
+	mSource->setPosition(vec3df(position.x, position.y, position.z));
 
 	if (playback == AudioPlayback::PAUSE)
 	{
-		alSourcePause(source);
+		mSource->setIsPaused();
 	}
 	else if (playback == AudioPlayback::STOP)
 	{
-		alSourceStop(source);
+		mSource->setIsPaused();
+		mSource->setPlayPosition(0);
 	}
 	else if (playback == AudioPlayback::PLAY)
 	{
-		int value;
-		alGetSourcei(source, AL_SOURCE_STATE, &value);
-		if (value != AL_PLAYING)
+		if (mSource->getIsPaused())
 		{
-			alSourcePlay(source);
-			alSourcei(source, AL_LOOPING, AL_TRUE);
+			mSource->setIsPaused(false);
+			mSource->setIsLooped(true);
 		}
 	}
 }
@@ -213,36 +71,31 @@ void AudioManager::Update()
 	vec3 up = camera->GetUp();
 	vec3 lookAt = camera->GetLookAt();
 
-	float position[] = { pos.x, pos.y, pos.z };
-	float orientation[] = { lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z };
-
-	alListenerfv(AL_POSITION, position);
-	alListenerfv(AL_ORIENTATION, orientation);
+	engine->setListenerPosition(vec3df(pos.x, pos.y, pos.z), vec3df(lookAt.x, lookAt.y, lookAt.z),
+		vec3df(0, 0, 0), vec3df(up.x, up.y, up.z));
 
 	for (int i = 0; i < cameraSounds.size(); i++)
 	{
-		ALenum playing;
-		alGetSourcei(cameraSounds.at(i), AL_SOURCE_STATE, &playing);
+		ISound * source = (ISound *)(cameraSounds.at(i));
 
-		if (playing == AL_STOPPED)
+		if (source->isFinished())
 		{
-			DeleteSource(cameraSounds.at(i));
+			DeleteSource(source);
 			cameraSounds.erase(cameraSounds.begin() + i);
 			i--;
 			continue;
 		}
 
-		alSource3f(cameraSounds.at(i), AL_POSITION, pos.x, pos.y, pos.z);
+		source->setPosition(vec3df(pos.x, pos.y, pos.z));
 	}
 
 	for (int i = 0; i < locationSounds.size(); i++)
 	{
-		ALenum playing;
-		alGetSourcei(locationSounds.at(i)->source, AL_SOURCE_STATE, &playing);
-
-		if (playing == AL_STOPPED)
+		ISound * source = (ISound *)(locationSounds.at(i)->source);
+		
+		if (source->isFinished())
 		{
-			DeleteSource(locationSounds.at(i)->source);
+			DeleteSource(source);
 			delete locationSounds.at(i);
 			locationSounds.erase(locationSounds.begin() + i);
 			i--;
@@ -252,12 +105,11 @@ void AudioManager::Update()
 
 	for (int i = 0; i < entitySounds.size(); i++)
 	{
-		ALenum playing;
-		alGetSourcei(entitySounds.at(i)->source, AL_SOURCE_STATE, &playing);
+		ISound * source = (ISound *)(entitySounds.at(i)->source);
 
-		if (playing == AL_STOPPED)
+		if (source->isFinished())
 		{
-			DeleteSource(entitySounds.at(i)->source);
+			DeleteSource(source);
 			delete entitySounds.at(i);
 			entitySounds.erase(entitySounds.begin() + i);
 			i--;
@@ -268,31 +120,36 @@ void AudioManager::Update()
 
 		vec3 entPos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
-		alSource3f(entitySounds.at(i)->source, AL_POSITION, entPos.x, entPos.y, entPos.z);
+		source->setPosition(vec3df(entPos.x, entPos.y, entPos.z));
 	}
 }
 
 void AudioManager::PlayAudio(string & sound)
 {
-	unsigned int source = ResourceManager::GetAudio(sound);
-	alSourcePlay(source);
-	alSourcei(source, AL_LOOPING, AL_FALSE);
+	void * preSource = ResourceManager::GetAudio(sound);
+
+	ISound * source = (ISound *)preSource;
+
+	source->setIsPaused(false);
 
 	Camera * camera = CameraManager::Instance()->GetCamera();
 
 	vec3 pos = camera->GetPosition();
-	alSource3f(source, AL_POSITION, pos.x, pos.y, pos.z);
+
+	source->setPosition(vec3df(pos.x, pos.y, pos.z));
 
 	cameraSounds.push_back(source);
 }
 
 void AudioManager::PlayAudioAtLocation(string & sound, vec3 & location)
 {
-	unsigned int source = ResourceManager::GetAudio(sound);
-	alSourcePlay(source);
-	alSourcei(source, AL_LOOPING, AL_FALSE);
+	void * preSource = ResourceManager::GetAudio(sound);
 
-	alSource3f(source, AL_POSITION, location.x, location.y, location.z);
+	ISound * source = (ISound *)preSource;
+
+	source->setIsPaused(false);
+
+	source->setPosition(vec3df(location.x, location.y, location.z));
 
 	LocationSound * locSound = new LocationSound();
 	locSound->location = location;
@@ -303,25 +160,28 @@ void AudioManager::PlayAudioAtLocation(string & sound, vec3 & location)
 
 void AudioManager::PlayAudioAtEntityLocation(string & sound, Entity * entity)
 {
-	unsigned int source = ResourceManager::GetAudio(sound);
-	alSourcePlay(source);
-	alSourcei(source, AL_LOOPING, AL_FALSE);
+	void * preSource = ResourceManager::GetAudio(sound);
+
+	ISound * source = (ISound *)preSource;
+	
+	source->setIsPaused(false);
 
 	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
 
-	vec3 pos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
+	vec3 pos = dynamic_cast<ComponentPosition * >(componentPosition)->GetUpdatePosition();
 
-	alSource3f(source, AL_POSITION, pos.x, pos.y, pos.z);
+	source->setPosition(vec3df(pos.x, pos.y, pos.z));
 
 	EntitySound * entSound = new EntitySound();
 	entSound->entity = entity;
 	entSound->source = source;
-
+	
 	entitySounds.push_back(entSound);
 }
 
-void AudioManager::DeleteSource(unsigned int source)
+void AudioManager::DeleteSource(void * pSource)
 {
-	alSourceStop(source);
-	alDeleteSources(1, &source);
+	ISound * mSource = (ISound *)pSource;
+	mSource->stop();
+	mSource->drop();
 }

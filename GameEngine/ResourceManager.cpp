@@ -11,7 +11,7 @@ vector<string> ResourceManager::usedAudios;
 map<string, iModel *> ResourceManager::modelList;
 map<string, Texture *> ResourceManager::textureList;
 map<string, Shader *> ResourceManager::shaderList;
-map<string, unsigned int> ResourceManager::audioBufferList;
+map<string, void *> ResourceManager::audioBufferList;
 
 void ResourceManager::LoadModel(const string & modelName, const string & fileName)
 {
@@ -117,9 +117,14 @@ void ResourceManager::LoadAudio(const string & audioName, const string & fileNam
 		return;
 	}
 
-	unsigned int buffer = AudioManager::Instance()->GenerateBuffer(fileName);
+	void * buffer = AudioManager::Instance()->GenerateBuffer(fileName);
 
-	audioBufferList.insert(pair<string, unsigned int>(audioName, buffer));
+	if (!buffer)
+	{
+		//TODO: Log that buffer failed to be created
+	}
+
+	audioBufferList.insert(pair<string, void *>(audioName, buffer));
 }
 
 iModel * ResourceManager::GetModel(const string & model)
@@ -155,13 +160,13 @@ Texture * ResourceManager::GetTexture(const string & texture)
 	return nullptr;
 }
 
-unsigned int ResourceManager::GetAudio(const string & audio)
+void * ResourceManager::GetAudio(const string & audio)
 {
-	map<string, unsigned int>::iterator it = audioBufferList.find(audio);
+	map<string, void *>::iterator it = audioBufferList.find(audio);
 
 	if (it != audioBufferList.end())
 	{
-		unsigned int source = AudioManager::Instance()->GenerateSource(it->second);
+		void * source = AudioManager::Instance()->GenerateSource(it->second);
 		return source;
 	}
 	return 0;

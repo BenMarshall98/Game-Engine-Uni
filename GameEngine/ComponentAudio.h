@@ -12,7 +12,7 @@ class ComponentAudio : public iComponent
 {
 private:
 	AudioPlayback mPlayback;
-	unsigned int mSource;
+	void * mSource;
 
 public:
 	ComponentAudio(AudioPlayback pPlayback, string audioName);
@@ -35,7 +35,7 @@ public:
 		mPlayback = pPlayback;
 	}
 
-	inline unsigned int GetUpdateAudioSource()
+	inline void * GetUpdateAudioSource()
 	{
 		return mSource;
 	}

@@ -21,7 +21,7 @@ class ResourceManager
 		static map<string, iModel *> modelList;
 		static map<string, Texture *> textureList;
 		static map<string, Shader *> shaderList;
-		static map<string, unsigned int> audioBufferList;
+		static map<string, void *> audioBufferList;
 
 		ResourceManager(void) {};
 	
@@ -34,5 +34,5 @@ class ResourceManager
 		static iModel * GetModel(const string & model);
 		static Shader * GetShader(const string & shader);
 		static Texture * GetTexture(const string & texture);
-		static unsigned int GetAudio(const string & audio);
+		static void * GetAudio(const string & audio);
 };

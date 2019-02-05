@@ -24,6 +24,6 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
-	static void Audio(const vec3 & position, unsigned int source, AudioPlayback playback);
+	static void Audio(const vec3 & position, void * source, AudioPlayback playback);
 };
 

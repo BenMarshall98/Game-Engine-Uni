@@ -1,15 +1,15 @@
 #pragma once
-#pragma comment(lib, "../OpenAL/libs/Win64/OpenAL32.lib")
 
+#pragma comment(lib, "../irrKlang-64bit-1.6.0/lib/Winx64-visualStudio/irrKlang.lib")
+
+#include "irrKlang-64bit-1.6.0/include/irrKlang.h"
 #include <string>
-#include "OpenAL/include/al.h"
-#include "OpenAL/include/alc.h"
 #include "glm/glm.hpp"
 #include <vector>
 #include "Camera.h"
 #include "Entity.h"
 
-using namespace std;
+using namespace irrklang;
 
 enum class AudioPlayback
 {
@@ -21,48 +21,46 @@ enum class AudioPlayback
 
 struct LocationSound
 {
-	unsigned int source;
+	void * source;
 	vec3 location;
 };
 
 struct EntitySound
 {
-	unsigned int source;
+	void * source;
 	Entity * entity;
 };
 
 class AudioManager
 {
 private:
-	ALCdevice * device;
-	ALCcontext * context;
+	ISoundEngine * engine;
 
-	vector<unsigned int> cameraSounds;
+	vector<void *> cameraSounds;
 	vector<LocationSound *> locationSounds;
 	vector<EntitySound *> entitySounds;
 
 	static AudioManager * instance;
-	static void LoadWAVFile(string & fileName, ALenum * channels, void ** data, unsigned int * size, unsigned int * frequency);
-	AudioManager();
-public:
 	
+	AudioManager();
+
+public:
 	static inline AudioManager * Instance()
 	{
 		if (instance == nullptr)
 		{
 			instance = new AudioManager();
 		}
-
 		return instance;
 	}
 
 	void Update();
 
-	unsigned int GenerateBuffer(string fileName);
-	unsigned int GenerateSource(unsigned int buffer);
+	void * GenerateBuffer(string fileName);
+	void * GenerateSource(void * buffer);
 
-	void DeleteSource(unsigned int source);
-	void UpdateComponentSound(unsigned int source, const vec3 & position, AudioPlayback playback);
+	void DeleteSource(void * source);
+	void UpdateComponentSound(void * source, const vec3 & position, AudioPlayback playback);
 
 	void PlayAudio(string & sound);
 	void PlayAudioAtLocation(string & sound, vec3 & location);
