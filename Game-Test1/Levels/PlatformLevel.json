@@ -3,84 +3,84 @@
     {
       "Type": "Texture",
       "Name": "Box",
-      "Texture": "container.jpg"
+      "Texture": "Textures/container.jpg"
     },
     {
       "Type": "Texture",
       "Name": "BoxNormal",
-      "Texture": "containerNormal.jpg"
+      "Texture": "Textures/containerNormal.jpg"
     },
     {
       "Type": "Texture",
       "Name": "Earth",
-      "Texture": "2k_earth_daymap.jpg"
+      "Texture": "Textures/2k_earth_daymap.jpg"
     },
     {
       "Type": "Texture",
       "Name": "EarthNormal",
-      "Texture": "Earth_Normal.jpg"
+      "Texture": "Textures/Earth_Normal.jpg"
     },
     {
       "Type": "Texture",
       "Name": "Concrete",
-      "Texture": "concrete.jpg"
+      "Texture": "Textures/concrete.jpg"
     },
     {
       "Type": "Texture",
       "Name": "ConcreteNormal",
-      "Texture": "concreteNormal.jpg"
+      "Texture": "Textures/concreteNormal.jpg"
     },
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "cube.obj"
+      "Model": "Models/cube.obj"
     },
     {
       "Type": "Model",
       "Name": "Sphere",
-      "Model": "sphere.obj"
+      "Model": "Models/sphere.obj"
     },
     {
       "Type": "Model",
       "Name": "Collectable",
-      "Model": "Collectable.obj"
+      "Model": "Models/Collectable.obj"
     },
     {
       "Type": "Shader",
       "Name": "TestShader",
-      "Vertex": "TestVertex.vert",
-      "Fragment": "TestFragment.frag"
+      "Vertex": "Shaders/TestVertex.vert",
+      "Fragment": "shaders/TestFragment.frag"
     },
     {
       "Type": "Shader",
       "Name": "NormalShader",
-      "Vertex": "NormalVertex.vert",
-      "Fragment": "NormalFragment.frag"
+      "Vertex": "Shaders/NormalVertex.vert",
+      "Fragment": "Shaders/NormalFragment.frag"
     },
     {
       "Type": "Shader",
       "Name": "RiggedShader",
-      "Vertex": "RiggedVertex.vert",
-      "Fragment": "RiggedFragment.frag"
+      "Vertex": "Shaders/RiggedVertex.vert",
+      "Fragment": "Shaders/RiggedFragment.frag"
     },
     {
       "Type": "Audio",
       "Name": "Collectable",
-      "Audio": "Collectable.wav"
+      "Audio": "Audio/Collectable.wav"
     },
     {
       "Type": "Audio",
       "Name": "CollectableNear",
-      "Audio": "CollectableNear.wav"
+      "Audio": "Audio/CollectableNear.wav"
     },
     {
       "Type": "Audio",
       "Name": "Thump",
-      "Audio": "Thump.wav"
+      "Audio": "Audio/Thump.wav"
     }
   ],
   "Scripts": [
-    "PlatformerFunctions.lua"
+    "Scripts/PlatformerFunctions.lua"
   ],
   "EntityTemplate": [
     {
@@ -279,7 +279,7 @@
   ],
   "Map": {
     "Type": "Platformer",
-    "File": "Level.txt",
+    "File": "Levels/Level.txt",
     "TopLeftCoord": [ 0, 0 ],
     "View": {
       "Perspective": {

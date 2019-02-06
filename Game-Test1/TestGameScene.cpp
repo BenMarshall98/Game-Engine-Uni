@@ -46,18 +46,18 @@ void TestGameScene::Load()
 		cin >> level;
 	}
 
-	string levelName = "3DLevel.json";
+	string levelName = "Levels/3DLevel.json";
 
 	if (level == 2)
 	{
-		levelName = "PlatformLevel.json";
+		levelName = "Levels/PlatformLevel.json";
 	}
 	LevelLoader::LoadLevelJSON(levelName);
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
-	ResourceManager::LoadShader("DirectionalShadow", "ShadowMapping.vert", "ShadowMapping.frag");
-	ResourceManager::LoadShader("PointShadow", "PointShadow.vert", "PointShadow.frag", "PointShadow.geom");
+	ResourceManager::LoadShader("DirectionalShadow", "Shaders/ShadowMapping.vert", "Shaders/ShadowMapping.frag");
+	ResourceManager::LoadShader("PointShadow", "Shaders/PointShadow.vert", "Shaders/PointShadow.frag", "Shaders/PointShadow.geom");
 	Shader * directionalShadow = ResourceManager::GetShader("DirectionalShadow");
 	Shader * pointLightShadow = ResourceManager::GetShader("PointShadow");
 

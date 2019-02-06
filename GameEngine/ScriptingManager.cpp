@@ -55,13 +55,13 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "PlayAudioAtEntityLocation", lua_PlayAudioAtEntityLocation);
 	lua_register(luaVM, "DeleteEntity", lua_DeleteEntity);
 	
-	string file = "Vector3.lua";
+	string file = "Scripts/Vector3.lua";
 	LoadLuaFromFile(file);
 
-	file = "Matrix4.lua";
+	file = "Scripts/Matrix4.lua";
 	LoadLuaFromFile(file);
 
-	file = "Quaternion.lua";
+	file = "Scripts/Quaternion.lua";
 	LoadLuaFromFile(file);
 }
 

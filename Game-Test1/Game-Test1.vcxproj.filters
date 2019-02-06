@@ -30,99 +30,99 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="2k_earth_daymap.jpg">
+    <Content Include="Textures/2k_earth_daymap.jpg">
       <Filter>Textures</Filter>
-    </Image>
-    <Image Include="container.jpg">
+    </Content>
+    <Content Include="Textures/container.jpg">
       <Filter>Textures</Filter>
-    </Image>
-    <Image Include="containerNormal.jpg">
+    </Content>
+    <Content Include="Textures/containerNormal.jpg">
       <Filter>Textures</Filter>
-    </Image>
-    <Image Include="Earth_Normal.jpg">
+    </Content>
+    <Content Include="Textures/Earth_Normal.jpg">
       <Filter>Textures</Filter>
-    </Image>
-    <Image Include="concrete.jpg">
+    </Content>
+    <Content Include="Textures/concrete.jpg">
       <Filter>Textures</Filter>
-    </Image>
-    <Image Include="concreteNormal.jpg">
+    </Content>
+    <Content Include="Textures/concreteNormal.jpg">
       <Filter>Textures</Filter>
-    </Image>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="cube.obj">
+    <Content Include="Models/cube.obj">
       <Filter>Models</Filter>
-    </Resource>
-    <Resource Include="sphere.obj">
+    </Content>
+    <Content Include="Models/sphere.obj">
       <Filter>Models</Filter>
-    </Resource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NormalFragment.frag">
+    <Content Include="Shaders/NormalFragment.frag">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="NormalVertex.vert">
+    </Content>
+    <Content Include="Shaders/NormalVertex.vert">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="RiggedFragment.frag">
+    </Content>
+    <Content Include="Shaders/RiggedFragment.frag">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="RiggedVertex.vert">
+    </Content>
+    <Content Include="Shaders/RiggedVertex.vert">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="TestFragment.frag">
+    </Content>
+    <Content Include="Shaders/TestFragment.frag">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="TestVertex.vert">
+    </Content>
+    <Content Include="Shaders/TestVertex.vert">
       <Filter>Shaders</Filter>
-    </None>
+    </Content>
     <None Include="packages.config" />
-    <Content Include="Vector3.lua">
+    <Content Include="Scripts/Vector3.lua">
       <Filter>Scripts</Filter>
     </Content>
-    <None Include="Quaternion.lua">
+    <Content Include="Scripts/Quaternion.lua">
       <Filter>Scripts</Filter>
-    </None>
-    <None Include="Matrix4.lua">
+    </Content>
+    <Content Include="Scripts/Matrix4.lua">
       <Filter>Scripts</Filter>
-    </None>
-    <None Include="PlatformLevel.json">
+    </Content>
+    <Content Include="Levels/PlatformLevel.json">
       <Filter>Levels</Filter>
-    </None>
-    <None Include="3DLevel.json">
+    </Content>
+    <Content Include="Levels/3DLevel.json">
       <Filter>Levels</Filter>
-    </None>
-    <None Include="3DLevelFunctions.lua">
+    </Content>
+    <Content Include="Scripts/3DLevelFunctions.lua">
       <Filter>Scripts</Filter>
-    </None>
-    <None Include="ShadowMapping.frag">
+    </Content>
+    <Content Include="Shaders/ShadowMapping.frag">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="ShadowMapping.vert">
+    </Content>
+    <Content Include="Shaders/ShadowMapping.vert">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="PointShadow.vert">
+    </Content>
+    <Content Include="Shaders/PointShadow.vert">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="PointShadow.frag">
+    </Content>
+    <Content Include="Shaders/PointShadow.frag">
       <Filter>Shaders</Filter>
-    </None>
-    <None Include="PointShadow.geom">
+    </Content>
+    <Content Include="Shaders/PointShadow.geom">
       <Filter>Shaders</Filter>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Collectable.obj">
+    <Content Include="Models/Collectable.obj">
       <Filter>Models</Filter>
-    </Object>
-    <Object Include="Floor.obj">
+    </Content>
+    <Content Include="Models/Floor.obj">
       <Filter>Models</Filter>
-    </Object>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Level.txt">
+    <Content Include="Levels/Level.txt">
       <Filter>Levels</Filter>
-    </Text>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestGameScene.h">
@@ -130,19 +130,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PlatformerFunctions.lua">
+    <Content Include="Scripts/PlatformerFunctions.lua">
       <Filter>Scripts</Filter>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="Collectable.wav">
+    <Content Include="Audio/Collectable.wav">
       <Filter>Audio</Filter>
-    </Media>
-    <Media Include="CollectableNear.wav">
+    </Content>
+    <Content Include="Audio/CollectableNear.wav">
       <Filter>Audio</Filter>
-    </Media>
-    <Media Include="Thump.wav">
+    </Content>
+    <Content Include="Audio/Thump.wav">
       <Filter>Audio</Filter>
-    </Media>
+    </Content>
   </ItemGroup>
 </Project>

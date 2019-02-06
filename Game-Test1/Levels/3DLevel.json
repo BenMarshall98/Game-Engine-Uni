@@ -3,42 +3,42 @@
     {
       "Type": "Texture",
       "Name": "Box",
-      "Texture": "container.jpg"
+      "Texture": "Textures/container.jpg"
     },
     {
       "Type": "Texture",
       "Name": "BoxNormal",
-      "Texture": "containerNormal.jpg"
+      "Texture": "Textures/containerNormal.jpg"
     },
     {
       "Type": "Texture",
       "Name": "Concrete",
-      "Texture": "concrete.jpg"
+      "Texture": "Textures/concrete.jpg"
     },
     {
       "Type": "Texture",
       "Name": "ConcreteNormal",
-      "Texture": "concreteNormal.jpg"
+      "Texture": "Textures/concreteNormal.jpg"
     },
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "cube.obj"
+      "Model": "Models/cube.obj"
     },
     {
       "Type": "Model",
       "Name": "Floor",
-      "Model": "Floor.obj"
+      "Model": "Models/Floor.obj"
     },
     {
       "Type": "Shader",
       "Name": "NormalShader",
-      "Vertex": "NormalVertex.vert",
-      "Fragment": "NormalFragment.frag"
+      "Vertex": "Shaders/NormalVertex.vert",
+      "Fragment": "Shaders/NormalFragment.frag"
     }
   ],
   "Scripts": [
-    "3DLevelFunctions.lua"
+    "Scripts/3DLevelFunctions.lua"
   ],
   "EntityTemplate": [
     {
