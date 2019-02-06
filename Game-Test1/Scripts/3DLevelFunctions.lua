@@ -1,4 +1,4 @@
-local Vector3 = require("Vector3")
+local Vector3 = require("Scripts/Vector3")
 
 function DeleteCoin(entity)
 	DeleteEntity(entity)
