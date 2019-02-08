@@ -165,9 +165,6 @@
     <ClCompile Include="CollisionCuboid.cpp">
       <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedModel.cpp">
-      <Filter>Utility\Models</Filter>
-    </ClCompile>
     <ClCompile Include="FollowPlaneCamera.cpp">
       <Filter>Camera Manager</Filter>
     </ClCompile>
@@ -206,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Audio Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModel.cpp">
+      <Filter>Utility\Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -327,9 +327,6 @@
     <ClInclude Include="CollisionCuboid.h">
       <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedModel.h">
-      <Filter>Utility\Models</Filter>
-    </ClInclude>
     <ClInclude Include="FollowPlaneCamera.h">
       <Filter>Camera Manager</Filter>
     </ClInclude>
@@ -359,6 +356,9 @@
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Audio Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModel.h">
+      <Filter>Utility\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

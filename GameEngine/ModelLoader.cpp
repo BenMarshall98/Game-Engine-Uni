@@ -3,9 +3,12 @@
 
 #include "assimp/Importer.hpp"
 #include "assimp/postprocess.h"
+#include "assimp/scene.h"
 
 #include <fstream>
 #include <sstream>
+
+using namespace Assimp;
 
 iModel * ModelLoader::LoadModel(const string & fileName)
 {
@@ -171,140 +174,69 @@ StaticModel * ModelLoader::LoadSME(const string & fileName)
 	//fileName = ""; //TODO: Remove this line, this was only placed to remove a parasoft issue
 	return nullptr;
 }
+
 AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 {
-	AnimatedModel * model = new AnimatedModel();
+	Importer import;
+	const aiScene * scene = import.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
 
-	Importer importer;
-	const aiScene * scene = importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
-
-	if (scene)
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
-		recursiveNodeProcess(scene->mRootNode, model);
-
-		for (int i = 0 ; i < scene->mNumAnimations; i++)
-		{
-			Animation * animation = new Animation();
-			animation->framesPerSecond = scene->mAnimations[i]->mTicksPerSecond;
-			animation->frameDuration = scene->mAnimations[i]->mDuration;
-
-			double secondsPerFrame = 1 / animation->framesPerSecond;
-
-			animation->timeDuration = secondsPerFrame * animation->frameDuration;
-			for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++)
-			{
-				animation->nodesAnim.push_back(scene->mAnimations[i]->mChannels[j]);
-			}
-
-			model->AddAnimation(animation);
-		}
-
-		mat4 globalInverse = inverse(AnimatedModel::AiMatrixtoGLMMatrix(scene->mRootNode->mTransformation));
-		model->SetGlobalInverse(globalInverse);
-
-		const aiMesh* mesh = scene->mMeshes[0];
-
-		for (int i = 0; i < mesh->mNumVertices; i++)
-		{
-			aiVector3D vertex = mesh->mVertices[i];
-			aiVector3D texCoord(0.5f, 0.5f, 0);
-			aiVector3D normal(0, 0, 0);
-
-			if (mesh->HasTextureCoords(0))
-			{
-				texCoord = mesh->mTextureCoords[0][i];
-			}
-
-			if (mesh->HasNormals())
-			{
-				normal = mesh->mNormals[i];
-			}
-
-			vec3 vert = vec3(vertex.x, vertex.y, vertex.z);
-			vec2 text = vec2(texCoord.x, texCoord.y);
-			vec3 norm = vec3(normal.x, normal.y, normal.z);
-
-			model->AddVertex(vert);
-			model->AddTexture(text);
-			model->AddNormal(norm);
-		}
-
-		for (int i = 0; i < mesh->mNumFaces; i++)
-		{
-			const aiFace& face = mesh->mFaces[i];
-
-			model->AddIndex(face.mIndices[0]);
-			model->AddIndex(face.mIndices[1]);
-			model->AddIndex(face.mIndices[2]);
-		}
-
-		model->ResizeIDs(mesh->mNumVertices * 4);
-		model->ResizeWeights(mesh->mNumVertices * 4);
-
-		for (int i = 0; i < mesh->mNumBones; i++)
-		{
-			aiBone * bone = mesh->mBones[i];
-
-			for (int j = 0; j < bone->mNumWeights; j++)
-			{
-				aiVertexWeight weight = bone->mWeights[j];
-				unsigned int vertexStart = weight.mVertexId * 4;
-
-				for (int k = 0; k < 4; k++)
-				{
-					if (model->GetWeightAt(vertexStart + k) == 0)
-					{
-						model->SetWeightAt(vertexStart + k, weight.mWeight);
-						model->SetIDAt(vertexStart + k, i);
-						break;
-					}
-				}
-
-			}
-
-			Bone * newBone = new Bone;
-			
-			newBone->name = bone->mName.data;
-			newBone->offsetMatrix = transpose(AnimatedModel::AiMatrixtoGLMMatrix(bone->mOffsetMatrix));
-			newBone->node = FindNode(newBone->name, model);
-
-			for (int k = 0; k < model->GetAnimationCount(); k++)
-			{
-				newBone->animNode.push_back(FindAnimNode(newBone->name, model->GetAnimation(k)));
-			}
-
-			model->AddBone(newBone);
-
-		}
-
-		for (int i = 0; i < model->GetBoneCount(); i++)
-		{
-			string name = model->GetBone(i)->name;
-			string parentName = FindNode(name, model)->mParent->mName.data;
-
-			Bone * parentBone = FindBone(parentName, model);
-
-			model->GetBone(i)->parent = parentBone;
-		}
-
-		model->Load();
-		return model;
-	}
-	else
-	{
-		//TODO: Log error occured
 		return nullptr;
+	}
+
+	AnimatedModel * animatedModel = new AnimatedModel();
+
+	ProcessNode(scene->mRootNode, scene, animatedModel);
+
+	animatedModel->LoadModel();
+	
+	return animatedModel;
+}
+
+void ModelLoader::ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel)
+{
+	for (unsigned int i = 0; i < node->mNumMeshes; i++)
+	{
+		aiMesh * mesh = scene->mMeshes[node->mMeshes[i]];
+		animatedModel->AddMesh(ProcessMesh(mesh, scene));
+	}
+
+	for (unsigned int i = 0; i < node->mNumChildren; i++)
+	{
+		ProcessNode(node->mChildren[i], scene, animatedModel);
 	}
 }
 
-void ModelLoader::recursiveNodeProcess(aiNode* node, AnimatedModel * model)
+Mesh ModelLoader::ProcessMesh(aiMesh * pMesh, const aiScene * scene)
 {
-	model->AddNode(new aiNode(*node));
+	Mesh mesh;
 
-	for (int i = 0; i < node->mNumChildren; i++)
+	for (unsigned int i = 0; i < pMesh->mNumVertices; i++)
 	{
-		recursiveNodeProcess(node->mChildren[i], model);
+		aiVector3D aiVertex = pMesh->mVertices[i];
+		aiVector3D aiNormal = pMesh->mNormals[i];
+		aiVector3D * aiTexture = pMesh->mTextureCoords[i];
+
+		vec3 vertex = vec3(aiVertex.x, aiVertex.y, aiVertex.z);
+		vec3 normal = vec3(aiVertex.x, aiVertex.y, aiVertex.z);
+		vec3 texture = vec3(aiVertex.x, aiVertex.y, aiVertex.z);
+
+		mesh.vertex.push_back(vertex);
+		mesh.normal.push_back(normal);
+		mesh.textures.push_back(texture);
 	}
+
+	for (unsigned int i = 0; i < pMesh->mNumFaces; i++)
+	{
+		aiFace face = pMesh->mFaces[i];
+		for (unsigned int j = 0; j < face.mNumIndices; j++)
+		{
+			mesh.indices.push_back(face.mIndices[j]);
+		}
+	}
+
+	return mesh;
 }
 
 void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents/*, vector<vec3> & bitangents*/)

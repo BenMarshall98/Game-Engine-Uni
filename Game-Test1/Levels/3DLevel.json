@@ -23,7 +23,7 @@
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "Models/cube.obj"
+      "Model": "Models/Monster_1.dae"
     },
     {
       "Type": "Model",
@@ -185,7 +185,7 @@
       "Camera": {
         "Type": "FollowPlayer",
         "Follow": "Player",
-        "DefaultDistance": 5,
+        "DefaultDistance": 20,
         "MinDistance": 2,
         "MaxDistance": 10,
         "FollowRate": 0.1

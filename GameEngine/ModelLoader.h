@@ -2,10 +2,11 @@
 #include "iModel.h"
 #include "StaticModel.h"
 #include "AnimatedModel.h"
-#include "assimp/scene.h"
 #include <vector>
 #include <string>
 #include "glm/glm.hpp"
+
+#include "assimp/scene.h"
 
 using namespace std;
 using namespace glm;
@@ -32,56 +33,8 @@ private:
 	static void TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents/*, vector<vec3> & bitangents*/);
 	static void CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex3, vec2 & texture1, vec2 & texture2, vec2 & texture3, vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
 
-	static void recursiveNodeProcess(aiNode* node, AnimatedModel * model);
-
-	static Bone* FindBone(string & name, AnimatedModel * model)
-	{
-		for (int i = 0; i < model->GetBoneCount(); i++)
-		{
-			if (model->GetBone(i)->name == name)
-			{
-				return model->GetBone(i);
-			}
-		}
-		return nullptr;
-	}
-
-	static aiNode* FindNode(string & name, AnimatedModel * model)
-	{
-		for (int i = 0; i < model->GetNodeCount(); i++)
-		{
-			if (model->GetNode(i)->mName.data == name)
-			{
-				return model->GetNode(i);
-			}
-		}
-		return nullptr;
-	}
-
-	static aiNodeAnim *FindAnimNode(string & name, Animation * animation)
-	{
-		for (int i = 0; i < animation->nodesAnim.size(); i++)
-		{
-			if (animation->nodesAnim.at(i)->mNodeName.data == name)
-			{
-				return animation->nodesAnim.at(i);
-			}
-		}
-		return nullptr;
-	}
-
-	static int FindBoneIDByName(string & name, AnimatedModel * model)
-	{
-		for (int i = 0; i < model->GetBoneCount(); i++)
-		{
-			if (model->GetBone(i)->name == name)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-
+	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
+	static Mesh ProcessMesh(aiMesh * mesh, const aiScene * scene);
 public:
 	static iModel * LoadModel(const string & fileName);
 };
