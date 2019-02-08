@@ -242,14 +242,8 @@
     <Text Include="Useful Links.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BulletPhysics\BulletCollision\BulletCollision.vcxproj">
-      <Project>{e6ee71f9-d074-48d5-b080-af478c68d717}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\BulletPhysics\BulletDynamics\BulletDynamics.vcxproj">
-      <Project>{d94568ea-f6d6-422e-803d-bf4ad7fcd325}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\BulletPhysics\LinearMath\LinearMath.vcxproj">
-      <Project>{e84feff4-3162-4800-befc-dd5e20ff315d}</Project>
+    <ProjectReference Include="..\BulletPhysicsEngine\BulletPhysicsEngine.vcxproj">
+      <Project>{19f0091f-89b9-436b-853d-681658c0672b}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Lua\Lua.vcxproj">
       <Project>{7fcce334-42b1-4cf3-8f96-04cafe83f7c0}</Project>
