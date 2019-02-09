@@ -21,9 +21,9 @@ private:
 	Shader * mDirectionalShadow;
 	Shader * mPointShadow;
 
-	void RenderDirectional(const iModel * model, vec3 & position, quat & direction, Directional * directional);
+	void RenderDirectional(iModel * model, vec3 & position, quat & direction, Directional * directional);
 
-	void RenderPoint(const iModel * model, vec3 & position, quat & direction);
+	void RenderPoint(iModel * model, vec3 & position, quat & direction);
 
 public:
 	ShadowSystem(vec3 & topLeftFrontCoord, vec3 & bottomRightBackCoord, Shader * directionalShadow, Shader * pointShadow);

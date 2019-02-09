@@ -46,6 +46,8 @@ private:
 	vector<Mesh> meshes;
 	vector<Animation> animations;
 	vector<Bone *> bones;
+	vector<mat4> boneMats;
+	mat4 globalInverse;
 
 public:
 	AnimatedModel() {}
@@ -59,6 +61,11 @@ public:
 	inline void SetBones(vector<Bone *> pBones)
 	{
 		bones = pBones;
+	}
+
+	inline void SetGlobalInverse(mat4 pGlobalInverse)
+	{
+		globalInverse = pGlobalInverse;
 	}
 
 	inline Mesh GetMesh(int loc)
@@ -76,11 +83,17 @@ public:
 		return animations.at(0);
 	}
 
-	void Render(Shader * shader) const override;
+	void Render(Shader * shader)override;
 	void LoadModel();
 
 	static aiMatrix4x4 GLMMat4ToAi(mat4 mat);
 	static mat4 AiToGLMMat4(aiMatrix4x4& mat);
 
 	mat4 GetBoneParentTransforms(Bone * bone);
+
+	Bone * FindBone(string name);
+	void UpdateBoneMatsVector();
+
+	void Update();
+
 };

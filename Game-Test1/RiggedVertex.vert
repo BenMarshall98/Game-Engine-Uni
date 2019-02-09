@@ -9,12 +9,19 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 perspective;
 
+uniform mat4 Bones[100];
+
 out vec4 we;
 out vec4 id;
 
 void main()
 {
-	gl_Position = perspective * view * model * vec4(aPos, 1.0f);
+	mat4 bone = Bones[aIDs[0]] * aWeights[0];
+	bone += Bones[aIDs[1]] * aWeights[1];
+	bone += Bones[aIDs[2]] * aWeights[2];
+	bone += Bones[aIDs[3]] * aWeights[3];
+
+	gl_Position = perspective * view * model * bone * vec4(aPos, 1.0f);
 
 	we = aWeights;
 	id = aIDs;

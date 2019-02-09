@@ -22,7 +22,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline const iModel * GetRenderModel() const
+	inline iModel * GetRenderModel()
 	{
 		return model;
 	}

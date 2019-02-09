@@ -27,6 +27,6 @@ public:
 	StaticModel(StaticModel&) = delete;
 
 	~StaticModel();
-	void Render(Shader * shader) const override;
+	void Render(Shader * shader) override;
 };
 

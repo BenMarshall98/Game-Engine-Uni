@@ -55,7 +55,7 @@ void RenderSystem::Action(void)
 		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
 
 		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetRenderShader();
-		const iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
 		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetRenderTexture();
 		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
@@ -71,7 +71,7 @@ void RenderSystem::Action(void)
 	}
 }
 
-void RenderSystem::Render(Shader * shader, const iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
+void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
 {
 	static int lastShader = -1;
 

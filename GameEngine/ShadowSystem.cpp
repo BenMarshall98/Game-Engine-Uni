@@ -51,7 +51,7 @@ void ShadowSystem::Action(void)
 		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
 		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
 
-		const iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
 		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
@@ -102,7 +102,7 @@ void ShadowSystem::Action(void)
 			iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_POSITION);
 			iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_DIRECTION);
 
-			const iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+			iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
 			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
@@ -152,7 +152,7 @@ void ShadowSystem::Action(void)
 			iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_POSITION);
 			iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_DIRECTION);
 
-			const iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+			iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
 			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
@@ -165,7 +165,7 @@ void ShadowSystem::Action(void)
 	glCullFace(GL_BACK);
 }
 
-void ShadowSystem::RenderDirectional(const iModel * model, vec3 & position, quat & direction, Directional * directional)
+void ShadowSystem::RenderDirectional(iModel * model, vec3 & position, quat & direction, Directional * directional)
 {
 	mDirectionalShadow->UseShader();
 
@@ -186,7 +186,7 @@ void ShadowSystem::RenderDirectional(const iModel * model, vec3 & position, quat
 	glUseProgram(0);
 }
 
-void ShadowSystem::RenderPoint(const iModel * model, vec3 & position, quat & direction)
+void ShadowSystem::RenderPoint(iModel * model, vec3 & position, quat & direction)
 {
 	mPointShadow->UseShader();
 

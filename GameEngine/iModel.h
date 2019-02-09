@@ -8,5 +8,5 @@ private:
 public:
 	iModel() {};
 	virtual ~iModel();
-	virtual void Render(Shader * shader) const = 0;
+	virtual void Render(Shader * shader) = 0;
 };

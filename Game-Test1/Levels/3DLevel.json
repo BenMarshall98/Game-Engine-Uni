@@ -106,16 +106,6 @@
           "Angle": -90
         },
         {
-          "Component": "Physics",
-          "Shape": {
-            "Type": "Cuboid",
-            "Size": [ 0.5, 0.5, 0.5 ]
-          },
-          "Mass": 1,
-          "Type": "PLAYER",
-          "AngularLimit": [0.1, 1.0, 0.1]
-        },
-        {
           "Component": "Texture",
           "Texture": "Box"
         },
@@ -170,7 +160,7 @@
       ]
     },
     {
-      "Name": "",
+      "Name": "Floor",
       "Template": "Floor",
       "Components": [
         {
@@ -190,7 +180,7 @@
       },
       "Camera": {
         "Type": "FollowPlayer",
-        "Follow": "Player",
+        "Follow": "Floor",
         "DefaultDistance": 20,
         "MinDistance": 2,
         "MaxDistance": 10,
