@@ -64,19 +64,12 @@
     <Content Include="Shaders/NormalVertex.vert">
       <Filter>Shaders</Filter>
     </Content>
-    <Content Include="Shaders/RiggedFragment.frag">
-      <Filter>Shaders</Filter>
-    </Content>
-    <Content Include="Shaders/RiggedVertex.vert">
-      <Filter>Shaders</Filter>
-    </Content>
     <Content Include="Shaders/TestFragment.frag">
       <Filter>Shaders</Filter>
     </Content>
     <Content Include="Shaders/TestVertex.vert">
       <Filter>Shaders</Filter>
     </Content>
-    <None Include="packages.config" />
     <Content Include="Scripts/Vector3.lua">
       <Filter>Scripts</Filter>
     </Content>
@@ -144,5 +137,13 @@
     <Content Include="Audio/Thump.wav">
       <Filter>Audio</Filter>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RiggedVertex.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="RiggedFragment.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

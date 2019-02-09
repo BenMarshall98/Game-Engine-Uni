@@ -35,6 +35,12 @@
       "Name": "NormalShader",
       "Vertex": "Shaders/NormalVertex.vert",
       "Fragment": "Shaders/NormalFragment.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "RiggedShader",
+      "Vertex": "RiggedVertex.vert",
+      "Fragment": "RiggedFragment.frag"
     }
   ],
   "Scripts": [
@@ -88,7 +94,7 @@
         },
         {
           "Component": "Shader",
-          "Shader": "NormalShader"
+          "Shader": "RiggedShader"
         },
         {
           "Component": "Position",
@@ -96,8 +102,8 @@
         },
         {
           "Component": "Direction",
-          "Direction": [ 0, 0, 1 ],
-          "Angle": 0
+          "Direction": [ 1, 0, 0 ],
+          "Angle": -90
         },
         {
           "Component": "Physics",

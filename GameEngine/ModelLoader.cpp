@@ -187,7 +187,49 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 
 	AnimatedModel * animatedModel = new AnimatedModel();
 
+	vector<aiNode*> nodes;
+
+	vector<Bone *> bones;
+
+	RecursiveNodeProcess(nodes, scene->mRootNode);
+	AnimNodeProcess(animatedModel, scene);
+
+	mat4 globalInverseTransform = inverse(AnimatedModel::AiToGLMMat4(scene->mRootNode->mTransformation));
+
 	ProcessNode(scene->mRootNode, scene, animatedModel);
+
+	Animation firstAnimation = animatedModel->GetFirstAnimation();
+
+	for (int i = 0; i < scene->mNumMeshes; i++)
+	{
+		for (int j = 0; j < scene->mMeshes[i]->mNumBones; j++)
+		{
+			string boneName = scene->mMeshes[i]->mBones[j]->mName.data;
+
+			mat4 boneMat = transpose(AnimatedModel::AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix));
+
+			Bone * bone = new Bone();
+			bone->name = boneName;
+			bone->offset_matrix = boneMat;
+			bone->mesh = animatedModel->GetMesh(i);
+			bone->node = FindAINode(nodes, boneName);
+			bone->animNode = FindAiNodeAnim(firstAnimation.animNodes, boneName);
+
+			bones.push_back(bone);
+		}
+	}
+
+	for (int i = 0; i < bones.size(); i++)
+	{
+		string boneName = bones.at(i)->name;
+		string parentName = FindAINode(nodes, boneName)->mParent->mName.data;
+
+		Bone * parentBone = FindBone(bones, parentName);
+
+		bones.at(i)->parent_bone = parentBone;
+	}
+
+	animatedModel->SetBones(bones);
 
 	animatedModel->LoadModel();
 	
@@ -236,7 +278,83 @@ Mesh ModelLoader::ProcessMesh(aiMesh * pMesh, const aiScene * scene)
 		}
 	}
 
+	const int WEIGHTS_PER_VERTEX = 4;
+	int boneArraysSize = pMesh->mNumVertices * WEIGHTS_PER_VERTEX;
+
+	vector<int> boneIDs;
+	boneIDs.resize(boneArraysSize);
+
+	vector<float>boneWeights;
+	boneWeights.resize(boneArraysSize);
+
+	vector<ivec4> IDs;
+	IDs.resize(pMesh->mNumVertices);
+
+	vector<vec4> Weights;
+	Weights.resize(pMesh->mNumVertices);
+
+	for (int i = 0; i < pMesh->mNumBones; i++)
+	{
+		aiBone * aiBone = pMesh->mBones[i];
+
+		for (int j = 0; j < aiBone->mNumWeights; j++)
+		{
+			aiVertexWeight weight = aiBone->mWeights[j];
+
+			unsigned int vertexStart = weight.mVertexId * WEIGHTS_PER_VERTEX;
+
+			for (int k = 0; k < WEIGHTS_PER_VERTEX; k++)
+			{
+				if (boneWeights.at(vertexStart + k) == 0)
+				{
+					boneWeights.at(vertexStart + k) = weight.mWeight;
+					boneIDs.at(vertexStart + k) = i;
+
+					IDs.at(weight.mVertexId)[k] = i;
+					Weights.at(weight.mVertexId)[k] = weight.mWeight;
+
+					break;
+				}
+			}
+		}
+	}
+
+	mesh.ids = IDs;
+	mesh.weights = Weights;
+
 	return mesh;
+}
+
+
+void ModelLoader::RecursiveNodeProcess(vector<aiNode*> & nodes, aiNode * node)
+{
+	nodes.push_back(node);
+
+	for (int i = 0; i < node->mNumChildren; i++)
+	{
+		RecursiveNodeProcess(nodes, node->mChildren[i]);
+	}
+}
+
+void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene)
+{
+	if (scene->mNumAnimations == 0)
+	{
+		return;
+	}
+
+	for (int i = 0; i < scene->mNumAnimations; i++)
+	{
+		Animation animation = Animation();
+		animation.name = scene->mAnimations[i]->mName.data;
+
+		for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++)
+		{
+			animation.animNodes.push_back(scene->mAnimations[i]->mChannels[j]);
+		}
+
+		animationModel->AddAnimation(animation);
+	}
 }
 
 void ModelLoader::TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents/*, vector<vec3> & bitangents*/)

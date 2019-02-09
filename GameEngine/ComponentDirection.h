@@ -13,7 +13,7 @@ private:
 	quat renderDirection;
 
 public:
-	ComponentDirection(vec3 & pDirection, float pAngle) : updateDirection(angleAxis(pAngle, pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
+	ComponentDirection(vec3 & pDirection, float pAngle) : updateDirection(angleAxis(radians(pAngle), pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
 	~ComponentDirection();
 	
 	ComponentType GetComponentName() override;

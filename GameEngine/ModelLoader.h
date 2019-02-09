@@ -35,6 +35,62 @@ private:
 
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
 	static Mesh ProcessMesh(aiMesh * mesh, const aiScene * scene);
+
+	static void RecursiveNodeProcess(vector<aiNode*> & nodes, aiNode * node);
+	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);
+
+	static inline Bone * FindBone(vector<Bone *> bones, string name)
+	{
+		for (int i = 0; i < bones.size(); i++)
+		{
+			if (bones.at(i)->name == name)
+			{
+				return bones.at(i);
+			}
+		}
+
+		return nullptr;
+	}
+
+	static inline aiNode* FindAINode(vector<aiNode*> nodes, string name)
+	{
+		for (int i = 0; i < nodes.size(); i++)
+		{
+			if (nodes.at(i)->mName.data == name)
+			{
+				return nodes.at(i);
+			}
+		}
+
+		return nullptr;
+	}
+
+	static inline aiNodeAnim* FindAiNodeAnim(vector<aiNodeAnim*> animNodes, string name)
+	{
+		for (int i = 0; i < animNodes.size(); i++)
+		{
+			if (animNodes.at(i)->mNodeName.data == name)
+			{
+				return animNodes.at(i);
+			}
+		}
+
+		return nullptr;
+	}
+
+	static inline int FindBoneIDByName(vector<Bone *> bones, string name)
+	{
+		for (int i = 0; i < bones.size(); i++)
+		{
+			if (bones.at(i)->name == name)
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
 public:
 	static iModel * LoadModel(const string & fileName);
 };
