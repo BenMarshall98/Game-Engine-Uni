@@ -34,7 +34,7 @@ private:
 	static void CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex3, vec2 & texture1, vec2 & texture2, vec2 & texture3, vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
 
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
-	static Mesh ProcessMesh(aiMesh * mesh, const aiScene * scene);
+	static Mesh ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);
 
 	static void RecursiveNodeProcess(vector<aiNode*> & nodes, aiNode * node);
 	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);

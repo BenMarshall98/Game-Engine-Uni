@@ -18,7 +18,7 @@ struct Mesh
 	vector<vec4> weights;
 	vector<ivec4> ids;
 	vector<int> indices;
-
+	mat4 globalInverse;
 	unsigned int VAO, VBO[5], EBO;
 };
 
@@ -47,6 +47,7 @@ private:
 	vector<Animation> animations;
 	vector<Bone *> bones;
 	vector<mat4> boneMats;
+	vector<aiNode *> nodes;
 	mat4 globalInverse;
 
 public:
@@ -63,6 +64,10 @@ public:
 		bones = pBones;
 	}
 
+	inline void SetNodes(vector<aiNode *> pNodes)
+	{
+		nodes = pNodes;
+	}
 	inline void SetGlobalInverse(mat4 pGlobalInverse)
 	{
 		globalInverse = pGlobalInverse;

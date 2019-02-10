@@ -206,11 +206,11 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 		{
 			string boneName = scene->mMeshes[i]->mBones[j]->mName.data;
 
-			mat4 boneMat = transpose(AnimatedModel::AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix));
+			mat4 boneMat = AnimatedModel::AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix);
 
 			Bone * bone = new Bone();
 			bone->name = boneName;
-			bone->offset_matrix = boneMat;
+			bone->offset_matrix = transpose(boneMat);
 			bone->mesh = animatedModel->GetMesh(i);
 			bone->node = FindAINode(nodes, boneName);
 			bone->animNode = FindAiNodeAnim(firstAnimation.animNodes, boneName);
@@ -230,6 +230,8 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 	}
 
 	animatedModel->SetBones(bones);
+	animatedModel->SetNodes(nodes);
+	animatedModel->SetGlobalInverse(globalInverseTransform);
 
 	animatedModel->LoadModel();
 	
@@ -241,7 +243,7 @@ void ModelLoader::ProcessNode(aiNode * node, const aiScene * scene, AnimatedMode
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh * mesh = scene->mMeshes[node->mMeshes[i]];
-		animatedModel->AddMesh(ProcessMesh(mesh, scene));
+		animatedModel->AddMesh(ProcessMesh(node, mesh, scene));
 	}
 
 	for (unsigned int i = 0; i < node->mNumChildren; i++)
@@ -250,9 +252,11 @@ void ModelLoader::ProcessNode(aiNode * node, const aiScene * scene, AnimatedMode
 	}
 }
 
-Mesh ModelLoader::ProcessMesh(aiMesh * pMesh, const aiScene * scene)
+Mesh ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * scene)
 {
 	Mesh mesh;
+
+	mesh.globalInverse = inverse(AnimatedModel::AiToGLMMat4(node->mTransformation));
 
 	for (unsigned int i = 0; i < pMesh->mNumVertices; i++)
 	{
@@ -328,7 +332,8 @@ Mesh ModelLoader::ProcessMesh(aiMesh * pMesh, const aiScene * scene)
 
 void ModelLoader::RecursiveNodeProcess(vector<aiNode*> & nodes, aiNode * node)
 {
-	nodes.push_back(node);
+	aiNode * mNode = new aiNode(*node);
+	nodes.push_back(mNode);
 
 	for (int i = 0; i < node->mNumChildren; i++)
 	{

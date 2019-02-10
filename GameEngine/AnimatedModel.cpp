@@ -61,6 +61,15 @@ void AnimatedModel::Render(Shader * shader)
 
 	for (int i = 0; i < meshes.size(); i++)
 	{
+		vector<mat4> newBones;
+		for (int j = 0; j < 100; j++)
+		{
+			newBones.push_back(meshes.at(i).globalInverse * boneMats.at(j));
+		}
+
+		int boneLocation = glGetUniformLocation(shader->ShaderID(), "Bones");
+		glUniformMatrix4fv(boneLocation, newBones.size(), GL_FALSE, value_ptr(newBones[0]));
+
 		glBindVertexArray(meshes.at(i).VAO);
 		glDrawElements(GL_TRIANGLES, meshes.at(i).indices.size(), GL_UNSIGNED_INT, nullptr);
 	}
@@ -119,7 +128,7 @@ mat4 AnimatedModel::GetBoneParentTransforms(Bone * bone)
 		parent = parent->parent_bone;
 	}
 
-	mat4 concatenated_transforms = mat4();
+	mat4 concatenated_transforms = mat4(1.0);
 
 	for (int i = mats.size() - 1; i >= 0; i--)
 	{
@@ -153,17 +162,17 @@ void AnimatedModel::UpdateBoneMatsVector()
 
 	for (int i = 0; i < 100; i++)
 	{
-		if (i > 1)
+		if (i > bones.size() - 1)
 		{
 			boneMats.push_back(mat4(1.0));
 		}
 		else
 		{
-			mat4 concatenated_transformation = GetBoneParentTransforms(bones.at(i)) *
-				AiToGLMMat4(bones.at(i)->node->mTransformation);
-
-			boneMats.push_back(globalInverse *
-				concatenated_transformation * bones.at(i)->offset_matrix);
+			aiMatrix4x4 preTransform = bones.at(i)->node->mTransformation;
+			mat4 transform = AiToGLMMat4(preTransform);
+			mat4 concatenated_transformation = GetBoneParentTransforms(bones.at(i)) * transform;
+			mat4 tmp = concatenated_transformation * bones.at(i)->offset_matrix;
+			boneMats.push_back(tmp);
 		}
 	}
 }
