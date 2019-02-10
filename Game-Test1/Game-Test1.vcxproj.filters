@@ -139,10 +139,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RiggedVertex.vert">
+    <None Include="Models\Test.dae">
+      <Filter>Models</Filter>
+    </None>
+    <None Include="Shaders\RiggedFragment.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="RiggedFragment.frag">
+    <None Include="Shaders\RiggedVertex.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

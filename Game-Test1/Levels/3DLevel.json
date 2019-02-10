@@ -23,7 +23,7 @@
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "Models/Monster_1.dae"
+      "Model": "Models/Test.dae"
     },
     {
       "Type": "Model",
@@ -39,8 +39,8 @@
     {
       "Type": "Shader",
       "Name": "RiggedShader",
-      "Vertex": "RiggedVertex.vert",
-      "Fragment": "RiggedFragment.frag"
+      "Vertex": "Shaders/RiggedVertex.vert",
+      "Fragment": "Shaders/RiggedFragment.frag"
     }
   ],
   "Scripts": [
@@ -181,7 +181,7 @@
       "Camera": {
         "Type": "FollowPlayer",
         "Follow": "Floor",
-        "DefaultDistance": 20,
+        "DefaultDistance": 10,
         "MinDistance": 2,
         "MaxDistance": 10,
         "FollowRate": 0.1

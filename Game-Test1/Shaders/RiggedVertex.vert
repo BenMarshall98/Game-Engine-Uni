@@ -16,12 +16,17 @@ out vec4 id;
 
 void main()
 {
-	mat4 bone = Bones[aIDs[0]] * aWeights[0];
-	bone += Bones[aIDs[1]] * aWeights[1];
-	bone += Bones[aIDs[2]] * aWeights[2];
-	bone += Bones[aIDs[3]] * aWeights[3];
+	mat4 bone = Bones[aIDs.x] * aWeights.x;
+          bone += Bones[aIDs.y] * aWeights.y;
+          bone += Bones[aIDs.z] * aWeights.z;
+          bone += Bones[aIDs.w] * aWeights.w;
 
-	gl_Position = perspective * view * model * bone * vec4(aPos, 1.0f);
+	vec4 loc = vec4(aPos, 1.0f);
+	loc = bone * loc;
+	loc = model * loc;
+	loc = view * loc;
+	loc = perspective * loc;
+	gl_Position = loc;
 
 	we = aWeights;
 	id = aIDs;

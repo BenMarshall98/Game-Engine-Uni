@@ -54,22 +54,23 @@ void AnimatedModel::LoadModel()
 
 void AnimatedModel::Render(Shader * shader)
 {
+	shader->UseShader();
 	Update();
 
-	int boneLocation = glGetUniformLocation(shader->ShaderID(), "Bones");
-	glUniformMatrix4fv(boneLocation, boneMats.size(), GL_FALSE, value_ptr(boneMats[0]));
+	for (int i = 0; i < boneMats.size(); i++)
+	{
+		string bone = "Bones[" + to_string(i) + ']';
+		int boneLocation = glGetUniformLocation(shader->ShaderID(), bone.c_str());
+
+		if (boneLocation != -1)
+		{
+			int j = 0;
+		}
+		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, value_ptr(boneMats[i]));
+	}
 
 	for (int i = 0; i < meshes.size(); i++)
 	{
-		vector<mat4> newBones;
-		for (int j = 0; j < 100; j++)
-		{
-			newBones.push_back(meshes.at(i).globalInverse * boneMats.at(j));
-		}
-
-		int boneLocation = glGetUniformLocation(shader->ShaderID(), "Bones");
-		glUniformMatrix4fv(boneLocation, newBones.size(), GL_FALSE, value_ptr(newBones[0]));
-
 		glBindVertexArray(meshes.at(i).VAO);
 		glDrawElements(GL_TRIANGLES, meshes.at(i).indices.size(), GL_UNSIGNED_INT, nullptr);
 	}
@@ -162,7 +163,7 @@ void AnimatedModel::UpdateBoneMatsVector()
 
 	for (int i = 0; i < 100; i++)
 	{
-		if (i > bones.size() - 1)
+		if (i > bones.size() -1)
 		{
 			boneMats.push_back(mat4(1.0));
 		}
@@ -170,8 +171,9 @@ void AnimatedModel::UpdateBoneMatsVector()
 		{
 			aiMatrix4x4 preTransform = bones.at(i)->node->mTransformation;
 			mat4 transform = AiToGLMMat4(preTransform);
-			mat4 concatenated_transformation = GetBoneParentTransforms(bones.at(i)) * transform;
-			mat4 tmp = concatenated_transformation * bones.at(i)->offset_matrix;
+			mat4 concatenated_transformation = GetBoneParentTransforms(bones.at(i));
+			mat4 tmp = (globalInverse * concatenated_transformation) * transform;
+
 			boneMats.push_back(tmp);
 		}
 	}

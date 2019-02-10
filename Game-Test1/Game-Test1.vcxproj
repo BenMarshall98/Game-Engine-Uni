@@ -259,8 +259,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RiggedFragment.frag" />
-    <None Include="RiggedVertex.vert" />
+    <None Include="Models\Test.dae" />
+    <None Include="Shaders\RiggedFragment.frag" />
+    <None Include="Shaders\RiggedVertex.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
