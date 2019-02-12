@@ -213,6 +213,9 @@
     <ClCompile Include="RiggedAnimationSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentShadowShader.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -371,6 +374,9 @@
     </ClInclude>
     <ClInclude Include="RiggedAnimationSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentShadowShader.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

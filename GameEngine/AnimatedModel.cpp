@@ -225,7 +225,6 @@ unsigned int AnimatedModel::FindPosition(Bone * bone, float time)
 		{
 			return i;
 		}
-
 	}
 	return 0;
 }
@@ -234,13 +233,10 @@ unsigned int AnimatedModel::FindRotation(Bone * bone, float time)
 {
 	for (unsigned int i = 0; i < bone->animNode->mNumRotationKeys - 1; i++)
 	{
-		float rotTime = (float)bone->animNode->mRotationKeys[i + 1].mTime;
-
-		if (time < rotTime)
+		if (time < (float)bone->animNode->mRotationKeys[i + 1].mTime)
 		{
 			return i;
 		}
-
 	}
 
 	return 0;

@@ -18,15 +18,13 @@ private:
 	EntityManager * entityManager;
 	vec3 mTopLeftCoord;
 	vec3 mBottomRightCoord;
-	Shader * mDirectionalShadow;
-	Shader * mPointShadow;
 
-	void RenderDirectional(iModel * model, vec3 & position, quat & direction, Directional * directional);
+	static void RenderDirectional(iModel * model, vec3 & position, quat & direction, Directional * directional, Shader * shadowShader);
 
-	void RenderPoint(iModel * model, vec3 & position, quat & direction);
+	static void RenderPoint(iModel * model, vec3 & position, quat & direction, Shader * shadowShader);
 
 public:
-	ShadowSystem(vec3 & topLeftFrontCoord, vec3 & bottomRightBackCoord, Shader * directionalShadow, Shader * pointShadow);
+	ShadowSystem(vec3 & topLeftFrontCoord, vec3 & bottomRightBackCoord);
 
 	ShadowSystem& operator=(const ShadowSystem&) = delete;
 	ShadowSystem(ShadowSystem&) = delete;

@@ -57,18 +57,13 @@ void TestGameScene::Load()
 
 	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
 
-	ResourceManager::LoadShader("DirectionalShadow", "Shaders/ShadowMapping.vert", "Shaders/ShadowMapping.frag");
-	ResourceManager::LoadShader("PointShadow", "Shaders/PointShadow.vert", "Shaders/PointShadow.frag", "Shaders/PointShadow.geom");
-	Shader * directionalShadow = ResourceManager::GetShader("DirectionalShadow");
-	Shader * pointLightShadow = ResourceManager::GetShader("PointShadow");
-
 	vec3 topLeftCoord = vec3(-15, 15, 15);
 	vec3 bottomRightCoord = vec3(15, -15, -15);
 
 	RiggedAnimationSystem * const rigged = new RiggedAnimationSystem();
 	mSystemManager.AddRenderSystem(rigged);
 
-	ShadowSystem * const shadow = new ShadowSystem(topLeftCoord, bottomRightCoord, directionalShadow, pointLightShadow);
+	ShadowSystem * const shadow = new ShadowSystem(topLeftCoord, bottomRightCoord);
 	mSystemManager.AddRenderSystem(shadow);
 
 	RenderSystem * const render = new RenderSystem();

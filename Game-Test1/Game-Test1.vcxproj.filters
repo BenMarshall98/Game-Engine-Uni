@@ -148,5 +148,20 @@
     <None Include="Shaders\RiggedVertex.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Shaders\RiggedPointShadow.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\RiggedPointShadow.geom">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\RiggedPointShadow.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\RiggedShadowMapping.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\RiggedShadowMapping.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

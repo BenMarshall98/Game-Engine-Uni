@@ -41,6 +41,32 @@
       "Name": "RiggedShader",
       "Vertex": "Shaders/RiggedVertex.vert",
       "Fragment": "Shaders/RiggedFragment.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "DirectionalShadow",
+      "Vertex": "Shaders/ShadowMapping.vert",
+      "Fragment": "Shaders/ShadowMapping.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "PointShadow",
+      "Vertex": "Shaders/PointShadow.vert",
+      "Fragment": "Shaders/PointShadow.frag",
+      "Geometry": "Shaders/PointShadow.geom"
+    },
+    {
+      "Type": "Shader",
+      "Name": "RiggedDirectionalShadow",
+      "Vertex": "Shaders/RiggedShadowMapping.vert",
+      "Fragment": "Shaders/RiggedShadowMapping.frag"
+    },
+    {
+      "Type": "Shader",
+      "Name": "RiggedPointShadow",
+      "Vertex": "Shaders/RiggedPointShadow.vert",
+      "Fragment": "Shaders/RiggedPointShadow.frag",
+      "Geometry": "Shaders/RiggedPointShadow.geom"
     }
   ],
   "Scripts": [
@@ -80,6 +106,11 @@
         {
           "Component": "NormalTexture",
           "Texture": "ConcreteNormal"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
         }
       ]
     }
@@ -95,6 +126,11 @@
         {
           "Component": "Shader",
           "Shader": "RiggedShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "RiggedDirectionalShadow",
+          "Point": "RiggedPointShadow"
         },
         {
           "Component": "Position",

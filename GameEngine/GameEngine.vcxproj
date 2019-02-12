@@ -144,6 +144,7 @@
     <ClCompile Include="ComponentPosition.cpp" />
     <ClCompile Include="ComponentRiggedAnimation.cpp" />
     <ClCompile Include="ComponentShader.cpp" />
+    <ClCompile Include="ComponentShadowShader.cpp" />
     <ClCompile Include="ComponentTexture.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="ComponentPosition.h" />
     <ClInclude Include="ComponentRiggedAnimation.h" />
     <ClInclude Include="ComponentShader.h" />
+    <ClInclude Include="ComponentShadowShader.h" />
     <ClInclude Include="ComponentTexture.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />

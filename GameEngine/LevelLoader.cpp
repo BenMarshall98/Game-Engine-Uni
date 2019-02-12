@@ -10,6 +10,7 @@
 #include "ComponentAudio.h"
 #include "ComponentNormalTexture.h"
 #include "ComponentRiggedAnimation.h"
+#include "ComponentShadowShader.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
 #include "CollisionShape.h"
@@ -574,6 +575,13 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			}
 
 			entityManager->AddComponentToEntity(entity, new ComponentRiggedAnimation(animation, playbackState));
+		}
+		else if (component == "ShadowShader")
+		{
+			string direction = (*it)["Direction"].GetString();
+			string point = (*it)["Point"].GetString();
+
+			entityManager->AddComponentToEntity(entity, new ComponentShadowShader(direction, point));
 		}
 		else if (component == "Input")
 		{
