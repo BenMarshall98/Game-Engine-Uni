@@ -1,5 +1,8 @@
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include "AnimatedModel.h"
 #include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/transform.hpp"
 
 void AnimatedModel::LoadModel()
 {
@@ -185,6 +188,25 @@ void AnimatedModel::UpdateBoneMatsVector()
 void AnimatedModel::Update()
 {
 	UpdateBoneMatsVector();
+
+	Animation animation = GetFirstAnimation();
+
+	time += (1.0 / 60.0);
+
+	if (time < animation.startTime)
+	{
+		time = animation.startTime;
+	}
+
+	if (time > animation.endTime)
+	{
+		time = animation.startTime;
+	}
+
+	for (int i = 0; i < bones.size(); i++)
+	{
+		UpdateKeyframeTransform(bones.at(i), time);
+	}
 }
 
 unsigned int AnimatedModel::FindPosition(Bone * bone, float time)
@@ -211,4 +233,84 @@ unsigned int AnimatedModel::FindRotation(Bone * bone, float time)
 
 		return 0;
 	}
+}
+
+vec3 AnimatedModel::CalcInterpolatedPosition(Bone * bone, float time)
+{
+	if (bone->animNode->mNumPositionKeys == 1)
+	{
+		aiVector3D aiPos = bone->animNode->mPositionKeys[0].mValue;
+		vec3 pos(aiPos.x, aiPos.y, aiPos.z);
+		return pos;
+	}
+
+	unsigned int PositionIndex = FindPosition(bone, time);
+	unsigned int NextPositionIndex = (PositionIndex + 1);
+
+	float pos1Time = (float)bone->animNode->mPositionKeys[PositionIndex].mTime;
+	float pos2Time = (float)bone->animNode->mPositionKeys[NextPositionIndex].mTime;
+	float DeltaTime = pos2Time - pos1Time;
+
+	if (DeltaTime == 0.0)
+	{
+		aiVector3D aiPos = bone->animNode->mPositionKeys[PositionIndex].mValue;
+		vec3 pos(aiPos.x, aiPos.y, aiPos.z);
+		return pos;
+	}
+
+	float Factor = (time - pos1Time) / DeltaTime;
+
+	const aiVector3D StartPosition = bone->animNode->mPositionKeys[PositionIndex].mValue;
+	const aiVector3D EndPosition = bone->animNode->mPositionKeys[PositionIndex].mValue;
+
+	vec3 p1(StartPosition.x, StartPosition.y, StartPosition.z);
+	vec3 p2(EndPosition.x, EndPosition.y, EndPosition.z);
+
+	vec3 pos = mix(p1, p2, Factor);
+
+	return pos;
+}
+
+quat AnimatedModel::CalcInterpolatedRotation(Bone * bone, float time)
+{
+	if (bone->animNode->mNumRotationKeys == 1)
+	{
+		aiQuaternion aiRot = bone->animNode->mRotationKeys[0].mValue;
+		quat rot(aiRot.w, aiRot.x, aiRot.y, aiRot.z);
+		return rot;
+	}
+
+	unsigned int RotationIndex = FindRotation(bone, time);
+	unsigned int NextRotationIndex = (RotationIndex + 1);
+
+	float DeltaTime = bone->animNode->mRotationKeys[NextRotationIndex].mTime - bone->animNode->mRotationKeys[RotationIndex].mTime;
+	float Factor = (time - (float)bone->animNode->mRotationKeys[RotationIndex].mTime) / DeltaTime;
+
+	const aiQuaternion& StartRotation = bone->animNode->mRotationKeys[RotationIndex].mValue;
+	const aiQuaternion& EndRotation = bone->animNode->mRotationKeys[NextRotationIndex].mValue;
+
+	quat r1(StartRotation.w, StartRotation.x, StartRotation.y, StartRotation.z);
+	quat r2(EndRotation.w, EndRotation.x, EndRotation.y, EndRotation.z);
+
+	quat rot = slerp(r1, r2, Factor);
+	return rot;
+}
+
+void AnimatedModel::UpdateKeyframeTransform(Bone * bone, float time)
+{
+	if (bone->animNode == nullptr)
+	{
+		return;
+	}
+
+	vec3 pos = CalcInterpolatedPosition(bone, time);
+	quat rot = CalcInterpolatedRotation(bone, time);
+	vec3 sca(1.0);
+
+	mat4 mat(1.0);
+	//mat *= translate(pos);
+	mat *= mat4_cast(rot);
+	mat *= scale(sca);
+
+	bone->node->mTransformation = GLMMat4ToAi(mat);
 }

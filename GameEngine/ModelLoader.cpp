@@ -352,6 +352,8 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene 
 	{
 		Animation animation = Animation();
 		animation.name = scene->mAnimations[i]->mName.data;
+		animation.startTime = 0;
+		animation.endTime = scene->mAnimations[i]->mDuration / scene->mAnimations[i]->mTicksPerSecond;
 
 		for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++)
 		{

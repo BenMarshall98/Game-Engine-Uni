@@ -26,6 +26,8 @@ struct Mesh
 struct Animation
 {
 	string name;
+	float startTime;
+	float endTime;
 	vector<aiNodeAnim*> animNodes;
 };
 
@@ -50,6 +52,8 @@ private:
 	vector<mat4> boneMats;
 	vector<aiNode *> nodes;
 	mat4 globalInverse;
+
+	float time;
 
 public:
 	AnimatedModel() {}
