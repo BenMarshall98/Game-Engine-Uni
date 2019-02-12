@@ -171,8 +171,11 @@ void AnimatedModel::UpdateBoneMatsVector()
 		{
 			aiMatrix4x4 preTransform = bones.at(i)->node->mTransformation;
 			mat4 transform = AiToGLMMat4(preTransform);
-			mat4 concatenated_transformation = GetBoneParentTransforms(bones.at(i));
-			mat4 tmp = (globalInverse * concatenated_transformation) * transform;
+			mat4 tmp = mat4(1.0);
+			tmp *= bones.at(i)->offset_matrix;
+			tmp *= transform;
+			tmp *= GetBoneParentTransforms(bones.at(i));
+			tmp *= globalInverse;
 
 			boneMats.push_back(tmp);
 		}
@@ -182,4 +185,30 @@ void AnimatedModel::UpdateBoneMatsVector()
 void AnimatedModel::Update()
 {
 	UpdateBoneMatsVector();
+}
+
+unsigned int AnimatedModel::FindPosition(Bone * bone, float time)
+{
+	for (unsigned int i = 0; i < bone->animNode->mNumPositionKeys - 1; i++)
+	{
+		if (time < (float)bone->animNode->mPositionKeys[i + 1].mTime)
+		{
+			return i;
+		}
+
+		return 0;
+	}
+}
+
+unsigned int AnimatedModel::FindRotation(Bone * bone, float time)
+{
+	for (unsigned int i = 0; i < bone->animNode->mNumRotationKeys - 1; i++)
+	{
+		if (time < (float)bone->animNode->mPositionKeys[i + 1].mTime)
+		{
+			return i;
+		}
+
+		return 0;
+	}
 }

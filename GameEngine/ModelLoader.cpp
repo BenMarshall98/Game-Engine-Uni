@@ -256,7 +256,7 @@ Mesh ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * sce
 {
 	Mesh mesh;
 
-	mesh.globalInverse = inverse(AnimatedModel::AiToGLMMat4(node->mParent->mTransformation));
+	mesh.globalInverse = AnimatedModel::AiToGLMMat4(node->mParent->mTransformation);
 
 	for (unsigned int i = 0; i < pMesh->mNumVertices; i++)
 	{

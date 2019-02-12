@@ -23,7 +23,7 @@
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "Models/Test.dae"
+      "Model": "Models/test.dae"
     },
     {
       "Type": "Model",

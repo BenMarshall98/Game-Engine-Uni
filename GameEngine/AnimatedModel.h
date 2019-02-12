@@ -2,6 +2,7 @@
 #include "iModel.h"
 #include <vector>
 #include "glm/glm.hpp"
+#include "glm/gtc/quaternion.hpp"
 
 #include "assimp/scene.h"
 
@@ -96,8 +97,15 @@ public:
 
 	mat4 GetBoneParentTransforms(Bone * bone);
 
+	unsigned int FindPosition(Bone * bone, float time);
+	vec3 CalcInterpolatedPosition(Bone * bone, float time);
+	unsigned int FindRotation(Bone * bone, float time);
+	quat CalcInterpolatedRotation(Bone * bone, float time);
+
 	Bone * FindBone(string name);
+
 	void UpdateBoneMatsVector();
+	void UpdateKeyframeTransform(Bone * bone, float time);
 
 	void Update();
 
