@@ -207,6 +207,12 @@
     <ClCompile Include="AnimatedModel.cpp">
       <Filter>Utility\Models</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentRiggedAnimation.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RiggedAnimationSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -359,6 +365,12 @@
     </ClInclude>
     <ClInclude Include="AnimatedModel.h">
       <Filter>Utility\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentRiggedAnimation.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RiggedAnimationSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -23,6 +23,7 @@
 #include "CameraManager.h"
 #include "AudioManager.h"
 #include "AudioSystem.h"
+#include "RiggedAnimationSystem.h"
 
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
@@ -63,6 +64,9 @@ void TestGameScene::Load()
 
 	vec3 topLeftCoord = vec3(-15, 15, 15);
 	vec3 bottomRightCoord = vec3(15, -15, -15);
+
+	RiggedAnimationSystem * const rigged = new RiggedAnimationSystem();
+	mSystemManager.AddRenderSystem(rigged);
 
 	ShadowSystem * const shadow = new ShadowSystem(topLeftCoord, bottomRightCoord, directionalShadow, pointLightShadow);
 	mSystemManager.AddRenderSystem(shadow);

@@ -60,7 +60,7 @@ void RenderSystem::Action(void)
 		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetRenderTexture();
 		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
-		iComponent * componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL);
+		iComponent * componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL_TEXTURE);
 
 		const Texture * normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
 

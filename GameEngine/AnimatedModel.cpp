@@ -58,7 +58,14 @@ void AnimatedModel::LoadModel()
 void AnimatedModel::Render(Shader * shader)
 {
 	shader->UseShader();
-	Update();
+
+	if (boneMats.size() == 0)
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			boneMats.push_back(mat4(1.0));
+		}
+	}
 
 	for (int i = 0; i < boneMats.size(); i++)
 	{
@@ -192,6 +199,7 @@ void AnimatedModel::Update()
 	Animation animation = GetFirstAnimation();
 
 	time += (1.0 / 60.0);
+	//time = 0;
 
 	if (time < animation.startTime)
 	{
@@ -218,21 +226,24 @@ unsigned int AnimatedModel::FindPosition(Bone * bone, float time)
 			return i;
 		}
 
-		return 0;
 	}
+	return 0;
 }
 
 unsigned int AnimatedModel::FindRotation(Bone * bone, float time)
 {
 	for (unsigned int i = 0; i < bone->animNode->mNumRotationKeys - 1; i++)
 	{
-		if (time < (float)bone->animNode->mPositionKeys[i + 1].mTime)
+		float rotTime = (float)bone->animNode->mRotationKeys[i + 1].mTime;
+
+		if (time < rotTime)
 		{
 			return i;
 		}
 
-		return 0;
 	}
+
+	return 0;
 }
 
 vec3 AnimatedModel::CalcInterpolatedPosition(Bone * bone, float time)
@@ -249,19 +260,12 @@ vec3 AnimatedModel::CalcInterpolatedPosition(Bone * bone, float time)
 
 	float pos1Time = (float)bone->animNode->mPositionKeys[PositionIndex].mTime;
 	float pos2Time = (float)bone->animNode->mPositionKeys[NextPositionIndex].mTime;
+
 	float DeltaTime = pos2Time - pos1Time;
-
-	if (DeltaTime == 0.0)
-	{
-		aiVector3D aiPos = bone->animNode->mPositionKeys[PositionIndex].mValue;
-		vec3 pos(aiPos.x, aiPos.y, aiPos.z);
-		return pos;
-	}
-
 	float Factor = (time - pos1Time) / DeltaTime;
 
 	const aiVector3D StartPosition = bone->animNode->mPositionKeys[PositionIndex].mValue;
-	const aiVector3D EndPosition = bone->animNode->mPositionKeys[PositionIndex].mValue;
+	const aiVector3D EndPosition = bone->animNode->mPositionKeys[NextPositionIndex].mValue;
 
 	vec3 p1(StartPosition.x, StartPosition.y, StartPosition.z);
 	vec3 p2(EndPosition.x, EndPosition.y, EndPosition.z);
@@ -283,8 +287,11 @@ quat AnimatedModel::CalcInterpolatedRotation(Bone * bone, float time)
 	unsigned int RotationIndex = FindRotation(bone, time);
 	unsigned int NextRotationIndex = (RotationIndex + 1);
 
-	float DeltaTime = bone->animNode->mRotationKeys[NextRotationIndex].mTime - bone->animNode->mRotationKeys[RotationIndex].mTime;
-	float Factor = (time - (float)bone->animNode->mRotationKeys[RotationIndex].mTime) / DeltaTime;
+	float rot1Time = (float)bone->animNode->mRotationKeys[RotationIndex].mTime;
+	float rot2Time = (float)bone->animNode->mRotationKeys[NextRotationIndex].mTime;
+
+	float DeltaTime = rot2Time - rot1Time;
+	float Factor = (time - rot1Time) / DeltaTime;
 
 	const aiQuaternion& StartRotation = bone->animNode->mRotationKeys[RotationIndex].mValue;
 	const aiQuaternion& EndRotation = bone->animNode->mRotationKeys[NextRotationIndex].mValue;
@@ -293,6 +300,7 @@ quat AnimatedModel::CalcInterpolatedRotation(Bone * bone, float time)
 	quat r2(EndRotation.w, EndRotation.x, EndRotation.y, EndRotation.z);
 
 	quat rot = slerp(r1, r2, Factor);
+
 	return rot;
 }
 
@@ -308,9 +316,11 @@ void AnimatedModel::UpdateKeyframeTransform(Bone * bone, float time)
 	vec3 sca(1.0);
 
 	mat4 mat(1.0);
-	//mat *= translate(pos);
+	mat *= translate(pos);
 	mat *= mat4_cast(rot);
 	mat *= scale(sca);
+
+	mat = transpose(mat);
 
 	bone->node->mTransformation = GLMMat4ToAi(mat);
 }

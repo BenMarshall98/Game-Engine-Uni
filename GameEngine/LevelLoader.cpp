@@ -9,6 +9,7 @@
 #include "ComponentTexture.h"
 #include "ComponentAudio.h"
 #include "ComponentNormalTexture.h"
+#include "ComponentRiggedAnimation.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
 #include "CollisionShape.h"
@@ -552,6 +553,27 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		{
 			string texture = (*it)["Texture"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentNormalTexture(texture));
+		}
+		else if (component == "RiggedAnimation")
+		{
+			string animation = (*it)["Animation"].GetString();
+			string playback = (*it)["Playback"].GetString();
+			RiggedAnimationState playbackState;
+
+			if (playback == "Play")
+			{
+				playbackState = RiggedAnimationState::PLAY;
+			}
+			else if (playback == "Pause")
+			{
+				playbackState = RiggedAnimationState::PAUSE;
+			}
+			else
+			{
+				playbackState = RiggedAnimationState::STOP;
+			}
+
+			entityManager->AddComponentToEntity(entity, new ComponentRiggedAnimation(animation, playbackState));
 		}
 		else if (component == "Input")
 		{

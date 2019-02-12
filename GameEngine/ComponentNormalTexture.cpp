@@ -7,7 +7,7 @@ ComponentNormalTexture::~ComponentNormalTexture()
 
 ComponentType ComponentNormalTexture::GetComponentName()
 {
-	return ComponentType::COMPONENT_NORMAL;
+	return ComponentType::COMPONENT_NORMAL_TEXTURE;
 }
 
 

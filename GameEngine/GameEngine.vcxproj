@@ -142,6 +142,7 @@
     <ClCompile Include="ComponentNormalTexture.cpp" />
     <ClCompile Include="ComponentPhysics.cpp" />
     <ClCompile Include="ComponentPosition.cpp" />
+    <ClCompile Include="ComponentRiggedAnimation.cpp" />
     <ClCompile Include="ComponentShader.cpp" />
     <ClCompile Include="ComponentTexture.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="RiggedAnimationSystem.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScriptingManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="ComponentNormalTexture.h" />
     <ClInclude Include="ComponentPhysics.h" />
     <ClInclude Include="ComponentPosition.h" />
+    <ClInclude Include="ComponentRiggedAnimation.h" />
     <ClInclude Include="ComponentShader.h" />
     <ClInclude Include="ComponentTexture.h" />
     <ClInclude Include="Entity.h" />
@@ -223,6 +226,7 @@
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="RiggedAnimationSystem.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScriptingManager.h" />
     <ClInclude Include="Shader.h" />

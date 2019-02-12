@@ -101,9 +101,14 @@
           "Position": [ 0, 1, 0 ]
         },
         {
+          "Component": "RiggedAnimation",
+          "Animation": "First",
+          "Playback": "Play"
+        },
+        {
           "Component": "Direction",
-          "Direction": [ 1, 0, 0 ],
-          "Angle": -90
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
         },
         {
           "Component": "Texture",
