@@ -84,6 +84,8 @@ void ShadowSystem::Action(void)
 		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 0.0, 1.0), vec3(0.0, -1.0, 0.0)));
 		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 0.0, -1.0), vec3(0.0, -1.0, 0.0)));
 
+		int lastShader = -1;
+
 		for (int j = 0; j < EntityList.size(); j++)
 		{
 			iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_MODEL);
@@ -95,8 +97,6 @@ void ShadowSystem::Action(void)
 			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 			Shader * shadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
-
-			static int lastShader = -1;
 
 			if (lastShader != shadowShader->ShaderID())
 			{
@@ -145,6 +145,8 @@ void ShadowSystem::Action(void)
 		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 0.0, 1.0), vec3(0.0, -1.0, 0.0)));
 		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 0.0, -1.0), vec3(0.0, -1.0, 0.0)));
 
+		int lastShader = -1;
+
 		for (int j = 0; j < EntityList.size(); j++)
 		{
 			iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_MODEL);
@@ -157,10 +159,10 @@ void ShadowSystem::Action(void)
 			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 			Shader * shadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
 
-			static int lastShader = -1;
-
 			if (lastShader != shadowShader->ShaderID())
 			{
+				shadowShader->UseShader();
+
 				int lightPosLocation = glGetUniformLocation(shadowShader->ShaderID(), "lightPos");
 				glUniform3fv(lightPosLocation, 1, value_ptr(spotLights[i]->location));
 

@@ -58,6 +58,9 @@
     <Filter Include="Audio Manager">
       <UniqueIdentifier>{f72519cc-02eb-446c-b7d6-c791bd55cadc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\Models\RiggedModel">
+      <UniqueIdentifier>{7e7901dd-31f3-4180-8325-5f119ba9eece}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -204,9 +207,6 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Audio Manager</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedModel.cpp">
-      <Filter>Utility\Models</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentRiggedAnimation.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -215,6 +215,27 @@
     </ClCompile>
     <ClCompile Include="ComponentShadowShader.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModel.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3AnimKey.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="QuatAnimKey.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimNode.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -366,9 +387,6 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Audio Manager</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedModel.h">
-      <Filter>Utility\Models</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentRiggedAnimation.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -377,6 +395,27 @@
     </ClInclude>
     <ClInclude Include="ComponentShadowShader.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModel.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3AnimKey.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="QuatAnimKey.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimNode.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: work on a menu system
 //TODO: build a animation system (for coins and the like)
 //TODO: build methods to control the camera using input
+//TODO: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

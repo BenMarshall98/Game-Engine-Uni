@@ -128,8 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedModel.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimNode.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="Bone.cpp" />
     <ClCompile Include="BulletPhysicsEngine.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollisionCuboid.cpp" />
@@ -165,11 +168,13 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="LoggingManager.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Projection.cpp" />
+    <ClCompile Include="QuatAnimKey.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RiggedAnimationSystem.cpp" />
@@ -181,11 +186,15 @@
     <ClCompile Include="StaticModel.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Vec3AnimKey.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedModel.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimNode.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioSystem.h" />
+    <ClInclude Include="Bone.h" />
     <ClInclude Include="BulletPhysicsEngine.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
@@ -220,11 +229,13 @@
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="LoggingManager.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="Projection.h" />
+    <ClInclude Include="QuatAnimKey.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -237,6 +248,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Vec3AnimKey.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

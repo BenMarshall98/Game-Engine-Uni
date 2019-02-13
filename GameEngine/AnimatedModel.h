@@ -5,61 +5,31 @@
 #include "glm/gtc/quaternion.hpp"
 
 #include "assimp/scene.h"
+#include "Mesh.h"
+#include "Animation.h"
+#include "Bone.h"
 
 using namespace Assimp;
-
 using namespace std;
 using namespace glm;
-
-struct Mesh
-{
-	vector<vec3> vertex;
-	vector<vec3> normal;
-	vector<vec2> textures;
-	vector<vec4> weights;
-	vector<ivec4> ids;
-	vector<int> indices;
-	mat4 globalInverse;
-	unsigned int VAO, VBO[5], EBO;
-};
-
-struct Animation
-{
-	string name;
-	float startTime;
-	float endTime;
-	vector<aiNodeAnim*> animNodes;
-};
-
-struct Bone
-{
-	Bone() {}
-	string name;
-	Mesh mesh;
-	aiNode * node;
-	aiNodeAnim * animNode;
-	Bone * parent_bone;
-	mat4 parent_transforms;
-	mat4 offset_matrix;
-};
 
 class AnimatedModel : public iModel
 {
 private:
-	vector<Mesh> meshes;
+	vector<Mesh *> meshes;
 	vector<Animation> animations;
 	vector<Bone *> bones;
 	vector<mat4> boneMats;
 	vector<aiNode *> nodes;
 	mat4 globalInverse;
 
-	float time;
+	float time = 0;
 
 public:
 	AnimatedModel() {}
 	~AnimatedModel();
 
-	inline void AddMesh(Mesh mesh)
+	inline void AddMesh(Mesh * mesh)
 	{
 		meshes.push_back(mesh);
 	}
@@ -78,7 +48,7 @@ public:
 		globalInverse = pGlobalInverse;
 	}
 
-	inline Mesh GetMesh(int loc)
+	inline Mesh * GetMesh(int loc)
 	{
 		return meshes.at(loc);
 	}
@@ -94,22 +64,13 @@ public:
 	}
 
 	void Render(Shader * shader)override;
-	void LoadModel();
 
 	static aiMatrix4x4 GLMMat4ToAi(mat4 mat);
 	static mat4 AiToGLMMat4(aiMatrix4x4& mat);
 
-	mat4 GetBoneParentTransforms(Bone * bone);
-
-	unsigned int FindPosition(Bone * bone, float time);
-	vec3 CalcInterpolatedPosition(Bone * bone, float time);
-	unsigned int FindRotation(Bone * bone, float time);
-	quat CalcInterpolatedRotation(Bone * bone, float time);
-
 	Bone * FindBone(string name);
 
 	void UpdateBoneMatsVector();
-	void UpdateKeyframeTransform(Bone * bone, float time);
 
 	void Update();
 
