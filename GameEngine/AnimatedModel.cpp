@@ -122,8 +122,6 @@ void AnimatedModel::Update()
 
 	Animation animation = GetFirstAnimation();
 
-	time = 0;
-
 	if (time < animation.GetStartTime())
 	{
 		time = animation.GetStartTime();
@@ -131,7 +129,7 @@ void AnimatedModel::Update()
 
 	if (time > animation.GetEndTime())
 	{
-		time = animation.GetEndTime();
+		time = animation.GetStartTime();
 	}
 
 	for (int i = 0; i < bones.size(); i++)

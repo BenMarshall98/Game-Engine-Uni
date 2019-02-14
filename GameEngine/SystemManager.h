@@ -12,8 +12,21 @@ private:
 	vector<iSystem *> RenderSystems;
 	vector<iSystem *> UpdateSystems;
 
-public:
+	static SystemManager * instance;
+
 	SystemManager();
+
+public:
+	static inline  SystemManager * Instance()
+	{
+		if (instance == nullptr)
+		{
+			instance == new SystemManager();
+		}
+
+		return instance;
+	}
+
 	~SystemManager();
 
 	inline void AddRenderSystem(iSystem * const system)

@@ -13,9 +13,22 @@ class PhysicsManager
 private:
 	
 	BulletPhysicsEngine* engine;
+
+	static PhysicsManager * instance;
+
+	PhysicsManager() {}
+
 public:
 
-	PhysicsManager(BulletPhysicsEngine* pEngine) : engine(pEngine) {}
+	static inline PhysicsManager * Instance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new PhysicsManager();
+		}
+
+		return instance;
+	}
 
 	PhysicsManager& operator= (const PhysicsManager&) = delete;
 	PhysicsManager(PhysicsManager&) = delete;

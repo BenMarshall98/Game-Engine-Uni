@@ -205,35 +205,28 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 		for (int j = 0; j < scene->mMeshes[i]->mNumBones; j++)
 		{
 			string boneName = scene->mMeshes[i]->mBones[j]->mName.data;
-
 			mat4 boneMat = AnimatedModel::AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix);
+			aiNode * node = FindAINode(nodes, boneName);
+			AnimNode * animNode = FindAiNodeAnim(firstAnimation.GetAnimNodes(), boneName);
 
-			Bone * bone = new Bone();
-			bone->name = boneName;
-			bone->offset_matrix = boneMat;
-			bone->mesh = animatedModel->GetMesh(i);
-			bone->node = FindAINode(nodes, boneName);
-			bone->animNode = FindAiNodeAnim(firstAnimation.animNodes, boneName);
-
+			Bone * bone = new Bone(boneName, node, animNode, boneMat);
 			bones.push_back(bone);
 		}
 	}
 
 	for (int i = 0; i < bones.size(); i++)
 	{
-		string boneName = bones.at(i)->name;
+		string boneName = bones.at(i)->GetName();
 		string parentName = FindAINode(nodes, boneName)->mParent->mName.data;
 
 		Bone * parentBone = FindBone(bones, parentName);
 
-		bones.at(i)->parent_bone = parentBone;
+		bones.at(i)->SetParentBone(parentBone);
 	}
 
 	animatedModel->SetBones(bones);
 	animatedModel->SetNodes(nodes);
 	animatedModel->SetGlobalInverse(globalInverseTransform);
-
-	animatedModel->LoadModel();
 	
 	return animatedModel;
 }
@@ -252,11 +245,11 @@ void ModelLoader::ProcessNode(aiNode * node, const aiScene * scene, AnimatedMode
 	}
 }
 
-Mesh ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * scene)
+Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * scene)
 {
-	Mesh mesh;
-
-	mesh.globalInverse = AnimatedModel::AiToGLMMat4(node->mParent->mTransformation);
+	vector<vec3> vertexes;
+	vector<vec3> normals;
+	vector<vec2> textures;
 
 	for (unsigned int i = 0; i < pMesh->mNumVertices; i++)
 	{
@@ -266,19 +259,21 @@ Mesh ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * sce
 
 		vec3 vertex = vec3(aiVertex.x, aiVertex.y, aiVertex.z);
 		vec3 normal = vec3(aiVertex.x, aiVertex.y, aiVertex.z);
-		vec3 texture = vec3(aiVertex.x, aiVertex.y, aiVertex.z);
+		vec2 texture = vec2(aiVertex.x, aiVertex.y);
 
-		mesh.vertex.push_back(vertex);
-		mesh.normal.push_back(normal);
-		mesh.textures.push_back(texture);
+		vertexes.push_back(vertex);
+		normals.push_back(normal);
+		textures.push_back(texture);
 	}
+
+	vector<int> indices;
 
 	for (unsigned int i = 0; i < pMesh->mNumFaces; i++)
 	{
 		aiFace face = pMesh->mFaces[i];
 		for (unsigned int j = 0; j < face.mNumIndices; j++)
 		{
-			mesh.indices.push_back(face.mIndices[j]);
+			indices.push_back(face.mIndices[j]);
 		}
 	}
 
@@ -323,8 +318,7 @@ Mesh ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * sce
 		}
 	}
 
-	mesh.ids = IDs;
-	mesh.weights = Weights;
+	Mesh * mesh = new Mesh(vertexes, normals, textures, Weights, IDs, indices);
 
 	return mesh;
 }
@@ -350,15 +344,57 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene 
 
 	for (int i = 0; i < scene->mNumAnimations; i++)
 	{
-		Animation animation = Animation();
-		animation.name = scene->mAnimations[i]->mName.data;
-		animation.startTime = 0;
-		animation.endTime = scene->mAnimations[i]->mDuration / scene->mAnimations[i]->mTicksPerSecond;
+		string name = scene->mAnimations[i]->mName.data;
+		float startTime = 0;
+		float endTime = scene->mAnimations[i]->mDuration / scene->mAnimations[i]->mTicksPerSecond;
+
+		vector<AnimNode *> animNodes;
 
 		for (int j = 0; j < scene->mAnimations[i]->mNumChannels; j++)
 		{
-			animation.animNodes.push_back(scene->mAnimations[i]->mChannels[j]);
+			string animNodeName = scene->mAnimations[i]->mChannels[j]->mNodeName.data;
+			vector<Vec3AnimKey *> positionKeys;
+			vector<QuatAnimKey *> rotationKeys;
+			vector<Vec3AnimKey *> scaleKeys;
+
+			for (int k = 0; k < scene->mAnimations[i]->mChannels[j]->mNumPositionKeys; k++)
+			{
+				float time = scene->mAnimations[i]->mChannels[j]->mPositionKeys[k].mTime;
+				aiVector3D aiValue = scene->mAnimations[i]->mChannels[j]->mPositionKeys[k].mValue;
+				vec3 value(aiValue.x, aiValue.y, aiValue.z);
+
+				Vec3AnimKey * posKey = new Vec3AnimKey(time, value);
+
+				positionKeys.push_back(posKey);
+			}
+
+			for (int k = 0; k < scene->mAnimations[i]->mChannels[j]->mNumRotationKeys; k++)
+			{
+				float time = scene->mAnimations[i]->mChannels[j]->mRotationKeys[k].mTime;
+				aiQuaternion aiValue = scene->mAnimations[i]->mChannels[j]->mRotationKeys[k].mValue;
+				quat value(aiValue.w, aiValue.x, aiValue.y, aiValue.z);
+
+				QuatAnimKey * rotKey = new QuatAnimKey(time, value);
+
+				rotationKeys.push_back(rotKey);
+			}
+
+			for (int k = 0; k < scene->mAnimations[i]->mChannels[j]->mNumScalingKeys; k++)
+			{
+				float time = scene->mAnimations[i]->mChannels[j]->mScalingKeys[k].mTime;
+				aiVector3D aiValue = scene->mAnimations[i]->mChannels[j]->mScalingKeys[k].mValue;
+				vec3 value(aiValue.x, aiValue.y, aiValue.z);
+
+				Vec3AnimKey * scaKey = new Vec3AnimKey(time, value);
+
+				scaleKeys.push_back(scaKey);
+			}
+
+			AnimNode * animNode = new AnimNode(animNodeName, positionKeys, rotationKeys, scaleKeys);
+			animNodes.push_back(animNode);
 		}
+
+		Animation animation = Animation(name, startTime, endTime, animNodes);
 
 		animationModel->AddAnimation(animation);
 	}

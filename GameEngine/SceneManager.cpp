@@ -3,21 +3,50 @@
 #include "glm/glm.hpp"
 #include "ComponentPosition.h"
 #include "CameraManager.h"
+#include "AudioManager.h"
+#include "InputManager.h"
+#include "LightManager.h"
+#include "LoggingManager.h"
+#include "PhysicsManager.h"
+#include "ScriptingManager.h"
+#include "SystemManager.h"
+#include "ResourceManager.h"
 #include <iostream>
 
 
 SceneManager::~SceneManager()
 {
-	if (swap.joinable())
+	while (!swap.joinable())
 	{
-		try {
-			swap.join();
-		}
-		catch (...)
-		{
-
-		}
 	}
+
+	try {
+		swap.join();
+	}
+	catch (...)
+	{
+
+	}
+
+	EntityManager * entityManager = EntityManager::Instance();
+	CameraManager * cameraManager = CameraManager::Instance();
+	AudioManager * audioManager = AudioManager::Instance();
+	InputManager * inputManager = InputManager::Instance();
+	LightManager * lightManager = LightManager::Instance();
+	PhysicsManager * physicsManager = PhysicsManager::Instance();
+	ScriptingManager * scriptingManager = ScriptingManager::Instance();
+	SystemManager * systemManager = SystemManager::Instance();
+
+	//ResourceManager::ClearResources(); //TODO: Implement
+
+	delete entityManager;
+	delete cameraManager;
+	delete audioManager;
+	delete inputManager;
+	delete lightManager;
+	delete physicsManager;
+	delete scriptingManager;
+	delete systemManager;
 	delete currentScene;
 }
 
