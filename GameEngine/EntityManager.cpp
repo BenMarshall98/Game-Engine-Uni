@@ -135,11 +135,12 @@ vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType
 	return entities;
 }
 
-void EntityManager::Update(SystemManager & systemManager)
+void EntityManager::Update()
 {
+	SystemManager * systemManager = SystemManager::Instance();
 	for (int i = 0; i < ToDeleteList.size(); i++)
 	{
-		systemManager.RemoveEntityFromSystems(ToDeleteList[i]);
+		systemManager->RemoveEntityFromSystems(ToDeleteList[i]);
 		RemoveEntity(ToDeleteList[i]);
 	}
 

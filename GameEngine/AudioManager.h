@@ -59,6 +59,7 @@ public:
 	void * GenerateBuffer(string fileName);
 	void * GenerateSource(void * buffer);
 
+	void DeleteBuffer(void * buffer);
 	void DeleteSource(void * source);
 	void UpdateComponentSound(void * source, const vec3 & position, AudioPlayback playback);
 

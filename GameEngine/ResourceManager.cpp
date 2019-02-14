@@ -171,3 +171,60 @@ void * ResourceManager::GetAudio(const string & audio)
 	}
 	return 0;
 }
+
+void ResourceManager::ClearResources()
+{
+	usedModels.clear();
+	usedShaders.clear();
+	usedTextures.clear();
+	usedAudios.clear();
+
+	{
+		map<string, iModel *>::iterator it;
+
+		for (it = modelList.begin(); it != modelList.end(); it++)
+		{
+			delete it->second;
+			it->second = nullptr;
+		}
+
+		modelList.clear();
+	}
+
+	{
+		map<string, Texture *>::iterator it;
+
+		for (it = textureList.begin(); it != textureList.end(); it++)
+		{
+			delete it->second;
+			it->second = nullptr;
+		}
+
+		textureList.clear();
+	}
+
+	{
+		map<string, Shader *>::iterator it;
+
+		for (it = shaderList.begin(); it != shaderList.end(); it++)
+		{
+			delete it->second;
+			it->second = nullptr;
+		}
+
+		shaderList.clear();
+	}
+
+	{
+		map<string, void *>::iterator it;
+
+		for (it = audioBufferList.begin(); it != audioBufferList.end(); it++)
+		{
+			AudioManager::Instance()->DeleteBuffer(it->second);
+			delete it->second;
+			it->second = nullptr;
+		}
+
+		audioBufferList.clear();
+	}
+}

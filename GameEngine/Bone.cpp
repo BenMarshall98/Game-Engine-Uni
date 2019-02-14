@@ -102,7 +102,7 @@ void Bone::UpdateKeyframeTransform(float time)
 
 	mat = transpose(mat);
 
-	node->mTransformation = AnimatedModel::GLMMat4ToAi(mat);
+	node->SetTransform(mat);
 }
 
 mat4 Bone::GetParentTransforms()
@@ -113,7 +113,7 @@ mat4 Bone::GetParentTransforms()
 
 	while (parent != nullptr)
 	{
-		mat4 tmp = AnimatedModel::AiToGLMMat4(parent->node->mTransformation);
+		mat4 tmp = parent->GetNode()->GetTransform();
 		mats.push_back(tmp);
 
 		parent = parent->parentBone;

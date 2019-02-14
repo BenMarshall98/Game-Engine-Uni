@@ -1,4 +1,4 @@
 #include "PhysicsManager.h"
 
 
-PhysicsManager * PhysicsManager::instance = nullptr
+PhysicsManager * PhysicsManager::instance = nullptr;

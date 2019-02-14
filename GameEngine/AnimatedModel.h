@@ -17,10 +17,10 @@ class AnimatedModel : public iModel
 {
 private:
 	vector<Mesh *> meshes;
-	vector<Animation> animations;
+	vector<Animation *> animations;
 	vector<Bone *> bones;
 	vector<mat4> boneMats;
-	vector<aiNode *> nodes;
+	vector<Node *> nodes;
 	mat4 globalInverse;
 
 	float time = 0;
@@ -39,13 +39,14 @@ public:
 		bones = pBones;
 	}
 
-	inline void SetNodes(vector<aiNode *> pNodes)
-	{
-		nodes = pNodes;
-	}
 	inline void SetGlobalInverse(mat4 pGlobalInverse)
 	{
 		globalInverse = pGlobalInverse;
+	}
+
+	inline void SetNodes(vector<Node *> pNodes)
+	{
+		nodes = pNodes;
 	}
 
 	inline Mesh * GetMesh(int loc)
@@ -53,12 +54,12 @@ public:
 		return meshes.at(loc);
 	}
 
-	inline void AddAnimation(Animation animation)
+	inline void AddAnimation(Animation * animation)
 	{
 		animations.push_back(animation);
 	}
 
-	inline Animation GetFirstAnimation()
+	inline Animation * GetFirstAnimation()
 	{
 		return animations.at(0);
 	}

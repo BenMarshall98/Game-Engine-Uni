@@ -185,3 +185,9 @@ void AudioManager::DeleteSource(void * pSource)
 	mSource->stop();
 	mSource->drop();
 }
+
+void AudioManager::DeleteBuffer(void * pBuffer)
+{
+	ISoundSource * mBuffer = (ISoundSource *)pBuffer;
+	mBuffer->drop();
+}

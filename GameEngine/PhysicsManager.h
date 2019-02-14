@@ -30,6 +30,12 @@ public:
 		return instance;
 	}
 
+	inline void SetPhysicsEngine(BulletPhysicsEngine * physicsEngine)
+	{
+		delete engine;
+		engine = physicsEngine;
+	}
+
 	PhysicsManager& operator= (const PhysicsManager&) = delete;
 	PhysicsManager(PhysicsManager&) = delete;
 

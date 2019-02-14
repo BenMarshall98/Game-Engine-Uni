@@ -49,7 +49,9 @@ Mesh::Mesh(vector<vec3> pVertex, vector<vec3> pNormal, vector<vec2> pTextures, v
 
 Mesh::~Mesh()
 {
-
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(5, VBO);
+	glDeleteBuffers(1, &EBO);
 }
 
 void Mesh::Render()

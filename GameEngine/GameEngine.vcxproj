@@ -170,6 +170,7 @@
     <ClCompile Include="LoggingManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="LoggingManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PhysicsSystem.h" />

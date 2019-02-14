@@ -17,11 +17,11 @@ private:
 	SystemManager();
 
 public:
-	static inline  SystemManager * Instance()
+	static inline SystemManager * Instance()
 	{
 		if (instance == nullptr)
 		{
-			instance == new SystemManager();
+			instance = new SystemManager();
 		}
 
 		return instance;

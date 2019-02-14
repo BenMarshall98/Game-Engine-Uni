@@ -35,4 +35,6 @@ class ResourceManager
 		static Shader * GetShader(const string & shader);
 		static Texture * GetTexture(const string & texture);
 		static void * GetAudio(const string & audio);
+
+		static void ClearResources();
 };

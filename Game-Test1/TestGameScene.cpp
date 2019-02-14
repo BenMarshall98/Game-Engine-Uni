@@ -30,8 +30,9 @@
 #include "LevelLoader.h"
 #include <iostream>
 
-TestGameScene::TestGameScene() : mPhysicsManager(nullptr)
+TestGameScene::TestGameScene() : mPhysicsManager(nullptr), mSystemManager(SystemManager::Instance())
 {
+	int i = 0;
 }
 
 void TestGameScene::Load()
@@ -55,28 +56,29 @@ void TestGameScene::Load()
 	}
 	LevelLoader::LoadLevelJSON(levelName);
 
-	mPhysicsManager = new PhysicsManager(new BulletPhysicsEngine());
+	mPhysicsManager = PhysicsManager::Instance();
+	mPhysicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
 
 	vec3 topLeftCoord = vec3(-15, 15, 15);
 	vec3 bottomRightCoord = vec3(15, -15, -15);
 
 	RiggedAnimationSystem * const rigged = new RiggedAnimationSystem();
-	mSystemManager.AddRenderSystem(rigged);
+	mSystemManager->AddRenderSystem(rigged);
 
 	ShadowSystem * const shadow = new ShadowSystem(topLeftCoord, bottomRightCoord);
-	mSystemManager.AddRenderSystem(shadow);
+	mSystemManager->AddRenderSystem(shadow);
 
 	RenderSystem * const render = new RenderSystem();
-	mSystemManager.AddRenderSystem(render);
+	mSystemManager->AddRenderSystem(render);
 
 	InputSystem * const input = new InputSystem();
-	mSystemManager.AddUpdateSystem(input);
+	mSystemManager->AddUpdateSystem(input);
 
-	PhysicsSystem * const physics = new PhysicsSystem(*mPhysicsManager);
-	mSystemManager.AddUpdateSystem(physics);
+	PhysicsSystem * const physics = new PhysicsSystem();
+	mSystemManager->AddUpdateSystem(physics);
 
 	AudioSystem * const audio = new AudioSystem();
-	mSystemManager.AddUpdateSystem(audio);
+	mSystemManager->AddUpdateSystem(audio);
 }
 
 void TestGameScene::Render()
@@ -86,14 +88,14 @@ void TestGameScene::Render()
 	LightManager * lightManager = LightManager::Instance();
 	lightManager->Update(CameraManager::Instance()->GetCamera()->GetPosition());
 
-	mSystemManager.Render();
+	mSystemManager->Render();
 
-	EntityManager::Instance()->Update(mSystemManager);
+	EntityManager::Instance()->Update();
 }
 
 void TestGameScene::Update()
 {
-	mSystemManager.Update();
+	mSystemManager->Update();
 	
 	CameraManager::Instance()->Update();
 	AudioManager::Instance()->Update();
@@ -109,5 +111,4 @@ void TestGameScene::Resize(const int width, const int height)
 
 TestGameScene::~TestGameScene()
 {
-	delete mPhysicsManager;
 }

@@ -68,11 +68,6 @@ mat4 AnimatedModel::AiToGLMMat4(aiMatrix4x4& mat)
 	return tmp;
 }
 
-AnimatedModel::~AnimatedModel()
-{
-
-}
-
 Bone * AnimatedModel::FindBone(string name)
 {
 	for (int i = 0; i < bones.size(); i++)
@@ -103,8 +98,7 @@ void AnimatedModel::UpdateBoneMatsVector()
 		}
 		else
 		{
-			aiMatrix4x4 preTransform = bones.at(i)->GetNode()->mTransformation;
-			mat4 transform = AiToGLMMat4(preTransform);
+			mat4 transform = bones.at(i)->GetNode()->GetTransform();
 			mat4 tmp = mat4(1.0);
 			tmp *= bones.at(i)->GetOffsetMatrix();
 			tmp *= transform;
@@ -120,16 +114,16 @@ void AnimatedModel::Update()
 {
 	UpdateBoneMatsVector();
 
-	Animation animation = GetFirstAnimation();
+	Animation * animation = GetFirstAnimation();
 
-	if (time < animation.GetStartTime())
+	if (time < animation->GetStartTime())
 	{
-		time = animation.GetStartTime();
+		time = animation->GetStartTime();
 	}
 
-	if (time > animation.GetEndTime())
+	if (time > animation->GetEndTime())
 	{
-		time = animation.GetStartTime();
+		time = animation->GetStartTime();
 	}
 
 	for (int i = 0; i < bones.size(); i++)
@@ -138,4 +132,39 @@ void AnimatedModel::Update()
 	}
 
 	time += (1.0 / 60.0);
+}
+
+AnimatedModel::~AnimatedModel()
+{
+	for (int i = 0; i < meshes.size(); i++)
+	{
+		delete meshes.at(i);
+		meshes.at(i) = nullptr;
+	}
+
+	meshes.clear();
+
+	for (int i = 0; i < animations.size(); i++)
+	{
+		delete animations.at(i);
+		animations.at(i) = nullptr;
+	}
+
+	animations.clear();
+
+	for (int i = 0; i < bones.size(); i++)
+	{
+		delete bones.at(i);
+		bones.at(i) = nullptr;
+	}
+
+	bones.clear();
+
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		delete nodes.at(i);
+		nodes.at(i) = nullptr;
+	}
+
+	nodes.clear();
 }

@@ -237,6 +237,9 @@
     <ClCompile Include="Bone.cpp">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -415,6 +418,9 @@
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClInclude>
     <ClInclude Include="Bone.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClInclude>
   </ItemGroup>

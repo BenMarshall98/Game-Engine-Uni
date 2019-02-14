@@ -9,7 +9,7 @@
 using namespace glm;
 
 
-PhysicsSystem::PhysicsSystem(PhysicsManager & pPhysicsManager) : physicsManager(pPhysicsManager)
+PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance())
 {
 	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_PHYSICS };
@@ -21,7 +21,7 @@ void PhysicsSystem::RemoveEntity(Entity * pEntity)
 {
 	iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, ComponentType::COMPONENT_PHYSICS);
 	void * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
-	physicsManager.RemoveRigidBody(rigidBody);
+	physicsManager->RemoveRigidBody(rigidBody);
 
 	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
@@ -46,14 +46,14 @@ void PhysicsSystem::Action(void)
 		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
 		vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
 
-		void * rigidBody = physicsManager.AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
+		void * rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
 
 		((ComponentPhysics *)componentPhysics)->SetUpdateRigidBody(rigidBody);
 	}
 
 	newEntities.clear();
 
-	physicsManager.Update(1 / 60.0);
+	physicsManager->Update(1 / 60.0);
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
@@ -68,20 +68,20 @@ void PhysicsSystem::Action(void)
 void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
 {
 	void * rigidBody = physics->GetUpdateRigidBody();
-	vec3 positionVec = physicsManager.GetPositionOfRigidBody(rigidBody);
-	quat directionQuat = physicsManager.GetDirectionOfRigidBody(rigidBody);
+	vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
+	quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
 
 	vec3 zero = vec3(0);
 	vec3 velocity = physics->GetUpdateVelocity();
-	physicsManager.ApplyVelocity(rigidBody, velocity);
+	physicsManager->ApplyVelocity(rigidBody, velocity);
 	physics->SetUpdateVelocity(zero);
 
 	vec3 impulse = physics->GetUpdateImpulse();
-	physicsManager.ApplyImpulse(rigidBody, impulse);
+	physicsManager->ApplyImpulse(rigidBody, impulse);
 	physics->SetUpdateImpulse(zero);
 
 	vec3 rotation = physics->GetUpdateRotation();
-	physicsManager.ApplyRotation(rigidBody, rotation);
+	physicsManager->ApplyRotation(rigidBody, rotation);
 	physics->SetUpdateRotation(zero);
 
 	position->SetUpdatePosition(positionVec);

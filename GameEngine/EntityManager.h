@@ -45,7 +45,7 @@ public:
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
 	vector<Entity *> GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
 
-	void Update(SystemManager & systemManager);
+	void Update();
 	void Swap();
 
 	~EntityManager() {};

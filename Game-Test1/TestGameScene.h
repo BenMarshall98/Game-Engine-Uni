@@ -14,7 +14,7 @@ using namespace std;
 class TestGameScene : public iScene
 {
 private:
-	SystemManager mSystemManager;
+	SystemManager * mSystemManager;
 	PhysicsManager * mPhysicsManager;
 
 public:

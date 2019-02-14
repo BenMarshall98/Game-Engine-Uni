@@ -187,7 +187,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 
 	AnimatedModel * animatedModel = new AnimatedModel();
 
-	vector<aiNode*> nodes;
+	vector<Node *> nodes;
 
 	vector<Bone *> bones;
 
@@ -198,7 +198,7 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 
 	ProcessNode(scene->mRootNode, scene, animatedModel);
 
-	Animation firstAnimation = animatedModel->GetFirstAnimation();
+	Animation * firstAnimation = animatedModel->GetFirstAnimation();
 
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
@@ -206,8 +206,8 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 		{
 			string boneName = scene->mMeshes[i]->mBones[j]->mName.data;
 			mat4 boneMat = AnimatedModel::AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix);
-			aiNode * node = FindAINode(nodes, boneName);
-			AnimNode * animNode = FindAiNodeAnim(firstAnimation.GetAnimNodes(), boneName);
+			Node * node = FindNode(nodes, boneName);
+			AnimNode * animNode = FindAiNodeAnim(firstAnimation->GetAnimNodes(), boneName);
 
 			Bone * bone = new Bone(boneName, node, animNode, boneMat);
 			bones.push_back(bone);
@@ -217,7 +217,15 @@ AnimatedModel * ModelLoader::LoadDAE(const string & fileName)
 	for (int i = 0; i < bones.size(); i++)
 	{
 		string boneName = bones.at(i)->GetName();
-		string parentName = FindAINode(nodes, boneName)->mParent->mName.data;
+
+		Node * parent = FindNode(nodes, boneName)->GetParent();
+
+		string parentName = "";
+
+		if (parent)
+		{
+			parentName = parent->GetName();
+		}
 
 		Bone * parentBone = FindBone(bones, parentName);
 
@@ -324,14 +332,18 @@ Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * s
 }
 
 
-void ModelLoader::RecursiveNodeProcess(vector<aiNode*> & nodes, aiNode * node)
+void ModelLoader::RecursiveNodeProcess(vector<Node*> & nodes, aiNode * pNode)
 {
-	aiNode * mNode = new aiNode(*node);
-	nodes.push_back(mNode);
+	string name = pNode->mName.data;
+	mat4 trans = AnimatedModel::AiToGLMMat4(pNode->mTransformation);
+	Node * node = new Node(name, trans);
 
-	for (int i = 0; i < node->mNumChildren; i++)
+	nodes.push_back(node);
+
+	for (int i = 0; i < pNode->mNumChildren; i++)
 	{
-		RecursiveNodeProcess(nodes, node->mChildren[i]);
+		RecursiveNodeProcess(nodes, pNode->mChildren[i]);
+		nodes.at(nodes.size() - 1)->SetParent(node);
 	}
 }
 
@@ -394,7 +406,7 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene 
 			animNodes.push_back(animNode);
 		}
 
-		Animation animation = Animation(name, startTime, endTime, animNodes);
+		Animation * animation = new Animation(name, startTime, endTime, animNodes);
 
 		animationModel->AddAnimation(animation);
 	}

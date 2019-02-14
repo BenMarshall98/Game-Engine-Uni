@@ -2,6 +2,7 @@
 
 #include "assimp/scene.h"
 #include "AnimNode.h"
+#include "Node.h"
 #include "glm/glm.hpp"
 #include <string>
 
@@ -12,13 +13,13 @@ class Bone
 {
 private:
 	string name;
-	aiNode * node;
+	Node * node;
 	AnimNode * animNode;
 	Bone * parentBone;
 	mat4 offsetMatrix;
 
 public:
-	Bone(string pName, aiNode * pNode, AnimNode * pAnimNode, mat4 pOffsetMatrix) :
+	Bone(string pName, Node * pNode, AnimNode * pAnimNode, mat4 pOffsetMatrix) :
 		name(pName), node(pNode), animNode(pAnimNode), offsetMatrix(pOffsetMatrix), parentBone(nullptr)
 	{
 
@@ -41,7 +42,7 @@ public:
 		return offsetMatrix;
 	}
 
-	inline aiNode * GetNode()
+	inline Node * GetNode()
 	{
 		return node;
 	}

@@ -19,10 +19,10 @@ private:
 	vector<Entity *> EntityList;
 	vector<Entity *> newEntities;
 	EntityManager * entityManager;
-	PhysicsManager & physicsManager;
+	PhysicsManager * physicsManager;
 
 public:
-	explicit PhysicsSystem(PhysicsManager & pPhysicsManager);
+	explicit PhysicsSystem();
 
 	PhysicsSystem& operator=(const PhysicsSystem&) = delete;
 	PhysicsSystem(PhysicsSystem&) = delete;

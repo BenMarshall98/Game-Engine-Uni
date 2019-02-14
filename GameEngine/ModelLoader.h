@@ -36,7 +36,7 @@ private:
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
 	static Mesh * ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);
 
-	static void RecursiveNodeProcess(vector<aiNode*> & nodes, aiNode * node);
+	static void RecursiveNodeProcess(vector<Node*> & nodes, aiNode * node);
 	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);
 
 	static inline Bone * FindBone(vector<Bone *> bones, string name)
@@ -52,11 +52,11 @@ private:
 		return nullptr;
 	}
 
-	static inline aiNode* FindAINode(vector<aiNode*> nodes, string name)
+	static inline Node* FindNode(vector<Node*> nodes, string name)
 	{
 		for (int i = 0; i < nodes.size(); i++)
 		{
-			if (nodes.at(i)->mName.data == name)
+			if (nodes.at(i)->GetName() == name)
 			{
 				return nodes.at(i);
 			}

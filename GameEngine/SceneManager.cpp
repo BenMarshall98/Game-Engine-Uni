@@ -16,28 +16,27 @@
 
 SceneManager::~SceneManager()
 {
-	while (!swap.joinable())
+	if (swap.joinable())
 	{
+		try {
+			swap.join();
+		}
+		catch (...)
+		{
+
+		}
 	}
 
-	try {
-		swap.join();
-	}
-	catch (...)
-	{
-
-	}
-
-	EntityManager * entityManager = EntityManager::Instance();
+	ResourceManager::ClearResources();
+	/*EntityManager * entityManager = EntityManager::Instance();
+	SystemManager * systemManager = SystemManager::Instance();
 	CameraManager * cameraManager = CameraManager::Instance();
 	AudioManager * audioManager = AudioManager::Instance();
 	InputManager * inputManager = InputManager::Instance();
 	LightManager * lightManager = LightManager::Instance();
 	PhysicsManager * physicsManager = PhysicsManager::Instance();
 	ScriptingManager * scriptingManager = ScriptingManager::Instance();
-	SystemManager * systemManager = SystemManager::Instance();
-
-	//ResourceManager::ClearResources(); //TODO: Implement
+	
 
 	delete entityManager;
 	delete cameraManager;
@@ -47,7 +46,7 @@ SceneManager::~SceneManager()
 	delete physicsManager;
 	delete scriptingManager;
 	delete systemManager;
-	delete currentScene;
+	delete currentScene;*/
 }
 
 void SceneManager::Run()
