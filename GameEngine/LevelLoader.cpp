@@ -10,6 +10,7 @@
 #include "ComponentAudio.h"
 #include "ComponentNormalTexture.h"
 #include "ComponentRiggedAnimation.h"
+#include "ComponentArtificalIntelligence.h"
 #include "ComponentShadowShader.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
@@ -456,6 +457,40 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 			float angle = (*it)["Angle"].GetFloat();
 			entityManager->AddComponentToEntity(entity, new ComponentDirection(direction, angle));
+		}
+		else if (component == "ArtificialIntelligence")
+		{
+			PathFollowing * pathfollower = nullptr;
+
+			if ((*it).HasMember("PathFollowing"))
+			{
+				vector<PathNode *> pathNodes;
+				Value::ConstValueIterator path;
+
+				for (path = (*it)["PathFollowing"].Begin(); path != (*it)["PathFollowing"].End(); path++)
+				{
+					vec3 position = vec3(0);
+
+					const Value& pos = (*path)["Position"];
+
+					for (SizeType i = 0; i < pos.Size(); i++)
+					{
+						position[i] = pos[i].GetFloat();
+					}
+
+					float radius = (*path)["Radius"].GetFloat();
+
+					PathNode * node = new PathNode();
+					node->position = position;
+					node->radius = radius;
+
+					pathNodes.push_back(node);
+				}
+
+				pathfollower = new PathFollowing(pathNodes);
+			}
+
+			entityManager->AddComponentToEntity(entity, new ComponentArtificalIntelligence(pathfollower));
 		}
 		else if (component == "Audio")
 		{

@@ -27,6 +27,11 @@
     },
     {
       "Type": "Model",
+      "Name": "AICube",
+      "Model": "Models/cube.obj"
+    },
+    {
+      "Type": "Model",
       "Name": "Floor",
       "Model": "Models/Floor.obj"
     },
@@ -198,6 +203,7 @@
             }
           ]
         }
+
       ]
     },
     {
@@ -207,6 +213,72 @@
         {
           "Component": "Position",
           "Position": [ 0, 0, 0 ]
+        }
+      ]
+    },
+    {
+      "Name": "AICube",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ 5, 10, 0 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ]
+        },
+        {
+          "Component": "ArtificialIntelligence",
+          "PathFollowing": [
+            {
+              "Position": [ -5, 0.5, -5 ],
+              "Radius": 2.5
+            },
+            {
+              "Position": [ -5, 0.5, 5 ],
+              "Radius": 2.5
+            },
+            {
+              "Position": [ 5, 0.5, 5 ],
+              "Radius": 2.5
+            },
+            {
+              "Position": [ 5, 0.5, -5 ],
+              "Radius": 2.5
+            }
+          ]
         }
       ]
     }
@@ -221,7 +293,7 @@
       },
       "Camera": {
         "Type": "FollowPlayer",
-        "Follow": "Floor",
+        "Follow": "AICube",
         "DefaultDistance": 10,
         "MinDistance": 2,
         "MaxDistance": 10,

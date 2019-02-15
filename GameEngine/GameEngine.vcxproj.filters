@@ -16,9 +16,6 @@
     <Filter Include="Logging Manager">
       <UniqueIdentifier>{567f75f0-c8b0-46a5-9ae1-124e6632364f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OpenGL">
-      <UniqueIdentifier>{f7eb6cce-748d-4a97-8227-894cfdd6de0e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Physics Manager">
       <UniqueIdentifier>{ed7564d2-a891-422f-b9b4-adedfe974c89}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,9 @@
     </Filter>
     <Filter Include="Utility\Models\RiggedModel">
       <UniqueIdentifier>{7e7901dd-31f3-4180-8325-5f119ba9eece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Artificial Intelligence">
+      <UniqueIdentifier>{110348f9-8e20-45bf-a6d3-58ad3c73b0b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="ComponentTexture.cpp">
       <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGL.cpp">
-      <Filter>OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Input Manager</Filter>
@@ -240,6 +237,15 @@
     <ClCompile Include="Node.cpp">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentArtificalIntelligence.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFollowing.cpp">
+      <Filter>Artificial Intelligence</Filter>
+    </ClCompile>
+    <ClCompile Include="ArtificialIntelligenceSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -260,9 +266,6 @@
     </ClInclude>
     <ClInclude Include="ModelLoader.h">
       <Filter>Utility\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
       <Filter>Entity Manager</Filter>
@@ -302,9 +305,6 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL.h">
-      <Filter>OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Input Manager</Filter>
@@ -422,6 +422,15 @@
     </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentArtificalIntelligence.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFollowing.h">
+      <Filter>Artificial Intelligence</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtificialIntelligenceSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

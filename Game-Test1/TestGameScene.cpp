@@ -24,6 +24,7 @@
 #include "AudioManager.h"
 #include "AudioSystem.h"
 #include "RiggedAnimationSystem.h"
+#include "ArtificialIntelligenceSystem.h"
 
 #include "BulletPhysicsEngine.h"
 #include "PhysicsSystem.h"
@@ -73,6 +74,9 @@ void TestGameScene::Load()
 
 	InputSystem * const input = new InputSystem();
 	mSystemManager->AddUpdateSystem(input);
+
+	ArtificialIntelligenceSystem * const intelligence = new ArtificialIntelligenceSystem();
+	mSystemManager->AddUpdateSystem(intelligence);
 
 	PhysicsSystem * const physics = new PhysicsSystem();
 	mSystemManager->AddUpdateSystem(physics);

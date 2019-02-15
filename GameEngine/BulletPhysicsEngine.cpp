@@ -73,6 +73,10 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat
 	{
 		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	}
+	else
+	{
+		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+	}
 
 	if (!collisionResponse)
 	{
