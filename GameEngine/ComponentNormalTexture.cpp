@@ -2,7 +2,6 @@
 
 ComponentNormalTexture::~ComponentNormalTexture()
 {
-	delete texture;
 }
 
 ComponentType ComponentNormalTexture::GetComponentName()

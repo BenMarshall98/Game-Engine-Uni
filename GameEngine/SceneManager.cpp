@@ -28,25 +28,28 @@ SceneManager::~SceneManager()
 	}
 
 	ResourceManager::ClearResources();
-	/*EntityManager * entityManager = EntityManager::Instance();
-	SystemManager * systemManager = SystemManager::Instance();
-	CameraManager * cameraManager = CameraManager::Instance();
-	AudioManager * audioManager = AudioManager::Instance();
-	InputManager * inputManager = InputManager::Instance();
-	LightManager * lightManager = LightManager::Instance();
-	PhysicsManager * physicsManager = PhysicsManager::Instance();
-	ScriptingManager * scriptingManager = ScriptingManager::Instance();
+	EntityManager * entityManager = EntityManager::Instance();
+	//SystemManager * systemManager = SystemManager::Instance();
+	//CameraManager * cameraManager = CameraManager::Instance();
+	//AudioManager * audioManager = AudioManager::Instance();
+	//InputManager * inputManager = InputManager::Instance();
+	//LightManager * lightManager = LightManager::Instance();
+	//PhysicsManager * physicsManager = PhysicsManager::Instance();
+	//ScriptingManager * scriptingManager = ScriptingManager::Instance();
 	
 
 	delete entityManager;
-	delete cameraManager;
-	delete audioManager;
-	delete inputManager;
-	delete lightManager;
-	delete physicsManager;
-	delete scriptingManager;
-	delete systemManager;
-	delete currentScene;*/
+	//delete cameraManager;
+	//delete audioManager;
+	//delete inputManager;
+	//delete lightManager;
+	//delete physicsManager;
+	//delete scriptingManager;
+	//delete systemManager;
+
+	delete newScene;
+	delete currentScene;
+	delete currentWindow;
 }
 
 void SceneManager::Run()
@@ -115,6 +118,7 @@ void SceneManager::FinishSwapScene()
 	delete currentScene;
 
 	currentScene = newScene;
+	newScene = nullptr;
 	currentScene->Load();
 
 	if (LoggingManager::HasSevereMessage())

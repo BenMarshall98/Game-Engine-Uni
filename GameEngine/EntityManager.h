@@ -48,6 +48,6 @@ public:
 	void Update();
 	void Swap();
 
-	~EntityManager() {};
+	~EntityManager();
 };
 

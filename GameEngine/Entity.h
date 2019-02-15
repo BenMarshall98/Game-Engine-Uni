@@ -19,6 +19,9 @@ public:
 		nextID++;
 	}
 
+	Entity& operator= (const Entity&) = delete;
+	Entity(Entity&) = delete;
+
 	~Entity()
 	{
 	}

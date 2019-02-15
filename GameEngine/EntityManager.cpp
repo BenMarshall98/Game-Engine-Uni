@@ -162,4 +162,33 @@ void EntityManager::Swap()
 	}
 }
 
+EntityManager::~EntityManager()
+{
+	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
+	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
+	{
+		map<Entity *, iComponent *> & entities = it->second;
+		map<Entity *, iComponent *>::iterator component;
+
+		for (component = entities.begin(); component != entities.end(); ++component)
+		{
+			delete component->second;
+		}
+
+		entities.clear();
+	}
+
+	ComponentList.clear();
+
+	for (int i = 0; i < EntityList.size(); i++)
+	{
+		delete EntityList.at(i);
+		EntityList.at(i) = nullptr;
+	}
+
+	EntityList.clear();
+
+	instance = nullptr;
+}
+
 EntityManager * EntityManager::instance = nullptr;
