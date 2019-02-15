@@ -2,7 +2,7 @@
 
 
 
-Projection::Projection(ProjectionType pProjection, float pWidth, float pHeight, float pNear, float pFar) : projectionType(pProjection), mWidth(pWidth), mHeight(pHeight), mNear(pNear), mFar(pFar)
+Projection::Projection(const ProjectionType pProjection, const float pWidth, const float pHeight, const float pNear, const float pFar) : projectionType(pProjection), mWidth(pWidth), mHeight(pHeight), mNear(pNear), mFar(pFar)
 {
 	Update();
 }

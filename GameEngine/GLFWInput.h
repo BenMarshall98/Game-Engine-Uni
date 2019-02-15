@@ -11,13 +11,13 @@ private:
 	bool keyboardAllowed = true;
 	bool gamepadAllowed = true;
 public:
-	explicit GLFWInput(GLFWwindow * pGameWindow) : gameWindow(pGameWindow) {}
+	explicit GLFWInput(GLFWwindow * const pGameWindow) : gameWindow(pGameWindow) {}
 
 	GLFWInput& operator= (const GLFWInput&) = delete;
 	GLFWInput(GLFWInput&) = delete;
 
-	float KeyboardInput(int key);
-	float MouseInput(int key);
+	float KeyboardInput(int key) const;
+	float MouseInput(int key) const;
 	float GamePadInput(int key) const;
 
 	void AllowMouseInput(bool allowMouse);

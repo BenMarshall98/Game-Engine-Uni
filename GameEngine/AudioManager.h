@@ -8,6 +8,8 @@
 #include <vector>
 #include "Camera.h"
 #include "Entity.h"
+#include "LocationSound.h"
+#include "EntitySound.h"
 
 using namespace irrklang;
 
@@ -19,26 +21,14 @@ enum class AudioPlayback
 	NONE
 };
 
-struct LocationSound
-{
-	void * source;
-	vec3 location;
-};
-
-struct EntitySound
-{
-	void * source;
-	Entity * entity;
-};
-
 class AudioManager
 {
 private:
-	ISoundEngine * engine;
-
 	vector<void *> cameraSounds;
 	vector<LocationSound *> locationSounds;
 	vector<EntitySound *> entitySounds;
+
+	ISoundEngine * engine;
 
 	static AudioManager * instance;
 	
@@ -54,18 +44,21 @@ public:
 		return instance;
 	}
 
+	AudioManager(const AudioManager&) = delete;
+	AudioManager& operator=(const AudioManager&) = delete;
+
 	void Update();
 
-	void * GenerateBuffer(string fileName);
+	void * GenerateBuffer(const string & fileName);
 	void * GenerateSource(void * buffer);
 
-	void DeleteBuffer(void * buffer);
-	void DeleteSource(void * source);
-	void UpdateComponentSound(void * source, const vec3 & position, AudioPlayback playback);
+	void DeleteBuffer(void * const buffer) const;
+	void DeleteSource(void * const source) const;
+	void UpdateComponentSound(void * const source, const vec3 & position, AudioPlayback playback) const;
 
-	void PlayAudio(string & sound);
-	void PlayAudioAtLocation(string & sound, vec3 & location);
-	void PlayAudioAtEntityLocation(string & sound, Entity * entity);
+	void PlayAudio(const string & sound);
+	void PlayAudioAtLocation(const string & sound, const vec3 & location);
+	void PlayAudioAtEntityLocation(const string & sound, Entity * const entity);
 	~AudioManager();
 };
 

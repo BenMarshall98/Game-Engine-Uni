@@ -5,12 +5,13 @@
 class FollowPlaneCamera : public Camera
 {
 private:
+	vec3 lastPosition;
 	Entity * mEntity;
 	float mDistanceMin;
 	float mDistanceMax;
 	float mDistanceCurrent;
 	float mInterpolateRate;
-	vec3 lastPosition;
+	
 
 public:
 	FollowPlaneCamera(Entity * pEntity, float pDistanceMin, float pDistanceMax, float pDistanceCurrent, float pInterpolateRate);

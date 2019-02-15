@@ -57,7 +57,7 @@ public:
 
 	ComponentType GetComponentName() override;
 
-	static EntityType StringToEnum(string & entityType);
+	static EntityType StringToEnum(const string & entityType);
 
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();

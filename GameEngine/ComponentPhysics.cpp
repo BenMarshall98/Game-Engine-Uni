@@ -36,7 +36,7 @@ void ComponentPhysics::ResolveCollisions()
 {
 	map<Entity *, EntityType>::iterator it;
 
-	const ScriptingManager * scriptingManager = ScriptingManager::Instance();
+	const ScriptingManager * const scriptingManager = ScriptingManager::Instance();
 
 	for (it = unresolvedCollisions.begin(); it != unresolvedCollisions.end(); ++it)
 	{
@@ -54,7 +54,7 @@ void ComponentPhysics::ResolveCollisions()
 	unresolvedCollisions.clear();
 }
 
-EntityType ComponentPhysics::StringToEnum(string & entityName)
+EntityType ComponentPhysics::StringToEnum(const string & entityName)
 {
 	for (int i = 0; i < EntityTypeNames.size(); i++)
 	{

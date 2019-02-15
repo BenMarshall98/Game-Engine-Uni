@@ -19,12 +19,12 @@ GLFWWindow::~GLFWWindow()
 	glfwTerminate();
 }
 
-void GLFWWindow::windowResize(GLFWwindow* const window, const int pWidth, const int pHeight)
+void GLFWWindow::windowResize(GLFWwindow * const window, const int pWidth, const int pHeight)
 {
 	glViewport(0, 0, pWidth, pHeight);
 	height = pHeight;
 	width = pWidth;
-	SceneManager * sceneManager = SceneManager::Instance();
+	SceneManager * const sceneManager = SceneManager::Instance();
 	sceneManager->Resize(pWidth, pHeight);
 };
 
@@ -68,7 +68,7 @@ bool GLFWWindow::IsRunning() const
 	return !glfwWindowShouldClose(gameWindow);
 }
 
-void GLFWWindow::LimitFPS(float FPS) const
+void GLFWWindow::LimitFPS(const float FPS) const
 {
 	double timeLapsed = glfwGetTime();
 
@@ -76,7 +76,7 @@ void GLFWWindow::LimitFPS(float FPS) const
 
 	timeLapsed = glfwGetTime();
 
-	double timeLeft = (1 / FPS) - timeLapsed;
+	const double timeLeft = (1 / FPS) - timeLapsed;
 
 	if (timeLeft > 0)
 	{

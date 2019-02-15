@@ -9,7 +9,7 @@ private:
 	Texture * texture;
 
 public:
-	explicit ComponentNormalTexture(string & textureName) : texture(ResourceManager::GetTexture(textureName))
+	explicit ComponentNormalTexture(const string & textureName) : texture(ResourceManager::GetTexture(textureName))
 	{
 	}
 

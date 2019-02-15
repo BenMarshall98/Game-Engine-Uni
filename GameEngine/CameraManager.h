@@ -30,12 +30,12 @@ public:
 	CameraManager(const CameraManager&) = delete;
 	CameraManager& operator=(const CameraManager&) = delete;
 
-	inline void SetCamera(Camera * pCamera)
+	inline void SetCamera(Camera * const pCamera)
 	{
 		camera = pCamera;
 	}
 
-	inline void SetProjection(Projection * pProjection)
+	inline void SetProjection(Projection * const pProjection)
 	{
 		projection = pProjection;
 	}
@@ -50,15 +50,18 @@ public:
 
 	void Swap()
 	{
-		camera->Swap();
+		if (camera)
+		{
+			camera->Swap();
+		}
 	}
 
-	inline Camera * GetCamera()
+	inline Camera * GetCamera() const
 	{
 		return camera;
 	}
 
-	inline Projection * GetProjection()
+	inline Projection * GetProjection() const
 	{
 		return projection;
 	}

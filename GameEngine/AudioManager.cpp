@@ -18,24 +18,24 @@ AudioManager::~AudioManager()
 	engine->drop();
 }
 
-void * AudioManager::GenerateBuffer(string fileName)
+void * AudioManager::GenerateBuffer(const string & fileName)
 {
-	ISoundSource * buffer = engine->addSoundSourceFromFile(fileName.c_str());
+	ISoundSource * const buffer = engine->addSoundSourceFromFile(fileName.c_str());
 
 	return buffer;
 }
 
-void * AudioManager::GenerateSource(void * pBuffer)
+void * AudioManager::GenerateSource(void * const pBuffer)
 {
-	ISoundSource * mBuffer = (ISoundSource *)(pBuffer);
-	ISound * source = engine->play3D(mBuffer, vec3df(0, 0, 0), false, true, true);
+	ISoundSource * const mBuffer = static_cast<ISoundSource *>(pBuffer);
+	ISound * const source = engine->play3D(mBuffer, vec3df(0, 0, 0), false, true, true);
 
 	return source;
 }
 
-void AudioManager::UpdateComponentSound(void * pSource, const vec3 & position, AudioPlayback playback)
+void AudioManager::UpdateComponentSound(void * const pSource, const vec3 & position, const AudioPlayback playback) const
 {
-	ISound * mSource = (ISound *)(pSource);
+	ISound * const mSource = static_cast<ISound *>(pSource);
 
 	if (!mSource)
 	{
@@ -65,18 +65,18 @@ void AudioManager::UpdateComponentSound(void * pSource, const vec3 & position, A
 
 void AudioManager::Update()
 {
-	Camera * camera = CameraManager::Instance()->GetCamera();
+	Camera * const camera = CameraManager::Instance()->GetCamera();
 
-	vec3 pos = camera->GetPosition();
-	vec3 up = camera->GetUp();
-	vec3 lookAt = camera->GetLookAt();
+	const vec3 pos = camera->GetPosition();
+	const vec3 up = camera->GetUp();
+	const vec3 lookAt = camera->GetLookAt();
 
 	engine->setListenerPosition(vec3df(pos.x, pos.y, pos.z), vec3df(lookAt.x, lookAt.y, lookAt.z),
 		vec3df(0, 0, 0), vec3df(up.x, up.y, up.z));
 
 	for (int i = 0; i < cameraSounds.size(); i++)
 	{
-		ISound * source = (ISound *)(cameraSounds.at(i));
+		ISound * const source = static_cast<ISound *>(cameraSounds.at(i));
 
 		if (source->isFinished())
 		{
@@ -91,7 +91,7 @@ void AudioManager::Update()
 
 	for (int i = 0; i < locationSounds.size(); i++)
 	{
-		ISound * source = (ISound *)(locationSounds.at(i)->source);
+		ISound * const source = static_cast<ISound *>(locationSounds.at(i)->GetSource());
 		
 		if (source->isFinished())
 		{
@@ -105,7 +105,7 @@ void AudioManager::Update()
 
 	for (int i = 0; i < entitySounds.size(); i++)
 	{
-		ISound * source = (ISound *)(entitySounds.at(i)->source);
+		ISound * const source = static_cast<ISound *>(entitySounds.at(i)->GetSource());
 
 		if (source->isFinished())
 		{
@@ -116,78 +116,74 @@ void AudioManager::Update()
 			continue;
 		}
 
-		iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entitySounds.at(i)->entity, ComponentType::COMPONENT_POSITION);
+		iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(entitySounds.at(i)->GetEntity(), ComponentType::COMPONENT_POSITION);
 
-		vec3 entPos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
+		const vec3 entPos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
 		source->setPosition(vec3df(entPos.x, entPos.y, entPos.z));
 	}
 }
 
-void AudioManager::PlayAudio(string & sound)
+void AudioManager::PlayAudio(const string & sound)
 {
-	void * preSource = ResourceManager::GetAudio(sound);
+	void * const preSource = ResourceManager::GetAudio(sound);
 
-	ISound * source = (ISound *)preSource;
+	ISound * const source = static_cast<ISound *>(preSource);
 
 	source->setIsPaused(false);
 
-	Camera * camera = CameraManager::Instance()->GetCamera();
+	Camera * const camera = CameraManager::Instance()->GetCamera();
 
-	vec3 pos = camera->GetPosition();
+	const vec3 pos = camera->GetPosition();
 
 	source->setPosition(vec3df(pos.x, pos.y, pos.z));
 
 	cameraSounds.push_back(source);
 }
 
-void AudioManager::PlayAudioAtLocation(string & sound, vec3 & location)
+void AudioManager::PlayAudioAtLocation(const string & sound, const vec3 & location)
 {
-	void * preSource = ResourceManager::GetAudio(sound);
+	void * const preSource = ResourceManager::GetAudio(sound);
 
-	ISound * source = (ISound *)preSource;
+	ISound * const source = static_cast<ISound *>(preSource);
 
 	source->setIsPaused(false);
 
 	source->setPosition(vec3df(location.x, location.y, location.z));
 
-	LocationSound * locSound = new LocationSound();
-	locSound->location = location;
-	locSound->source = source;
+	LocationSound * const locSound = new LocationSound(source, location);
 
 	locationSounds.push_back(locSound);
 }
 
-void AudioManager::PlayAudioAtEntityLocation(string & sound, Entity * entity)
+void AudioManager::PlayAudioAtEntityLocation(const string & sound, Entity * const entity)
 {
-	void * preSource = ResourceManager::GetAudio(sound);
+	void * const preSource = ResourceManager::GetAudio(sound);
 
-	ISound * source = (ISound *)preSource;
+	ISound * const source = static_cast<ISound *>(preSource);
 	
 	source->setIsPaused(false);
 
-	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
+	iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
 
-	vec3 pos = dynamic_cast<ComponentPosition * >(componentPosition)->GetUpdatePosition();
+	const vec3 pos = dynamic_cast<ComponentPosition * >(componentPosition)->GetUpdatePosition();
 
 	source->setPosition(vec3df(pos.x, pos.y, pos.z));
 
-	EntitySound * entSound = new EntitySound();
-	entSound->entity = entity;
-	entSound->source = source;
+	EntitySound * const entSound = new EntitySound(source, entity);
 	
 	entitySounds.push_back(entSound);
 }
 
-void AudioManager::DeleteSource(void * pSource)
+void AudioManager::DeleteSource(void * const pSource) const
 {
-	ISound * mSource = (ISound *)pSource;
+	ISound * const mSource = static_cast<ISound *>(pSource);
 	mSource->stop();
 	mSource->drop();
 }
 
-void AudioManager::DeleteBuffer(void * pBuffer)
+void AudioManager::DeleteBuffer(void * const pBuffer) const
 {
-	ISoundSource * mBuffer = (ISoundSource *)pBuffer;
+	ISoundSource * const mBuffer = static_cast<ISoundSource *>(pBuffer);
 	mBuffer->drop();
 }

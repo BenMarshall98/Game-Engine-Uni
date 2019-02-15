@@ -15,7 +15,7 @@ private:
 	void * mSource;
 
 public:
-	ComponentAudio(AudioPlayback pPlayback, string audioName);
+	ComponentAudio(const AudioPlayback pPlayback, const string & audioName);
 	~ComponentAudio();
 
 	ComponentAudio& operator=(const ComponentAudio&) = delete;
@@ -25,17 +25,17 @@ public:
 
 	void RenderSwap() override;
 
-	inline AudioPlayback GetUpdateAudioPlayback()
+	inline AudioPlayback GetUpdateAudioPlayback() const
 	{
 		return mPlayback;
 	}
 
-	inline void SetUpdateAudioPlayback(AudioPlayback pPlayback)
+	inline void SetUpdateAudioPlayback(const AudioPlayback pPlayback)
 	{
 		mPlayback = pPlayback;
 	}
 
-	inline void * GetUpdateAudioSource()
+	inline void * GetUpdateAudioSource() const
 	{
 		return mSource;
 	}

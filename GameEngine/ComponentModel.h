@@ -9,7 +9,7 @@ private:
 	iModel * model;
 
 public:
-	explicit ComponentModel(string & modelName) : model(ResourceManager::GetModel(modelName))
+	explicit ComponentModel(const string & modelName) : model(ResourceManager::GetModel(modelName))
 	{
 	}
 
@@ -22,7 +22,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline iModel * GetRenderModel()
+	inline iModel * GetRenderModel() const
 	{
 		return model;
 	}

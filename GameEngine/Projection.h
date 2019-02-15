@@ -30,7 +30,7 @@ public:
 
 	inline const mat4 & GetProjection() const
 	{
-		return projectionMat;
+		return mat4(projectionMat);
 	}
 
 	inline float GetWidth() const
@@ -48,22 +48,22 @@ public:
 		return mFar;
 	}
 
-	inline void SetWidth(float pWidth)
+	inline void SetWidth(const float pWidth)
 	{
 		mWidth = pWidth;
 	}
 
-	inline void SetHeight(float pHeight)
+	inline void SetHeight(const float pHeight)
 	{
 		mHeight = pHeight;
 	}
 
-	inline void SetNear(float pNear)
+	inline void SetNear(const float pNear)
 	{
 		mNear = pNear;
 	}
 
-	inline void SetFar(float pFar)
+	inline void SetFar(const float pFar)
 	{
 		mFar = pFar;
 	}

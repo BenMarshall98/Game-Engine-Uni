@@ -8,7 +8,7 @@ private:
 	PathFollowing * pathFollower;
 
 public:
-	ComponentArtificalIntelligence(PathFollowing * pPathFollower) : pathFollower(pPathFollower) {}
+	explicit ComponentArtificalIntelligence(PathFollowing * const pPathFollower) : pathFollower(pPathFollower) {}
 	~ComponentArtificalIntelligence();
 
 	ComponentArtificalIntelligence& operator=(const ComponentArtificalIntelligence&) = delete;
@@ -17,7 +17,7 @@ public:
 	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
-	inline void ResolveAI(vec3 currentPosition, quat currentDirection, ComponentPhysics * componentPhysics)
+	inline void ResolveAI(const vec3 & currentPosition, const quat & currentDirection, ComponentPhysics * const componentPhysics)
 	{
 		pathFollower->CalculatePath(currentPosition, currentDirection, componentPhysics);
 	}

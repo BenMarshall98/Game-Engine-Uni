@@ -153,6 +153,7 @@
     <ClCompile Include="ComponentTexture.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="EntitySound.cpp" />
     <ClCompile Include="FollowPlaneCamera.cpp" />
     <ClCompile Include="FollowPlayerCamera.cpp" />
     <ClCompile Include="GLFWInput.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="iSystem.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="LocationSound.cpp" />
     <ClCompile Include="LoggingManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
@@ -219,6 +221,7 @@
     <ClInclude Include="ComponentTexture.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="EntitySound.h" />
     <ClInclude Include="FollowPlaneCamera.h" />
     <ClInclude Include="FollowPlayerCamera.h" />
     <ClInclude Include="GLFWInput.h" />
@@ -233,6 +236,7 @@
     <ClInclude Include="iSystem.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="LocationSound.h" />
     <ClInclude Include="LoggingManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
