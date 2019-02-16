@@ -30,12 +30,12 @@
 #include <fstream>
 #include <iostream>
 
-void LevelLoader::CoinHitPlayer(Entity * pEntity)
+void LevelLoader::CoinHitPlayer(Entity * const pEntity)
 {
 	EntityManager::Instance()->AddToDeleteList(pEntity);
 }
 
-void LevelLoader::LoadLevelJSON(string fileName)
+void LevelLoader::LoadLevelJSON(string & fileName)
 {
 	ifstream in(fileName);
 
@@ -43,7 +43,7 @@ void LevelLoader::LoadLevelJSON(string fileName)
 
 	while (!in.eof())
 	{
-		char c = in.get();
+		const char c = in.get();
 		if (c == -1)
 		{
 			break;
@@ -56,9 +56,9 @@ void LevelLoader::LoadLevelJSON(string fileName)
 
 	if (d.HasParseError())
 	{
-		int loc = d.GetErrorOffset();
-		string error = GetParseError_En(d.GetParseError());
-		int line = GetLine(fullFile, loc);
+		const int loc = d.GetErrorOffset();
+		const string error = GetParseError_En(d.GetParseError());
+		const int line = GetLine(fullFile, loc);
 		return;
 	}
 
@@ -117,27 +117,27 @@ void LevelLoader::LoadResourcesJSON(const Value& Resources)
 
 	for (it = Resources.Begin(); it != Resources.End(); it++)
 	{
-		string type = (*it)["Type"].GetString();
-		string name = (*it)["Name"].GetString();
+		const string type = (*it)["Type"].GetString();
+		const string name = (*it)["Name"].GetString();
 
 		if (type == "Texture")
 		{
-			string texture = (*it)["Texture"].GetString();
+			const string texture = (*it)["Texture"].GetString();
 			ResourceManager::LoadTexture(name, texture);
 		}
 		else if (type == "Model")
 		{
-			string model = (*it)["Model"].GetString();
+			const string model = (*it)["Model"].GetString();
 			ResourceManager::LoadModel(name, model);
 		}
 		else if (type == "Shader")
 		{
-			string vertex = (*it)["Vertex"].GetString();
-			string fragment = (*it)["Fragment"].GetString();
+			const string vertex = (*it)["Vertex"].GetString();
+			const string fragment = (*it)["Fragment"].GetString();
 
 			if (it->HasMember("Geometry"))
 			{
-				string geometry = (*it)["Geometry"].GetString();
+				const string geometry = (*it)["Geometry"].GetString();
 				ResourceManager::LoadShader(name, vertex, fragment, geometry);
 			}
 			else
@@ -147,7 +147,7 @@ void LevelLoader::LoadResourcesJSON(const Value& Resources)
 		}
 		else if (type == "Audio")
 		{
-			string audio = (*it)["Audio"].GetString();
+			const string audio = (*it)["Audio"].GetString();
 			ResourceManager::LoadAudio(name, audio);
 		}
 	}
@@ -155,13 +155,13 @@ void LevelLoader::LoadResourcesJSON(const Value& Resources)
 
 void LevelLoader::LoadScriptsJSON(const Value& Scripts)
 {
-	ScriptingManager * scriptingManager = ScriptingManager::Instance();
+	ScriptingManager * const scriptingManager = ScriptingManager::Instance();
 
 	Value::ConstValueIterator it;
 
 	for (it = Scripts.Begin(); it != Scripts.End(); it++)
 	{
-		string script = (*it).GetString();
+		const string script = (*it).GetString();
 
 		scriptingManager->LoadLuaFromFile(script);
 	}
@@ -173,7 +173,7 @@ void LevelLoader::LoadEntityTemplatesJSON(const Value& EntityTemplates)
 
 	for (it = EntityTemplates.Begin(); it != EntityTemplates.End(); it++)
 	{
-		string name = (*it)["Name"].GetString();
+		const string name = (*it)["Name"].GetString();
 		const Value& components = (*it)["Components"];
 
 		templates.insert(pair<string, const Value&>(name, components));
@@ -184,19 +184,19 @@ void LevelLoader::LoadEntity(const Value& Entities)
 {
 	Value::ConstValueIterator it;
 
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager *  const entityManager = EntityManager::Instance();
 
 	for (it = Entities.Begin(); it != Entities.End(); it++)
 	{
-		string name = (*it)["Name"].GetString();
+		const string name = (*it)["Name"].GetString();
 
-		Entity * entity = entityManager->CreateEntity(name);
+		Entity * const entity = entityManager->CreateEntity(name);
 
 		if ((*it).HasMember("Template"))
 		{
-			string templateName = (*it)["Template"].GetString();
+			const string templateName = (*it)["Template"].GetString();
 
-			map<string, const Value&>::iterator it = templates.find(templateName);
+			const map<string, const Value&>::iterator it = templates.find(templateName);
 			if (it != templates.end())
 			{
 				AddComponentsToEntityJSON(entity, it->second);
@@ -211,11 +211,11 @@ void LevelLoader::LoadLights(const Value& Lights)
 {
 	Value::ConstValueIterator it;
 
-	LightManager * lightManager = LightManager::Instance();
+	LightManager * const lightManager = LightManager::Instance();
 
 	for (it = Lights.Begin(); it != Lights.End(); it++)
 	{
-		string type = (*it)["Type"].GetString();
+		const string type = (*it)["Type"].GetString();
 
 		vec3 colour = vec3(0);
 
@@ -272,8 +272,8 @@ void LevelLoader::LoadLights(const Value& Lights)
 				direction[i] = dir[i].GetFloat();
 			}
 
-			float innerCone = (*it)["InnerCone"].GetFloat();
-			float outerCone = (*it)["OuterCone"].GetFloat();
+			const float innerCone = (*it)["InnerCone"].GetFloat();
+			const float outerCone = (*it)["OuterCone"].GetFloat();
 
 			lightManager->AddSpotLight(location, direction, colour, innerCone, outerCone);
 		}
@@ -282,9 +282,9 @@ void LevelLoader::LoadLights(const Value& Lights)
 
 void LevelLoader::LoadMapJSON(const Value& Map)
 {
-	string type = Map["Type"].GetString();
+	const string type = Map["Type"].GetString();
 
-	string file = Map["File"].GetString();
+	const string file = Map["File"].GetString();
 	vec2 topLeftCoord = vec2(0);
 
 	const Value& position = Map["TopLeftCoord"];
@@ -333,21 +333,21 @@ void LevelLoader::LoadViewJSON(const Value& View)
 
 void LevelLoader::LoadPerspectiveJSON(const Value& Perspective)
 {
-	string type = Perspective["Type"].GetString();
+	const string type = Perspective["Type"].GetString();
 
-	float minDist = Perspective["MinDistance"].GetFloat();
-	float maxDist = Perspective["MaxDistance"].GetFloat();
+	const float minDist = Perspective["MinDistance"].GetFloat();
+	const float maxDist = Perspective["MaxDistance"].GetFloat();
 
 	//TODO: get projection into a camera manager
 
 	if (type == "Perspective")
 	{
-		Projection * projection = new Projection(ProjectionType::Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(),  minDist, maxDist);
+		Projection * const projection = new Projection(ProjectionType::Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(),  minDist, maxDist);
 		CameraManager::Instance()->SetProjection(projection);
 	}
 	else if (type == "Orthographic")
 	{
-		Projection * projection = new Projection(ProjectionType::Orthographic, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(), minDist, maxDist);
+		Projection * const projection = new Projection(ProjectionType::Orthographic, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(), minDist, maxDist);
 		CameraManager::Instance()->SetProjection(projection);
 	}
 }
@@ -356,42 +356,42 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera)
 {
 	//TODO: get camera into a camera manager
 
-	string type = pCamera["Type"].GetString();
+	const string type = pCamera["Type"].GetString();
 
-	float minDist = pCamera["MinDistance"].GetFloat();
-	float maxDist = pCamera["MaxDistance"].GetFloat();
-	float defDist = pCamera["DefaultDistance"].GetFloat();
-	float followRate = pCamera["FollowRate"].GetFloat();
-	string follow = pCamera["Follow"].GetString();
+	const float minDist = pCamera["MinDistance"].GetFloat();
+	const float maxDist = pCamera["MaxDistance"].GetFloat();
+	const float defDist = pCamera["DefaultDistance"].GetFloat();
+	const float followRate = pCamera["FollowRate"].GetFloat();
+	const string follow = pCamera["Follow"].GetString();
 
-	Entity * entity = EntityManager::Instance()->GetEntityByName(follow);
+	Entity * const entity = EntityManager::Instance()->GetEntityByName(follow);
 
 	if (type == "FollowPlane")
 	{
-		Camera * camera = new FollowPlaneCamera(entity, minDist, maxDist, defDist, followRate);
+		Camera * const camera = new FollowPlaneCamera(entity, minDist, maxDist, defDist, followRate);
 		CameraManager::Instance()->SetCamera(camera);
 	}
 	else if (type == "FollowPlayer")
 	{
-		Camera * camera = new FollowPlayerCamera(entity, minDist, maxDist, defDist, followRate);
+		Camera * const camera = new FollowPlayerCamera(entity, minDist, maxDist, defDist, followRate);
 		CameraManager::Instance()->SetCamera(camera);
 	}
 	
 }
 
-void LevelLoader::LoadPlatformerMap(string file, vec2 topLeftCoord)
+void LevelLoader::LoadPlatformerMap(const string & file, const vec2 & topLeftCoord)
 {
 	int x = topLeftCoord.x;
 	int y = topLeftCoord.y;
 
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 
 	ifstream in;
 	in.open(file);
 
 	while (!in.eof())
 	{
-		char letter = in.get();
+		const char letter = in.get();
 
 		if (letter == '\n')
 		{
@@ -400,10 +400,10 @@ void LevelLoader::LoadPlatformerMap(string file, vec2 topLeftCoord)
 		}
 		else
 		{		
-			map<string, const Value&>::iterator it = templates.find(string(1, letter));
+			const map<string, const Value&>::iterator it = templates.find(string(1, letter));
 			if (it != templates.end())
 			{
-				Entity * newEntity = entityManager->CreateEntity();
+				Entity * const newEntity = entityManager->CreateEntity();
 				AddComponentsToEntityJSON(newEntity, it->second);
 
 				vec3 position = position = vec3(x, y, 0);
@@ -415,19 +415,19 @@ void LevelLoader::LoadPlatformerMap(string file, vec2 topLeftCoord)
 	}
 }
 
-void LevelLoader::Load3DMap(string file, vec2 topLeftCoord)
+void LevelLoader::Load3DMap(const string & file, const vec2 & topLeftCoord)
 {
 	float x = topLeftCoord.x;
 	float y = topLeftCoord.y;
 
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 
 	ifstream in;
 	in.open(file);
 
 	while (!in.eof())
 	{
-		char letter = in.get();
+		const char letter = in.get();
 
 		if (letter == '\n')
 		{
@@ -436,10 +436,10 @@ void LevelLoader::Load3DMap(string file, vec2 topLeftCoord)
 		}
 		else
 		{
-			map<string, const Value&>::iterator it = templates.find(string(1, letter));
+			const map<string, const Value&>::iterator it = templates.find(string(1, letter));
 			if (it != templates.end())
 			{
-				Entity * newEntity = entityManager->CreateEntity();
+				Entity * const newEntity = entityManager->CreateEntity();
 				AddComponentsToEntityJSON(newEntity, it->second);
 
 				vec3 position = position = vec3(x, 0.5, y);
@@ -453,22 +453,22 @@ void LevelLoader::Load3DMap(string file, vec2 topLeftCoord)
 
 void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& components)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 
 	Value::ConstValueIterator it;
 
 	for (it = components.Begin(); it != components.End(); it++)
 	{
-		string component = (*it)["Component"].GetString();
+		const string component = (*it)["Component"].GetString();
 
 		if (component == "Model")
 		{
-			string model = (*it)["Model"].GetString();
+			const string model = (*it)["Model"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentModel(model));
 		}
 		else if (component == "Shader")
 		{
-			string shader = (*it)["Shader"].GetString();
+			const string shader = (*it)["Shader"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentShader(shader));
 		}
 		else if (component == "Position")
@@ -495,7 +495,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 				direction[i] = dir[i].GetFloat();
 			}
 
-			float angle = (*it)["Angle"].GetFloat();
+			const float angle = (*it)["Angle"].GetFloat();
 			entityManager->AddComponentToEntity(entity, new ComponentDirection(direction, angle));
 		}
 		else if (component == "ArtificialIntelligence")
@@ -519,9 +519,9 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 						position[i] = pos[i].GetFloat();
 					}
 
-					float radius = (*path)["Radius"].GetFloat();
+					const float radius = (*path)["Radius"].GetFloat();
 
-					PathNode * node = new PathNode();
+					PathNode * const node = new PathNode();
 					node->position = position;
 					node->radius = radius;
 
@@ -554,8 +554,8 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "Audio")
 		{
-			string name = (*it)["Audio"].GetString();
-			string playback = (*it)["Playback"].GetString();
+			const string name = (*it)["Audio"].GetString();
+			const string playback = (*it)["Playback"].GetString();
 
 			if (playback == "Play")
 			{
@@ -575,11 +575,11 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			CollisionShape * collisionShape = nullptr;
 			const Value& shape = (*it)["Shape"];
 
-			string shapeType = shape["Type"].GetString();
+			const string shapeType = shape["Type"].GetString();
 
 			if (shapeType == "Sphere")
 			{
-				float radius = shape["Radius"].GetFloat();
+				const float radius = shape["Radius"].GetFloat();
 				collisionShape = new CollisionSphere(radius);
 			}
 			else if (shapeType == "Cuboid")
@@ -596,8 +596,8 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 				collisionShape = new CollisionCuboid(size);
 			}
 
-			float mass = (*it)["Mass"].GetFloat();
-			string type = (*it)["Type"].GetString();
+			const float mass = (*it)["Mass"].GetFloat();
+			const string type = (*it)["Type"].GetString();
 
 			vec3 angularLimit = vec3(0);
 
@@ -622,8 +622,8 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 					for (col = (*it)["CollisionFunctions"].Begin(); col != (*it)["CollisionFunctions"].End(); col++)
 					{
-						string entityType = (*col)["EntityType"].GetString();
-						string function = (*col)["Function"].GetString();
+						const string entityType = (*col)["EntityType"].GetString();
+						const string function = (*col)["Function"].GetString();
 
 						EntityType cEntityType = ComponentPhysics::StringToEnum(entityType);
 
@@ -642,18 +642,18 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "Texture")
 		{
-			string texture = (*it)["Texture"].GetString();
+			const string texture = (*it)["Texture"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentTexture(texture));
 		}
 		else if (component == "NormalTexture")
 		{
-			string texture = (*it)["Texture"].GetString();
+			const string texture = (*it)["Texture"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentNormalTexture(texture));
 		}
 		else if (component == "RiggedAnimation")
 		{
-			string animation = (*it)["Animation"].GetString();
-			string playback = (*it)["Playback"].GetString();
+			const string animation = (*it)["Animation"].GetString();
+			const string playback = (*it)["Playback"].GetString();
 			RiggedAnimationState playbackState;
 
 			if (playback == "Play")
@@ -680,7 +680,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "Input")
 		{
-			vector<InputFunction> * playerInputs = LoadInputsJSON((*it)["Inputs"]);
+			vector<InputFunction> * const playerInputs = LoadInputsJSON((*it)["Inputs"]);
 			entityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
 		}
 	}
@@ -694,7 +694,7 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 
 	for (it = Inputs.Begin(); it != Inputs.End(); it++)
 	{
-		string function = (*it)["Function"].GetString();
+		const string function = (*it)["Function"].GetString();
 
 		InputFunction inputFunction = InputFunction(function);
 
@@ -704,8 +704,8 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 
 		for (key = keys.Begin(); key != keys.End(); key++)
 		{
-			string inputName = key->GetString();
-			GameInput gameInput = InputConverter::StringToEnum(inputName);
+			const string inputName = key->GetString();
+			const GameInput gameInput = InputConverter::StringToEnum(inputName);
 			inputFunction.AddInput(gameInput);
 		}
 
@@ -715,7 +715,7 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 	return playerInputs;
 }
 
-int LevelLoader::GetLine(string & file, int location)
+int LevelLoader::GetLine(string & file, const int location)
 {
 	int count = 0;
 

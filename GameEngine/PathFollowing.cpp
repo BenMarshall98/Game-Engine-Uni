@@ -5,10 +5,10 @@ PathFollowing::~PathFollowing()
 {
 }
 
-void PathFollowing::CalculatePath(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent)
+void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
-	float disVelocity = 200 * (1.0 / 60.0);
-	float disRotation = 200 * (1.0 / 60.0);
+	const float disVelocity = 200 * (1.0 / 60.0);
+	const float disRotation = 200 * (1.0 / 60.0);
 
 	if (currentNode == -1)
 	{
@@ -17,7 +17,7 @@ void PathFollowing::CalculatePath(vec3 currentPosition, quat currentDirection, C
 
 		for (int i = 1; i < pathNodes.size(); i++)
 		{
-			float newDistance = length(pathNodes.at(i)->position - currentPosition);
+			const float newDistance = length(pathNodes.at(i)->position - currentPosition);
 
 			if (newDistance < distance)
 			{
@@ -29,7 +29,7 @@ void PathFollowing::CalculatePath(vec3 currentPosition, quat currentDirection, C
 		currentNode = closestNode;
 	}
 
-	float distanceToNode = length(pathNodes.at(currentNode)->position - currentPosition);
+	const float distanceToNode = length(pathNodes.at(currentNode)->position - currentPosition);
 
 	if (distanceToNode < pathNodes.at(currentNode)->radius)
 	{
@@ -41,7 +41,7 @@ void PathFollowing::CalculatePath(vec3 currentPosition, quat currentDirection, C
 		}
 	}
 
-	vec3 norm = normalize(pathNodes.at(currentNode)->position - currentPosition);
+	const vec3 norm = normalize(pathNodes.at(currentNode)->position - currentPosition);
 
 	//mat3 matRotation = toMat3(currentDirection);
 	//vec3 velocity = matRotation * vec3(1, 0, 0);

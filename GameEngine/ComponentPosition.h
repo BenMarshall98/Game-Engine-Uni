@@ -22,12 +22,12 @@ public:
 		return updatePosition;
 	}
 
-	inline void SetUpdatePosition(vec3 & pPosition)
+	inline void SetUpdatePosition(const vec3 & pPosition)
 	{
 		updatePosition = pPosition;
 	}
 
-	inline const vec3 & GetRenderPosition()
+	inline const vec3 & GetRenderPosition() const
 	{
 		return renderPosition;
 	}

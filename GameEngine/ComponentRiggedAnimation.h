@@ -18,7 +18,7 @@ private:
 	RiggedAnimationState animationState;
 
 public:
-	ComponentRiggedAnimation(string pAnimation, RiggedAnimationState pAnimationState) : nextAnimation(pAnimation), animationState(pAnimationState) {}
+	ComponentRiggedAnimation(const string & pAnimation, const RiggedAnimationState pAnimationState) : nextAnimation(pAnimation), animationState(pAnimationState) {}
 	~ComponentRiggedAnimation();
 
 	ComponentType GetComponentName() override;

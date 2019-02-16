@@ -30,7 +30,7 @@ public:
 
 	inline const mat4 & GetProjection() const
 	{
-		return mat4(projectionMat);
+		return projectionMat;
 	}
 
 	inline float GetWidth() const

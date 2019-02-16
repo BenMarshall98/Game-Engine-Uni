@@ -32,10 +32,13 @@ public:
 		return instance;
 	}
 
+	EntityManager(const EntityManager&) = delete;
+	EntityManager& operator=(const EntityManager&) = delete;
+
 	Entity* CreateEntity(const string & entityName = string(""));
 	Entity* GetEntityByName(const string & entityName);
 	
-	inline void AddToDeleteList(Entity * entity)
+	inline void AddToDeleteList(Entity * const entity)
 	{
 		ToDeleteList.push_back(entity);
 	}

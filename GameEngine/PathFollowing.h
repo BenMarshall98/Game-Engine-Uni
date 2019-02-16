@@ -12,7 +12,7 @@ using namespace std;
 
 struct PathNode
 {
-	PathNode() {}
+	PathNode() : radius(0) {}
 	vec3 position;
 	float radius;
 };
@@ -24,9 +24,9 @@ private:
 	int currentNode;
 
 public:
-	explicit PathFollowing(vector<PathNode *> pPathNodes) : pathNodes(pPathNodes), currentNode(-1) {}
+	explicit PathFollowing(vector<PathNode *> & pPathNodes) : pathNodes(pPathNodes), currentNode(-1) {}
 	~PathFollowing();
 
-	void CalculatePath(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);
+	void CalculatePath(const vec3 & currentPosition, const quat & currentDirection, ComponentPhysics * const physicsComponent);
 };
 

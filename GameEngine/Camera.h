@@ -42,22 +42,22 @@ public:
 
 	inline const mat4 & GetViewMatrix() const
 	{
-		return mat4(renderViewMatrix);
+		return renderViewMatrix;
 	}
 
 	inline const vec3 & GetPosition() const
 	{
-		return vec3(position);
+		return position;
 	}
 
 	inline const vec3 & GetLookAt() const
 	{
-		return vec3(lookAt);
+		return lookAt;
 	}
 
 	inline const vec3 & GetUp() const
 	{
-		return vec3(up);
+		return up;
 	}
 
 	inline void SetPosition(const vec3 & pPosition)

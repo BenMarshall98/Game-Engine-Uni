@@ -12,11 +12,11 @@ private:
 	vector<GameInput> Inputs;
 
 public:
-	explicit InputFunction(string pInputFunction) : inputFunction(pInputFunction) {}
+	explicit InputFunction(const string & pInputFunction) : inputFunction(pInputFunction) {}
 
 	void AddInput(GameInput input);
 	void RemoveInput(GameInput input);
-	inline void SwapFunction(const string pInputFunction)
+	inline void SwapFunction(const string & pInputFunction)
 	{
 		inputFunction = pInputFunction;
 	}

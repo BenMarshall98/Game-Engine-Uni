@@ -17,7 +17,7 @@ LightManager::LightManager() : directional(nullptr)
 	glGenTextures(1, &Texture);
 	glBindTexture(GL_TEXTURE_2D, Texture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-		shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -49,7 +49,7 @@ LightManager::LightManager() : directional(nullptr)
 		for (int i = 0; i < 6; i++)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT,
-				shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+				shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 		}
 
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -64,7 +64,7 @@ LightManager::LightManager() : directional(nullptr)
 		glReadBuffer(GL_NONE);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		ShadowFrameBuffer * shadow = new ShadowFrameBuffer;
+		ShadowFrameBuffer * const shadow = new ShadowFrameBuffer;
 		shadow->FrameBuffer = pointFBO;
 		shadow->ShadowTexture = pointCubemap;
 		

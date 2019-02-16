@@ -12,5 +12,5 @@ ComponentType ComponentPosition::GetComponentName()
 
 void ComponentPosition::RenderSwap()
 {
-	renderPosition = vec3(updatePosition);
+	renderPosition = updatePosition;
 }

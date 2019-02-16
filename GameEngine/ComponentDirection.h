@@ -22,7 +22,7 @@ public:
 
 	inline const quat & GetUpdateDirection() const
 	{
-		return quat(updateDirection);
+		return updateDirection;
 	}
 
 	inline void SetUpdateDirection(const quat & pDirection)
@@ -32,7 +32,7 @@ public:
 
 	inline const quat & GetRenderDirection() const
 	{
-		return quat(renderDirection);
+		return renderDirection;
 	}
 };
 

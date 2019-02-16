@@ -24,14 +24,14 @@ private:
 	static void LoadViewJSON(const Value& View);
 	static void LoadPerspectiveJSON(const Value& Perspective);
 	static void LoadCameraJSON(const Value& Camera);
-	static void LoadPlatformerMap(string file, vec2 topLeftCoord);
-	static void Load3DMap(string file, vec2 topLeftCoord);
+	static void LoadPlatformerMap(const string & file, const vec2 & topLeftCoord);
+	static void Load3DMap(const string & file, const vec2 & topLeftCoord);
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
 	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
 	static int GetLine(string & file, int location);
 public:
 	static void CoinHitPlayer(Entity * pEntity);
-	static void LoadLevelJSON(string fileName);
+	static void LoadLevelJSON(string & fileName);
 	
 };
 

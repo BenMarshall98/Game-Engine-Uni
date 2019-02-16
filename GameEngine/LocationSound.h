@@ -11,14 +11,14 @@ private:
 	void * source;
 
 public:
-	explicit LocationSound(void * pSource, const vec3 & pLocation) :
+	explicit LocationSound(void * const pSource, const vec3 & pLocation) :
 		location(pLocation), source(pSource) {}
 	~LocationSound();
 
 	LocationSound(const LocationSound&) = delete;
 	LocationSound& operator=(const LocationSound&) = delete;
 
-	inline void * GetSource()
+	inline void * GetSource() const
 	{
 		return source;
 	}

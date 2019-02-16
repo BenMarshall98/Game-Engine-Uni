@@ -74,8 +74,8 @@ void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component
 
 void EntityManager::RemoveComponentFromEntity(Entity * const entity, iComponent * const component)
 {
-	ComponentType componentType = component->GetComponentName();
-	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
+	const ComponentType componentType = component->GetComponentName();
+	const map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
 
 	if (it != ComponentList.end())
 	{
@@ -90,14 +90,14 @@ void EntityManager::RemoveComponentFromEntity(Entity * const entity, iComponent 
 	}
 }
 
-iComponent * EntityManager::GetComponentOfEntity(Entity * entity, ComponentType componentName)
+iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const ComponentType componentName)
 {
 	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentName);
 
 	if (it != ComponentList.end())
 	{
 		map<Entity *, iComponent *> & entities = it->second;
-		map<Entity *, iComponent *>::iterator find = entities.find(entity);
+		const map<Entity *, iComponent *>::iterator find = entities.find(entity);
 
 		if (find != entities.end())
 		{
@@ -108,13 +108,13 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * entity, ComponentType 
 	return nullptr;
 }
 
-vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * componentName, int size)
+vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * const componentName, const int size)
 {
 	vector<Entity *> entities;
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		Entity * entity = EntityList.at(i);
+		Entity * const entity = EntityList.at(i);
 		bool containsComponents = true;
 
 		for (int j = 0; j < size; j++)
@@ -137,7 +137,7 @@ vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType
 
 void EntityManager::Update()
 {
-	SystemManager * systemManager = SystemManager::Instance();
+	SystemManager * const systemManager = SystemManager::Instance();
 	for (int i = 0; i < ToDeleteList.size(); i++)
 	{
 		systemManager->RemoveEntityFromSystems(ToDeleteList[i]);

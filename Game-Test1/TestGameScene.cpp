@@ -31,9 +31,8 @@
 #include "LevelLoader.h"
 #include <iostream>
 
-TestGameScene::TestGameScene() : mPhysicsManager(nullptr), mSystemManager(SystemManager::Instance())
+TestGameScene::TestGameScene() : mSystemManager(SystemManager::Instance()), mPhysicsManager(nullptr)
 {
-	int i = 0;
 }
 
 void TestGameScene::Load()
@@ -89,7 +88,7 @@ void TestGameScene::Render()
 {
 	glEnable(GL_DEPTH_TEST);
 
-	LightManager * lightManager = LightManager::Instance();
+	LightManager * const lightManager = LightManager::Instance();
 	lightManager->Update(CameraManager::Instance()->GetCamera()->GetPosition());
 
 	mSystemManager->Render();

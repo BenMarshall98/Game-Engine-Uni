@@ -9,7 +9,7 @@ class ComponentShader : public iComponent
 private:
 	Shader * shader;
 public:
-	explicit ComponentShader(string & shaderName) : shader(ResourceManager::GetShader(shaderName))
+	explicit ComponentShader(const string & shaderName) : shader(ResourceManager::GetShader(shaderName))
 	{
 	}
 

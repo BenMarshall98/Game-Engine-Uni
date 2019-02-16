@@ -10,7 +10,7 @@ private:
 
 public:
 
-	explicit EntitySound(void * pSource, Entity * pEntity) :
+	explicit EntitySound(void * const pSource, Entity * const pEntity) :
 		source(pSource), entity(pEntity) {}
 
 	~EntitySound();
@@ -18,12 +18,12 @@ public:
 	EntitySound(const EntitySound&) = delete;
 	EntitySound& operator=(const EntitySound&) = delete;
 
-	inline void * GetSource()
+	inline void * GetSource() const
 	{
 		return source;
 	}
 
-	inline Entity * GetEntity()
+	inline Entity * GetEntity() const
 	{
 		return entity;
 	}

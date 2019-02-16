@@ -27,7 +27,7 @@ void InputFunction::RemoveInput(const GameInput input)
 void InputFunction::Update(Entity * const entity) const
 {
 	InputManager * const inputManager = InputManager::Instance();
-	float value = inputManager->GetInputValue(Inputs);
+	const float value = inputManager->GetInputValue(Inputs);
 	ScriptingManager::Instance()->RunScriptFromInput(inputFunction, entity, value, (1 / 60.0));
 }
 

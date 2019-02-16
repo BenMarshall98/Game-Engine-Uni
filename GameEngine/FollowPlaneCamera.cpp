@@ -33,7 +33,7 @@ void FollowPlaneCamera::Update()
 		firstTime = !firstTime;
 	}
 
-	vec3 direction = normalize(playerPosition - cameraPosition);
+	const vec3 direction = normalize(playerPosition - cameraPosition);
 
 	SetLookAt(direction);
 	SetPosition(cameraPosition);

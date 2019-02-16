@@ -49,7 +49,7 @@ private:
 
 public:
 	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const vec3 & pAngularLimits, const bool pCollisionResponse = true, map<EntityType, string> * const pCollisionFunctions = new map<EntityType, string>())
-		: collisionFunctions(pCollisionFunctions), entityType(pEntityType), shape(pShape), mass(pMass), rigidBody(nullptr), angularLimits(pAngularLimits), thisEntity(pThisEntity), collisionResponse(pCollisionResponse) {}
+		: angularLimits(pAngularLimits), collisionFunctions(pCollisionFunctions), shape(pShape), rigidBody(nullptr), thisEntity(pThisEntity), entityType(pEntityType), mass(pMass),   collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics();
 
 	ComponentPhysics& operator=(const ComponentPhysics&) = delete;
@@ -69,7 +69,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline vec3 GetUpdateAngularLimits() const
+	inline const vec3 & GetUpdateAngularLimits() const
 	{
 		return angularLimits;
 	}
@@ -84,7 +84,7 @@ public:
 		return velocity;
 	}
 
-	inline void SetUpdateVelocity(vec3 & pVelocity)
+	inline void SetUpdateVelocity(const vec3 & pVelocity)
 	{
 		velocity = pVelocity;
 	}
@@ -94,7 +94,7 @@ public:
 		return impulse;
 	}
 
-	inline void SetUpdateImpulse(vec3 & pImpulse)
+	inline void SetUpdateImpulse(const vec3 & pImpulse)
 	{
 		impulse = pImpulse;
 	}
@@ -104,12 +104,12 @@ public:
 		return rotation;
 	}
 
-	inline void SetUpdateRotation(vec3 & pRotation)
+	inline void SetUpdateRotation(const vec3 & pRotation)
 	{
 		rotation = pRotation;
 	}
 
-	inline CollisionShape* GetUpdateShape() const
+	inline CollisionShape * GetUpdateShape() const
 	{
 		return shape;
 	}
