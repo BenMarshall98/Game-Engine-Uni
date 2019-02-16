@@ -252,6 +252,9 @@
     <ClCompile Include="EntitySound.cpp">
       <Filter>Audio Manager</Filter>
     </ClCompile>
+    <ClCompile Include="PathFinding.cpp">
+      <Filter>Artificial Intelligence</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -443,6 +446,9 @@
     </ClInclude>
     <ClInclude Include="EntitySound.h">
       <Filter>Audio Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFinding.h">
+      <Filter>Artificial Intelligence</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

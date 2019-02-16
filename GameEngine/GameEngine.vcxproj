@@ -175,6 +175,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="PathFinding.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PathFinding.h" />
     <ClInclude Include="PathFollowing.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PhysicsSystem.h" />

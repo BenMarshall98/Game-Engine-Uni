@@ -501,6 +501,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		else if (component == "ArtificialIntelligence")
 		{
 			PathFollowing * pathfollower = nullptr;
+			PathFinding * pathFinding = nullptr;
 
 			if ((*it).HasMember("PathFollowing"))
 			{
@@ -529,8 +530,27 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 				pathfollower = new PathFollowing(pathNodes);
 			}
+			
+			if ((*it).HasMember("PathFinding"))
+			{
+				const Value& pathFind = (*it)["PathFinding"];
 
-			entityManager->AddComponentToEntity(entity, new ComponentArtificalIntelligence(pathfollower));
+				string target = pathFind["Target"].GetString();
+				string map = pathFind["Map"].GetString();
+
+				vec2 position = vec3(0);
+
+				const Value& pos = pathFind["TopLeftCoord"];
+
+				for (SizeType i = 0; i < pos.Size(); i++)
+				{
+					position[i] = pos[i].GetFloat();
+				}
+
+				pathFinding = new PathFinding(target, map, position);
+			}
+
+			entityManager->AddComponentToEntity(entity, new ComponentArtificalIntelligence(pathfollower, pathFinding));
 		}
 		else if (component == "Audio")
 		{

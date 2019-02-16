@@ -322,6 +322,59 @@
           ]
         }
       ]
+    },
+    {
+      "Name": "AICube2",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ -5, 10, 0 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ]
+        },
+        {
+          "Component": "ArtificialIntelligence",
+          "PathFinding": {
+            "Target": "AICube",
+            "Map": "3DLevel.txt",
+            "TopLeftCoord": [ -24.5, 24.5 ]
+          }
+        }
+      ]
     }
   ],
   "Map": {
