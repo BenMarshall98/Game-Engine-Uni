@@ -164,4 +164,9 @@
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="3DLevel.txt">
+      <Filter>Levels</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -102,7 +102,48 @@
           },
           "Mass": 0,
           "Type": "WALL",
-          "AngularLimit": [0.0, 0.0, 0.0]
+          "AngularLimit": [ 0.0, 0.0, 0.0 ]
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Concrete"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "ConcreteNormal"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        }
+      ]
+    },
+    {
+      "Name": "w",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 0, 1 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 0,
+          "Type": "WALL",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ]
         },
         {
           "Component": "Texture",
@@ -285,6 +326,8 @@
   ],
   "Map": {
     "Type": "3DLevel",
+    "File": "3DLevel.txt",
+    "TopLeftCoord": [-24.5, 24.5],
     "View": {
       "Perspective": {
         "Type": "Perspective",

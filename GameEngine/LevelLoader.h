@@ -25,6 +25,7 @@ private:
 	static void LoadPerspectiveJSON(const Value& Perspective);
 	static void LoadCameraJSON(const Value& Camera);
 	static void LoadPlatformerMap(string file, vec2 topLeftCoord);
+	static void Load3DMap(string file, vec2 topLeftCoord);
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
 	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
 	static int GetLine(string & file, int location);

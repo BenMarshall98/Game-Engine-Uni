@@ -17,6 +17,12 @@ ShadowSystem::ShadowSystem(vec3 & topLeftCoord, vec3 & bottomRightCoord) :
 	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_SHADOW_SHADER};
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+
+	for (int i = 0; i < 6; i++)
+	{
+		string view = "shadowView[" + to_string(i) + ']';
+		views.push_back(view);
+	}
 }
 
 void ShadowSystem::RemoveEntity(Entity * pEntity)
@@ -31,6 +37,32 @@ void ShadowSystem::RemoveEntity(Entity * pEntity)
 
 void ShadowSystem::Action(void)
 {
+	vector<iModel *> models;
+	vector<vec3> positions;
+	vector<quat> directions;
+	vector<Shader *> directionalShadowShaders;
+	vector<Shader *> pointShadowShaders;
+
+	for (int i = 0; i < EntityList.size(); i++)
+	{
+		iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
+		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
+		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
+		iComponent * componentShadowShader = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_SHADOW_SHADER);
+
+		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
+		Shader * directionalShadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetDirectionalShader();
+		Shader * pointShadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
+
+		models.push_back(model);
+		positions.push_back(position);
+		directions.push_back(direction);
+		directionalShadowShaders.push_back(directionalShadowShader);
+		pointShadowShaders.push_back(pointShadowShader);
+	}
+
 	glCullFace(GL_FRONT);
 
 	Camera * camera = CameraManager::Instance()->GetCamera();
@@ -48,17 +80,7 @@ void ShadowSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
-		iComponent * componentShadowShader = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_SHADOW_SHADER);
-
-		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
-		Shader * shadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetDirectionalShader();
-
-		RenderDirectional(model, position, direction, directional, shadowShader);
+		RenderDirectional(models.at(i), positions.at(i), directions.at(i), directional, directionalShadowShaders.at(i));
 	}
 
 	vector<PointLight *> pointLights = LightManager::Instance()->GetRenderPointLights();
@@ -88,37 +110,26 @@ void ShadowSystem::Action(void)
 
 		for (int j = 0; j < EntityList.size(); j++)
 		{
-			iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_MODEL);
-			iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_POSITION);
-			iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_DIRECTION);
-			iComponent * componentShadowShader = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_SHADOW_SHADER);
-
-			iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
-			Shader * shadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
-
-			if (lastShader != shadowShader->ShaderID())
+			if (lastShader != pointShadowShaders.at(j)->ShaderID())
 			{
-				shadowShader->UseShader();
+				pointShadowShaders.at(j)->UseShader();
 
-				int lightPosLocation = glGetUniformLocation(shadowShader->ShaderID(), "lightPos");
+				int lightPosLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), "lightPos");
 				glUniform3fv(lightPosLocation, 1, value_ptr(pointLights[i]->location));
 
-				int farPlaneLocation = glGetUniformLocation(shadowShader->ShaderID(), "farPlane");
+				int farPlaneLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), "farPlane");
 				glUniform1f(farPlaneLocation, farPlane);
 
 				for (int k = 0; k < shadowTransforms.size(); k++)
 				{
-					string view = "shadowView[" + to_string(k) + ']';
-					int viewLocation = glGetUniformLocation(shadowShader->ShaderID(), view.c_str());
+					int viewLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), views.at(k).c_str());
 					glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(shadowTransforms.at(k)));
 				}
 
-				lastShader = shadowShader->ShaderID();
+				lastShader = pointShadowShaders.at(j)->ShaderID();
 			}
 
-			RenderPoint(model, position, direction, shadowShader);
+			RenderPoint(models.at(j), positions.at(j), directions.at(j), pointShadowShaders.at(j));
 		}
 	}
 
@@ -149,35 +160,27 @@ void ShadowSystem::Action(void)
 
 		for (int j = 0; j < EntityList.size(); j++)
 		{
-			iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_MODEL);
-			iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_POSITION);
-			iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_DIRECTION);
-			iComponent * componentShadowShader = entityManager->GetComponentOfEntity(EntityList[j], ComponentType::COMPONENT_SHADOW_SHADER);
-
-			iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
-			Shader * shadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
-
-			if (lastShader != shadowShader->ShaderID())
+			if (lastShader != pointShadowShaders.at(j)->ShaderID())
 			{
-				shadowShader->UseShader();
+				pointShadowShaders.at(j)->UseShader();
 
-				int lightPosLocation = glGetUniformLocation(shadowShader->ShaderID(), "lightPos");
+				int lightPosLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), "lightPos");
 				glUniform3fv(lightPosLocation, 1, value_ptr(spotLights[i]->location));
 
-				int farPlaneLocation = glGetUniformLocation(shadowShader->ShaderID(), "farPlane");
+				int farPlaneLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), "farPlane");
 				glUniform1f(farPlaneLocation, farPlane);
 
 				for (int k = 0; k < shadowTransforms.size(); k++)
 				{
-					string view = "shadowView[" + to_string(k) + ']';
-					int viewLocation = glGetUniformLocation(shadowShader->ShaderID(), view.c_str());
+					string view = views.at(k).c_str();
+					int viewLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), view.c_str());
 					glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(shadowTransforms.at(k)));
 				}
+
+				lastShader = pointShadowShaders.at(j)->ShaderID();
 			}
 
-			RenderPoint(model, position, direction, shadowShader);
+			RenderPoint(models.at(j), positions.at(j), directions.at(j), pointShadowShaders.at(j));
 		}
 	}
 

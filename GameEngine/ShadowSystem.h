@@ -15,6 +15,7 @@ class ShadowSystem : public iSystem
 {
 private:
 	vector<Entity *> EntityList;
+	vector<string> views;
 	EntityManager * entityManager;
 	vec3 mTopLeftCoord;
 	vec3 mBottomRightCoord;

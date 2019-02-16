@@ -21,12 +21,20 @@ private:
 	vector<Bone *> bones;
 	vector<mat4> boneMats;
 	vector<Node *> nodes;
+	vector<string> bonesLoc;
 	mat4 globalInverse;
 
 	float time = 0;
 
 public:
-	AnimatedModel() {}
+	AnimatedModel()
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			string bone = "Bones[" + to_string(i) + ']';
+			bonesLoc.push_back(bone);
+		}
+	}
 	~AnimatedModel();
 
 	inline void AddMesh(Mesh * mesh)

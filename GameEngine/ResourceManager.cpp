@@ -221,7 +221,6 @@ void ResourceManager::ClearResources()
 		for (it = audioBufferList.begin(); it != audioBufferList.end(); it++)
 		{
 			AudioManager::Instance()->DeleteBuffer(it->second);
-			delete it->second;
 			it->second = nullptr;
 		}
 

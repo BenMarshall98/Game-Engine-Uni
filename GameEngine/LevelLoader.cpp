@@ -283,20 +283,24 @@ void LevelLoader::LoadLights(const Value& Lights)
 void LevelLoader::LoadMapJSON(const Value& Map)
 {
 	string type = Map["Type"].GetString();
+
+	string file = Map["File"].GetString();
+	vec2 topLeftCoord = vec2(0);
+
+	const Value& position = Map["TopLeftCoord"];
+
+	for (SizeType i = 0; i < position.Size(); i++)
+	{
+		topLeftCoord[i] = position[i].GetFloat();
+	}
 	
 	if (type == "Platformer")
 	{
-		string file = Map["File"].GetString();
-		vec2 topLeftCoord = vec2(0);
-
-		const Value& position = Map["TopLeftCoord"];
-
-		for (SizeType i = 0; i < position.Size(); i++)
-		{
-			topLeftCoord[i] = position[i].GetFloat();
-		}
-
 		LoadPlatformerMap(file, topLeftCoord);
+	}
+	else if (type == "3DLevel")
+	{
+		Load3DMap(file, topLeftCoord);
 	}
 
 	if (Map.HasMember("View"))
@@ -377,8 +381,8 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera)
 
 void LevelLoader::LoadPlatformerMap(string file, vec2 topLeftCoord)
 {
-	int x = 0;
-	int y = 0;
+	int x = topLeftCoord.x;
+	int y = topLeftCoord.y;
 
 	EntityManager * entityManager = EntityManager::Instance();
 
@@ -403,6 +407,42 @@ void LevelLoader::LoadPlatformerMap(string file, vec2 topLeftCoord)
 				AddComponentsToEntityJSON(newEntity, it->second);
 
 				vec3 position = position = vec3(x, y, 0);
+
+				entityManager->AddComponentToEntity(newEntity, new ComponentPosition(position));
+			}
+		}
+		x++;
+	}
+}
+
+void LevelLoader::Load3DMap(string file, vec2 topLeftCoord)
+{
+	float x = topLeftCoord.x;
+	float y = topLeftCoord.y;
+
+	EntityManager * entityManager = EntityManager::Instance();
+
+	ifstream in;
+	in.open(file);
+
+	while (!in.eof())
+	{
+		char letter = in.get();
+
+		if (letter == '\n')
+		{
+			x = topLeftCoord.x -1;
+			y--;
+		}
+		else
+		{
+			map<string, const Value&>::iterator it = templates.find(string(1, letter));
+			if (it != templates.end())
+			{
+				Entity * newEntity = entityManager->CreateEntity();
+				AddComponentsToEntityJSON(newEntity, it->second);
+
+				vec3 position = position = vec3(x, 0.5, y);
 
 				entityManager->AddComponentToEntity(newEntity, new ComponentPosition(position));
 			}
