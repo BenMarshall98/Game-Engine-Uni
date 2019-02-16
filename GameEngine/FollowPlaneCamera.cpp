@@ -19,7 +19,7 @@ void FollowPlaneCamera::Update()
 
 	const vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
-	const vec3 cameraPosition = vec3(playerPosition.x, playerPosition.y, playerPosition.z + mDistanceCurrent);
+	vec3 cameraPosition = vec3(playerPosition.x, playerPosition.y, playerPosition.z + mDistanceCurrent);
 	const vec3 upDirection = vec3(0, 1, 0);
 
 	static bool firstTime = true;
