@@ -341,7 +341,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ -5, 10, 0 ]
+          "Position": [ -23, 10, -23 ]
         },
         {
           "Component": "Direction",
@@ -389,8 +389,8 @@
       },
       "Camera": {
         "Type": "FollowPlayer",
-        "Follow": "AICube",
-        "DefaultDistance": 10,
+        "Follow": "AICube2",
+        "DefaultDistance": 5,
         "MinDistance": 2,
         "MaxDistance": 10,
         "FollowRate": 0.1
