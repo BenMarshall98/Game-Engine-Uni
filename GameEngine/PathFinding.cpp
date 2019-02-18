@@ -98,10 +98,16 @@ void PathFinding::CalculatePath(vec3 currentPosition, quat currentDirection, Com
 			successor->position.x += directions.at(i).x;
 			successor->position.z += directions.at(i).y;
 			successor->travelTo = current->travelTo + 1;
-			successor->travelFrom = abs(successor->position.x - targetPosition.x) + abs(successor->position.z - targetPosition.z);
+			successor->travelFrom = length(vec2(successor->position.x - targetPosition.x, successor->position.z - targetPosition.z));
 			successor->weight = successor->travelTo + successor->travelFrom;
 
 			ivec2 successorMapLoc = CalculateMapLoc(successor->position);
+
+			if (current->parent && current->parent->position == successor->position)
+			{
+				delete successor;
+				continue;
+			}
 			
 			if (successorMapLoc == targetMapLoc)
 			{
@@ -114,11 +120,35 @@ void PathFinding::CalculatePath(vec3 currentPosition, quat currentDirection, Com
 				continue;
 			}
 
-			for (int j = 0; j < open.size(); j++)
+			for (int j = 0; j < directions.size(); j++)
 			{
-				if (successor->weight >= open.at(j)->weight)
+				vec3 position = vec3(directions.at(j).x, 0, directions.at(j).y);
+				position *= 0.75;
+				position += successor->position;
+				ivec2 surroundMapLoc = CalculateMapLoc(position);
+
+				if (surroundMapLoc.x < 0 || surroundMapLoc.y < 0)
 				{
-					if (successor->position == open.at(j)->position)
+					continue;
+				}
+				else if (map.size() <= surroundMapLoc.y || map.at(surroundMapLoc.y).size() <= surroundMapLoc.x)
+				{
+					continue;
+				}
+				else if (map.at(surroundMapLoc.y).at(surroundMapLoc.x) == 1)
+				{
+					delete successor;
+					successor = nullptr;
+					break;
+				}
+			}
+
+			for (int j = 0; j < open.size() && successor; j++)
+			{
+				StarNode * node = open.at(j);
+				if (successor->weight >= node->weight)
+				{
+					if (successor->position == node->position)
 					{
 						delete successor;
 						successor = nullptr;
@@ -129,9 +159,10 @@ void PathFinding::CalculatePath(vec3 currentPosition, quat currentDirection, Com
 
 			for (int j = 0; j < closed.size() && successor; j++)
 			{
-				if (successor->weight >= closed.at(j)->weight)
+				StarNode * node = closed[j];
+				if (successor->weight >= node->weight)
 				{
-					if (successor->position == closed.at(j)->position)
+					if (successor->position == node->position)
 					{
 						delete successor;
 						successor = nullptr;
@@ -158,11 +189,23 @@ void PathFinding::CalculatePath(vec3 currentPosition, quat currentDirection, Com
 	vec3 velocity = disVelocity * norm;
 
 	physicsComponent->SetUpdateVelocity(velocity);
+
+	for (int i = 0; i < open.size(); i++)
+	{
+		delete open.at(i);
+	}
+
+	for (int i = 0; i < closed.size(); i++)
+	{
+		delete closed.at(i);
+	}
 }
 
 ivec2 PathFinding::CalculateMapLoc(vec3 position)
 {
-	vec2 mapish = vec2(-position.x - topLeftCoord.x, -position.z + topLeftCoord.y);
+	vec2 mapish = vec2(position.x - topLeftCoord.x, -position.z + topLeftCoord.y);
+
+	mapish += 0.5;
 
 	ivec2 value = ivec2(floor(mapish.x), floor(mapish.y));
 

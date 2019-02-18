@@ -77,41 +77,48 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat
 
 	shader->UseShader();
 
+	static int modelLocation;
+	static int perspectiveLocation;
+	static int viewLocation;
+	static int textureLocation;
+	static int normalLocation;
+	static int viewPosLocation;
+
 	if (lastShader != shader->ShaderID() || updateFirst)
 	{
 		LightManager * lightManager = LightManager::Instance();
 		lightManager->Render(shader->ShaderID());
 		lastShader = shader->ShaderID();
 		updateFirst = false;
+		modelLocation = glGetUniformLocation(shader->ShaderID(), "model");
+		perspectiveLocation = glGetUniformLocation(shader->ShaderID(), "perspective");
+		viewLocation = glGetUniformLocation(shader->ShaderID(), "view");
+		textureLocation = glGetUniformLocation(shader->ShaderID(), "texture_map");
+		normalLocation = glGetUniformLocation(shader->ShaderID(), "normalTexture");
+		viewPosLocation = glGetUniformLocation(shader->ShaderID(), "viewPos");
 	}
 
 	mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
 	modelMatrix *= toMat4(direction);
 
-	int modelLocation = glGetUniformLocation(shader->ShaderID(), "model");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(modelMatrix));
 
-	int perspectiveLocation = glGetUniformLocation(shader->ShaderID(), "perspective");
 	glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, value_ptr(perspectiveMatrix));
 
-	int viewLocation = glGetUniformLocation(shader->ShaderID(), "view");
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(viewMatrix));
 
-	int textureLocation = glGetUniformLocation(shader->ShaderID(), "texture_map");
 	glUniform1i(textureLocation, 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
 
 	if (normal != nullptr)
 	{
-		int normalLocation = glGetUniformLocation(shader->ShaderID(), "normalTexture");
 		glUniform1i(normalLocation, 1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, normal->TextureID());
 	}
 
-	int viewPosLocation = glGetUniformLocation(shader->ShaderID(), "viewPos");
 	glUniform3fv(viewPosLocation, 1, value_ptr(viewPos));
 
 	model->Render(shader);
