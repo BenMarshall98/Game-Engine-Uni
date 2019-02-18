@@ -255,6 +255,9 @@
     <ClCompile Include="PathFinding.cpp">
       <Filter>Artificial Intelligence</Filter>
     </ClCompile>
+    <ClCompile Include="AIStateMachine.cpp">
+      <Filter>Artificial Intelligence</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -448,6 +451,9 @@
       <Filter>Audio Manager</Filter>
     </ClInclude>
     <ClInclude Include="PathFinding.h">
+      <Filter>Artificial Intelligence</Filter>
+    </ClInclude>
+    <ClInclude Include="AIStateMachine.h">
       <Filter>Artificial Intelligence</Filter>
     </ClInclude>
   </ItemGroup>

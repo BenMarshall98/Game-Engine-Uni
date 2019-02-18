@@ -32,10 +32,13 @@ private:
 
 	ivec2 CalculateMapLoc(vec3 position);
 
+	void BuildPath(vec3 cuurentPosition, quat currentDirection, ComponentPhysics * componentPhysics, vec3 targetLocation);
+
 public:
 	PathFinding(string & pTarget, string & pFile, vec2 & pTopLeftCoord);
 	~PathFinding();
 
 	void CalculatePath(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);
+	void CalculatePathToPosition(vec3 cuurentPosition, quat currentDirection, ComponentPhysics * componentPhysics, vec3 targetLocation);
 };
 

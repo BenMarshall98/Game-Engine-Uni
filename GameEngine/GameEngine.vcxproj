@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIStateMachine.cpp" />
     <ClCompile Include="AnimatedModel.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimNode.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Vec3AnimKey.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIStateMachine.h" />
     <ClInclude Include="AnimatedModel.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimNode.h" />

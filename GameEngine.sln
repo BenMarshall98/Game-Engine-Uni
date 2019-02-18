@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletPhysicsEngine", "BulletPhysicsEngine\BulletPhysicsEngine.vcxproj", "{19F0091F-89B9-436B-853D-681658C0672B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcxproj", "{705A2196-0C29-4942-A312-F30EEAF270EB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGLAndSTB", "OpenGL\OpenGL.vcxproj", "{705A2196-0C29-4942-A312-F30EEAF270EB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STBImage", "STBImage\STBImage.vcxproj", "{E773412A-550F-4B12-9C1E-F26C8E51ACC7}"
 EndProject
