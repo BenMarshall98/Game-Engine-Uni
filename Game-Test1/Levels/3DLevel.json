@@ -75,7 +75,8 @@
     }
   ],
   "Scripts": [
-    "Scripts/3DLevelFunctions.lua"
+    "Scripts/3DLevelFunctions.lua",
+    "3DLevelGuardFunctions.lua"
   ],
   "EntityTemplate": [
     {

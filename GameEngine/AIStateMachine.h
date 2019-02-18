@@ -1,8 +1,11 @@
 #pragma once
 
 #include <string>
+#include "glm/glm.hpp"
+#include "ComponentPhysics.h"
 
 using namespace std;
+using namespace glm;
 
 class AIStateMachine
 {
@@ -12,6 +15,6 @@ public:
 	explicit AIStateMachine(string pStartFunction) : startFunction(pStartFunction) {}
 	~AIStateMachine();
 
-	TraverseStateS
+	//void TraverseStates(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);
 };
 
