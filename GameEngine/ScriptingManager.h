@@ -40,7 +40,14 @@ private:
 	static int lua_PlayAudioAtLocation(lua_State * luaState);
 	static int lua_PlayAudioAtEntityLocation(lua_State * luaState);
 	static int lua_DeleteEntity(lua_State * luaState);
-
+	static int lua_GetValue(lua_State * luaState);
+	static int lua_SetValue(lua_State * luaState);
+	static int lua_ShootPlayer(lua_State * luaState);
+	static int lua_MoveOffPath(lua_State * luaState);
+	static int lua_OnPath(lua_State * luaState);
+	static int lua_FindAIPath(lua_State * luaState);
+	static int lua_FindPath(lua_State * luaState);
+	static int lua_GetNearestPath(lua_State * luaState);
 	ScriptingManager();
 
 	lua_State * luaVM;

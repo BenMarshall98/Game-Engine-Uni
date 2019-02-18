@@ -9,6 +9,8 @@
 #include "AudioManager.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "AIStateMachine.h"
+#include <sstream>
 
 using namespace glm;
 
@@ -54,6 +56,14 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "PlayAudioAtLocation", lua_PlayAudioAtLocation);
 	lua_register(luaVM, "PlayAudioAtEntityLocation", lua_PlayAudioAtEntityLocation);
 	lua_register(luaVM, "DeleteEntity", lua_DeleteEntity);
+	lua_register(luaVM, "GetValue", lua_GetValue);
+	lua_register(luaVM, "SetValue", lua_SetValue);
+	lua_register(luaVM, "ShootPlayer", lua_ShootPlayer);
+	lua_register(luaVM, "MoveOffPath", lua_MoveOffPath);
+	lua_register(luaVM, "OnPath", lua_OnPath);
+	lua_register(luaVM, "FindAIPath", lua_FindAIPath);
+	lua_register(luaVM, "FindPath", lua_FindPath);
+	lua_register(luaVM, "GetNearestPath", lua_GetNearestPath);
 	
 	string file = "Scripts/Vector3.lua";
 	LoadLuaFromFile(file);
@@ -1063,6 +1073,108 @@ int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
 
 	EntityManager::Instance()->AddToDeleteList(entity);
 
+	return 0;
+}
+
+int ScriptingManager::lua_GetValue(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 4)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: GetValue");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetValue");
+		lua_error(luaState);
+	}
+
+	string valueName = lua_tostring(luaState, 2);
+	string valueType = lua_tostring(luaState, 3);
+	string defaultValue = lua_tostring(luaState, 4);
+
+	string valueString = stateMachine->GetValue(valueName, defaultValue);
+
+	istringstream iString(valueString);
+
+	if (valueType == "integer")
+	{
+		int number;
+		iString >> number;
+
+		lua_pushinteger(luaState, number);
+	}
+	else if (valueType == "float")
+	{
+		float number;
+		iString >> number;
+
+		lua_pushnumber(luaState, number);
+	}
+	else if (valueType == "boolean")
+	{
+		bool type;
+		iString >> type;
+
+		lua_pushboolean(luaState, type);
+	}
+	else if (valueType == "string")
+	{
+		lua_pushstring(luaState, valueString.c_str());
+	}
+	else
+	{
+		lua_pushstring(luaState, "Value Type Not Recognised: GetValue");
+		lua_error(luaState);
+	}
+
+	return 1;
+}
+
+int ScriptingManager::lua_SetValue(lua_State * luaState)
+{
+	//TODO: implement
+	return 0;
+}
+
+int ScriptingManager::lua_ShootPlayer(lua_State * luaState)
+{
+	//TODO: Implement
+	return 0;
+}
+
+int ScriptingManager::lua_MoveOffPath(lua_State * luaState)
+{
+	//TODO: Implement
+	return 0;
+}
+
+int ScriptingManager::lua_OnPath(lua_State * luaState)
+{
+	//TODO: Implement
+	return 0;
+}
+
+int ScriptingManager::lua_FindAIPath(lua_State * luaState)
+{
+	//TODO: Implement
+	return 0;
+}
+
+int ScriptingManager::lua_FindPath(lua_State * luaState)
+{
+	//TODO: Implement
+	return 0;
+}
+
+int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
+{
+	//TODO: Implement
 	return 0;
 }
 

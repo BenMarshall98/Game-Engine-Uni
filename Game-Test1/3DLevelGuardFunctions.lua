@@ -29,7 +29,7 @@ function SeePlayer(guardEntity, playerEntity, guardPosition, playerPosition, AIS
 end
 
 function ShootingPlayer(guardEntity, playerEntity, AIStateMachine, deltaTime)
-	local timeLastShoot = GetValue(AIStateMachine, "timeSinceShoot", "float", 0)
+	local timeLastShoot = GetValue(AIStateMachine, "timeSinceShoot", "float", "0")
 	timeLastShoot = timeLastShoot - deltaTime;
 	if timeLastShoot <= 0 then
 		ShootPlayer(guardEntity, playerEntity)
@@ -53,7 +53,7 @@ function CannotSeePlayer(guardEntity, guardPosition, AIStateMachine, deltaTime)
 	local GuardComponentDirection = GetComponentDirection(guardEntity)
 	local guardDirection = GetDirection(GuardComponentDirection)
 
-	if OnPath(AIStateMachine, guardPosition)
+	if OnPath(AIStateMachine, guardPosition) then
 		--Move along guard path
 		FindPath(AIStateMachine, guardPosition, guardDirection, GuardComponentPhysics, deltaTime)
 	else
