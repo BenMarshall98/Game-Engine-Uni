@@ -18,3 +18,22 @@ string AIStateMachine::GetValue(string valueName, string defaultValue)
 		return defaultValue;
 	}
 }
+
+void AIStateMachine::SetValue(string valueName, string value)
+{
+	map<string, string>::iterator it = stateValues.find(valueName);
+
+	if (it != stateValues.end())
+	{
+		it->second = value;
+	}
+	else
+	{
+		stateValues.insert(pair<string, string>(valueName, value));
+	}
+}
+
+void AIStateMachine::MoveOffPath()
+{
+	pathFollower->MoveOffPath();
+}

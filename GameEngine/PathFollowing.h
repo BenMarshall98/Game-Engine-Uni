@@ -22,11 +22,19 @@ class PathFollowing
 private:
 	vector<PathNode *> pathNodes;
 	int currentNode;
+	bool onPath;
 
 public:
-	explicit PathFollowing(vector<PathNode *> & pPathNodes) : pathNodes(pPathNodes), currentNode(-1) {}
+	explicit PathFollowing(vector<PathNode *> & pPathNodes) : pathNodes(pPathNodes), currentNode(-1), onPath(true) {}
 	~PathFollowing();
 
 	void CalculatePath(const vec3 & currentPosition, const quat & currentDirection, ComponentPhysics * const physicsComponent);
+
+	inline void MoveOffPath()
+	{
+		onPath = false;
+	}
+
+	bool OnPath(vec3 position);
 };
 

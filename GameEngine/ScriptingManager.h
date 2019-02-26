@@ -43,6 +43,7 @@ private:
 	static int lua_GetValue(lua_State * luaState);
 	static int lua_SetValue(lua_State * luaState);
 	static int lua_ShootPlayer(lua_State * luaState);
+	static int lua_CanSeePlayer(lua_State * luaState);
 	static int lua_MoveOffPath(lua_State * luaState);
 	static int lua_OnPath(lua_State * luaState);
 	static int lua_FindAIPath(lua_State * luaState);

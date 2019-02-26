@@ -63,3 +63,23 @@ void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & cur
 	physicsComponent->SetUpdateVelocity(velocity);
 	//physicsComponent->SetUpdateRotation(rotation);
 }
+
+bool PathFollowing::OnPath(vec3 position)
+{
+	if (onPath)
+	{
+		return true;
+	}
+
+	for (int i = 0; i < pathNodes.size(); i++)
+	{
+		if (length(position - pathNodes.at(i)->position) <= pathNodes.at(i)->radius)
+		{
+			onPath = true;
+			currentNode = i;
+			return true;
+		}
+	}
+
+	return false;
+}

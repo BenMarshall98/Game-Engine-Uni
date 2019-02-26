@@ -7,6 +7,7 @@
 #include "ComponentPhysics.h"
 #include "ComponentAudio.h"
 #include "AudioManager.h"
+#include "PhysicsManager.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "AIStateMachine.h"
@@ -59,6 +60,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "GetValue", lua_GetValue);
 	lua_register(luaVM, "SetValue", lua_SetValue);
 	lua_register(luaVM, "ShootPlayer", lua_ShootPlayer);
+	lua_register(luaVM, "CanSeePlayer", lua_CanSeePlayer);
 	lua_register(luaVM, "MoveOffPath", lua_MoveOffPath);
 	lua_register(luaVM, "OnPath", lua_OnPath);
 	lua_register(luaVM, "FindAIPath", lua_FindAIPath);
@@ -929,7 +931,7 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
 		string message = lua_tostring(luaState, -1);
-		message = "error running function: 'NewVector3'" + message;
+		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
 	}
@@ -1005,7 +1007,7 @@ int ScriptingManager::lua_PlayAudioAtLocation(lua_State * luaState)
 
 	if (numberOfArgs != 2)
 	{
-		lua_pushstring(luaState, "wrong Numberr of Args: PlayAudioAtLocation");
+		lua_pushstring(luaState, "Wrong Number of Args: PlayAudioAtLocation");
 		lua_error(luaState);
 	}
 
@@ -1138,44 +1140,381 @@ int ScriptingManager::lua_GetValue(lua_State * luaState)
 
 int ScriptingManager::lua_SetValue(lua_State * luaState)
 {
-	//TODO: implement
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 3)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: SetValue");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: SetValue");
+		lua_error(luaState);
+	}
+	
+	string valueName = lua_tostring(luaState, 2);
+	string value;
+
+	ostringstream oString;
+
+	if (lua_isboolean(luaState, 3))
+	{
+		bool preValue = lua_toboolean(luaState, 3);
+		oString << preValue;
+		value = oString.str();
+	}
+	else if (lua_isnumber(luaState, 3))
+	{
+		float preValue = lua_tonumber(luaState, 3);
+		oString << preValue;
+		value = oString.str();
+	}
+	else if (lua_isinteger(luaState, 3))
+	{
+		int preValue = lua_tointeger(luaState, 3);
+		oString << preValue;
+		value = oString.str();
+	}
+	else
+	{
+		value = lua_tostring(luaState, 3);
+	}
+
+	stateMachine->SetValue(valueName, value);
+	
 	return 0;
 }
 
 int ScriptingManager::lua_ShootPlayer(lua_State * luaState)
 {
-	//TODO: Implement
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 4)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: ShootPlayer");
+		lua_error(luaState);
+	}
+
+	Entity * guard = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!guard)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: ShootPlayer");
+		lua_error(luaState);
+	}
+
+	Entity * player = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!player)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: ShootPlayer");
+		lua_error(luaState);
+	}
+
+	//TODO: Finish implementing
+
+	LoggingManager::LogMessage(MESSAGE_TYPE::LOG, "PEW PEW");
+
 	return 0;
+}
+
+int ScriptingManager::lua_CanSeePlayer(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CanSeePlayer");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x");
+	lua_getfield(luaState, 1, "y");
+	lua_getfield(luaState, 1, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 guardPosition(x, y, z);
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	x = lua_tonumber(luaState, -3);
+	y = lua_tonumber(luaState, -2);
+	z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 playerPosition(x, y, z);
+
+	bool clear = PhysicsManager::Instance()->ClearBetweenPoints(guardPosition, playerPosition);
+
+	lua_pushboolean(luaState, clear);
+
+	return 1;
 }
 
 int ScriptingManager::lua_MoveOffPath(lua_State * luaState)
 {
-	//TODO: Implement
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: MoveOffPath");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: MoveOffPath");
+		lua_error(luaState);
+	}
+
+	stateMachine->MoveOffPath();
+
 	return 0;
 }
 
 int ScriptingManager::lua_OnPath(lua_State * luaState)
 {
-	//TODO: Implement
-	return 0;
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: OnPath");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passedd in: OnPath");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 position(x, y, z);
+
+	bool onPath = stateMachine->OnPath(position);
+
+	lua_pushboolean(luaState, onPath);
+
+	return 1;
 }
 
 int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 {
-	//TODO: Implement
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 5 && numberOfArgs != 6)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: FindAIPath");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: FindAIPath");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 position(x, y, z);
+
+	lua_getfield(luaState, 3, "x");
+	lua_getfield(luaState, 3, "y");
+	lua_getfield(luaState, 3, "z");
+	lua_getfield(luaState, 3, "w");
+
+	x = lua_tonumber(luaState, -4);
+	y = lua_tonumber(luaState, -3);
+	z = lua_tonumber(luaState, -2);
+	double w = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 4);
+
+	quat direction(w, x, y, z);
+
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 4);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in FindAIPath");
+		lua_error(luaState);
+	}
+
+	if (numberOfArgs == 5)
+	{
+		float deltaTime = lua_tonumber(luaState, 5);
+
+		stateMachine->FindAIPath(position, direction, physicsComponent, deltaTime);
+	}
+	else
+	{
+		lua_getfield(luaState, 5, "x");
+		lua_getfield(luaState, 5, "y");
+		lua_getfield(luaState, 5, "z");
+
+
+		x = lua_tonumber(luaState, -3);
+		y = lua_tonumber(luaState, -2);
+		z = lua_tonumber(luaState, -1);
+
+		lua_pop(luaState, 3);
+
+		vec3 nearestPoint(x, y, z);
+
+		float deltaTime = lua_tonumber(luaState, 6);
+
+		stateMachine->FindAIPath(position, direction, physicsComponent, nearestPoint, deltaTime);
+	}
+
 	return 0;
 }
 
 int ScriptingManager::lua_FindPath(lua_State * luaState)
 {
-	//TODO: Implement
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 5)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: FindPath");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: FindPath");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 position(x, y, z);
+
+	lua_getfield(luaState, 3, "x");
+	lua_getfield(luaState, 3, "y");
+	lua_getfield(luaState, 3, "z");
+	lua_getfield(luaState, 3, "w");
+
+	x = lua_tonumber(luaState, -4);
+	y = lua_tonumber(luaState, -3);
+	z = lua_tonumber(luaState, -2);
+	double w = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 4);
+
+	quat direction(w, x, y, z);
+
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 4);
+
+	if (!physicsComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in FindPath");
+		lua_error(luaState);
+	}
+
+	float deltaTime = lua_tonumber(luaState, 5);
+
+	stateMachine->FindPath(position, direction, physicsComponent, deltaTime);
+
 	return 0;
 }
 
 int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 {
-	//TODO: Implement
-	return 0;
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: GetNearestPath");
+		lua_error(luaState);
+	}
+
+	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+
+	if (!stateMachine)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetNearestPath");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	vec3 position(x, y, z);
+
+	vec3 nearestPath = stateMachine->GetNearestPath(position);
+
+	lua_getglobal(luaState, "NewVector3");
+	lua_pushnumber(luaState, nearestPath.x);
+	lua_pushnumber(luaState, nearestPath.y);
+	lua_pushnumber(luaState, nearestPath.z);
+
+	if (lua_pcall(luaState, 3, 1, 0) != 0)
+	{
+		string message = lua_tostring(luaState, -1);
+		message = "Error running function: 'NewVector3'" + message;
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	if (!lua_istable(luaState, -1))
+	{
+		lua_pushstring(luaState, "Wrong value passed back in function: 'NewVector3'");
+		lua_error(luaState);
+	}
+
+	return 1;
 }
 
 void ScriptingManager::RunScriptFromCollision(const string & function, Entity * entity) const
