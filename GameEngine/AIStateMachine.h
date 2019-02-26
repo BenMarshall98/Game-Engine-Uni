@@ -47,5 +47,13 @@ public:
 		}
 		return false;
 	}
+
+	void FindAIPath(vec3 position, quat direction, ComponentPhysics * physicsComponent, vec3 target, float deltaTime);
+	void FindAIPath(vec3 position, quat direction, ComponentPhysics * physicsComponent, float deltaTime);
+	void FindPath(vec3 position, quat direction, ComponentPhysics * physicsComponent, float deltaTime);
+
+	vec3 GetNearestPath(vec3 position);
+
+	void ResolveStates(Entity * thisEntity, Entity * target);
 };
 

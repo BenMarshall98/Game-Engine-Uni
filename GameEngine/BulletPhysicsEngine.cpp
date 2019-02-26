@@ -218,4 +218,31 @@ void BulletPhysicsEngine::RemoveRigidBody(void * pRigidBody)
 	dynamicsWorld->removeRigidBody((btRigidBody *)pRigidBody);
 }
 
+bool BulletPhysicsEngine::ClearBetweenPoints(vec3 position1, vec3 position2)
+{
+	btVector3 rayStart = btVector3(position1.x, position1.y, position1.z);
+	btVector3 rayEnd = btVector3(position2.x, position2.y, position2.z);
+
+	btCollisionWorld::AllHitsRayResultCallback res(rayStart, rayEnd);
+
+	dynamicsWorld->rayTest(rayStart, rayEnd, res);
+
+	if (res.hasHit())
+	{
+		btAlignedObjectArray<const btCollisionObject *> collisionObjects = res.m_collisionObjects;
+
+		for (int i = 0; i < collisionObjects.size(); i++)
+		{
+			btVector3 collisionPosition = collisionObjects.at(i)->getWorldTransform().getOrigin();
+			if (collisionPosition.distance(rayStart) < 0.05 &&
+				collisionPosition.distance(rayEnd) < 0.05)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 btDiscreteDynamicsWorld * BulletPhysicsEngine::dynamicsWorld = nullptr;

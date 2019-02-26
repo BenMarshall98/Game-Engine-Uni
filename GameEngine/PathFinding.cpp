@@ -175,6 +175,21 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 		}
 	}
 
+	if (!found)
+	{
+		for (int i = 0; i < open.size(); i++)
+		{
+			delete open.at(i);
+		}
+
+		for (int i = 0; i < closed.size(); i++)
+		{
+			delete closed.at(i);
+		}
+
+		return;
+	}
+
 	while (found->parent->parent)
 	{
 		found = found->parent;
@@ -182,7 +197,7 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 
 	vec3 norm = normalize(found->position - currentPosition);
 
-	float disVelocity = (1000 * (1.0 / 60.0));
+	float disVelocity = (100 * (1.0 / 60.0));
 	vec3 velocity = disVelocity * norm;
 
 	physicsComponent->SetUpdateVelocity(velocity);

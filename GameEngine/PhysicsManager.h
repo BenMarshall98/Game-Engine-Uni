@@ -80,5 +80,10 @@ public:
 	{
 		engine->ApplyRotation(pRigidBody, rotation);
 	}
+
+	inline bool ClearBetweenPoints(vec3 position1, vec3 position2)
+	{
+		return engine->ClearBetweenPoints(position1, position2);
+	}
 };
 

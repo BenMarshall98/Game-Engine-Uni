@@ -24,23 +24,17 @@ void ArtificialIntelligenceSystem::Action(void)
 {
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
-		iComponent * componentPhysics = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_PHYSICS);
 		iComponent * componentIntelligence = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE);
 
-		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
-		ComponentPhysics * physics = dynamic_cast<ComponentPhysics *>(componentPhysics);
 		ComponentArtificalIntelligence * intelligence = dynamic_cast<ComponentArtificalIntelligence *>(componentIntelligence);
 
-		Intelligence(position, direction, intelligence, physics);
+		Intelligence(intelligence, EntityList[i]);
 	}
 }
 
-void ArtificialIntelligenceSystem::Intelligence(vec3 position, quat direction, ComponentArtificalIntelligence * intelligence, ComponentPhysics * physics)
+void ArtificialIntelligenceSystem::Intelligence(ComponentArtificalIntelligence * intelligence, Entity * pEntity)
 {
-	intelligence->ResolveAI(position, direction, physics);
+	intelligence->ResolveAI(pEntity);
 }
 
 ArtificialIntelligenceSystem::~ArtificialIntelligenceSystem()

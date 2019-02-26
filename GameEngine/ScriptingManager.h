@@ -6,6 +6,7 @@ extern "C"
 }
 
 #include "Entity.h"
+#include "AIStateMachine.h"
 #include <string>
 
 using namespace std;
@@ -71,6 +72,8 @@ public:
 	void RunScriptFromCollision(const string & function, Entity * entity) const;
 
 	void RunScriptFromInput(const string & function, Entity * entity, float inputValue, float deltaTime) const;
+
+	void RunScriptForStateAI(const string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const;
 
 	~ScriptingManager();
 };

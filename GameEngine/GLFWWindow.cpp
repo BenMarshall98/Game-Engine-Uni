@@ -72,7 +72,29 @@ void GLFWWindow::LimitFPS(const float FPS) const
 {
 	double timeLapsed = glfwGetTime();
 
-	cout << timeLapsed << endl;
+	static double average = 0;
+	static int count = 0;
+
+	if (count == 0)
+	{
+		average += (1.0 / timeLapsed);
+		count++;
+	}
+	else
+	{
+		average = ((average * count) + (1.0 / timeLapsed)) / (count + 1);
+		count++;
+	}
+
+	if (count == 60)
+	{
+		string title = "Game Engine: " + to_string((int)average) + "fps";
+		glfwSetWindowTitle(gameWindow, title.c_str());
+		average = 0;
+		count = 0;
+	}
+
+	//cout << timeLapsed << endl;
 
 	timeLapsed = glfwGetTime();
 

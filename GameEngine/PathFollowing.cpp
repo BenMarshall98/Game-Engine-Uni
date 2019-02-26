@@ -83,3 +83,22 @@ bool PathFollowing::OnPath(vec3 position)
 
 	return false;
 }
+
+vec3 PathFollowing::GetNearestPath(vec3 position)
+{
+	int closestNode = 0;
+	float distance = length(pathNodes.at(0)->position - position);
+
+	for (int i = 1; i < pathNodes.size(); i++)
+	{
+		const float newDistance = length(pathNodes.at(i)->position - position);
+
+		if (newDistance < distance)
+		{
+			distance = newDistance;
+			closestNode = i;
+		}
+	}
+
+	return pathNodes.at(closestNode)->position;
+}

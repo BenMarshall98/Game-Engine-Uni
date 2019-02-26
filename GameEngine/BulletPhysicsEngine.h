@@ -33,4 +33,6 @@ public:
 	void ApplyImpulse(void * pRigidBody, vec3 & impulse) const;
 	void ApplyRotation(void * pRigidBody, vec3 & rotation) const;
 	void RemoveRigidBody(void * pRigidBody);
+
+	bool ClearBetweenPoints(vec3 position1, vec3 position2);
 };

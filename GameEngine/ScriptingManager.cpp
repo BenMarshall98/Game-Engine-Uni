@@ -10,7 +10,6 @@
 #include "PhysicsManager.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include "AIStateMachine.h"
 #include <sstream>
 
 using namespace glm;
@@ -1538,6 +1537,22 @@ void ScriptingManager::RunScriptFromInput(const string & function, Entity * enti
 	lua_pushnumber(luaVM, deltaTime);
 
 	if (lua_pcall(luaVM, 3, 0, 0) != 0)
+	{
+		string message = lua_tostring(luaVM, -1);
+		message = "Error running lua script: " + message;
+		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
+	}
+}
+
+void ScriptingManager::RunScriptForStateAI(const string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const
+{
+	lua_getglobal(luaVM, function.c_str());
+	lua_pushlightuserdata(luaVM, entity1);
+	lua_pushlightuserdata(luaVM, entity2);
+	lua_pushlightuserdata(luaVM, stateMachine);
+	lua_pushnumber(luaVM, deltaTime);
+
+	if (lua_pcall(luaVM, 4, 0, 0) != 0)
 	{
 		string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;

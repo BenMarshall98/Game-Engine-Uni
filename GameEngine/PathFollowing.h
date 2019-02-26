@@ -36,5 +36,7 @@ public:
 	}
 
 	bool OnPath(vec3 position);
+
+	vec3 GetNearestPath(vec3 position);
 };
 

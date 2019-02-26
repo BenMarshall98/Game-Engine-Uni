@@ -15,7 +15,7 @@ private:
 	vector<Entity *> EntityList;
 	EntityManager * entityManager;
 
-	static void Intelligence(vec3 position, quat direction, ComponentArtificalIntelligence * artificalIntelligence, ComponentPhysics * physics);
+	static void Intelligence(ComponentArtificalIntelligence * artificalIntelligence, Entity * pEntity);
 public:
 	ArtificialIntelligenceSystem();
 	~ArtificialIntelligenceSystem();

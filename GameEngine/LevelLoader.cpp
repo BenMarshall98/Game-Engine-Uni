@@ -502,6 +502,13 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		{
 			PathFollowing * pathfollower = nullptr;
 			PathFinding * pathFinding = nullptr;
+			AIStateMachine * stateMachine = nullptr;
+			string target = "";
+
+			if ((*it).HasMember("Target"))
+			{
+				target = (*it)["Target"].GetString();
+			}
 
 			if ((*it).HasMember("PathFollowing"))
 			{
@@ -534,8 +541,6 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			if ((*it).HasMember("PathFinding"))
 			{
 				const Value& pathFind = (*it)["PathFinding"];
-
-				string target = pathFind["Target"].GetString();
 				string map = pathFind["Map"].GetString();
 
 				vec2 position = vec3(0);
@@ -550,7 +555,15 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 				pathFinding = new PathFinding(target, map, position);
 			}
 
-			entityManager->AddComponentToEntity(entity, new ComponentArtificalIntelligence(pathfollower, pathFinding));
+			if ((*it).HasMember("StateMachine"))
+			{
+				const Value& state = (*it)["StateMachine"];
+				string startFunction = state["Function"].GetString();
+
+				stateMachine = new AIStateMachine(startFunction);
+			}
+
+			entityManager->AddComponentToEntity(entity, new ComponentArtificalIntelligence(pathfollower, pathFinding, stateMachine, target));
 		}
 		else if (component == "Audio")
 		{

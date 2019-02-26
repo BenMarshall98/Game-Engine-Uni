@@ -342,7 +342,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ -23, 10, -23 ]
+          "Position": [ -22.5, 10, -22.5 ]
         },
         {
           "Component": "Direction",
@@ -370,10 +370,31 @@
         {
           "Component": "ArtificialIntelligence",
           "PathFinding": {
-            "Target": "AICube",
             "Map": "3DLevel.txt",
             "TopLeftCoord": [ -24.5, 24.5 ]
-          }
+          },
+          "PathFollowing": [
+            {
+              "Position": [ -22.5, 0.5, -22.5 ],
+              "Radius": 0.5
+            },
+            {
+              "Position": [ -22.5, 0.5, 22.5 ],
+              "Radius": 0.5
+            },
+            {
+              "Position": [ 22.5, 0.5, 22.5 ],
+              "Radius": 0.5
+            },
+            {
+              "Position": [ 22.5, 0.5, -22.5 ],
+              "Radius": 0.5
+            }
+          ],
+          "StateMachine": {
+            "Function": "GuardStart"
+          },
+          "Target": "AICube"
         }
       ]
     }
