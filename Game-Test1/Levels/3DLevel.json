@@ -276,7 +276,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ 5, 10, 0 ]
+          "Position": [ 5, 0.5, 0 ]
         },
         {
           "Component": "Direction",
@@ -342,7 +342,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ -22.5, 10, -22.5 ]
+          "Position": [ -22.5, 0.5, -22.5 ]
         },
         {
           "Component": "Direction",
@@ -376,19 +376,19 @@
           "PathFollowing": [
             {
               "Position": [ -22.5, 0.5, -22.5 ],
-              "Radius": 0.5
+              "Radius": 0.25
             },
             {
               "Position": [ -22.5, 0.5, 22.5 ],
-              "Radius": 0.5
+              "Radius": 0.25
             },
             {
               "Position": [ 22.5, 0.5, 22.5 ],
-              "Radius": 0.5
+              "Radius": 0.25
             },
             {
               "Position": [ 22.5, 0.5, -22.5 ],
-              "Radius": 0.5
+              "Radius": 0.25
             }
           ],
           "StateMachine": {

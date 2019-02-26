@@ -197,7 +197,7 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 
 	vec3 norm = normalize(found->position - currentPosition);
 
-	float disVelocity = (100 * (1.0 / 60.0));
+	float disVelocity = (200 * (1.0 / 60.0));
 	vec3 velocity = disVelocity * norm;
 
 	physicsComponent->SetUpdateVelocity(velocity);

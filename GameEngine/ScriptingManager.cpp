@@ -1192,7 +1192,7 @@ int ScriptingManager::lua_ShootPlayer(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
 
-	if (numberOfArgs != 4)
+	if (numberOfArgs != 2)
 	{
 		lua_pushstring(luaState, "Wrong Number Of Args: ShootPlayer");
 		lua_error(luaState);

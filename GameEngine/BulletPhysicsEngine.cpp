@@ -234,15 +234,15 @@ bool BulletPhysicsEngine::ClearBetweenPoints(vec3 position1, vec3 position2)
 		for (int i = 0; i < collisionObjects.size(); i++)
 		{
 			btVector3 collisionPosition = collisionObjects.at(i)->getWorldTransform().getOrigin();
-			if (collisionPosition.distance(rayStart) < 0.05 &&
-				collisionPosition.distance(rayEnd) < 0.05)
+			if (collisionPosition.distance(rayStart) > 0.05 &&
+				collisionPosition.distance(rayEnd) > 0.05)
 			{
-				return true;
+				return false;
 			}
 		}
 	}
 
-	return false;
+	return true;
 }
 
 btDiscreteDynamicsWorld * BulletPhysicsEngine::dynamicsWorld = nullptr;
