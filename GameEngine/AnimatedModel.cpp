@@ -18,12 +18,8 @@ void AnimatedModel::Render(Shader * shader)
 
 	for (int i = 0; i < boneMats.size(); i++)
 	{
-		int boneLocation = glGetUniformLocation(shader->ShaderID(), bonesLoc.at(i).c_str());
+		int boneLocation = glGetUniformLocation(shader->ShaderID(), "Bones");
 
-		if (boneLocation != -1)
-		{
-			int j = 0;
-		}
 		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, value_ptr(boneMats[i]));
 	}
 

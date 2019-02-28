@@ -170,6 +170,10 @@ int ScriptingManager::lua_GetComponentPhysics(lua_State * luaState)
 	iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_PHYSICS);
 	ComponentPhysics * physicsComponent = dynamic_cast<ComponentPhysics *>(componentPhysics);
 
+	if (!physicsComponent)
+	{
+		int i = 0;
+	}
 	lua_pushlightuserdata(luaState, physicsComponent);
 	return 1;
 }
@@ -282,8 +286,10 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 		lua_pushstring(luaState, "Wrong Number Of Args: GetVelocity");
 		lua_error(luaState);
 	}
+
+	void * pointer = lua_touserdata(luaState, 1);
 	
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = (ComponentPhysics *)pointer;
 
 	if (!physicsComponent)
 	{

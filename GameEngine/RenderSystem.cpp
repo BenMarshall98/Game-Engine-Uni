@@ -39,6 +39,7 @@ void RenderSystem::RemoveEntity(Entity * pEntity)
 void RenderSystem::Action(void)
 {
 	glViewport(0, 0, GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	mat4 perspectiveMatrix = projection->GetProjection();
 	mat4 viewMatrix = camera->GetViewMatrix();
 	vec3 viewPos = camera->GetPosition();

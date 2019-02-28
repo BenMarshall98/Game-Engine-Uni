@@ -72,6 +72,11 @@
       "Vertex": "Shaders/RiggedPointShadow.vert",
       "Fragment": "Shaders/RiggedPointShadow.frag",
       "Geometry": "Shaders/RiggedPointShadow.geom"
+    },
+    {
+      "Type": "Audio",
+      "Name": "Thump",
+      "Audio": "Audio/Thump.wav"
     }
   ],
   "Scripts": [
@@ -168,6 +173,94 @@
       "Components": [
         {
           "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ 0, 0.5, 0 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "PLAYER",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ],
+          "CollisionResponse": true
+        },
+        {
+          "Component": "Input",
+          "Inputs": [
+            {
+              "Function": "PlayerLeft",
+              "Input": [
+                "KEYBOARD_A",
+                "KEYBOARD_LEFT",
+                "GAMEPAD_L_LEFT"
+              ]
+            },
+            {
+              "Function": "PlayerRight",
+              "Input": [
+                "KEYBOARD_D",
+                "KEYBOARD_RIGHT",
+                "GAMEPAD_L_RIGHT"
+              ]
+            },
+            {
+              "Function": "PlayerForward",
+              "Input": [
+                "KEYBOARD_W",
+                "KEYBOARD_UP"
+              ]
+            },
+            {
+              "Function": "PlayerBackward",
+              "Input": [
+                "KEYBOARD_S",
+                "KEYBOARD_DOWN"
+              ]
+            },
+            {
+              "Function": "PlayerJump",
+              "Input": [
+                "KEYBOARD_SPACE",
+                "GAMEPAD_X"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "AnimatedCube",
+      "Components": [
+        {
+          "Component": "Model",
           "Model": "Cube"
         },
         {
@@ -200,52 +293,7 @@
         {
           "Component": "NormalTexture",
           "Texture": "BoxNormal"
-        },
-        {
-          "Component": "Input",
-          "Inputs": [
-            {
-              "Function": "PlayerLeft",
-              "Input": [
-                "KEYBOARD_A",
-                "KEYBOARD_LEFT",
-                "GAMEPAD_L_LEFT"
-              ]
-            },
-            {
-              "Function": "PlayerRight",
-              "Input": [
-                "KEYBOARD_D",
-                "KEYBOARD_RIGHT",
-                "GAMEPAD_L_RIGHT"
-              ]
-            },
-            {
-              "Function": "PlayerForward",
-              "Input": [
-                "KEYBOARD_W",
-                "KEYBOARD_UP",
-                "GAMEPAD_L_UP"
-              ]
-            },
-            {
-              "Function": "PlayerBackward",
-              "Input": [
-                "KEYBOARD_S",
-                "KEYBOARD_DOWN",
-                "GAMEPAD_L_DOWN"
-              ]
-            },
-            {
-              "Function": "PlayerJump",
-              "Input": [
-                "KEYBOARD_SPACE",
-                "GAMEPAD_X"
-              ]
-            }
-          ]
         }
-
       ]
     },
     {
@@ -394,7 +442,7 @@
           "StateMachine": {
             "Function": "GuardStart"
           },
-          "Target": "AICube"
+          "Target": "Player"
         }
       ]
     }
@@ -411,7 +459,7 @@
       },
       "Camera": {
         "Type": "FollowPlayer",
-        "Follow": "AICube2",
+        "Follow": "Player",
         "DefaultDistance": 5,
         "MinDistance": 2,
         "MaxDistance": 10,
