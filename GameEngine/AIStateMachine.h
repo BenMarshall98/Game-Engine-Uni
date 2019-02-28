@@ -20,7 +20,7 @@ private:
 	PathFollowing * pathFollower;
 
 public:
-	explicit AIStateMachine(string pStartFunction) : startFunction(pStartFunction) {}
+	explicit AIStateMachine(string pStartFunction) : startFunction(pStartFunction), pathFinder(nullptr), pathFollower(nullptr) {}
 	~AIStateMachine();
 
 	//void TraverseStates(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);

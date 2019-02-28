@@ -5,10 +5,11 @@
 #include "glm/glm.hpp"
 #include "Entity.h"
 #include "ComponentPhysics.h"
+#include "PhysicsEngine.h"
 
 using namespace glm;
 
-class BulletPhysicsEngine
+class BulletPhysicsEngine : public PhysicsEngine
 {
 private:
 
@@ -20,19 +21,11 @@ public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
 
-	btRigidBody* AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit);
+	RigidBody * AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit) override;
 
-	inline void Update(float pDeltaTime) const
-	{
-		dynamicsWorld->stepSimulation(pDeltaTime);
-	}
+	void Update(float pDeltaTime) override;
 
-	vec3 GetPositionOfRigidBody(void * pRigidBody);
-	quat GetDirectionOfRigidBody(void * pRigidBody);
-	void ApplyVelocity(void * pRigidBody, vec3 & velocity) const;
-	void ApplyImpulse(void * pRigidBody, vec3 & impulse) const;
-	void ApplyRotation(void * pRigidBody, vec3 & rotation) const;
-	void RemoveRigidBody(void * pRigidBody);
+	void RemoveRigidBody(RigidBody * pRigidBody) override;
 
-	bool ClearBetweenPoints(vec3 position1, vec3 position2);
+	bool ClearBetweenPoints(vec3 position1, vec3 position2) override;
 };

@@ -3,8 +3,7 @@
 #include <thread>
 
 #include "iScene.h"
-#include "GLFWWindow.h"
-#include "GLFWInput.h"
+#include "Window.h"
 #include "LoggingManager.h"
 
 using namespace std;
@@ -17,7 +16,7 @@ private:
 
 	iScene * currentScene;
 	iScene * newScene;
-	GLFWWindow * currentWindow;
+	Window * currentWindow;
 
 	int updateCount = 0;
 	int renderCount = 0;
@@ -64,7 +63,7 @@ public:
 		}
 	}
 
-	inline void SetWindow(GLFWWindow * gameWindow)
+	inline void SetWindow(Window * gameWindow)
 	{
 		static bool firstTime = true;
 

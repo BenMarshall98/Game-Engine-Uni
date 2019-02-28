@@ -1,39 +1,27 @@
 #pragma once
 
 #include "OpenGL.h"
+#include "Window.h"
 #include <GLFW/glfw3.h>
 
 //TODO: Make the Window generic
-class GLFWWindow
+class GLFWWindow : public Window
 {
-	private:
-		GLFWwindow * gameWindow;
+private:
+	GLFWwindow * gameWindow;
 
-		static inline void windowResize(GLFWwindow* window, const int pWidth, const int pHeight);
+	static inline void windowResize(GLFWwindow* window, const int pWidth, const int pHeight);
 
-		GLFWWindow(const GLFWWindow & window) = delete;
-		GLFWWindow& operator=(const GLFWWindow & window) = delete;
+	GLFWWindow(const GLFWWindow & window) = delete;
+	GLFWWindow& operator=(const GLFWWindow & window) = delete;
 
-		static int width;
-		static int height;
+public:
+	GLFWWindow();
+	~GLFWWindow() override;
 
-	public:
-		GLFWWindow();
-		~GLFWWindow();
-
-		void Load();
-		void LimitFPS(float FPS) const;
-		void WindowEvents() const;
-		bool IsRunning() const;
-
-		static int GetWidth()
-		{
-			return width;
-		}
-
-		static int GetHeight()
-		{
-			return height;
-		}
+	void Load() override;
+	void LimitFPS(float FPS) override;
+	void WindowEvents() override;
+	bool IsRunning() override;
 };
 

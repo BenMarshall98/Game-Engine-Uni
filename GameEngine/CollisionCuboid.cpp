@@ -3,3 +3,8 @@
 CollisionCuboid::~CollisionCuboid()
 {
 }
+
+Shape CollisionCuboid::GetShape()
+{
+	return Shape::CUBOID;
+}

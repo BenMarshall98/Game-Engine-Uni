@@ -10,16 +10,16 @@ class InputManager
 {
 private:
 	static InputManager * instance;
-	GLFWInput * inputDevice;
+	Input * inputDevice;
 
-	explicit InputManager(GLFWInput * const pInputDevice) : inputDevice(pInputDevice) {}
+	explicit InputManager(Input * const pInputDevice) : inputDevice(pInputDevice) {}
 
 public:
 
 	InputManager & operator=(const InputManager&) = delete;
 	InputManager(InputManager&) = delete;
 
-	inline static InputManager * Instance(GLFWInput * pInputDevice = nullptr)
+	inline static InputManager * Instance(Input * pInputDevice = nullptr)
 	{
 		if (instance == nullptr)
 		{
@@ -30,7 +30,7 @@ public:
 
 	float GetInputValue(const vector<GameInput> & gameInputs) const;
 
-	inline GLFWInput * GetInputReader() const
+	inline Input * GetInputReader() const
 	{
 		return inputDevice;
 	}

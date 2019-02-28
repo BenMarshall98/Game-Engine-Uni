@@ -14,6 +14,8 @@ using namespace rapidjson;
 class LevelLoader
 {
 private:
+	LevelLoader() {};
+
 	static map<string, const Value&> templates;
 	static void LoadResourcesJSON(const Value& Resources);
 	static void LoadScriptsJSON(const Value& Scripts);

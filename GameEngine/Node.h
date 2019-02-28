@@ -10,9 +10,10 @@ using namespace glm;
 class Node
 {
 private:
+	mat4 transformation;
 	string name;
 	Node * parent;
-	mat4 transformation;
+	
 
 public:
 	Node(string pName, mat4 pTransformation) :

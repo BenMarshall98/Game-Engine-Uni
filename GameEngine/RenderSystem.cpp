@@ -16,11 +16,8 @@
 #include <string>
 #include <algorithm>
 
-RenderSystem::RenderSystem() : updateFirst(true)
+RenderSystem::RenderSystem() : updateFirst(true), entityManager(EntityManager::Instance()), camera(CameraManager::Instance()->GetCamera()), projection(CameraManager::Instance()->GetProjection())
 {
-	entityManager = EntityManager::Instance();
-	camera = CameraManager::Instance()->GetCamera();
-	projection = CameraManager::Instance()->GetProjection();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_SHADER, ComponentType::COMPONENT_POSITION,
 		ComponentType::COMPONENT_TEXTURE, ComponentType::COMPONENT_DIRECTION };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));

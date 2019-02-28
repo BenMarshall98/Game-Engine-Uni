@@ -11,10 +11,9 @@
 #include "glm/gtx/quaternion.hpp"
 #include <algorithm>
 
-ShadowSystem::ShadowSystem(vec3 & topLeftCoord, vec3 & bottomRightCoord) : 
-	mTopLeftCoord(topLeftCoord), mBottomRightCoord(bottomRightCoord)
+ShadowSystem::ShadowSystem(vec3 & topLeftCoord, vec3 & bottomRightCoord) :
+	mTopLeftCoord(topLeftCoord), mBottomRightCoord(bottomRightCoord), entityManager(EntityManager::Instance())
 {
-	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_SHADOW_SHADER};
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 

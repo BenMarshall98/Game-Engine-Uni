@@ -23,20 +23,20 @@ struct Directional
 
 struct PointLight
 {
-	ShadowFrameBuffer * shadowTexture;
-	float farPlane;
 	vec3 location;
 	vec3 lightColour;
+	ShadowFrameBuffer * shadowTexture;
+	float farPlane;
 	float attenuation;
 };
 
 struct SpotLight
 {
-	ShadowFrameBuffer * shadowTexture;
-	float farPlane;
 	vec3 location;
 	vec3 direction;
 	vec3 lightColour;
+	ShadowFrameBuffer * shadowTexture;
+	float farPlane;
 	float angleInner;
 	float angleOutside;
 };

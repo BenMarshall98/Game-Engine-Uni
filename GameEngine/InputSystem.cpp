@@ -5,9 +5,8 @@
 #include <string>
 #include <algorithm>
 
-InputSystem::InputSystem()
+InputSystem::InputSystem() : entityManager(EntityManager::Instance())
 {
-	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_INPUT };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 }

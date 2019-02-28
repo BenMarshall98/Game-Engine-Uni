@@ -1,6 +1,7 @@
 #pragma once
 #include "iComponent.h"
 #include "CollisionShape.h"
+#include "RigidBody.h"
 #include "Entity.h"
 #include "glm/glm.hpp"
 #include <map>
@@ -38,7 +39,7 @@ private:
 	
 	map<EntityType, string> * collisionFunctions;
 	CollisionShape * shape;
-	void * rigidBody;
+	RigidBody * rigidBody;
 	Entity * thisEntity;
 
 	EntityType entityType;
@@ -119,12 +120,12 @@ public:
 		return mass;
 	}
 
-	inline void SetUpdateRigidBody(void * const pRigidBody)
+	inline void SetUpdateRigidBody(RigidBody * const pRigidBody)
 	{
 		rigidBody = pRigidBody;
 	}
 
-	inline void* GetUpdateRigidBody() const
+	inline RigidBody * GetUpdateRigidBody() const
 	{
 		return rigidBody;
 	}

@@ -3,6 +3,7 @@
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
 #include "EntityManager.h"
+#include "BulletRigidBody.h"
 #include <iostream>
 
 #include "glm/gtc/quaternion.hpp"
@@ -30,7 +31,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
+RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
 {
 	btCollisionShape* collisionShape;
 
@@ -89,68 +90,14 @@ btRigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat
 
 	dynamicsWorld->addRigidBody(rigidBody);
 
-	return rigidBody;
+	RigidBody * rBody = new BulletRigidBody(rigidBody);
+
+	return rBody;
 }
 
-vec3 BulletPhysicsEngine::GetPositionOfRigidBody(void * pRigidBody)
+void BulletPhysicsEngine::Update(float pDeltaTime)
 {
-	btRigidBody * rigidBody = (btRigidBody* )pRigidBody;
-
-	rigidBody->activate();
-
-	btTransform transform = rigidBody->getWorldTransform();
-	btVector3 origin = transform.getOrigin();
-
-	return vec3(origin.x(), origin.y(), origin.z());
-}
-
-quat BulletPhysicsEngine::GetDirectionOfRigidBody(void * pRigidBody)
-{
-	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
-
-	btTransform transform = rigidBody->getWorldTransform();
-	btQuaternion rotation = transform.getRotation();
-
-	return quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
-}
-
-void BulletPhysicsEngine::ApplyVelocity(void * pRigidBody, vec3 & pVelocity) const
-{
-	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
-
-	btVector3 currentVel = rigidBody->getLinearVelocity();
-	vec3 currentVelocity(currentVel.x(), currentVel.y(), currentVel.z());
-	vec3 desiredVelocity(pVelocity.x, currentVel.y(), pVelocity.z);
-
-	vec3 velocity = mix(currentVelocity, desiredVelocity, 0.1);
-
-	btVector3 vel(velocity.x, velocity.y, velocity.z);
-	
-	rigidBody->setLinearVelocity(vel);
-}
-
-void BulletPhysicsEngine::ApplyImpulse(void * pRigidBody, vec3 & pImpulse) const
-{
-	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
-
-	btVector3 origin(0.0, 0.0, 0.0);
-	btVector3 impulse(pImpulse.x, pImpulse.y, pImpulse.z);
-	rigidBody->applyImpulse(impulse, origin);
-}
-
-void BulletPhysicsEngine::ApplyRotation(void * pRigidBody, vec3 & pRotation) const
-{
-	btRigidBody * rigidBody = (btRigidBody*)pRigidBody;
-
-	btVector3 currentRot = rigidBody->getAngularVelocity();
-	vec3 currentRotation(currentRot.x(), currentRot.y(), currentRot.z());
-	vec3 desiredRotation(pRotation.x, pRotation.y, pRotation.z);
-
-	vec3 rotation = mix(currentRotation, desiredRotation, 0.1);
-
-	btVector3 rot(rotation.x, rotation.y, rotation.z);
-
-	rigidBody->setAngularVelocity(rot);
+	dynamicsWorld->stepSimulation(pDeltaTime);
 }
 
 bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
@@ -213,9 +160,11 @@ bool BulletPhysicsEngine::TouchingGround(const void * pRigidBody1, const void * 
 	return false;
 }
 
-void BulletPhysicsEngine::RemoveRigidBody(void * pRigidBody)
+void BulletPhysicsEngine::RemoveRigidBody(RigidBody * pRigidBody)
 {
-	dynamicsWorld->removeRigidBody((btRigidBody *)pRigidBody);
+	btRigidBody * rigidBody = (btRigidBody *)pRigidBody->GetRigidBody();
+
+	dynamicsWorld->removeRigidBody(rigidBody);
 }
 
 bool BulletPhysicsEngine::ClearBetweenPoints(vec3 position1, vec3 position2)

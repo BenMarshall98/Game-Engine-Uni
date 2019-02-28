@@ -61,6 +61,15 @@
     <Filter Include="Artificial Intelligence">
       <UniqueIdentifier>{110348f9-8e20-45bf-a6d3-58ad3c73b0b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics Manager\BulletPhysicsEngine">
+      <UniqueIdentifier>{06865258-fbac-43ef-9833-1e1c04abb2bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics Manager\GenericPhysicsEngine">
+      <UniqueIdentifier>{ce85653d-f26f-4f9c-9cea-f41620c802b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\GenericWindow">
+      <UniqueIdentifier>{122726f1-83ee-4310-8a10-eb1a34a06c73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -151,9 +160,6 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
-      <Filter>Physics Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletPhysicsEngine.cpp">
       <Filter>Physics Manager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionShape.cpp">
@@ -258,6 +264,24 @@
     <ClCompile Include="AIStateMachine.cpp">
       <Filter>Artificial Intelligence</Filter>
     </ClCompile>
+    <ClCompile Include="BulletPhysicsEngine.cpp">
+      <Filter>Physics Manager\BulletPhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletRigidBody.cpp">
+      <Filter>Physics Manager\BulletPhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>Physics Manager\GenericPhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Physics Manager\GenericPhysicsEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Window\GenericWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Window\GenericWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -360,9 +384,6 @@
     <ClInclude Include="PhysicsManager.h">
       <Filter>Physics Manager</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPhysicsEngine.h">
-      <Filter>Physics Manager</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionShape.h">
       <Filter>Physics Manager\CollisionShpaes</Filter>
     </ClInclude>
@@ -455,6 +476,24 @@
     </ClInclude>
     <ClInclude Include="AIStateMachine.h">
       <Filter>Artificial Intelligence</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPhysicsEngine.h">
+      <Filter>Physics Manager\BulletPhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletRigidBody.h">
+      <Filter>Physics Manager\BulletPhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>Physics Manager\GenericPhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Physics Manager\GenericPhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Window\GenericWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Window\GenericWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

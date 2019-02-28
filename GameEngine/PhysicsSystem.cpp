@@ -2,6 +2,7 @@
 #include "ComponentPosition.h"
 #include "ComponentDirection.h"
 #include "ComponentPhysics.h"
+#include "RigidBody.h"
 #include "glm/glm.hpp"
 
 #include <algorithm>
@@ -9,9 +10,8 @@
 using namespace glm;
 
 
-PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance())
+PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance()), entityManager(EntityManager::Instance())
 {
-	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_PHYSICS };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
 	newEntities = EntityList;
@@ -20,7 +20,7 @@ PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance())
 void PhysicsSystem::RemoveEntity(Entity * pEntity)
 {
 	iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, ComponentType::COMPONENT_PHYSICS);
-	void * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
+	RigidBody * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
 	physicsManager->RemoveRigidBody(rigidBody);
 
 	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
@@ -46,7 +46,7 @@ void PhysicsSystem::Action(void)
 		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
 		vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
 
-		void * rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
+		RigidBody * rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
 
 		((ComponentPhysics *)componentPhysics)->SetUpdateRigidBody(rigidBody);
 	}
@@ -67,7 +67,7 @@ void PhysicsSystem::Action(void)
 
 void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
 {
-	void * rigidBody = physics->GetUpdateRigidBody();
+	RigidBody * rigidBody = physics->GetUpdateRigidBody();
 	vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
 	quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
 

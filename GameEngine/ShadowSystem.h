@@ -14,11 +14,12 @@ using namespace glm;
 class ShadowSystem : public iSystem
 {
 private:
+	vec3 mTopLeftCoord;
+	vec3 mBottomRightCoord;
+
 	vector<Entity *> EntityList;
 	vector<string> views;
 	EntityManager * entityManager;
-	vec3 mTopLeftCoord;
-	vec3 mBottomRightCoord;
 
 	static void RenderDirectional(iModel * model, vec3 & position, quat & direction, Directional * directional, Shader * shadowShader);
 

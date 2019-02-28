@@ -10,12 +10,14 @@ private:
 	vec3 boundingBox;
 
 public:
-	explicit CollisionCuboid(vec3 & pBoundingBox) : CollisionShape(Shape::CUBOID), boundingBox(pBoundingBox) {}
+	explicit CollisionCuboid(vec3 & pBoundingBox) : boundingBox(pBoundingBox) {}
 	~CollisionCuboid();
 
 	inline const vec3 & GetSize() const
 	{
 		return boundingBox;
 	}
+
+	Shape GetShape() override;
 };
 

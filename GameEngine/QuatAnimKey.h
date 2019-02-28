@@ -7,8 +7,8 @@ using namespace glm;
 class QuatAnimKey
 {
 private:
-	float time;
 	quat value;
+	float time;
 
 public:
 	QuatAnimKey(float pTime, quat pValue) : time(pTime), value(pValue) {}

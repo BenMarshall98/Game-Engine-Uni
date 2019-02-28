@@ -57,18 +57,18 @@ void GLFWWindow::Load()
 	InputManager::Instance(new GLFWInput(gameWindow));
 }
 
-void GLFWWindow::WindowEvents() const
+void GLFWWindow::WindowEvents()
 {
 	glfwSwapBuffers(gameWindow);
 	glfwPollEvents();
 }
 
-bool GLFWWindow::IsRunning() const
+bool GLFWWindow::IsRunning()
 {
 	return !glfwWindowShouldClose(gameWindow);
 }
 
-void GLFWWindow::LimitFPS(const float FPS) const
+void GLFWWindow::LimitFPS(const float FPS)
 {
 	double timeLapsed = glfwGetTime();
 

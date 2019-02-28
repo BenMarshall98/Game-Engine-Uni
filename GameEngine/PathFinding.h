@@ -14,7 +14,7 @@ using namespace glm;
 
 struct StarNode
 {
-	StarNode() {}
+	StarNode() : parent(nullptr), travelTo(0), travelFrom(0), weight(0) {}
 	vec3 position;
 	float travelTo;
 	float travelFrom;

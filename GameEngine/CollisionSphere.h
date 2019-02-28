@@ -7,12 +7,14 @@ private:
 	float radius;
 
 public:
-	explicit CollisionSphere(float pRadius) : CollisionShape(Shape::SPHERE), radius(pRadius) {}
+	explicit CollisionSphere(float pRadius) : radius(pRadius) {}
 	~CollisionSphere();
 
 	inline float GetRadius() const
 	{
 		return radius;
 	}
+
+	Shape GetShape() override;
 };
 

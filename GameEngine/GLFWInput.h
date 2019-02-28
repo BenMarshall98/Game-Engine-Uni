@@ -1,28 +1,22 @@
 #pragma once
 #include "GLFWWindow.h"
+#include "Input.h"
 #include <GLFW/glfw3.h>
 
 //TODO: Make the input generic
-class GLFWInput
+class GLFWInput : public Input
 {
 private:
 	GLFWwindow * gameWindow;
-	bool mouseAllowed = true;
-	bool keyboardAllowed = true;
-	bool gamepadAllowed = true;
 public:
 	explicit GLFWInput(GLFWwindow * const pGameWindow) : gameWindow(pGameWindow) {}
 
 	GLFWInput& operator= (const GLFWInput&) = delete;
 	GLFWInput(GLFWInput&) = delete;
 
-	float KeyboardInput(int key) const;
-	float MouseInput(int key) const;
-	float GamePadInput(int key) const;
-
-	void AllowMouseInput(bool allowMouse);
-	void AllowKeyboardInput(bool allowKeyboard);
-	void AllowGamePadInput(bool allowGamePad);
+	float KeyboardInput(int key) const override;
+	float MouseInput(int key) const override;
+	float GamePadInput(int key) const override;
 
 	~GLFWInput();
 };

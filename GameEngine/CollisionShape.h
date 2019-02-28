@@ -8,18 +8,12 @@ enum class Shape
 
 class CollisionShape
 {
-private:
-	Shape shape;
-
 protected:
-	explicit CollisionShape(const Shape pShape) : shape(pShape) {}
+	explicit CollisionShape() {}
 
 public:
 	virtual ~CollisionShape();
 
-	inline Shape GetShape() const
-	{
-		return shape;
-	}
+	virtual Shape GetShape() = 0;
 };
 

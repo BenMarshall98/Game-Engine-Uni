@@ -235,14 +235,16 @@
               "Function": "PlayerForward",
               "Input": [
                 "KEYBOARD_W",
-                "KEYBOARD_UP"
+                "KEYBOARD_UP",
+                "GAMEPAD_L_UP"
               ]
             },
             {
               "Function": "PlayerBackward",
               "Input": [
                 "KEYBOARD_S",
-                "KEYBOARD_DOWN"
+                "KEYBOARD_DOWN",
+                "GAMEPAD_L_DOWN"
               ]
             },
             {

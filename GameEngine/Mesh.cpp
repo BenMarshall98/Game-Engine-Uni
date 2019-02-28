@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
 Mesh::Mesh(vector<vec3> pVertex, vector<vec3> pNormal, vector<vec2> pTextures, vector<vec4> pWeights, vector<ivec4> pIds, vector<int> pIndices) :
-	vertex(pVertex), normal(pNormal), textures(pTextures), weights(pWeights), ids(pIds), indices(pIndices)
+	vertex(pVertex), normal(pNormal), textures(pTextures), weights(pWeights), ids(pIds), indices(pIndices), VAO(0), EBO(0)
 {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(5, VBO);

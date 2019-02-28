@@ -1,6 +1,7 @@
 #pragma once
 
-#include "BulletPhysicsEngine.h"
+#include "PhysicsEngine.h"
+#include "RigidBody.h"
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
@@ -12,11 +13,11 @@ class PhysicsManager
 {
 private:
 	
-	BulletPhysicsEngine* engine;
+	PhysicsEngine* engine;
 
 	static PhysicsManager * instance;
 
-	PhysicsManager() {}
+	PhysicsManager() : engine(nullptr) {}
 
 public:
 
@@ -30,7 +31,7 @@ public:
 		return instance;
 	}
 
-	inline void SetPhysicsEngine(BulletPhysicsEngine * physicsEngine)
+	inline void SetPhysicsEngine(PhysicsEngine * physicsEngine)
 	{
 		delete engine;
 		engine = physicsEngine;
@@ -41,7 +42,7 @@ public:
 
 	~PhysicsManager() {}
 
-	inline void* AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
+	inline RigidBody * AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
 	{
 		return engine->AddRigidBody(mass, position, direction, shape, entity, collisionResponse, angularLimit);
 	}
@@ -51,32 +52,32 @@ public:
 		engine->Update(pDeltaTime);
 	}
 
-	inline vec3 GetPositionOfRigidBody(void * pRigidBody)
+	inline vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)
 	{
 		return engine->GetPositionOfRigidBody(pRigidBody);
 	}
 
-	inline quat GetDirectionOfRigidBody(void * pRigidBody)
+	inline quat GetDirectionOfRigidBody(RigidBody * pRigidBody)
 	{
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
 
-	inline void ApplyVelocity(void * pRigidBody, vec3 & velocity) const
+	inline void ApplyVelocity(RigidBody * pRigidBody, vec3 & velocity) const
 	{
 		engine->ApplyVelocity(pRigidBody, velocity);
 	}
 
-	inline void ApplyImpulse(void * pRigidBody, vec3 & impulse) const
+	inline void ApplyImpulse(RigidBody * pRigidBody, vec3 & impulse) const
 	{
 		engine->ApplyImpulse(pRigidBody, impulse);
 	}
 
-	inline void RemoveRigidBody(void * pRigidBody)
+	inline void RemoveRigidBody(RigidBody * pRigidBody)
 	{
 		engine->RemoveRigidBody(pRigidBody);
 	}
 
-	inline void ApplyRotation(void * pRigidBody, vec3 & rotation) const
+	inline void ApplyRotation(RigidBody * pRigidBody, vec3 & rotation) const
 	{
 		engine->ApplyRotation(pRigidBody, rotation);
 	}

@@ -136,6 +136,7 @@
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="BulletPhysicsEngine.cpp" />
+    <ClCompile Include="BulletRigidBody.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollisionCuboid.cpp" />
     <ClCompile Include="CollisionShape.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="iComponent.cpp" />
     <ClCompile Include="iModel.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputFunction.cpp" />
     <ClCompile Include="InputManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -178,6 +180,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathFinding.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Projection.cpp" />
@@ -185,6 +188,7 @@
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RiggedAnimationSystem.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScriptingManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -194,6 +198,7 @@
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vec3AnimKey.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIStateMachine.h" />
@@ -205,6 +210,7 @@
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="BulletPhysicsEngine.h" />
+    <ClInclude Include="BulletRigidBody.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollisionCuboid.h" />
@@ -231,6 +237,7 @@
     <ClInclude Include="GLFWWindow.h" />
     <ClInclude Include="iComponent.h" />
     <ClInclude Include="iModel.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="InputFunction.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputMapping.h" />
@@ -246,6 +253,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="PathFinding.h" />
     <ClInclude Include="PathFollowing.h" />
+    <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="Projection.h" />
@@ -254,6 +262,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RiggedAnimationSystem.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScriptingManager.h" />
     <ClInclude Include="Shader.h" />
@@ -262,6 +271,7 @@
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec3AnimKey.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
