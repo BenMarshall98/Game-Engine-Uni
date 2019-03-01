@@ -520,8 +520,8 @@
       },
       {
         "System": "Shadow",
-        "TopLeftCoord": [ -15, 15, 15 ],
-        "BottomRightCoord": [ 15, -15, -15 ]
+        "TopLeftCoord": [ -25, 25, 25 ],
+        "BottomRightCoord": [ 25, -25, -25 ]
       },
       {
         "System": "Render"
@@ -536,9 +536,6 @@
       },
       {
         "System": "Physics"
-      },
-      {
-        "System": "Audio"
       }
     ]
   }

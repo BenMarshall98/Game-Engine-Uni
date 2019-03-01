@@ -786,7 +786,25 @@ std::vector<iSystem *> LevelLoader::CreateSystems(const rapidjson::Value& pSyste
 		}
 		else if (system == "Shadow")
 		{
-			
+			glm::vec3 topLeftCoord = glm::vec3(0);
+
+			const rapidjson::Value& vec1 = (*it)["TopLeftCoord"];
+
+			for (rapidjson::SizeType i = 0; i < vec1.Size(); i++)
+			{
+				topLeftCoord[i] = vec1[i].GetFloat();
+			}
+
+			glm::vec3 bottomRightCoord = glm::vec3(0);
+
+			const rapidjson::Value& vec2 = (*it)["BottomRightCoord"];
+
+			for (rapidjson::SizeType i = 0; i < vec2.Size(); i++)
+			{
+				bottomRightCoord[i] = vec2[i].GetFloat();
+			}
+
+			systems.push_back(new ShadowSystem(topLeftCoord, bottomRightCoord));
 		}
 		else if (system == "Render")
 		{

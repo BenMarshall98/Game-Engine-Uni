@@ -19,9 +19,6 @@
     <Filter Include="Physics Manager">
       <UniqueIdentifier>{ed7564d2-a891-422f-b9b4-adedfe974c89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Physics Manager\CollisionShpaes">
-      <UniqueIdentifier>{294a5ecc-e10d-4698-837b-80757ea04515}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene Manager">
       <UniqueIdentifier>{87029c81-b448-498b-8d7a-6dc290f771ae}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,9 @@
     </Filter>
     <Filter Include="Window\GenericWindow">
       <UniqueIdentifier>{122726f1-83ee-4310-8a10-eb1a34a06c73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics Manager\CollisionShapes">
+      <UniqueIdentifier>{294a5ecc-e10d-4698-837b-80757ea04515}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,13 +163,13 @@
       <Filter>Physics Manager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionShape.cpp">
-      <Filter>Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShapes</Filter>
     </ClCompile>
     <ClCompile Include="CollisionSphere.cpp">
-      <Filter>Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShapes</Filter>
     </ClCompile>
     <ClCompile Include="CollisionCuboid.cpp">
-      <Filter>Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShapes</Filter>
     </ClCompile>
     <ClCompile Include="FollowPlaneCamera.cpp">
       <Filter>Camera Manager</Filter>
@@ -385,13 +385,13 @@
       <Filter>Physics Manager</Filter>
     </ClInclude>
     <ClInclude Include="CollisionShape.h">
-      <Filter>Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShapes</Filter>
     </ClInclude>
     <ClInclude Include="CollisionSphere.h">
-      <Filter>Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShapes</Filter>
     </ClInclude>
     <ClInclude Include="CollisionCuboid.h">
-      <Filter>Physics Manager\CollisionShpaes</Filter>
+      <Filter>Physics Manager\CollisionShapes</Filter>
     </ClInclude>
     <ClInclude Include="FollowPlaneCamera.h">
       <Filter>Camera Manager</Filter>

@@ -107,7 +107,7 @@
           },
           "Mass": 0,
           "Type": "WALL",
-          "AngularLimit": [0.0, 0.0, 0.0]
+          "AngularLimit": [ 0.0, 0.0, 0.0 ]
         },
         {
           "Component": "Texture",
@@ -143,7 +143,7 @@
           },
           "Mass": 1,
           "Type": "WALL",
-          "AngularLimit": [0.0,0.0,1.0]
+          "AngularLimit": [ 0.0, 0.0, 1.0 ]
         },
         {
           "Component": "Texture",
@@ -303,5 +303,28 @@
       "Direction": [ 0.0, -1.0, -1.0 ],
       "Colour": [ 1.0, 1.0, 1.0 ]
     }
-  ]
+  ],
+  "Systems": {
+    "Render": [
+      {
+        "System": "Shadow",
+        "TopLeftCoord": [ -25, 25, 25 ],
+        "BottomRightCoord": [ 25, -25, -25 ]
+      },
+      {
+        "System": "Render"
+      }
+    ],
+    "Update": [
+      {
+        "System": "Input"
+      },
+      {
+        "System": "Physics"
+      },
+      {
+        "System": "Audio"
+      }
+    ]
+  }
 }

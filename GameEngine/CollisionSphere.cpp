@@ -6,5 +6,5 @@ CollisionSphere::~CollisionSphere()
 
 Shape CollisionSphere::GetShape()
 {
-	return Shape::CUBOID;
+	return Shape::SPHERE;
 }

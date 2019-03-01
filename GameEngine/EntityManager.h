@@ -38,7 +38,12 @@ public:
 	
 	inline void AddToDeleteList(Entity * const entity)
 	{
-		ToDeleteList.push_back(entity);
+		std::vector<Entity *>::iterator it = find(ToDeleteList.begin(), ToDeleteList.end(), entity);
+
+		if (it == ToDeleteList.end())
+		{
+			ToDeleteList.push_back(entity);
+		}	
 	}
 
 	void AddComponentToEntity(Entity * entity, iComponent * component);
