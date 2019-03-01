@@ -27,6 +27,15 @@
 #include "CameraManager.h"
 #include "RapidJSON/error/en.h"
 #include "LightManager.h"
+#include "SystemManager.h"
+#include "ArtificialIntelligenceSystem.h"
+//#include "RiggedAnimationSystem.h"
+#include "RenderSystem.h"
+#include "ShadowSystem.h"
+#include "InputSystem.h"
+#include "ArtificialIntelligenceSystem.h"
+#include "PhysicsSystem.h"
+#include "AudioSystem.h"
 #include <fstream>
 #include <iostream>
 
@@ -107,6 +116,14 @@ void LevelLoader::LoadLevelJSON(string & fileName)
 		if (d["Lights"].IsArray())
 		{
 			LoadLights(d["Lights"]);
+		}
+	}
+
+	if (d.HasMember("Systems"))
+	{
+		if (d["Systems"].IsObject())
+		{
+			LoadSystems(d["Systems"]);
 		}
 	}
 }
@@ -726,6 +743,74 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 	}
 
 	return playerInputs;
+}
+
+void LevelLoader::LoadSystems(const Value& Systems)
+{
+	SystemManager * systemManager = SystemManager::Instance();
+
+	if (Systems.HasMember("Render"))
+	{
+		vector<iSystem *> renderSystems = CreateSystems(Systems["Render"]);
+
+		for (int i = 0; i < renderSystems.size(); i++)
+		{
+			systemManager->AddRenderSystem(renderSystems.at(i));
+		}
+	}
+
+	if (Systems.HasMember("Update"))
+	{
+		vector<iSystem *> updateSystems = CreateSystems(Systems["Update"]);
+
+		for (int i = 0; i < updateSystems.size(); i++)
+		{
+			systemManager->AddUpdateSystem(updateSystems.at(i));
+		}
+	}
+}
+
+vector<iSystem *> LevelLoader::CreateSystems(const Value& pSystems)
+{
+	vector<iSystem *> systems;
+
+	Value::ConstValueIterator it;
+
+	for (it = pSystems.Begin(); it != pSystems.End(); it++)
+	{
+		const string system = (*it)["System"].GetString();
+
+		if (system == "RiggedAnimation")
+		{
+			//systems.push_back(new RiggedAnimationSystem());
+		}
+		else if (system == "Shadow")
+		{
+			
+		}
+		else if (system == "Render")
+		{
+			systems.push_back(new RenderSystem());
+		}
+		else if (system == "Input")
+		{
+			systems.push_back(new InputSystem());
+		}
+		else if (system == "ArtificialIntelligence")
+		{
+			systems.push_back(new ArtificialIntelligenceSystem());
+		}
+		else if (system == "Physics")
+		{
+			systems.push_back(new PhysicsSystem());
+		}
+		else if (system == "Audio")
+		{
+			systems.push_back(new AudioSystem());
+		}
+	}
+
+	return systems;
 }
 
 int LevelLoader::GetLine(string & file, const int location)

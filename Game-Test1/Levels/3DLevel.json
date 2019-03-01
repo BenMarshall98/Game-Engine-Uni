@@ -512,5 +512,34 @@
       "InnerCone": 5.0,
       "OuterCone": 25.0
     }
-  ]
+  ],
+  "Systems": {
+    "Render": [
+      {
+        "System": "RiggedAnimation"
+      },
+      {
+        "System": "Shadow",
+        "TopLeftCoord": [ -15, 15, 15 ],
+        "BottomRightCoord": [ 15, -15, -15 ]
+      },
+      {
+        "System": "Render"
+      }
+    ],
+    "Update": [
+      {
+        "System": "Input"
+      },
+      {
+        "System": "ArtificialIntelligence"
+      },
+      {
+        "System": "Physics"
+      },
+      {
+        "System": "Audio"
+      }
+    ]
+  }
 }

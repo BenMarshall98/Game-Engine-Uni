@@ -4,6 +4,7 @@
 #include "RapidJSON/document.h"
 #include "glm/glm.hpp"
 #include "InputFunction.h"
+#include "iSystem.h"
 #include <string>
 #include <map>
 
@@ -28,6 +29,8 @@ private:
 	static void LoadCameraJSON(const Value& Camera);
 	static void LoadPlatformerMap(const string & file, const vec2 & topLeftCoord);
 	static void Load3DMap(const string & file, const vec2 & topLeftCoord);
+	static void LoadSystems(const Value& Systems);
+	static vector<iSystem *> CreateSystems(const Value& Systems);
 	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
 	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
 	static int GetLine(string & file, int location);

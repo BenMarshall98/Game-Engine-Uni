@@ -4,30 +4,12 @@
 #include "GLFWWindow.h"
 #include "TestGameScene.h"
 #include "ResourceManager.h"
-#include "ComponentModel.h"
-#include "ComponentPosition.h"
-#include "ComponentShader.h"
-#include "ComponentTexture.h"
-#include "ComponentNormalTexture.h"
-#include "RenderSystem.h"
-#include "InputSystem.h"
-#include "ShadowSystem.h"
 #include "LightManager.h"
 #include "InputManager.h"
 #include "glm/gtx/transform.hpp"
-#include "ComponentInput.h"
-#include "ComponentDirection.h"
-#include "ComponentPhysics.h"
-#include "CollisionCuboid.h"
-#include "FollowPlaneCamera.h"
 #include "CameraManager.h"
 #include "AudioManager.h"
-#include "AudioSystem.h"
-#include "RiggedAnimationSystem.h"
-#include "ArtificialIntelligenceSystem.h"
-
 #include "BulletPhysicsEngine.h"
-#include "PhysicsSystem.h"
 #include "LevelLoader.h"
 #include <iostream>
 
@@ -58,30 +40,6 @@ void TestGameScene::Load()
 
 	mPhysicsManager = PhysicsManager::Instance();
 	mPhysicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
-
-	vec3 topLeftCoord = vec3(-15, 15, 15);
-	vec3 bottomRightCoord = vec3(15, -15, -15);
-
-	RiggedAnimationSystem * const rigged = new RiggedAnimationSystem();
-	mSystemManager->AddRenderSystem(rigged);
-
-	ShadowSystem * const shadow = new ShadowSystem(topLeftCoord, bottomRightCoord);
-	mSystemManager->AddRenderSystem(shadow);
-
-	RenderSystem * const render = new RenderSystem();
-	mSystemManager->AddRenderSystem(render);
-
-	InputSystem * const input = new InputSystem();
-	mSystemManager->AddUpdateSystem(input);
-
-	ArtificialIntelligenceSystem * const intelligence = new ArtificialIntelligenceSystem();
-	mSystemManager->AddUpdateSystem(intelligence);
-
-	PhysicsSystem * const physics = new PhysicsSystem();
-	mSystemManager->AddUpdateSystem(physics);
-
-	AudioSystem * const audio = new AudioSystem();
-	mSystemManager->AddUpdateSystem(audio);
 }
 
 void TestGameScene::Render()

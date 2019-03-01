@@ -163,6 +163,9 @@
     <None Include="Shaders\RiggedShadowMapping.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="3DLevelGuardFunctions.lua">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="3DLevel.txt">
