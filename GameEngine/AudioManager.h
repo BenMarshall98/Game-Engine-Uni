@@ -11,8 +11,6 @@
 #include "LocationSound.h"
 #include "EntitySound.h"
 
-using namespace irrklang;
-
 enum class AudioPlayback
 {
 	PLAY,
@@ -24,11 +22,11 @@ enum class AudioPlayback
 class AudioManager
 {
 private:
-	vector<void *> cameraSounds;
-	vector<LocationSound *> locationSounds;
-	vector<EntitySound *> entitySounds;
+	std::vector<void *> cameraSounds;
+	std::vector<LocationSound *> locationSounds;
+	std::vector<EntitySound *> entitySounds;
 
-	ISoundEngine * engine;
+	irrklang::ISoundEngine * engine;
 
 	static AudioManager * instance;
 	
@@ -49,16 +47,16 @@ public:
 
 	void Update();
 
-	void * GenerateBuffer(const string & fileName);
+	void * GenerateBuffer(const std::string & fileName);
 	void * GenerateSource(void * buffer);
 
 	void DeleteBuffer(void * const buffer) const;
 	void DeleteSource(void * const source) const;
-	void UpdateComponentSound(void * const source, const vec3 & position, AudioPlayback playback) const;
+	void UpdateComponentSound(void * const source, const glm::vec3 & position, AudioPlayback playback) const;
 
-	void PlayAudio(const string & sound);
-	void PlayAudioAtLocation(const string & sound, const vec3 & location);
-	void PlayAudioAtEntityLocation(const string & sound, Entity * const entity);
+	void PlayAudio(const std::string & sound);
+	void PlayAudioAtLocation(const std::string & sound, const glm::vec3 & location);
+	void PlayAudioAtEntityLocation(const std::string & sound, Entity * const entity);
 	~AudioManager();
 };
 

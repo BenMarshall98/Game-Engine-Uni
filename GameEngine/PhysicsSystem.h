@@ -11,13 +11,11 @@
 
 #include <vector>
 
-using namespace std;
-
 class PhysicsSystem : public iSystem
 {
 private:
-	vector<Entity *> EntityList;
-	vector<Entity *> newEntities;
+	std::vector<Entity *> EntityList;
+	std::vector<Entity *> newEntities;
 	EntityManager * entityManager;
 	PhysicsManager * physicsManager;
 

@@ -72,7 +72,7 @@ LightManager::LightManager() : directional(nullptr)
 	}
 }
 
-void LightManager::AddPointLight(const vec3 & pLocation,const vec3 & pLightColour, const float pAttenuation)
+void LightManager::AddPointLight(const glm::vec3 & pLocation,const glm::vec3 & pLightColour, const float pAttenuation)
 {
 	PointLight * const pointLight = new PointLight();
 	pointLight->location = pLocation;
@@ -83,7 +83,7 @@ void LightManager::AddPointLight(const vec3 & pLocation,const vec3 & pLightColou
 
 void LightManager::RemovePointLight(PointLight * const pPointLight)
 {
-	const vector<PointLight *>::iterator iterator = find(pointLights.begin(), pointLights.end(), pPointLight);
+	const std::vector<PointLight *>::iterator iterator = find(pointLights.begin(), pointLights.end(), pPointLight);
 
 	if (iterator != pointLights.end())
 	{
@@ -91,7 +91,7 @@ void LightManager::RemovePointLight(PointLight * const pPointLight)
 	}
 }
 
-void LightManager::AddSpotLight(const vec3 & pLocation, const vec3 & pDirection, const vec3 & pLightColour, const float pAngleInner, const float pAngleOutside)
+void LightManager::AddSpotLight(const glm::vec3 & pLocation, const glm::vec3 & pDirection, const glm::vec3 & pLightColour, const float pAngleInner, const float pAngleOutside)
 {
 	SpotLight * const spotLight = new SpotLight();
 	spotLight->location = pLocation;
@@ -104,7 +104,7 @@ void LightManager::AddSpotLight(const vec3 & pLocation, const vec3 & pDirection,
 
 void LightManager::RemoveSpotLight(SpotLight * const pSpotLight)
 {
-	const vector<SpotLight *>::iterator iterator = find(spotLights.begin(), spotLights.end(), pSpotLight);
+	const std::vector<SpotLight *>::iterator iterator = find(spotLights.begin(), spotLights.end(), pSpotLight);
 
 	if (iterator != spotLights.end())
 	{
@@ -112,7 +112,7 @@ void LightManager::RemoveSpotLight(SpotLight * const pSpotLight)
 	}
 }
 
-void LightManager::Update(const vec3 & pViewLocation)
+void LightManager::Update(const glm::vec3 & pViewLocation)
 {
 	renderPointLights.clear();
 	renderSpotLights.clear();
@@ -125,13 +125,13 @@ void LightManager::Update(const vec3 & pViewLocation)
 		}
 		else
 		{
-			const float checkDistance = distance(pointLights.at(i)->location, pViewLocation);
+			const float checkDistance = glm::distance(pointLights.at(i)->location, pViewLocation);
 			float maxDistance = 0.0f;
 			float location = 0;
 
 			for (int j = 0; j < renderPointLights.size(); j++)
 			{
-				const float possDistance = distance(renderPointLights.at(j)->location, pViewLocation);
+				const float possDistance = glm::distance(renderPointLights.at(j)->location, pViewLocation);
 
 				if (checkDistance < possDistance && possDistance > maxDistance)
 				{
@@ -155,13 +155,13 @@ void LightManager::Update(const vec3 & pViewLocation)
 		}
 		else
 		{
-			const float checkDistance = distance(spotLights.at(i)->location, pViewLocation);
+			const float checkDistance = glm::distance(spotLights.at(i)->location, pViewLocation);
 			float maxDistance = 0.0f;
 			float location = 0;
 
 			for (int j = 0; j < renderPointLights.size(); j++)
 			{
-				const float possDistance = distance(renderPointLights.at(j)->location, pViewLocation);
+				const float possDistance = glm::distance(renderPointLights.at(j)->location, pViewLocation);
 
 				if (checkDistance < possDistance && possDistance > maxDistance)
 				{
@@ -172,7 +172,7 @@ void LightManager::Update(const vec3 & pViewLocation)
 
 			for (int j = 0; j < renderSpotLights.size(); j++)
 			{
-				const float possDistance = distance(renderSpotLights.at(j)->location, pViewLocation);
+				const float possDistance = glm::distance(renderSpotLights.at(j)->location, pViewLocation);
 
 				if (checkDistance < possDistance && possDistance > maxDistance)
 				{
@@ -220,16 +220,16 @@ void LightManager::Render(const int pShaderID)
 		glUniform1i(useDirectionLight, GL_TRUE);
 
 		const int directionalDirection = glGetUniformLocation(pShaderID, "DirectionLightDirection");
-		glUniform3fv(directionalDirection, 1, value_ptr(directional->direction));
+		glUniform3fv(directionalDirection, 1, glm::value_ptr(directional->direction));
 
 		const int directionalLightColour = glGetUniformLocation(pShaderID, "DirectionLightColour");
-		glUniform3fv(directionalLightColour, 1, value_ptr(directional->lightColour));
+		glUniform3fv(directionalLightColour, 1, glm::value_ptr(directional->lightColour));
 
 		const int directionalLightPerspective = glGetUniformLocation(pShaderID, "dirLightPerspective");
-		glUniformMatrix4fv(directionalLightPerspective, 1, GL_FALSE, value_ptr(directional->perspective));
+		glUniformMatrix4fv(directionalLightPerspective, 1, GL_FALSE, glm::value_ptr(directional->perspective));
 
 		const int directionalLightView = glGetUniformLocation(pShaderID, "dirLightView");
-		glUniformMatrix4fv(directionalLightView, 1, GL_FALSE, value_ptr(directional->view));
+		glUniformMatrix4fv(directionalLightView, 1, GL_FALSE, glm::value_ptr(directional->view));
 
 		const int directionalLightTexture = glGetUniformLocation(pShaderID, "DirLightShadow");
 		glUniform1i(directionalLightTexture, 2);
@@ -248,19 +248,19 @@ void LightManager::Render(const int pShaderID)
 
 	for (int i = 0; i < renderPointLights.size(); i++)
 	{
-		const int PointLightLocation = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].location").c_str());
-		glUniform3fv(PointLightLocation, 1, value_ptr(renderPointLights.at(i)->location));
+		const int PointLightLocation = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].location").c_str());
+		glUniform3fv(PointLightLocation, 1, glm::value_ptr(renderPointLights.at(i)->location));
 
-		const int PointLightColour = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].lightColour").c_str());
-		glUniform3fv(PointLightColour, 1, value_ptr(renderPointLights.at(i)->lightColour));
+		const int PointLightColour = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].lightColour").c_str());
+		glUniform3fv(PointLightColour, 1, glm::value_ptr(renderPointLights.at(i)->lightColour));
 
-		const int PointLightAttenuation = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].attenuation").c_str());
+		const int PointLightAttenuation = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].attenuation").c_str());
 		glUniform1f(PointLightAttenuation, renderPointLights.at(i)->attenuation);
 
-		const int PointLightFarDepth = glGetUniformLocation(pShaderID, ("pointLights[" + to_string(i) + "].farDepth").c_str());
+		const int PointLightFarDepth = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].farDepth").c_str());
 		glUniform1f(PointLightFarDepth, renderPointLights.at(i)->farPlane);
 
-		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + to_string(currentLight) + "]").c_str());
+		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + std::to_string(currentLight) + "]").c_str());
 		glUniform1i(directionalLightTexture, 3 + currentLight);
 		glActiveTexture(GL_TEXTURE3 + currentLight);
 		currentLight++;
@@ -272,25 +272,25 @@ void LightManager::Render(const int pShaderID)
 
 	for (int i = 0; i < renderSpotLights.size(); i++)
 	{
-		const int SpotLightLocation = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].location").c_str());
-		glUniform3fv(SpotLightLocation, 1, value_ptr(renderSpotLights.at(i)->location));
+		const int SpotLightLocation = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].location").c_str());
+		glUniform3fv(SpotLightLocation, 1, glm::value_ptr(renderSpotLights.at(i)->location));
 
-		const int SpotLightColour = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].lightColour").c_str());
-		glUniform3fv(SpotLightColour, 1, value_ptr(renderSpotLights.at(i)->lightColour));
+		const int SpotLightColour = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].lightColour").c_str());
+		glUniform3fv(SpotLightColour, 1, glm::value_ptr(renderSpotLights.at(i)->lightColour));
 
-		const int SpotLightDirection = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].direction").c_str());
-		glUniform3fv(SpotLightDirection, 1, value_ptr(renderSpotLights.at(i)->direction));
+		const int SpotLightDirection = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].direction").c_str());
+		glUniform3fv(SpotLightDirection, 1, glm::value_ptr(renderSpotLights.at(i)->direction));
 
-		const int SpotLightAngleInner = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].angleInner").c_str());
-		glUniform1f(SpotLightAngleInner, cos(radians(renderSpotLights.at(i)->angleInner)));
+		const int SpotLightAngleInner = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].angleInner").c_str());
+		glUniform1f(SpotLightAngleInner, cos(glm::radians(renderSpotLights.at(i)->angleInner)));
 
-		const int SpotLightAngleOuter = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].angleOuter").c_str());
-		glUniform1f(SpotLightAngleOuter, cos(radians(renderSpotLights.at(i)->angleOutside)));
+		const int SpotLightAngleOuter = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].angleOuter").c_str());
+		glUniform1f(SpotLightAngleOuter, cos(glm::radians(renderSpotLights.at(i)->angleOutside)));
 
-		const int SpotLightFarDepth = glGetUniformLocation(pShaderID, ("spotLights[" + to_string(i) + "].farPlane").c_str());
+		const int SpotLightFarDepth = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].farPlane").c_str());
 		glUniform1f(SpotLightFarDepth, renderSpotLights.at(i)->farPlane);
 
-		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + to_string(currentLight) + "]").c_str());
+		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + std::to_string(currentLight) + "]").c_str());
 		glUniform1i(directionalLightTexture, 3 + currentLight);
 		glActiveTexture(GL_TEXTURE3 + currentLight);
 		currentLight++;

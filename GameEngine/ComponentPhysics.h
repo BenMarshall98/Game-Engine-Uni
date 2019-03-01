@@ -8,10 +8,6 @@
 #include <string>
 #include <vector>
 
-
-using namespace glm;
-using namespace std;
-
 #define ENTITYTYPES(E) \
 	E(NONE), \
 	E(WALL), \
@@ -27,17 +23,17 @@ class ComponentPhysics : public iComponent
 private:
 
 #define E(s) #s
-	static vector<string> EntityTypeNames;
+	static std::vector<std::string> EntityTypeNames;
 #undef E
 
-	map<Entity *, EntityType> unresolvedCollisions = map<Entity *, EntityType>();
+	std::map<Entity *, EntityType> unresolvedCollisions = std::map<Entity *, EntityType>();
 	
-	vec3 velocity = vec3(0);
-	vec3 impulse = vec3(0);
-	vec3 rotation = vec3(0);
-	vec3 angularLimits = vec3(1);
+	glm::vec3 velocity = glm::vec3(0);
+	glm::vec3 impulse = glm::vec3(0);
+	glm::vec3 rotation = glm::vec3(0);
+	glm::vec3 angularLimits = glm::vec3(1);
 	
-	map<EntityType, string> * collisionFunctions;
+	std::map<EntityType, std::string> * collisionFunctions;
 	CollisionShape * shape;
 	RigidBody * rigidBody;
 	Entity * thisEntity;
@@ -49,7 +45,7 @@ private:
 	bool collisionResponse;
 
 public:
-	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const vec3 & pAngularLimits, const bool pCollisionResponse = true, map<EntityType, string> * const pCollisionFunctions = new map<EntityType, string>())
+	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const glm::vec3 & pAngularLimits, const bool pCollisionResponse = true, std::map<EntityType, std::string> * const pCollisionFunctions = new std::map<EntityType, std::string>())
 		: angularLimits(pAngularLimits), collisionFunctions(pCollisionFunctions), shape(pShape), rigidBody(nullptr), thisEntity(pThisEntity), entityType(pEntityType), mass(pMass),   collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics();
 
@@ -58,7 +54,7 @@ public:
 
 	ComponentType GetComponentName() override;
 
-	static EntityType StringToEnum(const string & entityType);
+	static EntityType StringToEnum(const std::string & entityType);
 
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
@@ -70,7 +66,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline const vec3 & GetUpdateAngularLimits() const
+	inline const glm::vec3 & GetUpdateAngularLimits() const
 	{
 		return angularLimits;
 	}
@@ -80,32 +76,32 @@ public:
 		return collisionResponse;
 	}
 
-	inline const vec3 & GetUpdateVelocity() const
+	inline const glm::vec3 & GetUpdateVelocity() const
 	{
 		return velocity;
 	}
 
-	inline void SetUpdateVelocity(const vec3 & pVelocity)
+	inline void SetUpdateVelocity(const glm::vec3 & pVelocity)
 	{
 		velocity = pVelocity;
 	}
 
-	inline const vec3 & GetUpdateImpulse() const
+	inline const glm::vec3 & GetUpdateImpulse() const
 	{
 		return impulse;
 	}
 
-	inline void SetUpdateImpulse(const vec3 & pImpulse)
+	inline void SetUpdateImpulse(const glm::vec3 & pImpulse)
 	{
 		impulse = pImpulse;
 	}
 
-	inline const vec3 & GetUpdateRotation() const
+	inline const glm::vec3 & GetUpdateRotation() const
 	{
 		return rotation;
 	}
 
-	inline void SetUpdateRotation(const vec3 & pRotation)
+	inline void SetUpdateRotation(const glm::vec3 & pRotation)
 	{
 		rotation = pRotation;
 	}

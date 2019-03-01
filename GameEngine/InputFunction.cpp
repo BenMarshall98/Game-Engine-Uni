@@ -14,7 +14,7 @@ void InputFunction::AddInput(const GameInput input)
 
 void InputFunction::RemoveInput(const GameInput input)
 {
-	vector<GameInput>::iterator it;
+	std::vector<GameInput>::iterator it;
 
 	it = find(Inputs.begin(), Inputs.end(), input);
 

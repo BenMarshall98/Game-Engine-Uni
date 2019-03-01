@@ -1,15 +1,15 @@
 #include "LoggingManager.h"
 
-void LoggingManager::LogMessage(const MESSAGE_TYPE type, const string & message)
+void LoggingManager::LogMessage(const MESSAGE_TYPE type, const std::string & message)
 {
 	if (type == MESSAGE_TYPE::SEVERE)
 	{
 		hasSevereMessage = true;
-		cout << "Severe Error: " << message << endl;
+		std::cout << "Severe Error: " << message << std::endl;
 	}
 	else
 	{
-		cout << "Log Message: " << message << endl;
+		std::cout << "Log Message: " << message << std::endl;
 	}
 }
 

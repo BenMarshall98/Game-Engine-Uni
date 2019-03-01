@@ -11,18 +11,16 @@
 #include "Projection.h"
 #include <vector>
 
-using namespace glm;
-
 class RenderSystem : public iSystem
 {
 private:
-	vector<Entity *> EntityList;
+	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
 	Camera * camera;
 	Projection * projection;
 	bool updateFirst;
 
-	static void Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst);
+	static void Render(Shader * shader, iModel * model, glm::vec3 & position, glm::quat & direction, const Texture * texture, const Texture * normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, bool & updateFirst);
 
 public:
 

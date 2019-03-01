@@ -8,35 +8,31 @@
 #include <string>
 #include <map>
 
-using namespace std;
-using namespace glm;
-using namespace rapidjson;
-
 class LevelLoader
 {
 private:
 	LevelLoader() {};
 
-	static map<string, const Value&> templates;
-	static void LoadResourcesJSON(const Value& Resources);
-	static void LoadScriptsJSON(const Value& Scripts);
-	static void LoadEntityTemplatesJSON(const Value& EntityTemplates);
-	static void LoadEntity(const Value& Entities);
-	static void LoadLights(const Value& Lights);
-	static void LoadMapJSON(const Value& Map);
-	static void LoadViewJSON(const Value& View);
-	static void LoadPerspectiveJSON(const Value& Perspective);
-	static void LoadCameraJSON(const Value& Camera);
-	static void LoadPlatformerMap(const string & file, const vec2 & topLeftCoord);
-	static void Load3DMap(const string & file, const vec2 & topLeftCoord);
-	static void LoadSystems(const Value& Systems);
-	static vector<iSystem *> CreateSystems(const Value& Systems);
-	static void AddComponentsToEntityJSON(Entity * entity, const Value& components);
-	static vector<InputFunction> * LoadInputsJSON(const Value& Inputs);
-	static int GetLine(string & file, int location);
+	static std::map<std::string, const rapidjson::Value&> templates;
+	static void LoadResourcesJSON(const rapidjson::Value& Resources);
+	static void LoadScriptsJSON(const rapidjson::Value& Scripts);
+	static void LoadEntityTemplatesJSON(const rapidjson::Value& EntityTemplates);
+	static void LoadEntity(const rapidjson::Value& Entities);
+	static void LoadLights(const rapidjson::Value& Lights);
+	static void LoadMapJSON(const rapidjson::Value& Map);
+	static void LoadViewJSON(const rapidjson::Value& View);
+	static void LoadPerspectiveJSON(const rapidjson::Value& Perspective);
+	static void LoadCameraJSON(const rapidjson::Value& Camera);
+	static void LoadPlatformerMap(const std::string & file, const glm::vec2 & topLeftCoord);
+	static void Load3DMap(const std::string & file, const glm::vec2 & topLeftCoord);
+	static void LoadSystems(const rapidjson::Value& Systems);
+	static std::vector<iSystem *> CreateSystems(const rapidjson::Value& Systems);
+	static void AddComponentsToEntityJSON(Entity * entity, const rapidjson::Value& components);
+	static std::vector<InputFunction> * LoadInputsJSON(const rapidjson::Value& Inputs);
+	static int GetLine(std::string & file, int location);
 public:
 	static void CoinHitPlayer(Entity * pEntity);
-	static void LoadLevelJSON(string & fileName);
+	static void LoadLevelJSON(std::string & fileName);
 	
 };
 

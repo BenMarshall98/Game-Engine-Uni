@@ -2,9 +2,6 @@
 #include "OpenGL.h"
 #include <string>
 
-using namespace std;
-
-
 class Texture
 {
 private:
@@ -23,7 +20,7 @@ public:
 		glDeleteTextures(1, &mTextureID);
 	}
 
-	bool LoadTexture(const string & fileName);
+	bool LoadTexture(const std::string & fileName);
 
 	inline int TextureID() const
 	{

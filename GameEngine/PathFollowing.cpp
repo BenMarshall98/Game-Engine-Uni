@@ -5,7 +5,7 @@ PathFollowing::~PathFollowing()
 {
 }
 
-void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & currentDirection, ComponentPhysics * const physicsComponent)
+void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
 	const float disVelocity = 200 * (1.0 / 60.0);
 	const float disRotation = 200 * (1.0 / 60.0);
@@ -13,7 +13,7 @@ void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & cur
 	if (currentNode == -1)
 	{
 		int closestNode = 0;
-		float distance = length(pathNodes.at(0)->position - currentPosition);
+		float distance = glm::length(pathNodes.at(0)->position - currentPosition);
 
 		for (int i = 1; i < pathNodes.size(); i++)
 		{
@@ -41,7 +41,7 @@ void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & cur
 		}
 	}
 
-	const vec3 norm = normalize(pathNodes.at(currentNode)->position - currentPosition);
+	const glm::vec3 norm = normalize(pathNodes.at(currentNode)->position - currentPosition);
 
 	//mat3 matRotation = toMat3(currentDirection);
 	//vec3 velocity = matRotation * vec3(1, 0, 0);
@@ -56,7 +56,7 @@ void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & cur
 
 	//vec3 rotation = vec3(0.0, angle, 0.0);
 
-	vec3 velocity = norm;
+	glm::vec3 velocity = norm;
 
 	velocity *= disVelocity;
 
@@ -64,7 +64,7 @@ void PathFollowing::CalculatePath(const vec3 & currentPosition, const quat & cur
 	//physicsComponent->SetUpdateRotation(rotation);
 }
 
-bool PathFollowing::OnPath(vec3 position)
+bool PathFollowing::OnPath(glm::vec3 position)
 {
 	if (onPath)
 	{
@@ -73,7 +73,7 @@ bool PathFollowing::OnPath(vec3 position)
 
 	for (int i = 0; i < pathNodes.size(); i++)
 	{
-		if (length(position - pathNodes.at(i)->position) <= pathNodes.at(i)->radius)
+		if (glm::length(position - pathNodes.at(i)->position) <= pathNodes.at(i)->radius)
 		{
 			onPath = true;
 			currentNode = i;
@@ -84,10 +84,10 @@ bool PathFollowing::OnPath(vec3 position)
 	return false;
 }
 
-vec3 PathFollowing::GetNearestPath(vec3 position)
+glm::vec3 PathFollowing::GetNearestPath(glm::vec3 position)
 {
 	int closestNode = 0;
-	float distance = length(pathNodes.at(0)->position - position);
+	float distance = glm::length(pathNodes.at(0)->position - position);
 
 	for (int i = 1; i < pathNodes.size(); i++)
 	{

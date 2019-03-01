@@ -9,8 +9,6 @@
 #include "PhysicsManager.h"
 #include <vector>
 
-using namespace std;
-
 class TestGameScene : public iScene
 {
 private:

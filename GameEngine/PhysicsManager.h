@@ -7,8 +7,6 @@
 #include "glm/gtc/quaternion.hpp"
 #include "Entity.h"
 
-using namespace glm;
-
 class PhysicsManager
 {
 private:
@@ -42,7 +40,7 @@ public:
 
 	~PhysicsManager() {}
 
-	inline RigidBody * AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
+	inline RigidBody * AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit)
 	{
 		return engine->AddRigidBody(mass, position, direction, shape, entity, collisionResponse, angularLimit);
 	}
@@ -52,22 +50,22 @@ public:
 		engine->Update(pDeltaTime);
 	}
 
-	inline vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)
+	inline glm::vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)
 	{
 		return engine->GetPositionOfRigidBody(pRigidBody);
 	}
 
-	inline quat GetDirectionOfRigidBody(RigidBody * pRigidBody)
+	inline glm::quat GetDirectionOfRigidBody(RigidBody * pRigidBody)
 	{
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
 
-	inline void ApplyVelocity(RigidBody * pRigidBody, vec3 & velocity) const
+	inline void ApplyVelocity(RigidBody * pRigidBody, glm::vec3 & velocity) const
 	{
 		engine->ApplyVelocity(pRigidBody, velocity);
 	}
 
-	inline void ApplyImpulse(RigidBody * pRigidBody, vec3 & impulse) const
+	inline void ApplyImpulse(RigidBody * pRigidBody, glm::vec3 & impulse) const
 	{
 		engine->ApplyImpulse(pRigidBody, impulse);
 	}
@@ -77,12 +75,12 @@ public:
 		engine->RemoveRigidBody(pRigidBody);
 	}
 
-	inline void ApplyRotation(RigidBody * pRigidBody, vec3 & rotation) const
+	inline void ApplyRotation(RigidBody * pRigidBody, glm::vec3 & rotation) const
 	{
 		engine->ApplyRotation(pRigidBody, rotation);
 	}
 
-	inline bool ClearBetweenPoints(vec3 position1, vec3 position2)
+	inline bool ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2)
 	{
 		return engine->ClearBetweenPoints(position1, position2);
 	}

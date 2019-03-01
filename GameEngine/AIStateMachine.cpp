@@ -5,9 +5,9 @@ AIStateMachine::~AIStateMachine()
 {
 }
 
-string AIStateMachine::GetValue(string valueName, string defaultValue)
+std::string AIStateMachine::GetValue(std::string valueName, std::string defaultValue)
 {
-	map<string, string>::iterator it = stateValues.find(valueName);
+	std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
 	if (it != stateValues.end())
 	{
@@ -15,14 +15,14 @@ string AIStateMachine::GetValue(string valueName, string defaultValue)
 	}
 	else
 	{
-		stateValues.insert(pair<string, string>(valueName, defaultValue));
+		stateValues.insert(std::pair<std::string, std::string>(valueName, defaultValue));
 		return defaultValue;
 	}
 }
 
-void AIStateMachine::SetValue(string valueName, string value)
+void AIStateMachine::SetValue(std::string valueName, std::string value)
 {
-	map<string, string>::iterator it = stateValues.find(valueName);
+	std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
 	if (it != stateValues.end())
 	{
@@ -30,7 +30,7 @@ void AIStateMachine::SetValue(string valueName, string value)
 	}
 	else
 	{
-		stateValues.insert(pair<string, string>(valueName, value));
+		stateValues.insert(std::pair<std::string, std::string>(valueName, value));
 	}
 }
 
@@ -39,22 +39,22 @@ void AIStateMachine::MoveOffPath()
 	pathFollower->MoveOffPath();
 }
 
-void AIStateMachine::FindAIPath(vec3 position, quat direction, ComponentPhysics * physicsComponent, vec3 target, float deltaTime)
+void AIStateMachine::FindAIPath(glm::vec3 position, glm::quat direction, ComponentPhysics * physicsComponent, glm::vec3 target, float deltaTime)
 {
 	pathFinder->CalculatePathToPosition(position, direction, physicsComponent, target);
 }
 
-void AIStateMachine::FindAIPath(vec3 position, quat direction, ComponentPhysics * physicsComponent, float deltaTime)
+void AIStateMachine::FindAIPath(glm::vec3 position, glm::quat direction, ComponentPhysics * physicsComponent, float deltaTime)
 {
 	pathFinder->CalculatePath(position, direction, physicsComponent);
 }
 
-void AIStateMachine::FindPath(vec3 position, quat direction, ComponentPhysics * physicsComponent, float deltaTime)
+void AIStateMachine::FindPath(glm::vec3 position, glm::quat direction, ComponentPhysics * physicsComponent, float deltaTime)
 {
 	pathFollower->CalculatePath(position, direction, physicsComponent);
 }
 
-vec3 AIStateMachine::GetNearestPath(vec3 position)
+glm::vec3 AIStateMachine::GetNearestPath(glm::vec3 position)
 {
 	return pathFollower->GetNearestPath(position);
 }

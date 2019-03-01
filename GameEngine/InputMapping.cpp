@@ -1,21 +1,21 @@
 #include "InputManager.h"
 
 #define I(s) #s
-vector<string> InputConverter::GameInputName = { GAMEINPUT(I) };
+std::vector<std::string> InputConverter::GameInputName = { GAMEINPUT(I) };
 #undef I
 
-map<string, int> InputConverter::GameInputMappings = map<string, int>();
+std::map<std::string, int> InputConverter::GameInputMappings = std::map<std::string, int>();
 
 void InputConverter::FirstTimeMapSetUp()
 {
 	for (int i = 0; i < GameInputName.size(); i++)
 	{
-		istringstream stream(GameInputName[i]);
+		std::istringstream stream(GameInputName[i]);
 
-		string inputName;
-		string device;
+		std::string inputName;
+		std::string device;
 		int code;
-		string dummy;
+		std::string dummy;
 
 		stream >> inputName >> dummy >> device >> dummy >> dummy >> dummy >> code >> dummy >> dummy;
 
@@ -36,11 +36,11 @@ void InputConverter::FirstTimeMapSetUp()
 
 		int inputCode = (deviceType << DEVICE | code << CODE);
 
-		GameInputMappings.insert(pair<string, int>(inputName, inputCode));
+		GameInputMappings.insert(std::pair<std::string, int>(inputName, inputCode));
 	}
 }
 
-GameInput InputConverter::StringToEnum(const string & input)
+GameInput InputConverter::StringToEnum(const std::string & input)
 {
 	static bool firstTime = true;
 
@@ -50,7 +50,7 @@ GameInput InputConverter::StringToEnum(const string & input)
 		firstTime = false;
 	}
 
-	const map<string, int>::iterator it = GameInputMappings.find(input);
+	const std::map<std::string, int>::iterator it = GameInputMappings.find(input);
 
 	if (it != GameInputMappings.end())
 	{

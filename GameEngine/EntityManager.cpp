@@ -1,5 +1,6 @@
 #include "EntityManager.h"
-Entity * EntityManager::CreateEntity(const string & entityName)
+
+Entity * EntityManager::CreateEntity(const std::string & entityName)
 {
 	Entity * const entity = new Entity(entityName);
 
@@ -8,7 +9,7 @@ Entity * EntityManager::CreateEntity(const string & entityName)
 	return entity;
 }
 
-Entity * EntityManager::GetEntityByName(const string & entityName)
+Entity * EntityManager::GetEntityByName(const std::string & entityName)
 {
 	if (entityName.compare("") == 0)
 	{
@@ -28,11 +29,11 @@ Entity * EntityManager::GetEntityByName(const string & entityName)
 
 void EntityManager::RemoveEntity(Entity * const entity)
 {
-	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
+	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
 	{
-		map<Entity *, iComponent *> & entities = it->second;
-		const map<Entity *, iComponent *>::iterator find = entities.find(entity);
+		std::map<Entity *, iComponent *> & entities = it->second;
+		const std::map<Entity *, iComponent *>::iterator find = entities.find(entity);
 
 		if (find == entities.end())
 		{
@@ -45,7 +46,7 @@ void EntityManager::RemoveEntity(Entity * const entity)
 		ComponentList[it->first].erase(entity);
 	}
 
-	const vector<Entity *>::iterator object = find(EntityList.begin(), EntityList.end(), entity);
+	const std::vector<Entity *>::iterator object = find(EntityList.begin(), EntityList.end(), entity);
 
 	if (object != EntityList.end())
 	{
@@ -58,24 +59,24 @@ void EntityManager::RemoveEntity(Entity * const entity)
 void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component)
 {
 	ComponentType componentType = component->GetComponentName();
-	const map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
+	const std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
 
 	if (it != ComponentList.end())
 	{
-		ComponentList[componentType].insert(pair<Entity *, iComponent *>(entity, component));
+		ComponentList[componentType].insert(std::pair<Entity *, iComponent *>(entity, component));
 	}
 	else
 	{
-		map<Entity *, iComponent *> ComponentDetails;
-		ComponentList.insert(pair<ComponentType, map<Entity *, iComponent *>>(componentType, ComponentDetails));
-		ComponentList[componentType].insert(pair<Entity *, iComponent *>(entity, component));
+		std::map<Entity *, iComponent *> ComponentDetails;
+		ComponentList.insert(std::pair<ComponentType, std::map<Entity *, iComponent *>>(componentType, ComponentDetails));
+		ComponentList[componentType].insert(std::pair<Entity *, iComponent *>(entity, component));
 	}
 }
 
 void EntityManager::RemoveComponentFromEntity(Entity * const entity, iComponent * const component)
 {
 	const ComponentType componentType = component->GetComponentName();
-	const map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
+	const std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentType);
 
 	if (it != ComponentList.end())
 	{
@@ -92,12 +93,12 @@ void EntityManager::RemoveComponentFromEntity(Entity * const entity, iComponent 
 
 iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const ComponentType componentName)
 {
-	map<ComponentType, map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentName);
+	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it = ComponentList.find(componentName);
 
 	if (it != ComponentList.end())
 	{
-		map<Entity *, iComponent *> & entities = it->second;
-		const map<Entity *, iComponent *>::iterator find = entities.find(entity);
+		std::map<Entity *, iComponent *> & entities = it->second;
+		const std::map<Entity *, iComponent *>::iterator find = entities.find(entity);
 
 		if (find != entities.end())
 		{
@@ -108,9 +109,9 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const Co
 	return nullptr;
 }
 
-vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * const componentName, const int size)
+std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * const componentName, const int size)
 {
-	vector<Entity *> entities;
+	std::vector<Entity *> entities;
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
@@ -149,11 +150,11 @@ void EntityManager::Update()
 
 void EntityManager::Swap()
 {
-	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
+	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
 	{
-		map<Entity *, iComponent *> & entities = it->second;
-		map<Entity *, iComponent *>::iterator component;
+		std::map<Entity *, iComponent *> & entities = it->second;
+		std::map<Entity *, iComponent *>::iterator component;
 
 		for (component = entities.begin(); component != entities.end(); ++component)
 		{
@@ -164,11 +165,11 @@ void EntityManager::Swap()
 
 EntityManager::~EntityManager()
 {
-	map<ComponentType, map<Entity *, iComponent *>>::iterator it;
+	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
 	{
-		map<Entity *, iComponent *> & entities = it->second;
-		map<Entity *, iComponent *>::iterator component;
+		std::map<Entity *, iComponent *> & entities = it->second;
+		std::map<Entity *, iComponent *>::iterator component;
 
 		for (component = entities.begin(); component != entities.end(); ++component)
 		{

@@ -2,16 +2,14 @@
 
 #include "glm/gtc/quaternion.hpp"
 
-using namespace glm;
-
 class QuatAnimKey
 {
 private:
-	quat value;
+	glm::quat value;
 	float time;
 
 public:
-	QuatAnimKey(float pTime, quat pValue) : time(pTime), value(pValue) {}
+	QuatAnimKey(float pTime, glm::quat pValue) : time(pTime), value(pValue) {}
 	~QuatAnimKey();
 
 	inline float GetTime()
@@ -19,7 +17,7 @@ public:
 		return time;
 	}
 
-	inline quat GetValue()
+	inline glm::quat GetValue()
 	{
 		return value;
 	}

@@ -3,9 +3,6 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-using namespace glm;
-using namespace std;
-
 enum class ProjectionType
 {
 	Orthographic,
@@ -16,7 +13,7 @@ class Projection
 {
 private:
 	ProjectionType projectionType;
-	mat4 projectionMat;
+	glm::mat4 projectionMat;
 	float mWidth;
 	float mHeight;
 	float mNear;
@@ -28,7 +25,7 @@ public:
 
 	void Update();
 
-	inline const mat4 & GetProjection() const
+	inline const glm::mat4 & GetProjection() const
 	{
 		return projectionMat;
 	}

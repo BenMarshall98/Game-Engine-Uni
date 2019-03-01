@@ -13,7 +13,6 @@
 #include "ResourceManager.h"
 #include <iostream>
 
-
 SceneManager::~SceneManager()
 {
 	if (swap.joinable())
@@ -57,7 +56,7 @@ void SceneManager::Run()
 	while (tempRunning)
 	{
 		sceneRunning = true;
-		unsigned int maxThreads = thread::hardware_concurrency();
+		unsigned int maxThreads = std::thread::hardware_concurrency();
 
 		windowRunning = true;
 
@@ -82,7 +81,7 @@ void SceneManager::Run()
 				EntityManager::Instance()->Swap();
 				CameraManager::Instance()->Swap();
 
-				thread update = thread(&SceneManager::Update, this);
+				std::thread update = std::thread(&SceneManager::Update, this);
 				Render();
 				update.join();
 				currentWindow->LimitFPS(60);

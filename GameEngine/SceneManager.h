@@ -6,13 +6,11 @@
 #include "Window.h"
 #include "LoggingManager.h"
 
-using namespace std;
-
 class SceneManager
 {
 private:
 	static SceneManager * instance;
-	thread swap;
+	std::thread swap;
 
 	iScene * currentScene;
 	iScene * newScene;

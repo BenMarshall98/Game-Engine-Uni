@@ -5,15 +5,13 @@
 
 #include <vector>
 
-using namespace std;
-
 class ComponentInput : public iComponent
 {
 private:
-	vector<InputFunction> * inputs;
+	std::vector<InputFunction> * inputs;
 
 public:
-	explicit ComponentInput(vector<InputFunction> * const pInputs) : inputs(pInputs) {}
+	explicit ComponentInput(std::vector<InputFunction> * const pInputs) : inputs(pInputs) {}
 	~ComponentInput();
 
 	ComponentInput& operator=(const ComponentInput&) = delete;
@@ -23,7 +21,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline vector<InputFunction> * const GetUpdateInputs() const
+	inline std::vector<InputFunction> * const GetUpdateInputs() const
 	{
 		return inputs;
 	}

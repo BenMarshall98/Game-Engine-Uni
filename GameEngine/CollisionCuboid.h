@@ -2,18 +2,16 @@
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
 
-using namespace glm;
-
 class CollisionCuboid : public CollisionShape
 {
 private:
-	vec3 boundingBox;
+	glm::vec3 boundingBox;
 
 public:
-	explicit CollisionCuboid(vec3 & pBoundingBox) : boundingBox(pBoundingBox) {}
+	explicit CollisionCuboid(glm::vec3 & pBoundingBox) : boundingBox(pBoundingBox) {}
 	~CollisionCuboid();
 
-	inline const vec3 & GetSize() const
+	inline const glm::vec3 & GetSize() const
 	{
 		return boundingBox;
 	}

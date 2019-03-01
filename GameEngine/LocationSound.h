@@ -2,16 +2,14 @@
 
 #include "glm/glm.hpp"
 
-using namespace glm;
-
 class LocationSound
 {
 private:
-	vec3 location;
+	glm::vec3 location;
 	void * source;
 
 public:
-	explicit LocationSound(void * const pSource, const vec3 & pLocation) :
+	explicit LocationSound(void * const pSource, const glm::vec3 & pLocation) :
 		location(pLocation), source(pSource) {}
 	~LocationSound();
 

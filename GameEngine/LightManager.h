@@ -4,9 +4,6 @@
 #include "glm/glm.hpp"
 #include <vector>
 
-using namespace glm;
-using namespace std;
-
 struct ShadowFrameBuffer
 {
 	unsigned int FrameBuffer;
@@ -15,16 +12,16 @@ struct ShadowFrameBuffer
 
 struct Directional
 {
-	vec3 direction;
-	vec3 lightColour;
-	mat4 perspective;
-	mat4 view;
+	glm::vec3 direction;
+	glm::vec3 lightColour;
+	glm::mat4 perspective;
+	glm::mat4 view;
 };
 
 struct PointLight
 {
-	vec3 location;
-	vec3 lightColour;
+	glm::vec3 location;
+	glm::vec3 lightColour;
 	ShadowFrameBuffer * shadowTexture;
 	float farPlane;
 	float attenuation;
@@ -32,9 +29,9 @@ struct PointLight
 
 struct SpotLight
 {
-	vec3 location;
-	vec3 direction;
-	vec3 lightColour;
+	glm::vec3 location;
+	glm::vec3 direction;
+	glm::vec3 lightColour;
 	ShadowFrameBuffer * shadowTexture;
 	float farPlane;
 	float angleInner;
@@ -44,14 +41,14 @@ struct SpotLight
 class LightManager
 {
 private:
-	vector<SpotLight *> renderSpotLights;
-	vector<SpotLight *> spotLights;
+	std::vector<SpotLight *> renderSpotLights;
+	std::vector<SpotLight *> spotLights;
 
-	vector<PointLight *> pointLights;
-	vector<PointLight *> renderPointLights;
+	std::vector<PointLight *> pointLights;
+	std::vector<PointLight *> renderPointLights;
 
 	ShadowFrameBuffer directionalShadowTexture;
-	vector<ShadowFrameBuffer *> pointShadowTexture;
+	std::vector<ShadowFrameBuffer *> pointShadowTexture;
 
 	Directional * directional;
 
@@ -77,17 +74,17 @@ public:
 	LightManager& operator=(const LightManager&) = delete;
 	LightManager(LightManager&) = delete;
 
-	inline vector<SpotLight*> & GetRenderSpotLights()
+	inline std::vector<SpotLight*> & GetRenderSpotLights()
 	{
 		return renderSpotLights;
 	}
 
-	inline vector<PointLight*> & GetRenderPointLights()
+	inline std::vector<PointLight*> & GetRenderPointLights()
 	{
 		return renderPointLights;
 	}
 
-	inline void SetDirectionalLight(const vec3 & pDirection, const vec3 & pLightColour)
+	inline void SetDirectionalLight(const glm::vec3 & pDirection, const glm::vec3 & pLightColour)
 	{
 		delete directional;
 		directional = new Directional();
@@ -116,7 +113,7 @@ public:
 		return directionalShadowTexture;
 	}
 
-	void AddPointLight(const vec3 & pLocation, const vec3 & pLightColour, const float pAttenuation = 0);
+	void AddPointLight(const glm::vec3 & pLocation, const glm::vec3 & pLightColour, const float pAttenuation = 0);
 	void RemovePointLight(PointLight * const pPointLight);
 
 	inline void AddSpotLight(SpotLight * const pSpotLight)
@@ -124,10 +121,10 @@ public:
 		spotLights.push_back(pSpotLight);
 	}
 
-	void AddSpotLight(const vec3 & pLocation, const vec3 & pDirection, const vec3 & pLightColour, const float pAngleInner = 30, const float pAngleOutside = 60);
+	void AddSpotLight(const glm::vec3 & pLocation, const glm::vec3 & pDirection, const glm::vec3 & pLightColour, const float pAngleInner = 30, const float pAngleOutside = 60);
 	void RemoveSpotLight(SpotLight * const pSpotLight);
 
-	void Update(const vec3 & pViewLocation);
+	void Update(const glm::vec3 & pViewLocation);
 	void Render(const int pShaderID);
 
 	~LightManager()

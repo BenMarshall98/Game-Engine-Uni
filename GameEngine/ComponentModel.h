@@ -9,7 +9,7 @@ private:
 	iModel * model;
 
 public:
-	explicit ComponentModel(const string & modelName) : model(ResourceManager::GetModel(modelName))
+	explicit ComponentModel(const std::string & modelName) : model(ResourceManager::GetModel(modelName))
 	{
 	}
 

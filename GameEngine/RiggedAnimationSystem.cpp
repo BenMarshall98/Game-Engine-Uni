@@ -6,12 +6,12 @@ RiggedAnimationSystem::RiggedAnimationSystem()
 {
 	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_RIGGED_ANIMATION };
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
 void RiggedAnimationSystem::RemoveEntity(Entity * pEntity)
 {
-	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{

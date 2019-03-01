@@ -4,19 +4,16 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-using namespace glm;
-
 class Node
 {
 private:
-	mat4 transformation;
-	string name;
+	glm::mat4 transformation;
+	std::string name;
 	Node * parent;
 	
 
 public:
-	Node(string pName, mat4 pTransformation) :
+	Node(std::string pName, glm::mat4 pTransformation) :
 		name(pName), transformation(pTransformation), parent(nullptr) {}
 	~Node() {}
 
@@ -25,7 +22,7 @@ public:
 		parent = pParent;
 	}
 
-	inline string GetName()
+	inline std::string GetName()
 	{
 		return name;
 	}
@@ -35,12 +32,12 @@ public:
 		return parent;
 	}
 
-	inline mat4 GetTransform()
+	inline glm::mat4 GetTransform()
 	{
 		return transformation;
 	}
 
-	inline void SetTransform(mat4 pTransform)
+	inline void SetTransform(glm::mat4 pTransform)
 	{
 		transformation = pTransform;
 	}

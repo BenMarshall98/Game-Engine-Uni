@@ -1,6 +1,5 @@
 #include "GLFWInput.h"
 #include <iostream>
-using namespace std;
 
 GLFWInput::~GLFWInput()
 {

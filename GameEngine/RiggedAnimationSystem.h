@@ -7,12 +7,10 @@
 #include "ComponentRiggedAnimation.h"
 #include <vector>
 
-using namespace std;
-
 class RiggedAnimationSystem : public iSystem
 {
 private:
-	vector<Entity *> EntityList;
+	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
 
 	static void Animate(AnimatedModel * animatedModel, ComponentRiggedAnimation * riggedAnimation);

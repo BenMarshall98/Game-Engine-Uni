@@ -9,8 +9,6 @@ extern "C"
 #include "AIStateMachine.h"
 #include <string>
 
-using namespace std;
-
 class ScriptingManager
 {
 private:
@@ -67,13 +65,13 @@ public:
 	ScriptingManager& operator=(const ScriptingManager&) = delete;
 	ScriptingManager(ScriptingManager&) = delete;
 
-	void LoadLuaFromFile(const string & fileName) const;
+	void LoadLuaFromFile(const std::string & fileName) const;
 
-	void RunScriptFromCollision(const string & function, Entity * entity) const;
+	void RunScriptFromCollision(const std::string & function, Entity * entity) const;
 
-	void RunScriptFromInput(const string & function, Entity * entity, float inputValue, float deltaTime) const;
+	void RunScriptFromInput(const std::string & function, Entity * entity, float inputValue, float deltaTime) const;
 
-	void RunScriptForStateAI(const string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const;
+	void RunScriptForStateAI(const std::string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const;
 
 	~ScriptingManager();
 };

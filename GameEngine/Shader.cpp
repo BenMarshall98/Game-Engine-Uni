@@ -3,10 +3,8 @@
 #include <fstream>
 #include <sstream>
 
-bool Shader::LoadShader(const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram)
+bool Shader::LoadShader(const std::string & vertexProgram, const std::string & fragmentProgram, const std::string & geometryProgram)
 {
-	
-
 	/*
 	The following code is based from the following resource:
 
@@ -41,7 +39,7 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	{
 		char infoLog[512];
 		glGetProgramInfoLog(mShaderID, 512, nullptr, infoLog);
-		string message = "Failed to Link Shaders:" + string(infoLog);
+		std::string message = "Failed to Link Shaders:" + std::string(infoLog);
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
@@ -59,27 +57,27 @@ bool Shader::LoadShader(const string & vertexProgram, const string & fragmentPro
 	return success;
 }
 
-void Shader::ReadShader(const string & fileName, string & shaderProgram)
+void Shader::ReadShader(const std::string & fileName, std::string & shaderProgram)
 {
-	ifstream reader(fileName.c_str());
+	std::ifstream reader(fileName.c_str());
 
 	if (reader.fail())
 	{
-		string message = "File" + fileName + "does not exist";
+		std::string message = "File" + fileName + "does not exist";
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 		shaderProgram = "";
 		return;
 	}
-	ostringstream buffer;
+	std::ostringstream buffer;
 
 	buffer << reader.rdbuf();
 	shaderProgram = buffer.str();
 	reader.close();
 }
 
-int Shader::CompileShader(const string & fileName, GLenum shaderType)
+int Shader::CompileShader(const std::string & fileName, GLenum shaderType)
 {
-	string shaderProgram;
+	std::string shaderProgram;
 	int success, shader;
 
 	ReadShader(fileName, shaderProgram);
@@ -93,7 +91,7 @@ int Shader::CompileShader(const string & fileName, GLenum shaderType)
 	{
 		char infoLog[512];
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-		string message = "Failed to Compile Shader: " + fileName + "\n" + infoLog;
+		std::string message = "Failed to Compile Shader: " + fileName + "\n" + infoLog;
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 

@@ -31,7 +31,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 }
 
-RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit)
+RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit)
 {
 	btCollisionShape* collisionShape;
 
@@ -40,7 +40,7 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, vec3 & position, quat &
 		case Shape::CUBOID:
 			{
 				CollisionCuboid * cuboid = dynamic_cast<CollisionCuboid *>(shape);
-				vec3 size = cuboid->GetSize();
+				glm::vec3 size = cuboid->GetSize();
 				collisionShape = new btBoxShape(btVector3(size.x, size.y, size.z));
 			}
 			break;
@@ -167,7 +167,7 @@ void BulletPhysicsEngine::RemoveRigidBody(RigidBody * pRigidBody)
 	dynamicsWorld->removeRigidBody(rigidBody);
 }
 
-bool BulletPhysicsEngine::ClearBetweenPoints(vec3 position1, vec3 position2)
+bool BulletPhysicsEngine::ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2)
 {
 	btVector3 rayStart = btVector3(position1.x, position1.y, position1.z);
 	btVector3 rayEnd = btVector3(position2.x, position2.y, position2.z);

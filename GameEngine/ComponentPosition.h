@@ -2,32 +2,30 @@
 #include "iComponent.h"
 #include "glm/glm.hpp"
 
-using namespace glm;
-
 class ComponentPosition : public iComponent
 {
 private:
-	vec3 updatePosition;
-	vec3 renderPosition;
+	glm::vec3 updatePosition;
+	glm::vec3 renderPosition;
 
 public:
-	explicit ComponentPosition(vec3 & pPosition) : updatePosition(pPosition), renderPosition(pPosition) {}
+	explicit ComponentPosition(glm::vec3 & pPosition) : updatePosition(pPosition), renderPosition(pPosition) {}
 	~ComponentPosition();
 
 	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
-	inline const vec3 & GetUpdatePosition() const
+	inline const glm::vec3 & GetUpdatePosition() const
 	{
 		return updatePosition;
 	}
 
-	inline void SetUpdatePosition(const vec3 & pPosition)
+	inline void SetUpdatePosition(const glm::vec3 & pPosition)
 	{
 		updatePosition = pPosition;
 	}
 
-	inline const vec3 & GetRenderPosition() const
+	inline const glm::vec3 & GetRenderPosition() const
 	{
 		return renderPosition;
 	}

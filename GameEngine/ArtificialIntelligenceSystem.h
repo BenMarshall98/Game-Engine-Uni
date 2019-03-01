@@ -12,7 +12,7 @@
 class ArtificialIntelligenceSystem : public iSystem
 {
 private:
-	vector<Entity *> EntityList;
+	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
 
 	static void Intelligence(ComponentArtificalIntelligence * artificalIntelligence, Entity * pEntity);

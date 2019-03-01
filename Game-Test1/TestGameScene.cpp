@@ -19,18 +19,18 @@ TestGameScene::TestGameScene() : mSystemManager(SystemManager::Instance()), mPhy
 
 void TestGameScene::Load()
 {
-	cout << "Please pick a level:" << endl;
-	cout << "   1. 3DLevel" << endl;
-	cout << "   2. PlatformLevel" << endl;
+	std::cout << "Please pick a level:" << std::endl;
+	std::cout << "   1. 3DLevel" << std::endl;
+	std::cout << "   2. PlatformLevel" << std::endl;
 
 	unsigned int level = 0;
 
 	while (level > 2 || level == 0)
 	{
-		cin >> level;
+		std::cin >> level;
 	}
 
-	string levelName = "Levels/3DLevel.json";
+	std::string levelName = "Levels/3DLevel.json";
 
 	if (level == 2)
 	{

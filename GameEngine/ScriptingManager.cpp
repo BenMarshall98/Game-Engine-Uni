@@ -12,8 +12,6 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <sstream>
 
-using namespace glm;
-
 extern "C"
 {
 	#include "Lua/lua.h"
@@ -25,7 +23,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 {
 	if (luaVM == nullptr)
 	{
-		string message = "Failed to Initialize lua";
+		std::string message = "Failed to Initialize lua";
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
@@ -66,7 +64,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "FindPath", lua_FindPath);
 	lua_register(luaVM, "GetNearestPath", lua_GetNearestPath);
 	
-	string file = "Scripts/Vector3.lua";
+	std::string file = "Scripts/Vector3.lua";
 	LoadLuaFromFile(file);
 
 	file = "Scripts/Matrix4.lua";
@@ -76,19 +74,19 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	LoadLuaFromFile(file);
 }
 
-void ScriptingManager::LoadLuaFromFile(const string & file) const
+void ScriptingManager::LoadLuaFromFile(const std::string & file) const
 {
 	int iStatus = luaL_loadfile(luaVM, file.c_str());
 	if (iStatus)
 	{
-		string message = lua_tostring(luaVM, -1);
+		std::string message = lua_tostring(luaVM, -1);
 		message = "Error: " + message;
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
 	if (lua_pcall(luaVM, 0, 0, 0))
 	{
-		string message = lua_tostring(luaVM, -1);
+		std::string message = lua_tostring(luaVM, -1);
 		message = "Error: " + message;
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
@@ -220,7 +218,7 @@ int ScriptingManager::lua_GetPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	vec3 vector = positionComponent->GetUpdatePosition();
+	glm::vec3 vector = positionComponent->GetUpdatePosition();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -229,7 +227,7 @@ int ScriptingManager::lua_GetPosition(lua_State * luaState)
 
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -271,7 +269,7 @@ int ScriptingManager::lua_SetPosition(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 position(x, y, z);
+	glm::vec3 position(x, y, z);
 	positionComponent->SetUpdatePosition(position);
 
 	return 0;
@@ -297,7 +295,7 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	vec3 vector = physicsComponent->GetUpdateVelocity();
+	glm::vec3 vector = physicsComponent->GetUpdateVelocity();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -306,7 +304,7 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -348,7 +346,7 @@ int ScriptingManager::lua_SetVelocity(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 velocity(x, y, z);
+	glm::vec3 velocity(x, y, z);
 	physicsComponent->SetUpdateVelocity(velocity);
 
 	return 0;
@@ -372,7 +370,7 @@ int ScriptingManager::lua_GetImpulse(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	vec3 vector = physicsComponent->GetUpdateImpulse();
+	glm::vec3 vector = physicsComponent->GetUpdateImpulse();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -381,7 +379,7 @@ int ScriptingManager::lua_GetImpulse(lua_State * luaState)
 
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -423,7 +421,7 @@ int ScriptingManager::lua_SetImpulse(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 impulse(x, y, z);
+	glm::vec3 impulse(x, y, z);
 	physicsComponent->SetUpdateImpulse(impulse);
 
 	return 0;
@@ -447,7 +445,7 @@ int ScriptingManager::lua_GetRotation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	vec3 vector = physicsComponent->GetUpdateRotation();
+	glm::vec3 vector = physicsComponent->GetUpdateRotation();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -456,7 +454,7 @@ int ScriptingManager::lua_GetRotation(lua_State * luaState)
 
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -498,7 +496,7 @@ int ScriptingManager::lua_SetRotation(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 rotation(x, y, z);
+	glm::vec3 rotation(x, y, z);
 	physicsComponent->SetUpdateRotation(rotation);
 
 	return 0;
@@ -522,7 +520,7 @@ int ScriptingManager::lua_GetDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	quat quaterion = directionComponent->GetUpdateDirection();
+	glm::quat quaterion = directionComponent->GetUpdateDirection();
 
 	lua_getglobal(luaState, "NewQuaternion");
 	lua_pushnumber(luaState, quaterion.x);
@@ -532,7 +530,7 @@ int ScriptingManager::lua_GetDirection(lua_State * luaState)
 
 	if (lua_pcall(luaState, 4, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewQuaterion'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -576,7 +574,7 @@ int ScriptingManager::lua_SetDirection(lua_State * luaState)
 
 	lua_pop(luaState, 4);
 
-	directionComponent->SetUpdateDirection(quat(x, y, z, w));
+	directionComponent->SetUpdateDirection(glm::quat(x, y, z, w));
 
 	return 0;
 }
@@ -626,7 +624,7 @@ int ScriptingManager::lua_CreateTranslationMatrix(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	mat4 translationMatrix = translate(mat4(1), vec3(x, y, z));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1), glm::vec3(x, y, z));
 
 	lua_getglobal(luaState, "NewMatrix4");
 
@@ -640,7 +638,7 @@ int ScriptingManager::lua_CreateTranslationMatrix(lua_State * luaState)
 
 	if (lua_pcall(luaState, 16, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewMatrix4'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -674,7 +672,7 @@ int ScriptingManager::lua_CreateScaleMatrix(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	mat4 scaleMatrix = scale(mat4(1), vec3(x, y, z));
+	glm::mat4 scaleMatrix = glm::scale(glm::mat4(1), glm::vec3(x, y, z));
 
 	lua_getglobal(luaState, "NewMatrix4");
 
@@ -688,7 +686,7 @@ int ScriptingManager::lua_CreateScaleMatrix(lua_State * luaState)
 
 	if (lua_pcall(luaState, 16, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewMatrix4'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -724,7 +722,7 @@ int ScriptingManager::lua_CreateRotationMatrix(lua_State * luaState)
 
 	lua_pop(luaState, 4);
 
-	mat4 rotationMatrix = mat4_cast(quat(x, y, z, w));
+	glm::mat4 rotationMatrix = glm::mat4_cast(glm::quat(x, y, z, w));
 
 	lua_getglobal(luaState, "NewMatrix4");
 
@@ -738,7 +736,7 @@ int ScriptingManager::lua_CreateRotationMatrix(lua_State * luaState)
 
 	if (lua_pcall(luaState, 16, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewMatrix4'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -798,7 +796,7 @@ int ScriptingManager::lua_MultiplyMatrices(lua_State * luaState)
 
 	lua_pop(luaState, 16);
 
-	mat4 matrix1 = mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+	glm::mat4 matrix1 = glm::mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
 
 	lua_getfield(luaState, 2, "x1");
 	lua_getfield(luaState, 2, "y1");
@@ -836,9 +834,9 @@ int ScriptingManager::lua_MultiplyMatrices(lua_State * luaState)
 
 	lua_pop(luaState, 16);
 
-	mat4 matrix2 = mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+	glm::mat4 matrix2 = glm::mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
 
-	mat4 matrix3 = matrix1 * matrix2;
+	glm::mat4 matrix3 = matrix1 * matrix2;
 
 	lua_getglobal(luaState, "NewMatrix4");
 
@@ -852,7 +850,7 @@ int ScriptingManager::lua_MultiplyMatrices(lua_State * luaState)
 
 	if (lua_pcall(luaState, 16, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewMatrix4'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -912,7 +910,7 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 
 	lua_pop(luaState, 16);
 
-	mat4 matrix = mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+	glm::mat4 matrix = glm::mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
 
 	lua_getfield(luaState, 2, "x");
 	lua_getfield(luaState, 2, "y");
@@ -924,9 +922,9 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec4 vector1 = vec4(x, y, z, 1);
+	glm::vec4 vector1 = glm::vec4(x, y, z, 1);
 
-	vec3 vector2 = vector1 * matrix;
+	glm::vec3 vector2 = vector1 * matrix;
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector2.x);
@@ -935,7 +933,7 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -967,7 +965,7 @@ int ScriptingManager::lua_ChangePlayback(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	string playback = lua_tostring(luaState, 2);
+	std::string playback = lua_tostring(luaState, 2);
 
 	if (playback == "Play")
 	{
@@ -999,7 +997,7 @@ int ScriptingManager::lua_PlayAudio(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	string sound = lua_tostring(luaState, 1);
+	std::string sound = lua_tostring(luaState, 1);
 
 	AudioManager::Instance()->PlayAudio(sound);
 
@@ -1016,7 +1014,7 @@ int ScriptingManager::lua_PlayAudioAtLocation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	string sound = lua_tostring(luaState, 1);
+	std::string sound = lua_tostring(luaState, 1);
 
 	lua_getfield(luaState, 2, "x");
 	lua_getfield(luaState, 2, "y");
@@ -1028,7 +1026,7 @@ int ScriptingManager::lua_PlayAudioAtLocation(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 position(x, y, z);
+	glm::vec3 position(x, y, z);
 	
 	AudioManager::Instance()->PlayAudioAtLocation(sound, position);
 
@@ -1045,7 +1043,7 @@ int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	string sound = lua_tostring(luaState, 1);
+	std::string sound = lua_tostring(luaState, 1);
 
 	Entity * entity = (Entity *)lua_touserdata(luaState, 2);
 
@@ -1101,13 +1099,13 @@ int ScriptingManager::lua_GetValue(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	string valueName = lua_tostring(luaState, 2);
-	string valueType = lua_tostring(luaState, 3);
-	string defaultValue = lua_tostring(luaState, 4);
+	std::string valueName = lua_tostring(luaState, 2);
+	std::string valueType = lua_tostring(luaState, 3);
+	std::string defaultValue = lua_tostring(luaState, 4);
 
-	string valueString = stateMachine->GetValue(valueName, defaultValue);
+	std::string valueString = stateMachine->GetValue(valueName, defaultValue);
 
-	istringstream iString(valueString);
+	std::istringstream iString(valueString);
 
 	if (valueType == "integer")
 	{
@@ -1161,10 +1159,10 @@ int ScriptingManager::lua_SetValue(lua_State * luaState)
 		lua_error(luaState);
 	}
 	
-	string valueName = lua_tostring(luaState, 2);
-	string value;
+	std::string valueName = lua_tostring(luaState, 2);
+	std::string value;
 
-	ostringstream oString;
+	std::ostringstream oString;
 
 	if (lua_isboolean(luaState, 3))
 	{
@@ -1247,7 +1245,7 @@ int ScriptingManager::lua_CanSeePlayer(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 guardPosition(x, y, z);
+	glm::vec3 guardPosition(x, y, z);
 
 	lua_getfield(luaState, 2, "x");
 	lua_getfield(luaState, 2, "y");
@@ -1259,7 +1257,7 @@ int ScriptingManager::lua_CanSeePlayer(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 playerPosition(x, y, z);
+	glm::vec3 playerPosition(x, y, z);
 
 	bool clear = PhysicsManager::Instance()->ClearBetweenPoints(guardPosition, playerPosition);
 
@@ -1319,7 +1317,7 @@ int ScriptingManager::lua_OnPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 position(x, y, z);
+	glm::vec3 position(x, y, z);
 
 	bool onPath = stateMachine->OnPath(position);
 
@@ -1356,7 +1354,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 position(x, y, z);
+	glm::vec3 position(x, y, z);
 
 	lua_getfield(luaState, 3, "x");
 	lua_getfield(luaState, 3, "y");
@@ -1370,7 +1368,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 
 	lua_pop(luaState, 4);
 
-	quat direction(w, x, y, z);
+	glm::quat direction(w, x, y, z);
 
 	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 4);
 
@@ -1399,7 +1397,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 
 		lua_pop(luaState, 3);
 
-		vec3 nearestPoint(x, y, z);
+		glm::vec3 nearestPoint(x, y, z);
 
 		float deltaTime = lua_tonumber(luaState, 6);
 
@@ -1437,7 +1435,7 @@ int ScriptingManager::lua_FindPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 position(x, y, z);
+	glm::vec3 position(x, y, z);
 
 	lua_getfield(luaState, 3, "x");
 	lua_getfield(luaState, 3, "y");
@@ -1451,7 +1449,7 @@ int ScriptingManager::lua_FindPath(lua_State * luaState)
 
 	lua_pop(luaState, 4);
 
-	quat direction(w, x, y, z);
+	glm::quat direction(w, x, y, z);
 
 	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 4);
 
@@ -1496,9 +1494,9 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	vec3 position(x, y, z);
+	glm::vec3 position(x, y, z);
 
-	vec3 nearestPath = stateMachine->GetNearestPath(position);
+	glm::vec3 nearestPath = stateMachine->GetNearestPath(position);
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, nearestPath.x);
@@ -1507,7 +1505,7 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 
 	if (lua_pcall(luaState, 3, 1, 0) != 0)
 	{
-		string message = lua_tostring(luaState, -1);
+		std::string message = lua_tostring(luaState, -1);
 		message = "Error running function: 'NewVector3'" + message;
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
@@ -1522,20 +1520,20 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 	return 1;
 }
 
-void ScriptingManager::RunScriptFromCollision(const string & function, Entity * entity) const
+void ScriptingManager::RunScriptFromCollision(const std::string & function, Entity * entity) const
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
 
 	if (lua_pcall(luaVM, 1, 0, 0) != 0)
 	{
-		string message = lua_tostring(luaVM, -1);
+		std::string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;
 		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
 	}
 }
 
-void ScriptingManager::RunScriptFromInput(const string & function, Entity * entity, float inputValue, float deltaTime) const
+void ScriptingManager::RunScriptFromInput(const std::string & function, Entity * entity, float inputValue, float deltaTime) const
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
@@ -1544,13 +1542,13 @@ void ScriptingManager::RunScriptFromInput(const string & function, Entity * enti
 
 	if (lua_pcall(luaVM, 3, 0, 0) != 0)
 	{
-		string message = lua_tostring(luaVM, -1);
+		std::string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;
 		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
 	}
 }
 
-void ScriptingManager::RunScriptForStateAI(const string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const
+void ScriptingManager::RunScriptForStateAI(const std::string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity1);
@@ -1560,7 +1558,7 @@ void ScriptingManager::RunScriptForStateAI(const string & function, Entity * ent
 
 	if (lua_pcall(luaVM, 4, 0, 0) != 0)
 	{
-		string message = lua_tostring(luaVM, -1);
+		std::string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;
 		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
 	}

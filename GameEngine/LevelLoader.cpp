@@ -29,7 +29,7 @@
 #include "LightManager.h"
 #include "SystemManager.h"
 #include "ArtificialIntelligenceSystem.h"
-//#include "RiggedAnimationSystem.h"
+#include "RiggedAnimationSystem.h"
 #include "RenderSystem.h"
 #include "ShadowSystem.h"
 #include "InputSystem.h"
@@ -44,11 +44,11 @@ void LevelLoader::CoinHitPlayer(Entity * const pEntity)
 	EntityManager::Instance()->AddToDeleteList(pEntity);
 }
 
-void LevelLoader::LoadLevelJSON(string & fileName)
+void LevelLoader::LoadLevelJSON(std::string & fileName)
 {
-	ifstream in(fileName);
+	std::ifstream in(fileName);
 
-	string fullFile;
+	std::string fullFile;
 
 	while (!in.eof())
 	{
@@ -60,13 +60,13 @@ void LevelLoader::LoadLevelJSON(string & fileName)
 		fullFile += c;
 	}
 
-	Document d;
+	rapidjson::Document d;
 	d.Parse(fullFile.c_str());
 
 	if (d.HasParseError())
 	{
 		const int loc = d.GetErrorOffset();
-		const string error = GetParseError_En(d.GetParseError());
+		const std::string error = GetParseError_En(d.GetParseError());
 		const int line = GetLine(fullFile, loc);
 		return;
 	}
@@ -128,33 +128,33 @@ void LevelLoader::LoadLevelJSON(string & fileName)
 	}
 }
 
-void LevelLoader::LoadResourcesJSON(const Value& Resources)
+void LevelLoader::LoadResourcesJSON(const rapidjson::Value& Resources)
 {
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	for (it = Resources.Begin(); it != Resources.End(); it++)
 	{
-		const string type = (*it)["Type"].GetString();
-		const string name = (*it)["Name"].GetString();
+		const std::string type = (*it)["Type"].GetString();
+		const std::string name = (*it)["Name"].GetString();
 
 		if (type == "Texture")
 		{
-			const string texture = (*it)["Texture"].GetString();
+			const std::string texture = (*it)["Texture"].GetString();
 			ResourceManager::LoadTexture(name, texture);
 		}
 		else if (type == "Model")
 		{
-			const string model = (*it)["Model"].GetString();
+			const std::string model = (*it)["Model"].GetString();
 			ResourceManager::LoadModel(name, model);
 		}
 		else if (type == "Shader")
 		{
-			const string vertex = (*it)["Vertex"].GetString();
-			const string fragment = (*it)["Fragment"].GetString();
+			const std::string vertex = (*it)["Vertex"].GetString();
+			const std::string fragment = (*it)["Fragment"].GetString();
 
 			if (it->HasMember("Geometry"))
 			{
-				const string geometry = (*it)["Geometry"].GetString();
+				const std::string geometry = (*it)["Geometry"].GetString();
 				ResourceManager::LoadShader(name, vertex, fragment, geometry);
 			}
 			else
@@ -164,56 +164,56 @@ void LevelLoader::LoadResourcesJSON(const Value& Resources)
 		}
 		else if (type == "Audio")
 		{
-			const string audio = (*it)["Audio"].GetString();
+			const std::string audio = (*it)["Audio"].GetString();
 			ResourceManager::LoadAudio(name, audio);
 		}
 	}
 }
 
-void LevelLoader::LoadScriptsJSON(const Value& Scripts)
+void LevelLoader::LoadScriptsJSON(const rapidjson::Value& Scripts)
 {
 	ScriptingManager * const scriptingManager = ScriptingManager::Instance();
 
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	for (it = Scripts.Begin(); it != Scripts.End(); it++)
 	{
-		const string script = (*it).GetString();
+		const std::string script = (*it).GetString();
 
 		scriptingManager->LoadLuaFromFile(script);
 	}
 }
 
-void LevelLoader::LoadEntityTemplatesJSON(const Value& EntityTemplates)
+void LevelLoader::LoadEntityTemplatesJSON(const rapidjson::Value& EntityTemplates)
 {
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	for (it = EntityTemplates.Begin(); it != EntityTemplates.End(); it++)
 	{
-		const string name = (*it)["Name"].GetString();
-		const Value& components = (*it)["Components"];
+		const std::string name = (*it)["Name"].GetString();
+		const rapidjson::Value& components = (*it)["Components"];
 
-		templates.insert(pair<string, const Value&>(name, components));
+		templates.insert(std::pair<std::string, const rapidjson::Value&>(name, components));
 	}
 }
 
-void LevelLoader::LoadEntity(const Value& Entities)
+void LevelLoader::LoadEntity(const rapidjson::Value& Entities)
 {
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	EntityManager *  const entityManager = EntityManager::Instance();
 
 	for (it = Entities.Begin(); it != Entities.End(); it++)
 	{
-		const string name = (*it)["Name"].GetString();
+		const std::string name = (*it)["Name"].GetString();
 
 		Entity * const entity = entityManager->CreateEntity(name);
 
 		if ((*it).HasMember("Template"))
 		{
-			const string templateName = (*it)["Template"].GetString();
+			const std::string templateName = (*it)["Template"].GetString();
 
-			const map<string, const Value&>::iterator it = templates.find(templateName);
+			const std::map<std::string, const rapidjson::Value&>::iterator it = templates.find(templateName);
 			if (it != templates.end())
 			{
 				AddComponentsToEntityJSON(entity, it->second);
@@ -224,32 +224,32 @@ void LevelLoader::LoadEntity(const Value& Entities)
 	}
 }
 
-void LevelLoader::LoadLights(const Value& Lights)
+void LevelLoader::LoadLights(const rapidjson::Value& Lights)
 {
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	LightManager * const lightManager = LightManager::Instance();
 
 	for (it = Lights.Begin(); it != Lights.End(); it++)
 	{
-		const string type = (*it)["Type"].GetString();
+		const std::string type = (*it)["Type"].GetString();
 
-		vec3 colour = vec3(0);
+		glm::vec3 colour = glm::vec3(0);
 
-		const Value& col = (*it)["Colour"];
+		const rapidjson::Value& col = (*it)["Colour"];
 
-		for (SizeType i = 0; i < col.Size(); i++)
+		for (rapidjson::SizeType i = 0; i < col.Size(); i++)
 		{
 			colour[i] = col[i].GetFloat();
 		}
 
 		if (type == "Directional")
 		{
-			vec3 direction = vec3(0);
+			glm::vec3 direction = glm::vec3(0);
 
-			const Value& dir = (*it)["Direction"];
+			const rapidjson::Value& dir = (*it)["Direction"];
 
-			for (SizeType i = 0; i < dir.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < dir.Size(); i++)
 			{
 				direction[i] = dir[i].GetFloat();
 			}
@@ -258,11 +258,11 @@ void LevelLoader::LoadLights(const Value& Lights)
 		}
 		else if (type == "Point")
 		{
-			vec3 location = vec3(0);
+			glm::vec3 location = glm::vec3(0);
 
-			const Value& loc = (*it)["Location"];
+			const rapidjson::Value& loc = (*it)["Location"];
 
-			for (SizeType i = 0; i < loc.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < loc.Size(); i++)
 			{
 				location[i] = loc[i].GetFloat();
 			}
@@ -271,20 +271,20 @@ void LevelLoader::LoadLights(const Value& Lights)
 		}
 		else if (type == "Spot")
 		{
-			vec3 location = vec3(0);
+			glm::vec3 location = glm::vec3(0);
 
-			const Value& loc = (*it)["Location"];
+			const rapidjson::Value& loc = (*it)["Location"];
 
-			for (SizeType i = 0; i < loc.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < loc.Size(); i++)
 			{
 				location[i] = loc[i].GetFloat();
 			}
 			
-			vec3 direction = vec3(0);
+			glm::vec3 direction = glm::vec3(0);
 
-			const Value& dir = (*it)["Direction"];
+			const rapidjson::Value& dir = (*it)["Direction"];
 
-			for (SizeType i = 0; i < dir.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < dir.Size(); i++)
 			{
 				direction[i] = dir[i].GetFloat();
 			}
@@ -297,16 +297,16 @@ void LevelLoader::LoadLights(const Value& Lights)
 	}
 }
 
-void LevelLoader::LoadMapJSON(const Value& Map)
+void LevelLoader::LoadMapJSON(const rapidjson::Value& Map)
 {
-	const string type = Map["Type"].GetString();
+	const std::string type = Map["Type"].GetString();
 
-	const string file = Map["File"].GetString();
-	vec2 topLeftCoord = vec2(0);
+	const std::string file = Map["File"].GetString();
+	glm::vec2 topLeftCoord = glm::vec2(0);
 
-	const Value& position = Map["TopLeftCoord"];
+	const rapidjson::Value& position = Map["TopLeftCoord"];
 
-	for (SizeType i = 0; i < position.Size(); i++)
+	for (rapidjson::SizeType i = 0; i < position.Size(); i++)
 	{
 		topLeftCoord[i] = position[i].GetFloat();
 	}
@@ -329,7 +329,7 @@ void LevelLoader::LoadMapJSON(const Value& Map)
 	}
 }
 
-void LevelLoader::LoadViewJSON(const Value& View)
+void LevelLoader::LoadViewJSON(const rapidjson::Value& View)
 {
 	if (View.HasMember("Perspective"))
 	{
@@ -348,9 +348,9 @@ void LevelLoader::LoadViewJSON(const Value& View)
 	}
 }
 
-void LevelLoader::LoadPerspectiveJSON(const Value& Perspective)
+void LevelLoader::LoadPerspectiveJSON(const rapidjson::Value& Perspective)
 {
-	const string type = Perspective["Type"].GetString();
+	const std::string type = Perspective["Type"].GetString();
 
 	const float minDist = Perspective["MinDistance"].GetFloat();
 	const float maxDist = Perspective["MaxDistance"].GetFloat();
@@ -369,17 +369,17 @@ void LevelLoader::LoadPerspectiveJSON(const Value& Perspective)
 	}
 }
 
-void LevelLoader::LoadCameraJSON(const Value& pCamera)
+void LevelLoader::LoadCameraJSON(const rapidjson::Value& pCamera)
 {
 	//TODO: get camera into a camera manager
 
-	const string type = pCamera["Type"].GetString();
+	const std::string type = pCamera["Type"].GetString();
 
 	const float minDist = pCamera["MinDistance"].GetFloat();
 	const float maxDist = pCamera["MaxDistance"].GetFloat();
 	const float defDist = pCamera["DefaultDistance"].GetFloat();
 	const float followRate = pCamera["FollowRate"].GetFloat();
-	const string follow = pCamera["Follow"].GetString();
+	const std::string follow = pCamera["Follow"].GetString();
 
 	Entity * const entity = EntityManager::Instance()->GetEntityByName(follow);
 
@@ -396,14 +396,14 @@ void LevelLoader::LoadCameraJSON(const Value& pCamera)
 	
 }
 
-void LevelLoader::LoadPlatformerMap(const string & file, const vec2 & topLeftCoord)
+void LevelLoader::LoadPlatformerMap(const std::string & file, const glm::vec2 & topLeftCoord)
 {
 	int x = topLeftCoord.x;
 	int y = topLeftCoord.y;
 
 	EntityManager * const entityManager = EntityManager::Instance();
 
-	ifstream in;
+	std::ifstream in;
 	in.open(file);
 
 	while (!in.eof())
@@ -417,13 +417,13 @@ void LevelLoader::LoadPlatformerMap(const string & file, const vec2 & topLeftCoo
 		}
 		else
 		{		
-			const map<string, const Value&>::iterator it = templates.find(string(1, letter));
+			const std::map<std::string, const rapidjson::Value&>::iterator it = templates.find(std::string(1, letter));
 			if (it != templates.end())
 			{
 				Entity * const newEntity = entityManager->CreateEntity();
 				AddComponentsToEntityJSON(newEntity, it->second);
 
-				vec3 position = position = vec3(x, y, 0);
+				glm::vec3 position = position = glm::vec3(x, y, 0);
 
 				entityManager->AddComponentToEntity(newEntity, new ComponentPosition(position));
 			}
@@ -432,14 +432,14 @@ void LevelLoader::LoadPlatformerMap(const string & file, const vec2 & topLeftCoo
 	}
 }
 
-void LevelLoader::Load3DMap(const string & file, const vec2 & topLeftCoord)
+void LevelLoader::Load3DMap(const std::string & file, const glm::vec2 & topLeftCoord)
 {
 	float x = topLeftCoord.x;
 	float y = topLeftCoord.y;
 
 	EntityManager * const entityManager = EntityManager::Instance();
 
-	ifstream in;
+	std::ifstream in;
 	in.open(file);
 
 	while (!in.eof())
@@ -453,13 +453,13 @@ void LevelLoader::Load3DMap(const string & file, const vec2 & topLeftCoord)
 		}
 		else
 		{
-			const map<string, const Value&>::iterator it = templates.find(string(1, letter));
+			const std::map<std::string, const rapidjson::Value&>::iterator it = templates.find(std::string(1, letter));
 			if (it != templates.end())
 			{
 				Entity * const newEntity = entityManager->CreateEntity();
 				AddComponentsToEntityJSON(newEntity, it->second);
 
-				vec3 position = position = vec3(x, 0.5, y);
+				glm::vec3 position = position = glm::vec3(x, 0.5, y);
 
 				entityManager->AddComponentToEntity(newEntity, new ComponentPosition(position));
 			}
@@ -468,33 +468,33 @@ void LevelLoader::Load3DMap(const string & file, const vec2 & topLeftCoord)
 	}
 }
 
-void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& components)
+void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Value& components)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
 
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	for (it = components.Begin(); it != components.End(); it++)
 	{
-		const string component = (*it)["Component"].GetString();
+		const std::string component = (*it)["Component"].GetString();
 
 		if (component == "Model")
 		{
-			const string model = (*it)["Model"].GetString();
+			const std::string model = (*it)["Model"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentModel(model));
 		}
 		else if (component == "Shader")
 		{
-			const string shader = (*it)["Shader"].GetString();
+			const std::string shader = (*it)["Shader"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentShader(shader));
 		}
 		else if (component == "Position")
 		{
-			vec3 position = vec3(0);
+			glm::vec3 position = glm::vec3(0);
 
-			const Value& pos = (*it)["Position"];
+			const rapidjson::Value& pos = (*it)["Position"];
 
-			for (SizeType i = 0; i < pos.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < pos.Size(); i++)
 			{
 				position[i] = pos[i].GetFloat();
 			}
@@ -503,11 +503,11 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "Direction")
 		{
-			vec3 direction = vec3(0);
+			glm::vec3 direction = glm::vec3(0);
 
-			const Value& dir = (*it)["Direction"];
+			const rapidjson::Value& dir = (*it)["Direction"];
 
-			for (SizeType i = 0; i < dir.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < dir.Size(); i++)
 			{
 				direction[i] = dir[i].GetFloat();
 			}
@@ -520,7 +520,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			PathFollowing * pathfollower = nullptr;
 			PathFinding * pathFinding = nullptr;
 			AIStateMachine * stateMachine = nullptr;
-			string target = "";
+			std::string target = "";
 
 			if ((*it).HasMember("Target"))
 			{
@@ -529,16 +529,16 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 			if ((*it).HasMember("PathFollowing"))
 			{
-				vector<PathNode *> pathNodes;
-				Value::ConstValueIterator path;
+				std::vector<PathNode *> pathNodes;
+				rapidjson::Value::ConstValueIterator path;
 
 				for (path = (*it)["PathFollowing"].Begin(); path != (*it)["PathFollowing"].End(); path++)
 				{
-					vec3 position = vec3(0);
+					glm::vec3 position = glm::vec3(0);
 
-					const Value& pos = (*path)["Position"];
+					const rapidjson::Value& pos = (*path)["Position"];
 
-					for (SizeType i = 0; i < pos.Size(); i++)
+					for (rapidjson::SizeType i = 0; i < pos.Size(); i++)
 					{
 						position[i] = pos[i].GetFloat();
 					}
@@ -557,14 +557,14 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			
 			if ((*it).HasMember("PathFinding"))
 			{
-				const Value& pathFind = (*it)["PathFinding"];
-				string map = pathFind["Map"].GetString();
+				const rapidjson::Value& pathFind = (*it)["PathFinding"];
+				std::string map = pathFind["Map"].GetString();
 
-				vec2 position = vec3(0);
+				glm::vec2 position = glm::vec3(0);
 
-				const Value& pos = pathFind["TopLeftCoord"];
+				const rapidjson::Value& pos = pathFind["TopLeftCoord"];
 
-				for (SizeType i = 0; i < pos.Size(); i++)
+				for (rapidjson::SizeType i = 0; i < pos.Size(); i++)
 				{
 					position[i] = pos[i].GetFloat();
 				}
@@ -574,8 +574,8 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 			if ((*it).HasMember("StateMachine"))
 			{
-				const Value& state = (*it)["StateMachine"];
-				string startFunction = state["Function"].GetString();
+				const rapidjson::Value& state = (*it)["StateMachine"];
+				std::string startFunction = state["Function"].GetString();
 
 				stateMachine = new AIStateMachine(startFunction);
 			}
@@ -584,8 +584,8 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "Audio")
 		{
-			const string name = (*it)["Audio"].GetString();
-			const string playback = (*it)["Playback"].GetString();
+			const std::string name = (*it)["Audio"].GetString();
+			const std::string playback = (*it)["Playback"].GetString();
 
 			if (playback == "Play")
 			{
@@ -603,9 +603,9 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		else if (component == "Physics")
 		{
 			CollisionShape * collisionShape = nullptr;
-			const Value& shape = (*it)["Shape"];
+			const rapidjson::Value& shape = (*it)["Shape"];
 
-			const string shapeType = shape["Type"].GetString();
+			const std::string shapeType = shape["Type"].GetString();
 
 			if (shapeType == "Sphere")
 			{
@@ -614,11 +614,11 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			}
 			else if (shapeType == "Cuboid")
 			{
-				vec3 size = vec3(0);
+				glm::vec3 size = glm::vec3(0);
 
-				const Value& sizeLoc = shape["Size"];
+				const rapidjson::Value& sizeLoc = shape["Size"];
 
-				for (SizeType i = 0; i < sizeLoc.Size(); i++)
+				for (rapidjson::SizeType i = 0; i < sizeLoc.Size(); i++)
 				{
 					size[i] = sizeLoc[i].GetFloat();
 				}
@@ -627,13 +627,13 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 			}
 
 			const float mass = (*it)["Mass"].GetFloat();
-			const string type = (*it)["Type"].GetString();
+			const std::string type = (*it)["Type"].GetString();
 
-			vec3 angularLimit = vec3(0);
+			glm::vec3 angularLimit = glm::vec3(0);
 
-			const Value& angLimit = (*it)["AngularLimit"];
+			const rapidjson::Value& angLimit = (*it)["AngularLimit"];
 
-			for (SizeType i = 0; i < angLimit.Size(); i++)
+			for (rapidjson::SizeType i = 0; i < angLimit.Size(); i++)
 			{
 				angularLimit[i] = angLimit[i].GetFloat();
 			}
@@ -646,18 +646,18 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 
 				if ((*it).HasMember("CollisionFunctions"))
 				{
-					map<EntityType, string> * collisionFunctions = new map<EntityType, string>();
+					std::map<EntityType, std::string> * collisionFunctions = new std::map<EntityType, std::string>();
 
-					Value::ConstValueIterator col;
+					rapidjson::Value::ConstValueIterator col;
 
 					for (col = (*it)["CollisionFunctions"].Begin(); col != (*it)["CollisionFunctions"].End(); col++)
 					{
-						const string entityType = (*col)["EntityType"].GetString();
-						const string function = (*col)["Function"].GetString();
+						const std::string entityType = (*col)["EntityType"].GetString();
+						const std::string function = (*col)["Function"].GetString();
 
 						EntityType cEntityType = ComponentPhysics::StringToEnum(entityType);
 
-						collisionFunctions->insert(pair<EntityType, string>(cEntityType, function));
+						collisionFunctions->insert(std::pair<EntityType, std::string>(cEntityType, function));
 					}
 
 					entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit, response, collisionFunctions));
@@ -672,18 +672,18 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "Texture")
 		{
-			const string texture = (*it)["Texture"].GetString();
+			const std::string texture = (*it)["Texture"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentTexture(texture));
 		}
 		else if (component == "NormalTexture")
 		{
-			const string texture = (*it)["Texture"].GetString();
+			const std::string texture = (*it)["Texture"].GetString();
 			entityManager->AddComponentToEntity(entity, new ComponentNormalTexture(texture));
 		}
 		else if (component == "RiggedAnimation")
 		{
-			const string animation = (*it)["Animation"].GetString();
-			const string playback = (*it)["Playback"].GetString();
+			const std::string animation = (*it)["Animation"].GetString();
+			const std::string playback = (*it)["Playback"].GetString();
 			RiggedAnimationState playbackState;
 
 			if (playback == "Play")
@@ -703,38 +703,38 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const Value& compon
 		}
 		else if (component == "ShadowShader")
 		{
-			string direction = (*it)["Direction"].GetString();
-			string point = (*it)["Point"].GetString();
+			std::string direction = (*it)["Direction"].GetString();
+			std::string point = (*it)["Point"].GetString();
 
 			entityManager->AddComponentToEntity(entity, new ComponentShadowShader(direction, point));
 		}
 		else if (component == "Input")
 		{
-			vector<InputFunction> * const playerInputs = LoadInputsJSON((*it)["Inputs"]);
+			std::vector<InputFunction> * const playerInputs = LoadInputsJSON((*it)["Inputs"]);
 			entityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
 		}
 	}
 }
 
-vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
+std::vector<InputFunction> * LevelLoader::LoadInputsJSON(const rapidjson::Value& Inputs)
 {
-	vector<InputFunction> * playerInputs = new vector<InputFunction>();
+	std::vector<InputFunction> * playerInputs = new std::vector<InputFunction>();
 
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	for (it = Inputs.Begin(); it != Inputs.End(); it++)
 	{
-		const string function = (*it)["Function"].GetString();
+		const std::string function = (*it)["Function"].GetString();
 
 		InputFunction inputFunction = InputFunction(function);
 
-		const Value& keys = (*it)["Input"];
+		const rapidjson::Value& keys = (*it)["Input"];
 
-		Value::ConstValueIterator key;
+		rapidjson::Value::ConstValueIterator key;
 
 		for (key = keys.Begin(); key != keys.End(); key++)
 		{
-			const string inputName = key->GetString();
+			const std::string inputName = key->GetString();
 			const GameInput gameInput = InputConverter::StringToEnum(inputName);
 			inputFunction.AddInput(gameInput);
 		}
@@ -745,13 +745,13 @@ vector<InputFunction> * LevelLoader::LoadInputsJSON(const Value& Inputs)
 	return playerInputs;
 }
 
-void LevelLoader::LoadSystems(const Value& Systems)
+void LevelLoader::LoadSystems(const rapidjson::Value& Systems)
 {
 	SystemManager * systemManager = SystemManager::Instance();
 
 	if (Systems.HasMember("Render"))
 	{
-		vector<iSystem *> renderSystems = CreateSystems(Systems["Render"]);
+		std::vector<iSystem *> renderSystems = CreateSystems(Systems["Render"]);
 
 		for (int i = 0; i < renderSystems.size(); i++)
 		{
@@ -761,7 +761,7 @@ void LevelLoader::LoadSystems(const Value& Systems)
 
 	if (Systems.HasMember("Update"))
 	{
-		vector<iSystem *> updateSystems = CreateSystems(Systems["Update"]);
+		std::vector<iSystem *> updateSystems = CreateSystems(Systems["Update"]);
 
 		for (int i = 0; i < updateSystems.size(); i++)
 		{
@@ -770,19 +770,19 @@ void LevelLoader::LoadSystems(const Value& Systems)
 	}
 }
 
-vector<iSystem *> LevelLoader::CreateSystems(const Value& pSystems)
+std::vector<iSystem *> LevelLoader::CreateSystems(const rapidjson::Value& pSystems)
 {
-	vector<iSystem *> systems;
+	std::vector<iSystem *> systems;
 
-	Value::ConstValueIterator it;
+	rapidjson::Value::ConstValueIterator it;
 
 	for (it = pSystems.Begin(); it != pSystems.End(); it++)
 	{
-		const string system = (*it)["System"].GetString();
+		const std::string system = (*it)["System"].GetString();
 
 		if (system == "RiggedAnimation")
 		{
-			//systems.push_back(new RiggedAnimationSystem());
+			systems.push_back(new RiggedAnimationSystem());
 		}
 		else if (system == "Shadow")
 		{
@@ -813,7 +813,7 @@ vector<iSystem *> LevelLoader::CreateSystems(const Value& pSystems)
 	return systems;
 }
 
-int LevelLoader::GetLine(string & file, const int location)
+int LevelLoader::GetLine(std::string & file, const int location)
 {
 	int count = 0;
 
@@ -828,4 +828,4 @@ int LevelLoader::GetLine(string & file, const int location)
 	return count;
 }
 
-map<string, const Value&> LevelLoader::templates;
+std::map<std::string, const rapidjson::Value&> LevelLoader::templates;

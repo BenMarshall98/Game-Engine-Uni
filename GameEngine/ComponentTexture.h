@@ -8,7 +8,7 @@ private:
 	Texture * texture;
 
 public:
-	explicit ComponentTexture(const string & textureName) : texture(ResourceManager::GetTexture(textureName))
+	explicit ComponentTexture(const std::string & textureName) : texture(ResourceManager::GetTexture(textureName))
 	{
 	}
 

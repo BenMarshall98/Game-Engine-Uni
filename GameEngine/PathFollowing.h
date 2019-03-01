@@ -7,36 +7,33 @@
 #include "glm/gtx/quaternion.hpp"
 #include "ComponentPhysics.h"
 
-using namespace glm;
-using namespace std;
-
 struct PathNode
 {
 	PathNode() : radius(0) {}
-	vec3 position;
+	glm::vec3 position;
 	float radius;
 };
 
 class PathFollowing
 {
 private:
-	vector<PathNode *> pathNodes;
+	std::vector<PathNode *> pathNodes;
 	int currentNode;
 	bool onPath;
 
 public:
-	explicit PathFollowing(vector<PathNode *> & pPathNodes) : pathNodes(pPathNodes), currentNode(-1), onPath(true) {}
+	explicit PathFollowing(std::vector<PathNode *> & pPathNodes) : pathNodes(pPathNodes), currentNode(-1), onPath(true) {}
 	~PathFollowing();
 
-	void CalculatePath(const vec3 & currentPosition, const quat & currentDirection, ComponentPhysics * const physicsComponent);
+	void CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent);
 
 	inline void MoveOffPath()
 	{
 		onPath = false;
 	}
 
-	bool OnPath(vec3 position);
+	bool OnPath(glm::vec3 position);
 
-	vec3 GetNearestPath(vec3 position);
+	glm::vec3 GetNearestPath(glm::vec3 position);
 };
 

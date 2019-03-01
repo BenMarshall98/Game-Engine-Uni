@@ -6,7 +6,7 @@
 class FollowPlayerCamera : public Camera
 {
 private:
-	vec3 lastPosition;
+	glm::vec3 lastPosition;
 	Entity * mEntity;
 	float mDistanceMin;
 	float mDistanceMax;

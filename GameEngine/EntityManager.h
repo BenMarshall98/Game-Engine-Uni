@@ -8,15 +8,13 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
 class EntityManager
 {
 private:
 	static EntityManager * instance;
-	map<ComponentType, map<Entity *, iComponent *>> ComponentList;
-	vector<Entity *> EntityList;
-	vector<Entity *> ToDeleteList;
+	std::map<ComponentType, std::map<Entity *, iComponent *>> ComponentList;
+	std::vector<Entity *> EntityList;
+	std::vector<Entity *> ToDeleteList;
 
 	void RemoveEntity(Entity* entity);
 
@@ -35,8 +33,8 @@ public:
 	EntityManager(const EntityManager&) = delete;
 	EntityManager& operator=(const EntityManager&) = delete;
 
-	Entity* CreateEntity(const string & entityName = string(""));
-	Entity* GetEntityByName(const string & entityName);
+	Entity* CreateEntity(const std::string & entityName = std::string(""));
+	Entity* GetEntityByName(const std::string & entityName);
 	
 	inline void AddToDeleteList(Entity * const entity)
 	{
@@ -46,7 +44,7 @@ public:
 	void AddComponentToEntity(Entity * entity, iComponent * component);
 	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
-	vector<Entity *> GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
+	std::vector<Entity *> GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
 
 	void Update();
 	void Swap();

@@ -8,33 +8,31 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
 class ResourceManager
 {
 	private:
-		static vector<string> usedModels;
-		static vector<string> usedTextures;
-		static vector<string> usedShaders;
-		static vector<string> usedAudios;
+		static std::vector<std::string> usedModels;
+		static std::vector<std::string> usedTextures;
+		static std::vector<std::string> usedShaders;
+		static std::vector<std::string> usedAudios;
 
-		static map<string, iModel *> modelList;
-		static map<string, Texture *> textureList;
-		static map<string, Shader *> shaderList;
-		static map<string, void *> audioBufferList;
+		static std::map<std::string, iModel *> modelList;
+		static std::map<std::string, Texture *> textureList;
+		static std::map<std::string, Shader *> shaderList;
+		static std::map<std::string, void *> audioBufferList;
 
 		ResourceManager(void) {};
 	
 	public:
-		static void LoadModel(const string & modelName, const string & fileName);
-		static void LoadTexture(const string & textureName, const string & fileName);
-		static void LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram = "");
-		static void LoadAudio(const string & audioName, const string & fileName);
+		static void LoadModel(const std::string & modelName, const std::string & fileName);
+		static void LoadTexture(const std::string & textureName, const std::string & fileName);
+		static void LoadShader(const std::string & shaderName, const std::string & vertexProgram, const std::string & fragmentProgram, const std::string & geometryProgram = "");
+		static void LoadAudio(const std::string & audioName, const std::string & fileName);
 
-		static iModel * GetModel(const string & model);
-		static Shader * GetShader(const string & shader);
-		static Texture * GetTexture(const string & texture);
-		static void * GetAudio(const string & audio);
+		static iModel * GetModel(const std::string & model);
+		static Shader * GetShader(const std::string & shader);
+		static Texture * GetTexture(const std::string & texture);
+		static void * GetAudio(const std::string & audio);
 
 		static void ClearResources();
 };

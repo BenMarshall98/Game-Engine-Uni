@@ -20,10 +20,10 @@ void Projection::Update()
 
 	if (projectionType == ProjectionType::Orthographic)
 	{
-		projectionMat = ortho(0.0f, mWidth, 0.0f, mHeight, mNear, mFar);
+		projectionMat = glm::ortho(0.0f, mWidth, 0.0f, mHeight, mNear, mFar);
 	}
 	else if (projectionType == ProjectionType::Perspective)
 	{
-		projectionMat = perspective(radians(45.0f), mWidth / mHeight, mNear, mFar);
+		projectionMat = glm::perspective(glm::radians(45.0f), mWidth / mHeight, mNear, mFar);
 	}
 }

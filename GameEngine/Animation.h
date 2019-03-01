@@ -5,18 +5,16 @@
 
 #include "AnimNode.h"
 
-using namespace std;
-
 class Animation
 {
 private:
-	string name;
+	std::string name;
 	float startTime;
 	float endTime;
-	vector<AnimNode *> animNodes;
+	std::vector<AnimNode *> animNodes;
 
 public:
-	Animation(string pName, float pStartTime, float pEndTime, vector<AnimNode *> pAnimNodes) :
+	Animation(std::string pName, float pStartTime, float pEndTime, std::vector<AnimNode *> pAnimNodes) :
 		name(pName), startTime(pStartTime), endTime(pEndTime), animNodes(pAnimNodes)
 	{
 
@@ -24,7 +22,7 @@ public:
 
 	~Animation();
 
-	inline string GetName()
+	inline std::string GetName()
 	{
 		return name;
 	}
@@ -39,7 +37,7 @@ public:
 		return endTime;
 	}
 
-	inline vector<AnimNode *> GetAnimNodes()
+	inline std::vector<AnimNode *> GetAnimNodes()
 	{
 		return animNodes;
 	}

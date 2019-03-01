@@ -4,25 +4,20 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
 
-#include "assimp/scene.h"
 #include "Mesh.h"
 #include "Animation.h"
 #include "Bone.h"
 
-using namespace Assimp;
-using namespace std;
-using namespace glm;
-
 class AnimatedModel : public iModel
 {
 private:
-	vector<Mesh *> meshes;
-	vector<Animation *> animations;
-	vector<Bone *> bones;
-	vector<mat4> boneMats;
-	vector<Node *> nodes;
-	vector<string> bonesLoc;
-	mat4 globalInverse;
+	std::vector<Mesh *> meshes;
+	std::vector<Animation *> animations;
+	std::vector<Bone *> bones;
+	std::vector<glm::mat4> boneMats;
+	std::vector<Node *> nodes;
+	std::vector<std::string> bonesLoc;
+	glm::mat4 globalInverse;
 
 	float time = 0;
 
@@ -31,7 +26,7 @@ public:
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			string bone = "Bones[" + to_string(i) + ']';
+			std::string bone = "Bones[" + std::to_string(i) + ']';
 			bonesLoc.push_back(bone);
 		}
 	}
@@ -42,17 +37,17 @@ public:
 		meshes.push_back(mesh);
 	}
 
-	inline void SetBones(vector<Bone *> pBones)
+	inline void SetBones(std::vector<Bone *> pBones)
 	{
 		bones = pBones;
 	}
 
-	inline void SetGlobalInverse(mat4 pGlobalInverse)
+	inline void SetGlobalInverse(glm::mat4 pGlobalInverse)
 	{
 		globalInverse = pGlobalInverse;
 	}
 
-	inline void SetNodes(vector<Node *> pNodes)
+	inline void SetNodes(std::vector<Node *> pNodes)
 	{
 		nodes = pNodes;
 	}
@@ -74,10 +69,7 @@ public:
 
 	void Render(Shader * shader)override;
 
-	static aiMatrix4x4 GLMMat4ToAi(mat4 mat);
-	static mat4 AiToGLMMat4(aiMatrix4x4& mat);
-
-	Bone * FindBone(string name);
+	Bone * FindBone(std::string name);
 
 	void UpdateBoneMatsVector();
 

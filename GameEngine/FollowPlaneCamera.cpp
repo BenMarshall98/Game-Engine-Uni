@@ -17,23 +17,23 @@ void FollowPlaneCamera::Update()
 {
 	iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(mEntity, ComponentType::COMPONENT_POSITION);
 
-	const vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
+	const glm::vec3 playerPosition = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
-	vec3 cameraPosition = vec3(playerPosition.x, playerPosition.y, playerPosition.z + mDistanceCurrent);
-	const vec3 upDirection = vec3(0, 1, 0);
+	glm::vec3 cameraPosition = glm::vec3(playerPosition.x, playerPosition.y, playerPosition.z + mDistanceCurrent);
+	const glm::vec3 upDirection = glm::vec3(0, 1, 0);
 
 	static bool firstTime = true;
 
 	if (!firstTime)
 	{
-		cameraPosition = mix(lastPosition, cameraPosition, mInterpolateRate);
+		cameraPosition = glm::mix(lastPosition, cameraPosition, mInterpolateRate);
 	}
 	else
 	{
 		firstTime = !firstTime;
 	}
 
-	const vec3 direction = normalize(playerPosition - cameraPosition);
+	const glm::vec3 direction = normalize(playerPosition - cameraPosition);
 
 	SetLookAt(direction);
 	SetPosition(cameraPosition);

@@ -9,13 +9,10 @@
 #include <string>
 #include <math.h>
 
-using namespace std;
-using namespace glm;
-
 struct StarNode
 {
 	StarNode() : parent(nullptr), travelTo(0), travelFrom(0), weight(0) {}
-	vec3 position;
+	glm::vec3 position;
 	float travelTo;
 	float travelFrom;
 	float weight;
@@ -25,20 +22,20 @@ struct StarNode
 class PathFinding
 {
 private:
-	vector<vector<int>> map;
-	const vector<ivec2> directions{ ivec2(1,0), ivec2(-1, 0), ivec2(0, 1), ivec2(0, -1) };
-	vec2 topLeftCoord;
+	std::vector< std::vector<int>> map;
+	const std::vector<glm::ivec2> directions{ glm::ivec2(1,0), glm::ivec2(-1, 0), glm::ivec2(0, 1), glm::ivec2(0, -1) };
+	glm::vec2 topLeftCoord;
 	Entity * target;
 
-	ivec2 CalculateMapLoc(vec3 position);
+	glm::ivec2 CalculateMapLoc(glm::vec3 position);
 
-	void BuildPath(vec3 cuurentPosition, quat currentDirection, ComponentPhysics * componentPhysics, vec3 targetLocation);
+	void BuildPath(glm::vec3 cuurentPosition, glm::quat currentDirection, ComponentPhysics * componentPhysics, glm::vec3 targetLocation);
 
 public:
-	PathFinding(string & pTarget, string & pFile, vec2 & pTopLeftCoord);
+	PathFinding(std::string & pTarget, std::string & pFile, glm::vec2 & pTopLeftCoord);
 	~PathFinding();
 
-	void CalculatePath(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);
-	void CalculatePathToPosition(vec3 cuurentPosition, quat currentDirection, ComponentPhysics * componentPhysics, vec3 targetLocation);
+	void CalculatePath(glm::vec3 currentPosition, glm::quat currentDirection, ComponentPhysics * physicsComponent);
+	void CalculatePathToPosition(glm::vec3 cuurentPosition, glm::quat currentDirection, ComponentPhysics * componentPhysics, glm::vec3 targetLocation);
 };
 

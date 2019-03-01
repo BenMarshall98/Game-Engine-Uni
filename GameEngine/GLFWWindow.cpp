@@ -4,8 +4,6 @@
 #include <Windows.h>
 #include <iostream>
 
-using namespace std;
-
 int GLFWWindow::height = 600;
 int GLFWWindow::width = 800;
 
@@ -88,7 +86,7 @@ void GLFWWindow::LimitFPS(const float FPS)
 
 	if (count == 60)
 	{
-		string title = "Game Engine: " + to_string((int)average) + "fps";
+		std::string title = "Game Engine: " + std::to_string((int)average) + "fps";
 		glfwSetWindowTitle(gameWindow, title.c_str());
 		average = 0;
 		count = 0;

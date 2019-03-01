@@ -6,27 +6,25 @@
 #include <vector>
 #include "InputMapping.h"
 
-using namespace glm;
-
 class Camera
 {
 	using CameraFunction = void(*)(Camera *, float, float);
 
 private:
-	mat4 renderViewMatrix;
-	mat4 updateViewMatrix;
-	vec3 position;
-	vec3 lookAt;
-	vec3 up;
+	glm::mat4 renderViewMatrix;
+	glm::mat4 updateViewMatrix;
+	glm::vec3 position;
+	glm::vec3 lookAt;
+	glm::vec3 up;
 
-	map<CameraFunction, vector<GameInput>> * mCameraFunctions;
+	std::map<CameraFunction, std::vector<GameInput>> * mCameraFunctions;
 
 public:
-	explicit Camera(map<CameraFunction, vector<GameInput>> * const pCameraFunctions) :position(vec3(0, 0, 0)), lookAt(vec3(0, 0, -1)), up(vec3(0, 1, 0)), mCameraFunctions(pCameraFunctions)
+	explicit Camera(std::map<CameraFunction, std::vector<GameInput>> * const pCameraFunctions) :position(glm::vec3(0, 0, 0)), lookAt(glm::vec3(0, 0, -1)), up(glm::vec3(0, 1, 0)), mCameraFunctions(pCameraFunctions)
 	{
 	}
 
-	explicit Camera(map<CameraFunction, vector<GameInput>> * const pCameraFunctions, vec3 & pPosition, vec3 & pLookAt, vec3 & pUp) : position(pPosition), lookAt(pLookAt), up(pUp), mCameraFunctions(pCameraFunctions)
+	explicit Camera(std::map<CameraFunction, std::vector<GameInput>> * const pCameraFunctions, glm::vec3 & pPosition, glm::vec3 & pLookAt, glm::vec3 & pUp) : position(pPosition), lookAt(pLookAt), up(pUp), mCameraFunctions(pCameraFunctions)
 	{
 	}
 
@@ -40,37 +38,37 @@ public:
 		renderViewMatrix = updateViewMatrix;
 	}
 
-	inline const mat4 & GetViewMatrix() const
+	inline const glm::mat4 & GetViewMatrix() const
 	{
 		return renderViewMatrix;
 	}
 
-	inline const vec3 & GetPosition() const
+	inline const glm::vec3 & GetPosition() const
 	{
 		return position;
 	}
 
-	inline const vec3 & GetLookAt() const
+	inline const glm::vec3 & GetLookAt() const
 	{
 		return lookAt;
 	}
 
-	inline const vec3 & GetUp() const
+	inline const glm::vec3 & GetUp() const
 	{
 		return up;
 	}
 
-	inline void SetPosition(const vec3 & pPosition)
+	inline void SetPosition(const glm::vec3 & pPosition)
 	{
 		position = pPosition;
 	}
 
-	inline void SetLookAt(const vec3 & pLookAt)
+	inline void SetLookAt(const glm::vec3 & pLookAt)
 	{
 		lookAt = pLookAt;
 	}
 
-	inline void SetUp(const vec3 & pUp)
+	inline void SetUp(const glm::vec3 & pUp)
 	{
 		up = pUp;
 	}

@@ -5,8 +5,6 @@
 #include <vector>
 #include <sstream>
 
-using namespace std;
-
 //http://www.cplusplus.com/forum/beginner/174993/
 
 
@@ -110,12 +108,12 @@ class InputConverter
 private:
 	InputConverter();
 #define I(s) #s
-	static vector<string> GameInputName;
+	static std::vector<std::string> GameInputName;
 #undef I
 
 	static void FirstTimeMapSetUp();
-	static map<string, int> GameInputMappings;
+	static std::map<std::string, int> GameInputMappings;
 
 public:
-	static GameInput StringToEnum(const string & input);
+	static GameInput StringToEnum(const std::string & input);
 };

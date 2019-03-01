@@ -20,12 +20,12 @@ RenderSystem::RenderSystem() : updateFirst(true), entityManager(EntityManager::I
 {
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_SHADER, ComponentType::COMPONENT_POSITION,
 		ComponentType::COMPONENT_TEXTURE, ComponentType::COMPONENT_DIRECTION };
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
 void RenderSystem::RemoveEntity(Entity * pEntity)
 {
-	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -37,9 +37,9 @@ void RenderSystem::Action(void)
 {
 	glViewport(0, 0, GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	mat4 perspectiveMatrix = projection->GetProjection();
-	mat4 viewMatrix = camera->GetViewMatrix();
-	vec3 viewPos = camera->GetPosition();
+	glm::mat4 perspectiveMatrix = projection->GetProjection();
+	glm::mat4 viewMatrix = camera->GetViewMatrix();
+	glm::vec3 viewPos = camera->GetPosition();
 
 	LightManager * lightManager = LightManager::Instance();
 	updateFirst = true;
@@ -54,9 +54,9 @@ void RenderSystem::Action(void)
 
 		Shader * shader = dynamic_cast<ComponentShader *>(componentShader)->GetRenderShader();
 		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+		glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 		Texture * texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetRenderTexture();
-		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
+		glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
 		iComponent * componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL_TEXTURE);
 
@@ -69,7 +69,7 @@ void RenderSystem::Action(void)
 	}
 }
 
-void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat & direction, const Texture * texture, const Texture * normal, mat4 & perspectiveMatrix, mat4 & viewMatrix, vec3 & viewPos, bool & updateFirst)
+void RenderSystem::Render(Shader * shader, iModel * model, glm::vec3 & position, glm::quat & direction, const Texture * texture, const Texture * normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, bool & updateFirst)
 {
 	static int lastShader = -1;
 
@@ -96,7 +96,7 @@ void RenderSystem::Render(Shader * shader, iModel * model, vec3 & position, quat
 		viewPosLocation = glGetUniformLocation(shader->ShaderID(), "viewPos");
 	}
 
-	mat4 modelMatrix(1.0f);
+	glm::mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
 	modelMatrix *= toMat4(direction);
 

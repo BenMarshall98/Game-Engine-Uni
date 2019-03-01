@@ -8,12 +8,12 @@
 InputSystem::InputSystem() : entityManager(EntityManager::Instance())
 {
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_INPUT };
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
 void InputSystem::RemoveEntity(Entity * pEntity)
 {
-	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 	
 	if (it != EntityList.end())
 	{
@@ -27,13 +27,13 @@ void InputSystem::Action(void)
 	{
 		iComponent * componentInput = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_INPUT);
 
-		vector<InputFunction> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
+		std::vector<InputFunction> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
 
 		Input(inputs, EntityList[i]);
 	}
 }
 
-void InputSystem::Input(vector<InputFunction>  * inputs, Entity * entity)
+void InputSystem::Input(std::vector<InputFunction>  * inputs, Entity * entity)
 {	
 	for (int i = 0; i < inputs->size(); i++)
 	{

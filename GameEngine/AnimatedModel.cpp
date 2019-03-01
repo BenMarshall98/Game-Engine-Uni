@@ -12,15 +12,15 @@ void AnimatedModel::Render(Shader * shader)
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			boneMats.push_back(mat4(1.0));
+			boneMats.push_back(glm::mat4(1.0));
 		}
 	}
 
 	for (int i = 0; i < boneMats.size(); i++)
 	{
-		int boneLocation = glGetUniformLocation(shader->ShaderID(), ("Bones[" + to_string(i) + ']').c_str());
+		int boneLocation = glGetUniformLocation(shader->ShaderID(), ("Bones[" + std::to_string(i) + ']').c_str());
 
-		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, value_ptr(boneMats[i]));
+		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, glm::value_ptr(boneMats[i]));
 	}
 
 	for (int i = 0; i < meshes.size(); i++)
@@ -29,41 +29,7 @@ void AnimatedModel::Render(Shader * shader)
 	}
 }
 
-aiMatrix4x4 AnimatedModel::GLMMat4ToAi(mat4 mat)
-{
-	return aiMatrix4x4(mat[0][0], mat[0][1], mat[0][2], mat[0][3],
-		mat[1][0], mat[1][1], mat[1][2], mat[1][3],
-		mat[2][0], mat[2][1], mat[2][2], mat[2][3],
-		mat[3][0], mat[3][1], mat[3][2], mat[3][3]);
-}
-
-mat4 AnimatedModel::AiToGLMMat4(aiMatrix4x4& mat)
-{
-	mat4 tmp;
-	tmp[0][0] = mat.a1;
-	tmp[1][0] = mat.b1;
-	tmp[2][0] = mat.c1;
-	tmp[3][0] = mat.d1;
-
-	tmp[0][1] = mat.a2;
-	tmp[1][1] = mat.b2;
-	tmp[2][1] = mat.c2;
-	tmp[3][1] = mat.d2;
-
-	tmp[0][2] = mat.a3;
-	tmp[1][2] = mat.b3;
-	tmp[2][2] = mat.c3;
-	tmp[3][2] = mat.d3;
-
-	tmp[0][3] = mat.a4;
-	tmp[1][3] = mat.b4;
-	tmp[2][3] = mat.c4;
-	tmp[3][3] = mat.d4;
-
-	return tmp;
-}
-
-Bone * AnimatedModel::FindBone(string name)
+Bone * AnimatedModel::FindBone(std::string name)
 {
 	for (int i = 0; i < bones.size(); i++)
 	{
@@ -89,12 +55,12 @@ void AnimatedModel::UpdateBoneMatsVector()
 	{
 		if (i > bones.size() -1)
 		{
-			boneMats.push_back(mat4(1.0));
+			boneMats.push_back(glm::mat4(1.0));
 		}
 		else
 		{
-			mat4 transform = bones.at(i)->GetNode()->GetTransform();
-			mat4 tmp = mat4(1.0);
+			glm::mat4 transform = bones.at(i)->GetNode()->GetTransform();
+			glm::mat4 tmp = glm::mat4(1.0);
 			tmp *= bones.at(i)->GetOffsetMatrix();
 			tmp *= transform;
 			tmp *= bones.at(i)->GetParentTransforms();

@@ -3,8 +3,6 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 enum class MESSAGE_TYPE
 {
 	SEVERE,
@@ -20,14 +18,14 @@ private:
 	LoggingManager() {}
 public:
 
-	static void LogMessage(const MESSAGE_TYPE type, const string & message);
+	static void LogMessage(const MESSAGE_TYPE type, const std::string & message);
 
 	static inline bool HasSevereMessage()
 	{
 		if (hasSevereMessage)
 		{
-			cout << "An Error Has Occured! Please press enter to exit";
-			cin.get();
+			std::cout << "An Error Has Occured! Please press enter to exit";
+			std::cin.get();
 		}
 
 		return hasSevereMessage;

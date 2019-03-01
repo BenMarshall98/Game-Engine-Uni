@@ -8,12 +8,10 @@
 
 #include <vector>
 
-using namespace std;
-
 class AudioSystem : public iSystem
 {
 private:
-	vector<Entity *> EntityList;
+	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
 public:
 	AudioSystem();
@@ -24,6 +22,6 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
-	static void Audio(const vec3 & position, void * source, AudioPlayback playback);
+	static void Audio(const glm::vec3 & position, void * source, AudioPlayback playback);
 };
 

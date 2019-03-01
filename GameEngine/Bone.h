@@ -1,25 +1,21 @@
 #pragma once
 
-#include "assimp/scene.h"
 #include "AnimNode.h"
 #include "Node.h"
 #include "glm/glm.hpp"
 #include <string>
 
-using namespace glm;
-using namespace Assimp;
-
 class Bone
 {
 private:
-	string name;
+	std::string name;
 	Node * node;
 	AnimNode * animNode;
 	Bone * parentBone;
-	mat4 offsetMatrix;
+	glm::mat4 offsetMatrix;
 
 public:
-	Bone(string pName, Node * pNode, AnimNode * pAnimNode, mat4 pOffsetMatrix) :
+	Bone(std::string pName, Node * pNode, AnimNode * pAnimNode, glm::mat4 pOffsetMatrix) :
 		name(pName), node(pNode), animNode(pAnimNode), offsetMatrix(pOffsetMatrix), parentBone(nullptr)
 	{
 
@@ -32,12 +28,12 @@ public:
 		parentBone = pParentBone;
 	}
 
-	inline string GetName()
+	inline std::string GetName()
 	{
 		return name;
 	}
 
-	inline mat4 GetOffsetMatrix()
+	inline glm::mat4 GetOffsetMatrix()
 	{
 		return offsetMatrix;
 	}
@@ -47,12 +43,12 @@ public:
 		return node;
 	}
 
-	mat4 GetParentTransforms();
+	glm::mat4 GetParentTransforms();
 
 	unsigned int FindPosition(float time);
-	vec3 CalcInterpolatedPosition(float time);
+	glm::vec3 CalcInterpolatedPosition(float time);
 	unsigned int FindRotation(float time);
-	quat CalcInterpolatedRotation(float time);
+	glm::quat CalcInterpolatedRotation(float time);
 
 	void UpdateKeyframeTransform(float time);
 };

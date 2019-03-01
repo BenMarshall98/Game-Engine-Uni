@@ -5,12 +5,8 @@
 #include <vector>
 #include <string>
 #include "glm/glm.hpp"
-
 #include "assimp/scene.h"
 
-using namespace std;
-using namespace glm;
-using namespace Assimp;
 
 class ModelLoader
 {
@@ -18,28 +14,31 @@ private:
 
 	//The following code is adapted from:
 	//https://thispointer.com/c-how-to-check-if-a-string-ends-with-an-another-given-string/
-	inline static bool EndsWith(const string & fileName, const string & fileType)
+	inline static bool EndsWith(const std::string & fileName, const std::string & fileType)
 	{
 		return (fileName.size() >= fileType.size() &&
 			fileName.compare(fileName.size() - fileType.size(), fileType.size(), fileType) == 0);
 	}
 
 	//static void SimpleFormatExists(const string & fileName, const string & fileType);
-	static int FindInVector(vector<string> & list, const string & toFind);
-	static StaticModel * LoadOBJ(const string & fileName);
-	static StaticModel * LoadSME(const string & fileName);
-	static AnimatedModel * LoadDAE(const string & fileName);
+	static int FindInVector(std::vector<std::string> & list, const std::string & toFind);
+	static StaticModel * LoadOBJ(const std::string & fileName);
+	static StaticModel * LoadSME(const std::string & fileName);
+	static AnimatedModel * LoadDAE(const std::string & fileName);
 
-	static void TangentSpace(vector<int> & indices, vector<vec3> & vertex, vector<vec2> & texture, vector<vec3> & tangents/*, vector<vec3> & bitangents*/);
-	static void CalculateTangent(vec3 & vertex1, vec3 & vertex2, vec3 & vertex3, vec2 & texture1, vec2 & texture2, vec2 & texture3, vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
+	static void TangentSpace(std::vector<int> & indices, std::vector<glm::vec3> & vertex, std::vector<glm::vec2> & texture, std::vector<glm::vec3> & tangents/*, vector<vec3> & bitangents*/);
+	static void CalculateTangent(glm::vec3 & vertex1, glm::vec3 & vertex2, glm::vec3 & vertex3, glm::vec2 & texture1, glm::vec2 & texture2, glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
 
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
 	static Mesh * ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);
 
-	static void RecursiveNodeProcess(vector<Node*> & nodes, aiNode * node);
+	static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat);
+	static glm::mat4 AiToGLMMat4(aiMatrix4x4& mat);
+
+	static void RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * node);
 	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);
 
-	static inline Bone * FindBone(vector<Bone *> bones, string name)
+	static inline Bone * FindBone(std::vector<Bone *> bones, std::string name)
 	{
 		for (int i = 0; i < bones.size(); i++)
 		{
@@ -52,7 +51,7 @@ private:
 		return nullptr;
 	}
 
-	static inline Node* FindNode(vector<Node*> nodes, string name)
+	static inline Node* FindNode(std::vector<Node*> nodes, std::string name)
 	{
 		for (int i = 0; i < nodes.size(); i++)
 		{
@@ -65,7 +64,7 @@ private:
 		return nullptr;
 	}
 
-	static inline AnimNode* FindAiNodeAnim(vector<AnimNode*> animNodes, string name)
+	static inline AnimNode* FindAiNodeAnim(std::vector<AnimNode*> animNodes, std::string name)
 	{
 		for (int i = 0; i < animNodes.size(); i++)
 		{
@@ -78,7 +77,7 @@ private:
 		return nullptr;
 	}
 
-	static inline int FindBoneIDByName(vector<Bone *> bones, string name)
+	static inline int FindBoneIDByName(std::vector<Bone *> bones, std::string name)
 	{
 		for (int i = 0; i < bones.size(); i++)
 		{
@@ -92,6 +91,6 @@ private:
 	}
 
 public:
-	static iModel * LoadModel(const string & fileName);
+	static iModel * LoadModel(const std::string & fileName);
 };
 

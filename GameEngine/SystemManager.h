@@ -4,13 +4,11 @@
 #include "iSystem.h"
 #include "Entity.h"
 
-using namespace std;
-
 class SystemManager
 {
 private:
-	vector<iSystem *> RenderSystems;
-	vector<iSystem *> UpdateSystems;
+	std::vector<iSystem *> RenderSystems;
+	std::vector<iSystem *> UpdateSystems;
 
 	static SystemManager * instance;
 

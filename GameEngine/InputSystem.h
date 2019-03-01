@@ -7,12 +7,10 @@
 
 #include <vector>
 
-using namespace std;
-
 class InputSystem : public iSystem
 {
 private:
-	vector<Entity *> EntityList;
+	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
 
 public:
@@ -23,7 +21,7 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
-	static void Input(vector<InputFunction> * inputs, Entity * entity);
+	static void Input(std::vector<InputFunction> * inputs, Entity * entity);
 	~InputSystem();
 };
 

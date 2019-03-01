@@ -4,14 +4,12 @@
 
 #include <string>
 
-using namespace std;
-
 class Shader
 {
 private:
 	int mShaderID;
-	static void ReadShader(const string & fileName, string & shaderProgram);
-	static int CompileShader(const string & fileName, GLenum shaderType);
+	static void ReadShader(const std::string & fileName, std::string & shaderProgram);
+	static int CompileShader(const std::string & fileName, GLenum shaderType);
 
 	Shader(const Shader& shader) = delete;
 	Shader& operator=(const Shader& shader) = delete;
@@ -36,7 +34,7 @@ public:
 		glUseProgram(mShaderID);
 	}
 
-	bool LoadShader(const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram);
+	bool LoadShader(const std::string & vertexProgram, const std::string & fragmentProgram, const std::string & geometryProgram);
 	
 };
 

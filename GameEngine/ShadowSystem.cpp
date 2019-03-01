@@ -11,22 +11,22 @@
 #include "glm/gtx/quaternion.hpp"
 #include <algorithm>
 
-ShadowSystem::ShadowSystem(vec3 & topLeftCoord, vec3 & bottomRightCoord) :
+ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoord) :
 	mTopLeftCoord(topLeftCoord), mBottomRightCoord(bottomRightCoord), entityManager(EntityManager::Instance())
 {
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_SHADOW_SHADER};
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 
 	for (int i = 0; i < 6; i++)
 	{
-		string view = "shadowView[" + to_string(i) + ']';
+		std::string view = "shadowView[" + std::to_string(i) + ']';
 		views.push_back(view);
 	}
 }
 
 void ShadowSystem::RemoveEntity(Entity * pEntity)
 {
-	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -36,11 +36,11 @@ void ShadowSystem::RemoveEntity(Entity * pEntity)
 
 void ShadowSystem::Action(void)
 {
-	vector<iModel *> models;
-	vector<vec3> positions;
-	vector<quat> directions;
-	vector<Shader *> directionalShadowShaders;
-	vector<Shader *> pointShadowShaders;
+	std::vector<iModel *> models;
+	std::vector<glm::vec3> positions;
+	std::vector<glm::quat> directions;
+	std::vector<Shader *> directionalShadowShaders;
+	std::vector<Shader *> pointShadowShaders;
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
@@ -50,8 +50,8 @@ void ShadowSystem::Action(void)
 		iComponent * componentShadowShader = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_SHADOW_SHADER);
 
 		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-		quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
+		glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+		glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 		Shader * directionalShadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetDirectionalShader();
 		Shader * pointShadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
 
@@ -67,10 +67,10 @@ void ShadowSystem::Action(void)
 	Camera * camera = CameraManager::Instance()->GetCamera();
 	Directional * directional = LightManager::Instance()->GetDirectionalLight();
 
-	directional->perspective = ortho(mTopLeftCoord.x, mBottomRightCoord.x,
+	directional->perspective = glm::ortho(mTopLeftCoord.x, mBottomRightCoord.x,
 		mBottomRightCoord.y, mTopLeftCoord.y, mTopLeftCoord.z, mBottomRightCoord.z);
 	
-	directional->view = lookAt(camera->GetPosition() + directional->direction, camera->GetPosition(), vec3(0, 0, 1));
+	directional->view = glm::lookAt(camera->GetPosition() + directional->direction, camera->GetPosition(), glm::vec3(0, 0, 1));
 
 	glViewport(0, 0, LightManager::shadowWidth, LightManager::shadowHeight);
 	ShadowFrameBuffer FrameBuffer = LightManager::Instance()->GetDirectionalFramebuffer();
@@ -82,7 +82,7 @@ void ShadowSystem::Action(void)
 		RenderDirectional(models.at(i), positions.at(i), directions.at(i), directional, directionalShadowShaders.at(i));
 	}
 
-	vector<PointLight *> pointLights = LightManager::Instance()->GetRenderPointLights();
+	std::vector<PointLight *> pointLights = LightManager::Instance()->GetRenderPointLights();
 
 	for (int i = 0; i < pointLights.size(); i++)
 	{
@@ -95,15 +95,15 @@ void ShadowSystem::Action(void)
 		float farPlane = 25.0f;
 
 		pointLights[i]->farPlane = farPlane;
-		mat4 projection = perspective(radians(90.0f), aspect, 1.0f, farPlane);
+		glm::mat4 projection = glm::perspective(glm::radians(90.0f), aspect, 1.0f, farPlane);
 
-		vector<mat4> shadowTransforms;
-		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(1.0, 0.0, 0.0), vec3(0.0, -1.0, 0.0)));
-		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(-1.0, 0.0, 0.0), vec3(0.0, -1.0, 0.0)));
-		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0)));
-		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, -1.0, 0.0), vec3(0.0, 0.0, -1.0)));
-		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 0.0, 1.0), vec3(0.0, -1.0, 0.0)));
-		shadowTransforms.push_back(projection * lookAt(pointLights[i]->location, pointLights[i]->location + vec3(0.0, 0.0, -1.0), vec3(0.0, -1.0, 0.0)));
+		std::vector<glm::mat4> shadowTransforms;
+		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(-1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(0.0, 1.0, 0.0), glm::vec3(0.0, 0.0, 1.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, 0.0, -1.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, -1.0, 0.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
 
 		int lastShader = -1;
 
@@ -132,7 +132,7 @@ void ShadowSystem::Action(void)
 		}
 	}
 
-	vector<SpotLight *> spotLights = LightManager::Instance()->GetRenderSpotLights();
+	std::vector<SpotLight *> spotLights = LightManager::Instance()->GetRenderSpotLights();
 
 	for (int i = 0; i < spotLights.size(); i++)
 	{
@@ -145,15 +145,15 @@ void ShadowSystem::Action(void)
 		float farPlane = 25.0f;
 
 		spotLights[i]->farPlane = farPlane;
-		mat4 projection = perspective(radians(90.0f), aspect, 1.0f, farPlane);
+		glm::mat4 projection = glm::perspective(glm::radians(90.0f), aspect, 1.0f, farPlane);
 
-		vector<mat4> shadowTransforms;
-		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(1.0, 0.0, 0.0), vec3(0.0, -1.0, 0.0)));
-		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(-1.0, 0.0, 0.0), vec3(0.0, -1.0, 0.0)));
-		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0)));
-		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, -1.0, 0.0), vec3(0.0, 0.0, -1.0)));
-		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 0.0, 1.0), vec3(0.0, -1.0, 0.0)));
-		shadowTransforms.push_back(projection * lookAt(spotLights[i]->location, spotLights[i]->location + vec3(0.0, 0.0, -1.0), vec3(0.0, -1.0, 0.0)));
+		std::vector<glm::mat4> shadowTransforms;
+		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(-1.0, 0.0, 0.0), glm::vec3(0.0, -1.0, 0.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(0.0, 1.0, 0.0), glm::vec3(0.0, 0.0, 1.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, 0.0, -1.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, -1.0, 0.0)));
+		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
 
 		int lastShader = -1;
 
@@ -171,7 +171,7 @@ void ShadowSystem::Action(void)
 
 				for (int k = 0; k < shadowTransforms.size(); k++)
 				{
-					string view = views.at(k).c_str();
+					std::string view = views.at(k).c_str();
 					int viewLocation = glGetUniformLocation(pointShadowShaders.at(j)->ShaderID(), view.c_str());
 					glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(shadowTransforms.at(k)));
 				}
@@ -188,11 +188,11 @@ void ShadowSystem::Action(void)
 	glCullFace(GL_BACK);
 }
 
-void ShadowSystem::RenderDirectional(iModel * model, vec3 & position, quat & direction, Directional * directional, Shader * shadowShader)
+void ShadowSystem::RenderDirectional(iModel * model, glm::vec3 & position, glm::quat & direction, Directional * directional, Shader * shadowShader)
 {
 	shadowShader->UseShader();
 
-	mat4 modelMatrix(1.0f);
+	glm::mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
 	modelMatrix *= toMat4(direction);
 
@@ -209,11 +209,11 @@ void ShadowSystem::RenderDirectional(iModel * model, vec3 & position, quat & dir
 	glUseProgram(0);
 }
 
-void ShadowSystem::RenderPoint(iModel * model, vec3 & position, quat & direction, Shader * shadowShader)
+void ShadowSystem::RenderPoint(iModel * model, glm::vec3 & position, glm::quat & direction, Shader * shadowShader)
 {
 	shadowShader->UseShader();
 
-	mat4 modelMatrix(1.0f);
+	glm::mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
 	modelMatrix *= toMat4(direction);
 

@@ -2,17 +2,16 @@
 #include "ComponentAudio.h"
 #include "ComponentPosition.h"
 
-
 AudioSystem::AudioSystem()
 {
 	entityManager = EntityManager::Instance();
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_AUDIO, ComponentType::COMPONENT_POSITION };
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
 void AudioSystem::RemoveEntity(Entity * pEntity)
 {
-	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -27,7 +26,7 @@ void AudioSystem::Action(void)
 		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
 		iComponent * componentAudio = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_AUDIO);
 
-		vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
+		glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 		void * source = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioSource();
 		AudioPlayback playback = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioPlayback();
 
@@ -37,7 +36,7 @@ void AudioSystem::Action(void)
 	}
 }
 
-void AudioSystem::Audio(const vec3 & position, void * source, AudioPlayback playback)
+void AudioSystem::Audio(const glm::vec3 & position, void * source, AudioPlayback playback)
 {
 	AudioManager::Instance()->UpdateComponentSound(source, position, playback);
 }

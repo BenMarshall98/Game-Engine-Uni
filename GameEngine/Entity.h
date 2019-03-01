@@ -2,19 +2,17 @@
 
 #include <string>
 
-using namespace std;
-
 class Entity
 {
 private:
 	static int nextID;
 
-	string mEntityName;
+	std::string mEntityName;
 	int mEntityID;
 	
 
 public:
-	explicit Entity(const string & entityName) : mEntityName(entityName), mEntityID(nextID)
+	explicit Entity(const std::string & entityName) : mEntityName(entityName), mEntityID(nextID)
 	{
 		nextID++;
 	}
@@ -31,7 +29,7 @@ public:
 		return mEntityID;
 	}
 
-	inline const string & GetName() const
+	inline const std::string & GetName() const
 	{
 		return mEntityName;
 	}

@@ -4,8 +4,6 @@
 
 #include <vector>
 
-using namespace std;
-
 class InputManager
 {
 private:
@@ -28,7 +26,7 @@ public:
 		return instance;
 	}
 
-	float GetInputValue(const vector<GameInput> & gameInputs) const;
+	float GetInputValue(const std::vector<GameInput> & gameInputs) const;
 
 	inline Input * GetInputReader() const
 	{

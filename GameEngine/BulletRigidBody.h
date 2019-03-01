@@ -12,12 +12,12 @@ public:
 	BulletRigidBody(btRigidBody * pRigidBody) : rigidBody(pRigidBody) {};
 	~BulletRigidBody();
 
-	vec3 GetPosition() override;
-	quat GetDirection() override;
+	glm::vec3 GetPosition() override;
+	glm::quat GetDirection() override;
 	void * GetRigidBody() override;
 
-	void ApplyVelocity(vec3 & velocity) override;
-	void ApplyImpulse(vec3 & impulse) override;
-	void ApplyRotation(vec3 & rotation) override;
+	void ApplyVelocity(glm::vec3 & velocity) override;
+	void ApplyImpulse(glm::vec3 & impulse) override;
+	void ApplyRotation(glm::vec3 & rotation) override;
 };
 

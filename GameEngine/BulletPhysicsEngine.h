@@ -7,8 +7,6 @@
 #include "ComponentPhysics.h"
 #include "PhysicsEngine.h"
 
-using namespace glm;
-
 class BulletPhysicsEngine : public PhysicsEngine
 {
 private:
@@ -21,11 +19,11 @@ public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
 
-	RigidBody * AddRigidBody(float mass, vec3 & position, quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, vec3 & angularLimit) override;
+	RigidBody * AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit) override;
 
 	void Update(float pDeltaTime) override;
 
 	void RemoveRigidBody(RigidBody * pRigidBody) override;
 
-	bool ClearBetweenPoints(vec3 position1, vec3 position2) override;
+	bool ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2) override;
 };

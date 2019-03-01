@@ -10,7 +10,7 @@ private:
 	Shader * directionShadowShader;
 	Shader * pointShadowShader;
 public:
-	explicit ComponentShadowShader(const string & directionShadowName, const string & pointShadowName) :
+	explicit ComponentShadowShader(const std::string & directionShadowName, const std::string & pointShadowName) :
 		directionShadowShader(ResourceManager::GetShader(directionShadowName)),
 		pointShadowShader(ResourceManager::GetShader(pointShadowName))
 	{

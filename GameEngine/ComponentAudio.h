@@ -4,10 +4,6 @@
 #include "AudioManager.h"
 #include <string>
 
-using namespace std;
-
-
-
 class ComponentAudio : public iComponent
 {
 private:
@@ -15,7 +11,7 @@ private:
 	void * mSource;
 
 public:
-	ComponentAudio(const AudioPlayback pPlayback, const string & audioName);
+	ComponentAudio(const AudioPlayback pPlayback, const std::string & audioName);
 	~ComponentAudio();
 
 	ComponentAudio& operator=(const ComponentAudio&) = delete;

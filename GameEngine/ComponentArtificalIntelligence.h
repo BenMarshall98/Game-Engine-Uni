@@ -16,7 +16,7 @@ private:
 	Entity * target;
 
 public:
-	explicit ComponentArtificalIntelligence(PathFollowing * const pPathFollower, PathFinding * const pPathFinding, AIStateMachine * const pAIStateMachine, const string & pTarget) : pathFollower(pPathFollower), pathFinding(pPathFinding),
+	explicit ComponentArtificalIntelligence(PathFollowing * const pPathFollower, PathFinding * const pPathFinding, AIStateMachine * const pAIStateMachine, const std::string & pTarget) : pathFollower(pPathFollower), pathFinding(pPathFinding),
 		aiStateMachine(pAIStateMachine), target(EntityManager::Instance()->GetEntityByName(pTarget))
 	{
 		if (aiStateMachine)
@@ -45,8 +45,8 @@ public:
 			iComponent * componentDirection = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_DIRECTION);
 			iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_PHYSICS);
 
-			vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-			quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
+			glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+			glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 			ComponentPhysics * physics = dynamic_cast<ComponentPhysics *>(componentPhysics);
 
 			if (pathFinding)

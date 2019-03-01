@@ -3,17 +3,17 @@
 #include "AudioManager.h"
 #include <algorithm>
 
-vector<string> ResourceManager::usedModels;
-vector<string> ResourceManager::usedTextures;
-vector<string> ResourceManager::usedShaders;
-vector<string> ResourceManager::usedAudios;
+std::vector<std::string> ResourceManager::usedModels;
+std::vector<std::string> ResourceManager::usedTextures;
+std::vector<std::string> ResourceManager::usedShaders;
+std::vector<std::string> ResourceManager::usedAudios;
 
-map<string, iModel *> ResourceManager::modelList;
-map<string, Texture *> ResourceManager::textureList;
-map<string, Shader *> ResourceManager::shaderList;
-map<string, void *> ResourceManager::audioBufferList;
+std::map<std::string, iModel *> ResourceManager::modelList;
+std::map<std::string, Texture *> ResourceManager::textureList;
+std::map<std::string, Shader *> ResourceManager::shaderList;
+std::map<std::string, void *> ResourceManager::audioBufferList;
 
-void ResourceManager::LoadModel(const string & modelName, const string & fileName)
+void ResourceManager::LoadModel(const std::string & modelName, const std::string & fileName)
 {
 	if (find(usedModels.begin(), usedModels.end(), fileName) == usedModels.end())
 	{
@@ -38,10 +38,10 @@ void ResourceManager::LoadModel(const string & modelName, const string & fileNam
 		return;
 	}
 
-	modelList.insert(pair<string, iModel*>(modelName, model));
+	modelList.insert(std::pair<std::string, iModel*>(modelName, model));
 }
 
-void ResourceManager::LoadTexture(const string & textureName, const string & fileName)
+void ResourceManager::LoadTexture(const std::string & textureName, const std::string & fileName)
 {
 	if (find(usedTextures.begin(), usedTextures.end(), fileName) == usedTextures.end())
 	{
@@ -66,12 +66,12 @@ void ResourceManager::LoadTexture(const string & textureName, const string & fil
 		return;
 	}
 
-	textureList.insert(pair<string, Texture *>(textureName, texture));
+	textureList.insert(std::pair<std::string, Texture *>(textureName, texture));
 }
 
-void ResourceManager::LoadShader(const string & shaderName, const string & vertexProgram, const string & fragmentProgram, const string & geometryProgram)
+void ResourceManager::LoadShader(const std::string & shaderName, const std::string & vertexProgram, const std::string & fragmentProgram, const std::string & geometryProgram)
 {
-	const string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
+	const std::string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
 	if(find(usedShaders.begin(), usedShaders.end(), shaderConcat) == usedShaders.end())
 	{
 		usedShaders.push_back(shaderConcat);
@@ -96,10 +96,10 @@ void ResourceManager::LoadShader(const string & shaderName, const string & verte
 		return;
 	}
 	
-	shaderList.insert(pair<string, Shader *>(shaderName, shader));
+	shaderList.insert(std::pair<std::string, Shader *>(shaderName, shader));
 }
 
-void ResourceManager::LoadAudio(const string & audioName, const string & fileName)
+void ResourceManager::LoadAudio(const std::string & audioName, const std::string & fileName)
 {
 	if (find(usedAudios.begin(), usedAudios.end(), fileName) == usedAudios.end())
 	{
@@ -124,12 +124,12 @@ void ResourceManager::LoadAudio(const string & audioName, const string & fileNam
 		//TODO: Log that buffer failed to be created
 	}
 
-	audioBufferList.insert(pair<string, void *>(audioName, buffer));
+	audioBufferList.insert(std::pair<std::string, void *>(audioName, buffer));
 }
 
-iModel * ResourceManager::GetModel(const string & model)
+iModel * ResourceManager::GetModel(const std::string & model)
 {
-	map<string, iModel *>::iterator it = modelList.find(model);
+	std::map<std::string, iModel *>::iterator it = modelList.find(model);
 
 	if (it != modelList.end())
 	{
@@ -138,9 +138,9 @@ iModel * ResourceManager::GetModel(const string & model)
 	return nullptr;
 }
 
-Shader * ResourceManager::GetShader(const string & shader)
+Shader * ResourceManager::GetShader(const std::string & shader)
 {
-	map<string, Shader *>::iterator it = shaderList.find(shader);
+	std::map<std::string, Shader *>::iterator it = shaderList.find(shader);
 
 	if (it != shaderList.end())
 	{
@@ -149,9 +149,9 @@ Shader * ResourceManager::GetShader(const string & shader)
 	return nullptr;
 }
 
-Texture * ResourceManager::GetTexture(const string & texture)
+Texture * ResourceManager::GetTexture(const std::string & texture)
 {
-	map<string, Texture *>::iterator it = textureList.find(texture);
+	std::map<std::string, Texture *>::iterator it = textureList.find(texture);
 
 	if (it != textureList.end())
 	{
@@ -160,9 +160,9 @@ Texture * ResourceManager::GetTexture(const string & texture)
 	return nullptr;
 }
 
-void * ResourceManager::GetAudio(const string & audio)
+void * ResourceManager::GetAudio(const std::string & audio)
 {
-	map<string, void *>::iterator it = audioBufferList.find(audio);
+	std::map<std::string, void *>::iterator it = audioBufferList.find(audio);
 
 	if (it != audioBufferList.end())
 	{
@@ -180,7 +180,7 @@ void ResourceManager::ClearResources()
 	usedAudios.clear();
 
 	{
-		map<string, iModel *>::iterator it;
+		std::map<std::string, iModel *>::iterator it;
 
 		for (it = modelList.begin(); it != modelList.end(); it++)
 		{
@@ -192,7 +192,7 @@ void ResourceManager::ClearResources()
 	}
 
 	{
-		map<string, Texture *>::iterator it;
+		std::map<std::string, Texture *>::iterator it;
 
 		for (it = textureList.begin(); it != textureList.end(); it++)
 		{
@@ -204,7 +204,7 @@ void ResourceManager::ClearResources()
 	}
 
 	{
-		map<string, Shader *>::iterator it;
+		std::map<std::string, Shader *>::iterator it;
 
 		for (it = shaderList.begin(); it != shaderList.end(); it++)
 		{
@@ -216,7 +216,7 @@ void ResourceManager::ClearResources()
 	}
 
 	{
-		map<string, void *>::iterator it;
+		std::map<std::string, void *>::iterator it;
 
 		for (it = audioBufferList.begin(); it != audioBufferList.end(); it++)
 		{

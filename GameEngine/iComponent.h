@@ -2,8 +2,6 @@
 
 #include <string>
 
-using namespace std;
-
 enum class ComponentType
 {
 	COMPONENT_DIRECTION,

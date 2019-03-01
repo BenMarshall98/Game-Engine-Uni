@@ -2,11 +2,11 @@
 #include "ComponentPosition.h"
 #include <fstream>
 
-PathFinding::PathFinding(string & pTarget, string & pFile, vec2 & pTopLeftCoord) : topLeftCoord(pTopLeftCoord), target(EntityManager::Instance()->GetEntityByName(pTarget))
+PathFinding::PathFinding(std::string & pTarget, std::string & pFile, glm::vec2 & pTopLeftCoord) : topLeftCoord(pTopLeftCoord), target(EntityManager::Instance()->GetEntityByName(pTarget))
 {
-	vector<int> line;
+	std::vector<int> line;
 
-	ifstream in;
+	std::ifstream in;
 	in.open(pFile);
 
 	while (!in.eof())
@@ -35,9 +35,9 @@ PathFinding::~PathFinding()
 {
 }
 
-void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent, vec3 targetLocation)
+void PathFinding::BuildPath(glm::vec3 currentPosition, glm::quat currentDirection, ComponentPhysics * physicsComponent, glm::vec3 targetLocation)
 {
-	ivec2 targetMapLoc = CalculateMapLoc(targetLocation);
+	glm::ivec2 targetMapLoc = CalculateMapLoc(targetLocation);
 
 	if (targetMapLoc.x < 0 || targetMapLoc.y < 0)
 	{
@@ -52,8 +52,8 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 		return;
 	}
 
-	vector<StarNode *> open;
-	vector<StarNode *> closed;
+	std::vector<StarNode *> open;
+	std::vector<StarNode *> closed;
 
 	StarNode * start = new StarNode();
 	start->position = currentPosition;
@@ -95,10 +95,10 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 			successor->position.x += directions.at(i).x;
 			successor->position.z += directions.at(i).y;
 			successor->travelTo = current->travelTo + 1;
-			successor->travelFrom = length(vec2(successor->position.x - targetLocation.x, successor->position.z - targetLocation.z));
+			successor->travelFrom = glm::length(glm::vec2(successor->position.x - targetLocation.x, successor->position.z - targetLocation.z));
 			successor->weight = successor->travelTo + successor->travelFrom;
 
-			ivec2 successorMapLoc = CalculateMapLoc(successor->position);
+			glm::ivec2 successorMapLoc = CalculateMapLoc(successor->position);
 
 			if (current->parent && current->parent->position == successor->position)
 			{
@@ -119,10 +119,10 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 
 			for (int j = 0; j < directions.size(); j++)
 			{
-			vec3 position = vec3(directions.at(j).x, 0, directions.at(j).y);
+			glm::vec3 position = glm::vec3(directions.at(j).x, 0, directions.at(j).y);
 			position *= 0.75;
 			position += successor->position;
-			ivec2 surroundMapLoc = CalculateMapLoc(position);
+			glm::ivec2 surroundMapLoc = CalculateMapLoc(position);
 
 			if (surroundMapLoc.x < 0 || surroundMapLoc.y < 0)
 			{
@@ -154,7 +154,7 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 				}
 			}
 
-			vector<StarNode *>::iterator it;
+			std::vector<StarNode *>::iterator it;
 			for (it = closed.begin(); it != closed.end() && successor; it++)
 			{
 				if (successor->weight >= (*it)->weight)
@@ -195,10 +195,10 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 		found = found->parent;
 	}
 
-	vec3 norm = normalize(found->position - currentPosition);
+	glm::vec3 norm = normalize(found->position - currentPosition);
 
 	float disVelocity = (200 * (1.0 / 60.0));
-	vec3 velocity = disVelocity * norm;
+	glm::vec3 velocity = disVelocity * norm;
 
 	physicsComponent->SetUpdateVelocity(velocity);
 
@@ -213,26 +213,26 @@ void PathFinding::BuildPath(vec3 currentPosition, quat currentDirection, Compone
 	}
 }
 
-void PathFinding::CalculatePath(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent)
+void PathFinding::CalculatePath(glm::vec3 currentPosition, glm::quat currentDirection, ComponentPhysics * physicsComponent)
 {
 	iComponent * positionComponent = EntityManager::Instance()->GetComponentOfEntity(target, ComponentType::COMPONENT_POSITION);
-	vec3 targetPosition = dynamic_cast<ComponentPosition *>(positionComponent)->GetRenderPosition();
+	glm::vec3 targetPosition = dynamic_cast<ComponentPosition *>(positionComponent)->GetRenderPosition();
 
 	BuildPath(currentPosition, currentDirection, physicsComponent, targetPosition);
 }
 
-ivec2 PathFinding::CalculateMapLoc(vec3 position)
+glm::ivec2 PathFinding::CalculateMapLoc(glm::vec3 position)
 {
-	vec2 mapish = vec2(position.x - topLeftCoord.x, -position.z + topLeftCoord.y);
+	glm::vec2 mapish = glm::vec2(position.x - topLeftCoord.x, -position.z + topLeftCoord.y);
 
 	mapish += 0.5;
 
-	ivec2 value = ivec2(floor(mapish.x), floor(mapish.y));
+	glm::ivec2 value = glm::ivec2(floor(mapish.x), floor(mapish.y));
 
 	return value;
 }
 
-void PathFinding::CalculatePathToPosition(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent, vec3 targetLocation)
+void PathFinding::CalculatePathToPosition(glm::vec3 currentPosition, glm::quat currentDirection, ComponentPhysics * physicsComponent, glm::vec3 targetLocation)
 {
 	BuildPath(currentPosition, currentDirection, physicsComponent, targetLocation);
 }

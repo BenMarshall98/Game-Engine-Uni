@@ -7,13 +7,10 @@
 
 #include <algorithm>
 
-using namespace glm;
-
-
 PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance()), entityManager(EntityManager::Instance())
 {
 	ComponentType componentTypes[] = { ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_PHYSICS };
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, size(componentTypes));
+	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 	newEntities = EntityList;
 }
 
@@ -23,7 +20,7 @@ void PhysicsSystem::RemoveEntity(Entity * pEntity)
 	RigidBody * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
 	physicsManager->RemoveRigidBody(rigidBody);
 
-	vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -39,12 +36,12 @@ void PhysicsSystem::Action(void)
 		iComponent * componentDirection = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_DIRECTION);
 		iComponent * componentPhysics = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_PHYSICS);
 
-		vec3 position = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
-		quat direction = ((ComponentDirection *)componentDirection)->GetUpdateDirection();
+		glm::vec3 position = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
+		glm::quat direction = ((ComponentDirection *)componentDirection)->GetUpdateDirection();
 		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
 		float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
 		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
-		vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
+		glm::vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
 
 		RigidBody * rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
 
@@ -68,19 +65,19 @@ void PhysicsSystem::Action(void)
 void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
 {
 	RigidBody * rigidBody = physics->GetUpdateRigidBody();
-	vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
-	quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
+	glm::vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
+	glm::quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
 
-	vec3 zero = vec3(0);
-	vec3 velocity = physics->GetUpdateVelocity();
+	glm::vec3 zero = glm::vec3(0);
+	glm::vec3 velocity = physics->GetUpdateVelocity();
 	physicsManager->ApplyVelocity(rigidBody, velocity);
 	physics->SetUpdateVelocity(zero);
 
-	vec3 impulse = physics->GetUpdateImpulse();
+	glm::vec3 impulse = physics->GetUpdateImpulse();
 	physicsManager->ApplyImpulse(rigidBody, impulse);
 	physics->SetUpdateImpulse(zero);
 
-	vec3 rotation = physics->GetUpdateRotation();
+	glm::vec3 rotation = physics->GetUpdateRotation();
 	physicsManager->ApplyRotation(rigidBody, rotation);
 	physics->SetUpdateRotation(zero);
 
