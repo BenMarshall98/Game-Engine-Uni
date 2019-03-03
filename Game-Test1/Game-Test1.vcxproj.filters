@@ -67,12 +67,6 @@
     <Content Include="Shaders/NormalVertex.vert">
       <Filter>Shaders</Filter>
     </Content>
-    <Content Include="Shaders/TestFragment.frag">
-      <Filter>Shaders</Filter>
-    </Content>
-    <Content Include="Shaders/TestVertex.vert">
-      <Filter>Shaders</Filter>
-    </Content>
     <Content Include="Scripts/Vector3.lua">
       <Filter>Scripts</Filter>
     </Content>
@@ -171,6 +165,12 @@
     </None>
     <None Include="GameChoosing.json">
       <Filter>Menus</Filter>
+    </None>
+    <None Include="TextVertex.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="TextFragment.frag">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

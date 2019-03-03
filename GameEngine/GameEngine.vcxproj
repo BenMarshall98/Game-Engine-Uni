@@ -78,6 +78,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\538704\source\repos\Game-Engine\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>
@@ -87,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)packages\Assimp.3.0.0\build\native\include;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\538704\source\repos\Game-Engine;C:\Users\538704\source\repos\Game-Engine\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Link />
@@ -103,6 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\538704\source\repos\Game-Engine\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -117,7 +119,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\packages\Assimp.3.0.0\build\native\include\assimp;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\538704\source\repos\Game-Engine;C:\Users\538704\source\repos\Game-Engine\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
@@ -201,6 +203,7 @@
     <ClCompile Include="StaticModel.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextRender.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vec3AnimKey.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -279,6 +282,7 @@
     <ClInclude Include="StaticModel.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="TextRender.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec3AnimKey.h" />
     <ClInclude Include="Window.h" />
@@ -295,6 +299,9 @@
   <ItemGroup>
     <ProjectReference Include="..\BulletPhysicsEngine\BulletPhysicsEngine.vcxproj">
       <Project>{19f0091f-89b9-436b-853d-681658c0672b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\FreeType\FreeType.vcxproj">
+      <Project>{7d5f9dbf-7641-4e1e-b16d-3ac459d251f6}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Lua\Lua.vcxproj">
       <Project>{7fcce334-42b1-4cf3-8f96-04cafe83f7c0}</Project>

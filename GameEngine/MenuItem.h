@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glm/glm.hpp"
+
 #include <string>
 
 enum class MenuType
@@ -22,8 +23,7 @@ protected:
 	glm::vec2 location;
 
 public:
-	MenuItem(MenuType pMenuType, std::string pText, std::string pAlign, float pFontSize, glm::vec3 pFontColour, glm::vec2 pLocation) :
-		menuType(pMenuType), text(pText), align(pAlign), fontSize(pFontSize), fontColour(pFontColour) {}
+	MenuItem(MenuType pMenuType, std::string pText, std::string pAlign, float pFontSize, glm::vec3 pFontColour, glm::vec2 pLocation);
 
 	virtual ~MenuItem();
 
