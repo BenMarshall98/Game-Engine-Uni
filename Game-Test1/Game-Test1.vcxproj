@@ -260,6 +260,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="3DLevelGuardFunctions.lua" />
+    <None Include="GameChoosing.json" />
     <None Include="Models\Test.dae" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />

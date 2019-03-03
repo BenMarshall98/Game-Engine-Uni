@@ -1,0 +1,30 @@
+{
+  "Background-Colour": "Black",
+  "Text": [
+    {
+      "Title": "Choose Game",
+      "Align": "Centre",
+      "FontSize": 10,
+      "FontColour": "White",
+      "Location": [ 50, 10 ]
+    },
+    {
+      "Button": "Hit-box 2",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": "White",
+      "Highlighted": "Grey",
+      "Location": [ 50, 25 ],
+      "Function": "PlayHitBox2"
+    },
+    {
+      "Button": "Super Earth Bros",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": "White",
+      "Highlighted": "Grey",
+      "Location": [ 50, 35 ],
+      "Function": "PlaySuperWorld"
+    }
+  ]
+}

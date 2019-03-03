@@ -22,6 +22,9 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{06ed896a-55cd-42b5-a3f8-7f1d0d595d2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{1b1df461-2280-4c68-8496-07483a0ce4f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -165,6 +168,9 @@
     </None>
     <None Include="3DLevelGuardFunctions.lua">
       <Filter>Scripts</Filter>
+    </None>
+    <None Include="GameChoosing.json">
+      <Filter>Menus</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
