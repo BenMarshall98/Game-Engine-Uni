@@ -9,7 +9,7 @@
 #include "PhysicsManager.h"
 #include <vector>
 
-class TestGameScene : public iScene
+class GameScene : public iScene
 {
 private:
 	SystemManager * mSystemManager;
@@ -17,16 +17,17 @@ private:
 
 public:
 
-	TestGameScene();
-	~TestGameScene();
+	GameScene(std::string pFileName);
+	~GameScene();
 
-	TestGameScene& operator=(const TestGameScene&) = delete;
-	TestGameScene(TestGameScene&) = delete;
+	GameScene& operator=(const GameScene&) = delete;
+	GameScene(GameScene&) = delete;
 
 	void Load() override;
 	void Render() override;
 	void Update() override;
 	void Close() override;
+	void Swap() override;
 
 	void Resize(const int width, const int height) override;
 };

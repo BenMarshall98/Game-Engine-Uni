@@ -3,6 +3,7 @@
 #include "Button.h"
 #include <fstream>
 
+#undef LoadMenu
 
 std::vector<MenuItem *> MenuLoader::LoadMenu(std::string fileName, glm::vec3 & backgroundColour)
 {

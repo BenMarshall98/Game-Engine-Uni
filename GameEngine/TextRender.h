@@ -26,6 +26,7 @@ private:
 	Shader * shader;
 	unsigned int VAO;
 	unsigned int VBO;
+	const float pixelHeight = 150;
 
 	static TextRender * instance;
 

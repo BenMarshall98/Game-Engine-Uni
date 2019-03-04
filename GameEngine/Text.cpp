@@ -12,12 +12,17 @@ Text::~Text()
 }
 
 
-void Text::Update(int height, int width)
+void Text::Update()
 {
-
+	updateLocation = TextRender::Instance()->CalculateSize(text, location, fontSize, align);
 }
 
 void Text::Render()
 {
+	TextRender::Instance()->RenderText(text, renderLocation, fontColour);
+}
 
+void Text::Swap()
+{
+	renderLocation = updateLocation;
 }

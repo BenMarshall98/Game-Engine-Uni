@@ -2,7 +2,7 @@
 
 #include "OpenGL.h"
 #include "GLFWWindow.h"
-#include "TestGameScene.h"
+#include "GameScene.h"
 #include "ResourceManager.h"
 #include "LightManager.h"
 #include "InputManager.h"
@@ -13,36 +13,19 @@
 #include "LevelLoader.h"
 #include <iostream>
 
-TestGameScene::TestGameScene() : mSystemManager(SystemManager::Instance()), mPhysicsManager(nullptr)
+GameScene::GameScene(std::string pFileName) : iScene(pFileName), mSystemManager(SystemManager::Instance()), mPhysicsManager(nullptr)
 {
 }
 
-void TestGameScene::Load()
+void GameScene::Load()
 {
-	std::cout << "Please pick a level:" << std::endl;
-	std::cout << "   1. 3DLevel" << std::endl;
-	std::cout << "   2. PlatformLevel" << std::endl;
-
-	unsigned int level = 0;
-
-	while (level > 2 || level == 0)
-	{
-		std::cin >> level;
-	}
-
-	std::string levelName = "Levels/3DLevel.json";
-
-	if (level == 2)
-	{
-		levelName = "Levels/PlatformLevel.json";
-	}
-	LevelLoader::LoadLevelJSON(levelName);
+	LevelLoader::LoadLevelJSON(fileName);
 
 	mPhysicsManager = PhysicsManager::Instance();
 	mPhysicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
 }
 
-void TestGameScene::Render()
+void GameScene::Render()
 {
 	glEnable(GL_DEPTH_TEST);
 
@@ -54,7 +37,7 @@ void TestGameScene::Render()
 	EntityManager::Instance()->Update();
 }
 
-void TestGameScene::Update()
+void GameScene::Update()
 {
 	mSystemManager->Update();
 	
@@ -62,14 +45,19 @@ void TestGameScene::Update()
 	AudioManager::Instance()->Update();
 }
 
-void TestGameScene::Close()
+void GameScene::Close()
 {
 }
 
-void TestGameScene::Resize(const int width, const int height)
+void GameScene::Resize(const int width, const int height)
 {
 }
 
-TestGameScene::~TestGameScene()
+void GameScene::Swap()
+{
+
+}
+
+GameScene::~GameScene()
 {
 }

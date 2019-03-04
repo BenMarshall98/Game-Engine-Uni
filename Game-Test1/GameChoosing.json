@@ -1,33 +1,34 @@
 {
+  "Script": "GameChoosing.lua",
   "Background-Colour": [ 0, 0, 0 ],
   "MenuItems": [
     {
       "Type": "Text",
       "Text": "Choose Game",
       "Align": "Centre",
-      "FontSize": 10,
+      "FontSize": 15,
       "FontColour": [ 255, 255, 255 ],
-      "Location": [ 50, 10 ]
+      "Location": [ 50, 15 ]
     },
     {
       "Type": "Button",
-      "Text": "Hit-Box 2",
+      "Text": "3D Game",
       "Align": "Centre",
-      "FontSize": 5,
+      "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
-      "Location": [ 50, 25 ],
-      "Function": "PlayHitBox2"
+      "Location": [ 50, 40 ],
+      "Function": "StartHitBox2"
     },
     {
       "Type": "Button",
-      "Text": "Super Earth Bros",
+      "Text": "Platformer",
       "Align": "Centre",
-      "FontSize": 5,
+      "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
-      "Location": [ 50, 35 ],
-      "Function": "PlaySuperWorld"
+      "Location": [ 50, 60 ],
+      "Function": "StartSuperWorld"
     }
   ]
 }

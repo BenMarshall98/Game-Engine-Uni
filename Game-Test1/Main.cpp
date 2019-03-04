@@ -1,6 +1,5 @@
 #include "GLFWWindow.h"
 #include "SceneManager.h"
-#include "TestGameScene.h"
 #include "MenuScene.h"
 
 int main(void)
@@ -8,7 +7,7 @@ int main(void)
 	SceneManager * const sceneManager = SceneManager::Instance();
 
 	sceneManager->SetWindow(new GLFWWindow());
-	sceneManager->SetScene(new MenuScene());
+	sceneManager->SetScene(new MenuScene("GameChoosing.json"));
 	sceneManager->Run();
 
 	delete sceneManager;

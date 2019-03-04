@@ -73,6 +73,7 @@ void SceneManager::Run()
 		{
 			while (currentWindow->IsRunning() && windowRunning)
 			{
+				currentScene->Swap();
 				EntityManager::Instance()->Swap();
 				CameraManager::Instance()->Swap();
 

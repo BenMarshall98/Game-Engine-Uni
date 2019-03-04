@@ -2,7 +2,7 @@
 
 
 
-iScene::iScene()
+iScene::iScene(std::string pFileName) : fileName(pFileName)
 {
 }
 

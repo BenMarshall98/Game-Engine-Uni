@@ -27,8 +27,9 @@ public:
 
 	virtual ~MenuItem();
 
-	virtual void Update(int height, int width) = 0;
+	virtual void Update() = 0;
 	virtual void Render() = 0;
+	virtual void Swap() = 0;
 
 	inline MenuType GetMenuType()
 	{
@@ -37,5 +38,6 @@ public:
 
 	virtual void Select() = 0;
 	virtual void Highlight() = 0;
+	virtual void UnHighlight() = 0;
 };
 

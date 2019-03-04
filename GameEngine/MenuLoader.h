@@ -5,6 +5,8 @@
 #include <vector>
 #include "RapidJSON/document.h"
 
+#undef LoadMenu
+
 class MenuLoader
 {
 private:

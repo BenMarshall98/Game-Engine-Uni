@@ -120,10 +120,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TestGameScene.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TestGameScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Textures/2k_earth_daymap.jpg">
@@ -255,6 +251,8 @@
   <ItemGroup>
     <None Include="3DLevelGuardFunctions.lua" />
     <None Include="GameChoosing.json" />
+    <None Include="GameChoosing.lua" />
+    <None Include="HitBoxMainMenu.lua" />
     <None Include="Models\Test.dae" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />
@@ -263,6 +261,7 @@
     <None Include="Shaders\RiggedShadowMapping.frag" />
     <None Include="Shaders\RiggedShadowMapping.vert" />
     <None Include="Shaders\RiggedVertex.vert" />
+    <None Include="SuperWorldMainMenu.lua" />
     <None Include="TextFragment.frag" />
     <None Include="TextVertex.vert" />
   </ItemGroup>

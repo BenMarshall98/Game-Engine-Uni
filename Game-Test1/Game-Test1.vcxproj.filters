@@ -7,9 +7,6 @@
     <Filter Include="Models">
       <UniqueIdentifier>{17267a8e-a6d2-4e6c-a70e-1f98d5bacd17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{c80f53cb-ac2e-4189-866b-2b92e4c3ada3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{a1df2660-304f-4159-8155-a871857bdcb5}</UniqueIdentifier>
     </Filter>
@@ -28,9 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TestGameScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Textures/2k_earth_daymap.jpg">
@@ -115,11 +109,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TestGameScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Scripts/PlatformerFunctions.lua">
       <Filter>Scripts</Filter>
     </Content>
@@ -171,6 +160,15 @@
     </None>
     <None Include="TextFragment.frag">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="GameChoosing.lua">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="HitBoxMainMenu.lua">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="SuperWorldMainMenu.lua">
+      <Filter>Scripts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

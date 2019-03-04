@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Game-Test1\GameScene.cpp" />
     <ClCompile Include="AIStateMachine.cpp" />
     <ClCompile Include="AnimatedModel.cpp" />
     <ClCompile Include="Animation.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Game-Test1\GameScene.h" />
     <ClInclude Include="AIStateMachine.h" />
     <ClInclude Include="AnimatedModel.h" />
     <ClInclude Include="Animation.h" />
