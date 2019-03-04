@@ -7,7 +7,7 @@ int main(void)
 	SceneManager * const sceneManager = SceneManager::Instance();
 
 	sceneManager->SetWindow(new GLFWWindow());
-	sceneManager->SetScene(new MenuScene("GameChoosing.json"));
+	sceneManager->NewScene(new MenuScene("GameChoosing.json"));
 	sceneManager->Run();
 
 	delete sceneManager;

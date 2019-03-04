@@ -10,6 +10,9 @@
 #include "PhysicsManager.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "SceneManager.h"
+#include "MenuScene.h"
+#include "GameScene.h"
 #include <sstream>
 
 extern "C"
@@ -63,6 +66,12 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "FindAIPath", lua_FindAIPath);
 	lua_register(luaVM, "FindPath", lua_FindPath);
 	lua_register(luaVM, "GetNearestPath", lua_GetNearestPath);
+	lua_register(luaVM, "NewGameScene", lua_NewGameScene);
+	lua_register(luaVM, "NewMenuScene", lua_NewMenuScene);
+	lua_register(luaVM, "SwapToMenuScene", lua_SwapToMenuScene);
+	lua_register(luaVM, "SwapToGameScene", lua_SwapToGameScene);
+	lua_register(luaVM, "CloseScene", lua_CloseScene);
+	lua_register(luaVM, "CloseWindow", lua_CloseWindow);
 	
 	std::string file = "Scripts/Vector3.lua";
 	LoadLuaFromFile(file);
@@ -1520,6 +1529,111 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 	return 1;
 }
 
+int ScriptingManager::lua_NewGameScene(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: NewGameScene");
+		lua_error(luaState);
+	}
+
+	std::string scene = lua_tostring(luaState, 1);
+
+	SceneManager::Instance()->NewScene(new GameScene(scene));
+
+	return 0;
+}
+
+int ScriptingManager::lua_NewMenuScene(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: NewMenuScene");
+		lua_error(luaState);
+	}
+
+	std::string scene = lua_tostring(luaState, 1);
+
+	SceneManager::Instance()->NewScene(new MenuScene(scene));
+
+	return 0;
+}
+
+int ScriptingManager::lua_SwapToMenuScene(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: SwapToMenuScene");
+		lua_error(luaState);
+	}
+
+	std::string scene = lua_tostring(luaState, 1);
+
+	SceneManager::Instance()->SwapScene(new MenuScene(scene));
+
+	return 0;
+}
+
+int ScriptingManager::lua_SwapToGameScene(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: SwapToGameScene");
+		lua_error(luaState);
+	}
+
+	std::string scene = lua_tostring(luaState, 1);
+
+	SceneManager::Instance()->SwapScene(new GameScene(scene));
+
+	return 0;
+}
+
+int ScriptingManager::lua_CloseScene(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs == 0)
+	{
+		SceneManager::Instance()->CloseScene();
+	}
+	else if (numberOfArgs == 1)
+	{
+		int noClose = lua_tointeger(luaState, 1);
+		SceneManager::Instance()->CloseScene(noClose);
+	}
+	else
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CloseScene");
+		lua_error(luaState);
+	}
+
+	return 0;
+}
+
+int ScriptingManager::lua_CloseWindow(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 0)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CloseWindow");
+		lua_error(luaState);
+	}
+
+	SceneManager::Instance()->CloseWindow();
+
+	return 0;
+}
+
 void ScriptingManager::RunScriptFromCollision(const std::string & function, Entity * entity) const
 {
 	lua_getglobal(luaVM, function.c_str());
@@ -1557,6 +1671,18 @@ void ScriptingManager::RunScriptForStateAI(const std::string & function, Entity 
 	lua_pushnumber(luaVM, deltaTime);
 
 	if (lua_pcall(luaVM, 4, 0, 0) != 0)
+	{
+		std::string message = lua_tostring(luaVM, -1);
+		message = "Error running lua script: " + message;
+		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
+	}
+}
+
+void ScriptingManager::RunScriptFromInput(const std::string & function)
+{
+	lua_getglobal(luaVM, function.c_str());
+
+	if (lua_pcall(luaVM, 0, 0, 0) != 0)
 	{
 		std::string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;

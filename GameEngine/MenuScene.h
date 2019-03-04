@@ -43,6 +43,5 @@ public:
 	void Load() override;
 	void Close() override;
 
-	void Resize(int width, int height) override;
 };
 

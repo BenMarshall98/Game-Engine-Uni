@@ -1,6 +1,7 @@
 #include "MenuLoader.h"
 #include "Text.h"
 #include "Button.h"
+#include "ScriptingManager.h"
 #include <fstream>
 
 #undef LoadMenu
@@ -29,6 +30,13 @@ std::vector<MenuItem *> MenuLoader::LoadMenu(std::string fileName, glm::vec3 & b
 	if (d.HasParseError())
 	{
 		return menuItems;
+	}
+
+	if (d.HasMember("Script"))
+	{
+		std::string script = d["Script"].GetString();
+
+		ScriptingManager::Instance()->LoadLuaFromFile(script);
 	}
 
 	if (d.HasMember("Background-Colour"))

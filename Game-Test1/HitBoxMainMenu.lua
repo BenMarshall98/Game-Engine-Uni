@@ -1,5 +1,5 @@
 function PlayHitBox2()
-	NewGameScene("Levels\3DLevel.json")
+	NewGameScene("Levels/3DLevel.json")
 end
 
 function GoToOptionsMenu()

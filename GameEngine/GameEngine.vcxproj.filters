@@ -40,9 +40,6 @@
     <Filter Include="Window\GLFW">
       <UniqueIdentifier>{16af0385-b6a9-4bc0-8545-e30f74096ea3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level Loaders">
-      <UniqueIdentifier>{68f96209-94ac-42bb-ad9b-4642a67e437a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripting Manager">
       <UniqueIdentifier>{50985445-f885-4060-a80c-415b1ad545ad}</UniqueIdentifier>
     </Filter>
@@ -73,6 +70,12 @@
     <Filter Include="Menu">
       <UniqueIdentifier>{cba22153-9ec5-4809-a6cb-d281946f097a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu Loader">
+      <UniqueIdentifier>{82e133e5-65cb-439f-b24f-10e8ddb29e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level Loader">
+      <UniqueIdentifier>{68f96209-94ac-42bb-ad9b-4642a67e437a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -98,9 +101,6 @@
     </ClCompile>
     <ClCompile Include="SystemManager.cpp">
       <Filter>System Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Scene Manager</Filter>
     </ClCompile>
     <ClCompile Include="iScene.cpp">
       <Filter>Scene Manager</Filter>
@@ -181,7 +181,7 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
-      <Filter>Level Loaders</Filter>
+      <Filter>Level Loader</Filter>
     </ClCompile>
     <ClCompile Include="ScriptingManager.cpp">
       <Filter>Scripting Manager</Filter>
@@ -294,15 +294,18 @@
     <ClCompile Include="Button.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="MenuLoader.cpp" />
     <ClCompile Include="TextRender.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="MenuScene.cpp">
       <Filter>Scene Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game-Test1\GameScene.cpp">
+    <ClCompile Include="GameScene.cpp">
       <Filter>Scene Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="MenuLoader.cpp">
+      <Filter>Menu Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -333,9 +336,6 @@
     </ClInclude>
     <ClInclude Include="SystemManager.h">
       <Filter>System Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Scene Manager</Filter>
     </ClInclude>
     <ClInclude Include="iScene.h">
       <Filter>Scene Manager</Filter>
@@ -422,7 +422,7 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoader.h">
-      <Filter>Level Loaders</Filter>
+      <Filter>Level Loader</Filter>
     </ClInclude>
     <ClInclude Include="ScriptingManager.h">
       <Filter>Scripting Manager</Filter>
@@ -526,15 +526,18 @@
     <ClInclude Include="Button.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="MenuLoader.h" />
     <ClInclude Include="TextRender.h">
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="MenuScene.h">
       <Filter>Scene Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Game-Test1\GameScene.h">
+    <ClInclude Include="GameScene.h">
       <Filter>Scene Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="MenuLoader.h">
+      <Filter>Menu Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

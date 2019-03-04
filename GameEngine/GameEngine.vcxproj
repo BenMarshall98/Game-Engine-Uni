@@ -129,7 +129,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Game-Test1\GameScene.cpp" />
     <ClCompile Include="AIStateMachine.cpp" />
     <ClCompile Include="AnimatedModel.cpp" />
     <ClCompile Include="Animation.cpp" />
@@ -162,6 +161,7 @@
     <ClCompile Include="EntitySound.cpp" />
     <ClCompile Include="FollowPlaneCamera.cpp" />
     <ClCompile Include="FollowPlayerCamera.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GLFWInput.cpp" />
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="iComponent.cpp" />
@@ -210,7 +210,6 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Game-Test1\GameScene.h" />
     <ClInclude Include="AIStateMachine.h" />
     <ClInclude Include="AnimatedModel.h" />
     <ClInclude Include="Animation.h" />
@@ -244,6 +243,7 @@
     <ClInclude Include="EntitySound.h" />
     <ClInclude Include="FollowPlaneCamera.h" />
     <ClInclude Include="FollowPlayerCamera.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="GLFWInput.h" />
     <ClInclude Include="GLFWWindow.h" />
     <ClInclude Include="iComponent.h" />

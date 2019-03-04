@@ -1,0 +1,22 @@
+{
+  "Script": "SuperWorldMainMenu.lua",
+  "Background-Colour": [ 0, 0, 0 ],
+  "MenuItems": [
+    {
+      "Type": "Text",
+      "Text": "Options",
+      "Align": "Centre",
+      "FontSize": 15,
+      "FontColour": [ 255, 255, 255 ],
+      "Location": [ 50, 15 ]
+    },
+    {
+      "Type": "Text",
+      "Text": "And You Thought You Had Options",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": [ 255, 255, 255 ],
+      "Location": [ 50, 50 ]
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 function PlaySuperWorld()
-	NewGameScene("Levels\PlatformLevel.json")
+	NewGameScene("Levels/PlatformLevel.json")
 end
 
 function GoToOptionsMenu()
 	NewMenuScene("Options.json")
 end
 
-function GoToSuperWorldMenu()
+function GoToHitBoxMenu()
 	SwapToMenuScene("HitBoxMainMenu.json")
 end
 

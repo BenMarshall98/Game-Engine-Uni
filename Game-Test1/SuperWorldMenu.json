@@ -1,0 +1,64 @@
+{
+  "Script": "SuperWorldMainMenu.lua",
+  "Background-Colour": [ 0, 0, 0 ],
+  "MenuItems": [
+    {
+      "Type": "Text",
+      "Text": "Super Earth Bros",
+      "Align": "Centre",
+      "FontSize": 15,
+      "FontColour": [ 255, 255, 255 ],
+      "Location": [ 50, 15 ]
+    },
+    {
+      "Type": "Button",
+      "Text": "Play Game",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 40 ],
+      "Function": "PlaySuperWorld"
+    },
+    {
+      "Type": "Button",
+      "Text": "Options",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 50 ],
+      "Function": "GoToOptionsMenu"
+    },
+    {
+      "Type": "Button",
+      "Text": "Play Hit Box 2 Instead",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 60 ],
+      "Function": "GoToHitBoxMenu"
+    },
+    {
+      "Type": "Button",
+      "Text": "Quit To Game List",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 70 ],
+      "Function": "QuitToChoosingMenu"
+    },
+    {
+      "Type": "Button",
+      "Text": "Quit To Windows",
+      "Align": "Centre",
+      "FontSize": 5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 80 ],
+      "Function": "QuitToWindow"
+    }
+  ]
+}

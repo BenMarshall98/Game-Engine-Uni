@@ -133,11 +133,6 @@ void MenuScene::Swap()
 	}
 }
 
-void MenuScene::Resize(int width, int height)
-{
-
-}
-
 void MenuScene::Close()
 {
 

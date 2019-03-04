@@ -48,6 +48,12 @@ private:
 	static int lua_FindAIPath(lua_State * luaState);
 	static int lua_FindPath(lua_State * luaState);
 	static int lua_GetNearestPath(lua_State * luaState);
+	static int lua_NewGameScene(lua_State * luaState);
+	static int lua_NewMenuScene(lua_State * luaState);
+	static int lua_SwapToMenuScene(lua_State * luaState);
+	static int lua_SwapToGameScene(lua_State * luaState);
+	static int lua_CloseScene(lua_State * luaState);
+	static int lua_CloseWindow(lua_State * luaState);
 	ScriptingManager();
 
 	lua_State * luaVM;
@@ -72,6 +78,8 @@ public:
 	void RunScriptFromInput(const std::string & function, Entity * entity, float inputValue, float deltaTime) const;
 
 	void RunScriptForStateAI(const std::string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const;
+
+	void RunScriptFromInput(const std::string & function);
 
 	~ScriptingManager();
 };

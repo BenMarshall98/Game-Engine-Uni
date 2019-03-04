@@ -5,74 +5,68 @@
 #include "iScene.h"
 #include "Window.h"
 #include "LoggingManager.h"
+#include <stack>
 
 class SceneManager
 {
 private:
 	static SceneManager * instance;
-	std::thread swap;
 
-	iScene * currentScene;
+	std::stack<iScene *> scenes;
 	iScene * newScene;
-	Window * currentWindow;
+	Window * window;
 
-	int updateCount = 0;
-	int renderCount = 0;
-	bool windowRunning;
-	bool sceneRunning;
-	bool tempRunning;
+	bool tempRunning = false;
+	bool windowRunning = false;
+	bool newSceneBool = false;
+	bool swapSceneBool = false;
+	bool closeSceneBool = false;
+	bool closeWindowBool = false;
 
-	SceneManager() : currentScene(nullptr), newScene(nullptr), currentWindow(nullptr), windowRunning(true), sceneRunning(true), tempRunning(true)
-	{
-	};
+	int scenesToClose = 0;
 
-	inline void Update()
-	{
-		currentScene->Update();
-	}
+	SceneManager();
+	void Update();
+	void Render();
+	void Swap();
 
-	inline void Render()
-	{
-		currentScene->Render();
-	}
+	void StartNewScene(iScene * scene);
+	void FinishNewScene();
 
 	void StartSwapScene(iScene * scene);
 	void FinishSwapScene();
 
+	void StartCloseScene(int noOfScene);
+	void FinishCloseScene();
+
+	void StartCloseWindow();
+	void FinishCloseWindow();
+
 public:
+	static inline SceneManager * Instance()
+	{
+		if (instance == nullptr)
+		{
+			instance = new SceneManager();
+		}
 
-	static SceneManager * Instance();
+		return instance;
+	}
 
-	SceneManager& operator= (const SceneManager&) = delete;
+	SceneManager& operator=(const SceneManager&) = delete;
 	SceneManager(SceneManager&) = delete;
 
-	~SceneManager() throw();
+	~SceneManager();
 
 	void Run();
 
-	inline void SetScene(iScene * scene)
-	{
-		StartSwapScene(scene);
-
-		if (currentScene == nullptr)
-		{
-			tempRunning = true;
-			FinishSwapScene();
-		}
-	}
-
-	inline void SetWindow(Window * gameWindow)
-	{
-		static bool firstTime = true;
-
-		if (firstTime)
-		{
-			currentWindow = gameWindow;
-			currentWindow->Load();
-			firstTime = false;
-		}
-	}
-
 	void Resize(int width, int height);
+
+	void SetWindow(Window * pWindow);
+
+	void NewScene(iScene * scene);
+	void SwapScene(iScene * scene);
+	void CloseScene(int noOfScenes = 1);
+	void CloseWindow();
 };
 

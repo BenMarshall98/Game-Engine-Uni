@@ -252,8 +252,10 @@
     <None Include="3DLevelGuardFunctions.lua" />
     <None Include="GameChoosing.json" />
     <None Include="GameChoosing.lua" />
+    <None Include="HitBoxMainMenu.json" />
     <None Include="HitBoxMainMenu.lua" />
     <None Include="Models\Test.dae" />
+    <None Include="Options.json" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />
     <None Include="Shaders\RiggedPointShadow.geom" />
@@ -262,6 +264,7 @@
     <None Include="Shaders\RiggedShadowMapping.vert" />
     <None Include="Shaders\RiggedVertex.vert" />
     <None Include="SuperWorldMainMenu.lua" />
+    <None Include="SuperWorldMenu.json" />
     <None Include="TextFragment.frag" />
     <None Include="TextVertex.vert" />
   </ItemGroup>

@@ -17,7 +17,5 @@ public:
 
 	virtual void Load() = 0;
 	virtual void Close() = 0;
-
-	virtual void Resize(int width, int height) = 0;
 };
 

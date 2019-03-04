@@ -1,99 +1,58 @@
 #include "SceneManager.h"
-#include "EntityManager.h"
-#include "glm/glm.hpp"
-#include "ComponentPosition.h"
 #include "CameraManager.h"
-#include "AudioManager.h"
-#include "InputManager.h"
-#include "LightManager.h"
-#include "LoggingManager.h"
-#include "PhysicsManager.h"
-#include "ScriptingManager.h"
-#include "SystemManager.h"
-#include "ResourceManager.h"
-#include <iostream>
+#include "EntityManager.h"
+
+SceneManager * SceneManager::instance = nullptr;
+
+SceneManager::SceneManager()
+{
+}
+
 
 SceneManager::~SceneManager()
 {
-	if (swap.joinable())
-	{
-		try {
-			swap.join();
-		}
-		catch (...)
-		{
-
-		}
-	}
-
-	ResourceManager::ClearResources();
-	EntityManager * entityManager = EntityManager::Instance();
-	//SystemManager * systemManager = SystemManager::Instance();
-	//CameraManager * cameraManager = CameraManager::Instance();
-	//AudioManager * audioManager = AudioManager::Instance();
-	//InputManager * inputManager = InputManager::Instance();
-	//LightManager * lightManager = LightManager::Instance();
-	//PhysicsManager * physicsManager = PhysicsManager::Instance();
-	//ScriptingManager * scriptingManager = ScriptingManager::Instance();
-	
-
-	delete entityManager;
-	//delete cameraManager;
-	//delete audioManager;
-	//delete inputManager;
-	//delete lightManager;
-	//delete physicsManager;
-	//delete scriptingManager;
-	//delete systemManager;
-
-	delete newScene;
-	delete currentScene;
-	delete currentWindow;
 }
 
-void SceneManager::Run()
+void SceneManager::Update()
 {
-	while (tempRunning)
+	scenes.top()->Update();
+}
+
+void SceneManager::Render()
+{
+	scenes.top()->Render();
+}
+
+void SceneManager::Swap()
+{
+	scenes.top()->Swap();
+	EntityManager::Instance()->Swap();
+	CameraManager::Instance()->Swap();
+}
+
+void SceneManager::Resize(int width, int height)
+{
+	CameraManager::Instance()->Resize(width, height);
+}
+
+void SceneManager::SetWindow(Window * pWindow)
+{
+	static bool firstTime = true;
+
+	if (firstTime)
 	{
-		sceneRunning = true;
-		unsigned int maxThreads = std::thread::hardware_concurrency();
-
-		windowRunning = true;
-
-		if (maxThreads < 2)
-		{
-			while (currentWindow->IsRunning() && windowRunning)
-			{
-				EntityManager::Instance()->Swap();
-				Update();
-				Render();
-			}
-		}
-		else
-		{
-			while (currentWindow->IsRunning() && windowRunning)
-			{
-				currentScene->Swap();
-				EntityManager::Instance()->Swap();
-				CameraManager::Instance()->Swap();
-
-				std::thread update = std::thread(&SceneManager::Update, this);
-				Render();
-				update.join();
-				currentWindow->LimitFPS(60);
-				currentWindow->WindowEvents();
-			}
-		}
-
-		if (currentWindow->IsRunning())
-		{
-			FinishSwapScene();
-		}
-		else
-		{
-			tempRunning = false;
-		}
+		window = pWindow;
+		window->Load();
+		firstTime = false;
 	}
+}
+
+void SceneManager::StartNewScene(iScene * scene)
+{
+	tempRunning = windowRunning;
+	windowRunning = false;
+	newScene = scene;
+	newSceneBool = true;
 }
 
 void SceneManager::StartSwapScene(iScene * scene)
@@ -101,44 +60,146 @@ void SceneManager::StartSwapScene(iScene * scene)
 	tempRunning = windowRunning;
 	windowRunning = false;
 	newScene = scene;
+	swapSceneBool = true;
 }
 
-void SceneManager::FinishSwapScene()
+void SceneManager::StartCloseScene(int noOfScene)
 {
-	if (currentScene != nullptr)
-	{
-		currentScene->Close();
-	}
+	tempRunning = windowRunning;
+	windowRunning = false;
+	scenesToClose = noOfScene;
+	closeSceneBool = true;
+}
 
-	delete currentScene;
+void SceneManager::StartCloseWindow()
+{
+	closeWindowBool = false;
+}
 
-	currentScene = newScene;
+void SceneManager::FinishNewScene()
+{
+	scenes.push(newScene);
+	scenes.top()->Load();
 	newScene = nullptr;
-	currentScene->Load();
 
 	if (LoggingManager::HasSevereMessage())
 	{
 		tempRunning = false;
 	}
+
+	newSceneBool = false;
 }
 
-SceneManager * SceneManager::Instance()
+void SceneManager::FinishSwapScene()
 {
-	if (instance == nullptr)
+	scenes.top()->Close();
+	delete scenes.top();
+	scenes.pop();
+
+	scenes.push(newScene);
+	scenes.top()->Load();
+	newScene = nullptr;
+
+	if (LoggingManager::HasSevereMessage())
 	{
-		instance = new SceneManager();
+		tempRunning = false;
 	}
-	return instance;
+
+	swapSceneBool = false;
 }
 
-void SceneManager::Resize(int width, int height)
+void SceneManager::FinishCloseScene()
 {
-	if (currentScene != nullptr)
+	for (int i = 0; i < scenesToClose; i++)
 	{
-		currentScene->Resize(width, height);
+		scenes.top()->Close();
+		delete scenes.top();
+		scenes.pop();
 	}
 
-	CameraManager::Instance()->Resize(width, height);
+	if (LoggingManager::HasSevereMessage())
+	{
+		tempRunning = false;
+	}
+
+	closeSceneBool = false;
 }
 
-SceneManager * SceneManager::instance = nullptr;
+void SceneManager::FinishCloseWindow()
+{
+	tempRunning = false;
+	closeWindowBool = false;
+}
+
+void SceneManager::NewScene(iScene * scene)
+{
+	StartNewScene(scene);
+
+	if (scenes.empty())
+	{
+		tempRunning = true;
+		FinishNewScene();
+	}
+}
+
+void SceneManager::SwapScene(iScene * scene)
+{
+	StartSwapScene(scene);
+}
+
+void SceneManager::CloseScene(int noOfScenes)
+{
+	StartCloseScene(noOfScenes);
+}
+
+void SceneManager::CloseWindow()
+{
+	StartCloseWindow();
+}
+
+void SceneManager::Run()
+{
+	while (tempRunning)
+	{
+		if (scenes.empty())
+		{
+			break;
+		}
+
+		windowRunning = true;
+
+		while (window->IsRunning() && windowRunning)
+		{
+			Swap();
+			std::thread update = std::thread(&SceneManager::Update, this);
+			Render();
+			update.join();
+			window->LimitFPS(60);
+			window->WindowEvents();
+		}
+
+		if (window->IsRunning())
+		{
+			if (newSceneBool)
+			{
+				FinishNewScene();
+			}
+			else if (swapSceneBool)
+			{
+				FinishSwapScene();
+			}
+			else if (closeSceneBool)
+			{
+				FinishCloseScene();
+			}
+			else if (closeWindowBool)
+			{
+				FinishCloseWindow();
+			}
+		}
+		else
+		{
+			tempRunning = false;
+		}
+	}
+}
