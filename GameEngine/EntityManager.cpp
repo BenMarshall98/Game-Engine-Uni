@@ -27,7 +27,7 @@ Entity * EntityManager::GetEntityByName(const std::string & entityName)
 	return nullptr;
 }
 
-void EntityManager::RemoveEntity(Entity * const entity)
+void EntityManager::RemoveEntity(Entity * entity)
 {
 	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
@@ -54,6 +54,7 @@ void EntityManager::RemoveEntity(Entity * const entity)
 	}
 
 	delete entity;
+	entity = nullptr;
 }
 
 void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component)

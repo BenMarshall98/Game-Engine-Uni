@@ -16,7 +16,7 @@ private:
 	std::vector<Entity *> EntityList;
 	std::vector<Entity *> ToDeleteList;
 
-	void RemoveEntity(Entity* entity);
+	void RemoveEntity(Entity * entity);
 
 	EntityManager() {};
 public:

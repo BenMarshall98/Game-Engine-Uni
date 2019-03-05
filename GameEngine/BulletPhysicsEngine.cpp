@@ -11,14 +11,14 @@
 BulletPhysicsEngine::BulletPhysicsEngine()
 {
 	//Build the broadphase
-	btBroadphaseInterface* broadphase = new btDbvtBroadphase();
+	broadphase = new btDbvtBroadphase();
 
 	//Set up the collision configuration and dispatcher
-	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
-	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	collisionConfiguration = new btDefaultCollisionConfiguration();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
 
 	//The actual physics solver
-	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+	solver = new btSequentialImpulseConstraintSolver;
 
 	//The world.
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
@@ -29,6 +29,39 @@ BulletPhysicsEngine::BulletPhysicsEngine()
 
 BulletPhysicsEngine::~BulletPhysicsEngine()
 {
+	CProfileManager::CleanupMemory();
+	Clear();
+
+	delete dynamicsWorld;
+	delete solver;
+	delete broadphase;
+	delete dispatcher;
+	delete collisionConfiguration;
+}
+
+void BulletPhysicsEngine::Clear()
+{
+	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
+	{
+		btCollisionObject * obj = dynamicsWorld->getCollisionObjectArray()[i];
+		btRigidBody * body = btRigidBody::upcast(obj);
+
+		if (body && body->getMotionState())
+		{
+			delete body->getMotionState();
+		}
+
+		dynamicsWorld->removeCollisionObject(obj);
+		delete obj;
+	}
+
+	for (int i = 0; i < collisionShapes.size(); i++)
+	{
+		delete collisionShapes[i];
+		collisionShapes[i] = nullptr;
+	}
+
+	collisionShapes.clear();
 }
 
 RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit)
@@ -55,6 +88,8 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, g
 			collisionShape = nullptr;
 	}
 
+
+	collisionShapes.push_back(collisionShape);
 
 	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(
 		btQuaternion(direction.x, direction.y, direction.z, direction.w),
@@ -163,6 +198,11 @@ bool BulletPhysicsEngine::TouchingGround(const void * pRigidBody1, const void * 
 void BulletPhysicsEngine::RemoveRigidBody(RigidBody * pRigidBody)
 {
 	btRigidBody * rigidBody = (btRigidBody *)pRigidBody->GetRigidBody();
+
+	if (rigidBody && rigidBody->getMotionState())
+	{
+		delete rigidBody->getMotionState();
+	}
 
 	dynamicsWorld->removeRigidBody(rigidBody);
 }

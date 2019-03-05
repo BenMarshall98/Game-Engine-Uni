@@ -38,7 +38,7 @@ public:
 	PhysicsManager& operator= (const PhysicsManager&) = delete;
 	PhysicsManager(PhysicsManager&) = delete;
 
-	~PhysicsManager() {}
+	~PhysicsManager();
 
 	inline RigidBody * AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit)
 	{
@@ -48,6 +48,11 @@ public:
 	inline void Update(float pDeltaTime) const
 	{
 		engine->Update(pDeltaTime);
+	}
+
+	inline void Clear() const
+	{
+		engine->Clear();
 	}
 
 	inline glm::vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)

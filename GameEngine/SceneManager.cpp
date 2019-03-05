@@ -1,6 +1,14 @@
 #include "SceneManager.h"
+#include "AudioManager.h"
 #include "CameraManager.h"
 #include "EntityManager.h"
+#include "LightManager.h"
+#include "PhysicsManager.h"
+#include "ScriptingManager.h"
+#include "SystemManager.h"
+#include "ResourceManager.h"
+#include "InputManager.h"
+#include "TextRender.h"
 
 SceneManager * SceneManager::instance = nullptr;
 
@@ -11,6 +19,25 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+	while (!scenes.empty())
+	{
+		delete scenes.top();
+		scenes.top() = nullptr;
+		scenes.pop();
+	}
+
+	ResourceManager::ClearResources();
+	delete EntityManager::Instance();
+	delete AudioManager::Instance();
+	delete CameraManager::Instance();
+	delete LightManager::Instance();
+	delete PhysicsManager::Instance();
+	delete ScriptingManager::Instance();
+	delete SystemManager::Instance();
+	delete InputManager::Instance();
+	delete TextRender::Instance();	
+
+	delete window;
 }
 
 void SceneManager::Update()
@@ -73,7 +100,7 @@ void SceneManager::StartCloseScene(int noOfScene)
 
 void SceneManager::StartCloseWindow()
 {
-	closeWindowBool = false;
+	closeWindowBool = true;
 }
 
 void SceneManager::FinishNewScene()

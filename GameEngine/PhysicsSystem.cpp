@@ -20,9 +20,6 @@ void PhysicsSystem::RemoveEntity(Entity * pEntity)
 
 	if (it != EntityList.end())
 	{
-		iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, ComponentType::COMPONENT_PHYSICS);
-		RigidBody * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
-		physicsManager->RemoveRigidBody(rigidBody);
 		EntityList.erase(it);
 	}
 }

@@ -4,6 +4,7 @@ InputManager * InputManager::instance = nullptr;
 
 InputManager::~InputManager()
 {
+	delete inputDevice;
 }
 
 float InputManager::GetInputValue(const std::vector<GameInput> & gameInputs) const

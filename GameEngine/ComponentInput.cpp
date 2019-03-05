@@ -2,7 +2,7 @@
 
 ComponentInput::~ComponentInput()
 {
-
+	delete inputs;
 }
 
 ComponentType ComponentInput::GetComponentName()

@@ -15,7 +15,9 @@ AudioManager::AudioManager()
 
 AudioManager::~AudioManager()
 {
-	engine->drop();
+	Clear();
+	//TODO: Find out why this does not work -- engine->drop();
+	instance = nullptr;
 }
 
 void * AudioManager::GenerateBuffer(const std::string & fileName)

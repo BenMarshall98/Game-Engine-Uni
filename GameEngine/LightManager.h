@@ -128,9 +128,6 @@ public:
 	void Clear();
 	void Render(const int pShaderID);
 
-	~LightManager()
-	{
-		delete directional;
-	};
+	~LightManager();
 };
 

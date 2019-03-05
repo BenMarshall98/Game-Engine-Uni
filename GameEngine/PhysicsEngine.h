@@ -16,6 +16,7 @@ public:
 	virtual void RemoveRigidBody(RigidBody * pRigidBody) = 0;
 
 	virtual void Update(float pDeltaTime) = 0;
+	virtual void Clear() = 0;
 
 	inline glm::vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)
 	{
@@ -43,5 +44,6 @@ public:
 	}
 	
 	virtual bool ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2) = 0;
+
 };
 

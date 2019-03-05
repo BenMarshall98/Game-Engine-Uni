@@ -9,6 +9,7 @@ SystemManager::SystemManager()
 
 SystemManager::~SystemManager()
 {
+	Clear();
 }
 
 void SystemManager::Render()

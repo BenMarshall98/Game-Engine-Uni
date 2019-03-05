@@ -72,6 +72,21 @@ LightManager::LightManager() : directional(nullptr)
 	}
 }
 
+LightManager::~LightManager()
+{
+	Clear();
+
+	for (int i = 0; i < pointShadowTexture.size(); i++)
+	{
+		delete pointShadowTexture.at(i);
+		pointShadowTexture.at(i) = nullptr;
+	}
+
+	pointShadowTexture.clear();
+
+	delete directional;
+}
+
 void LightManager::AddPointLight(const glm::vec3 & pLocation,const glm::vec3 & pLightColour, const float pAttenuation)
 {
 	PointLight * const pointLight = new PointLight();

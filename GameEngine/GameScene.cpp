@@ -64,7 +64,7 @@ void GameScene::Close()
 {
 	SystemManager::Instance()->Clear();
 	EntityManager::Instance()->Clear();
-	//PhysicsManager::Instance()->Clear();
+	PhysicsManager::Instance()->Clear();
 	AudioManager::Instance()->Clear();
 	CameraManager::Instance()->Clear();
 	LightManager::Instance()->Clear();

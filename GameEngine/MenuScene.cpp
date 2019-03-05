@@ -13,6 +13,13 @@ MenuScene::MenuScene(std::string pFileName) : iScene(pFileName)
 
 MenuScene::~MenuScene()
 {
+	for (int i = 0; i < menuItems.size(); i++)
+	{
+		delete menuItems.at(i);
+		menuItems.at(i) = nullptr;
+	}
+
+	menuItems.clear();
 }
 
 void MenuScene::Load()
