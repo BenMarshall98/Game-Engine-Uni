@@ -1,8 +1,7 @@
 #pragma once
 
 #include "iScene.h"
-#include "EntityManager.h"
-#include "SystemManager.h"
+
 #include "Camera.h"
 #include "Projection.h"
 #include "InputMapping.h"
@@ -12,8 +11,6 @@
 class GameScene : public iScene
 {
 private:
-	SystemManager * mSystemManager;
-	PhysicsManager * mPhysicsManager;
 
 public:
 

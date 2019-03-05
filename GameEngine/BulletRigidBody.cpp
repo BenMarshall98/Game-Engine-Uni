@@ -1,7 +1,10 @@
 #include "BulletRigidBody.h"
+#include "PhysicsManager.h"
 
 BulletRigidBody::~BulletRigidBody()
 {
+	PhysicsManager::Instance()->RemoveRigidBody(this);
+	delete rigidBody;
 }
 
 glm::vec3 BulletRigidBody::GetPosition()

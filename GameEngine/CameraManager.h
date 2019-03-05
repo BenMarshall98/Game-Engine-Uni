@@ -44,6 +44,14 @@ public:
 		projection->Update();
 	}
 
+	inline void Clear()
+	{
+		delete camera;
+		camera = nullptr;
+		delete projection;
+		projection = nullptr;
+	}
+
 	void Resize(float width, float height);
 
 	void Swap()

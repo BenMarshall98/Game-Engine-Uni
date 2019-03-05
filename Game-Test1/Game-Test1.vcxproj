@@ -256,6 +256,8 @@
     <None Include="HitBoxMainMenu.lua" />
     <None Include="Models\Test.dae" />
     <None Include="Options.json" />
+    <None Include="Pause.json" />
+    <None Include="PauseMenu.lua" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />
     <None Include="Shaders\RiggedPointShadow.geom" />

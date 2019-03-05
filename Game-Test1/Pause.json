@@ -1,0 +1,34 @@
+{
+  "Script": "PauseMenu.lua",
+  "Background-Colour": [ 0, 0, 0 ],
+  "MenuItems": [
+    {
+      "Type": "Text",
+      "Text": "Pause",
+      "Align": "Centre",
+      "FontSize": 15,
+      "FontColour": [ 255, 255, 255 ],
+      "Location": [ 50, 15 ]
+    },
+    {
+      "Type": "Button",
+      "Text": "Resume Game",
+      "Align": "Centre",
+      "FontSize": 7.5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 40 ],
+      "Function": "ResumeGame"
+    },
+    {
+      "Type": "Button",
+      "Text": "Return to Main Menu",
+      "Align": "Centre",
+      "FontSize": 7.5,
+      "FontColour": [ 255, 255, 255 ],
+      "Highlighted": [ 128, 128, 128 ],
+      "Location": [ 50, 60 ],
+      "Function": "QuitGame"
+    }
+  ]
+}

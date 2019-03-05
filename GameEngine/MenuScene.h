@@ -24,10 +24,6 @@ private:
 		GameInput::KEYBOARD_ENTER
 	};
 
-	std::vector<GameInput> escapeMenu = {
-		GameInput::KEYBOARD_ESCAPE
-	};
-
 	glm::vec3 backgroundColour = glm::vec3(0);
 	int currentSelected = 0;
 	int totalSelectable = 0;

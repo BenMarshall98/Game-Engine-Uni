@@ -14,6 +14,7 @@ private:
 	LevelLoader() {};
 
 	static std::map<std::string, const rapidjson::Value&> templates;
+
 	static void LoadResourcesJSON(const rapidjson::Value& Resources);
 	static void LoadScriptsJSON(const rapidjson::Value& Scripts);
 	static void LoadEntityTemplatesJSON(const rapidjson::Value& EntityTemplates);
@@ -31,7 +32,6 @@ private:
 	static std::vector<InputFunction> * LoadInputsJSON(const rapidjson::Value& Inputs);
 	static int GetLine(std::string & file, int location);
 public:
-	static void CoinHitPlayer(Entity * pEntity);
 	static void LoadLevelJSON(std::string & fileName);
 	
 };

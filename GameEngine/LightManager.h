@@ -125,6 +125,7 @@ public:
 	void RemoveSpotLight(SpotLight * const pSpotLight);
 
 	void Update(const glm::vec3 & pViewLocation);
+	void Clear();
 	void Render(const int pShaderID);
 
 	~LightManager()

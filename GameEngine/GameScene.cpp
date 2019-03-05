@@ -3,9 +3,17 @@
 #include "OpenGL.h"
 #include "GLFWWindow.h"
 #include "GameScene.h"
+#include "MenuScene.h"
 #include "ResourceManager.h"
 #include "LightManager.h"
 #include "InputManager.h"
+#include "SceneManager.h"
+#include "AudioManager.h"
+#include "CameraManager.h"
+#include "EntityManager.h"
+#include "SystemManager.h"
+#include "PhysicsManager.h"
+#include "ResourceManager.h"
 #include "glm/gtx/transform.hpp"
 #include "CameraManager.h"
 #include "AudioManager.h"
@@ -13,7 +21,7 @@
 #include "LevelLoader.h"
 #include <iostream>
 
-GameScene::GameScene(std::string pFileName) : iScene(pFileName), mSystemManager(SystemManager::Instance()), mPhysicsManager(nullptr)
+GameScene::GameScene(std::string pFileName) : iScene(pFileName)
 {
 }
 
@@ -21,8 +29,8 @@ void GameScene::Load()
 {
 	LevelLoader::LoadLevelJSON(fileName);
 
-	mPhysicsManager = PhysicsManager::Instance();
-	mPhysicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
+	PhysicsManager * physicsManager = PhysicsManager::Instance();
+	physicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
 }
 
 void GameScene::Render()
@@ -32,14 +40,21 @@ void GameScene::Render()
 	LightManager * const lightManager = LightManager::Instance();
 	lightManager->Update(CameraManager::Instance()->GetCamera()->GetPosition());
 
-	mSystemManager->Render();
+	SystemManager::Instance()->Render();
 
 	EntityManager::Instance()->Update();
 }
 
 void GameScene::Update()
 {
-	mSystemManager->Update();
+	float inputValue = InputManager::Instance()->GetInputValue(escapeMenu);
+
+	if (inputValue > 0.2)
+	{
+		SceneManager::Instance()->NewScene(new MenuScene("Pause.json"));
+	}
+
+	SystemManager::Instance()->Update();
 	
 	CameraManager::Instance()->Update();
 	AudioManager::Instance()->Update();
@@ -47,6 +62,13 @@ void GameScene::Update()
 
 void GameScene::Close()
 {
+	SystemManager::Instance()->Clear();
+	EntityManager::Instance()->Clear();
+	//PhysicsManager::Instance()->Clear();
+	AudioManager::Instance()->Clear();
+	CameraManager::Instance()->Clear();
+	LightManager::Instance()->Clear();
+	
 }
 
 void GameScene::Swap()

@@ -297,3 +297,25 @@ void LightManager::Render(const int pShaderID)
 		glBindTexture(GL_TEXTURE_CUBE_MAP, renderSpotLights.at(i)->shadowTexture->ShadowTexture);
 	}
 }
+
+void LightManager::Clear()
+{
+	renderSpotLights.clear();
+	renderPointLights.clear();
+
+	for (int i = 0; i < spotLights.size(); i++)
+	{
+		delete spotLights.at(i);
+		spotLights.at(i) = nullptr;
+	}
+
+	spotLights.clear();
+
+	for (int i = 0; i < pointLights.size(); i++)
+	{
+		delete pointLights.at(i);
+		pointLights.at(i) = nullptr;
+	}
+
+	pointLights.clear();
+}

@@ -47,12 +47,6 @@
     },
     {
       "Type": "Shader",
-      "Name": "TestShader",
-      "Vertex": "Shaders/TestVertex.vert",
-      "Fragment": "shaders/TestFragment.frag"
-    },
-    {
-      "Type": "Shader",
       "Name": "NormalShader",
       "Vertex": "Shaders/NormalVertex.vert",
       "Fragment": "Shaders/NormalFragment.frag"
@@ -164,7 +158,7 @@
         },
         {
           "Component": "Shader",
-          "Shader": "TestShader"
+          "Shader": "NormalShader"
         },
         {
           "Component": "Direction",

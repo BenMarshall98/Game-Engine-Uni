@@ -2,6 +2,7 @@
 #include "MenuLoader.h"
 #include "OpenGL.h"
 #include "Window.h"
+#include "SceneManager.h"
 
 #undef LoadMenu
 
@@ -81,7 +82,16 @@ void MenuScene::Update()
 				}
 				else
 				{
-					delay = 0;
+					inputValue = InputManager::Instance()->GetInputValue(escapeMenu);
+
+					if (inputValue > 0.1)
+					{
+						SceneManager::Instance()->CloseScene();
+					}
+					else
+					{
+						delay = 0;
+					}
 				}
 			}
 		}

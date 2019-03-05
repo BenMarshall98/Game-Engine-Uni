@@ -46,6 +46,7 @@ public:
 	AudioManager& operator=(const AudioManager&) = delete;
 
 	void Update();
+	void Clear();
 
 	void * GenerateBuffer(const std::string & fileName);
 	void * GenerateSource(void * buffer);

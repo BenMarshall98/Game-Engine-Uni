@@ -179,6 +179,12 @@
     <None Include="Options.json">
       <Filter>Menus</Filter>
     </None>
+    <None Include="Pause.json">
+      <Filter>Menus</Filter>
+    </None>
+    <None Include="PauseMenu.lua">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="3DLevel.txt">

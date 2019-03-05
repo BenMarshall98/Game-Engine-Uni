@@ -27,7 +27,7 @@ void SystemManager::Update()
 	}
 }
 
-void SystemManager::ClearSystems()
+void SystemManager::Clear()
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
 	{

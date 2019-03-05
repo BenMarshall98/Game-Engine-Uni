@@ -39,11 +39,6 @@
 #include <fstream>
 #include <iostream>
 
-void LevelLoader::CoinHitPlayer(Entity * const pEntity)
-{
-	EntityManager::Instance()->AddToDeleteList(pEntity);
-}
-
 void LevelLoader::LoadLevelJSON(std::string & fileName)
 {
 	std::ifstream in(fileName);
@@ -126,6 +121,8 @@ void LevelLoader::LoadLevelJSON(std::string & fileName)
 			LoadSystems(d["Systems"]);
 		}
 	}
+
+	templates.clear();
 }
 
 void LevelLoader::LoadResourcesJSON(const rapidjson::Value& Resources)

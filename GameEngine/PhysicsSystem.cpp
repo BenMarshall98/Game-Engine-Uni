@@ -16,14 +16,13 @@ PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance()), ent
 
 void PhysicsSystem::RemoveEntity(Entity * pEntity)
 {
-	iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, ComponentType::COMPONENT_PHYSICS);
-	RigidBody * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
-	physicsManager->RemoveRigidBody(rigidBody);
-
 	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
+		iComponent * componentPhysics = entityManager->GetComponentOfEntity(pEntity, ComponentType::COMPONENT_PHYSICS);
+		RigidBody * rigidBody = ((ComponentPhysics *)componentPhysics)->GetUpdateRigidBody();
+		physicsManager->RemoveRigidBody(rigidBody);
 		EntityList.erase(it);
 	}
 }

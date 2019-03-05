@@ -53,6 +53,7 @@ public:
 
 	void Update();
 	void Swap();
+	void Clear();
 
 	~EntityManager();
 };

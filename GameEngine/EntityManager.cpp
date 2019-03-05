@@ -163,7 +163,7 @@ void EntityManager::Swap()
 	}
 }
 
-EntityManager::~EntityManager()
+void EntityManager::Clear()
 {
 	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it;
 	for (it = ComponentList.begin(); it != ComponentList.end(); ++it)
@@ -188,7 +188,11 @@ EntityManager::~EntityManager()
 	}
 
 	EntityList.clear();
+}
 
+EntityManager::~EntityManager()
+{
+	Clear();
 	instance = nullptr;
 }
 

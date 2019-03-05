@@ -124,6 +124,11 @@ void AudioManager::Update()
 	}
 }
 
+void AudioManager::Clear()
+{
+	engine->stopAllSounds();
+}
+
 void AudioManager::PlayAudio(const std::string & sound)
 {
 	void * const preSource = ResourceManager::GetAudio(sound);

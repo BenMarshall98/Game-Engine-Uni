@@ -303,9 +303,11 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>Scene Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="MenuLoader.cpp">
       <Filter>Menu Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -535,9 +537,11 @@
     <ClInclude Include="GameScene.h">
       <Filter>Scene Manager</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="MenuLoader.h">
       <Filter>Menu Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

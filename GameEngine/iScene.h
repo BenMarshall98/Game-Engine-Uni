@@ -1,11 +1,17 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include "InputMapping.h"
 
 class iScene
 {
 protected:
 	std::string fileName;
+
+	std::vector<GameInput> escapeMenu = {
+		GameInput::KEYBOARD_ESCAPE
+	};
 
 public:
 	iScene(std::string pFileName);

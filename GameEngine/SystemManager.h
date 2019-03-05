@@ -41,7 +41,7 @@ public:
 	void Render();
 	void Update();
 
-	void ClearSystems();
+	void Clear();
 
 	void RemoveEntityFromSystems(Entity * pEntity);
 };

@@ -8,7 +8,9 @@ std::vector<std::string> ComponentPhysics::EntityTypeNames = { ENTITYTYPES(E) };
 
 ComponentPhysics::~ComponentPhysics()
 {
-
+	delete rigidBody;
+	delete collisionFunctions;
+	delete shape;
 }
 
 void ComponentPhysics::RenderSwap()
