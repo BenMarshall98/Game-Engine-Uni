@@ -30,17 +30,7 @@ BulletPhysicsEngine::BulletPhysicsEngine()
 BulletPhysicsEngine::~BulletPhysicsEngine()
 {
 	CProfileManager::CleanupMemory();
-	Clear();
 
-	delete dynamicsWorld;
-	delete solver;
-	delete broadphase;
-	delete dispatcher;
-	delete collisionConfiguration;
-}
-
-void BulletPhysicsEngine::Clear()
-{
 	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
 	{
 		btCollisionObject * obj = dynamicsWorld->getCollisionObjectArray()[i];
@@ -62,6 +52,12 @@ void BulletPhysicsEngine::Clear()
 	}
 
 	collisionShapes.clear();
+
+	delete dynamicsWorld;
+	delete solver;
+	delete broadphase;
+	delete dispatcher;
+	delete collisionConfiguration;
 }
 
 RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit)
@@ -124,6 +120,13 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, g
 	rigidBody->setAngularFactor(angLimit);
 
 	dynamicsWorld->addRigidBody(rigidBody);
+
+	int numOfObjects = dynamicsWorld->getNumCollisionObjects();
+
+	if (numOfObjects > 0)
+	{
+		int i = 0;
+	}
 
 	RigidBody * rBody = new BulletRigidBody(rigidBody);
 

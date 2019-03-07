@@ -16,7 +16,6 @@ public:
 	virtual void RemoveRigidBody(RigidBody * pRigidBody) = 0;
 
 	virtual void Update(float pDeltaTime) = 0;
-	virtual void Clear() = 0;
 
 	inline glm::vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)
 	{

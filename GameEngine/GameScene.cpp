@@ -47,12 +47,23 @@ void GameScene::Render()
 
 void GameScene::Update()
 {
-	float inputValue = InputManager::Instance()->GetInputValue(escapeMenu);
+	static int delay = 0;
 
-	if (inputValue > 0.2)
+	if (delay == 0)
 	{
-		SceneManager::Instance()->NewScene(new MenuScene("Pause.json"));
+		float inputValue = InputManager::Instance()->GetInputValue(escapeMenu);
+
+		if (inputValue > 0.2)
+		{
+			SceneManager::Instance()->NewScene(new MenuScene("Pause.json"));
+			delay = 10;
+		}
 	}
+	else
+	{
+		delay--;
+	}
+	
 
 	SystemManager::Instance()->Update();
 	
@@ -68,7 +79,7 @@ void GameScene::Close()
 	AudioManager::Instance()->Clear();
 	CameraManager::Instance()->Clear();
 	LightManager::Instance()->Clear();
-	
+	ResourceManager::ClearResources();
 }
 
 void GameScene::Swap()

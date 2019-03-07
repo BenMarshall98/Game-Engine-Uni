@@ -29,7 +29,6 @@ public:
 	RigidBody * AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit) override;
 
 	void Update(float pDeltaTime) override;
-	void Clear() override;
 
 	void RemoveRigidBody(RigidBody * pRigidBody) override;
 

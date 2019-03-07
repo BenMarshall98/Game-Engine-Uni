@@ -80,6 +80,15 @@ TextRender::TextRender()
 
 void TextRender::RenderText(std::string text, PixelLocation pPixelLocation, glm::vec3 colour)
 {
+
+	shader = ResourceManager::GetShader("TextShader");
+
+	if (!shader)
+	{
+		ResourceManager::LoadShader("TextShader", "TextVertex.vert", "TextFragment.frag");
+		shader = ResourceManager::GetShader("TextShader");
+	}
+
 	glViewport(0, 0, Window::GetWidth(), Window::GetHeight());
 
 	glEnable(GL_CULL_FACE);

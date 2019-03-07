@@ -9,14 +9,15 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: have a look at angular limits in physics engine, especially the 3D level
 //TODO: have a look at collisions in the physics engine, see if it is possible to fine tune them
 
-//TODO: build a finite state machine ai, using lua to store and decide on states
-//TODO: build a simple path following ai
-//TODO: build a A* pathfinding alogirthm (that does not get stuck)
+//DONE: build a finite state machine ai, using lua to store and decide on states
+//DONE: build a simple path following ai
+//DONE: build a A* pathfinding alogirthm (that does not get stuck)
 //TODO: work on the animation model, see if that can be fixed
 //TODO: work on a menu system
 //TODO: build a animation system (for coins and the like)
 //TODO: build methods to control the camera using input
 //TODO: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
+//TODO: resource manager to have a count map for number of times a resource is used, only delete once resource is not used anymore
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

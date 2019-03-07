@@ -100,6 +100,7 @@ void SceneManager::StartCloseScene(int noOfScene)
 
 void SceneManager::StartCloseWindow()
 {
+	windowRunning = false;
 	closeWindowBool = true;
 }
 

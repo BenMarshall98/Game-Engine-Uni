@@ -50,9 +50,10 @@ public:
 		engine->Update(pDeltaTime);
 	}
 
-	inline void Clear() const
+	inline void Clear()
 	{
-		engine->Clear();
+		delete engine;
+		engine = nullptr;
 	}
 
 	inline glm::vec3 GetPositionOfRigidBody(RigidBody * pRigidBody)
