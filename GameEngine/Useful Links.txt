@@ -18,35 +18,37 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: build methods to control the camera using input
 //TODO: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 //TODO: resource manager to have a count map for number of times a resource is used, only delete once resource is not used anymore
+//TODO: look at the lifetime of the audio engine
+//TODO: pause and unpause music when in pause menu
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 
 int i;
-	int top = lua_gettop(luaState);
-	printf("---- Begin Stack ----\n");
-	printf("Stack size: %i\n\n", top);
-	for (i = top; i >= 1; i--)
+int top = lua_gettop(luaState);
+printf("---- Begin Stack ----\n");
+printf("Stack size: %i\n\n", top);
+for (i = top; i >= 1; i--)
+{
+	int t = lua_type(luaState, i);
+	switch (t)
 	{
-		int t = lua_type(luaState, i);
-		switch (t)
-		{
-		case LUA_TSTRING:
-			printf("%i -- (%i) ---- `%s'", i, i - (top + 1), lua_tostring(luaState, i));
-			break;
+	case LUA_TSTRING:
+		printf("%i -- (%i) ---- `%s'", i, i - (top + 1), lua_tostring(luaState, i));
+		break;
 
-		case LUA_TBOOLEAN:
-			printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_toboolean(luaState, i) ? "true" : "false");
-			break;
+	case LUA_TBOOLEAN:
+		printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_toboolean(luaState, i) ? "true" : "false");
+		break;
 
-		case LUA_TNUMBER:
-			printf("%i -- (%i) ---- %g", i, i - (top + 1), lua_tonumber(luaState, i));
-			break;
+	case LUA_TNUMBER:
+		printf("%i -- (%i) ---- %g", i, i - (top + 1), lua_tonumber(luaState, i));
+		break;
 
-		default:
-			printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_typename(luaState, t));
-			break;
-		}
-		printf("\n");
+	default:
+		printf("%i -- (%i) ---- %s", i, i - (top + 1), lua_typename(luaState, t));
+		break;
 	}
-	printf("---- End Stack ----\n");
 	printf("\n");
+}
+printf("---- End Stack ----\n");
+printf("\n");
