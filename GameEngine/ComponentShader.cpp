@@ -2,7 +2,7 @@
 
 ComponentShader::~ComponentShader()
 {
-
+	ResourceManager::RemoveShader(shader);
 }
 
 ComponentType ComponentShader::GetComponentName()

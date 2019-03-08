@@ -21,7 +21,12 @@ class ResourceManager
 		static std::map<std::string, Shader *> shaderList;
 		static std::map<std::string, void *> audioBufferList;
 
-		ResourceManager(void) {};
+		static std::map<std::string, int> modelUsage;
+		static std::map<std::string, int> textureUsage;
+		static std::map<std::string, int> shaderUsage;
+		static std::map<std::string, int> audioBufferUsage;
+
+		ResourceManager() = delete;
 	
 	public:
 		static void LoadModel(const std::string & modelName, const std::string & fileName);
@@ -34,5 +39,11 @@ class ResourceManager
 		static Texture * GetTexture(const std::string & texture);
 		static void * GetAudio(const std::string & audio);
 
+		static void RemoveModel(iModel * model);
+		static void RemoveShader(Shader * shader);
+		static void RemoveTexture(Texture * texture);
+		static void RemoveAudio(void * audio);
+
 		static void ClearResources();
+		static void FinalClearResources();
 };

@@ -2,6 +2,7 @@
 
 ComponentModel::~ComponentModel()
 {
+	ResourceManager::RemoveModel(model);
 }
 
 ComponentType ComponentModel::GetComponentName()

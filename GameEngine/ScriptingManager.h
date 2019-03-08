@@ -54,6 +54,22 @@ private:
 	static int lua_SwapToGameScene(lua_State * luaState);
 	static int lua_CloseScene(lua_State * luaState);
 	static int lua_CloseWindow(lua_State * luaState);
+
+	static int lua_CreateEntity(lua_State * luaState);
+	static int lua_AddComponentArtificalIntelligence(lua_State * luaState);
+	static int lua_AddComponentAudio(lua_State * luaState);
+	static int lua_AddComponentDirection(lua_State * luaState);
+	static int lua_AddComponentInput(lua_State * luaState);
+	static int lua_AddComponentModel(lua_State * luaState);
+	static int lua_AddComponentNormalTexture(lua_State * luaState);
+	static int lua_AddComponentPhysics(lua_State * luaState);
+	static int lua_AddComponentPosition(lua_State * luaState);
+	static int lua_AddComponentRiggedAnimation(lua_State * luaState);
+	static int lua_AddComponentShader(lua_State * luaState);
+	static int lua_AddComponentShadowShader(lua_State * luaState);
+	static int lua_AddComponentTexture(lua_State * luaState);
+	static int lua_FinishEntity(lua_State * luaState);
+
 	ScriptingManager();
 
 	lua_State * luaVM;

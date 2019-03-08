@@ -2,6 +2,7 @@
 
 ComponentNormalTexture::~ComponentNormalTexture()
 {
+	ResourceManager::RemoveTexture(texture);
 }
 
 ComponentType ComponentNormalTexture::GetComponentName()

@@ -20,6 +20,11 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: resource manager to have a count map for number of times a resource is used, only delete once resource is not used anymore
 //TODO: look at the lifetime of the audio engine
 //TODO: pause and unpause music when in pause menu
+//TODO: deal with removing audio in the resource manager when refactoring the audio manager
+//TODO: create the render manager
+//TODO: build a way to create entities in lua
+//TODO: look at when the 'guard' goes back to its post
+//TODO: move bone mats out of the rigged animation
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

@@ -2,7 +2,7 @@
 
 ComponentTexture::~ComponentTexture()
 {
-
+	ResourceManager::RemoveTexture(texture);
 }
 
 ComponentType ComponentTexture::GetComponentName()

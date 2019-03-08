@@ -5,7 +5,12 @@
 #include "ComponentDirection.h"
 #include "ComponentPosition.h"
 #include "ComponentPhysics.h"
+#include "ComponentModel.h"
+#include "ComponentNormalTexture.h"
+#include "ComponentTexture.h"
 #include "ComponentAudio.h"
+#include "ComponentShader.h"
+#include "ComponentShadowShader.h"
 #include "AudioManager.h"
 #include "PhysicsManager.h"
 #include "glm/glm.hpp"
@@ -72,6 +77,21 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "SwapToGameScene", lua_SwapToGameScene);
 	lua_register(luaVM, "CloseScene", lua_CloseScene);
 	lua_register(luaVM, "CloseWindow", lua_CloseWindow);
+
+	lua_register(luaVM, "CreateEntity", lua_CreateEntity);
+	lua_register(luaVM, "AddComponentArtificial", lua_AddComponentArtificalIntelligence);
+	lua_register(luaVM, "AddComponentAudio", lua_AddComponentAudio);
+	lua_register(luaVM, "AddComponentDirection", lua_AddComponentDirection);
+	lua_register(luaVM, "AddComponentInput", lua_AddComponentInput);
+	lua_register(luaVM, "AddComponentModel", lua_AddComponentModel);
+	lua_register(luaVM, "AddComponentNormalTexture", lua_AddComponentNormalTexture);
+	lua_register(luaVM, "AddComponentPhysics", lua_AddComponentPhysics);
+	lua_register(luaVM, "AddComponentPosition", lua_AddComponentPosition);
+	lua_register(luaVM, "AddComponentRiggedAnimation", lua_AddComponentRiggedAnimation);
+	lua_register(luaVM, "AddComponentShader", lua_AddComponentShader);
+	lua_register(luaVM, "AddComponentShadowShader", lua_AddComponentShadowShader);
+	lua_register(luaVM, "AddComponentTexture", lua_AddComponentTexture);
+	lua_register(luaVM, "FinishEntity", lua_FinishEntity);
 	
 	std::string file = "Scripts/Vector3.lua";
 	LoadLuaFromFile(file);
@@ -1632,6 +1652,255 @@ int ScriptingManager::lua_CloseWindow(lua_State * luaState)
 	SceneManager::Instance()->CloseWindow();
 
 	return 0;
+}
+
+int ScriptingManager::lua_CreateEntity(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs == 1)
+	{
+		std::string entityName = lua_tostring(luaState, 1);
+		Entity * entity = EntityManager::Instance()->CreateEntity(entityName);
+		lua_pushlightuserdata(luaState, entity);
+	}
+	else if (numberOfArgs == 0)
+	{
+		Entity * entity = EntityManager::Instance()->CreateEntity();
+		lua_pushlightuserdata(luaState, entity);
+	}
+	else
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateEntity");
+		lua_error(luaState);
+	}
+
+	return 1;
+}
+
+int ScriptingManager::lua_AddComponentAudio(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 3)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentAudio");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentAudio");
+		lua_error(luaState);
+	}
+
+	std::string playback = lua_tostring(luaState, 2);
+	std::string audio = lua_tostring(luaState, 3);
+
+	AudioPlayback playbackState;
+
+	if (playback == "Play")
+	{
+		playbackState = AudioPlayback::PLAY;
+	}
+	else if (playback == "Pause")
+	{
+		playbackState = AudioPlayback::PAUSE;
+	}
+	else if (playback == "Stop")
+	{
+		playbackState = AudioPlayback::STOP;
+	}
+	else
+	{
+		lua_pushstring(luaState, "Wrong Playback State Passed in: AddComponentAudio");
+		lua_error(luaState);
+	}
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentAudio(playbackState, audio));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentDirection(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 3)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentDirection");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentDireciton");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	glm::vec3 direction(x, y, z);
+	float angle = lua_tonumber(luaState, 3);
+
+	lua_pop(luaState, 4);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentDirection(direction, angle));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentModel(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: AddComponentModel");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentModel");
+		lua_error(luaState);
+	}
+
+	std::string model = lua_tostring(luaState, 2);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentModel(model));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentNormalTexture(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentNormalTexture");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentNormalTexture");
+		lua_error(luaState);
+	}
+
+	std::string texture = lua_tostring(luaState, 2);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentNormalTexture(texture));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentPosition(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentPosition");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentPosition");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	glm::vec3 position(x, y, z);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentPosition(position));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentShader(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentShader");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentShader");
+		lua_error(luaState);
+	}
+
+	std::string shader = lua_tostring(luaState, 2);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentShader(shader));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentShadowShader(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentShadowShader");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentShadowShader");
+		lua_error(luaState);
+	}
+
+	std::string shader = lua_tostring(luaState, 2);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentShadowShader(shader));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentTexture(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentTexture");
+	}
 }
 
 void ScriptingManager::RunScriptFromCollision(const std::string & function, Entity * entity) const
