@@ -2,8 +2,14 @@
 #include "LoggingManager.h"
 #include "Entity.h"
 #include "EntityManager.h"
+#include "InputFunction.h"
+#include "CollisionCuboid.h"
+#include "CollisionSphere.h"
+#include "ComponentArtificalIntelligence.h"
+#include "ComponentRiggedAnimation.h"
 #include "ComponentDirection.h"
 #include "ComponentPosition.h"
+#include "ComponentInput.h"
 #include "ComponentPhysics.h"
 #include "ComponentModel.h"
 #include "ComponentNormalTexture.h"
@@ -79,12 +85,25 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "CloseWindow", lua_CloseWindow);
 
 	lua_register(luaVM, "CreateEntity", lua_CreateEntity);
-	lua_register(luaVM, "AddComponentArtificial", lua_AddComponentArtificalIntelligence);
+	lua_register(luaVM, "CreateAIStateMachine", lua_CreateAIStateMachine);
+	lua_register(luaVM, "CreatePathFinder", lua_CreatePathFinder);
+	lua_register(luaVM, "CreatePathVector", lua_CreatePathVector);
+	lua_register(luaVM, "AddToPathVector", lua_AddToPathVector);
+	lua_register(luaVM, "CreatePathFollower", lua_CreatePathFollower);
+	lua_register(luaVM, "AddComponentArtificialIntelligence", lua_AddComponentArtificalIntelligence);
 	lua_register(luaVM, "AddComponentAudio", lua_AddComponentAudio);
 	lua_register(luaVM, "AddComponentDirection", lua_AddComponentDirection);
+	lua_register(luaVM, "CreateInputFunction", lua_CreateInputFunction);
+	lua_register(luaVM, "AddInputToInputFunction", lua_AddInputToInputFunction);
+	lua_register(luaVM, "CreateInputVector", lua_CreateInputVector);
+	lua_register(luaVM, "AddToInputVector", lua_AddToInputVector);
 	lua_register(luaVM, "AddComponentInput", lua_AddComponentInput);
 	lua_register(luaVM, "AddComponentModel", lua_AddComponentModel);
 	lua_register(luaVM, "AddComponentNormalTexture", lua_AddComponentNormalTexture);
+	lua_register(luaVM, "CreateCollisionSphere", lua_CreateCollisionSphere);
+	lua_register(luaVM, "CreateCollisionCuboid", lua_CreateCollisionCuboid);
+	lua_register(luaVM, "CreateCollisionFunctionMap", lua_CreateCollisionFunctionMap);
+	lua_register(luaVM, "AddToCollisionFunctionMap", lua_AddToCollisionFunctionMap);
 	lua_register(luaVM, "AddComponentPhysics", lua_AddComponentPhysics);
 	lua_register(luaVM, "AddComponentPosition", lua_AddComponentPosition);
 	lua_register(luaVM, "AddComponentRiggedAnimation", lua_AddComponentRiggedAnimation);
@@ -1678,6 +1697,185 @@ int ScriptingManager::lua_CreateEntity(lua_State * luaState)
 	return 1;
 }
 
+int ScriptingManager::lua_CreateAIStateMachine(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateAIStateMachine");
+		lua_error(luaState);
+	}
+
+	std::string startFunction = lua_tostring(luaState, 1);
+
+	AIStateMachine * stateMachine = new AIStateMachine(startFunction);
+
+	lua_pushlightuserdata(luaState, stateMachine);
+
+	return 1;
+}
+
+int ScriptingManager::lua_CreatePathFinder(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 4)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreatePathFinder");
+		lua_error(luaState);
+	}
+
+	std::string target = lua_tostring(luaState, 1);
+	std::string mapFile = lua_tostring(luaState, 2);
+
+	float x = lua_tonumber(luaState, 3);
+	float y = lua_tonumber(luaState, 4);
+
+	glm::vec2 topLeftCoord(x, y);
+
+	PathFinding * pathFinder = new PathFinding(target, mapFile, topLeftCoord);
+
+	lua_pushlightuserdata(luaState, pathFinder);
+
+	return 1;
+}
+
+int ScriptingManager::lua_CreatePathVector(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 0)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreatePathVector");
+		lua_error(luaState);
+	}
+
+	std::vector<PathNode *> * pathNodes = new std::vector<PathNode *>();
+
+	lua_pushlightuserdata(luaState, pathNodes);
+
+	return 1;
+}
+
+int ScriptingManager::lua_AddToPathVector(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 3)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddToPathVector");
+		lua_error(luaState);
+	}
+
+	std::vector<PathNode *> * pathNodes = (std::vector<PathNode *> *)lua_touserdata(luaState, 1);
+
+	lua_getfield(luaState, 2, "x");
+	lua_getfield(luaState, 2, "y");
+	lua_getfield(luaState, 2, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	glm::vec3 position(x, y, z);
+
+	double radius = lua_tonumber(luaState, 3);
+
+	PathNode * pathNode = new PathNode();
+	pathNode->position;
+	pathNode->radius;
+
+	pathNodes->push_back(pathNode);
+
+	return 0;
+}
+
+int ScriptingManager::lua_CreatePathFollower(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreatePathFollower");
+		lua_error(luaState);
+	}
+
+	std::vector<PathNode *> * pathNodes = (std::vector<PathNode *> *)lua_touserdata(luaState, 1);
+
+	PathFollowing * pathFollower = new PathFollowing(pathNodes);
+
+	lua_pushlightuserdata(luaState, pathFollower);
+
+	return 1;
+}
+
+int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 5)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentArtificialIntelligence");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentArtificialIntelligence");
+		lua_error(luaState);
+	}
+
+	PathFollowing * pathFollower = nullptr;
+
+	if (!lua_isnil(luaState, 2))
+	{
+		pathFollower = (PathFollowing *)lua_touserdata(luaState, 2);
+
+		if (!pathFollower)
+		{
+			lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentArtificialIntelligence");
+			lua_error(luaState);
+		}
+	}
+
+	PathFinding * pathFinder = nullptr;
+
+	if (!lua_isnil(luaState, 3))
+	{
+		pathFinder = (PathFinding *)lua_touserdata(luaState, 3);
+
+		if (!pathFinder)
+		{
+			lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentArtificialIntelligence");
+			lua_error(luaState);
+		}
+	}
+
+	AIStateMachine * stateMachine = nullptr;
+
+	if (!lua_isnil(luaState, 4))
+	{
+		stateMachine = (AIStateMachine *)lua_touserdata(luaState, 4);
+
+		if (!stateMachine)
+		{
+			lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentArtificialIntelligence");
+			lua_error(luaState);
+		}
+	}
+
+	std::string target = lua_tostring(luaState, 5);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentArtificalIntelligence(pathFollower, pathFinder, stateMachine, target));
+
+	return 0;
+}
+
 int ScriptingManager::lua_AddComponentAudio(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
@@ -1760,6 +1958,131 @@ int ScriptingManager::lua_AddComponentDirection(lua_State * luaState)
 	return 0;
 }
 
+int ScriptingManager::lua_CreateInputFunction(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateInputFunction");
+		lua_error(luaState);
+	}
+
+	std::string functionName = lua_tostring(luaState, 1);
+
+	InputFunction * inputFunction = new InputFunction(functionName);
+
+	lua_pushlightuserdata(luaState, inputFunction);
+
+	return 1;
+}
+
+int ScriptingManager::lua_AddInputToInputFunction(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddInputToInputFunction");
+		lua_error(luaState);
+	}
+
+	InputFunction * inputFunction = (InputFunction *)lua_touserdata(luaState, 1);
+
+	if (!inputFunction)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddInputToInputFunction");
+		lua_error(luaState);
+	}
+
+	std::string inputName = lua_tostring(luaState, 2);
+
+	GameInput input = InputConverter::StringToEnum(inputName);
+
+	inputFunction->AddInput(input);
+
+	return 0;
+}
+
+int ScriptingManager::lua_CreateInputVector(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 0)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateInputVector");
+		lua_error(luaState);
+	}
+
+	std::vector<InputFunction *> * gameInputs = new std::vector<InputFunction *>();
+
+	lua_pushlightuserdata(luaState, gameInputs);
+
+	return 1;
+}
+
+int ScriptingManager::lua_AddToInputVector(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddToInputVector");
+		lua_error(luaState);
+	}
+
+	std::vector<InputFunction *> * gameInputs = (std::vector<InputFunction *> *)lua_touserdata(luaState, 1);
+
+	if (!gameInputs)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToInputVector");
+		lua_error(luaState);
+	}
+
+	InputFunction * inputFunction = (InputFunction *)lua_touserdata(luaState, 2);
+
+	if (!inputFunction)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToInputVecotor");
+		lua_error(luaState);
+	}
+
+	gameInputs->push_back(inputFunction);
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentInput(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentInput");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentInput");
+		lua_error(luaState);
+	}
+
+	std::vector<InputFunction *> * gameInputs = (std::vector<InputFunction *> *)lua_touserdata(luaState, 2);
+
+	if (!gameInputs)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentInput");
+		lua_error(luaState);
+	}
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentInput(gameInputs));
+
+	return 0;
+}
+
 int ScriptingManager::lua_AddComponentModel(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
@@ -1806,6 +2129,208 @@ int ScriptingManager::lua_AddComponentNormalTexture(lua_State * luaState)
 	std::string texture = lua_tostring(luaState, 2);
 
 	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentNormalTexture(texture));
+
+	return 0;
+}
+
+int ScriptingManager::lua_CreateCollisionSphere(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateCollisionSphere");
+		lua_error(luaState);
+	}
+
+	float radius = lua_tonumber(luaState, 1);
+
+	CollisionSphere * sphere = new CollisionSphere(radius);
+
+	lua_pushlightuserdata(luaState, sphere);
+
+	return 1;
+}
+
+int ScriptingManager::lua_CreateCollisionCuboid(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateCollisionCuboid");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 1, "x");
+	lua_getfield(luaState, 1, "y");
+	lua_getfield(luaState, 1, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	glm::vec3 size(x, y, z);
+
+	CollisionCuboid * cuboid = new CollisionCuboid(size);
+
+	lua_pushlightuserdata(luaState, cuboid);
+
+	return 1;
+}
+
+int ScriptingManager::lua_CreateCollisionFunctionMap(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 0)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: CreateCollisionFunctionMap");
+		lua_error(luaState);
+	}
+
+	std::map<EntityType, std::string> * collisionFunctions = new std::map<EntityType, std::string>();
+
+	lua_pushlightuserdata(luaState, collisionFunctions);
+
+	return 1;
+}
+
+int ScriptingManager::lua_AddToCollisionFunctionMap(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 3)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddToCollisionFunctionMap");
+		lua_error(luaState);
+	}
+
+	std::map<EntityType, std::string> * collisionFunctions = (std::map<EntityType, std::string> *)lua_touserdata(luaState, 1);
+
+	if (!collisionFunctions)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToCollisionFunctionMap");
+		lua_error(luaState);
+	}
+
+	std::string type = lua_tostring(luaState, 2);
+	std::string function = lua_tostring(luaState, 3);
+
+	EntityType entityType = EntityType::NONE;
+
+	if (type == "Collectable")
+	{
+		entityType = EntityType::COLLECTABLE;
+	}
+	else if (type == "Player")
+	{
+		entityType = EntityType::PLAYER;
+	}
+	else if (type == "Wall")
+	{
+		entityType = EntityType::WALL;
+	}
+	else if (type != "None")
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToCollisionFunctionMap");
+		lua_error(luaState);
+	}
+
+	collisionFunctions->insert(std::pair<EntityType, std::string>(entityType, function));
+
+	return 0;
+}
+
+int ScriptingManager::lua_AddComponentPhysics(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs < 5 || numberOfArgs > 7)
+	{
+		lua_pushstring(luaState, "Wrong Number of Args: AddComponentPhysics");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentPhysics");
+		lua_error(luaState);
+	}
+
+	CollisionShape * shape = (CollisionShape *)lua_touserdata(luaState, 2);
+
+	if (!shape)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentPhysics");
+		lua_error(luaState);
+	}
+
+	float mass = lua_tonumber(luaState, 3);
+
+	std::string type = lua_tostring(luaState, 4);
+
+	EntityType entityType = EntityType::NONE;
+
+	if (type == "Collectable")
+	{
+		entityType = EntityType::COLLECTABLE;
+	}
+	else if (type == "Player")
+	{
+		entityType = EntityType::PLAYER;
+	}
+	else if (type == "Wall")
+	{
+		entityType = EntityType::WALL;
+	}
+	else if (type != "None")
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToCollisionFunctionMap");
+		lua_error(luaState);
+	}
+
+	lua_getfield(luaState, 5, "x");
+	lua_getfield(luaState, 5, "y");
+	lua_getfield(luaState, 5, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	glm::vec3 angularLimits(x, y, z);
+
+	if (numberOfArgs == 5)
+	{
+		EntityManager::Instance()->AddComponentToEntity(entity, new ComponentPhysics(shape, mass, entityType, entity, angularLimits));
+	}
+	else
+	{
+		bool collisionResponse = lua_toboolean(luaState, 6);
+
+		if (numberOfArgs == 6)
+		{
+			EntityManager::Instance()->AddComponentToEntity(entity, new ComponentPhysics(shape, mass, entityType, entity, angularLimits, collisionResponse));
+		}
+		else
+		{
+			std::map<EntityType, std::string> * const collisionFunctions = (std::map<EntityType, std::string> *)lua_touserdata(luaState, 7);
+
+			if (!collisionFunctions)
+			{
+				lua_pushstring(luaState, "Wrong Parameters Passed in: AddToCollisionFunctionMap");
+				lua_error(luaState);
+			}
+
+			EntityManager::Instance()->AddComponentToEntity(entity, new ComponentPhysics(shape, mass, entityType, entity, angularLimits, collisionResponse, collisionFunctions));
+		}
+	}
 
 	return 0;
 }
@@ -1863,6 +2388,30 @@ int ScriptingManager::lua_AddComponentRiggedAnimation(lua_State * luaState)
 
 	std::string animation = lua_tostring(luaState, 2);
 	std::string state = lua_tostring(luaState, 3);
+
+	RiggedAnimationState animationState = RiggedAnimationState::NONE;
+
+	if (state == "Play")
+	{
+		animationState = RiggedAnimationState::PLAY;
+	}
+	else if (state == "Pause")
+	{
+		animationState = RiggedAnimationState::PAUSE;
+	}
+	else if (state == "Stop")
+	{
+		animationState = RiggedAnimationState::STOP;
+	}
+	else
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentRiggedAnimmation");
+		lua_error(luaState);
+	}
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentRiggedAnimation(animation, animationState));
+
+	return 0;
 }
 
 int ScriptingManager::lua_AddComponentShader(lua_State * luaState)

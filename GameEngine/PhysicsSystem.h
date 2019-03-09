@@ -19,6 +19,14 @@ private:
 	EntityManager * entityManager;
 	PhysicsManager * physicsManager;
 
+	const ComponentType componentTypes[3] = {
+		ComponentType::COMPONENT_POSITION,
+		ComponentType::COMPONENT_DIRECTION,
+		ComponentType::COMPONENT_PHYSICS
+	};
+
+	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);
+
 public:
 	explicit PhysicsSystem();
 
@@ -27,7 +35,8 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
-	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);
+	void AddEntity(Entity * pEntity) override;
+	
 	~PhysicsSystem();
 };
 

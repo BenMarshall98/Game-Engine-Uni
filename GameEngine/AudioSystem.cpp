@@ -5,7 +5,6 @@
 AudioSystem::AudioSystem()
 {
 	entityManager = EntityManager::Instance();
-	ComponentType componentTypes[] = { ComponentType::COMPONENT_AUDIO, ComponentType::COMPONENT_POSITION };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
@@ -16,6 +15,28 @@ void AudioSystem::RemoveEntity(Entity * pEntity)
 	if (it != EntityList.end())
 	{
 		EntityList.erase(it);
+	}
+}
+
+void AudioSystem::AddEntity(Entity * pEntity)
+{
+	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	bool containsEntity = false;
+
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		containsEntity = true;
+	}
+
+	if (containsEntity && !containsComponents)
+	{
+		EntityList.erase(it);
+	}
+	else if (!containsEntity && containsComponents)
+	{
+		EntityList.push_back(pEntity);
 	}
 }
 

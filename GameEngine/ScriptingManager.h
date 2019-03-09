@@ -56,12 +56,25 @@ private:
 	static int lua_CloseWindow(lua_State * luaState);
 
 	static int lua_CreateEntity(lua_State * luaState);
+	static int lua_CreateAIStateMachine(lua_State * luaState);
+	static int lua_CreatePathFinder(lua_State * luaState);
+	static int lua_CreatePathVector(lua_State * luaState);
+	static int lua_AddToPathVector(lua_State * luaState);
+	static int lua_CreatePathFollower(lua_State * luaState);
 	static int lua_AddComponentArtificalIntelligence(lua_State * luaState);
 	static int lua_AddComponentAudio(lua_State * luaState);
 	static int lua_AddComponentDirection(lua_State * luaState);
+	static int lua_CreateInputFunction(lua_State * luaState);
+	static int lua_AddInputToInputFunction(lua_State * luaState);
+	static int lua_CreateInputVector(lua_State * luaState);
+	static int lua_AddToInputVector(lua_State * luaState);
 	static int lua_AddComponentInput(lua_State * luaState);
 	static int lua_AddComponentModel(lua_State * luaState);
 	static int lua_AddComponentNormalTexture(lua_State * luaState);
+	static int lua_CreateCollisionSphere(lua_State * luaState);
+	static int lua_CreateCollisionCuboid(lua_State * luaState);
+	static int lua_CreateCollisionFunctionMap(lua_State * luaState);
+	static int lua_AddToCollisionFunctionMap(lua_State * luaState);
 	static int lua_AddComponentPhysics(lua_State * luaState);
 	static int lua_AddComponentPosition(lua_State * luaState);
 	static int lua_AddComponentRiggedAnimation(lua_State * luaState);

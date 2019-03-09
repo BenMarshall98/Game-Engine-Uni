@@ -51,8 +51,22 @@ void SystemManager::RemoveEntityFromSystems(Entity * pEntity)
 	{
 		RenderSystems.at(i)->RemoveEntity(pEntity);
 	}
+
 	for (int i = 0; i < UpdateSystems.size(); i++)
 	{
 		UpdateSystems.at(i)->RemoveEntity(pEntity);
+	}
+}
+
+void SystemManager::AddEntityToSystems(Entity * pEntity)
+{
+	for (int i = 0; i < RenderSystems.size(); i++)
+	{
+		RenderSystems.at(i)->AddEntity(pEntity);
+	}
+
+	for (int i = 0; i < UpdateSystems.size(); i++)
+	{
+		UpdateSystems.at(i)->AddEntity(pEntity);
 	}
 }

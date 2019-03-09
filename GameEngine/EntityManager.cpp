@@ -27,6 +27,11 @@ Entity * EntityManager::GetEntityByName(const std::string & entityName)
 	return nullptr;
 }
 
+void EntityManager::FinishEntity(Entity * entity)
+{
+	SystemManager::Instance()->AddEntityToSystems(entity);
+}
+
 void EntityManager::RemoveEntity(Entity * entity)
 {
 	std::map<ComponentType, std::map<Entity *, iComponent *>>::iterator it;
@@ -135,6 +140,22 @@ std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const Componen
 	}
 
 	return entities;
+}
+
+bool EntityManager::CheckEntityHasComponents(Entity * entity, const ComponentType * componentName, int size)
+{
+	bool containsComponents = true;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (GetComponentOfEntity(entity, componentName[i]) == nullptr)
+		{
+			containsComponents = false;
+			break;
+		}
+	}
+
+	return containsComponents;
 }
 
 void EntityManager::Update()

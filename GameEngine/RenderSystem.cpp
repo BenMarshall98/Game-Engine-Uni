@@ -18,8 +18,6 @@
 
 RenderSystem::RenderSystem() : updateFirst(true), entityManager(EntityManager::Instance()), camera(CameraManager::Instance()->GetCamera()), projection(CameraManager::Instance()->GetProjection())
 {
-	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_SHADER, ComponentType::COMPONENT_POSITION,
-		ComponentType::COMPONENT_TEXTURE, ComponentType::COMPONENT_DIRECTION };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
@@ -30,6 +28,28 @@ void RenderSystem::RemoveEntity(Entity * pEntity)
 	if (it != EntityList.end())
 	{
 		EntityList.erase(it);
+	}
+}
+
+void RenderSystem::AddEntity(Entity * pEntity)
+{
+	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	bool containsEntity = false;
+
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		containsEntity = true;
+	}
+
+	if (containsEntity && !containsComponents)
+	{
+		EntityList.erase(it);
+	}
+	else if (!containsEntity && containsComponents)
+	{
+		EntityList.push_back(pEntity);
 	}
 }
 

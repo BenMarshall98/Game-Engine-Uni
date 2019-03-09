@@ -19,6 +19,13 @@ private:
 	std::vector<std::string> views;
 	EntityManager * entityManager;
 
+	ComponentType componentTypes[4] = {
+		ComponentType::COMPONENT_MODEL,
+		ComponentType::COMPONENT_POSITION,
+		ComponentType::COMPONENT_DIRECTION,
+		ComponentType::COMPONENT_SHADOW_SHADER
+	};
+
 	static void RenderDirectional(iModel * model, glm::vec3 & position, glm::quat & direction, Directional * directional, Shader * shadowShader);
 
 	static void RenderPoint(iModel * model, glm::vec3 & position, glm::quat & direction, Shader * shadowShader);
@@ -31,6 +38,7 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
+	void AddEntity(Entity * pEntity) override;
 
 	~ShadowSystem();
 };

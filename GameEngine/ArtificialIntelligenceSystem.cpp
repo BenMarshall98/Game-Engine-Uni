@@ -6,7 +6,6 @@
 ArtificialIntelligenceSystem::ArtificialIntelligenceSystem()
 {
 	entityManager = EntityManager::Instance();
-	ComponentType componentTypes[] = { ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_PHYSICS, ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
@@ -17,6 +16,28 @@ void ArtificialIntelligenceSystem::RemoveEntity(Entity * pEntity)
 	if (it != EntityList.end())
 	{
 		EntityList.erase(it);
+	}
+}
+
+void ArtificialIntelligenceSystem::AddEntity(Entity * pEntity)
+{
+	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	bool containsEntity = false;
+
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		containsEntity = true;
+	}
+
+	if (containsEntity && !containsComponents)
+	{
+		EntityList.erase(it);
+	}
+	else if (!containsEntity && containsComponents)
+	{
+		EntityList.push_back(pEntity);
 	}
 }
 

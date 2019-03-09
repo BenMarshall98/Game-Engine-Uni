@@ -17,12 +17,12 @@ struct PathNode
 class PathFollowing
 {
 private:
-	std::vector<PathNode *> pathNodes;
+	std::vector<PathNode *> * pathNodes;
 	int currentNode;
 	bool onPath;
 
 public:
-	explicit PathFollowing(std::vector<PathNode *> & pPathNodes) : pathNodes(pPathNodes), currentNode(-1), onPath(true) {}
+	explicit PathFollowing(std::vector<PathNode *> * pPathNodes) : pathNodes(pPathNodes), currentNode(-1), onPath(true) {}
 	~PathFollowing();
 
 	void CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent);

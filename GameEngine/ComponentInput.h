@@ -8,10 +8,10 @@
 class ComponentInput : public iComponent
 {
 private:
-	std::vector<InputFunction> * inputs;
+	std::vector<InputFunction *> * inputs;
 
 public:
-	explicit ComponentInput(std::vector<InputFunction> * const pInputs) : inputs(pInputs) {}
+	explicit ComponentInput(std::vector<InputFunction *> * const pInputs) : inputs(pInputs) {}
 	~ComponentInput();
 
 	ComponentInput& operator=(const ComponentInput&) = delete;
@@ -21,7 +21,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline std::vector<InputFunction> * const GetUpdateInputs() const
+	inline std::vector<InputFunction *> * const GetUpdateInputs() const
 	{
 		return inputs;
 	}

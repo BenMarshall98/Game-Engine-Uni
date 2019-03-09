@@ -44,5 +44,6 @@ public:
 	void Clear();
 
 	void RemoveEntityFromSystems(Entity * pEntity);
+	void AddEntityToSystems(Entity * pEntity);
 };
 

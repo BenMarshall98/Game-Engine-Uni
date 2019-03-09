@@ -5,7 +5,6 @@
 RiggedAnimationSystem::RiggedAnimationSystem()
 {
 	entityManager = EntityManager::Instance();
-	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_RIGGED_ANIMATION };
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
@@ -16,6 +15,28 @@ void RiggedAnimationSystem::RemoveEntity(Entity * pEntity)
 	if (it != EntityList.end())
 	{
 		EntityList.erase(it);
+	}
+}
+
+void RiggedAnimationSystem::AddEntity(Entity * pEntity)
+{
+	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	bool containsEntity = false;
+
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		containsEntity = true;
+	}
+
+	if (containsEntity && !containsComponents)
+	{
+		EntityList.erase(it);
+	}
+	else if (!containsEntity && containsComponents)
+	{
+		EntityList.push_back(pEntity);
 	}
 }
 

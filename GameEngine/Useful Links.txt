@@ -25,6 +25,8 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: build a way to create entities in lua
 //TODO: look at when the 'guard' goes back to its post
 //TODO: move bone mats out of the rigged animation
+//TODO: Turn componenttypes array into vector and do removing / adding in the isystem class
+//TODO: Give the option to output log to a file instead of cout
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

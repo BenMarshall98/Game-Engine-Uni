@@ -526,7 +526,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 
 			if ((*it).HasMember("PathFollowing"))
 			{
-				std::vector<PathNode *> pathNodes;
+				std::vector<PathNode *> * pathNodes = new std::vector<PathNode *>();
 				rapidjson::Value::ConstValueIterator path;
 
 				for (path = (*it)["PathFollowing"].Begin(); path != (*it)["PathFollowing"].End(); path++)
@@ -546,7 +546,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 					node->position = position;
 					node->radius = radius;
 
-					pathNodes.push_back(node);
+					pathNodes->push_back(node);
 				}
 
 				pathfollower = new PathFollowing(pathNodes);
@@ -707,15 +707,15 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 		}
 		else if (component == "Input")
 		{
-			std::vector<InputFunction> * const playerInputs = LoadInputsJSON((*it)["Inputs"]);
+			std::vector<InputFunction *> * const playerInputs = LoadInputsJSON((*it)["Inputs"]);
 			entityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
 		}
 	}
 }
 
-std::vector<InputFunction> * LevelLoader::LoadInputsJSON(const rapidjson::Value& Inputs)
+std::vector<InputFunction *> * LevelLoader::LoadInputsJSON(const rapidjson::Value& Inputs)
 {
-	std::vector<InputFunction> * playerInputs = new std::vector<InputFunction>();
+	std::vector<InputFunction *> * playerInputs = new std::vector<InputFunction *>();
 
 	rapidjson::Value::ConstValueIterator it;
 
@@ -723,7 +723,7 @@ std::vector<InputFunction> * LevelLoader::LoadInputsJSON(const rapidjson::Value&
 	{
 		const std::string function = (*it)["Function"].GetString();
 
-		InputFunction inputFunction = InputFunction(function);
+		InputFunction * inputFunction = new InputFunction(function);
 
 		const rapidjson::Value& keys = (*it)["Input"];
 
@@ -733,7 +733,7 @@ std::vector<InputFunction> * LevelLoader::LoadInputsJSON(const rapidjson::Value&
 		{
 			const std::string inputName = key->GetString();
 			const GameInput gameInput = InputConverter::StringToEnum(inputName);
-			inputFunction.AddInput(gameInput);
+			inputFunction->AddInput(gameInput);
 		}
 
 		playerInputs->push_back(inputFunction);

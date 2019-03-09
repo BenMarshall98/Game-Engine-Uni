@@ -14,7 +14,6 @@
 ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoord) :
 	mTopLeftCoord(topLeftCoord), mBottomRightCoord(bottomRightCoord), entityManager(EntityManager::Instance())
 {
-	ComponentType componentTypes[] = { ComponentType::COMPONENT_MODEL, ComponentType::COMPONENT_POSITION, ComponentType::COMPONENT_DIRECTION, ComponentType::COMPONENT_SHADOW_SHADER};
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 
 	for (int i = 0; i < 6; i++)
@@ -31,6 +30,28 @@ void ShadowSystem::RemoveEntity(Entity * pEntity)
 	if (it != EntityList.end())
 	{
 		EntityList.erase(it);
+	}
+}
+
+void ShadowSystem::AddEntity(Entity * pEntity)
+{
+	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	bool containsEntity = false;
+
+	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+
+	if (it != EntityList.end())
+	{
+		containsEntity = true;
+	}
+
+	if (containsEntity && !containsComponents)
+	{
+		EntityList.erase(it);
+	}
+	else if (!containsEntity && containsComponents)
+	{
+		EntityList.push_back(pEntity);
 	}
 }
 

@@ -14,6 +14,12 @@ class ArtificialIntelligenceSystem : public iSystem
 private:
 	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
+	const ComponentType componentTypes[4] = {
+		ComponentType::COMPONENT_POSITION,
+		ComponentType::COMPONENT_DIRECTION,
+		ComponentType::COMPONENT_PHYSICS,
+		ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE
+	};
 
 	static void Intelligence(ComponentArtificalIntelligence * artificalIntelligence, Entity * pEntity);
 public:
@@ -25,5 +31,6 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
+	void AddEntity(Entity * pEntity) override;
 };
 

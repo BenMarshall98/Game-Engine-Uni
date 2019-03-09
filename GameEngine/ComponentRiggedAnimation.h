@@ -6,7 +6,8 @@ enum class RiggedAnimationState
 {
 	PLAY,
 	PAUSE,
-	STOP
+	STOP,
+	NONE
 };
 
 class ComponentRiggedAnimation : public iComponent

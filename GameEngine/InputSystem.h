@@ -13,6 +13,12 @@ private:
 	std::vector<Entity *> EntityList;
 	EntityManager * entityManager;
 
+	const ComponentType componentTypes[1] = {
+		ComponentType::COMPONENT_INPUT
+	};
+
+	static void Input(std::vector<InputFunction *> * inputs, Entity * entity);
+
 public:
 	InputSystem();
 
@@ -21,7 +27,8 @@ public:
 
 	void Action(void) override;
 	void RemoveEntity(Entity * pEntity) override;
-	static void Input(std::vector<InputFunction> * inputs, Entity * entity);
+	void AddEntity(Entity * pEntity) override;
+	
 	~InputSystem();
 };
 

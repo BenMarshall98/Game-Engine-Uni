@@ -35,6 +35,8 @@ public:
 
 	Entity* CreateEntity(const std::string & entityName = std::string(""));
 	Entity* GetEntityByName(const std::string & entityName);
+
+	void FinishEntity(Entity * entity);
 	
 	inline void AddToDeleteList(Entity * const entity)
 	{
@@ -50,6 +52,7 @@ public:
 	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
 	std::vector<Entity *> GetAllEntitiesWithComponents(const ComponentType * componentName, int size);
+	bool CheckEntityHasComponents(Entity * entity, const ComponentType * componentName, int size);
 
 	void Update();
 	void Swap();

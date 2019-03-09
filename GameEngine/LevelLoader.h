@@ -29,7 +29,7 @@ private:
 	static void LoadSystems(const rapidjson::Value& Systems);
 	static std::vector<iSystem *> CreateSystems(const rapidjson::Value& Systems);
 	static void AddComponentsToEntityJSON(Entity * entity, const rapidjson::Value& components);
-	static std::vector<InputFunction> * LoadInputsJSON(const rapidjson::Value& Inputs);
+	static std::vector<InputFunction *> * LoadInputsJSON(const rapidjson::Value& Inputs);
 	static int GetLine(std::string & file, int location);
 public:
 	static void LoadLevelJSON(std::string & fileName);

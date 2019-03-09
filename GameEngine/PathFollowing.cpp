@@ -13,11 +13,11 @@ void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::
 	if (currentNode == -1)
 	{
 		int closestNode = 0;
-		float distance = glm::length(pathNodes.at(0)->position - currentPosition);
+		float distance = glm::length(pathNodes->at(0)->position - currentPosition);
 
-		for (int i = 1; i < pathNodes.size(); i++)
+		for (int i = 1; i < pathNodes->size(); i++)
 		{
-			const float newDistance = length(pathNodes.at(i)->position - currentPosition);
+			const float newDistance = length(pathNodes->at(i)->position - currentPosition);
 
 			if (newDistance < distance)
 			{
@@ -29,19 +29,19 @@ void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::
 		currentNode = closestNode;
 	}
 
-	const float distanceToNode = length(pathNodes.at(currentNode)->position - currentPosition);
+	const float distanceToNode = length(pathNodes->at(currentNode)->position - currentPosition);
 
-	if (distanceToNode < pathNodes.at(currentNode)->radius)
+	if (distanceToNode < pathNodes->at(currentNode)->radius)
 	{
 		currentNode++;
 
-		if (currentNode == pathNodes.size())
+		if (currentNode == pathNodes->size())
 		{
 			currentNode = 0;
 		}
 	}
 
-	const glm::vec3 norm = normalize(pathNodes.at(currentNode)->position - currentPosition);
+	const glm::vec3 norm = normalize(pathNodes->at(currentNode)->position - currentPosition);
 
 	//mat3 matRotation = toMat3(currentDirection);
 	//vec3 velocity = matRotation * vec3(1, 0, 0);
@@ -71,9 +71,9 @@ bool PathFollowing::OnPath(glm::vec3 position)
 		return true;
 	}
 
-	for (int i = 0; i < pathNodes.size(); i++)
+	for (int i = 0; i < pathNodes->size(); i++)
 	{
-		if (glm::length(position - pathNodes.at(i)->position) <= pathNodes.at(i)->radius)
+		if (glm::length(position - pathNodes->at(i)->position) <= pathNodes->at(i)->radius)
 		{
 			onPath = true;
 			currentNode = i;
@@ -87,11 +87,11 @@ bool PathFollowing::OnPath(glm::vec3 position)
 glm::vec3 PathFollowing::GetNearestPath(glm::vec3 position)
 {
 	int closestNode = 0;
-	float distance = glm::length(pathNodes.at(0)->position - position);
+	float distance = glm::length(pathNodes->at(0)->position - position);
 
-	for (int i = 1; i < pathNodes.size(); i++)
+	for (int i = 1; i < pathNodes->size(); i++)
 	{
-		const float newDistance = length(pathNodes.at(i)->position - position);
+		const float newDistance = length(pathNodes->at(i)->position - position);
 
 		if (newDistance < distance)
 		{
@@ -100,5 +100,5 @@ glm::vec3 PathFollowing::GetNearestPath(glm::vec3 position)
 		}
 	}
 
-	return pathNodes.at(closestNode)->position;
+	return pathNodes->at(closestNode)->position;
 }
