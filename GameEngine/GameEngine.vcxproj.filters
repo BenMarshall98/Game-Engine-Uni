@@ -309,6 +309,15 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Scene Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentAnimation.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentState.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -542,6 +551,15 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Scene Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentAnimation.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentState.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -42,6 +42,7 @@ void PhysicsSystem::AddEntity(Entity * pEntity)
 	else if (!containsEntity && containsComponents)
 	{
 		EntityList.push_back(pEntity);
+		newEntities.push_back(pEntity);
 	}
 }
 
@@ -82,30 +83,41 @@ void PhysicsSystem::Action(void)
 void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
 {
 	RigidBody * rigidBody = physics->GetUpdateRigidBody();
-	glm::vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
-	glm::quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
 
-	glm::vec3 zero = glm::vec3(0);
-	glm::vec3 velocity = physics->GetUpdateVelocity();
-	physicsManager->ApplyVelocity(rigidBody, velocity);
-	physics->SetUpdateVelocity(zero);
-
-	glm::vec3 impulse = physics->GetUpdateImpulse();
-	physicsManager->ApplyImpulse(rigidBody, impulse);
-	physics->SetUpdateImpulse(zero);
-
-	glm::vec3 rotation = physics->GetUpdateRotation();
-	physicsManager->ApplyRotation(rigidBody, rotation);
-	physics->SetUpdateRotation(zero);
-
-	position->SetUpdatePosition(positionVec);
-	direction->SetUpdateDirection(directionQuat);
-
-	physics->ResolveCollisions();
-
-	if (physics->GetUpdateMass() > 0)
+	if (physics->GetUpdateMass() != 0)
 	{
+		glm::vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
+		glm::quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
+
+		glm::vec3 zero = glm::vec3(0);
+		glm::vec3 velocity = physics->GetUpdateVelocity();
+		physicsManager->ApplyVelocity(rigidBody, velocity);
+		physics->SetUpdateVelocity(zero);
+
+		glm::vec3 impulse = physics->GetUpdateImpulse();
+		physicsManager->ApplyImpulse(rigidBody, impulse);
+		physics->SetUpdateImpulse(zero);
+
+		glm::vec3 rotation = physics->GetUpdateRotation();
+		physicsManager->ApplyRotation(rigidBody, rotation);
+		physics->SetUpdateRotation(zero);
+
+		position->SetUpdatePosition(positionVec);
+		direction->SetUpdateDirection(directionQuat);
+
+		physics->ResolveCollisions();
+
 		physics->GroundSwap();
+	}
+	else
+	{
+		glm::vec3 positionVec = position->GetUpdatePosition();
+		glm::quat directionQuat = direction->GetUpdateDirection();
+
+		physicsManager->SetPositionOfRigidBody(rigidBody, positionVec);
+		physicsManager->SetDirectionOfRigidBody(rigidBody, directionQuat);
+
+		physics->ResolveCollisions();
 	}
 }
 

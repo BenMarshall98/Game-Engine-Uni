@@ -3,6 +3,8 @@
 #include "ResourceManager.h"
 #include "ComponentModel.h"
 #include "ComponentShader.h"
+#include "ComponentAnimation.h"
+#include "ComponentState.h"
 #include "ComponentPosition.h"
 #include "ComponentDirection.h"
 #include "ComponentPhysics.h"
@@ -33,6 +35,7 @@
 #include "RenderSystem.h"
 #include "ShadowSystem.h"
 #include "InputSystem.h"
+#include "AnimationSystem.h"
 #include "ArtificialIntelligenceSystem.h"
 #include "PhysicsSystem.h"
 #include "AudioSystem.h"
@@ -710,6 +713,16 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 			std::vector<InputFunction *> * const playerInputs = LoadInputsJSON((*it)["Inputs"]);
 			entityManager->AddComponentToEntity(entity, new ComponentInput(playerInputs));
 		}
+		else if (component == "Animation")
+		{
+			std::string function = (*it)["Function"].GetString();
+
+			entityManager->AddComponentToEntity(entity, new ComponentAnimation(function));
+		}
+		else if (component == "State")
+		{
+			entityManager->AddComponentToEntity(entity, new ComponentState());
+		}
 	}
 }
 
@@ -822,6 +835,10 @@ std::vector<iSystem *> LevelLoader::CreateSystems(const rapidjson::Value& pSyste
 		else if (system == "Audio")
 		{
 			systems.push_back(new AudioSystem());
+		}
+		else if (system == "Animation")
+		{
+			systems.push_back(new AnimationSystem());
 		}
 	}
 

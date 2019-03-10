@@ -27,6 +27,16 @@ public:
 		return pRigidBody->GetDirection();
 	}
 
+	inline void SetPositionOfRigidBody(RigidBody * pRigidBody, glm::vec3 pPosition)
+	{
+		pRigidBody->SetPosition(pPosition);
+	}
+
+	inline void SetDirectionOfRigidBody(RigidBody * pRigidBody, glm::quat pDirection)
+	{
+		pRigidBody->SetDirection(pDirection);
+	}
+
 	inline void ApplyVelocity(RigidBody * pRigidBody, glm::vec3 & velocity)
 	{
 		pRigidBody->ApplyVelocity(velocity);

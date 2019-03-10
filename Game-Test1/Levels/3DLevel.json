@@ -36,6 +36,11 @@
       "Model": "Models/Floor.obj"
     },
     {
+      "Type": "Model",
+      "Name": "Bullet",
+      "Model": "Models/bullet.obj"
+    },
+    {
       "Type": "Shader",
       "Name": "NormalShader",
       "Vertex": "Shaders/NormalVertex.vert",

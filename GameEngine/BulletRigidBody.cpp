@@ -30,6 +30,24 @@ void * BulletRigidBody::GetRigidBody()
 	return rigidBody;
 }
 
+void BulletRigidBody::SetPosition(glm::vec3 pPosition)
+{
+	btVector3 origin(pPosition.x, pPosition.y, pPosition.z);
+
+	btTransform transform = rigidBody->getWorldTransform();
+	transform.setOrigin(origin);
+	rigidBody->setWorldTransform(transform);
+}
+
+void BulletRigidBody::SetDirection(glm::quat pRotation)
+{
+	btQuaternion rotation(pRotation.x, pRotation.y, pRotation.z, pRotation.w);
+
+	btTransform transform = rigidBody->getWorldTransform();
+	transform.setRotation(rotation);
+	rigidBody->setWorldTransform(transform);
+}
+
 void BulletRigidBody::ApplyVelocity(glm::vec3 & pVelocity)
 {
 	btVector3 currentVel = rigidBody->getLinearVelocity();

@@ -5,6 +5,8 @@
 #include "InputFunction.h"
 #include "CollisionCuboid.h"
 #include "CollisionSphere.h"
+#include "ComponentAnimation.h"
+#include "ComponentState.h"
 #include "ComponentArtificalIntelligence.h"
 #include "ComponentRiggedAnimation.h"
 #include "ComponentDirection.h"
@@ -47,6 +49,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "GetComponentPosition", lua_GetComponentPosition);
 	lua_register(luaVM, "GetComponentDirection", lua_GetComponentDirection);
 	lua_register(luaVM, "GetComponentAudio", lua_GetComponentAudio);
+	lua_register(luaVM, "GetComponentState", lua_GetComponentState);
 	lua_register(luaVM, "GetPosition", lua_GetPosition);
 	lua_register(luaVM, "SetPosition", lua_SetPosition);
 	lua_register(luaVM, "GetVelocity", lua_GetVelocity);
@@ -68,9 +71,10 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "PlayAudioAtLocation", lua_PlayAudioAtLocation);
 	lua_register(luaVM, "PlayAudioAtEntityLocation", lua_PlayAudioAtEntityLocation);
 	lua_register(luaVM, "DeleteEntity", lua_DeleteEntity);
+	lua_register(luaVM, "GetAIValue", lua_GetAIValue);
+	lua_register(luaVM, "SetAIValue", lua_SetAIValue);
 	lua_register(luaVM, "GetValue", lua_GetValue);
 	lua_register(luaVM, "SetValue", lua_SetValue);
-	lua_register(luaVM, "ShootPlayer", lua_ShootPlayer);
 	lua_register(luaVM, "CanSeePlayer", lua_CanSeePlayer);
 	lua_register(luaVM, "MoveOffPath", lua_MoveOffPath);
 	lua_register(luaVM, "OnPath", lua_OnPath);
@@ -85,6 +89,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "CloseWindow", lua_CloseWindow);
 
 	lua_register(luaVM, "CreateEntity", lua_CreateEntity);
+	lua_register(luaVM, "AddComponentAnimation", lua_AddComponentAnimation);
 	lua_register(luaVM, "CreateAIStateMachine", lua_CreateAIStateMachine);
 	lua_register(luaVM, "CreatePathFinder", lua_CreatePathFinder);
 	lua_register(luaVM, "CreatePathVector", lua_CreatePathVector);
@@ -109,6 +114,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "AddComponentRiggedAnimation", lua_AddComponentRiggedAnimation);
 	lua_register(luaVM, "AddComponentShader", lua_AddComponentShader);
 	lua_register(luaVM, "AddComponentShadowShader", lua_AddComponentShadowShader);
+	lua_register(luaVM, "AddComponentState", lua_AddComponentState);
 	lua_register(luaVM, "AddComponentTexture", lua_AddComponentTexture);
 	lua_register(luaVM, "FinishEntity", lua_FinishEntity);
 	
@@ -246,6 +252,31 @@ int ScriptingManager::lua_GetComponentAudio(lua_State * luaState)
 	ComponentAudio * audioComponent = dynamic_cast<ComponentAudio *>(componentAudio);
 
 	lua_pushlightuserdata(luaState, audioComponent);
+	return 1;
+}
+
+int ScriptingManager::lua_GetComponentState(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: GetComponentState");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetComponentState");
+		lua_error(luaState);
+	}
+
+	iComponent * componentAnimation = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_ANIMATION);
+	ComponentAnimation * animationComponent = dynamic_cast<ComponentAnimation *>(componentAnimation);
+
+	lua_pushlightuserdata(luaState, animationComponent);
 	return 1;
 }
 
@@ -1129,13 +1160,13 @@ int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_GetValue(lua_State * luaState)
+int ScriptingManager::lua_GetAIValue(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 4)
 	{
-		lua_pushstring(luaState, "Wrong Number Of Args: GetValue");
+		lua_pushstring(luaState, "Wrong Number Of Args: GetAIValue");
 		lua_error(luaState);
 	}
 
@@ -1143,7 +1174,7 @@ int ScriptingManager::lua_GetValue(lua_State * luaState)
 
 	if (!stateMachine)
 	{
-		lua_pushstring(luaState, "Wrong Parameters Passed in: GetValue");
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetAIValue");
 		lua_error(luaState);
 	}
 
@@ -1182,20 +1213,20 @@ int ScriptingManager::lua_GetValue(lua_State * luaState)
 	}
 	else
 	{
-		lua_pushstring(luaState, "Value Type Not Recognised: GetValue");
+		lua_pushstring(luaState, "Value Type Not Recognised: GetAIValue");
 		lua_error(luaState);
 	}
 
 	return 1;
 }
 
-int ScriptingManager::lua_SetValue(lua_State * luaState)
+int ScriptingManager::lua_SetAIValue(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 3)
 	{
-		lua_pushstring(luaState, "Wrong Number of Args: SetValue");
+		lua_pushstring(luaState, "Wrong Number of Args: SetAIValue");
 		lua_error(luaState);
 	}
 
@@ -1203,7 +1234,7 @@ int ScriptingManager::lua_SetValue(lua_State * luaState)
 
 	if (!stateMachine)
 	{
-		lua_pushstring(luaState, "Wrong Parameters Passed in: SetValue");
+		lua_pushstring(luaState, "Wrong Parameters Passed in: SetAIValue");
 		lua_error(luaState);
 	}
 	
@@ -1240,35 +1271,113 @@ int ScriptingManager::lua_SetValue(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_ShootPlayer(lua_State * luaState)
+int ScriptingManager::lua_GetValue(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
 
-	if (numberOfArgs != 2)
+	if (numberOfArgs != 4)
 	{
-		lua_pushstring(luaState, "Wrong Number Of Args: ShootPlayer");
+		lua_pushstring(luaState, "Wrong Number Of Args: GetValue");
 		lua_error(luaState);
 	}
 
-	Entity * guard = (Entity *)lua_touserdata(luaState, 1);
+	ComponentState * stateComponent = (ComponentState *)lua_touserdata(luaState, 1);
 
-	if (!guard)
+	if (!stateComponent)
 	{
-		lua_pushstring(luaState, "Wrong Parameters Passed in: ShootPlayer");
+		lua_pushstring(luaState, "Wrong Parameters Passed in: GetValue");
 		lua_error(luaState);
 	}
 
-	Entity * player = (Entity *)lua_touserdata(luaState, 1);
+	std::string valueName = lua_tostring(luaState, 2);
+	std::string valueType = lua_tostring(luaState, 3);
+	std::string defaultValue = lua_tostring(luaState, 4);
 
-	if (!player)
+	std::string valueString = stateComponent->GetValue(valueName, defaultValue);
+
+	std::istringstream iString(valueString);
+
+	if (valueType == "integer")
 	{
-		lua_pushstring(luaState, "Wrong Parameters Passed in: ShootPlayer");
+		int number;
+		iString >> number;
+
+		lua_pushinteger(luaState, number);
+	}
+	else if (valueType == "float")
+	{
+		float number;
+		iString >> number;
+
+		lua_pushnumber(luaState, number);
+	}
+	else if (valueType == "boolean")
+	{
+		bool type;
+		iString >> type;
+		
+		lua_pushboolean(luaState, type);
+	}
+	else if (valueType == "string")
+	{
+		lua_pushstring(luaState, valueString.c_str());
+	}
+	else
+	{
+		lua_pushstring(luaState, "Value Type Not Recognised: GetValue");
 		lua_error(luaState);
 	}
 
-	//TODO: Finish implementing
+	return 1;
+}
 
-	LoggingManager::LogMessage(MESSAGE_TYPE::LOG, "PEW PEW");
+int ScriptingManager::lua_SetValue(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 3)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: SetValue");
+		lua_error(luaState);
+	}
+
+	ComponentState * stateComponent = (ComponentState *)lua_touserdata(luaState, 1);
+
+	if (!stateComponent)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: SetValue");
+		lua_error(luaState);
+	}
+
+	std::string valueName = lua_tostring(luaState, 2);
+	std::string value;
+
+	std::ostringstream oString;
+
+	if (lua_isboolean(luaState, 3))
+	{
+		bool preValue = lua_toboolean(luaState, 3);
+		oString << preValue;
+		value = oString.str();
+	}
+	else if (lua_isnumber(luaState, 3))
+	{
+		float preValue = lua_tonumber(luaState, 3);
+		oString << preValue;
+		value = oString.str();
+	}
+	else if (lua_isinteger(luaState, 3))
+	{
+		int preValue = lua_tointeger(luaState, 3);
+		oString << preValue;
+		value = oString.str();
+	}
+	else
+	{
+		value = lua_tostring(luaState, 3);
+	}
+
+	stateComponent->SetValue(valueName, value);
 
 	return 0;
 }
@@ -1695,6 +1804,31 @@ int ScriptingManager::lua_CreateEntity(lua_State * luaState)
 	}
 
 	return 1;
+}
+
+int ScriptingManager::lua_AddComponentAnimation(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentAnimation");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passed in: AddComponentAnimation");
+		lua_error(luaState);
+	}
+
+	std::string function = lua_tostring(luaState, 2);
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentAnimation(function));
+
+	return 0;
 }
 
 int ScriptingManager::lua_CreateAIStateMachine(lua_State * luaState)
@@ -2465,6 +2599,29 @@ int ScriptingManager::lua_AddComponentShadowShader(lua_State * luaState)
 	return 0;
 }
 
+int ScriptingManager::lua_AddComponentState(lua_State * luaState)
+{
+	int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: AddComponentState");
+		lua_error(luaState);
+	}
+
+	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+
+	if (!entity)
+	{
+		lua_pushstring(luaState, "Wrong Parameters Passeed in: AddComponentState");
+		lua_error(luaState);
+	}
+
+	EntityManager::Instance()->AddComponentToEntity(entity, new ComponentState());
+
+	return 0;
+}
+
 int ScriptingManager::lua_AddComponentTexture(lua_State * luaState)
 {
 	int numberOfArgs = lua_gettop(luaState);
@@ -2562,6 +2719,20 @@ void ScriptingManager::RunScriptFromInput(const std::string & function)
 	lua_getglobal(luaVM, function.c_str());
 
 	if (lua_pcall(luaVM, 0, 0, 0) != 0)
+	{
+		std::string message = lua_tostring(luaVM, -1);
+		message = "Error running lua script: " + message;
+		LoggingManager::LogMessage(MESSAGE_TYPE::LOG, message);
+	}
+}
+
+void ScriptingManager::RunScriptFromAnimation(const std::string & function, Entity * entity)
+{
+	lua_getglobal(luaVM, function.c_str());
+	lua_pushlightuserdata(luaVM, entity);
+	lua_pushnumber(luaVM, (1.0 / 60.0));
+
+	if (lua_pcall(luaVM, 2, 0, 0) != 0)
 	{
 		std::string message = lua_tostring(luaVM, -1);
 		message = "Error running lua script: " + message;

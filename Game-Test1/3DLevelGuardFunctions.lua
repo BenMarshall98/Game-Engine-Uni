@@ -29,14 +29,14 @@ function SeePlayer(guardEntity, playerEntity, guardPosition, playerPosition, AIS
 end
 
 function ShootingPlayer(guardEntity, playerEntity, AIStateMachine, deltaTime)
-	local timeLastShoot = GetValue(AIStateMachine, "timeSinceShoot", "float", "0")
+	local timeLastShoot = GetAIValue(AIStateMachine, "timeSinceShoot", "float", "0")
 	timeLastShoot = timeLastShoot - deltaTime;
 	if timeLastShoot <= 0 then
-		ShootPlayer(guardEntity, playerEntity)
+		ShootPlayer()
 		timeLastShoot = 1
 	end
 	--Else do nothing
-	SetValue(AIStateMachine, "timeSinceShoot", timeLastShoot)
+	SetAIValue(AIStateMachine, "timeSinceShoot", timeLastShoot)
 end
 
 function MoveAIToPlayer(guardEntity, guardPosition, AIStateMachine, deltaTime)
@@ -61,4 +61,24 @@ function CannotSeePlayer(guardEntity, guardPosition, AIStateMachine, deltaTime)
 		local nearestPath = GetNearestPath(AIStateMachine, guardPosition)
 		FindAIPath(AIStateMachine, guardPosition, guardDirection, GuardComponentPhysics, nearestPath, deltaTime)
 	end
+end
+
+function ShootPlayer()
+	local entity = CreateEntity();
+	local position = Vector3:new(5, 1, 5);
+	local direction = Vector3:new(0, 1, 0);
+	local size = Vector3:new(0.05, 0.05, 0.05);
+	local angularLimits = Vector3:new(1, 1, 1);
+	local cuboid = CreateCollisionCuboid(size);
+
+	AddComponentPosition(entity, position);
+	AddComponentDirection(entity, direction, 0);
+	AddComponentPhysics(entity, cuboid, 0.1, "None", angularLimits);
+	AddComponentModel(entity, "Bullet");
+	AddComponentNormalTexture(entity, "BoxNormal");
+	AddComponentTexture(entity, "Box");
+	AddComponentShader(entity, "NormalShader");
+	AddComponentShadowShader(entity, "DirectionalShadow", "PointShadow");
+
+	FinishEntity(entity);
 end

@@ -191,4 +191,9 @@
       <Filter>Levels</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="Models\bullet.obj">
+      <Filter>Models</Filter>
+    </Object>
+  </ItemGroup>
 </Project>

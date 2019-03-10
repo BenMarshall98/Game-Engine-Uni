@@ -66,6 +66,16 @@ public:
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
 
+	inline void SetPositionOfRigidBody(RigidBody * pRigidBody, glm::vec3 pPosition)
+	{
+		engine->SetPositionOfRigidBody(pRigidBody, pPosition);
+	}
+
+	inline void SetDirectionOfRigidBody(RigidBody * pRigidBody, glm::quat pDirection)
+	{
+		engine->SetDirectionOfRigidBody(pRigidBody, pDirection);
+	}
+
 	inline void ApplyVelocity(RigidBody * pRigidBody, glm::vec3 & velocity) const
 	{
 		engine->ApplyVelocity(pRigidBody, velocity);

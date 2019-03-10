@@ -18,6 +18,7 @@ private:
 	static int lua_GetComponentPosition(lua_State * luaState);
 	static int lua_GetComponentPhysics(lua_State * luaState);
 	static int lua_GetComponentAudio(lua_State * luaState);
+	static int lua_GetComponentState(lua_State * luaState);
 	static int lua_GetPosition(lua_State * luaState);
 	static int lua_SetPosition(lua_State * luaState);
 	static int lua_GetVelocity(lua_State * luaState);
@@ -39,9 +40,10 @@ private:
 	static int lua_PlayAudioAtLocation(lua_State * luaState);
 	static int lua_PlayAudioAtEntityLocation(lua_State * luaState);
 	static int lua_DeleteEntity(lua_State * luaState);
+	static int lua_GetAIValue(lua_State * luaState);
+	static int lua_SetAIValue(lua_State * luaState);
 	static int lua_GetValue(lua_State * luaState);
 	static int lua_SetValue(lua_State * luaState);
-	static int lua_ShootPlayer(lua_State * luaState);
 	static int lua_CanSeePlayer(lua_State * luaState);
 	static int lua_MoveOffPath(lua_State * luaState);
 	static int lua_OnPath(lua_State * luaState);
@@ -56,6 +58,7 @@ private:
 	static int lua_CloseWindow(lua_State * luaState);
 
 	static int lua_CreateEntity(lua_State * luaState);
+	static int lua_AddComponentAnimation(lua_State * luaState);
 	static int lua_CreateAIStateMachine(lua_State * luaState);
 	static int lua_CreatePathFinder(lua_State * luaState);
 	static int lua_CreatePathVector(lua_State * luaState);
@@ -80,6 +83,7 @@ private:
 	static int lua_AddComponentRiggedAnimation(lua_State * luaState);
 	static int lua_AddComponentShader(lua_State * luaState);
 	static int lua_AddComponentShadowShader(lua_State * luaState);
+	static int lua_AddComponentState(lua_State * luaState);
 	static int lua_AddComponentTexture(lua_State * luaState);
 	static int lua_FinishEntity(lua_State * luaState);
 
@@ -109,6 +113,8 @@ public:
 	void RunScriptForStateAI(const std::string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const;
 
 	void RunScriptFromInput(const std::string & function);
+
+	void RunScriptFromAnimation(const std::string & function, Entity * entity);
 
 	~ScriptingManager();
 };
