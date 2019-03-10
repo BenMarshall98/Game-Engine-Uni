@@ -86,7 +86,7 @@ void GLFWWindow::LimitFPS(const float FPS)
 
 	if (count == 60)
 	{
-		std::string title = "Game Engine: " + std::to_string((int)average) + "fps";
+		const std::string title = "Game Engine: " + std::to_string((int)average) + "fps";
 		glfwSetWindowTitle(gameWindow, title.c_str());
 		average = 0;
 		count = 0;

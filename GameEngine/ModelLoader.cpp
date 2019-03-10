@@ -110,8 +110,8 @@ StaticModel * ModelLoader::LoadOBJ(const std::string & fileName)
 				return nullptr;
 			}
 
-			std::string lineToAdd = vertexString[vertex - 1] + " " + textureString[texture - 1] + " " + normalString[normal - 1];
-			int index = FindInVector(modelData, lineToAdd);
+			const std::string lineToAdd = vertexString[vertex - 1] + " " + textureString[texture - 1] + " " + normalString[normal - 1];
+			const int index = FindInVector(modelData, lineToAdd);
 			if (index != -1)
 			{
 				indexes.push_back(index);
@@ -176,14 +176,14 @@ StaticModel * ModelLoader::LoadSME(const std::string & fileName)
 AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 {
 	Assimp::Importer import;
-	const aiScene * scene = import.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene * const scene = import.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		return nullptr;
 	}
 
-	AnimatedModel * animatedModel = new AnimatedModel();
+	AnimatedModel * const animatedModel = new AnimatedModel();
 
 	std::vector<Node *> nodes;
 
@@ -192,11 +192,11 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 	RecursiveNodeProcess(nodes, scene->mRootNode);
 	AnimNodeProcess(animatedModel, scene);
 
-	glm::mat4 globalInverseTransform = AiToGLMMat4(scene->mRootNode->mTransformation);
+	const glm::mat4 globalInverseTransform = AiToGLMMat4(scene->mRootNode->mTransformation);
 
 	ProcessNode(scene->mRootNode, scene, animatedModel);
 
-	Animation * firstAnimation = animatedModel->GetFirstAnimation();
+	Animation * const firstAnimation = animatedModel->GetFirstAnimation();
 
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
@@ -207,16 +207,16 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 			Node * node = FindNode(nodes, boneName);
 			AnimNode * animNode = FindAiNodeAnim(firstAnimation->GetAnimNodes(), boneName);
 
-			Bone * bone = new Bone(boneName, node, animNode, boneMat);
+			Bone * const bone = new Bone(boneName, node, animNode, boneMat);
 			bones.push_back(bone);
 		}
 	}
 
 	for (int i = 0; i < bones.size(); i++)
 	{
-		std::string boneName = bones.at(i)->GetName();
+		const std::string boneName = bones.at(i)->GetName();
 
-		Node * parent = FindNode(nodes, boneName)->GetParent();
+		Node * const parent = FindNode(nodes, boneName)->GetParent();
 
 		std::string parentName = "";
 
@@ -225,7 +225,7 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 			parentName = parent->GetName();
 		}
 
-		Bone * parentBone = FindBone(bones, parentName);
+		Bone * const parentBone = FindBone(bones, parentName);
 
 		bones.at(i)->SetParentBone(parentBone);
 	}
@@ -237,11 +237,11 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 	return animatedModel;
 }
 
-void ModelLoader::ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel)
+void ModelLoader::ProcessNode(aiNode * const node, const aiScene * const scene, AnimatedModel * const animatedModel)
 {
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
-		aiMesh * mesh = scene->mMeshes[node->mMeshes[i]];
+		aiMesh * const mesh = scene->mMeshes[node->mMeshes[i]];
 		animatedModel->AddMesh(ProcessMesh(node, mesh, scene));
 	}
 
@@ -251,7 +251,7 @@ void ModelLoader::ProcessNode(aiNode * node, const aiScene * scene, AnimatedMode
 	}
 }
 
-Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * scene)
+Mesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const aiScene * const scene)
 {
 	std::vector<glm::vec3> vertexes;
 	std::vector<glm::vec3> normals;
@@ -259,13 +259,13 @@ Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * s
 
 	for (unsigned int i = 0; i < pMesh->mNumVertices; i++)
 	{
-		aiVector3D aiVertex = pMesh->mVertices[i];
-		aiVector3D aiNormal = pMesh->mNormals[i];
-		aiVector3D * aiTexture = pMesh->mTextureCoords[i];
+		const aiVector3D aiVertex = pMesh->mVertices[i];
+		const aiVector3D aiNormal = pMesh->mNormals[i];
+		aiVector3D * const aiTexture = pMesh->mTextureCoords[i];
 
-		glm::vec3 vertex = glm::vec3(aiVertex.x, aiVertex.y, aiVertex.z);
-		glm::vec3 normal = glm::vec3(aiVertex.x, aiVertex.y, aiVertex.z);
-		glm::vec2 texture = glm::vec2(aiVertex.x, aiVertex.y);
+		const glm::vec3 vertex = glm::vec3(aiVertex.x, aiVertex.y, aiVertex.z);
+		const glm::vec3 normal = glm::vec3(aiNormal.x, aiNormal.y, aiNormal.z);
+		const glm::vec2 texture = glm::vec2(aiTexture->x, aiTexture->y);
 
 		vertexes.push_back(vertex);
 		normals.push_back(normal);
@@ -276,7 +276,7 @@ Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * s
 
 	for (unsigned int i = 0; i < pMesh->mNumFaces; i++)
 	{
-		aiFace face = pMesh->mFaces[i];
+		const aiFace face = pMesh->mFaces[i];
 		for (unsigned int j = 0; j < face.mNumIndices; j++)
 		{
 			indices.push_back(face.mIndices[j]);
@@ -284,7 +284,7 @@ Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * s
 	}
 
 	const int WEIGHTS_PER_VERTEX = 4;
-	int boneArraysSize = pMesh->mNumVertices * WEIGHTS_PER_VERTEX;
+	const int boneArraysSize = pMesh->mNumVertices * WEIGHTS_PER_VERTEX;
 
 	std::vector<int> boneIDs;
 	boneIDs.resize(boneArraysSize);
@@ -300,13 +300,13 @@ Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * s
 
 	for (int i = 0; i < pMesh->mNumBones; i++)
 	{
-		aiBone * aiBone = pMesh->mBones[i];
+		aiBone * const aiBone = pMesh->mBones[i];
 
 		for (int j = 0; j < aiBone->mNumWeights; j++)
 		{
-			aiVertexWeight weight = aiBone->mWeights[j];
+			const aiVertexWeight weight = aiBone->mWeights[j];
 
-			unsigned int vertexStart = weight.mVertexId * WEIGHTS_PER_VERTEX;
+			const unsigned int vertexStart = weight.mVertexId * WEIGHTS_PER_VERTEX;
 
 			for (int k = 0; k < WEIGHTS_PER_VERTEX; k++)
 			{
@@ -324,17 +324,17 @@ Mesh * ModelLoader::ProcessMesh(aiNode * node, aiMesh * pMesh, const aiScene * s
 		}
 	}
 
-	Mesh * mesh = new Mesh(vertexes, normals, textures, Weights, IDs, indices);
+	Mesh * const mesh = new Mesh(vertexes, normals, textures, Weights, IDs, indices);
 
 	return mesh;
 }
 
 
-void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * pNode)
+void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * const pNode)
 {
 	std::string name = pNode->mName.data;
 	glm::mat4 trans = AiToGLMMat4(pNode->mTransformation);
-	Node * node = new Node(name, trans);
+	Node * const node = new Node(name, trans);
 
 	nodes.push_back(node);
 
@@ -345,7 +345,7 @@ void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * pNod
 	}
 }
 
-void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene)
+void ModelLoader::AnimNodeProcess(AnimatedModel * const animationModel, const aiScene * const scene)
 {
 	if (scene->mNumAnimations == 0)
 	{
@@ -370,10 +370,10 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene 
 			for (int k = 0; k < scene->mAnimations[i]->mChannels[j]->mNumPositionKeys; k++)
 			{
 				float time = scene->mAnimations[i]->mChannels[j]->mPositionKeys[k].mTime;
-				aiVector3D aiValue = scene->mAnimations[i]->mChannels[j]->mPositionKeys[k].mValue;
+				const aiVector3D aiValue = scene->mAnimations[i]->mChannels[j]->mPositionKeys[k].mValue;
 				glm::vec3 value(aiValue.x, aiValue.y, aiValue.z);
 
-				Vec3AnimKey * posKey = new Vec3AnimKey(time, value);
+				Vec3AnimKey * const posKey = new Vec3AnimKey(time, value);
 
 				positionKeys.push_back(posKey);
 			}
@@ -381,10 +381,10 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene 
 			for (int k = 0; k < scene->mAnimations[i]->mChannels[j]->mNumRotationKeys; k++)
 			{
 				float time = scene->mAnimations[i]->mChannels[j]->mRotationKeys[k].mTime;
-				aiQuaternion aiValue = scene->mAnimations[i]->mChannels[j]->mRotationKeys[k].mValue;
+				const aiQuaternion aiValue = scene->mAnimations[i]->mChannels[j]->mRotationKeys[k].mValue;
 				glm::quat value(aiValue.w, aiValue.x, aiValue.y, aiValue.z);
 
-				QuatAnimKey * rotKey = new QuatAnimKey(time, value);
+				QuatAnimKey * const rotKey = new QuatAnimKey(time, value);
 
 				rotationKeys.push_back(rotKey);
 			}
@@ -392,19 +392,19 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * animationModel, const aiScene 
 			for (int k = 0; k < scene->mAnimations[i]->mChannels[j]->mNumScalingKeys; k++)
 			{
 				float time = scene->mAnimations[i]->mChannels[j]->mScalingKeys[k].mTime;
-				aiVector3D aiValue = scene->mAnimations[i]->mChannels[j]->mScalingKeys[k].mValue;
+				const aiVector3D aiValue = scene->mAnimations[i]->mChannels[j]->mScalingKeys[k].mValue;
 				glm::vec3 value(aiValue.x, aiValue.y, aiValue.z);
 
-				Vec3AnimKey * scaKey = new Vec3AnimKey(time, value);
+				Vec3AnimKey * const scaKey = new Vec3AnimKey(time, value);
 
 				scaleKeys.push_back(scaKey);
 			}
 
-			AnimNode * animNode = new AnimNode(animNodeName, positionKeys, rotationKeys, scaleKeys);
+			AnimNode * const animNode = new AnimNode(animNodeName, positionKeys, rotationKeys, scaleKeys);
 			animNodes.push_back(animNode);
 		}
 
-		Animation * animation = new Animation(name, startTime, endTime, animNodes);
+		Animation * const animation = new Animation(name, startTime, endTime, animNodes);
 
 		animationModel->AddAnimation(animation);
 	}
@@ -445,15 +445,15 @@ void ModelLoader::TangentSpace(std::vector<int> & indices, std::vector<glm::vec3
 	}
 }
 
-void ModelLoader::CalculateTangent(glm::vec3 & vertex1, glm::vec3 & vertex2, glm::vec3 & vertex3, glm::vec2 & texture1, glm::vec2 & texture2, glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed)
+void ModelLoader::CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & vertex2, const glm::vec3 & vertex3, const glm::vec2 & texture1, const  glm::vec2 & texture2, const glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed)
 {
-	glm::vec3 edge1 = vertex2 - vertex1;
-	glm::vec3 edge2 = vertex3 - vertex1;
+	const glm::vec3 edge1 = vertex2 - vertex1;
+	const glm::vec3 edge2 = vertex3 - vertex1;
 
-	glm::vec2 deltaUV1 = texture2 - texture1;
-	glm::vec2 deltaUV2 = texture3 - texture1;
+	const glm::vec2 deltaUV1 = texture2 - texture1;
+	const glm::vec2 deltaUV2 = texture3 - texture1;
 
-	float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+	const float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
 
 	glm::vec3 newTangent;
 	newTangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
@@ -475,7 +475,7 @@ void ModelLoader::CalculateTangent(glm::vec3 & vertex1, glm::vec3 & vertex2, glm
 	numTimesUsed++;
 }
 
-aiMatrix4x4 ModelLoader::GLMMat4ToAi(glm::mat4 mat)
+aiMatrix4x4 ModelLoader::GLMMat4ToAi(const glm::mat4 mat)
 {
 	return aiMatrix4x4(mat[0][0], mat[0][1], mat[0][2], mat[0][3],
 		mat[1][0], mat[1][1], mat[1][2], mat[1][3],

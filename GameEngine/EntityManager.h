@@ -40,7 +40,7 @@ public:
 	
 	inline void AddToDeleteList(Entity * const entity)
 	{
-		std::vector<Entity *>::iterator it = find(ToDeleteList.begin(), ToDeleteList.end(), entity);
+		const std::vector<Entity *>::iterator it = find(ToDeleteList.begin(), ToDeleteList.end(), entity);
 
 		if (it == ToDeleteList.end())
 		{

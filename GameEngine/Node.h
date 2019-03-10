@@ -17,7 +17,7 @@ public:
 		name(pName), transformation(pTransformation), parent(nullptr) {}
 	~Node() {}
 
-	void SetParent(Node * pParent)
+	void SetParent(Node * const pParent)
 	{
 		parent = pParent;
 	}
@@ -37,7 +37,7 @@ public:
 		return transformation;
 	}
 
-	inline void SetTransform(glm::mat4 pTransform)
+	inline void SetTransform(const glm::mat4 pTransform)
 	{
 		transformation = pTransform;
 	}

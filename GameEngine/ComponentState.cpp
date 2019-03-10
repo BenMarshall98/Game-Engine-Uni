@@ -10,7 +10,7 @@ ComponentState::~ComponentState()
 
 std::string ComponentState::GetValue(std::string valueName, std::string defaultValue)
 {
-	std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
+	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
 	if (it != stateValues.end())
 	{
@@ -25,7 +25,7 @@ std::string ComponentState::GetValue(std::string valueName, std::string defaultV
 
 void ComponentState::SetValue(std::string valueName, std::string value)
 {
-	std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
+	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
 	if (it != stateValues.end())
 	{

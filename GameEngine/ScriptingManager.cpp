@@ -39,7 +39,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 {
 	if (luaVM == nullptr)
 	{
-		std::string message = "Failed to Initialize lua";
+		const std::string message = "Failed to Initialize lua";
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
@@ -151,9 +151,9 @@ ScriptingManager::~ScriptingManager()
 	lua_close(luaVM);
 }
 
-int ScriptingManager::lua_GetComponentDirection(lua_State * luaState)
+int ScriptingManager::lua_GetComponentDirection(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -161,7 +161,7 @@ int ScriptingManager::lua_GetComponentDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -169,16 +169,16 @@ int ScriptingManager::lua_GetComponentDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentDirection = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_DIRECTION);
-	ComponentDirection * directionComponent = dynamic_cast<ComponentDirection *>(componentDirection);
+	iComponent * const componentDirection = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_DIRECTION);
+	ComponentDirection * const directionComponent = dynamic_cast<ComponentDirection *>(componentDirection);
 
 	lua_pushlightuserdata(luaState, directionComponent);
 	return 1;
 }
 
-int ScriptingManager::lua_GetComponentPosition(lua_State * luaState)
+int ScriptingManager::lua_GetComponentPosition(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -186,7 +186,7 @@ int ScriptingManager::lua_GetComponentPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -194,16 +194,16 @@ int ScriptingManager::lua_GetComponentPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
-	ComponentPosition * positionComponent = dynamic_cast<ComponentPosition *>(componentPosition);
+	iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
+	ComponentPosition * const positionComponent = dynamic_cast<ComponentPosition *>(componentPosition);
 
 	lua_pushlightuserdata(luaState, positionComponent);
 	return 1;
 }
 
-int ScriptingManager::lua_GetComponentPhysics(lua_State * luaState)
+int ScriptingManager::lua_GetComponentPhysics(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -211,7 +211,7 @@ int ScriptingManager::lua_GetComponentPhysics(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -219,20 +219,16 @@ int ScriptingManager::lua_GetComponentPhysics(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_PHYSICS);
-	ComponentPhysics * physicsComponent = dynamic_cast<ComponentPhysics *>(componentPhysics);
+	iComponent * const componentPhysics = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_PHYSICS);
+	ComponentPhysics * const physicsComponent = dynamic_cast<ComponentPhysics *>(componentPhysics);
 
-	if (!physicsComponent)
-	{
-		int i = 0;
-	}
 	lua_pushlightuserdata(luaState, physicsComponent);
 	return 1;
 }
 
-int ScriptingManager::lua_GetComponentAudio(lua_State * luaState)
+int ScriptingManager::lua_GetComponentAudio(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -240,7 +236,7 @@ int ScriptingManager::lua_GetComponentAudio(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -248,16 +244,16 @@ int ScriptingManager::lua_GetComponentAudio(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentAudio = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_AUDIO);
-	ComponentAudio * audioComponent = dynamic_cast<ComponentAudio *>(componentAudio);
+	iComponent * const componentAudio = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_AUDIO);
+	ComponentAudio * const audioComponent = dynamic_cast<ComponentAudio *>(componentAudio);
 
 	lua_pushlightuserdata(luaState, audioComponent);
 	return 1;
 }
 
-int ScriptingManager::lua_GetComponentState(lua_State * luaState)
+int ScriptingManager::lua_GetComponentState(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -265,7 +261,7 @@ int ScriptingManager::lua_GetComponentState(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -273,23 +269,23 @@ int ScriptingManager::lua_GetComponentState(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	iComponent * componentAnimation = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_ANIMATION);
-	ComponentAnimation * animationComponent = dynamic_cast<ComponentAnimation *>(componentAnimation);
+	iComponent * const componentAnimation = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_ANIMATION);
+	ComponentAnimation * const animationComponent = dynamic_cast<ComponentAnimation *>(componentAnimation);
 
 	lua_pushlightuserdata(luaState, animationComponent);
 	return 1;
 }
 
-int ScriptingManager::lua_GetPosition(lua_State * luaState)
+int ScriptingManager::lua_GetPosition(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
 		lua_pushstring(luaState, "Wrong Number Of Args: GetPosition");
 		lua_error(luaState);
 	}
-	ComponentPosition * positionComponent = (ComponentPosition *)lua_touserdata(luaState, 1);
+	ComponentPosition * positionComponent = static_cast<ComponentPosition *>(lua_touserdata(luaState, 1));
 
 	if (!positionComponent)
 	{
@@ -297,7 +293,7 @@ int ScriptingManager::lua_GetPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	glm::vec3 vector = positionComponent->GetUpdatePosition();
+	const glm::vec3 vector = positionComponent->GetUpdatePosition();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -320,9 +316,9 @@ int ScriptingManager::lua_GetPosition(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetPosition(lua_State * luaState)
+int ScriptingManager::lua_SetPosition(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -330,7 +326,7 @@ int ScriptingManager::lua_SetPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPosition * positionComponent = (ComponentPosition *)lua_touserdata(luaState, 1);
+	ComponentPosition * positionComponent = static_cast<ComponentPosition *>(lua_touserdata(luaState, 1));
 
 	if (!positionComponent)
 	{
@@ -348,15 +344,15 @@ int ScriptingManager::lua_SetPosition(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 	positionComponent->SetUpdatePosition(position);
 
 	return 0;
 }
 
-int ScriptingManager::lua_GetVelocity(lua_State * luaState)
+int ScriptingManager::lua_GetVelocity(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -364,9 +360,7 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	void * pointer = lua_touserdata(luaState, 1);
-	
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)pointer;
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -374,7 +368,7 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	glm::vec3 vector = physicsComponent->GetUpdateVelocity();
+	const glm::vec3 vector = physicsComponent->GetUpdateVelocity();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -397,9 +391,9 @@ int ScriptingManager::lua_GetVelocity(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetVelocity(lua_State * luaState)
+int ScriptingManager::lua_SetVelocity(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -407,7 +401,7 @@ int ScriptingManager::lua_SetVelocity(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -425,15 +419,15 @@ int ScriptingManager::lua_SetVelocity(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 velocity(x, y, z);
+	const glm::vec3 velocity(x, y, z);
 	physicsComponent->SetUpdateVelocity(velocity);
 
 	return 0;
 }
 
-int ScriptingManager::lua_GetImpulse(lua_State * luaState)
+int ScriptingManager::lua_GetImpulse(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -441,7 +435,7 @@ int ScriptingManager::lua_GetImpulse(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -449,7 +443,7 @@ int ScriptingManager::lua_GetImpulse(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	glm::vec3 vector = physicsComponent->GetUpdateImpulse();
+	const glm::vec3 vector = physicsComponent->GetUpdateImpulse();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -472,9 +466,9 @@ int ScriptingManager::lua_GetImpulse(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetImpulse(lua_State * luaState)
+int ScriptingManager::lua_SetImpulse(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -482,7 +476,7 @@ int ScriptingManager::lua_SetImpulse(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -500,15 +494,15 @@ int ScriptingManager::lua_SetImpulse(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 impulse(x, y, z);
+	const glm::vec3 impulse(x, y, z);
 	physicsComponent->SetUpdateImpulse(impulse);
 
 	return 0;
 }
 
-int ScriptingManager::lua_GetRotation(lua_State * luaState)
+int ScriptingManager::lua_GetRotation(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -516,7 +510,7 @@ int ScriptingManager::lua_GetRotation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -524,7 +518,7 @@ int ScriptingManager::lua_GetRotation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	glm::vec3 vector = physicsComponent->GetUpdateRotation();
+	const glm::vec3 vector = physicsComponent->GetUpdateRotation();
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector.x);
@@ -547,9 +541,9 @@ int ScriptingManager::lua_GetRotation(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetRotation(lua_State * luaState)
+int ScriptingManager::lua_SetRotation(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -557,7 +551,7 @@ int ScriptingManager::lua_SetRotation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -575,15 +569,15 @@ int ScriptingManager::lua_SetRotation(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 rotation(x, y, z);
+	const glm::vec3 rotation(x, y, z);
 	physicsComponent->SetUpdateRotation(rotation);
 
 	return 0;
 }
 
-int ScriptingManager::lua_GetDirection(lua_State * luaState)
+int ScriptingManager::lua_GetDirection(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -591,7 +585,7 @@ int ScriptingManager::lua_GetDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentDirection * directionComponent = (ComponentDirection *)lua_touserdata(luaState, 1);
+	ComponentDirection * directionComponent = static_cast<ComponentDirection *>(lua_touserdata(luaState, 1));
 
 	if (!directionComponent)
 	{
@@ -599,7 +593,7 @@ int ScriptingManager::lua_GetDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	glm::quat quaterion = directionComponent->GetUpdateDirection();
+	const glm::quat quaterion = directionComponent->GetUpdateDirection();
 
 	lua_getglobal(luaState, "NewQuaternion");
 	lua_pushnumber(luaState, quaterion.x);
@@ -623,9 +617,9 @@ int ScriptingManager::lua_GetDirection(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetDirection(lua_State * luaState)
+int ScriptingManager::lua_SetDirection(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -633,7 +627,7 @@ int ScriptingManager::lua_SetDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentDirection * directionComponent = (ComponentDirection *)lua_touserdata(luaState, 1);
+	ComponentDirection * directionComponent = static_cast<ComponentDirection *>(lua_touserdata(luaState, 1));
 
 	if (!directionComponent)
 	{
@@ -658,9 +652,9 @@ int ScriptingManager::lua_SetDirection(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
+int ScriptingManager::lua_GetTouchingGround(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -668,7 +662,7 @@ int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 1);
+	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -676,16 +670,16 @@ int ScriptingManager::lua_GetTouchingGround(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	bool touchingGround = physicsComponent->GetUpdateTouchingGround();
+	const bool touchingGround = physicsComponent->GetUpdateTouchingGround();
 
 	lua_pushboolean(luaState, touchingGround);
 
 	return 1;
 }
 
-int ScriptingManager::lua_CreateTranslationMatrix(lua_State * luaState)
+int ScriptingManager::lua_CreateTranslationMatrix(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -731,9 +725,9 @@ int ScriptingManager::lua_CreateTranslationMatrix(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_CreateScaleMatrix(lua_State * luaState)
+int ScriptingManager::lua_CreateScaleMatrix(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -779,9 +773,9 @@ int ScriptingManager::lua_CreateScaleMatrix(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_CreateRotationMatrix(lua_State * luaState)
+int ScriptingManager::lua_CreateRotationMatrix(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -829,9 +823,9 @@ int ScriptingManager::lua_CreateRotationMatrix(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_MultiplyMatrices(lua_State * luaState)
+int ScriptingManager::lua_MultiplyMatrices(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -943,9 +937,9 @@ int ScriptingManager::lua_MultiplyMatrices(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
+int ScriptingManager::lua_MultiplyMatrixVector(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -989,7 +983,7 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 
 	lua_pop(luaState, 16);
 
-	glm::mat4 matrix = glm::mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
+	const glm::mat4 matrix = glm::mat4(x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4);
 
 	lua_getfield(luaState, 2, "x");
 	lua_getfield(luaState, 2, "y");
@@ -1001,9 +995,9 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec4 vector1 = glm::vec4(x, y, z, 1);
+	const glm::vec4 vector1 = glm::vec4(x, y, z, 1);
 
-	glm::vec3 vector2 = vector1 * matrix;
+	const glm::vec3 vector2 = vector1 * matrix;
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, vector2.x);
@@ -1026,9 +1020,9 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_ChangePlayback(lua_State * luaState)
+int ScriptingManager::lua_ChangePlayback(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1036,7 +1030,7 @@ int ScriptingManager::lua_ChangePlayback(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentAudio * audioComponent = (ComponentAudio *)lua_touserdata(luaState, 1);
+	ComponentAudio * audioComponent = static_cast<ComponentAudio *>(lua_touserdata(luaState, 1));
 
 	if (!audioComponent)
 	{
@@ -1066,9 +1060,9 @@ int ScriptingManager::lua_ChangePlayback(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_PlayAudio(lua_State * luaState)
+int ScriptingManager::lua_PlayAudio(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1083,9 +1077,9 @@ int ScriptingManager::lua_PlayAudio(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_PlayAudioAtLocation(lua_State * luaState)
+int ScriptingManager::lua_PlayAudioAtLocation(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1105,16 +1099,16 @@ int ScriptingManager::lua_PlayAudioAtLocation(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 	
 	AudioManager::Instance()->PlayAudioAtLocation(sound, position);
 
 	return 0;
 }
 
-int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * luaState)
+int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1124,7 +1118,7 @@ int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * luaState)
 
 	std::string sound = lua_tostring(luaState, 1);
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 2);
+	Entity * entity = static_cast<Entity *>(lua_touserdata(luaState, 2));
 
 	if (!entity)
 	{
@@ -1137,9 +1131,9 @@ int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
+int ScriptingManager::lua_DeleteEntity(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1147,7 +1141,7 @@ int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -1160,9 +1154,9 @@ int ScriptingManager::lua_DeleteEntity(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_GetAIValue(lua_State * luaState)
+int ScriptingManager::lua_GetAIValue(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 4)
 	{
@@ -1170,7 +1164,7 @@ int ScriptingManager::lua_GetAIValue(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1220,9 +1214,9 @@ int ScriptingManager::lua_GetAIValue(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetAIValue(lua_State * luaState)
+int ScriptingManager::lua_SetAIValue(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 3)
 	{
@@ -1230,7 +1224,7 @@ int ScriptingManager::lua_SetAIValue(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1245,7 +1239,7 @@ int ScriptingManager::lua_SetAIValue(lua_State * luaState)
 
 	if (lua_isboolean(luaState, 3))
 	{
-		bool preValue = lua_toboolean(luaState, 3);
+		const bool preValue = lua_toboolean(luaState, 3);
 		oString << preValue;
 		value = oString.str();
 	}
@@ -1271,9 +1265,9 @@ int ScriptingManager::lua_SetAIValue(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_GetValue(lua_State * luaState)
+int ScriptingManager::lua_GetValue(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 4)
 	{
@@ -1281,7 +1275,7 @@ int ScriptingManager::lua_GetValue(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentState * stateComponent = (ComponentState *)lua_touserdata(luaState, 1);
+	ComponentState * stateComponent = static_cast<ComponentState *>(lua_touserdata(luaState, 1));
 
 	if (!stateComponent)
 	{
@@ -1331,9 +1325,9 @@ int ScriptingManager::lua_GetValue(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_SetValue(lua_State * luaState)
+int ScriptingManager::lua_SetValue(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 3)
 	{
@@ -1341,7 +1335,7 @@ int ScriptingManager::lua_SetValue(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	ComponentState * stateComponent = (ComponentState *)lua_touserdata(luaState, 1);
+	ComponentState * const stateComponent = static_cast<ComponentState *>(lua_touserdata(luaState, 1));
 
 	if (!stateComponent)
 	{
@@ -1356,7 +1350,7 @@ int ScriptingManager::lua_SetValue(lua_State * luaState)
 
 	if (lua_isboolean(luaState, 3))
 	{
-		bool preValue = lua_toboolean(luaState, 3);
+		const bool preValue = lua_toboolean(luaState, 3);
 		oString << preValue;
 		value = oString.str();
 	}
@@ -1382,9 +1376,9 @@ int ScriptingManager::lua_SetValue(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CanSeePlayer(lua_State * luaState)
+int ScriptingManager::lua_CanSeePlayer(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1402,7 +1396,7 @@ int ScriptingManager::lua_CanSeePlayer(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 guardPosition(x, y, z);
+	const glm::vec3 guardPosition(x, y, z);
 
 	lua_getfield(luaState, 2, "x");
 	lua_getfield(luaState, 2, "y");
@@ -1414,18 +1408,18 @@ int ScriptingManager::lua_CanSeePlayer(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 playerPosition(x, y, z);
+	const glm::vec3 playerPosition(x, y, z);
 
-	bool clear = PhysicsManager::Instance()->ClearBetweenPoints(guardPosition, playerPosition);
+	const bool clear = PhysicsManager::Instance()->ClearBetweenPoints(guardPosition, playerPosition);
 
 	lua_pushboolean(luaState, clear);
 
 	return 1;
 }
 
-int ScriptingManager::lua_MoveOffPath(lua_State * luaState)
+int ScriptingManager::lua_MoveOffPath(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1433,7 +1427,7 @@ int ScriptingManager::lua_MoveOffPath(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * const stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1446,9 +1440,9 @@ int ScriptingManager::lua_MoveOffPath(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_OnPath(lua_State * luaState)
+int ScriptingManager::lua_OnPath(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1456,7 +1450,7 @@ int ScriptingManager::lua_OnPath(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1474,18 +1468,18 @@ int ScriptingManager::lua_OnPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 
-	bool onPath = stateMachine->OnPath(position);
+	const bool onPath = stateMachine->OnPath(position);
 
 	lua_pushboolean(luaState, onPath);
 
 	return 1;
 }
 
-int ScriptingManager::lua_FindAIPath(lua_State * luaState)
+int ScriptingManager::lua_FindAIPath(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 5 && numberOfArgs != 6)
 	{
@@ -1493,7 +1487,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * const stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1511,7 +1505,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 
 	lua_getfield(luaState, 3, "x");
 	lua_getfield(luaState, 3, "y");
@@ -1525,9 +1519,9 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 
 	lua_pop(luaState, 4);
 
-	glm::quat direction(w, x, y, z);
+	const glm::quat direction(w, x, y, z);
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 4);
+	ComponentPhysics * const physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 4));
 
 	if (!physicsComponent)
 	{
@@ -1554,7 +1548,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 
 		lua_pop(luaState, 3);
 
-		glm::vec3 nearestPoint(x, y, z);
+		const glm::vec3 nearestPoint(x, y, z);
 
 		float deltaTime = lua_tonumber(luaState, 6);
 
@@ -1564,9 +1558,9 @@ int ScriptingManager::lua_FindAIPath(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_FindPath(lua_State * luaState)
+int ScriptingManager::lua_FindPath(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 5)
 	{
@@ -1574,7 +1568,7 @@ int ScriptingManager::lua_FindPath(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * const stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1592,7 +1586,7 @@ int ScriptingManager::lua_FindPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 
 	lua_getfield(luaState, 3, "x");
 	lua_getfield(luaState, 3, "y");
@@ -1606,9 +1600,9 @@ int ScriptingManager::lua_FindPath(lua_State * luaState)
 
 	lua_pop(luaState, 4);
 
-	glm::quat direction(w, x, y, z);
+	const glm::quat direction(w, x, y, z);
 
-	ComponentPhysics * physicsComponent = (ComponentPhysics *)lua_touserdata(luaState, 4);
+	ComponentPhysics * const physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 4));
 
 	if (!physicsComponent)
 	{
@@ -1623,9 +1617,9 @@ int ScriptingManager::lua_FindPath(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
+int ScriptingManager::lua_GetNearestPath(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1633,7 +1627,7 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	AIStateMachine * stateMachine = (AIStateMachine *)lua_touserdata(luaState, 1);
+	AIStateMachine * const stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 1));
 
 	if (!stateMachine)
 	{
@@ -1651,9 +1645,9 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 
-	glm::vec3 nearestPath = stateMachine->GetNearestPath(position);
+	const glm::vec3 nearestPath = stateMachine->GetNearestPath(position);
 
 	lua_getglobal(luaState, "NewVector3");
 	lua_pushnumber(luaState, nearestPath.x);
@@ -1677,9 +1671,9 @@ int ScriptingManager::lua_GetNearestPath(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_NewGameScene(lua_State * luaState)
+int ScriptingManager::lua_NewGameScene(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1694,9 +1688,9 @@ int ScriptingManager::lua_NewGameScene(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_NewMenuScene(lua_State * luaState)
+int ScriptingManager::lua_NewMenuScene(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1711,9 +1705,9 @@ int ScriptingManager::lua_NewMenuScene(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_SwapToMenuScene(lua_State * luaState)
+int ScriptingManager::lua_SwapToMenuScene(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1728,9 +1722,9 @@ int ScriptingManager::lua_SwapToMenuScene(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_SwapToGameScene(lua_State * luaState)
+int ScriptingManager::lua_SwapToGameScene(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1745,9 +1739,9 @@ int ScriptingManager::lua_SwapToGameScene(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CloseScene(lua_State * luaState)
+int ScriptingManager::lua_CloseScene(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs == 0)
 	{
@@ -1767,9 +1761,9 @@ int ScriptingManager::lua_CloseScene(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CloseWindow(lua_State * luaState)
+int ScriptingManager::lua_CloseWindow(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 0)
 	{
@@ -1782,19 +1776,19 @@ int ScriptingManager::lua_CloseWindow(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CreateEntity(lua_State * luaState)
+int ScriptingManager::lua_CreateEntity(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs == 1)
 	{
 		std::string entityName = lua_tostring(luaState, 1);
-		Entity * entity = EntityManager::Instance()->CreateEntity(entityName);
+		Entity * const entity = EntityManager::Instance()->CreateEntity(entityName);
 		lua_pushlightuserdata(luaState, entity);
 	}
 	else if (numberOfArgs == 0)
 	{
-		Entity * entity = EntityManager::Instance()->CreateEntity();
+		Entity * const entity = EntityManager::Instance()->CreateEntity();
 		lua_pushlightuserdata(luaState, entity);
 	}
 	else
@@ -1806,9 +1800,9 @@ int ScriptingManager::lua_CreateEntity(lua_State * luaState)
 	return 1;
 }
 
-int ScriptingManager::lua_AddComponentAnimation(lua_State * luaState)
+int ScriptingManager::lua_AddComponentAnimation(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -1816,7 +1810,7 @@ int ScriptingManager::lua_AddComponentAnimation(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -1831,9 +1825,9 @@ int ScriptingManager::lua_AddComponentAnimation(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CreateAIStateMachine(lua_State * luaState)
+int ScriptingManager::lua_CreateAIStateMachine(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1843,16 +1837,16 @@ int ScriptingManager::lua_CreateAIStateMachine(lua_State * luaState)
 
 	std::string startFunction = lua_tostring(luaState, 1);
 
-	AIStateMachine * stateMachine = new AIStateMachine(startFunction);
+	AIStateMachine * const stateMachine = new AIStateMachine(startFunction);
 
 	lua_pushlightuserdata(luaState, stateMachine);
 
 	return 1;
 }
 
-int ScriptingManager::lua_CreatePathFinder(lua_State * luaState)
+int ScriptingManager::lua_CreatePathFinder(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 4)
 	{
@@ -1868,16 +1862,16 @@ int ScriptingManager::lua_CreatePathFinder(lua_State * luaState)
 
 	glm::vec2 topLeftCoord(x, y);
 
-	PathFinding * pathFinder = new PathFinding(target, mapFile, topLeftCoord);
+	PathFinding * const pathFinder = new PathFinding(target, mapFile, topLeftCoord);
 
 	lua_pushlightuserdata(luaState, pathFinder);
 
 	return 1;
 }
 
-int ScriptingManager::lua_CreatePathVector(lua_State * luaState)
+int ScriptingManager::lua_CreatePathVector(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 0)
 	{
@@ -1885,16 +1879,16 @@ int ScriptingManager::lua_CreatePathVector(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	std::vector<PathNode *> * pathNodes = new std::vector<PathNode *>();
+	std::vector<PathNode *> * const pathNodes = new std::vector<PathNode *>();
 
 	lua_pushlightuserdata(luaState, pathNodes);
 
 	return 1;
 }
 
-int ScriptingManager::lua_AddToPathVector(lua_State * luaState)
+int ScriptingManager::lua_AddToPathVector(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 3)
 	{
@@ -1902,7 +1896,7 @@ int ScriptingManager::lua_AddToPathVector(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	std::vector<PathNode *> * pathNodes = (std::vector<PathNode *> *)lua_touserdata(luaState, 1);
+	std::vector<PathNode *> * const pathNodes = static_cast<std::vector<PathNode *> *>(lua_touserdata(luaState, 1));
 
 	lua_getfield(luaState, 2, "x");
 	lua_getfield(luaState, 2, "y");
@@ -1914,11 +1908,11 @@ int ScriptingManager::lua_AddToPathVector(lua_State * luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 position(x, y, z);
+	const glm::vec3 position(x, y, z);
 
 	double radius = lua_tonumber(luaState, 3);
 
-	PathNode * pathNode = new PathNode();
+	PathNode * const pathNode = new PathNode();
 	pathNode->position;
 	pathNode->radius;
 
@@ -1927,9 +1921,9 @@ int ScriptingManager::lua_AddToPathVector(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CreatePathFollower(lua_State * luaState)
+int ScriptingManager::lua_CreatePathFollower(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -1937,18 +1931,18 @@ int ScriptingManager::lua_CreatePathFollower(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	std::vector<PathNode *> * pathNodes = (std::vector<PathNode *> *)lua_touserdata(luaState, 1);
+	std::vector<PathNode *> * pathNodes = static_cast<std::vector<PathNode *> *>(lua_touserdata(luaState, 1));
 
-	PathFollowing * pathFollower = new PathFollowing(pathNodes);
+	PathFollowing * const pathFollower = new PathFollowing(pathNodes);
 
 	lua_pushlightuserdata(luaState, pathFollower);
 
 	return 1;
 }
 
-int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState)
+int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 5)
 	{
@@ -1956,7 +1950,7 @@ int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -1968,7 +1962,7 @@ int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState
 
 	if (!lua_isnil(luaState, 2))
 	{
-		pathFollower = (PathFollowing *)lua_touserdata(luaState, 2);
+		pathFollower = static_cast<PathFollowing *>(lua_touserdata(luaState, 2));
 
 		if (!pathFollower)
 		{
@@ -1981,7 +1975,7 @@ int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState
 
 	if (!lua_isnil(luaState, 3))
 	{
-		pathFinder = (PathFinding *)lua_touserdata(luaState, 3);
+		pathFinder = static_cast<PathFinding *>(lua_touserdata(luaState, 3));
 
 		if (!pathFinder)
 		{
@@ -1994,7 +1988,7 @@ int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState
 
 	if (!lua_isnil(luaState, 4))
 	{
-		stateMachine = (AIStateMachine *)lua_touserdata(luaState, 4);
+		stateMachine = static_cast<AIStateMachine *>(lua_touserdata(luaState, 4));
 
 		if (!stateMachine)
 		{
@@ -2010,9 +2004,9 @@ int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * luaState
 	return 0;
 }
 
-int ScriptingManager::lua_AddComponentAudio(lua_State * luaState)
+int ScriptingManager::lua_AddComponentAudio(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 3)
 	{
@@ -2020,7 +2014,7 @@ int ScriptingManager::lua_AddComponentAudio(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -2056,9 +2050,9 @@ int ScriptingManager::lua_AddComponentAudio(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_AddComponentDirection(lua_State * luaState)
+int ScriptingManager::lua_AddComponentDirection(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 3)
 	{
@@ -2066,7 +2060,7 @@ int ScriptingManager::lua_AddComponentDirection(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = static_cast<Entity *>(lua_touserdata(luaState, 1));
 
 	if (!entity)
 	{
@@ -2092,9 +2086,9 @@ int ScriptingManager::lua_AddComponentDirection(lua_State * luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_CreateInputFunction(lua_State * luaState)
+int ScriptingManager::lua_CreateInputFunction(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 1)
 	{
@@ -2104,16 +2098,16 @@ int ScriptingManager::lua_CreateInputFunction(lua_State * luaState)
 
 	std::string functionName = lua_tostring(luaState, 1);
 
-	InputFunction * inputFunction = new InputFunction(functionName);
+	InputFunction * const inputFunction = new InputFunction(functionName);
 
 	lua_pushlightuserdata(luaState, inputFunction);
 
 	return 1;
 }
 
-int ScriptingManager::lua_AddInputToInputFunction(lua_State * luaState)
+int ScriptingManager::lua_AddInputToInputFunction(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -2121,7 +2115,7 @@ int ScriptingManager::lua_AddInputToInputFunction(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	InputFunction * inputFunction = (InputFunction *)lua_touserdata(luaState, 1);
+	InputFunction * const inputFunction = static_cast<InputFunction *>(lua_touserdata(luaState, 1));
 
 	if (!inputFunction)
 	{
@@ -2131,7 +2125,7 @@ int ScriptingManager::lua_AddInputToInputFunction(lua_State * luaState)
 
 	std::string inputName = lua_tostring(luaState, 2);
 
-	GameInput input = InputConverter::StringToEnum(inputName);
+	const GameInput input = InputConverter::StringToEnum(inputName);
 
 	inputFunction->AddInput(input);
 
@@ -2140,7 +2134,7 @@ int ScriptingManager::lua_AddInputToInputFunction(lua_State * luaState)
 
 int ScriptingManager::lua_CreateInputVector(lua_State * luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 0)
 	{
@@ -2148,7 +2142,7 @@ int ScriptingManager::lua_CreateInputVector(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	std::vector<InputFunction *> * gameInputs = new std::vector<InputFunction *>();
+	std::vector<InputFunction *> * const gameInputs = new std::vector<InputFunction *>();
 
 	lua_pushlightuserdata(luaState, gameInputs);
 

@@ -6,9 +6,9 @@ AnimationSystem::AnimationSystem() : entityManager(EntityManager::Instance())
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
-void AnimationSystem::RemoveEntity(Entity * pEntity)
+void AnimationSystem::RemoveEntity(Entity * const pEntity)
 {
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -16,12 +16,12 @@ void AnimationSystem::RemoveEntity(Entity * pEntity)
 	}
 }
 
-void AnimationSystem::AddEntity(Entity * pEntity)
+void AnimationSystem::AddEntity(Entity * const pEntity)
 {
-	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
 	bool containsEntity = false;
 
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -42,15 +42,15 @@ void AnimationSystem::Action(void)
 {
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_ANIMATION);
+		iComponent * const componentAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_ANIMATION);
 
-		std::string function = dynamic_cast<ComponentAnimation *>(componentAnimation)->GetFunction();
+		const std::string function = dynamic_cast<ComponentAnimation *>(componentAnimation)->GetFunction();
 
 		Animation(function, EntityList[i]);
 	}
 }
 
-void AnimationSystem::Animation(std::string function, Entity * entity)
+void AnimationSystem::Animation(const std::string function, Entity * const entity)
 {
 	//TODO: sort out the function
 }

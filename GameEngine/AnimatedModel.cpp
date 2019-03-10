@@ -4,7 +4,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtx/transform.hpp"
 
-void AnimatedModel::Render(Shader * shader)
+void AnimatedModel::Render(Shader * const shader)
 {
 	shader->UseShader();
 
@@ -29,7 +29,7 @@ void AnimatedModel::Render(Shader * shader)
 	}
 }
 
-Bone * AnimatedModel::FindBone(std::string name)
+Bone * AnimatedModel::FindBone(const std::string name)
 {
 	for (int i = 0; i < bones.size(); i++)
 	{
@@ -59,7 +59,7 @@ void AnimatedModel::UpdateBoneMatsVector()
 		}
 		else
 		{
-			glm::mat4 transform = bones.at(i)->GetNode()->GetTransform();
+			const glm::mat4 transform = bones.at(i)->GetNode()->GetTransform();
 			glm::mat4 tmp = glm::mat4(1.0);
 			tmp *= bones.at(i)->GetOffsetMatrix();
 			tmp *= transform;
@@ -75,7 +75,7 @@ void AnimatedModel::Update()
 {
 	UpdateBoneMatsVector();
 
-	Animation * animation = GetFirstAnimation();
+	Animation * const animation = GetFirstAnimation();
 
 	if (time < animation->GetStartTime())
 	{

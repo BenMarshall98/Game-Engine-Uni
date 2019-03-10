@@ -26,38 +26,38 @@ public:
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			std::string bone = "Bones[" + std::to_string(i) + ']';
+			const std::string bone = "Bones[" + std::to_string(i) + ']';
 			bonesLoc.push_back(bone);
 		}
 	}
 	~AnimatedModel();
 
-	inline void AddMesh(Mesh * mesh)
+	inline void AddMesh(Mesh * const mesh)
 	{
 		meshes.push_back(mesh);
 	}
 
-	inline void SetBones(std::vector<Bone *> pBones)
+	inline void SetBones(const std::vector<Bone *> pBones)
 	{
 		bones = pBones;
 	}
 
-	inline void SetGlobalInverse(glm::mat4 pGlobalInverse)
+	inline void SetGlobalInverse(const glm::mat4 pGlobalInverse)
 	{
 		globalInverse = pGlobalInverse;
 	}
 
-	inline void SetNodes(std::vector<Node *> pNodes)
+	inline void SetNodes(const std::vector<Node *> pNodes)
 	{
 		nodes = pNodes;
 	}
 
-	inline Mesh * GetMesh(int loc)
+	inline Mesh * GetMesh(const int loc)
 	{
 		return meshes.at(loc);
 	}
 
-	inline void AddAnimation(Animation * animation)
+	inline void AddAnimation(Animation * const animation)
 	{
 		animations.push_back(animation);
 	}

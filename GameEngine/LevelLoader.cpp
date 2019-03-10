@@ -728,7 +728,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 
 std::vector<InputFunction *> * LevelLoader::LoadInputsJSON(const rapidjson::Value& Inputs)
 {
-	std::vector<InputFunction *> * playerInputs = new std::vector<InputFunction *>();
+	std::vector<InputFunction *> * const playerInputs = new std::vector<InputFunction *>();
 
 	rapidjson::Value::ConstValueIterator it;
 
@@ -736,7 +736,7 @@ std::vector<InputFunction *> * LevelLoader::LoadInputsJSON(const rapidjson::Valu
 	{
 		const std::string function = (*it)["Function"].GetString();
 
-		InputFunction * inputFunction = new InputFunction(function);
+		InputFunction * const inputFunction = new InputFunction(function);
 
 		const rapidjson::Value& keys = (*it)["Input"];
 
@@ -757,7 +757,7 @@ std::vector<InputFunction *> * LevelLoader::LoadInputsJSON(const rapidjson::Valu
 
 void LevelLoader::LoadSystems(const rapidjson::Value& Systems)
 {
-	SystemManager * systemManager = SystemManager::Instance();
+	SystemManager * const systemManager = SystemManager::Instance();
 
 	if (Systems.HasMember("Render"))
 	{

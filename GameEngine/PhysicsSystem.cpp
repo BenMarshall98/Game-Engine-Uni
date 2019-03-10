@@ -13,9 +13,9 @@ PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance()), ent
 	newEntities = EntityList;
 }
 
-void PhysicsSystem::RemoveEntity(Entity * pEntity)
+void PhysicsSystem::RemoveEntity(Entity * const pEntity)
 {
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -23,12 +23,12 @@ void PhysicsSystem::RemoveEntity(Entity * pEntity)
 	}
 }
 
-void PhysicsSystem::AddEntity(Entity * pEntity)
+void PhysicsSystem::AddEntity(Entity * const pEntity)
 {
-	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
 	bool containsEntity = false;
 
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -50,13 +50,13 @@ void PhysicsSystem::Action(void)
 {
 	for (int i = 0; i < newEntities.size(); i++)
 	{
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_POSITION);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_DIRECTION);
-		iComponent * componentPhysics = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_PHYSICS);
+		iComponent * const componentPosition = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_POSITION);
+		iComponent * const componentDirection = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_DIRECTION);
+		iComponent * const componentPhysics = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_PHYSICS);
 
 		glm::vec3 position = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
 		glm::quat direction = ((ComponentDirection *)componentDirection)->GetUpdateDirection();
-		CollisionShape* shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
+		CollisionShape* const shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
 		float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
 		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
 		glm::vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();

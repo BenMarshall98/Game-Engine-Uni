@@ -27,7 +27,7 @@ Entity * EntityManager::GetEntityByName(const std::string & entityName)
 	return nullptr;
 }
 
-void EntityManager::FinishEntity(Entity * entity)
+void EntityManager::FinishEntity(Entity * const entity)
 {
 	SystemManager::Instance()->AddEntityToSystems(entity);
 }
@@ -142,7 +142,7 @@ std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const Componen
 	return entities;
 }
 
-bool EntityManager::CheckEntityHasComponents(Entity * entity, const ComponentType * componentName, int size)
+bool EntityManager::CheckEntityHasComponents(Entity * const entity, const ComponentType * const componentName, const int size)
 {
 	bool containsComponents = true;
 

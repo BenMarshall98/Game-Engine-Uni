@@ -9,7 +9,7 @@ class BulletRigidBody : public RigidBody
 private:
 	btRigidBody * rigidBody;
 public:
-	BulletRigidBody(btRigidBody * pRigidBody) : rigidBody(pRigidBody) {};
+	BulletRigidBody(btRigidBody * const pRigidBody) : rigidBody(pRigidBody) {};
 	~BulletRigidBody();
 
 	glm::vec3 GetPosition() override;

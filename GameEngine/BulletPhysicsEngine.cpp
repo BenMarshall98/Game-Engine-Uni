@@ -33,8 +33,8 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 
 	for (int i = dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
 	{
-		btCollisionObject * obj = dynamicsWorld->getCollisionObjectArray()[i];
-		btRigidBody * body = btRigidBody::upcast(obj);
+		btCollisionObject * const obj = dynamicsWorld->getCollisionObjectArray()[i];
+		btRigidBody * const body = btRigidBody::upcast(obj);
 
 		if (body && body->getMotionState())
 		{
@@ -60,7 +60,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 	delete collisionConfiguration;
 }
 
-RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit)
+RigidBody* BulletPhysicsEngine::AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, const bool collisionResponse, const glm::vec3 & angularLimit)
 {
 	btCollisionShape* collisionShape;
 
@@ -68,14 +68,14 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, g
 	{
 		case Shape::CUBOID:
 			{
-				CollisionCuboid * cuboid = dynamic_cast<CollisionCuboid *>(shape);
+				CollisionCuboid * const cuboid = dynamic_cast<CollisionCuboid *>(shape);
 				glm::vec3 size = cuboid->GetSize();
 				collisionShape = new btBoxShape(btVector3(size.x, size.y, size.z));
 			}
 			break;
 		case Shape::SPHERE:
 			{
-				CollisionSphere * sphere = dynamic_cast<CollisionSphere *>(shape);
+				CollisionSphere * const sphere = dynamic_cast<CollisionSphere *>(shape);
 				float radius = sphere->GetRadius();
 				collisionShape = new btSphereShape(radius);
 			}
@@ -87,7 +87,7 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, g
 
 	collisionShapes.push_back(collisionShape);
 
-	btDefaultMotionState* motionState = new btDefaultMotionState(btTransform(
+	btDefaultMotionState * const motionState = new btDefaultMotionState(btTransform(
 		btQuaternion(direction.x, direction.y, direction.z, direction.w),
 		btVector3(position.x, position.y, position.z)
 	));
@@ -115,68 +115,61 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(float mass, glm::vec3 & position, g
 		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 	}
 
-	btVector3 angLimit = btVector3(angularLimit.x, angularLimit.y, angularLimit.z);
+	const btVector3 angLimit = btVector3(angularLimit.x, angularLimit.y, angularLimit.z);
 
 	rigidBody->setAngularFactor(angLimit);
 
 	dynamicsWorld->addRigidBody(rigidBody);
 
-	int numOfObjects = dynamicsWorld->getNumCollisionObjects();
-
-	if (numOfObjects > 0)
-	{
-		int i = 0;
-	}
-
-	RigidBody * rBody = new BulletRigidBody(rigidBody);
+	RigidBody * const rBody = new BulletRigidBody(rigidBody);
 
 	return rBody;
 }
 
-void BulletPhysicsEngine::Update(float pDeltaTime)
+void BulletPhysicsEngine::Update(const float pDeltaTime)
 {
 	dynamicsWorld->stepSimulation(pDeltaTime);
 }
 
-bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+bool BulletPhysicsEngine::collisionCallback(const btManifoldPoint& cp, const btCollisionObjectWrapper * const obj1, const int id1, const int index1, const btCollisionObjectWrapper * const obj2, const int id2, const int index2)
 {
-	Entity * entity1 = (Entity *)obj1->getCollisionObject()->getUserPointer();
-	Entity * entity2 = (Entity *)obj2->getCollisionObject()->getUserPointer();
+	Entity * const entity1 = (Entity *)obj1->getCollisionObject()->getUserPointer();
+	Entity * const entity2 = (Entity *)obj2->getCollisionObject()->getUserPointer();
 
-	iComponent * physicsComponent1 = EntityManager::Instance()->GetComponentOfEntity(entity1, ComponentType::COMPONENT_PHYSICS);
-	iComponent * physicsComponent2 = EntityManager::Instance()->GetComponentOfEntity(entity2, ComponentType::COMPONENT_PHYSICS);
+	iComponent * const physicsComponent1 = EntityManager::Instance()->GetComponentOfEntity(entity1, ComponentType::COMPONENT_PHYSICS);
+	iComponent * const physicsComponent2 = EntityManager::Instance()->GetComponentOfEntity(entity2, ComponentType::COMPONENT_PHYSICS);
 
-	ComponentPhysics * componentPhysics1 = (ComponentPhysics *)physicsComponent1;
-	ComponentPhysics * componentPhysics2 = (ComponentPhysics *)physicsComponent2;
+	ComponentPhysics * const componentPhysics1 = (ComponentPhysics *)physicsComponent1;
+	ComponentPhysics * const componentPhysics2 = (ComponentPhysics *)physicsComponent2;
 
 	componentPhysics1->AddCollision(entity2, componentPhysics2->GetUpdateEntityType());
 	componentPhysics2->AddCollision(entity1, componentPhysics1->GetUpdateEntityType());
 
 	if (componentPhysics1->GetUpdateMass() != 0 && componentPhysics2->GetUpdateEntityType() == EntityType::WALL)
 	{
-		bool touchingGround = TouchingGround(obj1->getCollisionObject(), obj2->getCollisionObject());
+		const bool touchingGround = TouchingGround(obj1->getCollisionObject(), obj2->getCollisionObject());
 		componentPhysics1->SetUpdateTouchingGround(touchingGround);
 	}
 	if (componentPhysics2->GetUpdateMass() != 0 && componentPhysics1->GetUpdateEntityType() == EntityType::WALL)
 	{
-		bool touchingGround = TouchingGround(obj2->getCollisionObject(), obj1->getCollisionObject());
+		const bool touchingGround = TouchingGround(obj2->getCollisionObject(), obj1->getCollisionObject());
 		componentPhysics2->SetUpdateTouchingGround(touchingGround);
 	}
 	return false;
 }
 
-bool BulletPhysicsEngine::TouchingGround(const void * pRigidBody1, const void * pRigidBody2)
+bool BulletPhysicsEngine::TouchingGround(const void * const pRigidBody1, const void * const pRigidBody2)
 {
-	btRigidBody * rigidBody = (btRigidBody *)pRigidBody1;
+	btRigidBody * const rigidBody = (btRigidBody *)pRigidBody1;
 
-	btCollisionShape * collisionShape = rigidBody->getCollisionShape();
+	btCollisionShape * const collisionShape = rigidBody->getCollisionShape();
 
-	btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
+	const btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
 	btVector3 offset;
 	btScalar radius;
 	collisionShape->getBoundingSphere(offset, radius);
 
-	btVector3 rayEnd = btVector3(rayStart.x(), rayStart.y() - radius, rayStart.z());
+	const btVector3 rayEnd = btVector3(rayStart.x(), rayStart.y() - radius, rayStart.z());
 
 	btCollisionWorld::AllHitsRayResultCallback res(rayStart, rayEnd);
 
@@ -198,9 +191,9 @@ bool BulletPhysicsEngine::TouchingGround(const void * pRigidBody1, const void * 
 	return false;
 }
 
-void BulletPhysicsEngine::RemoveRigidBody(RigidBody * pRigidBody)
+void BulletPhysicsEngine::RemoveRigidBody(RigidBody * const pRigidBody)
 {
-	btRigidBody * rigidBody = (btRigidBody *)pRigidBody->GetRigidBody();
+	btRigidBody * const rigidBody = (btRigidBody *)pRigidBody->GetRigidBody();
 
 	if (rigidBody && rigidBody->getMotionState())
 	{
@@ -210,10 +203,10 @@ void BulletPhysicsEngine::RemoveRigidBody(RigidBody * pRigidBody)
 	dynamicsWorld->removeRigidBody(rigidBody);
 }
 
-bool BulletPhysicsEngine::ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2)
+bool BulletPhysicsEngine::ClearBetweenPoints(const glm::vec3 position1, const glm::vec3 position2)
 {
-	btVector3 rayStart = btVector3(position1.x, position1.y, position1.z);
-	btVector3 rayEnd = btVector3(position2.x, position2.y, position2.z);
+	const btVector3 rayStart = btVector3(position1.x, position1.y, position1.z);
+	const btVector3 rayEnd = btVector3(position2.x, position2.y, position2.z);
 
 	btCollisionWorld::AllHitsRayResultCallback res(rayStart, rayEnd);
 
@@ -225,7 +218,7 @@ bool BulletPhysicsEngine::ClearBetweenPoints(glm::vec3 position1, glm::vec3 posi
 
 		for (int i = 0; i < collisionObjects.size(); i++)
 		{
-			btVector3 collisionPosition = collisionObjects.at(i)->getWorldTransform().getOrigin();
+			const btVector3 collisionPosition = collisionObjects.at(i)->getWorldTransform().getOrigin();
 			if (collisionPosition.distance(rayStart) > 0.05 &&
 				collisionPosition.distance(rayEnd) > 0.05)
 			{

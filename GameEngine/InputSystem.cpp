@@ -10,9 +10,9 @@ InputSystem::InputSystem() : entityManager(EntityManager::Instance())
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
-void InputSystem::RemoveEntity(Entity * pEntity)
+void InputSystem::RemoveEntity(Entity * const pEntity)
 {
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 	
 	if (it != EntityList.end())
 	{
@@ -20,12 +20,12 @@ void InputSystem::RemoveEntity(Entity * pEntity)
 	}
 }
 
-void InputSystem::AddEntity(Entity * pEntity)
+void InputSystem::AddEntity(Entity * const pEntity)
 {
-	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
 	bool containsEntity = false;
 
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -46,15 +46,15 @@ void InputSystem::Action(void)
 {
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentInput = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_INPUT);
+		iComponent * const componentInput = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_INPUT);
 
-		std::vector<InputFunction *> * inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
+		std::vector<InputFunction *> * const inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
 
 		Input(inputs, EntityList[i]);
 	}
 }
 
-void InputSystem::Input(std::vector<InputFunction *> * inputs, Entity * entity)
+void InputSystem::Input(std::vector<InputFunction *> * const inputs, Entity * const entity)
 {	
 	for (int i = 0; i < inputs->size(); i++)
 	{

@@ -34,7 +34,7 @@ std::vector<MenuItem *> MenuLoader::LoadMenu(std::string fileName, glm::vec3 & b
 
 	if (d.HasMember("Script"))
 	{
-		std::string script = d["Script"].GetString();
+		const std::string script = d["Script"].GetString();
 
 		ScriptingManager::Instance()->LoadLuaFromFile(script);
 	}
@@ -64,7 +64,7 @@ void MenuLoader::LoadMenuItems(const rapidjson::Value& MenuItems, std::vector<Me
 
 	for (it = MenuItems.Begin(); it != MenuItems.End(); it++)
 	{
-		std::string type = (*it)["Type"].GetString();
+		const std::string type = (*it)["Type"].GetString();
 		std::string text = (*it)["Text"].GetString();
 		
 		const rapidjson::Value& loc = (*it)["Location"];

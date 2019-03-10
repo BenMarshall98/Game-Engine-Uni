@@ -21,7 +21,7 @@
 #include "LevelLoader.h"
 #include <iostream>
 
-GameScene::GameScene(std::string pFileName) : iScene(pFileName)
+GameScene::GameScene(const std::string pFileName) : iScene(pFileName)
 {
 }
 
@@ -29,7 +29,7 @@ void GameScene::Load()
 {
 	LevelLoader::LoadLevelJSON(fileName);
 
-	PhysicsManager * physicsManager = PhysicsManager::Instance();
+	PhysicsManager * const physicsManager = PhysicsManager::Instance();
 	physicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
 }
 
@@ -51,7 +51,7 @@ void GameScene::Update()
 
 	if (delay == 0)
 	{
-		float inputValue = InputManager::Instance()->GetInputValue(escapeMenu);
+		const float inputValue = InputManager::Instance()->GetInputValue(escapeMenu);
 
 		if (inputValue > 0.2)
 		{

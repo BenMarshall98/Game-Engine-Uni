@@ -33,7 +33,7 @@ public:
 	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
-	inline void ResolveAI(Entity * thisEntity)
+	inline void ResolveAI(Entity * const thisEntity)
 	{
 		if (aiStateMachine)
 		{
@@ -41,13 +41,13 @@ public:
 		}
 		else
 		{
-			iComponent * componentPosition = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_POSITION);
-			iComponent * componentDirection = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_DIRECTION);
-			iComponent * componentPhysics = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_PHYSICS);
+			iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_POSITION);
+			iComponent * const componentDirection = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_DIRECTION);
+			iComponent * const componentPhysics = EntityManager::Instance()->GetComponentOfEntity(thisEntity, ComponentType::COMPONENT_PHYSICS);
 
-			glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
-			glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
-			ComponentPhysics * physics = dynamic_cast<ComponentPhysics *>(componentPhysics);
+			const glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+			const glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
+			ComponentPhysics * const physics = dynamic_cast<ComponentPhysics *>(componentPhysics);
 
 			if (pathFinding)
 			{

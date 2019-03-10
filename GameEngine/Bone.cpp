@@ -9,7 +9,7 @@ Bone::~Bone()
 
 }
 
-unsigned int Bone::FindPosition(float time)
+unsigned int Bone::FindPosition(const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetPositionKeys().size() - 1; i++)
 	{
@@ -21,7 +21,7 @@ unsigned int Bone::FindPosition(float time)
 	return 0;
 }
 
-unsigned int Bone::FindRotation(float time)
+unsigned int Bone::FindRotation(const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetRotationKeys().size() - 1; i++)
 	{
@@ -34,66 +34,66 @@ unsigned int Bone::FindRotation(float time)
 	return 0;
 }
 
-glm::vec3 Bone::CalcInterpolatedPosition(float time)
+glm::vec3 Bone::CalcInterpolatedPosition(const float time)
 {
 	if (animNode->GetPositionKeys().size() == 1)
 	{
-		glm::vec3 pos = animNode->GetPositionKeys()[0]->GetValue();
+		const glm::vec3 pos = animNode->GetPositionKeys()[0]->GetValue();
 		return pos;
 	}
 
-	unsigned int PositionIndex = FindPosition(time);
-	unsigned int NextPositionIndex = (PositionIndex + 1);
+	const unsigned int PositionIndex = FindPosition(time);
+	const unsigned int NextPositionIndex = (PositionIndex + 1);
 
-	float pos1Time = (float)animNode->GetPositionKeys()[PositionIndex]->GetTime();
-	float pos2Time = (float)animNode->GetPositionKeys()[NextPositionIndex]->GetTime();
+	const float pos1Time = (float)animNode->GetPositionKeys()[PositionIndex]->GetTime();
+	const float pos2Time = (float)animNode->GetPositionKeys()[NextPositionIndex]->GetTime();
 
-	float DeltaTime = pos2Time - pos1Time;
-	float Factor = (time - pos1Time) / DeltaTime;
+	const float DeltaTime = pos2Time - pos1Time;
+	const float Factor = (time - pos1Time) / DeltaTime;
 
-	glm::vec3 p1 = animNode->GetPositionKeys()[PositionIndex]->GetValue();
-	glm::vec3 p2 = animNode->GetPositionKeys()[NextPositionIndex]->GetValue();
+	const glm::vec3 p1 = animNode->GetPositionKeys()[PositionIndex]->GetValue();
+	const glm::vec3 p2 = animNode->GetPositionKeys()[NextPositionIndex]->GetValue();
 
-	glm::vec3 pos = mix(p1, p2, Factor);
+	const glm::vec3 pos = mix(p1, p2, Factor);
 
 	return pos;
 }
 
-glm::quat Bone::CalcInterpolatedRotation(float time)
+glm::quat Bone::CalcInterpolatedRotation(const float time)
 {
 	if (animNode->GetRotationKeys().size() == 1)
 	{
-		glm::quat rot = animNode->GetRotationKeys()[0]->GetValue();
+		const glm::quat rot = animNode->GetRotationKeys()[0]->GetValue();
 		return rot;
 	}
 
-	unsigned int RotationIndex = FindRotation(time);
-	unsigned int NextRotationIndex = (RotationIndex + 1);
+	const unsigned int RotationIndex = FindRotation(time);
+	const unsigned int NextRotationIndex = (RotationIndex + 1);
 
-	float rot1Time = (float)animNode->GetRotationKeys()[RotationIndex]->GetTime();
-	float rot2Time = (float)animNode->GetRotationKeys()[NextRotationIndex]->GetTime();
+	const float rot1Time = (float)animNode->GetRotationKeys()[RotationIndex]->GetTime();
+	const float rot2Time = (float)animNode->GetRotationKeys()[NextRotationIndex]->GetTime();
 
-	float DeltaTime = rot2Time - rot1Time;
-	float Factor = (time - rot1Time) / DeltaTime;
+	const float DeltaTime = rot2Time - rot1Time;
+	const float Factor = (time - rot1Time) / DeltaTime;
 
-	glm::quat r1 = animNode->GetRotationKeys()[RotationIndex]->GetValue();
-	glm::quat r2 = animNode->GetRotationKeys()[NextRotationIndex]->GetValue();
+	const glm::quat r1 = animNode->GetRotationKeys()[RotationIndex]->GetValue();
+	const glm::quat r2 = animNode->GetRotationKeys()[NextRotationIndex]->GetValue();
 
-	glm::quat rot = slerp(r1, r2, Factor);
+	const glm::quat rot = slerp(r1, r2, Factor);
 
 	return rot;
 }
 
-void Bone::UpdateKeyframeTransform(float time)
+void Bone::UpdateKeyframeTransform(const float time)
 {
 	if (animNode == nullptr)
 	{
 		return;
 	}
 
-	glm::vec3 pos = CalcInterpolatedPosition(time);
-	glm::quat rot = CalcInterpolatedRotation(time);
-	glm::vec3 sca(1.0);
+	const glm::vec3 pos = CalcInterpolatedPosition(time);
+	const glm::quat rot = CalcInterpolatedRotation(time);
+	const glm::vec3 sca(1.0);
 
 	glm::mat4 mat(1.0);
 	mat *= translate(pos);
@@ -113,7 +113,7 @@ glm::mat4 Bone::GetParentTransforms()
 
 	while (parent != nullptr)
 	{
-		glm::mat4 tmp = parent->GetNode()->GetTransform();
+		const glm::mat4 tmp = parent->GetNode()->GetTransform();
 		mats.push_back(tmp);
 
 		parent = parent->parentBone;

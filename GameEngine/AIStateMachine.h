@@ -24,19 +24,19 @@ public:
 	std::string GetValue(std::string valueName, std::string defaultValue);
 	void SetValue(std::string valueName, std::string value);
 
-	inline void SetPathFinder(PathFinding * pPathFinder)
+	inline void SetPathFinder(PathFinding * const pPathFinder)
 	{
 		pathFinder = pPathFinder;
 	}
 
-	inline void SetPathFollower(PathFollowing * pPathFollower)
+	inline void SetPathFollower(PathFollowing * const pPathFollower)
 	{
 		pathFollower = pPathFollower;
 	}
 
 	void MoveOffPath();
 
-	inline bool OnPath(glm::vec3 position)
+	inline bool OnPath(const glm::vec3 position)
 	{
 		if (pathFollower)
 		{

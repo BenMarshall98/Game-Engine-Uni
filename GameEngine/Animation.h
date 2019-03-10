@@ -14,7 +14,7 @@ private:
 	std::vector<AnimNode *> animNodes;
 
 public:
-	Animation(std::string pName, float pStartTime, float pEndTime, std::vector<AnimNode *> pAnimNodes) :
+	Animation(std::string pName, const float pStartTime, const float pEndTime, std::vector<AnimNode *> pAnimNodes) :
 		name(pName), startTime(pStartTime), endTime(pEndTime), animNodes(pAnimNodes)
 	{
 
