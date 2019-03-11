@@ -131,16 +131,16 @@ void BulletPhysicsEngine::Update(const float pDeltaTime)
 	dynamicsWorld->stepSimulation(pDeltaTime);
 }
 
-bool BulletPhysicsEngine::collisionCallback(const btManifoldPoint& cp, const btCollisionObjectWrapper * const obj1, const int id1, const int index1, const btCollisionObjectWrapper * const obj2, const int id2, const int index2)
+bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper * const obj1, const int id1, const int index1, const btCollisionObjectWrapper * const obj2, const int id2, const int index2)
 {
-	Entity * const entity1 = (Entity *)obj1->getCollisionObject()->getUserPointer();
-	Entity * const entity2 = (Entity *)obj2->getCollisionObject()->getUserPointer();
+	Entity * const entity1 = static_cast<Entity *>(obj1->getCollisionObject()->getUserPointer());
+	Entity * const entity2 = static_cast<Entity *>(obj2->getCollisionObject()->getUserPointer());
 
 	iComponent * const physicsComponent1 = EntityManager::Instance()->GetComponentOfEntity(entity1, ComponentType::COMPONENT_PHYSICS);
 	iComponent * const physicsComponent2 = EntityManager::Instance()->GetComponentOfEntity(entity2, ComponentType::COMPONENT_PHYSICS);
 
-	ComponentPhysics * const componentPhysics1 = (ComponentPhysics *)physicsComponent1;
-	ComponentPhysics * const componentPhysics2 = (ComponentPhysics *)physicsComponent2;
+	ComponentPhysics * const componentPhysics1 = dynamic_cast<ComponentPhysics *>(physicsComponent1);
+	ComponentPhysics * const componentPhysics2 = dynamic_cast<ComponentPhysics *>(physicsComponent2);
 
 	componentPhysics1->AddCollision(entity2, componentPhysics2->GetUpdateEntityType());
 	componentPhysics2->AddCollision(entity1, componentPhysics1->GetUpdateEntityType());
@@ -158,11 +158,11 @@ bool BulletPhysicsEngine::collisionCallback(const btManifoldPoint& cp, const btC
 	return false;
 }
 
-bool BulletPhysicsEngine::TouchingGround(const void * const pRigidBody1, const void * const pRigidBody2)
+bool BulletPhysicsEngine::TouchingGround(const btCollisionObject * const pRigidBody1, const btCollisionObject * const pRigidBody2)
 {
-	btRigidBody * const rigidBody = (btRigidBody *)pRigidBody1;
+	const btRigidBody * const rigidBody = dynamic_cast<const btRigidBody *>(pRigidBody1);
 
-	btCollisionShape * const collisionShape = rigidBody->getCollisionShape();
+	const btCollisionShape * const collisionShape = rigidBody->getCollisionShape();
 
 	const btVector3 rayStart = rigidBody->getWorldTransform().getOrigin();
 	btVector3 offset;
@@ -193,7 +193,7 @@ bool BulletPhysicsEngine::TouchingGround(const void * const pRigidBody1, const v
 
 void BulletPhysicsEngine::RemoveRigidBody(RigidBody * const pRigidBody)
 {
-	btRigidBody * const rigidBody = (btRigidBody *)pRigidBody->GetRigidBody();
+	btRigidBody * const rigidBody = static_cast<btRigidBody *>(pRigidBody->GetRigidBody());
 
 	if (rigidBody && rigidBody->getMotionState())
 	{
@@ -203,7 +203,7 @@ void BulletPhysicsEngine::RemoveRigidBody(RigidBody * const pRigidBody)
 	dynamicsWorld->removeRigidBody(rigidBody);
 }
 
-bool BulletPhysicsEngine::ClearBetweenPoints(const glm::vec3 position1, const glm::vec3 position2)
+bool BulletPhysicsEngine::ClearBetweenPoints(const glm::vec3 & position1, const glm::vec3 & position2)
 {
 	const btVector3 rayStart = btVector3(position1.x, position1.y, position1.z);
 	const btVector3 rayEnd = btVector3(position2.x, position2.y, position2.z);

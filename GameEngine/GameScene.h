@@ -14,7 +14,7 @@ private:
 
 public:
 
-	GameScene(std::string pFileName);
+	explicit GameScene(const std::string & pFileName);
 	~GameScene();
 
 	GameScene& operator=(const GameScene&) = delete;

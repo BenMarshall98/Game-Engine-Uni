@@ -17,12 +17,15 @@ private:
 	PathFollowing * pathFollower;
 
 public:
-	explicit AIStateMachine(std::string pStartFunction) : startFunction(pStartFunction), pathFinder(nullptr), pathFollower(nullptr) {}
+	explicit AIStateMachine(std::string & pStartFunction) : startFunction(pStartFunction), pathFinder(nullptr), pathFollower(nullptr) {}
 	~AIStateMachine();
 
+	AIStateMachine& operator=(const AIStateMachine&) = delete;
+	AIStateMachine(AIStateMachine&) = delete;
+
 	//void TraverseStates(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);
-	std::string GetValue(std::string valueName, std::string defaultValue);
-	void SetValue(std::string valueName, std::string value);
+	std::string GetValue(std::string & valueName, std::string & defaultValue);
+	void SetValue(std::string & valueName, std::string & value);
 
 	inline void SetPathFinder(PathFinding * const pPathFinder)
 	{
@@ -36,7 +39,7 @@ public:
 
 	void MoveOffPath();
 
-	inline bool OnPath(const glm::vec3 position)
+	inline bool OnPath(const glm::vec3 & position)
 	{
 		if (pathFollower)
 		{
@@ -45,11 +48,11 @@ public:
 		return false;
 	}
 
-	void FindAIPath(glm::vec3 position, glm::quat direction, ComponentPhysics * physicsComponent, glm::vec3 target, float deltaTime);
-	void FindAIPath(glm::vec3 position, glm::quat direction, ComponentPhysics * physicsComponent, float deltaTime);
-	void FindPath(glm::vec3 position, glm::quat direction, ComponentPhysics * physicsComponent, float deltaTime);
+	void FindAIPath(const glm::vec3 & position, const glm::quat & direction, ComponentPhysics * const physicsComponent, const glm::vec3 & target, float deltaTime);
+	void FindAIPath(const glm::vec3 & position, const glm::quat & direction, ComponentPhysics * const physicsComponent, float deltaTime);
+	void FindPath(const glm::vec3 & position, const glm::quat & direction, ComponentPhysics * const physicsComponent, float deltaTime);
 
-	glm::vec3 GetNearestPath(glm::vec3 position);
+	glm::vec3 GetNearestPath(const glm::vec3 & position);
 
 	void ResolveStates(Entity * thisEntity, Entity * target);
 };

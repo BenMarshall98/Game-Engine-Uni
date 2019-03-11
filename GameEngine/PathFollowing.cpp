@@ -8,7 +8,6 @@ PathFollowing::~PathFollowing()
 void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
 	const float disVelocity = 200 * (1.0 / 60.0);
-	const float disRotation = 200 * (1.0 / 60.0);
 
 	if (currentNode == -1)
 	{
@@ -64,7 +63,7 @@ void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::
 	//physicsComponent->SetUpdateRotation(rotation);
 }
 
-bool PathFollowing::OnPath(const glm::vec3 position)
+bool PathFollowing::OnPath(const glm::vec3 & position)
 {
 	if (onPath)
 	{
@@ -84,7 +83,7 @@ bool PathFollowing::OnPath(const glm::vec3 position)
 	return false;
 }
 
-glm::vec3 PathFollowing::GetNearestPath(const glm::vec3 position)
+glm::vec3 PathFollowing::GetNearestPath(const glm::vec3 & position)
 {
 	int closestNode = 0;
 	float distance = glm::length(pathNodes->at(0)->position - position);

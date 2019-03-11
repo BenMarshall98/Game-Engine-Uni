@@ -25,6 +25,9 @@ public:
 	explicit PathFollowing(std::vector<PathNode *> * const pPathNodes) : pathNodes(pPathNodes), currentNode(-1), onPath(true) {}
 	~PathFollowing();
 
+	PathFollowing& operator=(const PathFollowing&) = delete;
+	PathFollowing(PathFollowing&) = delete;
+
 	void CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent);
 
 	inline void MoveOffPath()
@@ -32,8 +35,8 @@ public:
 		onPath = false;
 	}
 
-	bool OnPath(glm::vec3 position);
+	bool OnPath(const glm::vec3 & position);
 
-	glm::vec3 GetNearestPath(glm::vec3 position);
+	glm::vec3 GetNearestPath(const glm::vec3 & position);
 };
 

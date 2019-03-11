@@ -26,9 +26,9 @@ private:
 		ComponentType::COMPONENT_SHADOW_SHADER
 	};
 
-	static void RenderDirectional(iModel * model, glm::vec3 & position, glm::quat & direction, Directional * directional, Shader * shadowShader);
+	static void RenderDirectional(iModel * const model, const glm::vec3 & position, const glm::quat & direction, Directional * const directional, Shader * const shadowShader);
 
-	static void RenderPoint(iModel * model, glm::vec3 & position, glm::quat & direction, Shader * shadowShader);
+	static void RenderPoint(iModel * const model, const glm::vec3 & position, const glm::quat & direction, Shader * const shadowShader);
 
 public:
 	ShadowSystem(glm::vec3 & topLeftFrontCoord, glm::vec3 & bottomRightBackCoord);

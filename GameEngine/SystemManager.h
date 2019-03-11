@@ -27,6 +27,9 @@ public:
 
 	~SystemManager();
 
+	SystemManager& operator=(const SystemManager&) = delete;
+	SystemManager(SystemManager&) = delete;
+
 	inline void AddRenderSystem(iSystem * const system)
 	{
 		RenderSystems.push_back(system);

@@ -20,17 +20,20 @@ private:
 
 	std::vector<btCollisionShape *> collisionShapes;
 
-	static bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2);
-	static bool TouchingGround(const void * pRigidBody1, const void * pRigidBody2);
+	static bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper * const obj1, const int id1, const int index1, const btCollisionObjectWrapper * const obj2, const int id2, const int index2);
+	static bool TouchingGround(const btCollisionObject * pRigidBody1, const btCollisionObject * pRigidBody2);
 public:
 	BulletPhysicsEngine();
 	~BulletPhysicsEngine();
 
-	RigidBody * AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit) override;
+	BulletPhysicsEngine& operator=(const BulletPhysicsEngine&) = delete;
+	BulletPhysicsEngine(BulletPhysicsEngine&) = delete;
+
+	RigidBody * AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, const bool collisionResponse, const glm::vec3 & angularLimit) override;
 
 	void Update(float pDeltaTime) override;
 
 	void RemoveRigidBody(RigidBody * pRigidBody) override;
 
-	bool ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2) override;
+	bool ClearBetweenPoints(const glm::vec3 & position1, const glm::vec3 & position2) override;
 };

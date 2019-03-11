@@ -5,7 +5,7 @@ AIStateMachine::~AIStateMachine()
 {
 }
 
-std::string AIStateMachine::GetValue(std::string valueName, std::string defaultValue)
+std::string AIStateMachine::GetValue(std::string & valueName, std::string & defaultValue)
 {
 	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
@@ -20,7 +20,7 @@ std::string AIStateMachine::GetValue(std::string valueName, std::string defaultV
 	}
 }
 
-void AIStateMachine::SetValue(std::string valueName, std::string value)
+void AIStateMachine::SetValue(std::string & valueName, std::string & value)
 {
 	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
@@ -39,22 +39,22 @@ void AIStateMachine::MoveOffPath()
 	pathFollower->MoveOffPath();
 }
 
-void AIStateMachine::FindAIPath(const glm::vec3 position, const glm::quat direction, ComponentPhysics * const physicsComponent, const glm::vec3 target, const float deltaTime)
+void AIStateMachine::FindAIPath(const glm::vec3 & position, const glm::quat & direction, ComponentPhysics * const physicsComponent, const glm::vec3 & target, const float deltaTime)
 {
 	pathFinder->CalculatePathToPosition(position, direction, physicsComponent, target);
 }
 
-void AIStateMachine::FindAIPath(const glm::vec3 position, const glm::quat direction, ComponentPhysics * const physicsComponent, const float deltaTime)
+void AIStateMachine::FindAIPath(const glm::vec3 & position, const glm::quat & direction, ComponentPhysics * const physicsComponent, const float deltaTime)
 {
 	pathFinder->CalculatePath(position, direction, physicsComponent);
 }
 
-void AIStateMachine::FindPath(const glm::vec3 position, const glm::quat direction, ComponentPhysics * const physicsComponent, const float deltaTime)
+void AIStateMachine::FindPath(const glm::vec3 & position, const glm::quat & direction, ComponentPhysics * const physicsComponent, const float deltaTime)
 {
 	pathFollower->CalculatePath(position, direction, physicsComponent);
 }
 
-glm::vec3 AIStateMachine::GetNearestPath(const glm::vec3 position)
+glm::vec3 AIStateMachine::GetNearestPath(const glm::vec3 & position)
 {
 	return pathFollower->GetNearestPath(position);
 }

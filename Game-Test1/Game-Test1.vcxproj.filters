@@ -45,6 +45,12 @@
     <Content Include="Textures/concreteNormal.jpg">
       <Filter>Textures</Filter>
     </Content>
+    <Content Include="Scripts\PlatformerPlayerFunctions.lua">
+      <Filter>Scripts</Filter>
+    </Content>
+    <Content Include="Scripts\3DLevelPlayerFunctions.lua">
+      <Filter>Scripts</Filter>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models/cube.obj">
@@ -76,9 +82,6 @@
     <Content Include="Levels/3DLevel.json">
       <Filter>Levels</Filter>
     </Content>
-    <Content Include="Scripts/3DLevelFunctions.lua">
-      <Filter>Scripts</Filter>
-    </Content>
     <Content Include="Shaders/ShadowMapping.frag">
       <Filter>Shaders</Filter>
     </Content>
@@ -106,11 +109,6 @@
   <ItemGroup>
     <Content Include="Levels/Level.txt">
       <Filter>Levels</Filter>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts/PlatformerFunctions.lua">
-      <Filter>Scripts</Filter>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +181,12 @@
       <Filter>Menus</Filter>
     </None>
     <None Include="PauseMenu.lua">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="PlatformerCoinFunctions.lua">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="PlatformerSceneFunctions.lua">
       <Filter>Scripts</Filter>
     </None>
   </ItemGroup>

@@ -14,7 +14,7 @@ private:
 	std::vector<AnimNode *> animNodes;
 
 public:
-	Animation(std::string pName, const float pStartTime, const float pEndTime, std::vector<AnimNode *> pAnimNodes) :
+	Animation(std::string & pName, const float pStartTime, const float pEndTime, std::vector<AnimNode *> & pAnimNodes) :
 		name(pName), startTime(pStartTime), endTime(pEndTime), animNodes(pAnimNodes)
 	{
 
@@ -22,7 +22,10 @@ public:
 
 	~Animation();
 
-	inline std::string GetName()
+	Animation& operator=(const Animation&) = delete;
+	Animation(Animation&) = delete;
+
+	inline std::string & GetName()
 	{
 		return name;
 	}
@@ -37,7 +40,7 @@ public:
 		return endTime;
 	}
 
-	inline std::vector<AnimNode *> GetAnimNodes()
+	inline std::vector<AnimNode *> & GetAnimNodes()
 	{
 		return animNodes;
 	}

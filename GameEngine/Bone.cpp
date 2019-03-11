@@ -25,7 +25,7 @@ unsigned int Bone::FindRotation(const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetRotationKeys().size() - 1; i++)
 	{
-		if (time < (float)animNode->GetRotationKeys()[i + 1]->GetTime())
+		if (time < animNode->GetRotationKeys()[i + 1]->GetTime())
 		{
 			return i;
 		}
@@ -45,8 +45,8 @@ glm::vec3 Bone::CalcInterpolatedPosition(const float time)
 	const unsigned int PositionIndex = FindPosition(time);
 	const unsigned int NextPositionIndex = (PositionIndex + 1);
 
-	const float pos1Time = (float)animNode->GetPositionKeys()[PositionIndex]->GetTime();
-	const float pos2Time = (float)animNode->GetPositionKeys()[NextPositionIndex]->GetTime();
+	const float pos1Time = animNode->GetPositionKeys()[PositionIndex]->GetTime();
+	const float pos2Time = animNode->GetPositionKeys()[NextPositionIndex]->GetTime();
 
 	const float DeltaTime = pos2Time - pos1Time;
 	const float Factor = (time - pos1Time) / DeltaTime;
@@ -70,8 +70,8 @@ glm::quat Bone::CalcInterpolatedRotation(const float time)
 	const unsigned int RotationIndex = FindRotation(time);
 	const unsigned int NextRotationIndex = (RotationIndex + 1);
 
-	const float rot1Time = (float)animNode->GetRotationKeys()[RotationIndex]->GetTime();
-	const float rot2Time = (float)animNode->GetRotationKeys()[NextRotationIndex]->GetTime();
+	const float rot1Time = animNode->GetRotationKeys()[RotationIndex]->GetTime();
+	const float rot2Time = animNode->GetRotationKeys()[NextRotationIndex]->GetTime();
 
 	const float DeltaTime = rot2Time - rot1Time;
 	const float Factor = (time - rot1Time) / DeltaTime;

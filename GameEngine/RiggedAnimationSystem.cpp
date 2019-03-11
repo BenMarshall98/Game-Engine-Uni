@@ -8,9 +8,9 @@ RiggedAnimationSystem::RiggedAnimationSystem()
 	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 }
 
-void RiggedAnimationSystem::RemoveEntity(Entity * pEntity)
+void RiggedAnimationSystem::RemoveEntity(Entity * const pEntity)
 {
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -18,12 +18,12 @@ void RiggedAnimationSystem::RemoveEntity(Entity * pEntity)
 	}
 }
 
-void RiggedAnimationSystem::AddEntity(Entity * pEntity)
+void RiggedAnimationSystem::AddEntity(Entity * const pEntity)
 {
-	bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
 	bool containsEntity = false;
 
-	std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
+	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 
 	if (it != EntityList.end())
 	{
@@ -44,18 +44,18 @@ void RiggedAnimationSystem::Action(void)
 {
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
-		iComponent * componentRiggedAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_RIGGED_ANIMATION);
+		iComponent * const componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
+		iComponent * const componentRiggedAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_RIGGED_ANIMATION);
 
-		iModel * model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-		ComponentRiggedAnimation * riggedAnimation = dynamic_cast<ComponentRiggedAnimation *>(componentRiggedAnimation);
-		AnimatedModel * animatedModel = dynamic_cast<AnimatedModel *>(model);
+		iModel * const model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
+		ComponentRiggedAnimation * const riggedAnimation = dynamic_cast<ComponentRiggedAnimation *>(componentRiggedAnimation);
+		AnimatedModel * const animatedModel = dynamic_cast<AnimatedModel *>(model);
 
 		Animate(animatedModel, riggedAnimation);
 	}
 }
 
-void RiggedAnimationSystem::Animate(AnimatedModel * animatedModel, ComponentRiggedAnimation * riggedAnimation)
+void RiggedAnimationSystem::Animate(AnimatedModel * const animatedModel, ComponentRiggedAnimation * const riggedAnimation)
 {
 	animatedModel->Update();
 }

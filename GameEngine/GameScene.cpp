@@ -21,7 +21,7 @@
 #include "LevelLoader.h"
 #include <iostream>
 
-GameScene::GameScene(const std::string pFileName) : iScene(pFileName)
+GameScene::GameScene(const std::string & pFileName) : iScene(pFileName)
 {
 }
 

@@ -181,7 +181,7 @@
     <Content Include="Levels/3DLevel.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts/3DLevelFunctions.lua">
+    <Content Include="Scripts\3DLevelPlayerFunctions.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Levels/PlatformLevel.json">
@@ -217,7 +217,7 @@
     <Content Include="Shaders/ShadowMapping.vert">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts/PlatformerFunctions.lua">
+    <Content Include="Scripts\PlatformerPlayerFunctions.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts/Vector3.lua">
@@ -258,6 +258,8 @@
     <None Include="Options.json" />
     <None Include="Pause.json" />
     <None Include="PauseMenu.lua" />
+    <None Include="PlatformerCoinFunctions.lua" />
+    <None Include="PlatformerSceneFunctions.lua" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />
     <None Include="Shaders\RiggedPointShadow.geom" />

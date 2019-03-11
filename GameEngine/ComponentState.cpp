@@ -1,4 +1,5 @@
 #include "ComponentState.h"
+#include <iostream>
 
 ComponentState::ComponentState()
 {
@@ -8,7 +9,7 @@ ComponentState::~ComponentState()
 {
 }
 
-std::string ComponentState::GetValue(std::string valueName, std::string defaultValue)
+std::string ComponentState::GetValue(std::string & valueName, std::string & defaultValue)
 {
 	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 
@@ -23,7 +24,7 @@ std::string ComponentState::GetValue(std::string valueName, std::string defaultV
 	}
 }
 
-void ComponentState::SetValue(std::string valueName, std::string value)
+void ComponentState::SetValue(std::string & valueName, std::string & value)
 {
 	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
 

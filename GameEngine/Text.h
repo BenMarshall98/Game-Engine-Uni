@@ -10,14 +10,14 @@ private:
 	PixelLocation renderLocation;
 
 public:
-	Text(std::string pText, std::string pAlign, float pFontSize, glm::vec3 pFontColour, glm::vec2 pLocation);
+	Text(const std::string & pText, const std::string & pAlign, float pFontSize, const glm::vec3 & pFontColour, const glm::vec2 & pLocation);
 	~Text();
 
 	void Update() override;
 	void Render() override;
 	void Swap() override;
-	void Select() override {}
-	void Highlight() override {}
-	void UnHighlight() override {}
+	void Select() override;
+	void Highlight() override;
+	void UnHighlight() override;
 };
 

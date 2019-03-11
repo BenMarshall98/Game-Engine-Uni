@@ -1,5 +1,6 @@
 #include "AnimationSystem.h"
 #include "ComponentAnimation.h"
+#include "ScriptingManager.h"
 
 AnimationSystem::AnimationSystem() : entityManager(EntityManager::Instance())
 {
@@ -50,9 +51,9 @@ void AnimationSystem::Action(void)
 	}
 }
 
-void AnimationSystem::Animation(const std::string function, Entity * const entity)
+void AnimationSystem::Animation(const std::string & function, Entity * const entity)
 {
-	//TODO: sort out the function
+	ScriptingManager::Instance()->RunScriptFromAnimation(function, entity);
 }
 
 AnimationSystem::~AnimationSystem()

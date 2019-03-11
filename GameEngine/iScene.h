@@ -14,7 +14,7 @@ protected:
 	};
 
 public:
-	iScene(std::string pFileName);
+	explicit iScene(const std::string & pFileName);
 	virtual ~iScene();
 
 	virtual void Update() = 0;

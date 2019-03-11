@@ -39,6 +39,7 @@
 #include "ArtificialIntelligenceSystem.h"
 #include "PhysicsSystem.h"
 #include "AudioSystem.h"
+#include "LoggingManager.h"
 #include <fstream>
 #include <iostream>
 
@@ -66,6 +67,8 @@ void LevelLoader::LoadLevelJSON(std::string & fileName)
 		const int loc = d.GetErrorOffset();
 		const std::string error = GetParseError_En(d.GetParseError());
 		const int line = GetLine(fullFile, loc);
+		const std::string message = "Error on line: " + std::to_string(line) + " of file " + fileName + ". Error is: " + error;
+		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 		return;
 	}
 

@@ -35,7 +35,7 @@ PathFinding::~PathFinding()
 {
 }
 
-void PathFinding::BuildPath(const glm::vec3 currentPosition, const glm::quat currentDirection, ComponentPhysics * const physicsComponent, const glm::vec3 targetLocation)
+void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent, const glm::vec3 & targetLocation)
 {
 	const glm::ivec2 targetMapLoc = CalculateMapLoc(targetLocation);
 
@@ -213,7 +213,7 @@ void PathFinding::BuildPath(const glm::vec3 currentPosition, const glm::quat cur
 	}
 }
 
-void PathFinding::CalculatePath(const glm::vec3 currentPosition, const glm::quat currentDirection, ComponentPhysics * const physicsComponent)
+void PathFinding::CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
 	iComponent * const positionComponent = EntityManager::Instance()->GetComponentOfEntity(target, ComponentType::COMPONENT_POSITION);
 	const glm::vec3 targetPosition = dynamic_cast<ComponentPosition *>(positionComponent)->GetRenderPosition();
@@ -221,7 +221,7 @@ void PathFinding::CalculatePath(const glm::vec3 currentPosition, const glm::quat
 	BuildPath(currentPosition, currentDirection, physicsComponent, targetPosition);
 }
 
-glm::ivec2 PathFinding::CalculateMapLoc(const glm::vec3 position)
+glm::ivec2 PathFinding::CalculateMapLoc(const glm::vec3 & position)
 {
 	glm::vec2 mapish = glm::vec2(position.x - topLeftCoord.x, -position.z + topLeftCoord.y);
 
@@ -232,7 +232,7 @@ glm::ivec2 PathFinding::CalculateMapLoc(const glm::vec3 position)
 	return value;
 }
 
-void PathFinding::CalculatePathToPosition(const glm::vec3 currentPosition, const glm::quat currentDirection, ComponentPhysics * const physicsComponent, const glm::vec3 targetLocation)
+void PathFinding::CalculatePathToPosition(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent, const glm::vec3 & targetLocation)
 {
 	BuildPath(currentPosition, currentDirection, physicsComponent, targetLocation);
 }

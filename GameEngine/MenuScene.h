@@ -29,8 +29,11 @@ private:
 	int totalSelectable = 0;
 
 public:
-	MenuScene(std::string pFileName);
+	explicit MenuScene(const std::string & pFileName);
 	~MenuScene();
+
+	MenuScene& operator=(const MenuScene&) = delete;
+	MenuScene(MenuScene&) = delete;
 
 	void Update() override;
 	void Render() override;

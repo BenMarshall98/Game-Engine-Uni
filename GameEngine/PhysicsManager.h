@@ -40,7 +40,7 @@ public:
 
 	~PhysicsManager();
 
-	inline RigidBody * AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, const bool collisionResponse, glm::vec3 & angularLimit)
+	inline RigidBody * AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, const bool collisionResponse, const glm::vec3 & angularLimit)
 	{
 		return engine->AddRigidBody(mass, position, direction, shape, entity, collisionResponse, angularLimit);
 	}
@@ -66,12 +66,12 @@ public:
 		return engine->GetDirectionOfRigidBody(pRigidBody);
 	}
 
-	inline void SetPositionOfRigidBody(RigidBody * const pRigidBody, const glm::vec3 pPosition)
+	inline void SetPositionOfRigidBody(RigidBody * const pRigidBody, const glm::vec3 & pPosition)
 	{
 		engine->SetPositionOfRigidBody(pRigidBody, pPosition);
 	}
 
-	inline void SetDirectionOfRigidBody(RigidBody * const pRigidBody, const glm::quat pDirection)
+	inline void SetDirectionOfRigidBody(RigidBody * const pRigidBody, const glm::quat & pDirection)
 	{
 		engine->SetDirectionOfRigidBody(pRigidBody, pDirection);
 	}
@@ -96,7 +96,7 @@ public:
 		engine->ApplyRotation(pRigidBody, rotation);
 	}
 
-	inline bool ClearBetweenPoints(const glm::vec3 position1, const glm::vec3 position2)
+	inline bool ClearBetweenPoints(const glm::vec3 & position1, const glm::vec3 & position2)
 	{
 		return engine->ClearBetweenPoints(position1, position2);
 	}

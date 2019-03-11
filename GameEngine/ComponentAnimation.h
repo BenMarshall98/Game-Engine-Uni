@@ -9,12 +9,12 @@ private:
 	std::string function;
 
 public:
-	ComponentAnimation(std::string pFunction);
+	explicit ComponentAnimation(std::string &pFunction);
 	~ComponentAnimation();
 
 	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
-	std::string GetFunction();
+	std::string & GetFunction();
 };
 

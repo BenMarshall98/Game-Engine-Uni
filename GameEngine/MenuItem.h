@@ -23,7 +23,7 @@ protected:
 	glm::vec2 location;
 
 public:
-	MenuItem(MenuType pMenuType, std::string pText, std::string pAlign, float pFontSize, glm::vec3 pFontColour, glm::vec2 pLocation);
+	MenuItem(MenuType pMenuType, const std::string & pText, const std::string & pAlign, float pFontSize, const glm::vec3 & pFontColour, const glm::vec2 & pLocation);
 
 	virtual ~MenuItem();
 

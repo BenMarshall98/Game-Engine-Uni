@@ -28,7 +28,7 @@ private:
 		ComponentType::COMPONENT_DIRECTION
 	};
 
-	static void Render(Shader * shader, iModel * model, glm::vec3 & position, glm::quat & direction, const Texture * texture, const Texture * normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, bool & updateFirst);
+	static void Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Texture * const texture, const Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, bool & updateFirst);
 
 public:
 

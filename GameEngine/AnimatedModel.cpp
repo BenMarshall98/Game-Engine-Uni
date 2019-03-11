@@ -29,7 +29,7 @@ void AnimatedModel::Render(Shader * const shader)
 	}
 }
 
-Bone * AnimatedModel::FindBone(const std::string name)
+Bone * AnimatedModel::FindBone(const std::string & name)
 {
 	for (int i = 0; i < bones.size(); i++)
 	{

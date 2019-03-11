@@ -11,7 +11,7 @@
 
 TextRender * TextRender::instance = nullptr;
 
-TextRender::TextRender()
+TextRender::TextRender() : VAO(0), VBO(0)
 {
 	ResourceManager::LoadShader("TextShader", "TextVertex.vert", "TextFragment.frag");
 	shader = ResourceManager::GetShader("TextShader");
@@ -78,7 +78,7 @@ TextRender::TextRender()
 	glBindVertexArray(0);
 }
 
-void TextRender::RenderText(std::string text, PixelLocation pPixelLocation, glm::vec3 colour)
+void TextRender::RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
 {
 
 	shader = ResourceManager::GetShader("TextShader");
@@ -110,19 +110,19 @@ void TextRender::RenderText(std::string text, PixelLocation pPixelLocation, glm:
 	glBindVertexArray(VAO);
 
 	float x = pPixelLocation.location.x;
-	float y = pPixelLocation.location.y;
+	const float y = pPixelLocation.location.y;
 
 	std::string::const_iterator c;
 
 	for (c = text.begin(); c != text.end(); c++)
 	{
-		Character ch = Characters[*c];
+		const Character ch = Characters[*c];
 
-		float xpos = x + ch.Bearing.x * pPixelLocation.scale;
-		float ypos = y - (ch.Size.y - ch.Bearing.y) * pPixelLocation.scale;
+		const float xpos = x + ch.Bearing.x * pPixelLocation.scale;
+		const float ypos = y - (ch.Size.y - ch.Bearing.y) * pPixelLocation.scale;
 
-		float w = ch.Size.x * pPixelLocation.scale;
-		float h = ch.Size.y * pPixelLocation.scale;
+		const float w = ch.Size.x * pPixelLocation.scale;
+		const float h = ch.Size.y * pPixelLocation.scale;
 
 		float vertices[6][4] = {
 			{ xpos, ypos + h, 0.0, 0.0},
@@ -150,14 +150,14 @@ void TextRender::RenderText(std::string text, PixelLocation pPixelLocation, glm:
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-PixelLocation TextRender::CalculateSize(std::string text, glm::vec2 location, float size, std::string align)
+PixelLocation TextRender::CalculateSize(const std::string & text, const glm::vec2 & location, const float size, const std::string & align)
 {
-	float scale = ((size / 100.0) * (float)Window::GetHeight()) / pixelHeight;
+	const float scale = ((size / 100.0) * (float)Window::GetHeight()) / pixelHeight;
 
 	float x = 0;
-	float y = 0;
+	const float y = 0;
 
-	float minX = 0;
+	const float minX = 0;
 	float minY = 0;
 	float maxX = 0;
 	float maxY = 0;
@@ -166,13 +166,13 @@ PixelLocation TextRender::CalculateSize(std::string text, glm::vec2 location, fl
 
 	for (c = text.begin(); c != text.end(); c++)
 	{
-		Character ch = Characters[*c];
+		const Character ch = Characters[*c];
 
-		float xpos = x + ch.Bearing.x * scale;
-		float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+		const float xpos = x + ch.Bearing.x * scale;
+		const float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
 
-		float w = ch.Size.x * scale;
-		float h = ch.Size.y * scale;
+		const float w = ch.Size.x * scale;
+		const float h = ch.Size.y * scale;
 
 		if (ypos < minY)
 		{
@@ -192,18 +192,18 @@ PixelLocation TextRender::CalculateSize(std::string text, glm::vec2 location, fl
 		x += (ch.Advance >> 6) * scale;
 	}
 
-	float sizeX = maxX - minX;
-	float sizeY = maxY - minX;
-	float offsetY = 0 - minY;
+	const float sizeX = maxX - minX;
+	const float sizeY = maxY - minX;
+	const float offsetY = 0 - minY;
 
-	float locX = ((location.x / 100) * Window::GetWidth());
-	float locY = ((1 - (location.y / 100)) * Window::GetHeight());
+	const float locX = ((location.x / 100) * Window::GetWidth());
+	const float locY = ((1 - (location.y / 100)) * Window::GetHeight());
 
 	if (align == "Centre")
 	{
-		float xLoc = locX - (sizeX / 2);
-		float yLoc = locY - (sizeY / 2) + offsetY;
-		PixelLocation pixelLocation = {
+		const float xLoc = locX - (sizeX / 2);
+		const float yLoc = locY - (sizeY / 2) + offsetY;
+		const PixelLocation pixelLocation = {
 			glm::vec2(
 				xLoc,
 				yLoc

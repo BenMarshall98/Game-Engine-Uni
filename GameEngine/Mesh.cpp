@@ -1,8 +1,8 @@
 #include "Mesh.h"
 #include "OpenGL.h"
 
-Mesh::Mesh(std::vector<glm::vec3> pVertex, std::vector<glm::vec3> pNormal, std::vector<glm::vec2> pTextures, std::vector<glm::vec4> pWeights, std::vector<glm::ivec4> pIds, std::vector<int> pIndices) :
-	vertex(pVertex), normal(pNormal), textures(pTextures), weights(pWeights), ids(pIds), indices(pIndices), VAO(0), EBO(0)
+Mesh::Mesh(std::vector<glm::vec3> & pVertex, std::vector<glm::vec3> & pNormal, std::vector<glm::vec2> & pTextures, std::vector<glm::vec4> & pWeights, std::vector<glm::ivec4> & pIds, std::vector<int> pIndices) :
+	vertex(pVertex), normal(pNormal), textures(pTextures), weights(pWeights), ids(pIds), indices(pIndices), VAO(0), EBO(0), VBO{0,0,0,0,0}
 {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(5, VBO);

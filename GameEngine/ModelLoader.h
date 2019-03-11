@@ -7,7 +7,6 @@
 #include "glm/glm.hpp"
 #include "assimp/scene.h"
 
-
 class ModelLoader
 {
 private:
@@ -27,7 +26,7 @@ private:
 	static AnimatedModel * LoadDAE(const std::string & fileName);
 
 	static void TangentSpace(std::vector<int> & indices, std::vector<glm::vec3> & vertex, std::vector<glm::vec2> & texture, std::vector<glm::vec3> & tangents/*, vector<vec3> & bitangents*/);
-	static void CalculateTangent(glm::vec3 & vertex1, glm::vec3 & vertex2, glm::vec3 & vertex3, glm::vec2 & texture1, glm::vec2 & texture2, glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
+	static void CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & vertex2, const glm::vec3 & vertex3, const glm::vec2 & texture1, const glm::vec2 & texture2, const glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
 
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
 	static Mesh * ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);

@@ -8,7 +8,7 @@ protected:
 
 public:
 	Input();
-	~Input();
+	virtual ~Input();
 
 	virtual float KeyboardInput(int key) const = 0;
 	virtual float MouseInput(int key) const = 0;

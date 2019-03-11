@@ -45,7 +45,7 @@ void SystemManager::Clear()
 	UpdateSystems.clear();
 }
 
-void SystemManager::RemoveEntityFromSystems(Entity * pEntity)
+void SystemManager::RemoveEntityFromSystems(Entity * const pEntity)
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
 	{
@@ -58,7 +58,7 @@ void SystemManager::RemoveEntityFromSystems(Entity * pEntity)
 	}
 }
 
-void SystemManager::AddEntityToSystems(Entity * pEntity)
+void SystemManager::AddEntityToSystems(Entity * const pEntity)
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
 	{

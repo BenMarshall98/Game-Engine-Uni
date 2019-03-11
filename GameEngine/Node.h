@@ -13,16 +13,19 @@ private:
 	
 
 public:
-	Node(std::string pName, glm::mat4 pTransformation) :
+	Node(std::string & pName, glm::mat4 & pTransformation) :
 		name(pName), transformation(pTransformation), parent(nullptr) {}
 	~Node() {}
+
+	Node& operator=(const Node&) = delete;
+	Node(Node&) = delete;
 
 	void SetParent(Node * const pParent)
 	{
 		parent = pParent;
 	}
 
-	inline std::string GetName()
+	inline std::string & GetName()
 	{
 		return name;
 	}
@@ -32,12 +35,12 @@ public:
 		return parent;
 	}
 
-	inline glm::mat4 GetTransform()
+	inline glm::mat4 & GetTransform()
 	{
 		return transformation;
 	}
 
-	inline void SetTransform(const glm::mat4 pTransform)
+	inline void SetTransform(const glm::mat4 & pTransform)
 	{
 		transformation = pTransform;
 	}

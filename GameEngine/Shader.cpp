@@ -39,7 +39,7 @@ bool Shader::LoadShader(const std::string & vertexProgram, const std::string & f
 	{
 		char infoLog[512];
 		glGetProgramInfoLog(mShaderID, 512, nullptr, infoLog);
-		std::string message = "Failed to Link Shaders:" + std::string(infoLog);
+		const std::string message = "Failed to Link Shaders:" + std::string(infoLog);
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 
@@ -63,7 +63,7 @@ void Shader::ReadShader(const std::string & fileName, std::string & shaderProgra
 
 	if (reader.fail())
 	{
-		std::string message = "File" + fileName + "does not exist";
+		const std::string message = "File" + fileName + "does not exist";
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 		shaderProgram = "";
 		return;
@@ -75,14 +75,14 @@ void Shader::ReadShader(const std::string & fileName, std::string & shaderProgra
 	reader.close();
 }
 
-int Shader::CompileShader(const std::string & fileName, GLenum shaderType)
+int Shader::CompileShader(const std::string & fileName, const GLenum shaderType)
 {
 	std::string shaderProgram;
 	int success, shader;
 
 	ReadShader(fileName, shaderProgram);
 	shader = glCreateShader(shaderType);
-	const char * program = shaderProgram.c_str();
+	const char * const program = shaderProgram.c_str();
 	glShaderSource(shader, 1, &program, nullptr);
 	glCompileShader(shader);
 
@@ -91,7 +91,7 @@ int Shader::CompileShader(const std::string & fileName, GLenum shaderType)
 	{
 		char infoLog[512];
 		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-		std::string message = "Failed to Compile Shader: " + fileName + "\n" + infoLog;
+		const std::string message = "Failed to Compile Shader: " + fileName + "\n" + infoLog;
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
 	}
 

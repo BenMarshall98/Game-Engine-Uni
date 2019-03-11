@@ -14,7 +14,8 @@ private:
 	static void LoadColour(const rapidjson::Value& ColourLoc, glm::vec3 & colour);
 
 public:
-	static std::vector<MenuItem *> LoadMenu(std::string fileName, glm::vec3 & backgroundColour);
+	static std::vector<MenuItem *> LoadMenu(std::string & fileName, glm::vec3 & backgroundColour);
 	
+	MenuLoader() = delete;
 };
 

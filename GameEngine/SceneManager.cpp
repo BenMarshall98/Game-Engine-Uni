@@ -12,7 +12,7 @@
 
 SceneManager * SceneManager::instance = nullptr;
 
-SceneManager::SceneManager()
+SceneManager::SceneManager() : newScene(nullptr), window(nullptr)
 {
 }
 
@@ -57,12 +57,12 @@ void SceneManager::Swap()
 	CameraManager::Instance()->Swap();
 }
 
-void SceneManager::Resize(int width, int height)
+void SceneManager::Resize(const int width, const int height)
 {
 	CameraManager::Instance()->Resize(width, height);
 }
 
-void SceneManager::SetWindow(Window * pWindow)
+void SceneManager::SetWindow(Window * const pWindow)
 {
 	static bool firstTime = true;
 
@@ -74,7 +74,7 @@ void SceneManager::SetWindow(Window * pWindow)
 	}
 }
 
-void SceneManager::StartNewScene(iScene * scene)
+void SceneManager::StartNewScene(iScene * const scene)
 {
 	tempRunning = windowRunning;
 	windowRunning = false;
@@ -82,7 +82,7 @@ void SceneManager::StartNewScene(iScene * scene)
 	newSceneBool = true;
 }
 
-void SceneManager::StartSwapScene(iScene * scene)
+void SceneManager::StartSwapScene(iScene * const scene)
 {
 	tempRunning = windowRunning;
 	windowRunning = false;
@@ -90,7 +90,7 @@ void SceneManager::StartSwapScene(iScene * scene)
 	swapSceneBool = true;
 }
 
-void SceneManager::StartCloseScene(int noOfScene)
+void SceneManager::StartCloseScene(const int noOfScene)
 {
 	tempRunning = windowRunning;
 	windowRunning = false;
@@ -159,7 +159,7 @@ void SceneManager::FinishCloseWindow()
 	closeWindowBool = false;
 }
 
-void SceneManager::NewScene(iScene * scene)
+void SceneManager::NewScene(iScene * const scene)
 {
 	StartNewScene(scene);
 
@@ -170,12 +170,12 @@ void SceneManager::NewScene(iScene * scene)
 	}
 }
 
-void SceneManager::SwapScene(iScene * scene)
+void SceneManager::SwapScene(iScene * const scene)
 {
 	StartSwapScene(scene);
 }
 
-void SceneManager::CloseScene(int noOfScenes)
+void SceneManager::CloseScene(const int noOfScenes)
 {
 	StartCloseScene(noOfScenes);
 }

@@ -32,22 +32,25 @@ public:
 	}
 	~AnimatedModel();
 
+	AnimatedModel& operator=(const AnimatedModel&) = delete;
+	AnimatedModel(AnimatedModel&) = delete;
+
 	inline void AddMesh(Mesh * const mesh)
 	{
 		meshes.push_back(mesh);
 	}
 
-	inline void SetBones(const std::vector<Bone *> pBones)
+	inline void SetBones(const std::vector<Bone *> & pBones)
 	{
 		bones = pBones;
 	}
 
-	inline void SetGlobalInverse(const glm::mat4 pGlobalInverse)
+	inline void SetGlobalInverse(const glm::mat4 & pGlobalInverse)
 	{
 		globalInverse = pGlobalInverse;
 	}
 
-	inline void SetNodes(const std::vector<Node *> pNodes)
+	inline void SetNodes(const std::vector<Node *> & pNodes)
 	{
 		nodes = pNodes;
 	}
@@ -69,7 +72,7 @@ public:
 
 	void Render(Shader * shader)override;
 
-	Bone * FindBone(std::string name);
+	Bone * FindBone(const std::string & name);
 
 	void UpdateBoneMatsVector();
 

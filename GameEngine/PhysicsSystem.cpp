@@ -57,8 +57,8 @@ void PhysicsSystem::Action(void)
 		glm::vec3 position = ((ComponentPosition *)componentPosition)->GetUpdatePosition();
 		glm::quat direction = ((ComponentDirection *)componentDirection)->GetUpdateDirection();
 		CollisionShape* const shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
-		float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
-		bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
+		const float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
+		const bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
 		glm::vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
 
 		RigidBody * rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
@@ -72,24 +72,24 @@ void PhysicsSystem::Action(void)
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{
-		iComponent * componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
-		iComponent * componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
-		iComponent * componentPhysics = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_PHYSICS);
+		iComponent * const componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);
+		iComponent * const componentDirection = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_DIRECTION);
+		iComponent * const componentPhysics = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_PHYSICS);
 
 		Motion(((ComponentPosition *)componentPosition), ((ComponentDirection *)componentDirection), ((ComponentPhysics *)componentPhysics));
 	}
 }
 
-void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics)
+void PhysicsSystem::Motion(ComponentPosition * const position, ComponentDirection * const direction, ComponentPhysics * const physics)
 {
-	RigidBody * rigidBody = physics->GetUpdateRigidBody();
+	RigidBody * const rigidBody = physics->GetUpdateRigidBody();
 
 	if (physics->GetUpdateMass() != 0)
 	{
-		glm::vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
-		glm::quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
+		const glm::vec3 positionVec = physicsManager->GetPositionOfRigidBody(rigidBody);
+		const glm::quat directionQuat = physicsManager->GetDirectionOfRigidBody(rigidBody);
 
-		glm::vec3 zero = glm::vec3(0);
+		const glm::vec3 zero = glm::vec3(0);
 		glm::vec3 velocity = physics->GetUpdateVelocity();
 		physicsManager->ApplyVelocity(rigidBody, velocity);
 		physics->SetUpdateVelocity(zero);
@@ -111,8 +111,8 @@ void PhysicsSystem::Motion(ComponentPosition * position, ComponentDirection * di
 	}
 	else
 	{
-		glm::vec3 positionVec = position->GetUpdatePosition();
-		glm::quat directionQuat = direction->GetUpdateDirection();
+		const glm::vec3 positionVec = position->GetUpdatePosition();
+		const glm::quat directionQuat = direction->GetUpdateDirection();
 
 		physicsManager->SetPositionOfRigidBody(rigidBody, positionVec);
 		physicsManager->SetDirectionOfRigidBody(rigidBody, directionQuat);

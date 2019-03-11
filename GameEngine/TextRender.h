@@ -43,9 +43,12 @@ public:
 		return instance;
 	}
 
-	void RenderText(std::string text, PixelLocation pPixelLocation, glm::vec3 colour);
-	PixelLocation CalculateSize(std::string text, glm::vec2 location, float size, std::string align);
+	void RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour);
+	PixelLocation CalculateSize(const std::string & text, const glm::vec2 & location, float size, const std::string & align);
 
 	~TextRender();
+
+	TextRender& operator=(const TextRender&) = delete;
+	TextRender(TextRender&) = delete;
 };
 

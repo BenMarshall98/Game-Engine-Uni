@@ -58,6 +58,7 @@ private:
 	static int lua_CloseWindow(lua_State * luaState);
 
 	static int lua_CreateEntity(lua_State * luaState);
+	static int lua_GetEntity(lua_State * luaState);
 	static int lua_AddComponentAnimation(lua_State * luaState);
 	static int lua_CreateAIStateMachine(lua_State * luaState);
 	static int lua_CreatePathFinder(lua_State * luaState);
@@ -86,6 +87,8 @@ private:
 	static int lua_AddComponentState(lua_State * luaState);
 	static int lua_AddComponentTexture(lua_State * luaState);
 	static int lua_FinishEntity(lua_State * luaState);
+
+	static int lua_DisplayText(lua_State * luaState);
 
 	ScriptingManager();
 

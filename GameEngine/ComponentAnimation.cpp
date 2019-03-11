@@ -1,6 +1,6 @@
 #include "ComponentAnimation.h"
 
-ComponentAnimation::ComponentAnimation(std::string pFunction) : function(pFunction)
+ComponentAnimation::ComponentAnimation(std::string & pFunction) : function(pFunction)
 {
 }
 
@@ -17,7 +17,7 @@ void ComponentAnimation::RenderSwap()
 {
 }
 
-std::string ComponentAnimation::GetFunction()
+std::string & ComponentAnimation::GetFunction()
 {
 	return function;
 }

@@ -74,7 +74,9 @@
     }
   ],
   "Scripts": [
-    "Scripts/PlatformerFunctions.lua"
+    "Scripts/PlatformerPlayerFunctions.lua",
+    "PlatformerCoinFunctions.lua",
+    "PlatformerSceneFunctions.lua"
   ],
   "EntityTemplate": [
     {
@@ -190,6 +192,13 @@
           "Component": "Audio",
           "Audio": "CollectableNear",
           "Playback": "Play"
+        },
+        {
+          "Component": "Animation",
+          "Function": "SpinCoin"
+        },
+        {
+          "Component": "State"
         }
       ]
     }
@@ -229,6 +238,10 @@
             {
               "EntityType": "WALL",
               "Function": "HitGround"
+            },
+            {
+              "EntityType": "COLLECTABLE",
+              "Function": "CollectCoin"
             }
           ]
         },
@@ -267,6 +280,9 @@
               ]
             }
           ]
+        },
+        {
+          "Component": "State"
         }
       ]
     }
@@ -312,6 +328,9 @@
     "Update": [
       {
         "System": "Input"
+      },
+      {
+        "System": "Animation"
       },
       {
         "System": "Physics"

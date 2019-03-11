@@ -15,8 +15,11 @@ private:
 	unsigned int VAO, VBO[5], EBO;
 
 public:
-	Mesh(std::vector<glm::vec3> pVertex, std::vector<glm::vec3> pNormal, std::vector<glm::vec2> pTextures, std::vector<glm::vec4> pWeights, std::vector<glm::ivec4> pIds, std::vector<int> pIndices);
+	Mesh(std::vector<glm::vec3> & pVertex, std::vector<glm::vec3> & pNormal, std::vector<glm::vec2> & pTextures, std::vector<glm::vec4> & pWeights, std::vector<glm::ivec4> & pIds, std::vector<int> pIndices);
 	~Mesh();
+
+	Mesh& operator=(const Mesh&) = delete;
+	Mesh(Mesh&) = delete;
 
 	void Render();
 };

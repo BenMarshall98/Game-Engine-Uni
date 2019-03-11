@@ -20,6 +20,9 @@ struct Directional
 
 struct PointLight
 {
+	PointLight() {};
+	PointLight& operator=(const PointLight&) = delete;
+	PointLight(PointLight&) = delete;
 	glm::vec3 location;
 	glm::vec3 lightColour;
 	ShadowFrameBuffer * shadowTexture;
@@ -29,6 +32,9 @@ struct PointLight
 
 struct SpotLight
 {
+	SpotLight() {};
+	SpotLight& operator=(const SpotLight&) = delete;
+	SpotLight(SpotLight&) = delete;
 	glm::vec3 location;
 	glm::vec3 direction;
 	glm::vec3 lightColour;
@@ -108,7 +114,7 @@ public:
 		return directional;
 	}
 
-	inline ShadowFrameBuffer GetDirectionalFramebuffer()
+	inline ShadowFrameBuffer & GetDirectionalFramebuffer()
 	{
 		return directionalShadowTexture;
 	}

@@ -30,7 +30,7 @@ void * BulletRigidBody::GetRigidBody()
 	return rigidBody;
 }
 
-void BulletRigidBody::SetPosition(const glm::vec3 pPosition)
+void BulletRigidBody::SetPosition(const glm::vec3 & pPosition)
 {
 	const btVector3 origin(pPosition.x, pPosition.y, pPosition.z);
 
@@ -39,7 +39,7 @@ void BulletRigidBody::SetPosition(const glm::vec3 pPosition)
 	rigidBody->setWorldTransform(transform);
 }
 
-void BulletRigidBody::SetDirection(const glm::quat pRotation)
+void BulletRigidBody::SetDirection(const glm::quat & pRotation)
 {
 	const btQuaternion rotation(pRotation.x, pRotation.y, pRotation.z, pRotation.w);
 

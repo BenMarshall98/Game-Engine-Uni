@@ -15,7 +15,7 @@ private:
 	glm::mat4 offsetMatrix;
 
 public:
-	Bone(std::string pName, Node * const pNode, AnimNode * const pAnimNode, glm::mat4 pOffsetMatrix) :
+	Bone(std::string & pName, Node * const pNode, AnimNode * const pAnimNode, glm::mat4 & pOffsetMatrix) :
 		name(pName), node(pNode), animNode(pAnimNode), offsetMatrix(pOffsetMatrix), parentBone(nullptr)
 	{
 
@@ -23,17 +23,20 @@ public:
 
 	~Bone();
 
+	Bone& operator=(const Bone&) = delete;
+	Bone(Bone&) = delete;
+
 	inline void SetParentBone(Bone * const pParentBone)
 	{
 		parentBone = pParentBone;
 	}
 
-	inline std::string GetName()
+	inline std::string & GetName()
 	{
 		return name;
 	}
 
-	inline glm::mat4 GetOffsetMatrix()
+	inline glm::mat4 & GetOffsetMatrix()
 	{
 		return offsetMatrix;
 	}

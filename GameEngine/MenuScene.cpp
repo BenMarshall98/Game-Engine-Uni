@@ -6,7 +6,7 @@
 
 #undef LoadMenu
 
-MenuScene::MenuScene(const std::string pFileName) : iScene(pFileName)
+MenuScene::MenuScene(const std::string & pFileName) : iScene(pFileName)
 {
 }
 

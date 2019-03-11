@@ -9,7 +9,7 @@ private:
 	float time;
 
 public:
-	QuatAnimKey(float pTime, glm::quat pValue) : time(pTime), value(pValue) {}
+	QuatAnimKey(const float pTime, glm::quat & pValue) : time(pTime), value(pValue) {}
 	~QuatAnimKey();
 
 	inline float GetTime()
@@ -17,7 +17,7 @@ public:
 		return time;
 	}
 
-	inline glm::quat GetValue()
+	inline glm::quat & GetValue()
 	{
 		return value;
 	}

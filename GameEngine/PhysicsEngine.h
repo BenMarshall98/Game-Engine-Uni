@@ -12,7 +12,7 @@ public:
 	PhysicsEngine();
 	virtual ~PhysicsEngine();
 
-	virtual RigidBody * AddRigidBody(float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * shape, Entity * entity, bool collisionResponse, glm::vec3 & angularLimit) = 0;
+	virtual RigidBody * AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, bool collisionResponse, const glm::vec3 & angularLimit) = 0;
 	virtual void RemoveRigidBody(RigidBody * pRigidBody) = 0;
 
 	virtual void Update(float pDeltaTime) = 0;
@@ -27,32 +27,32 @@ public:
 		return pRigidBody->GetDirection();
 	}
 
-	inline void SetPositionOfRigidBody(RigidBody * const pRigidBody, const glm::vec3 pPosition)
+	inline void SetPositionOfRigidBody(RigidBody * const pRigidBody, const glm::vec3 & pPosition)
 	{
 		pRigidBody->SetPosition(pPosition);
 	}
 
-	inline void SetDirectionOfRigidBody(RigidBody * const pRigidBody, const glm::quat pDirection)
+	inline void SetDirectionOfRigidBody(RigidBody * const pRigidBody, const glm::quat & pDirection)
 	{
 		pRigidBody->SetDirection(pDirection);
 	}
 
-	inline void ApplyVelocity(RigidBody * const pRigidBody, glm::vec3 & velocity)
+	inline void ApplyVelocity(RigidBody * const pRigidBody, const glm::vec3 & velocity)
 	{
 		pRigidBody->ApplyVelocity(velocity);
 	}
 
-	inline void ApplyImpulse(RigidBody * const cpRigidBody, glm::vec3 & impulse)
+	inline void ApplyImpulse(RigidBody * const pRigidBody, const glm::vec3 & impulse)
 	{
 		pRigidBody->ApplyImpulse(impulse);
 	}
 
-	inline void ApplyRotation(RigidBody * const pRigidBody, glm::vec3 & rotation)
+	inline void ApplyRotation(RigidBody * const pRigidBody, const glm::vec3 & rotation)
 	{
 		pRigidBody->ApplyRotation(rotation);
 	}
 	
-	virtual bool ClearBetweenPoints(glm::vec3 position1, glm::vec3 position2) = 0;
+	virtual bool ClearBetweenPoints(const glm::vec3 & position1, const glm::vec3 & position2) = 0;
 
 };
 

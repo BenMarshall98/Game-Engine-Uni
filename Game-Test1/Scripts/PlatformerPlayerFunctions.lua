@@ -1,11 +1,6 @@
 local Vector3 = require("Scripts/Vector3")
 local wasTouchingGround = false
 
-function DeleteCoin(entity)
-	PlayAudio("Collectable")
-	DeleteEntity(entity)
-end
-
 function HitGround(entity)
 	if wasTouchingGround == false then
 		local ComponentPhysics = GetComponentPhysics(entity)
@@ -16,6 +11,13 @@ function HitGround(entity)
 			wasTouchingGround = true
 		end
 	end
+end
+
+function CollectCoin(entity)
+	local ComponentState = GetComponentState(entity)
+	local currentScore = GetValue(ComponentState, "CoinsCollected", "integer", 0);
+	currentScore = currentScore + 1
+	SetValue(ComponentState, "CoinsCollected", currentScore)
 end
 
 function PlayerLeft(entity, inputValue, deltaTime)

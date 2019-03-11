@@ -15,7 +15,7 @@ private:
 		ComponentType::COMPONENT_ANIMATION
 	};
 
-	static void Animation(std::string function, Entity * entity);
+	static void Animation(const std::string & function, Entity * entity);
 
 public:
 	AnimationSystem();

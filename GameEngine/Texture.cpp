@@ -20,8 +20,8 @@ bool Texture::LoadTexture(const std::string & fileName)
 	int width, height, numChannels;
 	stbi_set_flip_vertically_on_load(true);
 
-	unsigned char * image = stbi_load(fileName.c_str(), &width, &height, &numChannels, 3);
-	bool success = image;
+	unsigned char * const image = stbi_load(fileName.c_str(), &width, &height, &numChannels, 3);
+	const bool success = image;
 
 	if (success)
 	{

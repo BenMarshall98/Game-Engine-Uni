@@ -2,7 +2,7 @@
 
 #include "ScriptingManager.h"
 
-Button::Button(const std::string pText, const std::string pAlign, const float pFontSize, const glm::vec3 pFontColour, glm::vec3 pHighlighted, const glm::vec2 pLocation, std::string pFunction) :
+Button::Button(const std::string & pText, const std::string & pAlign, const float pFontSize, const glm::vec3 & pFontColour, const glm::vec3 & pHighlighted, const glm::vec2 & pLocation, const std::string & pFunction) :
 	MenuItem(MenuType::Button, pText, pAlign, pFontSize, pFontColour, pLocation), highlightColour(pHighlighted), function(pFunction)
 {
 }

@@ -14,12 +14,12 @@ public:
 	virtual glm::quat GetDirection() = 0;
 	virtual void * GetRigidBody() = 0;
 
-	virtual void SetPosition(glm::vec3 position) = 0;
-	virtual void SetDirection(glm::quat direction) = 0;
+	virtual void SetPosition(const glm::vec3 & position) = 0;
+	virtual void SetDirection(const glm::quat & direction) = 0;
 
-	virtual void ApplyVelocity(glm::vec3 & velocity) = 0;
-	virtual void ApplyImpulse(glm::vec3 & impulse) = 0;
-	virtual void ApplyRotation(glm::vec3 & rotation) = 0;
+	virtual void ApplyVelocity(const glm::vec3 & velocity) = 0;
+	virtual void ApplyImpulse(const glm::vec3 & impulse) = 0;
+	virtual void ApplyRotation(const glm::vec3 & rotation) = 0;
 
 	
 };
