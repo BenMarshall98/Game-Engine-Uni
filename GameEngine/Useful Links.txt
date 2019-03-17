@@ -12,20 +12,21 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //DONE: build a finite state machine ai, using lua to store and decide on states
 //DONE: build a simple path following ai
 //DONE: build a A* pathfinding alogirthm (that does not get stuck)
+//DONE: resource manager to have a count map for number of times a resource is used, only delete once resource is not used anymore
+//DONE: build a way to create entities in lua
+//DONE: Turn componenttypes array into vector and do removing / adding in the isystem class
+
 //TODO: work on the animation model, see if that can be fixed
 //TODO: work on a menu system
 //TODO: build a animation system (for coins and the like)
 //TODO: build methods to control the camera using input
 //TODO: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
-//DONE: resource manager to have a count map for number of times a resource is used, only delete once resource is not used anymore
 //TODO: look at the lifetime of the audio engine
 //TODO: pause and unpause music when in pause menu
 //TODO: deal with removing audio in the resource manager when refactoring the audio manager
 //TODO: create the render manager
-//DONE: build a way to create entities in lua
 //TODO: look at when the 'guard' goes back to its post
 //TODO: move bone mats out of the rigged animation
-//TODO: Turn componenttypes array into vector and do removing / adding in the isystem class
 //TODO: Give the option to output log to a file instead of cout
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds

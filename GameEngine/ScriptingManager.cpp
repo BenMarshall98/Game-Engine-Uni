@@ -26,6 +26,7 @@
 #include "SceneManager.h"
 #include "MenuScene.h"
 #include "GameScene.h"
+#include "TextRender.h"
 #include <sstream>
 
 extern "C"
@@ -1803,6 +1804,31 @@ int ScriptingManager::lua_CreateEntity(lua_State * const luaState)
 	return 1;
 }
 
+int ScriptingManager::lua_GetEntity(lua_State * const luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: GetEntity");
+		lua_error(luaState);
+	}
+
+	std::string entityName = lua_tostring(luaState, 1);
+
+	Entity * entity = EntityManager::Instance()->GetEntityByName(entityName);
+
+	if (!entity)
+	{
+		std::string message = "Entity " + entityName + " does not exist";
+		lua_pushstring(luaState, message.c_str());
+		lua_error(luaState);
+	}
+
+	lua_pushlightuserdata(luaState, entity);
+	return 1;
+}
+
 int ScriptingManager::lua_AddComponentAnimation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2667,6 +2693,44 @@ int ScriptingManager::lua_FinishEntity(lua_State * const luaState)
 	return 0;
 }
 
+int ScriptingManager::lua_DisplayText(lua_State * const luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 6)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: DisplayText");
+		lua_error(luaState);
+	}
+
+	std::string displayText = lua_tostring(luaState, 1);
+	std::string align = lua_tostring(luaState, 2);
+
+	float XPos = lua_tonumber(luaState, 3);
+	float YPos = lua_tonumber(luaState, 4);
+
+	glm::vec2 location(XPos, YPos);
+
+	float fontSize = lua_tonumber(luaState, 5);
+
+	lua_getfield(luaState, 6, "x");
+	lua_getfield(luaState, 6, "y");
+	lua_getfield(luaState, 6, "z");
+
+	double x = lua_tonumber(luaState, -3);
+	double y = lua_tonumber(luaState, -2);
+	double z = lua_tonumber(luaState, -1);
+
+	lua_pop(luaState, 3);
+
+	glm::vec3 colour(x, y, z);
+
+	PixelLocation pixelLocation = TextRender::Instance()->CalculateSize(displayText, location, fontSize, align);
+	TextRender::Instance()->RenderText(displayText, pixelLocation, colour);
+
+	return 0;
+}
+
 void ScriptingManager::RunScriptFromCollision(const std::string & function, Entity * const entity) const
 {
 	lua_getglobal(luaVM, function.c_str());
@@ -2711,7 +2775,7 @@ void ScriptingManager::RunScriptForStateAI(const std::string & function, Entity 
 	}
 }
 
-void ScriptingManager::RunScriptFromInput(const std::string & function)
+void ScriptingManager::RunScriptFromScene(const std::string & function)
 {
 	lua_getglobal(luaVM, function.c_str());
 

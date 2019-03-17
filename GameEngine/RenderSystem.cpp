@@ -16,45 +16,19 @@
 #include <string>
 #include <algorithm>
 
-RenderSystem::RenderSystem() : updateFirst(true), entityManager(EntityManager::Instance()), camera(CameraManager::Instance()->GetCamera()), projection(CameraManager::Instance()->GetProjection())
+RenderSystem::RenderSystem() : iSystem(std::vector<ComponentType>{
+	ComponentType::COMPONENT_MODEL,
+	ComponentType::COMPONENT_SHADER,
+	ComponentType::COMPONENT_POSITION,
+	ComponentType::COMPONENT_TEXTURE,
+	ComponentType::COMPONENT_DIRECTION
+}), updateFirst(true), camera(CameraManager::Instance()->GetCamera()), projection(CameraManager::Instance()->GetProjection())
 {
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
-}
-
-void RenderSystem::RemoveEntity(Entity * const pEntity)
-{
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		EntityList.erase(it);
-	}
-}
-
-void RenderSystem::AddEntity(Entity * const pEntity)
-{
-	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
-	bool containsEntity = false;
-
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		containsEntity = true;
-	}
-
-	if (containsEntity && !containsComponents)
-	{
-		EntityList.erase(it);
-	}
-	else if (!containsEntity && containsComponents)
-	{
-		EntityList.push_back(pEntity);
-	}
 }
 
 void RenderSystem::Action(void)
 {
+	EntityManager * entityManager = EntityManager::Instance();
 	glViewport(0, 0, GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glm::mat4 perspectiveMatrix = projection->GetProjection();

@@ -10,14 +10,6 @@
 class RiggedAnimationSystem : public iSystem
 {
 private:
-	std::vector<Entity *> EntityList;
-	EntityManager * entityManager;
-
-	ComponentType componentTypes[2] = {
-		ComponentType::COMPONENT_MODEL,
-		ComponentType::COMPONENT_RIGGED_ANIMATION
-	};
-
 	static void Animate(AnimatedModel * animatedModel, ComponentRiggedAnimation * riggedAnimation);
 	
 public:
@@ -28,7 +20,5 @@ public:
 	RiggedAnimationSystem(RiggedAnimationSystem&) = delete;
 
 	void Action(void) override;
-	void RemoveEntity(Entity * pEntity) override;
-	void AddEntity(Entity * pEntity) override;
 };
 

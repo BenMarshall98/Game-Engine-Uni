@@ -52,6 +52,8 @@ public:
 	glm::vec3 CalcInterpolatedPosition(float time);
 	unsigned int FindRotation(float time);
 	glm::quat CalcInterpolatedRotation(float time);
+	unsigned int FindScale(float time);
+	glm::vec3 CalcInterpolatedScale(float time);
 
 	void UpdateKeyframeTransform(float time);
 };

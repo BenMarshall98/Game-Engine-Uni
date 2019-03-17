@@ -31,7 +31,7 @@ void Button::Render()
 
 void Button::Select()
 {
-	ScriptingManager::Instance()->RunScriptFromInput(function);
+	ScriptingManager::Instance()->RunScriptFromScene(function);
 }
 
 void Button::Highlight()

@@ -1,13 +1,21 @@
 #pragma once
 #include "Entity.h"
+#include "iComponent.h"
+#include <vector>
+
 class iSystem
 {
+protected:
+	const std::vector<ComponentType> componentTypes;
+	std::vector<Entity *> EntityList;
+
 public:
-	iSystem();
+	iSystem(std::vector<ComponentType> pComponentTypes);
 	virtual ~iSystem();
 
 	virtual void Action() = 0;
-	virtual void RemoveEntity(Entity * pEntity) = 0;
-	virtual void AddEntity(Entity * pEntity) = 0;
+
+	virtual void RemoveEntity(Entity * pEntity);
+	virtual void AddEntity(Entity * pEntity);
 };
 

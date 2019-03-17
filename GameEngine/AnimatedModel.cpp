@@ -20,7 +20,7 @@ void AnimatedModel::Render(Shader * const shader)
 	{
 		int boneLocation = glGetUniformLocation(shader->ShaderID(), ("Bones[" + std::to_string(i) + ']').c_str());
 
-		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, glm::value_ptr(boneMats[i]));
+		glUniformMatrix4fv(boneLocation, 1, GL_FALSE, glm::value_ptr(boneMats[i]));
 	}
 
 	for (int i = 0; i < meshes.size(); i++)

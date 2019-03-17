@@ -43,7 +43,7 @@
 #include <fstream>
 #include <iostream>
 
-void LevelLoader::LoadLevelJSON(std::string & fileName)
+std::string LevelLoader::LoadLevelJSON(std::string & fileName)
 {
 	std::ifstream in(fileName);
 
@@ -69,7 +69,7 @@ void LevelLoader::LoadLevelJSON(std::string & fileName)
 		const int line = GetLine(fullFile, loc);
 		const std::string message = "Error on line: " + std::to_string(line) + " of file " + fileName + ". Error is: " + error;
 		LoggingManager::LogMessage(MESSAGE_TYPE::SEVERE, message);
-		return;
+		return "";
 	}
 
 	if (d.HasMember("Resources"))
@@ -129,6 +129,13 @@ void LevelLoader::LoadLevelJSON(std::string & fileName)
 	}
 
 	templates.clear();
+
+	if (d.HasMember("Scene Script"))
+	{
+		return d["Scene Script"].GetString();
+	}
+
+	return "";
 }
 
 void LevelLoader::LoadResourcesJSON(const rapidjson::Value& Resources)

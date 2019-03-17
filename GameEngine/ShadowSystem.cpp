@@ -11,11 +11,13 @@
 #include "glm/gtx/quaternion.hpp"
 #include <algorithm>
 
-ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoord) :
-	mTopLeftCoord(topLeftCoord), mBottomRightCoord(bottomRightCoord), entityManager(EntityManager::Instance())
+ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoord) : iSystem(std::vector<ComponentType>{
+	ComponentType::COMPONENT_MODEL,
+	ComponentType::COMPONENT_POSITION,
+	ComponentType::COMPONENT_DIRECTION,
+	ComponentType::COMPONENT_SHADOW_SHADER
+}),	mTopLeftCoord(topLeftCoord), mBottomRightCoord(bottomRightCoord)
 {
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
-
 	for (int i = 0; i < 6; i++)
 	{
 		const std::string view = "shadowView[" + std::to_string(i) + ']';
@@ -23,40 +25,9 @@ ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoor
 	}
 }
 
-void ShadowSystem::RemoveEntity(Entity * const pEntity)
-{
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		EntityList.erase(it);
-	}
-}
-
-void ShadowSystem::AddEntity(Entity * const pEntity)
-{
-	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
-	bool containsEntity = false;
-
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		containsEntity = true;
-	}
-
-	if (containsEntity && !containsComponents)
-	{
-		EntityList.erase(it);
-	}
-	else if (!containsEntity && containsComponents)
-	{
-		EntityList.push_back(pEntity);
-	}
-}
-
 void ShadowSystem::Action(void)
 {
+	EntityManager * entityManager = EntityManager::Instance();
 	std::vector<iModel *> models;
 	std::vector<glm::vec3> positions;
 	std::vector<glm::quat> directions;

@@ -189,7 +189,7 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 
 	std::vector<Bone *> bones;
 
-	RecursiveNodeProcess(nodes, scene->mRootNode);
+	RecursiveNodeProcess(nodes, scene->mRootNode, nullptr);
 	AnimNodeProcess(animatedModel, scene);
 
 	const glm::mat4 globalInverseTransform = AiToGLMMat4(scene->mRootNode->mTransformation);
@@ -261,11 +261,11 @@ Mesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const 
 	{
 		const aiVector3D aiVertex = pMesh->mVertices[i];
 		const aiVector3D aiNormal = pMesh->mNormals[i];
-		aiVector3D * const aiTexture = pMesh->mTextureCoords[i];
+		aiVector3D aiTexture = pMesh->HasTextureCoords(0) ? pMesh->mTextureCoords[0][i] : aiVector3D(0);
 
 		const glm::vec3 vertex = glm::vec3(aiVertex.x, aiVertex.y, aiVertex.z);
 		const glm::vec3 normal = glm::vec3(aiNormal.x, aiNormal.y, aiNormal.z);
-		const glm::vec2 texture = glm::vec2(aiTexture->x, aiTexture->y);
+		const glm::vec2 texture = glm::vec2(aiTexture.x, aiTexture.y);
 
 		vertexes.push_back(vertex);
 		normals.push_back(normal);
@@ -330,18 +330,17 @@ Mesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const 
 }
 
 
-void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * const pNode)
+void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * const pNode, Node * parentNode)
 {
 	std::string name = pNode->mName.data;
 	glm::mat4 trans = AiToGLMMat4(pNode->mTransformation);
 	Node * const node = new Node(name, trans);
-
+	node->SetParent(parentNode);
 	nodes.push_back(node);
 
 	for (int i = 0; i < pNode->mNumChildren; i++)
 	{
-		RecursiveNodeProcess(nodes, pNode->mChildren[i]);
-		nodes.at(nodes.size() - 1)->SetParent(node);
+		RecursiveNodeProcess(nodes, pNode->mChildren[i], node);
 	}
 }
 

@@ -1,4 +1,5 @@
 {
+  "Scene Script": "PlatformerSceneDisplay",
   "Resources": [
     {
       "Type": "Texture",

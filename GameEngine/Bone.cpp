@@ -34,6 +34,19 @@ unsigned int Bone::FindRotation(const float time)
 	return 0;
 }
 
+unsigned int Bone::FindScale(const float time)
+{
+	for (unsigned int i = 0; i < animNode->GetScaleKeys().size() - 1; i++)
+	{
+		if (time < animNode->GetScaleKeys()[i + 1]->GetTime())
+		{
+			return i;
+		}
+	}
+
+	return 0;
+}
+
 glm::vec3 Bone::CalcInterpolatedPosition(const float time)
 {
 	if (animNode->GetPositionKeys().size() == 1)
@@ -57,6 +70,31 @@ glm::vec3 Bone::CalcInterpolatedPosition(const float time)
 	const glm::vec3 pos = mix(p1, p2, Factor);
 
 	return pos;
+}
+
+glm::vec3 Bone::CalcInterpolatedScale(const float time)
+{
+	if (animNode->GetScaleKeys().size() == 1)
+	{
+		const glm::vec3 sca = animNode->GetScaleKeys()[0]->GetValue();
+		return sca;
+	}
+	
+	const unsigned int ScaleIndex = FindScale(time);
+	const unsigned int NextScaleIndex = (ScaleIndex + 1);
+
+	const float sca1Time = animNode->GetScaleKeys()[ScaleIndex]->GetTime();
+	const float sca2Time = animNode->GetScaleKeys()[NextScaleIndex]->GetTime();
+
+	const float DeltaTime = sca2Time - sca1Time;
+	const float Factor = (time - sca1Time) / DeltaTime;
+
+	const glm::vec3 s1 = animNode->GetPositionKeys()[ScaleIndex]->GetValue();
+	const glm::vec3 s2 = animNode->GetPositionKeys()[NextScaleIndex]->GetValue();
+
+	const glm::vec3 sca = mix(s1, s2, Factor);
+
+	return sca;
 }
 
 glm::quat Bone::CalcInterpolatedRotation(const float time)
@@ -93,12 +131,16 @@ void Bone::UpdateKeyframeTransform(const float time)
 
 	const glm::vec3 pos = CalcInterpolatedPosition(time);
 	const glm::quat rot = CalcInterpolatedRotation(time);
-	const glm::vec3 sca(1.0);
+	//const glm::vec3 sca = CalcInterpolatedScale(time);
 
 	glm::mat4 mat(1.0);
-	mat *= translate(pos);
+	//mat *= scale(sca);
 	mat *= mat4_cast(rot);
-	mat *= scale(sca);
+	mat *= translate(pos);
+	
+	
+	
+	
 
 	mat = transpose(mat);
 

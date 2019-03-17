@@ -32,7 +32,7 @@ private:
 	static std::vector<InputFunction *> * LoadInputsJSON(const rapidjson::Value& Inputs);
 	static int GetLine(std::string & file, int location);
 public:
-	static void LoadLevelJSON(std::string & fileName);
+	static std::string LoadLevelJSON(std::string & fileName);
 	
 };
 

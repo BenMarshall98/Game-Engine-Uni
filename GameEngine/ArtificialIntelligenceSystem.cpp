@@ -3,46 +3,18 @@
 #include "ComponentDirection.h"
 
 
-ArtificialIntelligenceSystem::ArtificialIntelligenceSystem()
+ArtificialIntelligenceSystem::ArtificialIntelligenceSystem() : iSystem(std::vector<ComponentType>{
+	ComponentType::COMPONENT_POSITION,
+	ComponentType::COMPONENT_DIRECTION,
+	ComponentType::COMPONENT_PHYSICS,
+	ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE
+})
 {
-	entityManager = EntityManager::Instance();
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
-}
-
-void ArtificialIntelligenceSystem::RemoveEntity(Entity * const pEntity)
-{
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		EntityList.erase(it);
-	}
-}
-
-void ArtificialIntelligenceSystem::AddEntity(Entity * const pEntity)
-{
-	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
-	bool containsEntity = false;
-
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		containsEntity = true;
-	}
-
-	if (containsEntity && !containsComponents)
-	{
-		EntityList.erase(it);
-	}
-	else if (!containsEntity && containsComponents)
-	{
-		EntityList.push_back(pEntity);
-	}
 }
 
 void ArtificialIntelligenceSystem::Action(void)
 {
+	EntityManager * entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentIntelligence = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE);

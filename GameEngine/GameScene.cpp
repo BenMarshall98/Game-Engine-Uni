@@ -19,6 +19,7 @@
 #include "AudioManager.h"
 #include "BulletPhysicsEngine.h"
 #include "LevelLoader.h"
+#include "ScriptingManager.h"
 #include <iostream>
 
 GameScene::GameScene(const std::string & pFileName) : iScene(pFileName)
@@ -27,7 +28,7 @@ GameScene::GameScene(const std::string & pFileName) : iScene(pFileName)
 
 void GameScene::Load()
 {
-	LevelLoader::LoadLevelJSON(fileName);
+	function = LevelLoader::LoadLevelJSON(fileName);
 
 	PhysicsManager * const physicsManager = PhysicsManager::Instance();
 	physicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
@@ -43,6 +44,8 @@ void GameScene::Render()
 	SystemManager::Instance()->Render();
 
 	EntityManager::Instance()->Update();
+
+	ScriptingManager::Instance()->RunScriptFromScene(function);
 }
 
 void GameScene::Update()

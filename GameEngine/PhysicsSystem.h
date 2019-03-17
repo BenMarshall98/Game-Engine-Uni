@@ -14,17 +14,8 @@
 class PhysicsSystem : public iSystem
 {
 private:
-	std::vector<Entity *> EntityList;
 	std::vector<Entity *> newEntities;
-	EntityManager * entityManager;
 	PhysicsManager * physicsManager;
-
-	const ComponentType componentTypes[3] = {
-		ComponentType::COMPONENT_POSITION,
-		ComponentType::COMPONENT_DIRECTION,
-		ComponentType::COMPONENT_PHYSICS
-	};
-
 	void Motion(ComponentPosition * position, ComponentDirection * direction, ComponentPhysics * physics);
 
 public:
@@ -34,7 +25,6 @@ public:
 	PhysicsSystem(PhysicsSystem&) = delete;
 
 	void Action(void) override;
-	void RemoveEntity(Entity * pEntity) override;
 	void AddEntity(Entity * pEntity) override;
 	
 	~PhysicsSystem();

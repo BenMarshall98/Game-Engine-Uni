@@ -115,7 +115,7 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const Co
 	return nullptr;
 }
 
-std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const ComponentType * const componentName, const int size)
+std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(std::vector<ComponentType>componentName)
 {
 	std::vector<Entity *> entities;
 
@@ -124,7 +124,7 @@ std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const Componen
 		Entity * const entity = EntityList.at(i);
 		bool containsComponents = true;
 
-		for (int j = 0; j < size; j++)
+		for (int j = 0; j < componentName.size(); j++)
 		{
 			if (GetComponentOfEntity(entity, componentName[j]) == nullptr)
 			{
@@ -142,11 +142,11 @@ std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const Componen
 	return entities;
 }
 
-bool EntityManager::CheckEntityHasComponents(Entity * const entity, const ComponentType * const componentName, const int size)
+bool EntityManager::CheckEntityHasComponents(Entity * const entity, std::vector<ComponentType> componentName)
 {
 	bool containsComponents = true;
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < componentName.size(); i++)
 	{
 		if (GetComponentOfEntity(entity, componentName[i]) == nullptr)
 		{

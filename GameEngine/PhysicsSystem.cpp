@@ -7,25 +7,19 @@
 
 #include <algorithm>
 
-PhysicsSystem::PhysicsSystem() : physicsManager(PhysicsManager::Instance()), entityManager(EntityManager::Instance())
+PhysicsSystem::PhysicsSystem() : iSystem(std::vector<ComponentType>{
+	ComponentType::COMPONENT_POSITION,
+	ComponentType::COMPONENT_DIRECTION,
+	ComponentType::COMPONENT_PHYSICS
+}), physicsManager(PhysicsManager::Instance())
 {
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
 	newEntities = EntityList;
-}
-
-void PhysicsSystem::RemoveEntity(Entity * const pEntity)
-{
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		EntityList.erase(it);
-	}
 }
 
 void PhysicsSystem::AddEntity(Entity * const pEntity)
 {
-	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
+	EntityManager * entityManager = EntityManager::Instance();
+	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes);
 	bool containsEntity = false;
 
 	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
@@ -48,6 +42,7 @@ void PhysicsSystem::AddEntity(Entity * const pEntity)
 
 void PhysicsSystem::Action(void)
 {
+	EntityManager * entityManager = EntityManager::Instance();
 	for (int i = 0; i < newEntities.size(); i++)
 	{
 		iComponent * const componentPosition = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_POSITION);

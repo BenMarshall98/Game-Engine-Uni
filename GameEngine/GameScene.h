@@ -11,7 +11,7 @@
 class GameScene : public iScene
 {
 private:
-
+	std::string function = "";
 public:
 
 	explicit GameScene(const std::string & pFileName);

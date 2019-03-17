@@ -115,7 +115,7 @@ public:
 
 	void RunScriptForStateAI(const std::string & function, Entity * entity1, Entity * entity2, AIStateMachine * stateMachine, float deltaTime) const;
 
-	void RunScriptFromInput(const std::string & function);
+	void RunScriptFromScene(const std::string & function);
 
 	void RunScriptFromAnimation(const std::string & function, Entity * entity);
 

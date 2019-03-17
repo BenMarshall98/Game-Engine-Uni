@@ -23,7 +23,7 @@
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "Models/test.dae"
+      "Model": "Models/player4.dae"
     },
     {
       "Type": "Model",
@@ -85,7 +85,7 @@
     }
   ],
   "Scripts": [
-    "Scripts/3DLevelFunctions.lua",
+    "Scripts/3DLevelPlayerFunctions.lua",
     "3DLevelGuardFunctions.lua"
   ],
   "EntityTemplate": [
@@ -281,7 +281,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ 0, 1, 0 ]
+          "Position": [ 0, 0, 0 ]
         },
         {
           "Component": "RiggedAnimation",

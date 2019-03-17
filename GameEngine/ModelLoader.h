@@ -34,7 +34,7 @@ private:
 	static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat);
 	static glm::mat4 AiToGLMMat4(aiMatrix4x4& mat);
 
-	static void RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * node);
+	static void RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * node, Node * parentNode);
 	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);
 
 	static inline Bone * FindBone(std::vector<Bone *> bones, const std::string name)

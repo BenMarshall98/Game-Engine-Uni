@@ -2,46 +2,16 @@
 #include "ComponentAudio.h"
 #include "ComponentPosition.h"
 
-AudioSystem::AudioSystem()
+AudioSystem::AudioSystem() : iSystem(std::vector<ComponentType>{
+	ComponentType::COMPONENT_AUDIO,
+	ComponentType::COMPONENT_POSITION
+})
 {
-	entityManager = EntityManager::Instance();
-	EntityList = entityManager->GetAllEntitiesWithComponents(componentTypes, std::size(componentTypes));
-}
-
-void AudioSystem::RemoveEntity(Entity * const pEntity)
-{
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		EntityList.erase(it);
-	}
-}
-
-void AudioSystem::AddEntity(Entity * const pEntity)
-{
-	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes, std::size(componentTypes));
-	bool containsEntity = false;
-
-	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
-
-	if (it != EntityList.end())
-	{
-		containsEntity = true;
-	}
-
-	if (containsEntity && !containsComponents)
-	{
-		EntityList.erase(it);
-	}
-	else if (!containsEntity && containsComponents)
-	{
-		EntityList.push_back(pEntity);
-	}
 }
 
 void AudioSystem::Action(void)
 {
+	EntityManager * entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);

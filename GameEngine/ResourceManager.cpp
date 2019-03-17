@@ -287,7 +287,7 @@ void ResourceManager::ClearResources()
 	{
 		std::map<std::string, iModel *>::iterator it;
 
-		for (it = modelList.begin(); it != modelList.end(); it++)
+		for (it = modelList.begin(); it != modelList.end();)
 		{
 			std::map<std::string, int>::iterator count = modelUsage.find(it->first);
 
@@ -298,6 +298,12 @@ void ResourceManager::ClearResources()
 
 				modelList.erase(it);
 				modelUsage.erase(count);
+
+				it = modelList.begin();
+			}
+			else
+			{
+				it++;
 			}
 		}
 	}
@@ -305,7 +311,7 @@ void ResourceManager::ClearResources()
 	{
 		std::map<std::string, Texture *>::iterator it;
 
-		for (it = textureList.begin(); it != textureList.end(); it++)
+		for (it = textureList.begin(); it != textureList.end();)
 		{
 			std::map<std::string, int>::iterator count = textureUsage.find(it->first);
 
@@ -316,6 +322,12 @@ void ResourceManager::ClearResources()
 
 				textureList.erase(it);
 				textureUsage.erase(count);
+
+				it = textureList.begin();
+			}
+			else
+			{
+				it++;
 			}
 		}
 	}
@@ -323,7 +335,7 @@ void ResourceManager::ClearResources()
 	{
 		std::map<std::string, Shader *>::iterator it;
 
-		for (it = shaderList.begin(); it != shaderList.end(); it++)
+		for (it = shaderList.begin(); it != shaderList.end();)
 		{
 			std::map<std::string, int>::iterator count = shaderUsage.find(it->first);
 
@@ -334,6 +346,12 @@ void ResourceManager::ClearResources()
 
 				shaderList.erase(it);
 				shaderUsage.erase(count);
+
+				it = shaderList.begin();
+			}
+			else
+			{
+				it++;
 			}
 		}
 	}
@@ -341,7 +359,7 @@ void ResourceManager::ClearResources()
 	{
 		std::map<std::string, void *>::iterator it;
 
-		for (it = audioBufferList.begin(); it != audioBufferList.end(); it++)
+		for (it = audioBufferList.begin(); it != audioBufferList.end();)
 		{
 			std::map<std::string, int>::iterator count = audioBufferUsage.find(it->first);
 
@@ -352,6 +370,12 @@ void ResourceManager::ClearResources()
 
 				audioBufferList.erase(it);
 				audioBufferUsage.erase(count);
+
+				it = audioBufferList.begin();
+			}
+			else
+			{
+				it++;
 			}
 		}
 	}
