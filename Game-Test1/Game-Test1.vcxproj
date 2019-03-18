@@ -85,6 +85,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\Assimp\code\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,6 +104,9 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\538704\source\repos\Game-Engine\FreeType\include;../;$(SolutionDir)\GameEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\Assimp\code\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -230,6 +234,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Assimp\code\assimp.vcxproj">
+      <Project>{42236bef-0ed7-3426-a4e7-08166a101882}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\GameEngine\GameEngine.vcxproj">
       <Project>{5d68cae3-7845-4e1f-9ca5-1b560135c1eb}</Project>
     </ProjectReference>
@@ -256,6 +263,7 @@
     <None Include="HitBoxMainMenu.lua" />
     <None Include="Models\Test.dae" />
     <None Include="Options.json" />
+    <None Include="packages.config" />
     <None Include="Pause.json" />
     <None Include="PauseMenu.lua" />
     <None Include="PlatformerCoinFunctions.lua" />
@@ -285,8 +293,6 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\glm.0.9.9\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.9\build\native\glm.targets')" />
     <Import Project="..\packages\glfw.3.2.1.5\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.2.1.5\build\native\glfw.targets')" />
-    <Import Project="..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets" Condition="Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" />
-    <Import Project="..\packages\Assimp.3.0.0\build\native\Assimp.targets" Condition="Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -294,7 +300,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\glm.0.9.9\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.9\build\native\glm.targets'))" />
     <Error Condition="!Exists('..\packages\glfw.3.2.1.5\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.2.1.5\build\native\glfw.targets'))" />
-    <Error Condition="!Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.3.0.0\build\native\Assimp.targets'))" />
   </Target>
 </Project>

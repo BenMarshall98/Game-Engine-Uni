@@ -23,7 +23,7 @@
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "Models/personanim.dae"
+      "Model": "Models/playeranim.dae"
     },
     {
       "Type": "Model",

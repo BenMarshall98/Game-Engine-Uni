@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include "glm/glm.hpp"
-#include "assimp/scene.h"
+#include "Assimp/include/assimp/scene.h"
 
 class ModelLoader
 {

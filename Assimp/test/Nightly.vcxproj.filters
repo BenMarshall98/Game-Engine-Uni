@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\Assimp\CMakeFiles\186159bee309d4821ecbbb5cdb151aca\Nightly.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ben32\Desktop\assimp-4.0.1\assimp-4.0.1\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\Assimp\test\CMakeFiles\Nightly" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{463FDD87-AC1D-3D53-BD38-1B48BB3F6635}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
