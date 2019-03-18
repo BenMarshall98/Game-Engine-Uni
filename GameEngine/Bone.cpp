@@ -9,7 +9,7 @@ Bone::~Bone()
 
 }
 
-unsigned int Bone::FindPosition(const float time)
+unsigned int Bone::FindPosition(AnimNode * animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetPositionKeys().size() - 1; i++)
 	{
@@ -21,7 +21,7 @@ unsigned int Bone::FindPosition(const float time)
 	return 0;
 }
 
-unsigned int Bone::FindRotation(const float time)
+unsigned int Bone::FindRotation(AnimNode * animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetRotationKeys().size() - 1; i++)
 	{
@@ -34,7 +34,7 @@ unsigned int Bone::FindRotation(const float time)
 	return 0;
 }
 
-unsigned int Bone::FindScale(const float time)
+unsigned int Bone::FindScale(AnimNode * animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetScaleKeys().size() - 1; i++)
 	{
@@ -47,7 +47,7 @@ unsigned int Bone::FindScale(const float time)
 	return 0;
 }
 
-glm::vec3 Bone::CalcInterpolatedPosition(const float time)
+glm::vec3 Bone::CalcInterpolatedPosition(AnimNode * animNode, const float time)
 {
 	if (animNode->GetPositionKeys().size() == 1)
 	{
@@ -55,7 +55,7 @@ glm::vec3 Bone::CalcInterpolatedPosition(const float time)
 		return pos;
 	}
 
-	const unsigned int PositionIndex = FindPosition(time);
+	const unsigned int PositionIndex = FindPosition(animNode, time);
 	const unsigned int NextPositionIndex = (PositionIndex + 1);
 
 	const float pos1Time = animNode->GetPositionKeys()[PositionIndex]->GetTime();
@@ -72,7 +72,7 @@ glm::vec3 Bone::CalcInterpolatedPosition(const float time)
 	return pos;
 }
 
-glm::vec3 Bone::CalcInterpolatedScale(const float time)
+glm::vec3 Bone::CalcInterpolatedScale(AnimNode * animNode, const float time)
 {
 	if (animNode->GetScaleKeys().size() == 1)
 	{
@@ -80,7 +80,7 @@ glm::vec3 Bone::CalcInterpolatedScale(const float time)
 		return sca;
 	}
 	
-	const unsigned int ScaleIndex = FindScale(time);
+	const unsigned int ScaleIndex = FindScale(animNode, time);
 	const unsigned int NextScaleIndex = (ScaleIndex + 1);
 
 	const float sca1Time = animNode->GetScaleKeys()[ScaleIndex]->GetTime();
@@ -97,7 +97,7 @@ glm::vec3 Bone::CalcInterpolatedScale(const float time)
 	return sca;
 }
 
-glm::quat Bone::CalcInterpolatedRotation(const float time)
+glm::quat Bone::CalcInterpolatedRotation(AnimNode * animNode, const float time)
 {
 	if (animNode->GetRotationKeys().size() == 1)
 	{
@@ -105,7 +105,7 @@ glm::quat Bone::CalcInterpolatedRotation(const float time)
 		return rot;
 	}
 
-	const unsigned int RotationIndex = FindRotation(time);
+	const unsigned int RotationIndex = FindRotation(animNode, time);
 	const unsigned int NextRotationIndex = (RotationIndex + 1);
 
 	const float rot1Time = animNode->GetRotationKeys()[RotationIndex]->GetTime();
@@ -122,25 +122,28 @@ glm::quat Bone::CalcInterpolatedRotation(const float time)
 	return rot;
 }
 
-void Bone::UpdateKeyframeTransform(const float time)
+void Bone::UpdateKeyframeTransform(Animation * animation, const float time)
 {
-	if (animNode == nullptr)
+	std::map<Animation *, AnimNode *>::iterator it = animNodes.find(animation);
+
+	if (it == animNodes.end())
 	{
 		return;
 	}
 
-	const glm::vec3 pos = CalcInterpolatedPosition(time);
-	const glm::quat rot = CalcInterpolatedRotation(time);
+	if (it->second == nullptr)
+	{
+		return;
+	}
+
+	const glm::vec3 pos = CalcInterpolatedPosition(it->second, time);
+	const glm::quat rot = CalcInterpolatedRotation(it->second, time);
 	//const glm::vec3 sca = CalcInterpolatedScale(time);
 
 	glm::mat4 mat(1.0);
 	//mat *= scale(sca);
 	mat *= mat4_cast(rot);
 	mat *= translate(pos);
-	
-	
-	
-	
 
 	mat = transpose(mat);
 

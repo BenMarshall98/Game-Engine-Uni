@@ -27,7 +27,11 @@ void RiggedAnimationSystem::Action(void)
 
 void RiggedAnimationSystem::Animate(AnimatedModel * const animatedModel, ComponentRiggedAnimation * const riggedAnimation)
 {
-	animatedModel->Update();
+	float time = riggedAnimation->GetTime();
+	std::string animation = riggedAnimation->GetAnimation();
+	std::vector<glm::mat4> boneMats = animatedModel->Update(animation, time);
+	riggedAnimation->SetTime(time);
+	riggedAnimation->SetBoneMats(boneMats);
 }
 
 RiggedAnimationSystem::~RiggedAnimationSystem()

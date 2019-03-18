@@ -196,7 +196,7 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 
 	ProcessNode(scene->mRootNode, scene, animatedModel);
 
-	Animation * const firstAnimation = animatedModel->GetFirstAnimation();
+	std::vector<Animation *> const animations = animatedModel->GetAnimations();
 
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
@@ -205,9 +205,15 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 			std::string boneName = scene->mMeshes[i]->mBones[j]->mName.data;
 			glm::mat4 boneMat = AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix);
 			Node * node = FindNode(nodes, boneName);
-			AnimNode * animNode = FindAiNodeAnim(firstAnimation->GetAnimNodes(), boneName);
 
-			Bone * const bone = new Bone(boneName, node, animNode, boneMat);
+			std::map<Animation *, AnimNode *> animNodes = std::map<Animation *, AnimNode *>();
+			for (int k = 0; k < animations.size(); k++)
+			{
+				AnimNode * animNode = FindAiNodeAnim(animations.at(0)->GetAnimNodes(), boneName);
+				animNodes.insert(std::pair<Animation *, AnimNode *>(animations.at(0), animNode));
+			}
+
+			Bone * const bone = new Bone(boneName, node, animNodes, boneMat);
 			bones.push_back(bone);
 		}
 	}

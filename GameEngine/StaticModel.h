@@ -25,5 +25,6 @@ public:
 
 	~StaticModel();
 	void Render(Shader * shader) override;
+	void Render(Shader * shader, std::vector<glm::mat4> boneMats);
 };
 

@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "EntityManager.h"
 #include "iSystem.h"
+#include "ComponentRiggedAnimation.h"
 #include "iModel.h"
 #include "glm/glm.hpp"
 #include "Shader.h"
@@ -18,7 +19,7 @@ private:
 	Projection * projection;
 	bool updateFirst;
 
-	static void Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Texture * const texture, const Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, bool & updateFirst);
+	static void Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Texture * const texture, const Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, ComponentRiggedAnimation * riggedAnimation, bool & updateFirst);
 
 public:
 

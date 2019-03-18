@@ -13,6 +13,8 @@ public:
 	virtual void LimitFPS(float FPS) = 0;
 	virtual void WindowEvents() = 0;
 	virtual bool IsRunning() = 0;
+	virtual void ChangeSize(float width, float height) = 0;
+	virtual void Fullscreen() = 0;
 
 	static int GetWidth()
 	{

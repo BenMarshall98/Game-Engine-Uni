@@ -23,7 +23,7 @@
     {
       "Type": "Model",
       "Name": "Cube",
-      "Model": "Models/player4.dae"
+      "Model": "Models/personanim.dae"
     },
     {
       "Type": "Model",
@@ -431,19 +431,19 @@
           "PathFollowing": [
             {
               "Position": [ -22.5, 0.5, -22.5 ],
-              "Radius": 0.25
+              "Radius": 1
             },
             {
               "Position": [ -22.5, 0.5, 22.5 ],
-              "Radius": 0.25
+              "Radius": 1
             },
             {
               "Position": [ 22.5, 0.5, 22.5 ],
-              "Radius": 0.25
+              "Radius": 1
             },
             {
               "Position": [ 22.5, 0.5, -22.5 ],
-              "Radius": 0.25
+              "Radius": 1
             }
           ],
           "StateMachine": {

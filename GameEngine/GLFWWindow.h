@@ -23,5 +23,8 @@ public:
 	void LimitFPS(float FPS) override;
 	void WindowEvents() override;
 	bool IsRunning() override;
+
+	void ChangeSize(float width, float height) override;
+	void Fullscreen() override;
 };
 

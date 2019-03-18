@@ -48,6 +48,10 @@ void StaticModel::Render(Shader * const shader)
 	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
+void StaticModel::Render(Shader * shader, std::vector<glm::mat4> boneMats)
+{
+}
+
 StaticModel::~StaticModel()
 {
 	glDeleteVertexArrays(1, &VAO);

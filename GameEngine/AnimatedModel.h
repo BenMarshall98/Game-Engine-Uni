@@ -14,12 +14,9 @@ private:
 	std::vector<Mesh *> meshes;
 	std::vector<Animation *> animations;
 	std::vector<Bone *> bones;
-	std::vector<glm::mat4> boneMats;
 	std::vector<Node *> nodes;
 	std::vector<std::string> bonesLoc;
 	glm::mat4 globalInverse;
-
-	float time = 0;
 
 public:
 	AnimatedModel()
@@ -65,17 +62,18 @@ public:
 		animations.push_back(animation);
 	}
 
-	inline Animation * GetFirstAnimation()
+	inline std::vector<Animation *> GetAnimations()
 	{
-		return animations.at(0);
+		return animations;
 	}
 
-	void Render(Shader * shader)override;
+	void Render(Shader * shader) override;
+	void Render(Shader * shader, std::vector<glm::mat4> boneMats) override;
 
 	Bone * FindBone(const std::string & name);
 
-	void UpdateBoneMatsVector();
+	std::vector<glm::mat4> UpdateBoneMatsVector();
 
-	void Update();
+	std::vector<glm::mat4> Update(std::string animation, float & time);
 
 };

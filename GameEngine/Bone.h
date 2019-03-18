@@ -3,20 +3,22 @@
 #include "AnimNode.h"
 #include "Node.h"
 #include "glm/glm.hpp"
+#include "Animation.h"
 #include <string>
+#include <map>
 
 class Bone
 {
 private:
 	std::string name;
 	Node * node;
-	AnimNode * animNode;
+	std::map<Animation *, AnimNode *> animNodes;
 	Bone * parentBone;
 	glm::mat4 offsetMatrix;
 
 public:
-	Bone(std::string & pName, Node * const pNode, AnimNode * const pAnimNode, glm::mat4 & pOffsetMatrix) :
-		name(pName), node(pNode), animNode(pAnimNode), offsetMatrix(pOffsetMatrix), parentBone(nullptr)
+	Bone(std::string & pName, Node * const pNode, std::map<Animation *, AnimNode *> const pAnimNodes, glm::mat4 & pOffsetMatrix) :
+		name(pName), node(pNode), animNodes(pAnimNodes), offsetMatrix(pOffsetMatrix), parentBone(nullptr)
 	{
 
 	}
@@ -48,12 +50,12 @@ public:
 
 	glm::mat4 GetParentTransforms();
 
-	unsigned int FindPosition(float time);
-	glm::vec3 CalcInterpolatedPosition(float time);
-	unsigned int FindRotation(float time);
-	glm::quat CalcInterpolatedRotation(float time);
-	unsigned int FindScale(float time);
-	glm::vec3 CalcInterpolatedScale(float time);
+	unsigned int FindPosition(AnimNode * animNode, float time);
+	glm::vec3 CalcInterpolatedPosition(AnimNode * animNode, float time);
+	unsigned int FindRotation(AnimNode * animNode, float time);
+	glm::quat CalcInterpolatedRotation(AnimNode * animNode, float time);
+	unsigned int FindScale(AnimNode * animNode, float time);
+	glm::vec3 CalcInterpolatedScale(AnimNode * animNode, float time);
 
-	void UpdateKeyframeTransform(float time);
+	void UpdateKeyframeTransform(Animation * animation, float time);
 };

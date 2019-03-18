@@ -15,19 +15,27 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //DONE: resource manager to have a count map for number of times a resource is used, only delete once resource is not used anymore
 //DONE: build a way to create entities in lua
 //DONE: Turn componenttypes array into vector and do removing / adding in the isystem class
+//DONE: look at when the 'guard' goes back to its post
+
+//NOT POSSIBLE: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 
 //TODO: work on the animation model, see if that can be fixed
-//TODO: work on a menu system
+//DONE: move bone mats out of the rigged animation
 //TODO: build a animation system (for coins and the like)
+
+//TODO: work on a menu system
+
 //TODO: build methods to control the camera using input
-//TODO: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
+
 //TODO: look at the lifetime of the audio engine
 //TODO: pause and unpause music when in pause menu
 //TODO: deal with removing audio in the resource manager when refactoring the audio manager
+
 //TODO: create the render manager
-//TODO: look at when the 'guard' goes back to its post
-//TODO: move bone mats out of the rigged animation
+
 //TODO: Give the option to output log to a file instead of cout
+
+//TODO: Adaptive Velocity for the AI pathfollowing and pathfinding
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

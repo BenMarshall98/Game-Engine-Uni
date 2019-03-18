@@ -6,6 +6,10 @@
 
 void AnimatedModel::Render(Shader * const shader)
 {
+}
+
+void AnimatedModel::Render(Shader * const shader, std::vector<glm::mat4> boneMats)
+{
 	shader->UseShader();
 
 	if (boneMats.size() == 0)
@@ -20,7 +24,7 @@ void AnimatedModel::Render(Shader * const shader)
 	{
 		int boneLocation = glGetUniformLocation(shader->ShaderID(), ("Bones[" + std::to_string(i) + ']').c_str());
 
-		glUniformMatrix4fv(boneLocation, 1, GL_FALSE, glm::value_ptr(boneMats[i]));
+		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, glm::value_ptr(boneMats[i]));
 	}
 
 	for (int i = 0; i < meshes.size(); i++)
@@ -42,14 +46,9 @@ Bone * AnimatedModel::FindBone(const std::string & name)
 	return nullptr;
 }
 
-void AnimatedModel::UpdateBoneMatsVector()
+std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 {
-	if (bones.size() == 0)
-	{
-		return;
-	}
-
-	boneMats.clear();
+	std::vector<glm::mat4> boneMats = std::vector<glm::mat4>();
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -69,13 +68,13 @@ void AnimatedModel::UpdateBoneMatsVector()
 			boneMats.push_back(tmp);
 		}
 	}
+
+	return boneMats;
 }
 
-void AnimatedModel::Update()
+std::vector<glm::mat4> AnimatedModel::Update(std::string animationName, float & time)
 {
-	UpdateBoneMatsVector();
-
-	Animation * const animation = GetFirstAnimation();
+	Animation * const animation = animations.at(0);
 
 	if (time < animation->GetStartTime())
 	{
@@ -89,10 +88,12 @@ void AnimatedModel::Update()
 
 	for (int i = 0; i < bones.size(); i++)
 	{
-		bones.at(i)->UpdateKeyframeTransform(time);
+		bones.at(i)->UpdateKeyframeTransform(animation, time);
 	}
 
 	time += (1.0 / 60.0);
+
+	return UpdateBoneMatsVector();
 }
 
 AnimatedModel::~AnimatedModel()

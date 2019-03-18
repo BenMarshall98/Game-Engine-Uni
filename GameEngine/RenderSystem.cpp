@@ -52,17 +52,19 @@ void RenderSystem::Action(void)
 		glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
 		iComponent * const componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL_TEXTURE);
-
 		const Texture * const normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
+
+		iComponent * const componentRiggedAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_RIGGED_ANIMATION);
+		ComponentRiggedAnimation * riggedAnimation = (componentRiggedAnimation == nullptr) ? nullptr : dynamic_cast<ComponentRiggedAnimation *>(componentRiggedAnimation);
 
 		if (length(position - viewPos) < (projection->GetFar() * 1.1f))
 		{
-			Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos, updateFirst);
+			Render(shader, model, position, direction, texture, normal, perspectiveMatrix, viewMatrix, viewPos, riggedAnimation, updateFirst);
 		}
 	}
 }
 
-void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Texture * const texture, const Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, bool & updateFirst)
+void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Texture * const texture, const Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, ComponentRiggedAnimation * riggedAnimation, bool & updateFirst)
 {
 	static int lastShader = -1;
 
@@ -112,7 +114,15 @@ void RenderSystem::Render(Shader * const shader, iModel * const model, const glm
 
 	glUniform3fv(viewPosLocation, 1, value_ptr(viewPos));
 
-	model->Render(shader);
+	if (riggedAnimation)
+	{
+		std::vector<glm::mat4> boneMats = riggedAnimation->GetBoneMats();
+		model->Render(shader, boneMats);
+	}
+	else
+	{
+		model->Render(shader);
+	}
 	glUseProgram(0);
 }
 
