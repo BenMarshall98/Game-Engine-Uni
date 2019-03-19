@@ -305,9 +305,6 @@
     <Text Include="Useful Links.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Assimp\code\assimp.vcxproj">
-      <Project>{42236bef-0ed7-3426-a4e7-08166a101882}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\BulletPhysicsEngine\BulletPhysicsEngine.vcxproj">
       <Project>{19f0091f-89b9-436b-853d-681658c0672b}</Project>
     </ProjectReference>

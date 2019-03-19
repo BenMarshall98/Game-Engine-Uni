@@ -1,0 +1,1355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\.editorconfig" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\color4.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\material.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix3x3.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix4x4.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\quaternion.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector2.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector3.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\.editorconfig" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderDNA.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Asset.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2AssetWriter.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAsset.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAssetWriter.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\makefile.mingw" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\SmoothingGroups.inl">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\ai_assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\anim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\cexport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\cfileio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\cimport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\color4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\DefaultIOStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\DefaultIOSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\DefaultLogger.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Exporter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\importerdesc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\IOStream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\IOSystem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Logger.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\LogStream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix4x4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\metadata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\NullLogger.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\postprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\ProgressHandler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\SceneCombiner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3MFXmlTags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ACLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Macro.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Node.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ASELoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ASEParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\assbin_chunks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AssxmlExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\B3DImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderBMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderDNA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderIntermediate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderModifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderSceneGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderTessellator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlobIOSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BVHLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ByteSwapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\C4DImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CalcTangentsProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CInterfaceIOWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\COBLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\COBScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ComputeUVMappingProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ConvertToLHProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CreateAnimMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CSMLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFOpcPackage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DeboneProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultProgressHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DXFHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DXFLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Exceptional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\fast_atof.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXCompileConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocumentUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXImportSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXMeshGeometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXProperties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXTokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FileLogStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FileSystemFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FindDegenerates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInstancesProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInvalidDataProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FIReader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FixNormalsStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\GenericProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\GenFaceNormalsProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\GenVertexNormalsProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Asset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2AssetWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Exporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Importer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAsset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAssetWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\HalfLifeFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\HMPFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\HMPLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCReaderGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Importer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ImproveCacheLocality.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IOStreamBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRMeshLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRShared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\irrXMLWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\JoinVerticesProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LimitBoneWeightsProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LineSplitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LogAux.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWSLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MakeVerboseFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MaterialSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MathFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2FileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2NormalTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD3FileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD3Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD4FileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCNormalTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLDefaultColorMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MemoryIOWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDCpp14.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDPmdParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDPmxParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDVmdParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MS3DLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\NDOLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\NFFLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileMtlImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OFFLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreBinarySerializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreParsingUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreXmlSerializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeMeshes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ParsingUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PolyTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PretransformVertices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ProcessHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Profiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPZipArchive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3DLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\qnan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RawLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveComments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveRedundantMaterials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveVCProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ScaleProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ScenePreprocessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ScenePrivate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SGSpatialSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SIBImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SkeletonMeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SMDLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SmoothingGroups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SortByPTypeProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SpatialSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitByBoneCountProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitLargeMeshes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StandardShapes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StdOStreamLogStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StepExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileEncoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STLExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STLLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StreamReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StreamWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StringComparison.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StringUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Subdivision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TargetAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TerragenLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TextureTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TinyFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TriangulateProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\UnrealLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ValidateDataStructure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\VertexTriangleAdjacency.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Win32DebugLogStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DExporter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Macro.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Node.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XGLLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XMLTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ACLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Postprocess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ASELoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ASEParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Assimp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssimpCExport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssxmlExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\B3DImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderBMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderDNA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderModifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderTessellator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BVHLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\C4DImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CalcTangentsProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CInterfaceIOWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\COBLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ComputeUVMappingProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ConvertToLHProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CreateAnimMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CSMLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFOpcPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DeboneProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultIOStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultIOSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DXFLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Exporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXBinaryTokenizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDeformer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocumentUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXMeshGeometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXNodeAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXProperties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXTokenizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FindDegenerates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInstancesProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInvalidDataProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FIReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FixNormalsStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\GenFaceNormalsProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\GenVertexNormalsProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Exporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\HMPLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCBoolean.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCCurve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCGeometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCOpenings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCProfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCReaderGen1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCReaderGen2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Importer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ImporterRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ImproveCacheLocality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRMeshLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRShared.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\JoinVerticesProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LimitBoneWeightsProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOBLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWSLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MakeVerboseFormat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MaterialSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2Loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD3Loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLMaterialLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDPmxParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MS3DLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\NDOLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\NFFLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileMtlImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OFFLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreBinarySerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreStructs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreXmlSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeMeshes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PostStepRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PretransformVertices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ProcessHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPZipArchive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3DLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RawLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveComments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveRedundantMaterials.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveVCProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ScaleProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SceneCombiner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ScenePreprocessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SGSpatialSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SIBImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SkeletonMeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SMDLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SortByPTypeProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SpatialSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitByBoneCountProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitLargeMeshes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\StandardShapes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\StepExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileEncoding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STLExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STLLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Subdivision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TargetAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TerragenLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TextureTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TriangulateProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\UnrealLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ValidateDataStructure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\VertexTriangleAdjacency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Geometry2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Geometry3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Metadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Networking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Postprocess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Rendering.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Texturing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DVocabulary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XGLLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assimp-4.1.0\assimp-4.1.0\code\CMakeLists.txt" />
+  </ItemGroup>
+</Project>

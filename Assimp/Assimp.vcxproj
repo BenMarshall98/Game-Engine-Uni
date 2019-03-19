@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{DDC0CC0B-0FD1-4AC9-8AA7-963855D1F4C3}</ProjectGuid>
+    <RootNamespace>Assimp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\contrib\zlib;$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\contrib;$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\contrib\irrXML;$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\;$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;ASSIMP_BUILD_NO_C4D_IMPORTER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\.editorconfig" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderDNA.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Asset.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2AssetWriter.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAsset.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAssetWriter.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\makefile.mingw" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\code\SmoothingGroups.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\.editorconfig" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\color4.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\material.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix3x3.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix4x4.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\quaternion.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector2.inl" />
+    <None Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector3.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSHelper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\3MFXmlTags.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ACLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Macro.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Node.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ASELoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ASEParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\assbin_chunks.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\AssxmlExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\B3DImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Bitmap.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderBMesh.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderDNA.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderIntermediate.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderModifier.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderScene.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderSceneGen.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderTessellator.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BlobIOSystem.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\BVHLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ByteSwapper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\C4DImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CalcTangentsProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CInterfaceIOWrapper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\COBLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\COBScene.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaHelper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ComputeUVMappingProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ConvertToLHProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CreateAnimMesh.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\CSMLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFOpcPackage.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DeboneProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultProgressHandler.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DXFHelper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\DXFLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Exceptional.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\fast_atof.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXCompileConfig.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXConverter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocument.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocumentUtil.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXImportSettings.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXMeshGeometry.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXProperties.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXTokenizer.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXUtil.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FileLogStream.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FileSystemFilter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FindDegenerates.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInstancesProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInvalidDataProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FIReader.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\FixNormalsStep.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\GenericProperty.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\GenFaceNormalsProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\GenVertexNormalsProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Asset.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2AssetWriter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Exporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Importer.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAsset.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFAssetWriter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\HalfLifeFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Hash.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\HMPFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\HMPLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCReaderGen.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCUtil.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IFF.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Importer.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ImproveCacheLocality.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IOStreamBuffer.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRMeshLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRShared.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\irrXMLWrapper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\JoinVerticesProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LimitBoneWeightsProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LineSplitter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LogAux.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOAnimation.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\LWSLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Macros.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MakeVerboseFormat.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MaterialSystem.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MathFunctions.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2FileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2Loader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2NormalTable.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD3FileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD3Loader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD4FileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Loader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Parser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCNormalTable.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLDefaultColorMap.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MemoryIOWrapper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDCpp14.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDPmdParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDPmxParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDVmdParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\MS3DLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\NDOLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\NFFLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileMtlImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjTools.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OFFLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreBinarySerializer.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreParsingUtils.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreStructs.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreXmlSerializer.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXStructs.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeGraph.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeMeshes.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ParsingUtils.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PolyTools.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\PretransformVertices.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ProcessHelper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Profiler.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileData.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPZipArchive.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3DLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\qnan.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RawLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveComments.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveRedundantMaterials.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveVCProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ScaleProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ScenePreprocessor.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ScenePrivate.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SGSpatialSort.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SIBImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SkeletonMeshBuilder.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SMDLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SmoothingGroups.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SortByPTypeProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SpatialSort.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitByBoneCountProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitLargeMeshes.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StandardShapes.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StdOStreamLogStream.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StepExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFile.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileEncoding.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileReader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STLExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\STLLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StreamReader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StreamWriter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StringComparison.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\StringUtils.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Subdivision.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TargetAnimation.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TerragenLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TextureTransform.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TinyFormatter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\TriangulateProcess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\UnrealLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\ValidateDataStructure.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Vertex.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\VertexTriangleAdjacency.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\Win32DebugLogStream.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DExporter.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Macro.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Node.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileExporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileHelper.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileImporter.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileParser.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XGLLoader.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\code\XMLTools.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\ai_assert.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\anim.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\camera.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\cexport.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\cfileio.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\cimport.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\color4.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\config.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\DefaultIOStream.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Defines.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\defs.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Exporter.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Importer.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\importerdesc.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\IOStream.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\IOSystem.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\light.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\Logger.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\LogStream.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\material.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix3x3.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\matrix4x4.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\mesh.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\metadata.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\NullLogger.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\postprocess.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\quaternion.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\scene.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\SceneCombiner.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\texture.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\types.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector2.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\vector3.h" />
+    <ClInclude Include="..\assimp-4.1.0\assimp-4.1.0\include\assimp\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSConverter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\3DSLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ACLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Geometry.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Material.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AMFImporter_Postprocess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ASELoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ASEParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssbinLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Assimp.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssimpCExport.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\AssxmlExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\B3DImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BaseProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Bitmap.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderBMesh.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderDNA.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderModifier.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderScene.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BlenderTessellator.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\BVHLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\C4DImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CalcTangentsProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CInterfaceIOWrapper.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\COBLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ColladaParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ComputeUVMappingProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ConvertToLHProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CreateAnimMesh.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\CSMLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\D3MFOpcPackage.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DeboneProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultIOStream.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultIOSystem.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DefaultLogger.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\DXFLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Exporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXAnimation.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXBinaryTokenizer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXConverter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDeformer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocument.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXDocumentUtil.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXMaterial.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXMeshGeometry.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXModel.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXNodeAttribute.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXProperties.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXTokenizer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FBXUtil.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FindDegenerates.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInstancesProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FindInvalidDataProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FIReader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\FixNormalsStep.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\GenFaceNormalsProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\GenVertexNormalsProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Exporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTF2Importer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\glTFImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\HMPLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCBoolean.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCCurve.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCGeometry.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCMaterial.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCOpenings.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCProfile.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCReaderGen1.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCReaderGen2.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IFCUtil.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Importer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ImporterRegistry.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ImproveCacheLocality.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRMeshLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\IRRShared.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\JoinVerticesProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LimitBoneWeightsProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOAnimation.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOBLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWOMaterial.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\LWSLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MakeVerboseFormat.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MaterialSystem.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD2Loader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD3Loader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Loader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MD5Parser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MDCLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MDLMaterialLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MMDPmxParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\MS3DLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\NDOLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\NFFLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileMtlImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ObjFileParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OFFLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreBinarySerializer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreMaterial.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreStructs.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OgreXmlSerializer.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OpenGEXImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeGraph.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\OptimizeMeshes.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PlyParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PostStepRegistry.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\PretransformVertices.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ProcessHelper.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPFileParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3BSPZipArchive.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Q3DLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RawLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveComments.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveRedundantMaterials.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\RemoveVCProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ScaleProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\scene.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SceneCombiner.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ScenePreprocessor.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SGSpatialSort.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SIBImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SkeletonMeshBuilder.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SMDLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SortByPTypeProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SpatialSort.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitByBoneCountProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\SplitLargeMeshes.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\StandardShapes.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\StepExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileEncoding.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STEPFileReader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STLExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\STLLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Subdivision.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TargetAnimation.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TerragenLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TextureTransform.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\TriangulateProcess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\UnrealLoader.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\ValidateDataStructure.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\Version.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\VertexTriangleAdjacency.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Geometry2D.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Geometry3D.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Group.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Light.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Metadata.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Networking.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Postprocess.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Rendering.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Shape.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DImporter_Texturing.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\X3DVocabulary.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileExporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileImporter.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XFileParser.cpp" />
+    <ClCompile Include="..\assimp-4.1.0\assimp-4.1.0\code\XGLLoader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assimp-4.1.0\assimp-4.1.0\code\CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
