@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\Assimp\include\;$(SolutionDir);$(SolutionDir)\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\include\;$(SolutionDir);$(SolutionDir)\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Link />
@@ -119,7 +119,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\ben32\source\repos\BenMarshall98\Game-Engine\Assimp\include\;$(SolutionDir);$(SolutionDir)\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\include\;$(SolutionDir);$(SolutionDir)\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
@@ -305,6 +305,9 @@
     <Text Include="Useful Links.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Assimp\Assimp.vcxproj">
+      <Project>{ddc0cc0b-0fd1-4ac9-8aa7-963855d1f4c3}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\BulletPhysicsEngine\BulletPhysicsEngine.vcxproj">
       <Project>{19f0091f-89b9-436b-853d-681658c0672b}</Project>
     </ProjectReference>

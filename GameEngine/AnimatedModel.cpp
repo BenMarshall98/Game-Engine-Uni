@@ -52,7 +52,8 @@ std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 
 	for (int i = 0; i < 100; i++)
 	{
-		if (i > bones.size() -1)
+		int size = bones.size() - 1;
+		if (i > size)
 		{
 			boneMats.push_back(glm::mat4(1.0));
 		}

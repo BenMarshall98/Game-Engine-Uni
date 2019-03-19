@@ -234,8 +234,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Assimp\code\assimp.vcxproj">
-      <Project>{42236bef-0ed7-3426-a4e7-08166a101882}</Project>
+    <ProjectReference Include="..\Assimp\Assimp.vcxproj">
+      <Project>{ddc0cc0b-0fd1-4ac9-8aa7-963855d1f4c3}</Project>
     </ProjectReference>
     <ProjectReference Include="..\GameEngine\GameEngine.vcxproj">
       <Project>{5d68cae3-7845-4e1f-9ca5-1b560135c1eb}</Project>
