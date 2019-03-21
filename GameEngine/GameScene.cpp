@@ -43,9 +43,7 @@ void GameScene::Render()
 
 	SystemManager::Instance()->Render();
 
-	EntityManager::Instance()->Update();
-
-	ScriptingManager::Instance()->RunScriptFromScene(function);
+	
 }
 
 void GameScene::Update()
@@ -87,7 +85,7 @@ void GameScene::Close()
 
 void GameScene::Swap()
 {
-
+	ScriptingManager::Instance()->RunScriptFromScene(function);
 }
 
 GameScene::~GameScene()

@@ -74,3 +74,51 @@ function PlayerJump(entity, inputValue, deltaTime)
 		end
 	end
 end
+
+function PlayerShoot(entity, inputValue, deltaTime)
+	if inputValue > 0.2 then
+		local ComponentState = GetComponentState(entity)
+		local timeLastShoot = GetValue(ComponentState, "timeSinceShoot", "float", "0")
+		
+		if timeLastShoot <= 0 then
+			local ComponentPosition = GetComponentPosition(entity)
+			local ComponentDirection = GetComponentDirection(entity)
+			local currentPosition = GetPosition(ComponentPosition)
+			local currentDirection = GetDirection(ComponentDirection)
+			local changePosition = Vector3:new(1, 0, 0)
+			local rotationMatrix = CreateRotationMatrix(currentDirection)
+
+			changePosition  = MultiplyMatrixVector(rotationMatrix, changePosition)
+
+			local entity = CreateEntity();
+			local position = currentPosition:add(changePosition);
+			local direction = Vector3:new(0, 1, 0);
+			local size = Vector3:new(0.05, 0.05, 0.05);
+			local angularLimits = Vector3:new(1, 1, 1);
+			local cuboid = CreateCollisionCuboid(size);
+
+			local collisionFunctionMap = CreateCollisionFunctionMap()
+			AddToCollisionFunctionMap(collisionFunctionMap, "PLAYER", "DestroyBullet")
+			AddToCollisionFunctionMap(collisionFunctionMap, "WALL", "DestroyBullet")
+
+			AddComponentPosition(entity, position);
+			AddComponentDirection(entity, direction, 0);
+			AddComponentPhysics(entity, cuboid, 0.1, "BULLET", angularLimits, false, collisionFunctionMap);
+			AddComponentModel(entity, "Bullet");
+			AddComponentNormalTexture(entity, "BoxNormal");
+			AddComponentTexture(entity, "Box");
+			AddComponentShader(entity, "NormalShader");
+			AddComponentShadowShader(entity, "DirectionalShadow", "PointShadow");
+			AddComponentAnimation(entity, "BulletMovement");
+			AddComponentState(entity);
+
+			local ComponentState = GetComponentState(entity);
+			SetValue(ComponentState, "xDirection", changePosition:getX())
+			SetValue(ComponentState, "yDirection", changePosition:getY())
+			SetValue(ComponentState, "zDirection", changePosition:getZ())
+			SetValue(ComponentState, "BulletTime", 5)
+
+			FinishEntity(entity);
+		end
+	end
+end

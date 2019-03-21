@@ -2376,25 +2376,7 @@ int ScriptingManager::lua_AddToCollisionFunctionMap(lua_State * const luaState)
 	std::string type = lua_tostring(luaState, 2);
 	std::string function = lua_tostring(luaState, 3);
 
-	EntityType entityType = EntityType::NONE;
-
-	if (type == "Collectable")
-	{
-		entityType = EntityType::COLLECTABLE;
-	}
-	else if (type == "Player")
-	{
-		entityType = EntityType::PLAYER;
-	}
-	else if (type == "Wall")
-	{
-		entityType = EntityType::WALL;
-	}
-	else if (type != "None")
-	{
-		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToCollisionFunctionMap");
-		lua_error(luaState);
-	}
+	EntityType entityType = ComponentPhysics::StringToEnum(type);
 
 	collisionFunctions->insert(std::pair<EntityType, std::string>(entityType, function));
 
@@ -2431,25 +2413,7 @@ int ScriptingManager::lua_AddComponentPhysics(lua_State * const luaState)
 
 	std::string type = lua_tostring(luaState, 4);
 
-	EntityType entityType = EntityType::NONE;
-
-	if (type == "Collectable")
-	{
-		entityType = EntityType::COLLECTABLE;
-	}
-	else if (type == "Player")
-	{
-		entityType = EntityType::PLAYER;
-	}
-	else if (type == "Wall")
-	{
-		entityType = EntityType::WALL;
-	}
-	else if (type != "None")
-	{
-		lua_pushstring(luaState, "Wrong Parameters Passed in: AddToCollisionFunctionMap");
-		lua_error(luaState);
-	}
+	EntityType entityType = ComponentPhysics::StringToEnum(type);
 
 	lua_getfield(luaState, 5, "x");
 	lua_getfield(luaState, 5, "y");

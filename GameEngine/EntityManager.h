@@ -15,6 +15,7 @@ private:
 	std::map<ComponentType, std::map<Entity *, iComponent *>> ComponentList;
 	std::vector<Entity *> EntityList;
 	std::vector<Entity *> ToDeleteList;
+	std::vector<Entity *> ToUpdateList;
 
 	void RemoveEntity(Entity * entity);
 

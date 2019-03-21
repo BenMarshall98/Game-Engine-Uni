@@ -18,14 +18,14 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //DONE: build a way to create entities in lua
 //DONE: Turn componenttypes array into vector and do removing / adding in the isystem class
 //DONE: look at when the 'guard' goes back to its post
+//DONE: move bone mats out of the rigged animation
 
 //NOT POSSIBLE: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 
 //TODO: work on the animation model, see if that can be fixed
-//DONE: move bone mats out of the rigged animation
 //TODO: build a animation system (for coins and the like)
 
-//TODO: work on a menu system
+//TODO: work on a menu system (config file?)
 
 //TODO: build methods to control the camera using input
 

@@ -55,6 +55,7 @@ void SceneManager::Swap()
 	scenes.top()->Swap();
 	EntityManager::Instance()->Swap();
 	CameraManager::Instance()->Swap();
+	EntityManager::Instance()->Update();
 }
 
 void SceneManager::Resize(const int width, const int height)
@@ -198,10 +199,10 @@ void SceneManager::Run()
 
 		while (window->IsRunning() && windowRunning)
 		{
-			Swap();
 			std::thread update = std::thread(&SceneManager::Update, this);
 			Render();
 			update.join();
+			Swap();
 			window->LimitFPS(60);
 			window->WindowEvents();
 		}

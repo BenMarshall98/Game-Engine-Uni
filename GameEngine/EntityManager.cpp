@@ -29,7 +29,7 @@ Entity * EntityManager::GetEntityByName(const std::string & entityName)
 
 void EntityManager::FinishEntity(Entity * const entity)
 {
-	SystemManager::Instance()->AddEntityToSystems(entity);
+	ToUpdateList.push_back(entity);
 }
 
 void EntityManager::RemoveEntity(Entity * entity)
@@ -161,12 +161,19 @@ bool EntityManager::CheckEntityHasComponents(Entity * const entity, std::vector<
 void EntityManager::Update()
 {
 	SystemManager * const systemManager = SystemManager::Instance();
+
+	for (int i = 0; i < ToUpdateList.size(); i++)
+	{
+		systemManager->AddEntityToSystems(ToUpdateList[i]);
+	}
+
 	for (int i = 0; i < ToDeleteList.size(); i++)
 	{
 		systemManager->RemoveEntityFromSystems(ToDeleteList[i]);
 		RemoveEntity(ToDeleteList[i]);
 	}
 
+	ToUpdateList.clear();
 	ToDeleteList.clear();
 }
 

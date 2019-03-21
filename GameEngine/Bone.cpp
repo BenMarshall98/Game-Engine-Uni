@@ -142,8 +142,8 @@ void Bone::UpdateKeyframeTransform(Animation * animation, const float time)
 
 	glm::mat4 mat(1.0);
 	//mat *= scale(sca);
-	mat *= mat4_cast(rot);
 	mat *= translate(pos);
+	mat *= mat4_cast(rot);
 
 	mat = transpose(mat);
 

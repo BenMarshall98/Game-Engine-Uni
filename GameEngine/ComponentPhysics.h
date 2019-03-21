@@ -12,7 +12,8 @@
 	E(NONE), \
 	E(WALL), \
 	E(PLAYER), \
-	E(COLLECTABLE)
+	E(COLLECTABLE), \
+	E(BULLET)
 
 #define E(e) e
 static enum class EntityType { ENTITYTYPES(E) };

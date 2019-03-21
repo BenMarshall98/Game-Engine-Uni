@@ -209,8 +209,8 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 			std::map<Animation *, AnimNode *> animNodes = std::map<Animation *, AnimNode *>();
 			for (int k = 0; k < animations.size(); k++)
 			{
-				AnimNode * animNode = FindAiNodeAnim(animations.at(0)->GetAnimNodes(), boneName);
-				animNodes.insert(std::pair<Animation *, AnimNode *>(animations.at(0), animNode));
+				AnimNode * animNode = FindAiNodeAnim(animations.at(k)->GetAnimNodes(), boneName);
+				animNodes.insert(std::pair<Animation *, AnimNode *>(animations.at(k), animNode));
 			}
 
 			Bone * const bone = new Bone(boneName, node, animNodes, boneMat);
