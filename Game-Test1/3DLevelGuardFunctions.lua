@@ -1,4 +1,5 @@
 local Vector3 = require("Scripts/Vector3")
+local guards = 1
 
 function GuardStart(guardEntity, playerEntity, AIStateMachine, deltaTime)
 	local GuardComponentPosition = GetComponentPosition(guardEntity)
@@ -122,9 +123,14 @@ function ThreeDLevelSceneDisplay()
 	local ComponentState = GetComponentState(entity)
 	local currentScore = GetValue(ComponentState, "Health", "integer", 100)
 
-	local scoreDisplay = "Health: " .. currentScore
+	local healthDisplay = "Health: " .. currentScore
 	local colour = Vector3:new(1, 1, 1)
-	DisplayText(scoreDisplay, "Centre", 50, 50, 10, colour)
+	DisplayText(healthDisplay, "Centre", 50, 50, 3, colour)
+
+	local guardsLeft = GetValue(ComponentState, "GuardsLeft", "integer", guards)
+	local guardsDisplay = "Guards Left: " .. guardsLeft
+
+	DisplayText(guardsDisplay, "Centre", 50, 70, 3, colour)
 end
 
 function PlayerDown(entity)
@@ -143,10 +149,15 @@ function GuardDown(entity)
 	local ComponentState = GetComponentState(entity)
 	local currentScore = GetValue(ComponentState, "Health", "integer", 100)
 	currentScore = currentScore - 10
+	SetValue(ComponentState, "Health", currentScore)
 
 	if currentScore <= 0 then
+		local player = GetEntity("Player")
+		local playerComponentState = GetComponentState(player)
+		local guardsLeft = GetValue(playerComponentState, "GuardsLeft", "integer", guards)
+
+		guardsLeft = guardsLeft - 1
+		SetValue(playerComponentState, "GuardsLeft", guardsLeft)
 		DeleteEntity(entity)
 	end
-
-	SetValue(ComponentState, "Health", currentScore)
 end

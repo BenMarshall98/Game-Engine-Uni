@@ -190,6 +190,12 @@
       <Filter>Scripts</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="WinScene.json">
+      <Filter>Menus</Filter>
+    </None>
+    <None Include="LoseScene.json">
+      <Filter>Menus</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="3DLevel.txt">

@@ -261,6 +261,7 @@
     <None Include="GameChoosing.lua" />
     <None Include="HitBoxMainMenu.json" />
     <None Include="HitBoxMainMenu.lua" />
+    <None Include="LoseScene.json" />
     <None Include="Models\Test.dae" />
     <None Include="Options.json" />
     <None Include="packages.config" />
@@ -279,6 +280,7 @@
     <None Include="SuperWorldMenu.json" />
     <None Include="TextFragment.frag" />
     <None Include="TextVertex.vert" />
+    <None Include="WinScene.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="3DLevel.txt" />

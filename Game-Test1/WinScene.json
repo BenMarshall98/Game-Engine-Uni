@@ -3,7 +3,7 @@
   "MenuItems": [
     {
       "Type": "Text",
-      "Text": "Options",
+      "Text": "You Win :)",
       "Align": "Centre",
       "FontSize": 15,
       "FontColour": [ 255, 255, 255 ],
@@ -11,7 +11,7 @@
     },
     {
       "Type": "Text",
-      "Text": "And You Thought You Had Options",
+      "Text": "Press Escape Go Back To Main Menu",
       "Align": "Centre",
       "FontSize": 5,
       "FontColour": [ 255, 255, 255 ],

@@ -284,6 +284,10 @@
         },
         {
           "Component": "State"
+        },
+        {
+          "Component": "Animation",
+          "Function": "PlayerAnimation"
         }
       ]
     }

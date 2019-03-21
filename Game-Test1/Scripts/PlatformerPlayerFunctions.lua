@@ -55,3 +55,12 @@ function PlayerJump(entity, inputValue, deltaTime)
 		end
 	end
 end
+
+function PlayerAnimation(entity, deltaTime)
+	local ComponentState = GetComponentState(entity)
+	local timeTillWin = GetValue(ComponentState, "TimeTillWin", "float", -1)
+	if timeTillWin > -1 then
+		timeTillWin = timeTillWin - deltaTime
+		SetValue(ComponentState, "TimeTillWin", timeTillWin)
+	end
+end

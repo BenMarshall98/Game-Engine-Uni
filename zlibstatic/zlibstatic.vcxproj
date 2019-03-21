@@ -151,7 +151,6 @@
   <ItemGroup>
     <None Include="..\assimp-4.1.0\assimp-4.1.0\contrib\zlib\README" />
     <None Include="..\assimp-4.1.0\assimp-4.1.0\contrib\zlib\zconf.h.cmakein" />
-    <None Include="..\assimp-4.1.0\assimp-4.1.0\contrib\zlib\zconf.h" />
     <None Include="..\assimp-4.1.0\assimp-4.1.0\contrib\zlib\zconf.h.included" />
     <None Include="..\assimp-4.1.0\assimp-4.1.0\contrib\zlib\zlib.pc.cmakein" />
   </ItemGroup>
