@@ -122,3 +122,11 @@ function PlayerShoot(entity, inputValue, deltaTime)
 		end
 	end
 end
+
+function PlayerDown(entity)
+	local ComponentState = GetComponentState(entity)
+	local currentScore = GetValue(ComponentState, "Health", "integer", 100)
+	currentScore = currentScore - 10
+
+	SetValue(ComponentState, "Health", currentScore)
+end

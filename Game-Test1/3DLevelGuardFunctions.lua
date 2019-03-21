@@ -133,14 +133,6 @@ function ThreeDLevelSceneDisplay()
 	DisplayText(guardsDisplay, "Centre", 50, 70, 3, colour)
 end
 
-function PlayerDown(entity)
-	local ComponentState = GetComponentState(entity)
-	local currentScore = GetValue(ComponentState, "Health", "integer", 100)
-	currentScore = currentScore - 10
-
-	SetValue(ComponentState, "Health", currentScore)
-end
-
 function DestroyBullet(entity)
 	DeleteEntity(entity)
 end

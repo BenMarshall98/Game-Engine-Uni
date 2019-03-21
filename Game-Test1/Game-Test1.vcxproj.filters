@@ -201,6 +201,9 @@
     <Text Include="3DLevel.txt">
       <Filter>Levels</Filter>
     </Text>
+    <Text Include="3DLevelFull.txt">
+      <Filter>Levels</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Models\bullet.obj">

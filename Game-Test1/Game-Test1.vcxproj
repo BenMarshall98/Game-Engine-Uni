@@ -284,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="3DLevel.txt" />
+    <Text Include="3DLevelFull.txt" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Models\bullet.obj">

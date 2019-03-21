@@ -28,12 +28,15 @@ ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoor
 void ShadowSystem::Action(void)
 {
 	EntityManager * entityManager = EntityManager::Instance();
-	std::vector<iModel *> models = std::vector<iModel *>(EntityList.size());
-	std::vector<glm::vec3> positions = std::vector<glm::vec3>(EntityList.size());
-	std::vector<glm::quat> directions = std::vector<glm::quat>(EntityList.size());
-	std::vector<Shader *> directionalShadowShaders = std::vector<Shader *>(EntityList.size());
-	std::vector<Shader *> pointShadowShaders = std::vector<Shader *>(EntityList.size());
+	std::vector<iModel *> models = std::vector<iModel *>();
+	std::vector<glm::vec3> positions = std::vector<glm::vec3>();
+	std::vector<glm::quat> directions = std::vector<glm::quat>();
+	std::vector<Shader *> directionalShadowShaders = std::vector<Shader *>();
+	std::vector<Shader *> pointShadowShaders = std::vector<Shader *>();
+	Camera * camera = CameraManager::Instance()->GetCamera();
+	Projection * projection = CameraManager::Instance()->GetProjection();
 
+	int count = 0;
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
@@ -47,16 +50,18 @@ void ShadowSystem::Action(void)
 		Shader * const directionalShadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetDirectionalShader();
 		Shader * const pointShadowShader = dynamic_cast<ComponentShadowShader *>(componentShadowShader)->GetPointShader();
 
-		models.at(i) = model;
-		positions.at(i) = position;
-		directions.at(i) = direction;
-		directionalShadowShaders.at(i) = directionalShadowShader;
-		pointShadowShaders.at(i) = pointShadowShader;
+		if (length(position - camera->GetPosition()) < (projection->GetFar() * 1.1f))
+		{
+			models.push_back(model);
+			positions.push_back(position);
+			directions.push_back(direction);
+			directionalShadowShaders.push_back(directionalShadowShader);
+			pointShadowShaders.push_back(pointShadowShader);
+		}
 	}
 
 	glCullFace(GL_FRONT);
 
-	Camera * const camera = CameraManager::Instance()->GetCamera();
 	Directional * const directional = LightManager::Instance()->GetDirectionalLight();
 
 	directional->perspective = glm::ortho(mTopLeftCoord.x, mBottomRightCoord.x,
@@ -69,7 +74,7 @@ void ShadowSystem::Action(void)
 	glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer.FrameBuffer);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	for (int i = 0; i < EntityList.size(); i++)
+	for (int i = 0; i < models.size(); i++)
 	{
 		RenderDirectional(models.at(i), positions.at(i), directions.at(i), directional, directionalShadowShaders.at(i));
 	}
@@ -99,7 +104,7 @@ void ShadowSystem::Action(void)
 
 		int lastShader = -1;
 
-		for (int j = 0; j < EntityList.size(); j++)
+		for (int j = 0; j < models.size(); j++)
 		{
 			if (lastShader != pointShadowShaders.at(j)->ShaderID())
 			{
@@ -149,7 +154,7 @@ void ShadowSystem::Action(void)
 
 		int lastShader = -1;
 
-		for (int j = 0; j < EntityList.size(); j++)
+		for (int j = 0; j < models.size(); j++)
 		{
 			if (lastShader != pointShadowShaders.at(j)->ShaderID())
 			{
