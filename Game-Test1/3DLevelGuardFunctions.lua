@@ -1,5 +1,5 @@
 local Vector3 = require("Scripts/Vector3")
-local guards = 1
+local guards = 4
 
 function GuardStart(guardEntity, playerEntity, AIStateMachine, deltaTime)
 	local GuardComponentPosition = GetComponentPosition(guardEntity)
@@ -123,6 +123,18 @@ function ThreeDLevelSceneDisplay()
 	local ComponentState = GetComponentState(entity)
 	local currentScore = GetValue(ComponentState, "Health", "integer", 100)
 
+	if currentScore <= 0 then
+		currentScore = 0
+		local timeTillLose = GetValue(ComponentState, "TimeTillLose", "float", -1)
+		if timeTillLose == -1 then
+			SetValue(ComponentState, "TimeTillLose", 1.0)
+		end
+
+		if (timeTillLose ~= -1) and timeTillLose <= 0 then
+			SwapToMenuScene("LoseScene.json")
+		end
+	end
+
 	local healthDisplay = "Health: " .. currentScore
 	local colour = Vector3:new(1, 1, 1)
 	DisplayText(healthDisplay, "Centre", 50, 50, 3, colour)
@@ -131,6 +143,17 @@ function ThreeDLevelSceneDisplay()
 	local guardsDisplay = "Guards Left: " .. guardsLeft
 
 	DisplayText(guardsDisplay, "Centre", 50, 70, 3, colour)
+
+	if guardsLeft == 0 then
+		local timeTillWin = GetValue(ComponentState, "TimeTillWin", "float", -1)
+		if timeTillWin == -1 then
+			SetValue(ComponentState, "TimeTillWin", 1.0)
+		end
+
+		if (timeTillWin ~= -1) and timeTillWin <= 0 then
+			SwapToMenuScene("WinScene.json")
+		end
+	end
 end
 
 function DestroyBullet(entity)
@@ -151,5 +174,19 @@ function GuardDown(entity)
 		guardsLeft = guardsLeft - 1
 		SetValue(playerComponentState, "GuardsLeft", guardsLeft)
 		DeleteEntity(entity)
+	end
+end
+
+function PlayerAnimation(entity, deltaTime)
+	local ComponentState = GetComponentState(entity)
+	local timeTillWin = GetValue(ComponentState, "TimeTillWin", "float", -1)
+	if timeTillWin > -1 then
+		timeTillWin = timeTillWin - deltaTime
+		SetValue(ComponentState, "TimeTillWin", timeTillWin)
+	end
+	local timeTillLose = GetValue(ComponentState, "TimeTillLose", "float", -1)
+	if timeTillLose > -1 then
+		timeTillLose = timeTillLose - deltaTime
+		SetValue(ComponentState, "TimeTillLose", timeTillLose)
 	end
 end

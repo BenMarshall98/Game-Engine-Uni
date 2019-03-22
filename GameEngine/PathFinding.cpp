@@ -18,7 +18,7 @@ PathFinding::PathFinding(const std::string & pTarget, const std::string & pFile,
 			map.push_back(line);
 			line.clear();
 		}
-		else if (letter == 'w')
+		else if (letter == 'w' || letter == '0')
 		{
 			line.push_back(1);
 		}

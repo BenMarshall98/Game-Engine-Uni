@@ -262,7 +262,22 @@
     <None Include="HitBoxMainMenu.json" />
     <None Include="HitBoxMainMenu.lua" />
     <None Include="LoseScene.json" />
+    <None Include="Models\boxanim.dae" />
+    <None Include="Models\bullet.mtl" />
+    <None Include="Models\Monster_1.dae" />
+    <None Include="Models\person1anim.dae" />
+    <None Include="Models\personanim.dae" />
+    <None Include="Models\personanim1.dae" />
+    <None Include="Models\player.dae" />
+    <None Include="Models\player2.dae" />
+    <None Include="Models\player3.dae" />
+    <None Include="Models\player4.dae" />
+    <None Include="Models\playeranim.dae" />
+    <None Include="Models\playertest5.dae" />
     <None Include="Models\Test.dae" />
+    <None Include="Models\untitled.dae" />
+    <None Include="Models\untitled2.dae" />
+    <None Include="Models\untitled3.dae" />
     <None Include="Options.json" />
     <None Include="packages.config" />
     <None Include="Pause.json" />
@@ -291,6 +306,25 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
+    <Object Include="Models\pixelcircle.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Models\pixelcirclecorner.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Models\pixelcirclemiddle.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Models\pixelcircleside.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="\\adir.hull.ac.uk\home\538\538704\Desktop\tiletexture.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

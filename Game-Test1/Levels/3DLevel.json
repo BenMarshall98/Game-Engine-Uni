@@ -22,6 +22,16 @@
       "Texture": "Textures/concreteNormal.jpg"
     },
     {
+      "Type": "Texture",
+      "Name": "Floor",
+      "Texture": "Textures/floor.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "FloorNormal",
+      "Texture": "Textures/floorNormal.jpg"
+    },
+    {
       "Type": "Model",
       "Name": "Cube",
       "Model": "Models/playertest5.dae"
@@ -33,8 +43,18 @@
     },
     {
       "Type": "Model",
-      "Name": "Floor",
-      "Model": "Models/Floor.obj"
+      "Name": "FloorCorner",
+      "Model": "Models/pixelcirclecorner.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "FloorSide",
+      "Model": "Models/pixelcircleside.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "FloorMiddle",
+      "Model": "Models/pixelcirclemiddle.obj"
     },
     {
       "Type": "Model",
@@ -94,23 +114,14 @@
       "Name": "Floor",
       "Components": [
         {
-          "Component": "Model",
-          "Model": "Floor"
-        },
-        {
           "Component": "Shader",
           "Shader": "NormalShader"
-        },
-        {
-          "Component": "Direction",
-          "Direction": [ 0, 0, 1 ],
-          "Angle": 0
         },
         {
           "Component": "Physics",
           "Shape": {
             "Type": "Cuboid",
-            "Size": [ 25, 0, 25 ]
+            "Size": [ 30, 0, 30 ]
           },
           "Mass": 0,
           "Type": "WALL",
@@ -118,11 +129,11 @@
         },
         {
           "Component": "Texture",
-          "Texture": "Concrete"
+          "Texture": "Floor"
         },
         {
           "Component": "NormalTexture",
-          "Texture": "ConcreteNormal"
+          "Texture": "FloorNormal"
         },
         {
           "Component": "ShadowShader",
@@ -192,7 +203,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ 0, 0.5, 0 ]
+          "Position": [ 63.5, 0.5, -63.5 ]
         },
         {
           "Component": "Direction",
@@ -209,6 +220,10 @@
         {
           "Component": "NormalTexture",
           "Texture": "BoxNormal"
+        },
+        {
+          "Component": "Animation",
+          "Function": "PlayerAnimation"
         },
         {
           "Component": "Physics",
@@ -280,52 +295,306 @@
       ]
     },
     {
-      "Name": "AnimatedCube",
-      "Components": [
-        {
-          "Component": "Model",
-          "Model": "Cube"
-        },
-        {
-          "Component": "Shader",
-          "Shader": "RiggedShader"
-        },
-        {
-          "Component": "ShadowShader",
-          "Direction": "RiggedDirectionalShadow",
-          "Point": "RiggedPointShadow"
-        },
-        {
-          "Component": "Position",
-          "Position": [ 0, 0, 0 ]
-        },
-        {
-          "Component": "RiggedAnimation",
-          "Animation": "First",
-          "Playback": "Play"
-        },
-        {
-          "Component": "Direction",
-          "Direction": [ 1, 0, 0 ],
-          "Angle": 90
-        },
-        {
-          "Component": "Texture",
-          "Texture": "Box"
-        },
-        {
-          "Component": "NormalTexture",
-          "Texture": "BoxNormal"
-        }
-      ]
-    },
-    {
-      "Name": "Floor",
+      "Name": "",
       "Template": "Floor",
       "Components": [
         {
           "Component": "Position",
-          "Position": [ 0, 0, 0 ]
+          "Position": [ -14.5, 0, 14.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": -90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorCorner"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ -14.5, 0, -37.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 180
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ -14.5, 0, -89.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 180
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ -14.5, 0, -141.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 180
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorCorner"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 37.5, 0, 14.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": -90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 37.5, 0, -37.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorMiddle"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 37.5, 0, -89.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorMiddle"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 37.5, 0, -141.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 89.5, 0, 14.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": -90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 89.5, 0, -37.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 180
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorMiddle"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 89.5, 0, -89.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": -90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorMiddle"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 89.5, 0, -141.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 141.5, 0, 14.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorCorner"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 141.5, 0, -37.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 141.5, 0, -89.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorSide"
+        }
+      ]
+    },
+    {
+      "Name": "",
+      "Template": "Floor",
+      "Components": [
+        {
+          "Component": "Position",
+          "Position": [ 141.5, 0, -141.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Model",
+          "Model": "FloorCorner"
         }
       ]
     },
@@ -347,73 +616,7 @@
         },
         {
           "Component": "Position",
-          "Position": [ 5, 0.5, 0 ]
-        },
-        {
-          "Component": "Direction",
-          "Direction": [ 0, 1, 0 ],
-          "Angle": 90
-        },
-        {
-          "Component": "Texture",
-          "Texture": "Box"
-        },
-        {
-          "Component": "NormalTexture",
-          "Texture": "BoxNormal"
-        },
-        {
-          "Component": "Physics",
-          "Shape": {
-            "Type": "Cuboid",
-            "Size": [ 0.5, 0.5, 0.5 ]
-          },
-          "Mass": 1,
-          "Type": "WALL",
-          "AngularLimit": [ 0.0, 0.0, 0.0 ]
-        },
-        {
-          "Component": "ArtificialIntelligence",
-          "PathFollowing": [
-            {
-              "Position": [ -5, 0.5, -5 ],
-              "Radius": 2.5
-            },
-            {
-              "Position": [ -5, 0.5, 5 ],
-              "Radius": 2.5
-            },
-            {
-              "Position": [ 5, 0.5, 5 ],
-              "Radius": 2.5
-            },
-            {
-              "Position": [ 5, 0.5, -5 ],
-              "Radius": 2.5
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "AICube2",
-      "Components": [
-        {
-          "Component": "Model",
-          "Model": "AICube"
-        },
-        {
-          "Component": "Shader",
-          "Shader": "NormalShader"
-        },
-        {
-          "Component": "ShadowShader",
-          "Direction": "DirectionalShadow",
-          "Point": "PointShadow"
-        },
-        {
-          "Component": "Position",
-          "Position": [ -22.5, 0.5, -22.5 ]
+          "Position": [ -14.5, 0.5, 14.5 ]
         },
         {
           "Component": "Direction",
@@ -451,24 +654,276 @@
         {
           "Component": "ArtificialIntelligence",
           "PathFinding": {
-            "Map": "3DLevel.txt",
+            "Map": "3DLevelFull.txt",
             "TopLeftCoord": [ -24.5, 24.5 ]
           },
           "PathFollowing": [
             {
-              "Position": [ -22.5, 0.5, -22.5 ],
+              "Position": [ -14.5, 0.5, 14.5 ],
               "Radius": 1
             },
             {
-              "Position": [ -22.5, 0.5, 22.5 ],
+              "Position": [ 37.5, 0.5, 14.5 ],
               "Radius": 1
             },
             {
-              "Position": [ 22.5, 0.5, 22.5 ],
+              "Position": [ 37.5, 0.5, -37.5 ],
               "Radius": 1
             },
             {
-              "Position": [ 22.5, 0.5, -22.5 ],
+              "Position": [ -14.5, 0.5, -37.5 ],
+              "Radius": 1
+            }
+          ],
+          "StateMachine": {
+            "Function": "GuardStart"
+          },
+          "Target": "Player"
+        }
+      ]
+    },
+    {
+      "Name": "AICube2",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ 141.5, 0.5, -141.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        },
+        {
+          "Component": "State"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ],
+          "CollisionResponse": true,
+          "CollisionFunctions": [
+            {
+              "EntityType": "BULLET",
+              "Function": "GuardDown"
+            }
+          ]
+        },
+        {
+          "Component": "ArtificialIntelligence",
+          "PathFinding": {
+            "Map": "3DLevelFull.txt",
+            "TopLeftCoord": [ -24.5, 24.5 ]
+          },
+          "PathFollowing": [
+            {
+              "Position": [ 141.5, 0.5, -141.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 89.5, 0.5, -141.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 89.5, 0.5, -89.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 141.5, 0.5, -89.5 ],
+              "Radius": 1
+            }
+          ],
+          "StateMachine": {
+            "Function": "GuardStart"
+          },
+          "Target": "Player"
+        }
+      ]
+    },
+    {
+      "Name": "AICube3",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ -14.5, 0.5, -141.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        },
+        {
+          "Component": "State"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ],
+          "CollisionResponse": true,
+          "CollisionFunctions": [
+            {
+              "EntityType": "BULLET",
+              "Function": "GuardDown"
+            }
+          ]
+        },
+        {
+          "Component": "ArtificialIntelligence",
+          "PathFinding": {
+            "Map": "3DLevelFull.txt",
+            "TopLeftCoord": [ -24.5, 24.5 ]
+          },
+          "PathFollowing": [
+            {
+              "Position": [ -14.5, 0.5, -141.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ -14.5, 0.5, -89.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 37.5, 0.5, -89.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 37.5, 0.5, -141.5 ],
+              "Radius": 1
+            }
+          ],
+          "StateMachine": {
+            "Function": "GuardStart"
+          },
+          "Target": "Player"
+        }
+      ]
+    },
+    {
+      "Name": "AICube3",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "AICube"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ 141.5, 0.5, 14.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 90
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Box"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "BoxNormal"
+        },
+        {
+          "Component": "State"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Cuboid",
+            "Size": [ 0.5, 0.5, 0.5 ]
+          },
+          "Mass": 1,
+          "Type": "WALL",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ],
+          "CollisionResponse": true,
+          "CollisionFunctions": [
+            {
+              "EntityType": "BULLET",
+              "Function": "GuardDown"
+            }
+          ]
+        },
+        {
+          "Component": "ArtificialIntelligence",
+          "PathFinding": {
+            "Map": "3DLevelFull.txt",
+            "TopLeftCoord": [ -24.5, 24.5 ]
+          },
+          "PathFollowing": [
+            {
+              "Position": [ 141.5, 0.5, 14.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 141.5, 0.5, -37.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 89.5, 0.5, -37.5 ],
+              "Radius": 1
+            },
+            {
+              "Position": [ 89.5, 0.5, 14.5 ],
               "Radius": 1
             }
           ],
@@ -488,7 +943,7 @@
       "Perspective": {
         "Type": "Perspective",
         "MinDistance": 0.1,
-        "MaxDistance": 50
+        "MaxDistance": 70
       },
       "Camera": {
         "Type": "FollowPlayer",
