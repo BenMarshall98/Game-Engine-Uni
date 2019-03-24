@@ -140,11 +140,8 @@ function ThreeDLevelSceneDisplay()
 	DisplayText(healthDisplay, "Centre", 50, 50, 3, colour)
 
 	local guardsLeft = GetValue(ComponentState, "GuardsLeft", "integer", guards)
-	local guardsDisplay = "Guards Left: " .. guardsLeft
 
-	DisplayText(guardsDisplay, "Centre", 50, 70, 3, colour)
-
-	if guardsLeft == 0 then
+	if guardsLeft <= 0 then
 		local timeTillWin = GetValue(ComponentState, "TimeTillWin", "float", -1)
 		if timeTillWin == -1 then
 			SetValue(ComponentState, "TimeTillWin", 1.0)
@@ -153,7 +150,12 @@ function ThreeDLevelSceneDisplay()
 		if (timeTillWin ~= -1) and timeTillWin <= 0 then
 			SwapToMenuScene("WinScene.json")
 		end
+		guardsLeft = 0
 	end
+
+	local guardsDisplay = "Guards Left: " .. guardsLeft
+
+	DisplayText(guardsDisplay, "Centre", 50, 70, 3, colour)
 end
 
 function DestroyBullet(entity)

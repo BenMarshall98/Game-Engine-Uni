@@ -38,6 +38,7 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: Give the option to output log to a file instead of cout
 
 //TODO: Adaptive Velocity for the AI pathfollowing and pathfinding
+//TODO: Rename mesh to something else
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

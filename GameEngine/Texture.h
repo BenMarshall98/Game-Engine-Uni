@@ -5,26 +5,14 @@
 class Texture
 {
 private:
-	unsigned int mTextureID;
+public:
+	Texture();
+
+	~Texture();
+
 	Texture& operator=(const Texture& texture) = delete;
 	Texture(const Texture& texture) = delete;
 
-public:
-	Texture() : mTextureID(0)
-	{
-
-	}
-
-	~Texture()
-	{
-		glDeleteTextures(1, &mTextureID);
-	}
-
-	bool LoadTexture(const std::string & fileName);
-
-	inline int TextureID() const
-	{
-		return mTextureID;
-	}
+	virtual bool LoadTexture(const std::string & fileName) = 0;
 };
 

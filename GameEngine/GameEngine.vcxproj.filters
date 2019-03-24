@@ -76,19 +76,43 @@
     <Filter Include="Level Loader">
       <UniqueIdentifier>{68f96209-94ac-42bb-ad9b-4642a67e437a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render Manager">
+      <UniqueIdentifier>{5bd11447-1cff-47fc-93a4-50525ba759de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\GenericRender">
+      <UniqueIdentifier>{5d08c880-6965-4306-a0d0-1f29abb81ed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\GenericRender\Models">
+      <UniqueIdentifier>{18ab1a5b-701e-4a96-b800-c1953f7df196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\GenericRender\Shader">
+      <UniqueIdentifier>{4946c6a6-6488-4bea-ad0d-ef82838b34a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\GenericRender\Texture">
+      <UniqueIdentifier>{1b75c059-7aa5-425d-85c2-649a75db3101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330">
+      <UniqueIdentifier>{d3cdd79b-8396-4d28-ada7-dd0c6f1c2770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330\Models">
+      <UniqueIdentifier>{cf8f7009-5fcb-48ea-8dff-df5fc29129f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330\Texture">
+      <UniqueIdentifier>{0a52d694-0cd5-4285-9986-425f6dac3028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330\Shader">
+      <UniqueIdentifier>{48dc0525-6bbb-4e9c-b95e-9f0aa2f4209a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\GenericRender\FrameBuffer">
+      <UniqueIdentifier>{c0c00380-f321-4ecd-9464-fbb939b957b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330\FrameBuffer">
+      <UniqueIdentifier>{3e8a7980-08f1-4757-b9a0-d816306aa4df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticModel.cpp">
-      <Filter>Utility\Models</Filter>
     </ClCompile>
     <ClCompile Include="ModelLoader.cpp">
       <Filter>Utility\Models</Filter>
@@ -189,9 +213,6 @@
     <ClCompile Include="InputMapping.cpp">
       <Filter>Input Manager</Filter>
     </ClCompile>
-    <ClCompile Include="iModel.cpp">
-      <Filter>Utility\Models</Filter>
-    </ClCompile>
     <ClCompile Include="CameraManager.cpp">
       <Filter>Camera Manager</Filter>
     </ClCompile>
@@ -222,9 +243,6 @@
     <ClCompile Include="ComponentShadowShader.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedModel.cpp">
-      <Filter>Utility\Models\RiggedModel</Filter>
-    </ClCompile>
     <ClCompile Include="Vec3AnimKey.cpp">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClCompile>
@@ -232,9 +250,6 @@
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClCompile>
     <ClCompile Include="AnimNode.cpp">
-      <Filter>Utility\Models\RiggedModel</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
@@ -318,23 +333,59 @@
     <ClCompile Include="AnimationSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Render Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderEngine.cpp">
+      <Filter>Render Manager\GenericRender</Filter>
+    </ClCompile>
+    <ClCompile Include="iModel.cpp">
+      <Filter>Render Manager\GenericRender\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticModel.cpp">
+      <Filter>Render Manager\GenericRender\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Render Manager\GenericRender\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Render Manager\GenericRender\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330Engine.cpp">
+      <Filter>Render Manager\OpenGL330</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330StaticModel.cpp">
+      <Filter>Render Manager\OpenGL330\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330AnimatedModel.cpp">
+      <Filter>Render Manager\OpenGL330\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330Shader.cpp">
+      <Filter>Render Manager\OpenGL330\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330Texture.cpp">
+      <Filter>Render Manager\OpenGL330\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Render Manager\GenericRender\FrameBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330DirectionalShadowFramebuffer.cpp">
+      <Filter>Render Manager\OpenGL330\FrameBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330PointShadowFramebuffer.cpp">
+      <Filter>Render Manager\OpenGL330\FrameBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModel.cpp">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModelMesh.cpp">
+      <Filter>Render Manager\GenericRender\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h">
       <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="iModel.h">
-      <Filter>Utility\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticModel.h">
-      <Filter>Utility\Models</Filter>
     </ClInclude>
     <ClInclude Include="ModelLoader.h">
       <Filter>Utility\Models</Filter>
@@ -465,9 +516,6 @@
     <ClInclude Include="ComponentShadowShader.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedModel.h">
-      <Filter>Utility\Models\RiggedModel</Filter>
-    </ClInclude>
     <ClInclude Include="Vec3AnimKey.h">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClInclude>
@@ -475,9 +523,6 @@
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClInclude>
     <ClInclude Include="AnimNode.h">
-      <Filter>Utility\Models\RiggedModel</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
       <Filter>Utility\Models\RiggedModel</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
@@ -560,6 +605,54 @@
     </ClInclude>
     <ClInclude Include="AnimationSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Render Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderEngine.h">
+      <Filter>Render Manager\GenericRender</Filter>
+    </ClInclude>
+    <ClInclude Include="iModel.h">
+      <Filter>Render Manager\GenericRender\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticModel.h">
+      <Filter>Render Manager\GenericRender\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Render Manager\GenericRender\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Render Manager\GenericRender\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330Engine.h">
+      <Filter>Render Manager\OpenGL330</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330StaticModel.h">
+      <Filter>Render Manager\OpenGL330\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330AnimatedModel.h">
+      <Filter>Render Manager\OpenGL330\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330Shader.h">
+      <Filter>Render Manager\OpenGL330\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330Texture.h">
+      <Filter>Render Manager\OpenGL330\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Render Manager\GenericRender\FrameBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330DirectionalShadowFramebuffer.h">
+      <Filter>Render Manager\OpenGL330\FrameBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330PointShadowFramebuffer.h">
+      <Filter>Render Manager\OpenGL330\FrameBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModel.h">
+      <Filter>Utility\Models\RiggedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModelMesh.h">
+      <Filter>Render Manager\GenericRender\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
