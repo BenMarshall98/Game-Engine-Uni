@@ -15,6 +15,7 @@
 #include "CameraManager.h"
 #include <string>
 #include <algorithm>
+#include "RenderManager.h"
 
 RenderSystem::RenderSystem() : iSystem(std::vector<ComponentType>{
 	ComponentType::COMPONENT_MODEL,
@@ -29,8 +30,9 @@ RenderSystem::RenderSystem() : iSystem(std::vector<ComponentType>{
 void RenderSystem::Action(void)
 {
 	EntityManager * entityManager = EntityManager::Instance();
-	glViewport(0, 0, GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	RenderManager::Instance()->SetViewport(GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
+	RenderManager::Instance()->ClearColorBuffer();
+	RenderManager::Instance()->ClearDepthBuffer();
 	glm::mat4 perspectiveMatrix = projection->GetProjection();
 	glm::mat4 viewMatrix = camera->GetViewMatrix();
 	glm::vec3 viewPos = camera->GetPosition();
@@ -52,7 +54,7 @@ void RenderSystem::Action(void)
 		glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
 		iComponent * const componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL_TEXTURE);
-		const Texture * const normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
+		Texture * const normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
 
 		iComponent * const componentRiggedAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_RIGGED_ANIMATION);
 		ComponentRiggedAnimation * riggedAnimation = (componentRiggedAnimation == nullptr) ? nullptr : dynamic_cast<ComponentRiggedAnimation *>(componentRiggedAnimation);
@@ -64,9 +66,11 @@ void RenderSystem::Action(void)
 	}
 }
 
-void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Texture * const texture, const Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, ComponentRiggedAnimation * riggedAnimation, bool & updateFirst)
+void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, Texture * const texture, Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, ComponentRiggedAnimation * riggedAnimation, bool & updateFirst)
 {
-	static int lastShader = -1;
+	static Shader * lastShader = nullptr;
+
+	RenderManager * renderManager = RenderManager::Instance();
 
 	shader->UseShader();
 
@@ -77,42 +81,29 @@ void RenderSystem::Render(Shader * const shader, iModel * const model, const glm
 	static int normalLocation;
 	static int viewPosLocation;
 
-	if (lastShader != shader->ShaderID() || updateFirst)
+	if (lastShader != shader || updateFirst)
 	{
 		LightManager * const lightManager = LightManager::Instance();
-		lightManager->Render(shader->ShaderID());
-		lastShader = shader->ShaderID();
+		lightManager->Render(shader);
+		lastShader = shader;
 		updateFirst = false;
-		modelLocation = glGetUniformLocation(shader->ShaderID(), "model");
-		perspectiveLocation = glGetUniformLocation(shader->ShaderID(), "perspective");
-		viewLocation = glGetUniformLocation(shader->ShaderID(), "view");
-		textureLocation = glGetUniformLocation(shader->ShaderID(), "texture_map");
-		normalLocation = glGetUniformLocation(shader->ShaderID(), "normalTexture");
-		viewPosLocation = glGetUniformLocation(shader->ShaderID(), "viewPos");
 	}
 
 	glm::mat4 modelMatrix(1.0f);
 	modelMatrix = translate(modelMatrix, position);
 	modelMatrix *= toMat4(direction);
 
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(modelMatrix));
-
-	glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, value_ptr(perspectiveMatrix));
-
-	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(viewMatrix));
-
-	glUniform1i(textureLocation, 0);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture->TextureID());
+	renderManager->SetUniformMatrix4fv(shader, "model", modelMatrix, false);
+	renderManager->SetUniformMatrix4fv(shader, "perspective", perspectiveMatrix, false);
+	renderManager->SetUniformMatrix4fv(shader, "view", viewMatrix, false);
+	renderManager->UseTexture(shader, "texture_map", texture, 0);
 
 	if (normal != nullptr)
 	{
-		glUniform1i(normalLocation, 1);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, normal->TextureID());
+		renderManager->UseTexture(shader, "normalTexture", normal, 1);
 	}
 
-	glUniform3fv(viewPosLocation, 1, value_ptr(viewPos));
+	renderManager->SetUniform3fv(shader, "viewPos", viewPos);
 
 	if (riggedAnimation)
 	{
@@ -123,7 +114,8 @@ void RenderSystem::Render(Shader * const shader, iModel * const model, const glm
 	{
 		model->Render(shader);
 	}
-	glUseProgram(0);
+
+	renderManager->ClearShader();
 }
 
 RenderSystem::~RenderSystem()

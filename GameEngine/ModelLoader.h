@@ -29,7 +29,7 @@ private:
 	static void CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & vertex2, const glm::vec3 & vertex3, const glm::vec2 & texture1, const glm::vec2 & texture2, const glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
 
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
-	static Mesh * ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);
+	static AnimatedModelMesh * ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);
 
 	static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat);
 	static glm::mat4 AiToGLMMat4(aiMatrix4x4& mat);

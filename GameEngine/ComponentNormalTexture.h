@@ -22,7 +22,7 @@ public:
 
 	void RenderSwap() override;
 
-	inline const Texture * GetRenderTexture() const
+	inline Texture * GetRenderTexture() const
 	{
 		return texture;
 	}

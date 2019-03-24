@@ -8,6 +8,7 @@
 #include "Window.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "RenderManager.h"
 
 TextRender * TextRender::instance = nullptr;
 
@@ -98,15 +99,11 @@ void TextRender::RenderText(const std::string & text, const PixelLocation & pPix
 	glm::mat4 projection = glm::ortho(0.0f, (float)Window::GetWidth(), 0.0f, (float)Window::GetHeight());
 
 	shader->UseShader();
-	int projectionLoc = glGetUniformLocation(shader->ShaderID(), "projection");
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	
+	RenderManager::Instance()->SetUniformMatrix4fv(shader, "projection", projection, false);
+	RenderManager::Instance()->SetUniform3fv(shader, "textColor", colour);
+	RenderManager::Instance()->UseTexture(shader, "text", nullptr, 0);
 
-	int textureLoc = glGetUniformLocation(shader->ShaderID(), "textColor");
-	glUniform3f(textureLoc, colour.x, colour.y, colour.z);
-
-	int textureLocation = glGetUniformLocation(shader->ShaderID(), "text");
-	glUniform1i(textureLocation, 0);
-	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 
 	float x = pPixelLocation.location.x;

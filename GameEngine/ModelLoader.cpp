@@ -8,6 +8,8 @@
 #include <fstream>
 #include <sstream>
 
+#include "RenderManager.h"
+
 iModel * ModelLoader::LoadModel(const std::string & fileName)
 {
 
@@ -152,7 +154,7 @@ StaticModel * ModelLoader::LoadOBJ(const std::string & fileName)
 
 	TangentSpace(indexes, vertex, texture, tangents/*, bitangents*/);
 
-	return new StaticModel(vertex, texture, normal, indexes, tangents/*, bitangents*/);
+	return RenderManager::Instance()->CreateStaticModel(vertex, texture, normal, indexes, tangents);
 }
 
 int ModelLoader::FindInVector(std::vector<std::string> & list, const std::string & toFind)
@@ -257,7 +259,7 @@ void ModelLoader::ProcessNode(aiNode * const node, const aiScene * const scene, 
 	}
 }
 
-Mesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const aiScene * const scene)
+AnimatedModelMesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const aiScene * const scene)
 {
 	std::vector<glm::vec3> vertexes;
 	std::vector<glm::vec3> normals;
@@ -330,9 +332,7 @@ Mesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const 
 		}
 	}
 
-	Mesh * const mesh = new Mesh(vertexes, normals, textures, Weights, IDs, indices);
-
-	return mesh;
+	return RenderManager::Instance()->CreateAnimatedModelMesh(vertexes, normals, textures, Weights, IDs, indices);
 }
 
 

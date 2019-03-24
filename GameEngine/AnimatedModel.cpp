@@ -3,6 +3,7 @@
 #include "AnimatedModel.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtx/transform.hpp"
+#include "RenderManager.h"
 
 void AnimatedModel::Render(Shader * const shader)
 {
@@ -22,9 +23,7 @@ void AnimatedModel::Render(Shader * const shader, std::vector<glm::mat4> boneMat
 
 	for (int i = 0; i < boneMats.size(); i++)
 	{
-		int boneLocation = glGetUniformLocation(shader->ShaderID(), ("Bones[" + std::to_string(i) + ']').c_str());
-
-		glUniformMatrix4fv(boneLocation, 1, GL_TRUE, glm::value_ptr(boneMats[i]));
+		RenderManager::Instance()->SetUniformMatrix4fv(shader, bonesLoc.at(i), boneMats[i], true);
 	}
 
 	for (int i = 0; i < meshes.size(); i++)

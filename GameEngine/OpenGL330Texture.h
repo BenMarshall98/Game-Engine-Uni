@@ -12,5 +12,6 @@ public:
 	~OpenGL330Texture();
 
 	bool LoadTexture(const std::string & fileName) override;
+	void BindTexture() override;
 };
 

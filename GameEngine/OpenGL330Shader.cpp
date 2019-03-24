@@ -1,6 +1,6 @@
 #include "OpenGL330Shader.h"
-
-
+#include "LoggingManager.h"
+#include "glm/gtc/type_ptr.hpp"
 
 OpenGL330Shader::OpenGL330Shader() : mShaderID(0)
 {
@@ -92,4 +92,35 @@ int OpenGL330Shader::CompileShader(const std::string & fileName, const GLenum sh
 	}
 
 	return shader;
+}
+
+void OpenGL330Shader::SetUniform1i(std::string uniformName, int value)
+{
+	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
+	glUniform1i(location, value);
+}
+
+void OpenGL330Shader::SetUniform1f(std::string uniformName, float value)
+{
+	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
+	glUniform1f(location, value);
+}
+
+void OpenGL330Shader::SetUniform3fv(std::string uniformName, glm::vec3 value)
+{
+	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
+	glUniform3fv(location, 1, value_ptr(value));
+}
+
+void OpenGL330Shader::SetUniformMatrix4fv(std::string uniformName, glm::mat4 value, bool transpose)
+{
+	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
+	glUniformMatrix4fv(location, 1, transpose, value_ptr(value));
+}
+
+void OpenGL330Shader::UseTexture(std::string uniformName, int activeTexture)
+{
+	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
+	glUniform1i(location, activeTexture);
+	glActiveTexture(GL_TEXTURE0 + activeTexture);
 }

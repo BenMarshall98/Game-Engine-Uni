@@ -1,7 +1,10 @@
+#define NOMINMAX
+
 #include "ResourceManager.h"
 #include "ModelLoader.h"
 #include "AudioManager.h"
 #include <algorithm>
+#include "RenderManager.h"
 
 std::vector<std::string> ResourceManager::usedModels;
 std::vector<std::string> ResourceManager::usedTextures;
@@ -65,8 +68,8 @@ void ResourceManager::LoadTexture(const std::string & textureName, const std::st
 		return;
 	}
 
-	Texture * texture = new Texture();
-	if (!texture->LoadTexture(fileName))
+	Texture * texture = RenderManager::Instance()->CreateTexture(fileName);
+	if (!texture)
 	{
 		//TODO: Log that the texture failed to load
 		return;
@@ -96,8 +99,8 @@ void ResourceManager::LoadShader(const std::string & shaderName, const std::stri
 	}
 
 	
-	Shader * shader = new Shader();
-	if (!shader->LoadShader(vertexProgram, fragmentProgram, geometryProgram))
+	Shader * shader = RenderManager::Instance()->CreateShader(vertexProgram, fragmentProgram, geometryProgram);
+	if (!shader)
 	{
 		//TODO: Log that the shader failed to compile
 		return;

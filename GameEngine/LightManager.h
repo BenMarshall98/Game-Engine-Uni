@@ -1,14 +1,9 @@
 #pragma once
 
-#include "OpenGL.h"
 #include "glm/glm.hpp"
 #include <vector>
-
-struct ShadowFrameBuffer
-{
-	unsigned int FrameBuffer;
-	unsigned int ShadowTexture;
-};
+#include "FrameBuffer.h"
+#include "Shader.h"
 
 struct Directional
 {
@@ -25,7 +20,7 @@ struct PointLight
 	PointLight(PointLight&) = delete;
 	glm::vec3 location;
 	glm::vec3 lightColour;
-	ShadowFrameBuffer * shadowTexture;
+	FrameBuffer * shadowTexture;
 	float farPlane;
 	float attenuation;
 };
@@ -38,7 +33,7 @@ struct SpotLight
 	glm::vec3 location;
 	glm::vec3 direction;
 	glm::vec3 lightColour;
-	ShadowFrameBuffer * shadowTexture;
+	FrameBuffer * shadowTexture;
 	float farPlane;
 	float angleInner;
 	float angleOutside;
@@ -53,8 +48,8 @@ private:
 	std::vector<PointLight *> pointLights;
 	std::vector<PointLight *> renderPointLights;
 
-	ShadowFrameBuffer directionalShadowTexture;
-	std::vector<ShadowFrameBuffer *> pointShadowTexture;
+	FrameBuffer * directionalShadowTexture;
+	std::vector<FrameBuffer *> pointShadowTexture;
 
 	Directional * directional;
 
@@ -114,7 +109,7 @@ public:
 		return directional;
 	}
 
-	inline ShadowFrameBuffer & GetDirectionalFramebuffer()
+	inline FrameBuffer * GetDirectionalFramebuffer()
 	{
 		return directionalShadowTexture;
 	}
@@ -132,7 +127,7 @@ public:
 
 	void Update(const glm::vec3 & pViewLocation);
 	void Clear();
-	void Render(const int pShaderID);
+	void Render(Shader * pShader);
 
 	~LightManager();
 };

@@ -3,6 +3,7 @@
 #include "OpenGL.h"
 #include "Window.h"
 #include "SceneManager.h"
+#include "RenderManager.h"
 
 #undef LoadMenu
 
@@ -133,8 +134,9 @@ void MenuScene::Update()
 
 void MenuScene::Render()
 {
-	glClearColor(backgroundColour.x, backgroundColour.y, backgroundColour.z, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	RenderManager::Instance()->ClearColor(backgroundColour);
+	RenderManager::Instance()->ClearDepthBuffer();
+	RenderManager::Instance()->ClearColorBuffer();
 
 	for (int i = 0; i < menuItems.size(); i++)
 	{

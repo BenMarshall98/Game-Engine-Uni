@@ -44,3 +44,8 @@ bool OpenGL330Texture::LoadTexture(const std::string & fileName)
 
 	return success;
 }
+
+void OpenGL330Texture::BindTexture()
+{
+	glBindTexture(GL_TEXTURE_2D, mTextureID);
+}

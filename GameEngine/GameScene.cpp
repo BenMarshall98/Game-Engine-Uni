@@ -20,6 +20,7 @@
 #include "BulletPhysicsEngine.h"
 #include "LevelLoader.h"
 #include "ScriptingManager.h"
+#include "RenderManager.h"
 #include <iostream>
 
 GameScene::GameScene(const std::string & pFileName) : iScene(pFileName)
@@ -36,14 +37,12 @@ void GameScene::Load()
 
 void GameScene::Render()
 {
-	glEnable(GL_DEPTH_TEST);
+	RenderManager::Instance()->EnableDepth();
 
 	LightManager * const lightManager = LightManager::Instance();
 	lightManager->Update(CameraManager::Instance()->GetCamera()->GetPosition());
 
 	SystemManager::Instance()->Render();
-
-	
 }
 
 void GameScene::Update()

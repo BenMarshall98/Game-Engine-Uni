@@ -4,14 +4,14 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
 
-#include "Mesh.h"
+#include "AnimatedModelMesh.h"
 #include "Animation.h"
 #include "Bone.h"
 
 class AnimatedModel : public iModel
 {
 private:
-	std::vector<Mesh *> meshes;
+	std::vector<AnimatedModelMesh *> meshes;
 	std::vector<Animation *> animations;
 	std::vector<Bone *> bones;
 	std::vector<Node *> nodes;
@@ -32,7 +32,7 @@ public:
 	AnimatedModel& operator=(const AnimatedModel&) = delete;
 	AnimatedModel(AnimatedModel&) = delete;
 
-	inline void AddMesh(Mesh * const mesh)
+	inline void AddMesh(AnimatedModelMesh * const mesh)
 	{
 		meshes.push_back(mesh);
 	}
@@ -52,7 +52,7 @@ public:
 		nodes = pNodes;
 	}
 
-	inline Mesh * GetMesh(const int loc)
+	inline AnimatedModelMesh * GetMesh(const int loc)
 	{
 		return meshes.at(loc);
 	}

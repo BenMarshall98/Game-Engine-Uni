@@ -4,69 +4,17 @@
 #include "OpenGL.h"
 #include <string>
 #include <algorithm>
+#include "RenderManager.h"
 
 LightManager * LightManager::instance = nullptr;
 
 LightManager::LightManager() : directional(nullptr) 
 {
-	unsigned int FBO;
-	glGenFramebuffers(1, &FBO);
-
-	unsigned int Texture;
-
-	glGenTextures(1, &Texture);
-	glBindTexture(GL_TEXTURE_2D, Texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
-		shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-
-	float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, Texture, 0);
-	glDrawBuffer(GL_NONE);
-	glReadBuffer(GL_NONE);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	directionalShadowTexture.FrameBuffer = FBO;
-	directionalShadowTexture.ShadowTexture = Texture;
+	directionalShadowTexture = RenderManager::Instance()->CreateDirectionShadowFrameBuffer(shadowWidth, shadowHeight);
 
 	for (int i = 0; i < MAX_LIGHTS; i++)
 	{
-		unsigned int pointFBO;
-		glGenFramebuffers(1, &pointFBO);
-
-		unsigned int pointCubemap;
-		glGenTextures(1, &pointCubemap);
-
-		glBindTexture(GL_TEXTURE_CUBE_MAP, pointCubemap);
-
-		for (int i = 0; i < 6; i++)
-		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT,
-				shadowWidth, shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
-		}
-
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
-		glBindFramebuffer(GL_FRAMEBUFFER, pointFBO);
-		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, pointCubemap, 0);
-		glDrawBuffer(GL_NONE);
-		glReadBuffer(GL_NONE);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-		ShadowFrameBuffer * const shadow = new ShadowFrameBuffer;
-		shadow->FrameBuffer = pointFBO;
-		shadow->ShadowTexture = pointCubemap;
+		FrameBuffer * const shadow = RenderManager::Instance()->CreatePointShadowFrameBuffer(shadowWidth, shadowHeight);
 		
 		pointShadowTexture.push_back(shadow);
 	}
@@ -226,90 +174,49 @@ void LightManager::Update(const glm::vec3 & pViewLocation)
 	}
 }
 
-void LightManager::Render(const int pShaderID)
+void LightManager::Render(Shader * pShader)
 {
-	const int useDirectionLight = glGetUniformLocation(pShaderID, "DirectionLightUsed");
+	RenderManager * renderManager = RenderManager::Instance();
 
 	if (directional != nullptr)
 	{
-		glUniform1i(useDirectionLight, GL_TRUE);
+		renderManager->SetUniform1i(pShader, "DirectionLightUsed", true);
 
-		const int directionalDirection = glGetUniformLocation(pShaderID, "DirectionLightDirection");
-		glUniform3fv(directionalDirection, 1, glm::value_ptr(directional->direction));
-
-		const int directionalLightColour = glGetUniformLocation(pShaderID, "DirectionLightColour");
-		glUniform3fv(directionalLightColour, 1, glm::value_ptr(directional->lightColour));
-
-		const int directionalLightPerspective = glGetUniformLocation(pShaderID, "dirLightPerspective");
-		glUniformMatrix4fv(directionalLightPerspective, 1, GL_FALSE, glm::value_ptr(directional->perspective));
-
-		const int directionalLightView = glGetUniformLocation(pShaderID, "dirLightView");
-		glUniformMatrix4fv(directionalLightView, 1, GL_FALSE, glm::value_ptr(directional->view));
-
-		const int directionalLightTexture = glGetUniformLocation(pShaderID, "DirLightShadow");
-		glUniform1i(directionalLightTexture, 2);
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, directionalShadowTexture.ShadowTexture);
+		renderManager->SetUniform3fv(pShader, "DirectionLightDirection", directional->direction);
+		renderManager->SetUniform3fv(pShader, "DirectionLightColour", directional->lightColour);
+		renderManager->SetUniformMatrix4fv(pShader, "dirLightPerspective", directional->perspective, false);
+		renderManager->SetUniformMatrix4fv(pShader, "dirLightView", directional->view, false);
+		renderManager->UseFrameBufferTexture(pShader, "DirLightShadow", directionalShadowTexture, 2);
 	}
 	else
 	{
-		glUniform1i(useDirectionLight, GL_FALSE);
+		renderManager->SetUniform1i(pShader, "DirectionLightUsed", false);
 	}
 
-	const int totalPointLight = glGetUniformLocation(pShaderID, "TotalPointLights");
-	glUniform1i(totalPointLight, renderPointLights.size());
+	renderManager->SetUniform1i(pShader, "TotalPointLights", renderPointLights.size());
 
 	unsigned int currentLight = 0;
 
 	for (int i = 0; i < renderPointLights.size(); i++)
 	{
-		const int PointLightLocation = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].location").c_str());
-		glUniform3fv(PointLightLocation, 1, glm::value_ptr(renderPointLights.at(i)->location));
-
-		const int PointLightColour = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].lightColour").c_str());
-		glUniform3fv(PointLightColour, 1, glm::value_ptr(renderPointLights.at(i)->lightColour));
-
-		const int PointLightAttenuation = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].attenuation").c_str());
-		glUniform1f(PointLightAttenuation, renderPointLights.at(i)->attenuation);
-
-		const int PointLightFarDepth = glGetUniformLocation(pShaderID, ("pointLights[" + std::to_string(i) + "].farDepth").c_str());
-		glUniform1f(PointLightFarDepth, renderPointLights.at(i)->farPlane);
-
-		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + std::to_string(currentLight) + "]").c_str());
-		glUniform1i(directionalLightTexture, 3 + currentLight);
-		glActiveTexture(GL_TEXTURE3 + currentLight);
-		currentLight++;
-		glBindTexture(GL_TEXTURE_CUBE_MAP, renderPointLights.at(i)->shadowTexture->ShadowTexture);
+		renderManager->SetUniform3fv(pShader, "pointLights[" + std::to_string(i) + "].location", renderPointLights.at(i)->location);
+		renderManager->SetUniform3fv(pShader, "pointLights[" + std::to_string(i) + "].lightColour", renderPointLights.at(i)->lightColour);
+		renderManager->SetUniform1f(pShader, "pointLights[" + std::to_string(i) + "].attenuation", renderPointLights.at(i)->attenuation);
+		renderManager->SetUniform1f(pShader, "pointLights[" + std::to_string(i) + "].farDepth", renderPointLights.at(i)->farPlane);
+		renderManager->UseFrameBufferTexture(pShader, "depthMaps[" + std::to_string(currentLight) + "]", renderPointLights.at(i)->shadowTexture, 3 + currentLight);
 	}
 
-	const int totalSpotLight = glGetUniformLocation(pShaderID, "TotalSpotLights");
-	glUniform1i(totalSpotLight, renderSpotLights.size());
+	renderManager->SetUniform1i(pShader, "TotalSpotLights", renderSpotLights.size());
 
 	for (int i = 0; i < renderSpotLights.size(); i++)
 	{
-		const int SpotLightLocation = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].location").c_str());
-		glUniform3fv(SpotLightLocation, 1, glm::value_ptr(renderSpotLights.at(i)->location));
-
-		const int SpotLightColour = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].lightColour").c_str());
-		glUniform3fv(SpotLightColour, 1, glm::value_ptr(renderSpotLights.at(i)->lightColour));
-
-		const int SpotLightDirection = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].direction").c_str());
-		glUniform3fv(SpotLightDirection, 1, glm::value_ptr(renderSpotLights.at(i)->direction));
-
-		const int SpotLightAngleInner = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].angleInner").c_str());
-		glUniform1f(SpotLightAngleInner, cos(glm::radians(renderSpotLights.at(i)->angleInner)));
-
-		const int SpotLightAngleOuter = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].angleOuter").c_str());
-		glUniform1f(SpotLightAngleOuter, cos(glm::radians(renderSpotLights.at(i)->angleOutside)));
-
-		const int SpotLightFarDepth = glGetUniformLocation(pShaderID, ("spotLights[" + std::to_string(i) + "].farPlane").c_str());
-		glUniform1f(SpotLightFarDepth, renderSpotLights.at(i)->farPlane);
-
-		const int directionalLightTexture = glGetUniformLocation(pShaderID, ("depthMaps[" + std::to_string(currentLight) + "]").c_str());
-		glUniform1i(directionalLightTexture, 3 + currentLight);
-		glActiveTexture(GL_TEXTURE3 + currentLight);
-		currentLight++;
-		glBindTexture(GL_TEXTURE_CUBE_MAP, renderSpotLights.at(i)->shadowTexture->ShadowTexture);
+		renderManager->SetUniform3fv(pShader, "spotLights[" + std::to_string(i) + "].location", renderSpotLights.at(i)->location);
+		renderManager->SetUniform3fv(pShader, "spotLights[" + std::to_string(i) + "].lightColour", renderSpotLights.at(i)->lightColour);
+		renderManager->SetUniform3fv(pShader, "spotLights[" + std::to_string(i) + "].direction", renderSpotLights.at(i)->direction);
+		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].angleInner", cos(glm::radians(renderSpotLights.at(i)->angleInner)));
+		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].angleOuter", cos(glm::radians(renderSpotLights.at(i)->angleOutside)));
+		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].farPlane", renderSpotLights.at(i)->farPlane);
+		renderManager->UseFrameBufferTexture(pShader, "depthMaps[" + std::to_string(currentLight) + "]", renderSpotLights.at(i)->shadowTexture, 3 + currentLight);
 	}
 }
 

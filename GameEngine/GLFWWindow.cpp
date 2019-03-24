@@ -1,8 +1,11 @@
+#define NOMINMAX
+
 #include "GLFWWindow.h"
 #include "SceneManager.h"
 #include "InputManager.h"
 #include <Windows.h>
 #include <iostream>
+#include "RenderManager.h"
 
 int GLFWWindow::height = 600;
 int GLFWWindow::width = 800;
@@ -19,7 +22,7 @@ GLFWWindow::~GLFWWindow()
 
 void GLFWWindow::windowResize(GLFWwindow * const window, const int pWidth, const int pHeight)
 {
-	glViewport(0, 0, pWidth, pHeight);
+	RenderManager::Instance()->SetViewport(pWidth, pHeight);
 	height = pHeight;
 	width = pWidth;
 	SceneManager * const sceneManager = SceneManager::Instance();

@@ -14,5 +14,6 @@ public:
 	Texture(const Texture& texture) = delete;
 
 	virtual bool LoadTexture(const std::string & fileName) = 0;
+	virtual void BindTexture() = 0;
 };
 

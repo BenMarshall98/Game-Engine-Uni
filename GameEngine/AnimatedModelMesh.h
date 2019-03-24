@@ -5,14 +5,13 @@
 
 class AnimatedModelMesh
 {
-private:
+protected:
 	std::vector<glm::vec3> vertex;
 	std::vector<glm::vec3> normal;
 	std::vector<glm::vec2> textures;
 	std::vector<glm::vec4> weights;
 	std::vector<glm::ivec4> ids;
 	std::vector<int> indices;
-	unsigned int VAO, VBO[5], EBO;
 
 public:
 	AnimatedModelMesh(std::vector<glm::vec3> & pVertex, std::vector<glm::vec3> & pNormal, std::vector<glm::vec2> & pTextures, std::vector<glm::vec4> & pWeights, std::vector<glm::ivec4> & pIds, std::vector<int> pIndices);
@@ -21,5 +20,5 @@ public:
 	AnimatedModelMesh& operator=(const AnimatedModelMesh&) = delete;
 	AnimatedModelMesh(AnimatedModelMesh&) = delete;
 
-	void Render();
+	virtual void Render() = 0;
 };
