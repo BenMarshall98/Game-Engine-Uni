@@ -12,7 +12,6 @@ class EntityManager
 {
 private:
 	static EntityManager * instance;
-	std::map<ComponentType, std::map<Entity *, iComponent *>> ComponentList;
 	std::vector<Entity *> EntityList;
 	std::vector<Entity *> ToDeleteList;
 	std::vector<Entity *> ToUpdateList;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "iComponent.h"
+#include <vector>
 #include <string>
 
 class Entity
@@ -9,7 +11,8 @@ private:
 
 	std::string mEntityName;
 	int mEntityID;
-	
+
+	std::vector<iComponent *> components = std::vector<iComponent *>();
 
 public:
 	explicit Entity(const std::string & entityName) : mEntityName(entityName), mEntityID(nextID)
@@ -20,9 +23,7 @@ public:
 	Entity& operator= (const Entity&) = delete;
 	Entity(Entity&) = delete;
 
-	~Entity()
-	{
-	}
+	~Entity();
 
 	inline int GetID() const
 	{
@@ -33,4 +34,11 @@ public:
 	{
 		return mEntityName;
 	}
+
+	void AddComponent(iComponent * component);
+	void RemoveComponent(iComponent * component);
+	void Swap();
+	void RemoveAllComponents();
+
+	iComponent * GetComponentOfEntity(ComponentType componentType);
 };
