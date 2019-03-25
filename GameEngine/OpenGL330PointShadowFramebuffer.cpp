@@ -1,7 +1,8 @@
 #include "OpenGL330PointShadowFramebuffer.h"
 #include "OpenGL.h"
 
-OpenGL330PointShadowFramebuffer::OpenGL330PointShadowFramebuffer(int width, int height)
+OpenGL330PointShadowFramebuffer::OpenGL330PointShadowFramebuffer(const int width, const int height) :
+	pointCubemap(0), pointFBO(0)
 {
 	glGenFramebuffers(1, &pointFBO);
 

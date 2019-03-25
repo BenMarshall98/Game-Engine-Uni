@@ -76,12 +76,12 @@ public:
 		engine->SetDirectionOfRigidBody(pRigidBody, pDirection);
 	}
 
-	inline void ApplyVelocity(RigidBody * const pRigidBody, glm::vec3 & velocity) const
+	inline void ApplyVelocity(RigidBody * const pRigidBody, const glm::vec3 & velocity) const
 	{
 		engine->ApplyVelocity(pRigidBody, velocity);
 	}
 
-	inline void ApplyImpulse(RigidBody * const pRigidBody, glm::vec3 & impulse) const
+	inline void ApplyImpulse(RigidBody * const pRigidBody, const glm::vec3 & impulse) const
 	{
 		engine->ApplyImpulse(pRigidBody, impulse);
 	}
@@ -91,7 +91,7 @@ public:
 		engine->RemoveRigidBody(pRigidBody);
 	}
 
-	inline void ApplyRotation(RigidBody * const pRigidBody, glm::vec3 & rotation) const
+	inline void ApplyRotation(RigidBody * const pRigidBody, const glm::vec3 & rotation) const
 	{
 		engine->ApplyRotation(pRigidBody, rotation);
 	}

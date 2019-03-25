@@ -24,7 +24,7 @@ public:
 	void WindowEvents() override;
 	bool IsRunning() override;
 
-	void ChangeSize(float width, float height) override {};
-	void Fullscreen() override {};
+	void ChangeSize(const float width, const float height) override;
+	void Fullscreen() override;
 };
 

@@ -94,31 +94,31 @@ int OpenGL330Shader::CompileShader(const std::string & fileName, const GLenum sh
 	return shader;
 }
 
-void OpenGL330Shader::SetUniform1i(std::string uniformName, int value)
+void OpenGL330Shader::SetUniform1i(const std::string & uniformName, const int value)
 {
 	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
 	glUniform1i(location, value);
 }
 
-void OpenGL330Shader::SetUniform1f(std::string uniformName, float value)
+void OpenGL330Shader::SetUniform1f(const std::string & uniformName, const float value)
 {
 	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
 	glUniform1f(location, value);
 }
 
-void OpenGL330Shader::SetUniform3fv(std::string uniformName, glm::vec3 value)
+void OpenGL330Shader::SetUniform3fv(const std::string & uniformName, const glm::vec3 & value)
 {
 	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
 	glUniform3fv(location, 1, value_ptr(value));
 }
 
-void OpenGL330Shader::SetUniformMatrix4fv(std::string uniformName, glm::mat4 value, bool transpose)
+void OpenGL330Shader::SetUniformMatrix4fv(const std::string & uniformName, const glm::mat4 & value, const bool transpose)
 {
 	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
 	glUniformMatrix4fv(location, 1, transpose, value_ptr(value));
 }
 
-void OpenGL330Shader::UseTexture(std::string uniformName, int activeTexture)
+void OpenGL330Shader::UseTexture(const std::string & uniformName, const int activeTexture)
 {
 	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
 	glUniform1i(location, activeTexture);

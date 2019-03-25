@@ -29,7 +29,7 @@ RenderSystem::RenderSystem() : iSystem(std::vector<ComponentType>{
 
 void RenderSystem::Action(void)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	RenderManager::Instance()->SetViewport(GLFWWindow::GetWidth(), GLFWWindow::GetHeight());
 	RenderManager::Instance()->ClearColorBuffer();
 	RenderManager::Instance()->ClearDepthBuffer();
@@ -49,15 +49,15 @@ void RenderSystem::Action(void)
 
 		Shader * const shader = dynamic_cast<ComponentShader *>(componentShader)->GetRenderShader();
 		iModel * const model = dynamic_cast<ComponentModel *>(componentModel)->GetRenderModel();
-		glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
+		const glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetRenderPosition();
 		Texture * const texture = dynamic_cast<ComponentTexture *>(componentTexture)->GetRenderTexture();
-		glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
+		const glm::quat direction = dynamic_cast<ComponentDirection *>(componentDirection)->GetRenderDirection();
 
 		iComponent * const componentNormal = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_NORMAL_TEXTURE);
 		Texture * const normal = (componentNormal == nullptr) ? nullptr : dynamic_cast<ComponentNormalTexture *>(componentNormal)->GetRenderTexture();
 
 		iComponent * const componentRiggedAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_RIGGED_ANIMATION);
-		ComponentRiggedAnimation * riggedAnimation = (componentRiggedAnimation == nullptr) ? nullptr : dynamic_cast<ComponentRiggedAnimation *>(componentRiggedAnimation);
+		ComponentRiggedAnimation * const riggedAnimation = (componentRiggedAnimation == nullptr) ? nullptr : dynamic_cast<ComponentRiggedAnimation *>(componentRiggedAnimation);
 
 		if (length(position - viewPos) < (projection->GetFar() * 1.1f))
 		{
@@ -66,20 +66,13 @@ void RenderSystem::Action(void)
 	}
 }
 
-void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, Texture * const texture, Texture * const normal, glm::mat4 & perspectiveMatrix, glm::mat4 & viewMatrix, glm::vec3 & viewPos, ComponentRiggedAnimation * riggedAnimation, bool & updateFirst)
+void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, Texture * const texture, Texture * const normal, const glm::mat4 & perspectiveMatrix, const glm::mat4 & viewMatrix, const glm::vec3 & viewPos, ComponentRiggedAnimation * const  riggedAnimation, bool & updateFirst)
 {
 	static Shader * lastShader = nullptr;
 
-	RenderManager * renderManager = RenderManager::Instance();
+	RenderManager * const renderManager = RenderManager::Instance();
 
 	shader->UseShader();
-
-	static int modelLocation;
-	static int perspectiveLocation;
-	static int viewLocation;
-	static int textureLocation;
-	static int normalLocation;
-	static int viewPosLocation;
 
 	if (lastShader != shader || updateFirst)
 	{
@@ -107,7 +100,7 @@ void RenderSystem::Render(Shader * const shader, iModel * const model, const glm
 
 	if (riggedAnimation)
 	{
-		std::vector<glm::mat4> boneMats = riggedAnimation->GetBoneMats();
+		const std::vector<glm::mat4> boneMats = riggedAnimation->GetBoneMats();
 		model->Render(shader, boneMats);
 	}
 	else

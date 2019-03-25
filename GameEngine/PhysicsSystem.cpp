@@ -18,7 +18,7 @@ PhysicsSystem::PhysicsSystem() : iSystem(std::vector<ComponentType>{
 
 void PhysicsSystem::AddEntity(Entity * const pEntity)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes);
 	bool containsEntity = false;
 
@@ -42,7 +42,7 @@ void PhysicsSystem::AddEntity(Entity * const pEntity)
 
 void PhysicsSystem::Action(void)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < newEntities.size(); i++)
 	{
 		iComponent * const componentPosition = entityManager->GetComponentOfEntity(newEntities[i], ComponentType::COMPONENT_POSITION);
@@ -54,9 +54,9 @@ void PhysicsSystem::Action(void)
 		CollisionShape* const shape = ((ComponentPhysics *)componentPhysics)->GetUpdateShape();
 		const float mass = ((ComponentPhysics *)componentPhysics)->GetUpdateMass();
 		const bool collisionResponse = ((ComponentPhysics *)componentPhysics)->GetUpdateCollisionResponse();
-		glm::vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
+		const glm::vec3 angularLimit = ((ComponentPhysics *)componentPhysics)->GetUpdateAngularLimits();
 
-		RigidBody * rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
+		RigidBody * const rigidBody = physicsManager->AddRigidBody(mass, position, direction, shape, newEntities[i], collisionResponse, angularLimit);
 
 		((ComponentPhysics *)componentPhysics)->SetUpdateRigidBody(rigidBody);
 	}

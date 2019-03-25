@@ -3,7 +3,7 @@ class FrameBuffer
 {
 public:
 	FrameBuffer();
-	~FrameBuffer();
+	virtual ~FrameBuffer();
 
 	virtual void UseFrameBuffer() = 0;
 	virtual void BindTexture() = 0;

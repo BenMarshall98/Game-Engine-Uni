@@ -174,9 +174,9 @@ void LightManager::Update(const glm::vec3 & pViewLocation)
 	}
 }
 
-void LightManager::Render(Shader * pShader)
+void LightManager::Render(Shader * const pShader)
 {
-	RenderManager * renderManager = RenderManager::Instance();
+	RenderManager * const renderManager = RenderManager::Instance();
 
 	if (directional != nullptr)
 	{
@@ -204,6 +204,7 @@ void LightManager::Render(Shader * pShader)
 		renderManager->SetUniform1f(pShader, "pointLights[" + std::to_string(i) + "].attenuation", renderPointLights.at(i)->attenuation);
 		renderManager->SetUniform1f(pShader, "pointLights[" + std::to_string(i) + "].farDepth", renderPointLights.at(i)->farPlane);
 		renderManager->UseFrameBufferTexture(pShader, "depthMaps[" + std::to_string(currentLight) + "]", renderPointLights.at(i)->shadowTexture, 3 + currentLight);
+		currentLight++;
 	}
 
 	renderManager->SetUniform1i(pShader, "TotalSpotLights", renderSpotLights.size());
@@ -217,6 +218,7 @@ void LightManager::Render(Shader * pShader)
 		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].angleOuter", cos(glm::radians(renderSpotLights.at(i)->angleOutside)));
 		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].farPlane", renderSpotLights.at(i)->farPlane);
 		renderManager->UseFrameBufferTexture(pShader, "depthMaps[" + std::to_string(currentLight) + "]", renderSpotLights.at(i)->shadowTexture, 3 + currentLight);
+		currentLight++;
 	}
 }
 

@@ -11,5 +11,5 @@ public:
 	iModel() {};
 	virtual ~iModel();
 	virtual void Render(Shader * shader) = 0;
-	virtual void Render(Shader * shader, std::vector<glm::mat4> boneMats) = 0;
+	virtual void Render(Shader * shader, const std::vector<glm::mat4> & boneMats) = 0;
 };

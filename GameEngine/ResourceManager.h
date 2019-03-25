@@ -39,10 +39,10 @@ class ResourceManager
 		static Texture * GetTexture(const std::string & texture);
 		static void * GetAudio(const std::string & audio);
 
-		static void RemoveModel(iModel * model);
-		static void RemoveShader(Shader * shader);
-		static void RemoveTexture(Texture * texture);
-		static void RemoveAudio(void * audio);
+		static void RemoveModel(const iModel * const model);
+		static void RemoveShader(const Shader * const shader);
+		static void RemoveTexture(const Texture * const texture);
+		static void RemoveAudio(const void * const audio);
 
 		static void ClearResources();
 		static void FinalClearResources();

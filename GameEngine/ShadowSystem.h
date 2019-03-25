@@ -17,7 +17,7 @@ private:
 
 	std::vector<std::string> views;
 
-	static void RenderDirectional(iModel * const model, const glm::vec3 & position, const glm::quat & direction, Directional * const directional, Shader * const shadowShader);
+	static void RenderDirectional(iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Directional * const directional, Shader * const shadowShader);
 
 	static void RenderPoint(iModel * const model, const glm::vec3 & position, const glm::quat & direction, Shader * const shadowShader);
 

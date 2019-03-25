@@ -11,7 +11,7 @@ AudioSystem::AudioSystem() : iSystem(std::vector<ComponentType>{
 
 void AudioSystem::Action(void)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentPosition = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_POSITION);

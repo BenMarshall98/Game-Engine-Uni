@@ -10,8 +10,11 @@ protected:
 	std::vector<Entity *> EntityList;
 
 public:
-	iSystem(std::vector<ComponentType> pComponentTypes);
+	explicit iSystem(const std::vector<ComponentType> & pComponentTypes);
 	virtual ~iSystem();
+
+	iSystem& operator=(const iSystem&) = delete;
+	iSystem(iSystem&) = delete;
 
 	virtual void Action() = 0;
 

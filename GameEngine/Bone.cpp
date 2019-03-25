@@ -9,7 +9,7 @@ Bone::~Bone()
 
 }
 
-unsigned int Bone::FindPosition(AnimNode * animNode, const float time)
+unsigned int Bone::FindPosition(AnimNode * const animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetPositionKeys().size() - 1; i++)
 	{
@@ -21,7 +21,7 @@ unsigned int Bone::FindPosition(AnimNode * animNode, const float time)
 	return 0;
 }
 
-unsigned int Bone::FindRotation(AnimNode * animNode, const float time)
+unsigned int Bone::FindRotation(AnimNode * const animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetRotationKeys().size() - 1; i++)
 	{
@@ -34,7 +34,7 @@ unsigned int Bone::FindRotation(AnimNode * animNode, const float time)
 	return 0;
 }
 
-unsigned int Bone::FindScale(AnimNode * animNode, const float time)
+unsigned int Bone::FindScale(AnimNode * const animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetScaleKeys().size() - 1; i++)
 	{
@@ -47,7 +47,7 @@ unsigned int Bone::FindScale(AnimNode * animNode, const float time)
 	return 0;
 }
 
-glm::vec3 Bone::CalcInterpolatedPosition(AnimNode * animNode, const float time)
+glm::vec3 Bone::CalcInterpolatedPosition(AnimNode * const animNode, const float time)
 {
 	if (animNode->GetPositionKeys().size() == 1)
 	{
@@ -72,7 +72,7 @@ glm::vec3 Bone::CalcInterpolatedPosition(AnimNode * animNode, const float time)
 	return pos;
 }
 
-glm::vec3 Bone::CalcInterpolatedScale(AnimNode * animNode, const float time)
+glm::vec3 Bone::CalcInterpolatedScale(AnimNode * const animNode, const float time)
 {
 	if (animNode->GetScaleKeys().size() == 1)
 	{
@@ -97,7 +97,7 @@ glm::vec3 Bone::CalcInterpolatedScale(AnimNode * animNode, const float time)
 	return sca;
 }
 
-glm::quat Bone::CalcInterpolatedRotation(AnimNode * animNode, const float time)
+glm::quat Bone::CalcInterpolatedRotation(AnimNode * const animNode, const float time)
 {
 	if (animNode->GetRotationKeys().size() == 1)
 	{
@@ -122,7 +122,7 @@ glm::quat Bone::CalcInterpolatedRotation(AnimNode * animNode, const float time)
 	return rot;
 }
 
-void Bone::UpdateKeyframeTransform(Animation * animation, const float time)
+void Bone::UpdateKeyframeTransform(Animation * const animation, const float time)
 {
 	std::map<Animation *, AnimNode *>::iterator it = animNodes.find(animation);
 

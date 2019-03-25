@@ -21,7 +21,7 @@ private:
 	std::vector<glm::mat4> boneMats;
 
 public:
-	ComponentRiggedAnimation(const std::string & pAnimation, const RiggedAnimationState pAnimationState) : animation(pAnimation), animationState(pAnimationState) {}
+	ComponentRiggedAnimation(const std::string & pAnimation, const RiggedAnimationState pAnimationState) : animation(pAnimation), animationState(pAnimationState), time(0) {}
 	~ComponentRiggedAnimation();
 
 	ComponentType GetComponentName() override;
@@ -32,27 +32,27 @@ public:
 		return time;
 	}
 
-	inline void SetTime(float pTime)
+	inline void SetTime(const float pTime)
 	{
 		time = pTime;
 	}
 
-	inline std::string GetAnimation()
+	inline std::string & GetAnimation()
 	{
 		return animation;
 	}
 
-	inline void SetAnimation(std::string pAnimation)
+	inline void SetAnimation(const std::string & pAnimation)
 	{
 		animation = pAnimation;
 	}
 
-	inline std::vector<glm::mat4> GetBoneMats()
+	inline std::vector<glm::mat4> & GetBoneMats()
 	{
 		return boneMats;
 	}
 
-	inline void SetBoneMats(std::vector<glm::mat4> pBoneMats)
+	inline void SetBoneMats(const std::vector<glm::mat4> & pBoneMats)
 	{
 		boneMats = pBoneMats;
 	}

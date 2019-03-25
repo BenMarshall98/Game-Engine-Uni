@@ -9,17 +9,9 @@ void AnimatedModel::Render(Shader * const shader)
 {
 }
 
-void AnimatedModel::Render(Shader * const shader, std::vector<glm::mat4> boneMats)
+void AnimatedModel::Render(Shader * const shader, const std::vector<glm::mat4> & boneMats)
 {
 	shader->UseShader();
-
-	if (boneMats.size() == 0)
-	{
-		for (int i = 0; i < 100; i++)
-		{
-			boneMats.push_back(glm::mat4(1.0));
-		}
-	}
 
 	for (int i = 0; i < boneMats.size(); i++)
 	{
@@ -51,7 +43,7 @@ std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 
 	for (int i = 0; i < 100; i++)
 	{
-		int size = bones.size() - 1;
+		const int size = bones.size() - 1;
 		if (i > size)
 		{
 			boneMats.push_back(glm::mat4(1.0));
@@ -72,7 +64,7 @@ std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 	return boneMats;
 }
 
-std::vector<glm::mat4> AnimatedModel::Update(std::string animationName, float & time)
+std::vector<glm::mat4> AnimatedModel::Update(const std::string & animationName, float & time)
 {
 	Animation * const animation = animations.at(0);
 

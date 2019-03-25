@@ -68,12 +68,12 @@ public:
 	}
 
 	void Render(Shader * shader) override;
-	void Render(Shader * shader, std::vector<glm::mat4> boneMats) override;
+	void Render(Shader * shader, const std::vector<glm::mat4> & boneMats) override;
 
 	Bone * FindBone(const std::string & name);
 
 	std::vector<glm::mat4> UpdateBoneMatsVector();
 
-	std::vector<glm::mat4> Update(std::string animation, float & time);
+	std::vector<glm::mat4> Update(const std::string & animation, float & time);
 
 };

@@ -141,8 +141,8 @@ void ResourceManager::LoadAudio(const std::string & audioName, const std::string
 
 iModel * ResourceManager::GetModel(const std::string & model)
 {
-	std::map<std::string, iModel *>::iterator it = modelList.find(model);
-	std::map<std::string, int>::iterator count = modelUsage.find(model);
+	const std::map<std::string, iModel *>::iterator it = modelList.find(model);
+	const std::map<std::string, int>::iterator count = modelUsage.find(model);
 
 	if (it != modelList.end())
 	{
@@ -154,8 +154,8 @@ iModel * ResourceManager::GetModel(const std::string & model)
 
 Shader * ResourceManager::GetShader(const std::string & shader)
 {
-	std::map<std::string, Shader *>::iterator it = shaderList.find(shader);
-	std::map<std::string, int>::iterator count = shaderUsage.find(shader);
+	const std::map<std::string, Shader *>::iterator it = shaderList.find(shader);
+	const std::map<std::string, int>::iterator count = shaderUsage.find(shader);
 
 	if (it != shaderList.end())
 	{
@@ -167,8 +167,8 @@ Shader * ResourceManager::GetShader(const std::string & shader)
 
 Texture * ResourceManager::GetTexture(const std::string & texture)
 {
-	std::map<std::string, Texture *>::iterator it = textureList.find(texture);
-	std::map<std::string, int>::iterator count = textureUsage.find(texture);
+	const std::map<std::string, Texture *>::iterator it = textureList.find(texture);
+	const std::map<std::string, int>::iterator count = textureUsage.find(texture);
 
 	if (it != textureList.end())
 	{
@@ -180,19 +180,19 @@ Texture * ResourceManager::GetTexture(const std::string & texture)
 
 void * ResourceManager::GetAudio(const std::string & audio)
 {
-	std::map<std::string, void *>::iterator it = audioBufferList.find(audio);
-	std::map<std::string, int>::iterator count = audioBufferUsage.find(audio);
+	const std::map<std::string, void *>::iterator it = audioBufferList.find(audio);
+	const std::map<std::string, int>::iterator count = audioBufferUsage.find(audio);
 
 	if (it != audioBufferList.end())
 	{
 		count->second++;
-		void * source = AudioManager::Instance()->GenerateSource(it->second);
+		void * const source = AudioManager::Instance()->GenerateSource(it->second);
 		return source;
 	}
-	return 0;
+	return nullptr;
 }
 
-void ResourceManager::RemoveModel(iModel * model)
+void ResourceManager::RemoveModel(const iModel * const model)
 {
 	std::map<std::string, iModel *>::iterator it;
 	std::string modelName = "";
@@ -206,7 +206,7 @@ void ResourceManager::RemoveModel(iModel * model)
 		}
 	}
 
-	std::map<std::string, int>::iterator count = modelUsage.find(modelName);
+	const std::map<std::string, int>::iterator count = modelUsage.find(modelName);
 
 	if (count != modelUsage.end())
 	{
@@ -214,7 +214,7 @@ void ResourceManager::RemoveModel(iModel * model)
 	}
 }
 
-void ResourceManager::RemoveShader(Shader * shader)
+void ResourceManager::RemoveShader(const Shader * const shader)
 {
 	std::map<std::string, Shader *>::iterator it;
 	std::string shaderName = "";
@@ -228,7 +228,7 @@ void ResourceManager::RemoveShader(Shader * shader)
 		}
 	}
 
-	std::map<std::string, int>::iterator count = shaderUsage.find(shaderName);
+	const std::map<std::string, int>::iterator count = shaderUsage.find(shaderName);
 
 	if (count != shaderUsage.end())
 	{
@@ -236,7 +236,7 @@ void ResourceManager::RemoveShader(Shader * shader)
 	}
 }
 
-void ResourceManager::RemoveTexture(Texture * texture)
+void ResourceManager::RemoveTexture(const Texture * const texture)
 {
 	std::map<std::string, Texture *>::iterator it;
 	std::string textureName = "";
@@ -250,7 +250,7 @@ void ResourceManager::RemoveTexture(Texture * texture)
 		}
 	}
 
-	std::map<std::string, int>::iterator count = textureUsage.find(textureName);
+	const std::map<std::string, int>::iterator count = textureUsage.find(textureName);
 
 	if (count != textureUsage.end())
 	{
@@ -258,7 +258,7 @@ void ResourceManager::RemoveTexture(Texture * texture)
 	}
 }
 
-void ResourceManager::RemoveAudio(void * audio)
+void ResourceManager::RemoveAudio(const void * const audio)
 {
 	std::map<std::string, void *>::iterator it;
 	std::string audioName = "";
@@ -272,7 +272,7 @@ void ResourceManager::RemoveAudio(void * audio)
 		}
 	}
 
-	std::map<std::string, int>::iterator count = audioBufferUsage.find(audioName);
+	const std::map<std::string, int>::iterator count = audioBufferUsage.find(audioName);
 
 	if (count != audioBufferUsage.end())
 	{
@@ -292,7 +292,7 @@ void ResourceManager::ClearResources()
 
 		for (it = modelList.begin(); it != modelList.end();)
 		{
-			std::map<std::string, int>::iterator count = modelUsage.find(it->first);
+			const std::map<std::string, int>::iterator count = modelUsage.find(it->first);
 
 			if (count->second == 0)
 			{
@@ -316,7 +316,7 @@ void ResourceManager::ClearResources()
 
 		for (it = textureList.begin(); it != textureList.end();)
 		{
-			std::map<std::string, int>::iterator count = textureUsage.find(it->first);
+			const std::map<std::string, int>::iterator count = textureUsage.find(it->first);
 
 			if (count->second == 0)
 			{
@@ -340,7 +340,7 @@ void ResourceManager::ClearResources()
 
 		for (it = shaderList.begin(); it != shaderList.end();)
 		{
-			std::map<std::string, int>::iterator count = shaderUsage.find(it->first);
+			const std::map<std::string, int>::iterator count = shaderUsage.find(it->first);
 
 			if (count->second == 0)
 			{
@@ -364,7 +364,7 @@ void ResourceManager::ClearResources()
 
 		for (it = audioBufferList.begin(); it != audioBufferList.end();)
 		{
-			std::map<std::string, int>::iterator count = audioBufferUsage.find(it->first);
+			const std::map<std::string, int>::iterator count = audioBufferUsage.find(it->first);
 
 			if (count->second == 0)
 			{

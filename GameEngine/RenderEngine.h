@@ -13,25 +13,25 @@ class RenderEngine
 {
 public:
 	RenderEngine();
-	~RenderEngine();
+	virtual ~RenderEngine();
 
-	virtual Texture * CreateTexture(std::string fileName) = 0;
-	virtual Shader * CreateShader(std::string vertexFile, std::string fragmentFile, std::string geometryFile) = 0;
-	virtual StaticModel * CreateStaticModel(std::vector<glm::vec3> & pVertex, std::vector<glm::vec2> & pTexture, std::vector<glm::vec3> & pNormal, std::vector<int> & pIndices, std::vector<glm::vec3> & pTangents) = 0;
-	virtual AnimatedModelMesh * CreateAnimatedModelMesh(std::vector<glm::vec3> & pVertex, std::vector<glm::vec3> & pNormal, std::vector<glm::vec2> & pTextures, std::vector<glm::vec4> & pWeights, std::vector<glm::ivec4> & pIds, std::vector<int> pIndices) = 0;
+	virtual Texture * CreateTexture(const std::string & fileName) = 0;
+	virtual Shader * CreateShader(const std::string & vertexFile, const std::string & fragmentFile, const std::string & geometryFile) = 0;
+	virtual StaticModel * CreateStaticModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec2> & pTexture, const std::vector<glm::vec3> & pNormal, const std::vector<int> & pIndices, const std::vector<glm::vec3> & pTangents) = 0;
+	virtual AnimatedModelMesh * CreateAnimatedModelMesh(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec3> & pNormal, const std::vector<glm::vec2> & pTextures, const std::vector<glm::vec4> & pWeights, const std::vector<glm::ivec4> & pIds, const std::vector<int> & pIndices) = 0;
 	virtual FrameBuffer * CreateDirectionShadowFrameBuffer(int width, int height) = 0;
 	virtual FrameBuffer * CreatePointShadowFrameBuffer(int width, int height) = 0;
 
 	virtual void SetViewport(int width, int height) = 0;
 
-	virtual void UseTexture(Shader * shader, std::string uniformName, Texture * texture, int activeTexture) = 0;
-	virtual void UseFrameBufferTexture(Shader * shader, std::string uniformName, FrameBuffer * frameBuffer, int activeTexture) = 0;
+	virtual void UseTexture(Shader * shader, const std::string & uniformName, Texture * texture, int activeTexture) = 0;
+	virtual void UseFrameBufferTexture(Shader * shader, const std::string & uniformName, FrameBuffer * frameBuffer, int activeTexture) = 0;
 	virtual void ClearColorBuffer() = 0;
 	virtual void EnableDepth() = 0;
 	virtual void ClearDepthBuffer() = 0;
 	virtual void ClearShader() = 0;
 	virtual void ClearFrameBuffer() = 0;
-	virtual void CullFace(std::string cullType) = 0;
-	virtual void ClearColor(glm::vec4 colour) = 0;
+	virtual void CullFace(const std::string & cullType) = 0;
+	virtual void ClearColor(const glm::vec4 & colour) = 0;
 };
 

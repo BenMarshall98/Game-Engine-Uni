@@ -10,7 +10,7 @@ AnimationSystem::AnimationSystem() : iSystem(std::vector<ComponentType>{
 
 void AnimationSystem::Action(void)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentAnimation = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_ANIMATION);

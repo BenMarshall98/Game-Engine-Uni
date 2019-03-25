@@ -15,7 +15,7 @@ struct Directional
 
 struct PointLight
 {
-	PointLight() {};
+	PointLight() : farPlane(0), attenuation(0), shadowTexture(nullptr) {};
 	PointLight& operator=(const PointLight&) = delete;
 	PointLight(PointLight&) = delete;
 	glm::vec3 location;
@@ -27,7 +27,7 @@ struct PointLight
 
 struct SpotLight
 {
-	SpotLight() {};
+	SpotLight() : farPlane(0), angleInner(0), angleOutside(0), shadowTexture(nullptr) {};
 	SpotLight& operator=(const SpotLight&) = delete;
 	SpotLight(SpotLight&) = delete;
 	glm::vec3 location;

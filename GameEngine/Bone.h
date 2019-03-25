@@ -17,7 +17,7 @@ private:
 	glm::mat4 offsetMatrix;
 
 public:
-	Bone(std::string & pName, Node * const pNode, std::map<Animation *, AnimNode *> const pAnimNodes, glm::mat4 & pOffsetMatrix) :
+	Bone(std::string & pName, Node * const pNode, const std::map<Animation *, AnimNode *> & pAnimNodes, glm::mat4 & pOffsetMatrix) :
 		name(pName), node(pNode), animNodes(pAnimNodes), offsetMatrix(pOffsetMatrix), parentBone(nullptr)
 	{
 

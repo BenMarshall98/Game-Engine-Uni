@@ -14,7 +14,7 @@ ArtificialIntelligenceSystem::ArtificialIntelligenceSystem() : iSystem(std::vect
 
 void ArtificialIntelligenceSystem::Action(void)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentIntelligence = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE);

@@ -11,7 +11,7 @@ RiggedAnimationSystem::RiggedAnimationSystem() : iSystem(std::vector<ComponentTy
 
 void RiggedAnimationSystem::Action(void)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
@@ -29,7 +29,7 @@ void RiggedAnimationSystem::Animate(AnimatedModel * const animatedModel, Compone
 {
 	float time = riggedAnimation->GetTime();
 	std::string animation = riggedAnimation->GetAnimation();
-	std::vector<glm::mat4> boneMats = animatedModel->Update(animation, time);
+	const std::vector<glm::mat4> boneMats = animatedModel->Update(animation, time);
 	riggedAnimation->SetTime(time);
 	riggedAnimation->SetBoneMats(boneMats);
 }

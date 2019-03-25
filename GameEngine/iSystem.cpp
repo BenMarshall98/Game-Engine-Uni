@@ -1,7 +1,7 @@
 #include "iSystem.h"
 #include "EntityManager.h"
 
-iSystem::iSystem(std::vector<ComponentType> pComponentTypes) : componentTypes(pComponentTypes)
+iSystem::iSystem(const std::vector<ComponentType> & pComponentTypes) : componentTypes(pComponentTypes)
 {
 	EntityList = EntityManager::Instance()->GetAllEntitiesWithComponents(componentTypes);
 }
@@ -11,9 +11,9 @@ iSystem::~iSystem()
 }
 
 
-void iSystem::AddEntity(Entity * pEntity)
+void iSystem::AddEntity(Entity * const pEntity)
 {
-	EntityManager * entityManager = EntityManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	const bool containsComponents = entityManager->CheckEntityHasComponents(pEntity, componentTypes);
 	bool containsEntity = false;
 
@@ -34,7 +34,7 @@ void iSystem::AddEntity(Entity * pEntity)
 	}
 }
 
-void iSystem::RemoveEntity(Entity * pEntity)
+void iSystem::RemoveEntity(Entity * const pEntity)
 {
 	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);
 

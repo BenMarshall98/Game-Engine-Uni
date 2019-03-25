@@ -555,7 +555,7 @@ int ScriptingManager::lua_SetRotation(lua_State * const luaState)
 		lua_error(luaState);
 	}
 
-	ComponentPhysics * physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
+	ComponentPhysics * const physicsComponent = static_cast<ComponentPhysics *>(lua_touserdata(luaState, 1));
 
 	if (!physicsComponent)
 	{
@@ -1816,11 +1816,11 @@ int ScriptingManager::lua_GetEntity(lua_State * const luaState)
 
 	std::string entityName = lua_tostring(luaState, 1);
 
-	Entity * entity = EntityManager::Instance()->GetEntityByName(entityName);
+	Entity * const entity = EntityManager::Instance()->GetEntityByName(entityName);
 
 	if (!entity)
 	{
-		std::string message = "Entity " + entityName + " does not exist";
+		const std::string message = "Entity " + entityName + " does not exist";
 		lua_pushstring(luaState, message.c_str());
 		lua_error(luaState);
 	}
@@ -2456,9 +2456,9 @@ int ScriptingManager::lua_AddComponentPhysics(lua_State * const luaState)
 	return 0;
 }
 
-int ScriptingManager::lua_AddComponentPosition(lua_State * luaState)
+int ScriptingManager::lua_AddComponentPosition(lua_State * const luaState)
 {
-	int numberOfArgs = lua_gettop(luaState);
+	const int numberOfArgs = lua_gettop(luaState);
 
 	if (numberOfArgs != 2)
 	{
@@ -2466,7 +2466,7 @@ int ScriptingManager::lua_AddComponentPosition(lua_State * luaState)
 		lua_error(luaState);
 	}
 
-	Entity * entity = (Entity *)lua_touserdata(luaState, 1);
+	Entity * const entity = (Entity *)lua_touserdata(luaState, 1);
 
 	if (!entity)
 	{
@@ -2673,7 +2673,7 @@ int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 	float XPos = lua_tonumber(luaState, 3);
 	float YPos = lua_tonumber(luaState, 4);
 
-	glm::vec2 location(XPos, YPos);
+	const glm::vec2 location(XPos, YPos);
 
 	float fontSize = lua_tonumber(luaState, 5);
 
@@ -2687,9 +2687,9 @@ int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 
 	lua_pop(luaState, 3);
 
-	glm::vec3 colour(x, y, z);
+	const glm::vec3 colour(x, y, z);
 
-	PixelLocation pixelLocation = TextRender::Instance()->CalculateSize(displayText, location, fontSize, align);
+	const PixelLocation pixelLocation = TextRender::Instance()->CalculateSize(displayText, location, fontSize, align);
 	TextRender::Instance()->RenderText(displayText, pixelLocation, colour);
 
 	return 0;

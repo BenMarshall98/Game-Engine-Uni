@@ -115,7 +115,7 @@ iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const Co
 	return nullptr;
 }
 
-std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(std::vector<ComponentType>componentName)
+std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const std::vector<ComponentType> & componentName)
 {
 	std::vector<Entity *> entities;
 
@@ -142,7 +142,7 @@ std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(std::vector<Co
 	return entities;
 }
 
-bool EntityManager::CheckEntityHasComponents(Entity * const entity, std::vector<ComponentType> componentName)
+bool EntityManager::CheckEntityHasComponents(Entity * const entity, const std::vector<ComponentType> & componentName)
 {
 	bool containsComponents = true;
 

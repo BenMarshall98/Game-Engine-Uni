@@ -8,7 +8,7 @@ private:
 public:
 	Texture();
 
-	~Texture();
+	virtual ~Texture();
 
 	Texture& operator=(const Texture& texture) = delete;
 	Texture(const Texture& texture) = delete;

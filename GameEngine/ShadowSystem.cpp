@@ -28,17 +28,16 @@ ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoor
 
 void ShadowSystem::Action(void)
 {
-	RenderManager * renderManager = RenderManager::Instance();
-	EntityManager * entityManager = EntityManager::Instance();
+	RenderManager * const renderManager = RenderManager::Instance();
+	EntityManager * const entityManager = EntityManager::Instance();
 	std::vector<iModel *> models = std::vector<iModel *>();
 	std::vector<glm::vec3> positions = std::vector<glm::vec3>();
 	std::vector<glm::quat> directions = std::vector<glm::quat>();
 	std::vector<Shader *> directionalShadowShaders = std::vector<Shader *>();
 	std::vector<Shader *> pointShadowShaders = std::vector<Shader *>();
-	Camera * camera = CameraManager::Instance()->GetCamera();
-	Projection * projection = CameraManager::Instance()->GetProjection();
+	Camera * const camera = CameraManager::Instance()->GetCamera();
+	Projection * const projection = CameraManager::Instance()->GetProjection();
 
-	int count = 0;
 	for (int i = 0; i < EntityList.size(); i++)
 	{
 		iComponent * const componentModel = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_MODEL);
@@ -72,7 +71,7 @@ void ShadowSystem::Action(void)
 	directional->view = glm::lookAt(camera->GetPosition() + directional->direction, camera->GetPosition(), glm::vec3(0, 0, 1));
 
 	renderManager->SetViewport(LightManager::shadowWidth, LightManager::shadowHeight);
-	FrameBuffer * frameBuffer = LightManager::Instance()->GetDirectionalFramebuffer();
+	FrameBuffer * const frameBuffer = LightManager::Instance()->GetDirectionalFramebuffer();
 	renderManager->UseFrameBuffer(frameBuffer);
 	renderManager->ClearDepthBuffer();
 
@@ -179,9 +178,9 @@ void ShadowSystem::Action(void)
 	renderManager->CullFace("Back");
 }
 
-void ShadowSystem::RenderDirectional(iModel * const model, const glm::vec3 & position, const glm::quat & direction, Directional * const directional, Shader * const shadowShader)
+void ShadowSystem::RenderDirectional(iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Directional * const directional, Shader * const shadowShader)
 {
-	RenderManager * renderManager = RenderManager::Instance();
+	RenderManager * const renderManager = RenderManager::Instance();
 	shadowShader->UseShader();
 
 	glm::mat4 modelMatrix(1.0f);

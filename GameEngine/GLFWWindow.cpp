@@ -109,3 +109,13 @@ void GLFWWindow::LimitFPS(const float FPS)
 
 	glfwSetTime(0);
 }
+
+void GLFWWindow::ChangeSize(const float width, const float height)
+{
+	//TODO: Implement
+}
+
+void GLFWWindow::Fullscreen()
+{
+	//TODO: Implement
+}

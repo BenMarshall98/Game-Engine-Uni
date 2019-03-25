@@ -1,7 +1,7 @@
 #include "OpenGL330StaticModel.h"
 #include "OpenGL.h"
 
-OpenGL330StaticModel::OpenGL330StaticModel(std::vector<glm::vec3> & pVertex, std::vector<glm::vec2> & pTexture, std::vector<glm::vec3> & pNormal, std::vector<int> & pIndices, std::vector<glm::vec3> & pTangents) :
+OpenGL330StaticModel::OpenGL330StaticModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec2> & pTexture, const std::vector<glm::vec3> & pNormal, const std::vector<int> & pIndices, const std::vector<glm::vec3> & pTangents) :
 	StaticModel(pVertex, pTexture, pNormal, pIndices, pTangents), VAO(0), EBO(0), VBO{ 0,0,0,0,0 }
 {
 	//The following code is based from learnopengl
@@ -49,7 +49,7 @@ void OpenGL330StaticModel::Render(Shader * const shader)
 	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
-void OpenGL330StaticModel::Render(Shader * shader, std::vector<glm::mat4> boneMats)
+void OpenGL330StaticModel::Render(Shader * const shader, const std::vector<glm::mat4> & boneMats)
 {
 }
 

@@ -259,7 +259,7 @@ void ModelLoader::ProcessNode(aiNode * const node, const aiScene * const scene, 
 	}
 }
 
-AnimatedModelMesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const pMesh, const aiScene * const scene)
+AnimatedModelMesh * ModelLoader::ProcessMesh(const aiNode * const node, const aiMesh * const pMesh, const aiScene * const scene)
 {
 	std::vector<glm::vec3> vertexes;
 	std::vector<glm::vec3> normals;
@@ -269,7 +269,7 @@ AnimatedModelMesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const 
 	{
 		const aiVector3D aiVertex = pMesh->mVertices[i];
 		const aiVector3D aiNormal = pMesh->mNormals[i];
-		aiVector3D aiTexture = pMesh->HasTextureCoords(0) ? pMesh->mTextureCoords[0][i] : aiVector3D(0);
+		const aiVector3D aiTexture = pMesh->HasTextureCoords(0) ? pMesh->mTextureCoords[0][i] : aiVector3D(0);
 
 		const glm::vec3 vertex = glm::vec3(aiVertex.x, aiVertex.y, aiVertex.z);
 		const glm::vec3 normal = glm::vec3(aiNormal.x, aiNormal.y, aiNormal.z);
@@ -336,7 +336,7 @@ AnimatedModelMesh * ModelLoader::ProcessMesh(aiNode * constnode, aiMesh * const 
 }
 
 
-void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * const pNode, Node * parentNode)
+void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * const pNode, Node * const parentNode)
 {
 	std::string name = pNode->mName.data;
 	glm::mat4 trans = AiToGLMMat4(pNode->mTransformation);
@@ -426,7 +426,7 @@ void ModelLoader::TangentSpace(std::vector<int> & indices, std::vector<glm::vec3
 		/*bitangents.push_back(vec3(0));*/
 	}
 
-	for (int i = 0; i < indices.size(); i = i + 3)
+	for (int i = 0; i < indices.size(); i += 3)
 	{
 		CalculateTangent(vertex[indices.at(i)], vertex[indices.at(i + 1)], vertex[indices.at(i + 2)],
 			texture[indices.at(i)], texture[indices.at(i + 1)], texture[indices.at(i + 2)], tangents[indices.at(i)]/*, bitangents[indices.at(i)]*/, numTimesUsed[indices.at(i)]);
@@ -480,7 +480,7 @@ void ModelLoader::CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & 
 	numTimesUsed++;
 }
 
-aiMatrix4x4 ModelLoader::GLMMat4ToAi(const glm::mat4 mat)
+aiMatrix4x4 ModelLoader::GLMMat4ToAi(const glm::mat4 & mat)
 {
 	return aiMatrix4x4(mat[0][0], mat[0][1], mat[0][2], mat[0][3],
 		mat[1][0], mat[1][1], mat[1][2], mat[1][3],
@@ -488,7 +488,7 @@ aiMatrix4x4 ModelLoader::GLMMat4ToAi(const glm::mat4 mat)
 		mat[3][0], mat[3][1], mat[3][2], mat[3][3]);
 }
 
-glm::mat4 ModelLoader::AiToGLMMat4(aiMatrix4x4& mat)
+glm::mat4 ModelLoader::AiToGLMMat4(const aiMatrix4x4 & mat)
 {
 	glm::mat4 tmp;
 	tmp[0][0] = mat.a1;

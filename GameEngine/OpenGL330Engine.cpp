@@ -16,9 +16,9 @@ OpenGL330Engine::~OpenGL330Engine()
 {
 }
 
-Texture * OpenGL330Engine::CreateTexture(std::string fileName)
+Texture * OpenGL330Engine::CreateTexture(const std::string & fileName)
 {
-	Texture * texture = new OpenGL330Texture();
+	Texture * const texture = new OpenGL330Texture();
 
 	if (!texture->LoadTexture(fileName))
 	{
@@ -29,9 +29,9 @@ Texture * OpenGL330Engine::CreateTexture(std::string fileName)
 	return texture;
 }
 
-Shader * OpenGL330Engine::CreateShader(std::string vertexFile, std::string fragmentFile, std::string geometryFile)
+Shader * OpenGL330Engine::CreateShader(const std::string & vertexFile, const std::string & fragmentFile, const std::string & geometryFile)
 {
-	Shader * shader = new OpenGL330Shader();
+	Shader * const shader = new OpenGL330Shader();
 
 	if (!shader->LoadShader(vertexFile, fragmentFile, geometryFile))
 	{
@@ -42,12 +42,12 @@ Shader * OpenGL330Engine::CreateShader(std::string vertexFile, std::string fragm
 	return shader;
 }
 
-StaticModel * OpenGL330Engine::CreateStaticModel(std::vector<glm::vec3> & pVertex, std::vector<glm::vec2> & pTexture, std::vector<glm::vec3> & pNormal, std::vector<int> & pIndices, std::vector<glm::vec3> & pTangents)
+StaticModel * OpenGL330Engine::CreateStaticModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec2> & pTexture, const std::vector<glm::vec3> & pNormal, const std::vector<int> & pIndices, const std::vector<glm::vec3> & pTangents)
 {
 	return new OpenGL330StaticModel(pVertex, pTexture, pNormal, pIndices, pTangents);
 }
 
-AnimatedModelMesh * OpenGL330Engine::CreateAnimatedModelMesh(std::vector<glm::vec3> & pVertex, std::vector<glm::vec3> & pNormal, std::vector<glm::vec2> & pTextures, std::vector<glm::vec4> & pWeights, std::vector<glm::ivec4> & pIds, std::vector<int> pIndices)
+AnimatedModelMesh * OpenGL330Engine::CreateAnimatedModelMesh(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec3> & pNormal, const std::vector<glm::vec2> & pTextures, const std::vector<glm::vec4> & pWeights, const std::vector<glm::ivec4> & pIds, const std::vector<int> & pIndices)
 {
 	return new OpenGL330AnimatedModel(pVertex, pNormal, pTextures, pWeights, pIds, pIndices);
 }
@@ -62,12 +62,12 @@ FrameBuffer * OpenGL330Engine::CreatePointShadowFrameBuffer(int width, int heigh
 	return new OpenGL330PointShadowFramebuffer(width, height);
 }
 
-void OpenGL330Engine::SetViewport(int width, int height)
+void OpenGL330Engine::SetViewport(const int width, const int height)
 {
 	glViewport(0, 0, width, height);
 }
 
-void OpenGL330Engine::UseTexture(Shader * shader, std::string uniformName, Texture * texture, int activeTexture)
+void OpenGL330Engine::UseTexture(Shader * const shader, const std::string & uniformName, Texture * const texture, const int activeTexture)
 {
 	shader->UseTexture(uniformName, activeTexture);
 
@@ -77,7 +77,7 @@ void OpenGL330Engine::UseTexture(Shader * shader, std::string uniformName, Textu
 	}
 }
 
-void OpenGL330Engine::UseFrameBufferTexture(Shader * shader, std::string uniformName, FrameBuffer * frameBuffer, int activeTexture)
+void OpenGL330Engine::UseFrameBufferTexture(Shader * const shader, const std::string & uniformName, FrameBuffer * const frameBuffer, const int activeTexture)
 {
 	shader->UseTexture(uniformName, activeTexture);
 	frameBuffer->BindTexture();
@@ -90,7 +90,7 @@ void OpenGL330Engine::ClearColorBuffer()
 
 void OpenGL330Engine::EnableDepth()
 {
-	glEnable(GL_DEPTH);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void OpenGL330Engine::ClearDepthBuffer()
@@ -108,7 +108,7 @@ void OpenGL330Engine::ClearFrameBuffer()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void OpenGL330Engine::CullFace(std::string cullType)
+void OpenGL330Engine::CullFace(const std::string & cullType)
 {
 	if (cullType == "Front")
 	{
@@ -120,7 +120,7 @@ void OpenGL330Engine::CullFace(std::string cullType)
 	}
 }
 
-void OpenGL330Engine::ClearColor(glm::vec4 colour)
+void OpenGL330Engine::ClearColor(const glm::vec4 & colour)
 {
 	glClearColor(colour.x, colour.y, colour.z, colour.w);
 }

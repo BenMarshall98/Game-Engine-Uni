@@ -29,15 +29,15 @@ private:
 	static void CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & vertex2, const glm::vec3 & vertex3, const glm::vec2 & texture1, const glm::vec2 & texture2, const glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed);
 
 	static void ProcessNode(aiNode * node, const aiScene * scene, AnimatedModel * animatedModel);
-	static AnimatedModelMesh * ProcessMesh(aiNode * node, aiMesh * mesh, const aiScene * scene);
+	static AnimatedModelMesh * ProcessMesh(const aiNode * const node, const aiMesh * const mesh, const aiScene * const scene);
 
-	static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat);
-	static glm::mat4 AiToGLMMat4(aiMatrix4x4& mat);
+	static aiMatrix4x4 GLMMat4ToAi(const glm::mat4 & mat);
+	static glm::mat4 AiToGLMMat4(const aiMatrix4x4 & mat);
 
 	static void RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * node, Node * parentNode);
 	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);
 
-	static inline Bone * FindBone(std::vector<Bone *> bones, const std::string name)
+	static inline Bone * FindBone(std::vector<Bone *> & bones, const std::string & name)
 	{
 		for (int i = 0; i < bones.size(); i++)
 		{
@@ -50,7 +50,7 @@ private:
 		return nullptr;
 	}
 
-	static inline Node* FindNode(std::vector<Node*> nodes, const std::string name)
+	static inline Node* FindNode(std::vector<Node*> & nodes, const std::string & name)
 	{
 		for (int i = 0; i < nodes.size(); i++)
 		{
@@ -63,7 +63,7 @@ private:
 		return nullptr;
 	}
 
-	static inline AnimNode* FindAiNodeAnim(std::vector<AnimNode*> animNodes, const std::string name)
+	static inline AnimNode* FindAiNodeAnim(std::vector<AnimNode*> & animNodes, const std::string & name)
 	{
 		for (int i = 0; i < animNodes.size(); i++)
 		{
@@ -76,7 +76,7 @@ private:
 		return nullptr;
 	}
 
-	static inline int FindBoneIDByName(std::vector<Bone *> bones, const std::string name)
+	static inline int FindBoneIDByName(std::vector<Bone *> & bones, const std::string & name)
 	{
 		for (int i = 0; i < bones.size(); i++)
 		{
@@ -90,6 +90,9 @@ private:
 	}
 
 public:
+
+	ModelLoader() = delete;
+
 	static iModel * LoadModel(const std::string & fileName);
 };
 

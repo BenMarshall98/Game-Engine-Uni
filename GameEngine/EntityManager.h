@@ -52,8 +52,8 @@ public:
 	void AddComponentToEntity(Entity * entity, iComponent * component);
 	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
-	std::vector<Entity *> GetAllEntitiesWithComponents(std::vector<ComponentType> componentName);
-	bool CheckEntityHasComponents(Entity * entity, std::vector<ComponentType> componentName);
+	std::vector<Entity *> GetAllEntitiesWithComponents(const std::vector<ComponentType> & componentName);
+	bool CheckEntityHasComponents(Entity * entity, const std::vector<ComponentType> & componentName);
 
 	void Update();
 	void Swap();

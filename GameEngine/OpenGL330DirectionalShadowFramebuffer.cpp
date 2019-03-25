@@ -1,7 +1,8 @@
 #include "OpenGL330DirectionalShadowFramebuffer.h"
 #include "OpenGL.h"
 
-OpenGL330DirectionalShadowFramebuffer::OpenGL330DirectionalShadowFramebuffer(int width, int height)
+OpenGL330DirectionalShadowFramebuffer::OpenGL330DirectionalShadowFramebuffer(const int width, const int height) :
+	FBO(0), Texture(0)
 {
 	glGenFramebuffers(1, &FBO);
 
