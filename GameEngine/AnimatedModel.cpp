@@ -5,17 +5,16 @@
 #include "glm/gtx/transform.hpp"
 #include "RenderManager.h"
 
-void AnimatedModel::Render(Shader * const shader)
+void AnimatedModel::Render(Shader * shader)
 {
 }
 
-void AnimatedModel::Render(Shader * const shader, const std::vector<glm::mat4> & boneMats)
+void AnimatedModel::Render(Shader * shader, const std::vector<glm::mat4> & boneMats)
 {
-	shader->UseShader();
-
 	for (int i = 0; i < boneMats.size(); i++)
 	{
-		RenderManager::Instance()->SetUniformMatrix4fv(shader, bonesLoc.at(i), boneMats[i], true);
+		UniformLocation * location = RenderManager::Instance()->GetUniformLocation(shader, bonesLoc.at(i));
+		RenderManager::Instance()->SetUniformMatrix4fv(location, boneMats[i], true);
 	}
 
 	for (int i = 0; i < meshes.size(); i++)

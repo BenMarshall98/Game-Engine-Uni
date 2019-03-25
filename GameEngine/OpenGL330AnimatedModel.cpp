@@ -1,6 +1,8 @@
 #include "OpenGL330AnimatedModel.h"
 #include "OpenGL.h"
 
+#include "RenderManager.h"
+
 OpenGL330AnimatedModel::OpenGL330AnimatedModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec3> & pNormal, const std::vector<glm::vec2> & pTextures, const std::vector<glm::vec4> & pWeights, const std::vector<glm::ivec4> & pIds, const std::vector<int> & pIndices) :
 	AnimatedModelMesh(pVertex, pNormal, pTextures, pWeights, pIds, pIndices), VAO(0), EBO(0), VBO{0,0,0,0,0}
 {
@@ -57,6 +59,6 @@ OpenGL330AnimatedModel::~OpenGL330AnimatedModel()
 
 void OpenGL330AnimatedModel::Render()
 {
-	glBindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 }

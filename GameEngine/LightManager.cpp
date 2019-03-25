@@ -180,44 +180,106 @@ void LightManager::Render(Shader * const pShader)
 
 	if (directional != nullptr)
 	{
-		renderManager->SetUniform1i(pShader, "DirectionLightUsed", true);
+		UniformLocation * dirLightUsedLocation = renderManager->GetUniformLocation(pShader, "DirectionLightUsed");
+		renderManager->SetUniform1i(dirLightUsedLocation, true);
 
-		renderManager->SetUniform3fv(pShader, "DirectionLightDirection", directional->direction);
-		renderManager->SetUniform3fv(pShader, "DirectionLightColour", directional->lightColour);
-		renderManager->SetUniformMatrix4fv(pShader, "dirLightPerspective", directional->perspective, false);
-		renderManager->SetUniformMatrix4fv(pShader, "dirLightView", directional->view, false);
-		renderManager->UseFrameBufferTexture(pShader, "DirLightShadow", directionalShadowTexture, 2);
+		UniformLocation * dirLightDirectionLocation = renderManager->GetUniformLocation(pShader, "DirectionLightDirection");
+		renderManager->SetUniform3fv(dirLightDirectionLocation, directional->direction);
+
+		UniformLocation * dirLightColourLocation = renderManager->GetUniformLocation(pShader, "DirectionLightColour");
+		renderManager->SetUniform3fv(dirLightColourLocation, directional->lightColour);
+
+		UniformLocation * dirLightPerspectiveLocation = renderManager->GetUniformLocation(pShader, "dirLightPerspective");
+		renderManager->SetUniformMatrix4fv(dirLightPerspectiveLocation, directional->perspective, false);
+
+		UniformLocation * dirLightViewLocation = renderManager->GetUniformLocation(pShader, "dirLightView");
+		renderManager->SetUniformMatrix4fv(dirLightViewLocation, directional->view, false);
+
+		UniformLocation * dirLightShadowLocation = renderManager->GetUniformLocation(pShader, "DirLightShadow");
+		renderManager->UseFrameBufferTexture(dirLightShadowLocation, directionalShadowTexture, 2);
+
+		delete dirLightUsedLocation;
+		delete dirLightDirectionLocation;
+		delete dirLightColourLocation;
+		delete dirLightPerspectiveLocation;
+		delete dirLightViewLocation;
+		delete dirLightShadowLocation;
 	}
 	else
 	{
-		renderManager->SetUniform1i(pShader, "DirectionLightUsed", false);
+		UniformLocation * dirLightUsedLocation = renderManager->GetUniformLocation(pShader, "DirectionLightUsed");
+		renderManager->SetUniform1i(dirLightUsedLocation, false);
+
+		delete dirLightUsedLocation;
 	}
 
-	renderManager->SetUniform1i(pShader, "TotalPointLights", renderPointLights.size());
+	UniformLocation * totalPointLightsLocation = renderManager->GetUniformLocation(pShader, "TotalPointLights");
+	renderManager->SetUniform1i(totalPointLightsLocation, renderPointLights.size());
+
+	delete totalPointLightsLocation;
 
 	unsigned int currentLight = 0;
 
 	for (int i = 0; i < renderPointLights.size(); i++)
 	{
-		renderManager->SetUniform3fv(pShader, "pointLights[" + std::to_string(i) + "].location", renderPointLights.at(i)->location);
-		renderManager->SetUniform3fv(pShader, "pointLights[" + std::to_string(i) + "].lightColour", renderPointLights.at(i)->lightColour);
-		renderManager->SetUniform1f(pShader, "pointLights[" + std::to_string(i) + "].attenuation", renderPointLights.at(i)->attenuation);
-		renderManager->SetUniform1f(pShader, "pointLights[" + std::to_string(i) + "].farDepth", renderPointLights.at(i)->farPlane);
-		renderManager->UseFrameBufferTexture(pShader, "depthMaps[" + std::to_string(currentLight) + "]", renderPointLights.at(i)->shadowTexture, 3 + currentLight);
+		UniformLocation * pointLightsLocation = renderManager->GetUniformLocation(pShader, "pointLights[" + std::to_string(i) + "].location");
+		renderManager->SetUniform3fv(pointLightsLocation, renderPointLights.at(i)->location);
+
+		UniformLocation * pointLightsColourLocation = renderManager->GetUniformLocation(pShader, "pointLights[" + std::to_string(i) + "].lightColour");
+		renderManager->SetUniform3fv(pointLightsColourLocation, renderPointLights.at(i)->lightColour);
+
+		UniformLocation * pointLightAttenuationLocation = renderManager->GetUniformLocation(pShader, "pointLights[" + std::to_string(i) + "].attenuation");
+		renderManager->SetUniform1f(pointLightAttenuationLocation, renderPointLights.at(i)->attenuation);
+
+		UniformLocation * pointLightsFarDepthLocation = renderManager->GetUniformLocation(pShader, "pointLights[" + std::to_string(i) + "].farDepth");
+		renderManager->SetUniform1f(pointLightsFarDepthLocation, renderPointLights.at(i)->farPlane);
+
+		UniformLocation * depthMapsLocation = renderManager->GetUniformLocation(pShader, "depthMaps[" + std::to_string(currentLight) + "]");
+		renderManager->UseFrameBufferTexture(depthMapsLocation, renderPointLights.at(i)->shadowTexture, 3 + currentLight);
+
+		delete pointLightsLocation;
+		delete pointLightsColourLocation;
+		delete pointLightAttenuationLocation;
+		delete pointLightsFarDepthLocation;
+		delete depthMapsLocation;
+
 		currentLight++;
 	}
 
-	renderManager->SetUniform1i(pShader, "TotalSpotLights", renderSpotLights.size());
+	UniformLocation * totalSpotLightsLocation = renderManager->GetUniformLocation(pShader, "TotalSpotLights");
+	renderManager->SetUniform1i(totalSpotLightsLocation, renderSpotLights.size());
 
 	for (int i = 0; i < renderSpotLights.size(); i++)
 	{
-		renderManager->SetUniform3fv(pShader, "spotLights[" + std::to_string(i) + "].location", renderSpotLights.at(i)->location);
-		renderManager->SetUniform3fv(pShader, "spotLights[" + std::to_string(i) + "].lightColour", renderSpotLights.at(i)->lightColour);
-		renderManager->SetUniform3fv(pShader, "spotLights[" + std::to_string(i) + "].direction", renderSpotLights.at(i)->direction);
-		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].angleInner", cos(glm::radians(renderSpotLights.at(i)->angleInner)));
-		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].angleOuter", cos(glm::radians(renderSpotLights.at(i)->angleOutside)));
-		renderManager->SetUniform1f(pShader, "spotLights[" + std::to_string(i) + "].farPlane", renderSpotLights.at(i)->farPlane);
-		renderManager->UseFrameBufferTexture(pShader, "depthMaps[" + std::to_string(currentLight) + "]", renderSpotLights.at(i)->shadowTexture, 3 + currentLight);
+		UniformLocation * spotLightsLocation = renderManager->GetUniformLocation(pShader, "spotLights[" + std::to_string(i) + "].location");
+		renderManager->SetUniform3fv(spotLightsLocation, renderSpotLights.at(i)->location);
+
+		UniformLocation * spotLightsColourLocation = renderManager->GetUniformLocation(pShader, "spotLights[" + std::to_string(i) + "].lightColour");
+		renderManager->SetUniform3fv(spotLightsColourLocation, renderSpotLights.at(i)->lightColour);
+
+		UniformLocation * spotLightsDirectionLocation = renderManager->GetUniformLocation(pShader, "spotLights[" + std::to_string(i) + "].direction");
+		renderManager->SetUniform3fv(spotLightsDirectionLocation, renderSpotLights.at(i)->direction);
+
+		UniformLocation * spotLightsAngleInnerLocation = renderManager->GetUniformLocation(pShader, "spotLights[" + std::to_string(i) + "].angleInner");
+		renderManager->SetUniform1f(spotLightsAngleInnerLocation, cos(glm::radians(renderSpotLights.at(i)->angleInner)));
+
+		UniformLocation * spotLightsAngleOuterLocation = renderManager->GetUniformLocation(pShader, "spotLights[" + std::to_string(i) + "].angleOuter");
+		renderManager->SetUniform1f(spotLightsAngleOuterLocation, cos(glm::radians(renderSpotLights.at(i)->angleOutside)));
+
+		UniformLocation * spotLightsFarPlaneLocation = renderManager->GetUniformLocation(pShader, "spotLights[" + std::to_string(i) + "].farPlane");
+		renderManager->SetUniform1f(spotLightsFarPlaneLocation, renderSpotLights.at(i)->farPlane);
+
+		UniformLocation * depthMapLocation = renderManager->GetUniformLocation(pShader, "depthMaps[" + std::to_string(currentLight) + "]");
+		renderManager->UseFrameBufferTexture(depthMapLocation, renderSpotLights.at(i)->shadowTexture, 3 + currentLight);
+
+		delete spotLightsLocation;
+		delete spotLightsColourLocation;
+		delete spotLightsDirectionLocation;
+		delete spotLightsAngleInnerLocation;
+		delete spotLightsAngleOuterLocation;
+		delete spotLightsFarPlaneLocation;
+		delete depthMapLocation;
+
 		currentLight++;
 	}
 }

@@ -381,6 +381,12 @@
     <ClCompile Include="AnimatedModelMesh.cpp">
       <Filter>Render Manager\GenericRender\Models</Filter>
     </ClCompile>
+    <ClCompile Include="UniformLocation.cpp">
+      <Filter>Render Manager\GenericRender\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330UniformLocation.cpp">
+      <Filter>Render Manager\OpenGL330\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -653,6 +659,12 @@
     </ClInclude>
     <ClInclude Include="AnimatedModelMesh.h">
       <Filter>Render Manager\GenericRender\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformLocation.h">
+      <Filter>Render Manager\GenericRender\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330UniformLocation.h">
+      <Filter>Render Manager\OpenGL330\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

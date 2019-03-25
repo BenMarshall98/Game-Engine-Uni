@@ -17,8 +17,8 @@ public:
 
 	void SetViewport(int width, int height) override;
 
-	void UseTexture(Shader * shader, const std::string & uniformName, Texture * texture, int activeTexture) override;
-	void UseFrameBufferTexture(Shader * shader, const std::string & uniformName, FrameBuffer * frameBuffer, int activeTexture) override;
+	void UseTexture(UniformLocation * location, Texture * texture, int activeTexture) override;
+	void UseFrameBufferTexture(UniformLocation * location, FrameBuffer * frameBuffer, int activeTexture) override;
 	void ClearColorBuffer() override;
 	void EnableDepth() override;
 	void ClearDepthBuffer() override;
@@ -26,5 +26,6 @@ public:
 	void ClearFrameBuffer() override;
 	void CullFace(const std::string & cullType) override;
 	void ClearColor(const glm::vec4 & colour) override;
+	void BindVertexArray(int VAO) override;
 };
 

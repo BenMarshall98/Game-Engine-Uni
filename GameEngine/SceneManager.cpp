@@ -203,8 +203,8 @@ void SceneManager::Run()
 			Render();
 			update.join();
 			Swap();
-			window->LimitFPS(60);
 			window->WindowEvents();
+			window->LimitFPS(60);
 		}
 
 		if (window->IsRunning())

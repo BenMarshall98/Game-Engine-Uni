@@ -35,6 +35,7 @@ void ShadowSystem::Action(void)
 	std::vector<glm::quat> directions = std::vector<glm::quat>();
 	std::vector<Shader *> directionalShadowShaders = std::vector<Shader *>();
 	std::vector<Shader *> pointShadowShaders = std::vector<Shader *>();
+	std::vector<glm::mat4> modelMatrics = std::vector<glm::mat4>();
 	Camera * const camera = CameraManager::Instance()->GetCamera();
 	Projection * const projection = CameraManager::Instance()->GetProjection();
 
@@ -58,6 +59,12 @@ void ShadowSystem::Action(void)
 			directions.push_back(direction);
 			directionalShadowShaders.push_back(directionalShadowShader);
 			pointShadowShaders.push_back(pointShadowShader);
+
+			glm::mat4 modelMatrix(1.0f);
+			modelMatrix = translate(modelMatrix, position);
+			modelMatrix *= toMat4(direction);
+
+			modelMatrics.push_back(modelMatrix);
 		}
 	}
 	
@@ -74,11 +81,14 @@ void ShadowSystem::Action(void)
 	FrameBuffer * const frameBuffer = LightManager::Instance()->GetDirectionalFramebuffer();
 	renderManager->UseFrameBuffer(frameBuffer);
 	renderManager->ClearDepthBuffer();
+	bool firstTime = true;
 
 	for (int i = 0; i < models.size(); i++)
 	{
-		RenderDirectional(models.at(i), positions.at(i), directions.at(i), directional, directionalShadowShaders.at(i));
+		RenderDirectional(models.at(i), modelMatrics.at(i), directional, directionalShadowShaders.at(i), firstTime);
 	}
+
+	renderManager->ClearShader();
 
 	std::vector<PointLight *> pointLights = LightManager::Instance()->GetRenderPointLights();
 
@@ -104,6 +114,7 @@ void ShadowSystem::Action(void)
 		shadowTransforms.push_back(projection * glm::lookAt(pointLights[i]->location, pointLights[i]->location + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
 
 		Shader * lastShader = nullptr;
+		bool firstTime = true;
 
 		for (int j = 0; j < models.size(); j++)
 		{
@@ -111,18 +122,27 @@ void ShadowSystem::Action(void)
 			{
 				pointShadowShaders.at(j)->UseShader();
 
-				renderManager->SetUniform3fv(pointShadowShaders.at(j), "lightPos", pointLights[i]->location);
-				renderManager->SetUniform1f(pointShadowShaders.at(j), "farPlane", farPlane);
+				UniformLocation * lightPosLocation = renderManager->GetUniformLocation(pointShadowShaders.at(j), "lightPos");
+				renderManager->SetUniform3fv(lightPosLocation, pointLights[i]->location);
+
+				UniformLocation * farPlaneLocation = renderManager->GetUniformLocation(pointShadowShaders.at(j), "farPlane");
+				renderManager->SetUniform1f(farPlaneLocation, farPlane);
+
+				delete lightPosLocation;
+				delete farPlaneLocation;
 
 				for (int k = 0; k < shadowTransforms.size(); k++)
 				{
-					renderManager->SetUniformMatrix4fv(pointShadowShaders.at(j), views.at(k), shadowTransforms.at(k), false);
+					UniformLocation * shadowViewLocation = renderManager->GetUniformLocation(pointShadowShaders.at(j), views.at(k));
+					renderManager->SetUniformMatrix4fv(shadowViewLocation, shadowTransforms.at(k), false);
+
+					delete shadowViewLocation;
 				}
 
 				lastShader = pointShadowShaders.at(j);
 			}
 
-			RenderPoint(models.at(j), positions.at(j), directions.at(j), pointShadowShaders.at(j));
+			RenderPoint(models.at(j), modelMatrics.at(j), pointShadowShaders.at(j), firstTime);
 		}
 	}
 
@@ -150,6 +170,7 @@ void ShadowSystem::Action(void)
 		shadowTransforms.push_back(projection * glm::lookAt(spotLights[i]->location, spotLights[i]->location + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
 
 		Shader * lastShader = nullptr;
+		bool firstTime = true;
 
 		for (int j = 0; j < models.size(); j++)
 		{
@@ -157,19 +178,29 @@ void ShadowSystem::Action(void)
 			{
 				pointShadowShaders.at(j)->UseShader();
 
-				renderManager->SetUniform3fv(pointShadowShaders.at(j), "lightPos", spotLights[i]->location);
-				renderManager->SetUniform1f(pointShadowShaders.at(j), "farPlane", farPlane);
+				UniformLocation * lightPosLocation = renderManager->GetUniformLocation(pointShadowShaders.at(j), "lightPos");
+				renderManager->SetUniform3fv(lightPosLocation, spotLights[i]->location);
+
+				UniformLocation * farPlaneLocation = renderManager->GetUniformLocation(pointShadowShaders.at(j), "farPlane");
+				renderManager->SetUniform1f(farPlaneLocation, farPlane);
+
+				delete lightPosLocation;
+				delete farPlaneLocation;
 
 				for (int k = 0; k < shadowTransforms.size(); k++)
 				{
 					const std::string view = views.at(k).c_str();
-					renderManager->SetUniformMatrix4fv(pointShadowShaders.at(j), view, shadowTransforms.at(k), false);
+
+					UniformLocation * shadowViewLocation = renderManager->GetUniformLocation(pointShadowShaders.at(j), view);
+					renderManager->SetUniformMatrix4fv(shadowViewLocation, shadowTransforms.at(k), false);
+
+					delete shadowViewLocation;
 				}
 
 				lastShader = pointShadowShaders.at(j);
 			}
 
-			RenderPoint(models.at(j), positions.at(j), directions.at(j), pointShadowShaders.at(j));
+			RenderPoint(models.at(j), modelMatrics.at(j), pointShadowShaders.at(j), firstTime);
 		}
 	}
 
@@ -178,33 +209,46 @@ void ShadowSystem::Action(void)
 	renderManager->CullFace("Back");
 }
 
-void ShadowSystem::RenderDirectional(iModel * const model, const glm::vec3 & position, const glm::quat & direction, const Directional * const directional, Shader * const shadowShader)
+void ShadowSystem::RenderDirectional(iModel * const model, const glm::mat4 & modelMatrix, const Directional * const directional, Shader * const shadowShader, bool & firstTime)
 {
+	static Shader * lastShader = nullptr;
+	static UniformLocation * modelLocation = nullptr;
+	static UniformLocation * perspectiveLocation = nullptr;
+	static UniformLocation * viewLocation = nullptr;
+
 	RenderManager * const renderManager = RenderManager::Instance();
-	shadowShader->UseShader();
 
-	glm::mat4 modelMatrix(1.0f);
-	modelMatrix = translate(modelMatrix, position);
-	modelMatrix *= toMat4(direction);
+	if (lastShader != shadowShader || firstTime)
+	{
+		shadowShader->UseShader();
+		modelLocation = renderManager->GetUniformLocation(shadowShader, "model");
+		perspectiveLocation = renderManager->GetUniformLocation(shadowShader, "perspective");
+		viewLocation = renderManager->GetUniformLocation(shadowShader, "view");
+		lastShader = shadowShader;
+		firstTime = false;
+	}
 
-	renderManager->SetUniformMatrix4fv(shadowShader, "model", modelMatrix, false);
-	renderManager->SetUniformMatrix4fv(shadowShader, "perspective", directional->perspective, false);
-	renderManager->SetUniformMatrix4fv(shadowShader, "view", directional->view, false);
+	renderManager->SetUniformMatrix4fv(modelLocation, modelMatrix, false);
+	renderManager->SetUniformMatrix4fv(perspectiveLocation, directional->perspective, false);
+	renderManager->SetUniformMatrix4fv(viewLocation, directional->view, false);
 
 	model->Render(shadowShader);
-	
-	renderManager->ClearShader();
 }
 
-void ShadowSystem::RenderPoint(iModel * const model, const glm::vec3 & position, const glm::quat & direction, Shader * const shadowShader)
+void ShadowSystem::RenderPoint(iModel * const model, const glm::mat4 & modelMatrix, Shader * const shadowShader, bool & firstTime)
 {
-	shadowShader->UseShader();
+	static Shader * lastShader = nullptr;
+	static UniformLocation * modelLocation = nullptr;
 
-	glm::mat4 modelMatrix(1.0f);
-	modelMatrix = translate(modelMatrix, position);
-	modelMatrix *= toMat4(direction);
+	if (lastShader != shadowShader || firstTime)
+	{
+		shadowShader->UseShader();
+		modelLocation = RenderManager::Instance()->GetUniformLocation(shadowShader, "model");
+		lastShader = shadowShader;
+		firstTime = false;
+	}
 
-	RenderManager::Instance()->SetUniformMatrix4fv(shadowShader, "model", modelMatrix, false);
+	RenderManager::Instance()->SetUniformMatrix4fv(modelLocation, modelMatrix, false);
 
 	model->Render(shadowShader);
 }

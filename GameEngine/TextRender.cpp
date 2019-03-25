@@ -70,13 +70,13 @@ TextRender::TextRender() : VAO(0), VBO(0)
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	glBindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	RenderManager::Instance()->BindVertexArray(0);
 }
 
 void TextRender::RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
@@ -100,11 +100,16 @@ void TextRender::RenderText(const std::string & text, const PixelLocation & pPix
 
 	shader->UseShader();
 	
-	RenderManager::Instance()->SetUniformMatrix4fv(shader, "projection", projection, false);
-	RenderManager::Instance()->SetUniform3fv(shader, "textColor", colour);
-	RenderManager::Instance()->UseTexture(shader, "text", nullptr, 0);
+	UniformLocation * projectionLocation = RenderManager::Instance()->GetUniformLocation(shader, "projection");
+	RenderManager::Instance()->SetUniformMatrix4fv(projectionLocation, projection, false);
 
-	glBindVertexArray(VAO);
+	UniformLocation * textColorLocation = RenderManager::Instance()->GetUniformLocation(shader, "textColor");
+	RenderManager::Instance()->SetUniform3fv(textColorLocation, colour);
+
+	UniformLocation * textLocation = RenderManager::Instance()->GetUniformLocation(shader, "text");
+	RenderManager::Instance()->UseTexture(textLocation, nullptr, 0);
+
+	RenderManager::Instance()->BindVertexArray(VAO);
 
 	float x = pPixelLocation.location.x;
 	const float y = pPixelLocation.location.y;
@@ -143,7 +148,7 @@ void TextRender::RenderText(const std::string & text, const PixelLocation & pPix
 		x += (ch.Advance >> 6) * pPixelLocation.scale;
 	}
 
-	glBindVertexArray(0);
+	RenderManager::Instance()->BindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

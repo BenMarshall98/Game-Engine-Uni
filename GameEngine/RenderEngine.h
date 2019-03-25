@@ -24,8 +24,8 @@ public:
 
 	virtual void SetViewport(int width, int height) = 0;
 
-	virtual void UseTexture(Shader * shader, const std::string & uniformName, Texture * texture, int activeTexture) = 0;
-	virtual void UseFrameBufferTexture(Shader * shader, const std::string & uniformName, FrameBuffer * frameBuffer, int activeTexture) = 0;
+	virtual void UseTexture(UniformLocation * location,Texture * texture, int activeTexture) = 0;
+	virtual void UseFrameBufferTexture(UniformLocation * location, FrameBuffer * frameBuffer, int activeTexture) = 0;
 	virtual void ClearColorBuffer() = 0;
 	virtual void EnableDepth() = 0;
 	virtual void ClearDepthBuffer() = 0;
@@ -33,5 +33,6 @@ public:
 	virtual void ClearFrameBuffer() = 0;
 	virtual void CullFace(const std::string & cullType) = 0;
 	virtual void ClearColor(const glm::vec4 & colour) = 0;
+	virtual void BindVertexArray(int VAO) = 0;
 };
 

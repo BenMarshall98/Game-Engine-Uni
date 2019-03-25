@@ -53,39 +53,44 @@ public:
 		return engine->CreatePointShadowFrameBuffer(width, height);
 	}
 
+	inline UniformLocation * GetUniformLocation(Shader * shader, const std::string & uniformName)
+	{
+		return shader->GetUniformLocation(uniformName);
+	}
+
 	inline void SetViewport(const int width, const int height)
 	{
 		engine->SetViewport(width, height);
 	}
 
-	inline void SetUniform1i(Shader * const shader, const std::string & uniformName, const int value)
+	inline void SetUniform1i(UniformLocation * const location,  const int value)
 	{
-		shader->SetUniform1i(uniformName, value);
+		location->SetUniform1i(value);
 	}
 
-	inline void SetUniform1f(Shader * const shader, const std::string & uniformName, const float value)
+	inline void SetUniform1f(UniformLocation * const location, const float value)
 	{
-		shader->SetUniform1f(uniformName, value);
+		location->SetUniform1f(value);
 	}
 
-	inline void SetUniform3fv(Shader * const shader, const std::string & uniformName, const glm::vec3 & value)
+	inline void SetUniform3fv(UniformLocation * const location, const glm::vec3 & value)
 	{
-		shader->SetUniform3fv(uniformName, value);
+		location->SetUniform3fv(value);
 	}
 
-	inline void SetUniformMatrix4fv(Shader * const shader, const std::string & uniformName, const glm::mat4 & value, bool transpose)
+	inline void SetUniformMatrix4fv(UniformLocation * const location, const glm::mat4 & value, bool transpose)
 	{
-		shader->SetUniformMatrix4fv(uniformName, value, transpose);
+		location->SetUniformMatrix4fv(value, transpose);
 	}
 
-	inline void UseTexture(Shader * const shader, const std::string & uniformName, Texture * const texture, const int activeTexture)
+	inline void UseTexture(UniformLocation * const location, Texture * const texture, const int activeTexture)
 	{
-		engine->UseTexture(shader, uniformName, texture, activeTexture);
+		engine->UseTexture(location, texture, activeTexture);
 	}
 
-	inline void UseFrameBufferTexture(Shader * const shader, const std::string & uniformName, FrameBuffer * const framebuffer, const int activeTexture)
+	inline void UseFrameBufferTexture(UniformLocation * const location, FrameBuffer * const framebuffer, const int activeTexture)
 	{
-		engine->UseFrameBufferTexture(shader, uniformName, framebuffer, activeTexture);
+		engine->UseFrameBufferTexture(location, framebuffer, activeTexture);
 	}
 
 	inline void UseFrameBuffer(FrameBuffer * const frameBuffer)
@@ -131,6 +136,11 @@ public:
 	inline void ClearColor(const glm::vec4 & colour)
 	{
 		engine->ClearColor(colour);
+	}
+
+	inline void BindVertexArray(int VAO)
+	{
+		engine->BindVertexArray(VAO);
 	}
 };
 

@@ -196,6 +196,7 @@
     <ClCompile Include="OpenGL330Shader.cpp" />
     <ClCompile Include="OpenGL330StaticModel.cpp" />
     <ClCompile Include="OpenGL330Texture.cpp" />
+    <ClCompile Include="OpenGL330UniformLocation.cpp" />
     <ClCompile Include="PathFinding.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextRender.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UniformLocation.cpp" />
     <ClCompile Include="Vec3AnimKey.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -289,6 +291,7 @@
     <ClInclude Include="OpenGL330Shader.h" />
     <ClInclude Include="OpenGL330StaticModel.h" />
     <ClInclude Include="OpenGL330Texture.h" />
+    <ClInclude Include="OpenGL330UniformLocation.h" />
     <ClInclude Include="PathFinding.h" />
     <ClInclude Include="PathFollowing.h" />
     <ClInclude Include="PhysicsEngine.h" />
@@ -312,6 +315,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextRender.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="UniformLocation.h" />
     <ClInclude Include="Vec3AnimKey.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

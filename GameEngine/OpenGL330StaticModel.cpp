@@ -1,5 +1,6 @@
 #include "OpenGL330StaticModel.h"
 #include "OpenGL.h"
+#include "RenderManager.h"
 
 OpenGL330StaticModel::OpenGL330StaticModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec2> & pTexture, const std::vector<glm::vec3> & pNormal, const std::vector<int> & pIndices, const std::vector<glm::vec3> & pTangents) :
 	StaticModel(pVertex, pTexture, pNormal, pIndices, pTangents), VAO(0), EBO(0), VBO{ 0,0,0,0,0 }
@@ -43,13 +44,13 @@ OpenGL330StaticModel::OpenGL330StaticModel(const std::vector<glm::vec3> & pVerte
 	glBindVertexArray(0);
 }
 
-void OpenGL330StaticModel::Render(Shader * const shader)
+void OpenGL330StaticModel::Render(Shader * shader)
 {
-	glBindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
-void OpenGL330StaticModel::Render(Shader * const shader, const std::vector<glm::mat4> & boneMats)
+void OpenGL330StaticModel::Render(Shader * shader, const std::vector<glm::mat4> & boneMats)
 {
 }
 

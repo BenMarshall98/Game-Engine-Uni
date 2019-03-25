@@ -163,7 +163,7 @@ float DirectionalShadowCalculation(vec4 LightPos, sampler2D shadowTexture, vec3 
 	float bias = max(0.01 * (1.0 - dot(normal, lightDir)), 0.001);
 
 	float shadow = 0.0;
-	vec2 texelSize = 1.0 / textureSize(shadowTexture, 0);
+	vec2 texelSize = 0.5 / textureSize(shadowTexture, 0);
 
 	for (int x = -2; x <= 2; x++)
 	{

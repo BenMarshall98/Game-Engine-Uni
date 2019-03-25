@@ -15,7 +15,7 @@ public:
 	OpenGL330StaticModel& operator=(const OpenGL330StaticModel&) = delete;
 	OpenGL330StaticModel(OpenGL330StaticModel&) = delete;
 
-	void Render(Shader * const shader) override;
+	void Render(Shader * shader) override;
 	void Render(Shader * shader, const std::vector<glm::mat4> & boneMats) override;
 };
 

@@ -67,9 +67,9 @@ void OpenGL330Engine::SetViewport(const int width, const int height)
 	glViewport(0, 0, width, height);
 }
 
-void OpenGL330Engine::UseTexture(Shader * const shader, const std::string & uniformName, Texture * const texture, const int activeTexture)
+void OpenGL330Engine::UseTexture(UniformLocation * const location, Texture * const texture, const int activeTexture)
 {
-	shader->UseTexture(uniformName, activeTexture);
+	location->UseTexture(activeTexture);
 
 	if (texture)
 	{
@@ -77,9 +77,9 @@ void OpenGL330Engine::UseTexture(Shader * const shader, const std::string & unif
 	}
 }
 
-void OpenGL330Engine::UseFrameBufferTexture(Shader * const shader, const std::string & uniformName, FrameBuffer * const frameBuffer, const int activeTexture)
+void OpenGL330Engine::UseFrameBufferTexture(UniformLocation * const location, FrameBuffer * const frameBuffer, const int activeTexture)
 {
-	shader->UseTexture(uniformName, activeTexture);
+	location->UseTexture(activeTexture);
 	frameBuffer->BindTexture();
 }
 
@@ -123,4 +123,15 @@ void OpenGL330Engine::CullFace(const std::string & cullType)
 void OpenGL330Engine::ClearColor(const glm::vec4 & colour)
 {
 	glClearColor(colour.x, colour.y, colour.z, colour.w);
+}
+
+void OpenGL330Engine::BindVertexArray(int VAO)
+{
+	static int lastVAO = -1;
+
+	if (lastVAO != VAO)
+	{
+		glBindVertexArray(VAO);
+		lastVAO = VAO;
+	}
 }
