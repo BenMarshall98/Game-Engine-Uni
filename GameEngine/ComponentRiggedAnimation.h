@@ -21,10 +21,10 @@ private:
 	std::vector<glm::mat4> boneMats;
 
 public:
-	ComponentRiggedAnimation(const std::string & pAnimation, const RiggedAnimationState pAnimationState) : animation(pAnimation), animationState(pAnimationState), time(0) {}
+	ComponentRiggedAnimation(const std::string & pAnimation, const RiggedAnimationState pAnimationState) :
+		iComponent(ComponentType::COMPONENT_RIGGED_ANIMATION), animation(pAnimation), animationState(pAnimationState), time(0) {}
 	~ComponentRiggedAnimation();
 
-	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
 	inline float GetTime()

@@ -9,7 +9,8 @@ private:
 	Texture * texture;
 
 public:
-	explicit ComponentNormalTexture(const std::string & textureName) : texture(ResourceManager::GetTexture(textureName))
+	explicit ComponentNormalTexture(const std::string & textureName) :
+		iComponent(ComponentType::COMPONENT_NORMAL_TEXTURE), texture(ResourceManager::GetTexture(textureName))
 	{
 	}
 
@@ -17,8 +18,6 @@ public:
 	ComponentNormalTexture(ComponentNormalTexture&) = delete;
 
 	~ComponentNormalTexture();
-
-	ComponentType GetComponentName() override;
 
 	void RenderSwap() override;
 

@@ -672,8 +672,10 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 
 					entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit, response, collisionFunctions));
 				}
-
-				entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit, response));
+				else
+				{
+					entityManager->AddComponentToEntity(entity, new ComponentPhysics(collisionShape, mass, eType, entity, angularLimit, response));
+				}
 			}
 			else
 			{

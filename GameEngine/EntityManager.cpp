@@ -41,6 +41,7 @@ void EntityManager::RemoveEntity(Entity * entity)
 		EntityList.erase(object);
 	}
 
+	entity->RemoveAllComponents();
 	delete entity;
 	entity = nullptr;
 }

@@ -22,11 +22,19 @@ enum class ComponentType
 
 class iComponent
 {
+private:
+	ComponentType componentType;
+
 protected:
-	iComponent() {}
+	iComponent(ComponentType pComponentType);
+
 public:
 	virtual ~iComponent();
-	virtual ComponentType GetComponentName() = 0;
 	virtual void RenderSwap() = 0;
+
+	inline ComponentType GetComponentName()
+	{
+		return componentType;
+	}
 };
 

@@ -9,7 +9,8 @@ private:
 	iModel * model;
 
 public:
-	explicit ComponentModel(const std::string & modelName) : model(ResourceManager::GetModel(modelName))
+	explicit ComponentModel(const std::string & modelName) :
+		iComponent(ComponentType::COMPONENT_MODEL), model(ResourceManager::GetModel(modelName))
 	{
 	}
 
@@ -17,8 +18,6 @@ public:
 	ComponentModel(ComponentModel&) = delete;
 
 	~ComponentModel();
-
-	ComponentType GetComponentName() override;
 
 	void RenderSwap() override;
 

@@ -18,11 +18,6 @@ void ComponentPhysics::RenderSwap()
 
 }
 
-ComponentType ComponentPhysics::GetComponentName()
-{
-	return ComponentType::COMPONENT_PHYSICS;
-}
-
 void ComponentPhysics::AddCollision(Entity * physicsComponent, EntityType pEntityType)
 {
 	std::map<Entity *, EntityType>::iterator it;

@@ -11,6 +11,7 @@ private:
 	Shader * pointShadowShader;
 public:
 	explicit ComponentShadowShader(const std::string & directionShadowName, const std::string & pointShadowName) :
+		iComponent(ComponentType::COMPONENT_SHADOW_SHADER),
 		directionShadowShader(ResourceManager::GetShader(directionShadowName)),
 		pointShadowShader(ResourceManager::GetShader(pointShadowName))
 	{
@@ -22,7 +23,6 @@ public:
 
 	~ComponentShadowShader();
 
-	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
 	inline Shader * GetDirectionalShader() const

@@ -47,13 +47,12 @@ private:
 
 public:
 	ComponentPhysics(CollisionShape * const pShape, const float pMass, const EntityType pEntityType, Entity * const pThisEntity, const glm::vec3 & pAngularLimits, const bool pCollisionResponse = true, std::map<EntityType, std::string> * const pCollisionFunctions = new std::map<EntityType, std::string>())
-		: angularLimits(pAngularLimits), collisionFunctions(pCollisionFunctions), shape(pShape), rigidBody(nullptr), thisEntity(pThisEntity), entityType(pEntityType), mass(pMass),   collisionResponse(pCollisionResponse) {}
+		: iComponent(ComponentType::COMPONENT_PHYSICS), angularLimits(pAngularLimits), collisionFunctions(pCollisionFunctions), shape(pShape), rigidBody(nullptr), thisEntity(pThisEntity), entityType(pEntityType), mass(pMass),   collisionResponse(pCollisionResponse) {}
 	~ComponentPhysics();
 
 	ComponentPhysics& operator=(const ComponentPhysics&) = delete;
 	ComponentPhysics(ComponentPhysics&) = delete;
 
-	ComponentType GetComponentName() override;
 
 	static EntityType StringToEnum(const std::string & entityType);
 

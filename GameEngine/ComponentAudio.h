@@ -17,8 +17,6 @@ public:
 	ComponentAudio& operator=(const ComponentAudio&) = delete;
 	ComponentAudio(ComponentAudio&) = delete;
 
-	ComponentType GetComponentName() override;
-
 	void RenderSwap() override;
 
 	inline AudioPlayback GetUpdateAudioPlayback() const

@@ -2,6 +2,7 @@
 
 CollisionCuboid::~CollisionCuboid()
 {
+	int i = 0;
 }
 
 Shape CollisionCuboid::GetShape()

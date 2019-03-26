@@ -1,7 +1,7 @@
 #include "ComponentState.h"
 #include <iostream>
 
-ComponentState::ComponentState()
+ComponentState::ComponentState() : iComponent(ComponentType::COMPONENT_STATE)
 {
 }
 
@@ -36,11 +36,6 @@ void ComponentState::SetValue(std::string & valueName, std::string & value)
 	{
 		stateValues.insert(std::pair<std::string, std::string>(valueName, value));
 	}
-}
-
-ComponentType ComponentState::GetComponentName()
-{
-	return ComponentType::COMPONENT_STATE;
 }
 
 void ComponentState::RenderSwap()

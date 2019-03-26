@@ -2,6 +2,7 @@
 
 CollisionSphere::~CollisionSphere()
 {
+	int i = 0;
 }
 
 Shape CollisionSphere::GetShape()

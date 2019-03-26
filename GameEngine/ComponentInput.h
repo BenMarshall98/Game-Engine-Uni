@@ -11,13 +11,12 @@ private:
 	std::vector<InputFunction *> * inputs;
 
 public:
-	explicit ComponentInput(std::vector<InputFunction *> * const pInputs) : inputs(pInputs) {}
+	explicit ComponentInput(std::vector<InputFunction *> * const pInputs) :
+		iComponent(ComponentType::COMPONENT_INPUT), inputs(pInputs) {}
 	~ComponentInput();
 
 	ComponentInput& operator=(const ComponentInput&) = delete;
 	ComponentInput(ComponentInput&) = delete;
-
-	ComponentType GetComponentName() override;
 
 	void RenderSwap() override;
 

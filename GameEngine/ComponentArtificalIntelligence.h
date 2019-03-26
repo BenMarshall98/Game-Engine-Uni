@@ -16,7 +16,8 @@ private:
 	Entity * target;
 
 public:
-	explicit ComponentArtificalIntelligence(PathFollowing * const pPathFollower, PathFinding * const pPathFinding, AIStateMachine * const pAIStateMachine, const std::string & pTarget) : pathFollower(pPathFollower), pathFinding(pPathFinding),
+	explicit ComponentArtificalIntelligence(PathFollowing * const pPathFollower, PathFinding * const pPathFinding, AIStateMachine * const pAIStateMachine, const std::string & pTarget) :
+		iComponent(ComponentType::COMPONENT_ARTIFICAL_INTELLIGENCE), pathFollower(pPathFollower), pathFinding(pPathFinding),
 		aiStateMachine(pAIStateMachine), target(EntityManager::Instance()->GetEntityByName(pTarget))
 	{
 		if (aiStateMachine)
@@ -30,7 +31,6 @@ public:
 	ComponentArtificalIntelligence& operator=(const ComponentArtificalIntelligence&) = delete;
 	ComponentArtificalIntelligence(ComponentArtificalIntelligence&) = delete;
 
-	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
 	inline void ResolveAI(Entity * const thisEntity)

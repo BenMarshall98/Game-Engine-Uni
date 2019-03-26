@@ -11,10 +11,9 @@ private:
 	glm::quat renderDirection;
 
 public:
-	ComponentDirection(glm::vec3 & pDirection, float pAngle) : updateDirection(glm::angleAxis(glm::radians(pAngle), pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
+	ComponentDirection(glm::vec3 & pDirection, float pAngle) :
+		iComponent(ComponentType::COMPONENT_DIRECTION), updateDirection(glm::angleAxis(glm::radians(pAngle), pDirection)), renderDirection(angleAxis(pAngle, pDirection)) {}
 	~ComponentDirection();
-	
-	ComponentType GetComponentName() override;
 
 	void RenderSwap() override;
 

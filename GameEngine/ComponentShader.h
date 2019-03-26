@@ -9,7 +9,8 @@ class ComponentShader : public iComponent
 private:
 	Shader * shader;
 public:
-	explicit ComponentShader(const std::string & shaderName) : shader(ResourceManager::GetShader(shaderName))
+	explicit ComponentShader(const std::string & shaderName) :
+		iComponent(ComponentType::COMPONENT_SHADER), shader(ResourceManager::GetShader(shaderName))
 	{
 	}
 
@@ -18,7 +19,6 @@ public:
 
 	~ComponentShader();
 
-	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
 	inline Shader * GetRenderShader() const

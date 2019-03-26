@@ -8,7 +8,8 @@ private:
 	Texture * texture;
 
 public:
-	explicit ComponentTexture(const std::string & textureName) : texture(ResourceManager::GetTexture(textureName))
+	explicit ComponentTexture(const std::string & textureName) :
+		iComponent(ComponentType::COMPONENT_TEXTURE), texture(ResourceManager::GetTexture(textureName))
 	{
 	}
 
@@ -17,7 +18,6 @@ public:
 
 	~ComponentTexture();
 
-	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
 	inline Texture * GetRenderTexture() const

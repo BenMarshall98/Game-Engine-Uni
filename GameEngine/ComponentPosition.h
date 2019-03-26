@@ -9,10 +9,10 @@ private:
 	glm::vec3 renderPosition;
 
 public:
-	explicit ComponentPosition(glm::vec3 & pPosition) : updatePosition(pPosition), renderPosition(pPosition) {}
+	explicit ComponentPosition(glm::vec3 & pPosition) :
+		iComponent(ComponentType::COMPONENT_POSITION), updatePosition(pPosition), renderPosition(pPosition) {}
 	~ComponentPosition();
 
-	ComponentType GetComponentName() override;
 	void RenderSwap() override;
 
 	inline const glm::vec3 & GetUpdatePosition() const

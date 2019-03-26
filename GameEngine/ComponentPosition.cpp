@@ -5,11 +5,6 @@ ComponentPosition::~ComponentPosition()
 
 }
 
-ComponentType ComponentPosition::GetComponentName()
-{
-	return ComponentType::COMPONENT_POSITION;
-}
-
 void ComponentPosition::RenderSwap()
 {
 	renderPosition = updatePosition;
