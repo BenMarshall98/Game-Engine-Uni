@@ -9,8 +9,12 @@
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "TextRender.h"
+#include "ConfigLoader.h"
+#include "GLFWWindow.h"
+#include "RenderManager.h"
 
 SceneManager * SceneManager::instance = nullptr;
+std::string SceneManager::windowName = "GLFW";
 
 SceneManager::SceneManager() : newScene(nullptr), window(nullptr)
 {
@@ -39,6 +43,19 @@ SceneManager::~SceneManager()
 	delete window;
 }
 
+void SceneManager::ConfigEngine(std::string configFile)
+{
+	ConfigLoader::LoadEngineConfig(configFile);
+
+	if (windowName == "GLFW")
+	{
+		window = new GLFWWindow();
+		window->Load();
+	}
+
+	RenderManager::Instance();
+}
+
 void SceneManager::Update()
 {
 	scenes.top()->Update();
@@ -60,18 +77,6 @@ void SceneManager::Swap()
 void SceneManager::Resize(const int width, const int height)
 {
 	CameraManager::Instance()->Resize(width, height);
-}
-
-void SceneManager::SetWindow(Window * const pWindow)
-{
-	static bool firstTime = true;
-
-	if (firstTime)
-	{
-		window = pWindow;
-		window->Load();
-		firstTime = false;
-	}
 }
 
 void SceneManager::StartNewScene(iScene * const scene)

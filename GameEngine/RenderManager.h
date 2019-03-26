@@ -1,10 +1,13 @@
 #pragma once
 
 #include "RenderEngine.h"
+#include "OpenGL330Engine.h"
 
 class RenderManager
 {
 private:
+	static std::string engineName;
+
 	static RenderManager * instance;
 
 	static RenderEngine * engine;
@@ -16,12 +19,29 @@ public:
 	{
 		if (instance == nullptr)
 		{
-			instance = new RenderManager();
+			instance = new RenderManager();	
 		}
+
+		if (engine == nullptr)
+		{
+			if (engineName == "OpenGL330")
+			{
+				engine = new OpenGL330Engine();
+				
+			}
+
+			engine->InitialiseTextRender();
+		}
+
 		return instance;
 	}
 
 	~RenderManager();
+
+	static void SetRenderEngine(std::string pEngineName)
+	{
+		engineName = pEngineName;
+	}
 
 	inline Texture * CreateTexture(const std::string & fileName)
 	{

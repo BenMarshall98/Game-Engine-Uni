@@ -30,9 +30,6 @@ GameScene::GameScene(const std::string & pFileName) : iScene(pFileName)
 void GameScene::Load()
 {
 	function = LevelLoader::LoadLevelJSON(fileName);
-
-	PhysicsManager * const physicsManager = PhysicsManager::Instance();
-	physicsManager->SetPhysicsEngine(new BulletPhysicsEngine());
 }
 
 void GameScene::Render()

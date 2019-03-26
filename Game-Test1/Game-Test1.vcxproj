@@ -256,7 +256,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="3DLevelConfig.json" />
     <None Include="3DLevelGuardFunctions.lua" />
+    <None Include="EngineConfig.json" />
     <None Include="GameChoosing.json" />
     <None Include="GameChoosing.lua" />
     <None Include="HitBoxMainMenu.json" />
@@ -283,6 +285,7 @@
     <None Include="Pause.json" />
     <None Include="PauseMenu.lua" />
     <None Include="PlatformerCoinFunctions.lua" />
+    <None Include="PlatformerLevelConfig.json" />
     <None Include="PlatformerSceneFunctions.lua" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />

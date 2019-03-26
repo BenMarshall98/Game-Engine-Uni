@@ -5,12 +5,14 @@
 #include "iScene.h"
 #include "Window.h"
 #include "LoggingManager.h"
+#include <string>
 #include <stack>
 
 class SceneManager
 {
 private:
 	static SceneManager * instance;
+	static std::string windowName;
 
 	std::stack<iScene *> scenes;
 	iScene * newScene;
@@ -62,11 +64,16 @@ public:
 
 	void Resize(int width, int height);
 
-	void SetWindow(Window * pWindow);
-
 	void NewScene(iScene * scene);
 	void SwapScene(iScene * scene);
 	void CloseScene(int noOfScenes = 1);
 	void CloseWindow();
+
+	void ConfigEngine(std::string configFile);
+
+	static void InitWindow(std::string pWindowName)
+	{
+		windowName = pWindowName;
+	}
 };
 

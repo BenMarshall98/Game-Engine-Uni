@@ -4,6 +4,7 @@ class Window
 protected:
 	static int width;
 	static int height;
+	static bool fullScreen;
 
 public:
 	Window();
@@ -24,6 +25,21 @@ public:
 	static int GetHeight()
 	{
 		return height;
+	}
+
+	static void InitWidth(int pWidth)
+	{
+		width = pWidth;
+	}
+
+	static void InitHeight(int pHeight)
+	{
+		height = pHeight;
+	}
+
+	static void InitFullScreen(bool pFullscreen)
+	{
+		fullScreen = pFullscreen;
 	}
 };
 

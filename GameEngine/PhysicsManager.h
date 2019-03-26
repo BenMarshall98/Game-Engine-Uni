@@ -6,16 +6,19 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
 #include "Entity.h"
+#include "BulletPhysicsEngine.h"
 
 class PhysicsManager
 {
 private:
 	
-	PhysicsEngine* engine;
+	static std::string engineName;
+
+	static PhysicsEngine * engine;
 
 	static PhysicsManager * instance;
 
-	PhysicsManager() : engine(nullptr) {}
+	PhysicsManager() {}
 
 public:
 
@@ -26,13 +29,20 @@ public:
 			instance = new PhysicsManager();
 		}
 
+		if (engine == nullptr)
+		{
+			if (engineName == "Bullet")
+			{
+				engine = new BulletPhysicsEngine;
+			}
+		}
+
 		return instance;
 	}
 
-	inline void SetPhysicsEngine(PhysicsEngine * const physicsEngine)
+	static void SetPhysicsEngine(std::string pEngineName)
 	{
-		delete engine;
-		engine = physicsEngine;
+		engineName = pEngineName;
 	}
 
 	PhysicsManager& operator= (const PhysicsManager&) = delete;

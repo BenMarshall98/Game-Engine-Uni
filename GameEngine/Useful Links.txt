@@ -32,6 +32,7 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: look at the lifetime of the audio engine
 //TODO: pause and unpause music when in pause menu
 //TODO: deal with removing audio in the resource manager when refactoring the audio manager
+//TODO: config file audio engine
 
 //TODO: Give the option to output log to a file instead of cout
 

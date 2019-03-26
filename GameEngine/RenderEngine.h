@@ -42,19 +42,11 @@ public:
 
 	inline void RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
 	{
-		if (textRender == nullptr)
-		{
-			InitialiseTextRender();
-		}
 		textRender->RenderText(text, pPixelLocation, colour);
 	}
 
 	inline PixelLocation CalculateTextSize(const std::string & text, const glm::vec2 & location, float size, const std::string & align)
 	{
-		if (textRender == nullptr)
-		{
-			InitialiseTextRender();
-		}
 		return textRender->CalculateSize(text, location, size, align);
 	}
 };

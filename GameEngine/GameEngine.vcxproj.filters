@@ -115,6 +115,9 @@
     <Filter Include="Render Manager\OpenGL330\TextRender">
       <UniqueIdentifier>{8c8a7e93-0d0c-40ce-bd3a-b22e2a7ad235}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config Loader">
+      <UniqueIdentifier>{b3a95129-23ce-42cd-af13-16bbd28d9632}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -395,6 +398,9 @@
     </ClCompile>
     <ClCompile Include="OpenGL330TextRender.cpp">
       <Filter>Render Manager\OpenGL330\TextRender</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigLoader.cpp">
+      <Filter>Config Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -677,6 +683,9 @@
     </ClInclude>
     <ClInclude Include="OpenGL330TextRender.h">
       <Filter>Render Manager\OpenGL330\TextRender</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigLoader.h">
+      <Filter>Config Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,10 @@
+{
+  "PhysicsEngine": "Bullet",
+  "WindowSetup": {
+    "Window": "GLFW",
+    "Fullscreen": false,
+    "Size": [1200, 900]
+  },
+  "GraphicsDriver": "OpenGL330",
+  "AudioDriver": "irrKlang"
+}

@@ -5,8 +5,8 @@
 int main(void)
 {
 	SceneManager * const sceneManager = SceneManager::Instance();
-
-	sceneManager->SetWindow(new GLFWWindow());
+	
+	sceneManager->ConfigEngine("EngineConfig.json");
 	sceneManager->NewScene(new MenuScene("GameChoosing.json"));
 	sceneManager->Run();
 

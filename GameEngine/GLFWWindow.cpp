@@ -7,9 +7,6 @@
 #include <iostream>
 #include "RenderManager.h"
 
-int GLFWWindow::height = 600;
-int GLFWWindow::width = 800;
-
 GLFWWindow::GLFWWindow() : gameWindow(nullptr)
 {
 	
@@ -45,7 +42,7 @@ void GLFWWindow::Load()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, false);
 
-	gameWindow = glfwCreateWindow(800, 600, "Game Engine", nullptr, nullptr);
+	gameWindow = glfwCreateWindow(width, height, "Game Engine", nullptr, nullptr);
 
 	if (gameWindow == nullptr)
 	{

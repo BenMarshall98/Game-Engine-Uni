@@ -22,6 +22,9 @@
     <Filter Include="Menus">
       <UniqueIdentifier>{1b1df461-2280-4c68-8496-07483a0ce4f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Configs">
+      <UniqueIdentifier>{f27aa6d5-6b85-4676-b714-78a74f230d7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -240,6 +243,15 @@
     </None>
     <None Include="Models\untitled3.dae">
       <Filter>Models</Filter>
+    </None>
+    <None Include="EngineConfig.json">
+      <Filter>Configs</Filter>
+    </None>
+    <None Include="3DLevelConfig.json">
+      <Filter>Configs</Filter>
+    </None>
+    <None Include="PlatformerLevelConfig.json">
+      <Filter>Configs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
