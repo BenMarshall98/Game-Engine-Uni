@@ -7,10 +7,14 @@
 #include "Shader.h"
 #include "FrameBuffer.h"
 #include "glm/glm.hpp"
+#include "TextRender.h"
 #include <vector>
 
 class RenderEngine
 {
+protected:
+	TextRender * textRender = nullptr;
+
 public:
 	RenderEngine();
 	virtual ~RenderEngine();
@@ -34,5 +38,24 @@ public:
 	virtual void CullFace(const std::string & cullType) = 0;
 	virtual void ClearColor(const glm::vec4 & colour) = 0;
 	virtual void BindVertexArray(int VAO) = 0;
+	virtual void InitialiseTextRender() = 0;
+
+	inline void RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
+	{
+		if (textRender == nullptr)
+		{
+			InitialiseTextRender();
+		}
+		textRender->RenderText(text, pPixelLocation, colour);
+	}
+
+	inline PixelLocation CalculateTextSize(const std::string & text, const glm::vec2 & location, float size, const std::string & align)
+	{
+		if (textRender == nullptr)
+		{
+			InitialiseTextRender();
+		}
+		return textRender->CalculateSize(text, location, size, align);
+	}
 };
 

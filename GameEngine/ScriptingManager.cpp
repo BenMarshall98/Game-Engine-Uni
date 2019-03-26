@@ -26,7 +26,7 @@
 #include "SceneManager.h"
 #include "MenuScene.h"
 #include "GameScene.h"
-#include "TextRender.h"
+#include "RenderManager.h"
 #include <sstream>
 
 extern "C"
@@ -2689,8 +2689,8 @@ int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 
 	const glm::vec3 colour(x, y, z);
 
-	const PixelLocation pixelLocation = TextRender::Instance()->CalculateSize(displayText, location, fontSize, align);
-	TextRender::Instance()->RenderText(displayText, pixelLocation, colour);
+	const PixelLocation pixelLocation = RenderManager::Instance()->CalculateTextSize(displayText, location, fontSize, align);
+	RenderManager::Instance()->RenderText(displayText, pixelLocation, colour);
 
 	return 0;
 }

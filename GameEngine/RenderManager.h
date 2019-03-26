@@ -142,5 +142,15 @@ public:
 	{
 		engine->BindVertexArray(VAO);
 	}
+
+	inline void RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
+	{
+		engine->RenderText(text, pPixelLocation, colour);
+	}
+
+	inline PixelLocation CalculateTextSize(const std::string & text, const glm::vec2 & location, float size, const std::string & align)
+	{
+		return engine->CalculateTextSize(text, location, size, align);
+	}
 };
 

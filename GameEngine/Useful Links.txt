@@ -40,7 +40,8 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: create the render manager
 //DONE: Rename mesh to something else
 //TODO: OpenGL330 TextRender
-//TODO: Render manager location
+//DONE: Render manager location
+//TODO: Render manager VAO
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

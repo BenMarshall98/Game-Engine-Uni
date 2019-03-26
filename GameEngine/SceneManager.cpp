@@ -35,7 +35,6 @@ SceneManager::~SceneManager()
 	delete ScriptingManager::Instance();
 	delete SystemManager::Instance();
 	delete InputManager::Instance();
-	delete TextRender::Instance();	
 
 	delete window;
 }

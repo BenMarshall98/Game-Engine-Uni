@@ -195,6 +195,7 @@
     <ClCompile Include="OpenGL330PointShadowFramebuffer.cpp" />
     <ClCompile Include="OpenGL330Shader.cpp" />
     <ClCompile Include="OpenGL330StaticModel.cpp" />
+    <ClCompile Include="OpenGL330TextRender.cpp" />
     <ClCompile Include="OpenGL330Texture.cpp" />
     <ClCompile Include="OpenGL330UniformLocation.cpp" />
     <ClCompile Include="PathFinding.cpp" />
@@ -290,6 +291,7 @@
     <ClInclude Include="OpenGL330PointShadowFramebuffer.h" />
     <ClInclude Include="OpenGL330Shader.h" />
     <ClInclude Include="OpenGL330StaticModel.h" />
+    <ClInclude Include="OpenGL330TextRender.h" />
     <ClInclude Include="OpenGL330Texture.h" />
     <ClInclude Include="OpenGL330UniformLocation.h" />
     <ClInclude Include="PathFinding.h" />

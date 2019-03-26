@@ -1,5 +1,5 @@
 #include "Button.h"
-
+#include "RenderManager.h"
 #include "ScriptingManager.h"
 
 Button::Button(const std::string & pText, const std::string & pAlign, const float pFontSize, const glm::vec3 & pFontColour, const glm::vec3 & pHighlighted, const glm::vec2 & pLocation, const std::string & pFunction) :
@@ -14,18 +14,18 @@ Button::~Button()
 
 void Button::Update()
 {
-	updateLocation = TextRender::Instance()->CalculateSize(text, location, fontSize, align);
+	updateLocation = RenderManager::Instance()->CalculateTextSize(text, location, fontSize, align);
 }
 
 void Button::Render()
 {
 	if (renderHighlighted)
 	{
-		TextRender::Instance()->RenderText(text, renderLocation, highlightColour);
+		RenderManager::Instance()->RenderText(text, renderLocation, highlightColour);
 	}
 	else
 	{
-		TextRender::Instance()->RenderText(text, renderLocation, fontColour);
+		RenderManager::Instance()->RenderText(text, renderLocation, fontColour);
 	}
 }
 

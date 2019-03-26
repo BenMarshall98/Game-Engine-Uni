@@ -7,8 +7,9 @@
 #include "OpenGL330PointShadowFramebuffer.h"
 #include "OpenGL330Shader.h"
 #include "OpenGL330StaticModel.h"
+#include "OpenGL330TextRender.h"
 
-OpenGL330Engine::OpenGL330Engine()
+OpenGL330Engine::OpenGL330Engine() : RenderEngine()
 {
 }
 
@@ -134,4 +135,9 @@ void OpenGL330Engine::BindVertexArray(int VAO)
 		glBindVertexArray(VAO);
 		lastVAO = VAO;
 	}
+}
+
+void OpenGL330Engine::InitialiseTextRender()
+{
+	textRender = new OpenGL330TextRender();
 }

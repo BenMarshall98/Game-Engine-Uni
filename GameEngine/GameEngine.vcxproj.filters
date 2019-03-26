@@ -109,6 +109,12 @@
     <Filter Include="Render Manager\OpenGL330\FrameBuffer">
       <UniqueIdentifier>{3e8a7980-08f1-4757-b9a0-d816306aa4df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render Manager\GenericRender\TextRender">
+      <UniqueIdentifier>{aec2d690-1b6e-44a4-8963-5d25b4ea5e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330\TextRender">
+      <UniqueIdentifier>{8c8a7e93-0d0c-40ce-bd3a-b22e2a7ad235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -309,9 +315,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="TextRender.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="MenuScene.cpp">
       <Filter>Scene Manager</Filter>
     </ClCompile>
@@ -386,6 +389,12 @@
     </ClCompile>
     <ClCompile Include="OpenGL330UniformLocation.cpp">
       <Filter>Render Manager\OpenGL330\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRender.cpp">
+      <Filter>Render Manager\GenericRender\TextRender</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330TextRender.cpp">
+      <Filter>Render Manager\OpenGL330\TextRender</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -588,9 +597,6 @@
     <ClInclude Include="Button.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="TextRender.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="MenuScene.h">
       <Filter>Scene Manager</Filter>
     </ClInclude>
@@ -665,6 +671,12 @@
     </ClInclude>
     <ClInclude Include="OpenGL330UniformLocation.h">
       <Filter>Render Manager\OpenGL330\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRender.h">
+      <Filter>Render Manager\GenericRender\TextRender</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330TextRender.h">
+      <Filter>Render Manager\OpenGL330\TextRender</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
