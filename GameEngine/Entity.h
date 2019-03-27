@@ -12,10 +12,10 @@ private:
 	std::string mEntityName;
 	int mEntityID;
 
-	std::vector<iComponent *> components = std::vector<iComponent *>();
+	std::vector<iComponent *> components;
 
 public:
-	explicit Entity(const std::string & entityName) : mEntityName(entityName), mEntityID(nextID)
+	explicit Entity(const std::string & entityName) : mEntityName(entityName), mEntityID(nextID), components((int)ComponentType::MAX_SIZE, nullptr)
 	{
 		nextID++;
 	}

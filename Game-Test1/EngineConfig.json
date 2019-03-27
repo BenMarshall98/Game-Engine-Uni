@@ -3,7 +3,7 @@
   "WindowSetup": {
     "Window": "GLFW",
     "Fullscreen": false,
-    "Size": [1200, 900]
+    "Size": [800, 600]
   },
   "GraphicsDriver": "OpenGL330",
   "AudioDriver": "irrKlang"

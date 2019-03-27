@@ -9,38 +9,29 @@ Entity::~Entity()
 
 void Entity::AddComponent(iComponent * component)
 {
-	components.push_back(component);
+	delete components.at((int)component->GetComponentName());
+	components.at((int)component->GetComponentName()) = component;
 }
 
 void Entity::RemoveComponent(iComponent * component)
 {
-	std::vector<iComponent *>::iterator it = find(components.begin(), components.end(), component);
-
-	if (it != components.end())
-	{
-		delete *it;
-		components.erase(it);
-	}
+	delete components.at((int)component->GetComponentName());
+	components.at((int)component->GetComponentName()) = nullptr;
 }
 
 iComponent * Entity::GetComponentOfEntity(ComponentType componentType)
 {
-	for (int i = 0; i < components.size(); i++)
-	{
-		if (components.at(i)->GetComponentName() == componentType)
-		{
-			return components.at(i);
-		}
-	}
-
-	return nullptr;
+	return components.at((int)componentType);
 }
 
 void Entity::Swap()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		components.at(i)->RenderSwap();
+		if (components.at(i))
+		{
+			components.at(i)->RenderSwap();
+		}
 	}
 }
 
