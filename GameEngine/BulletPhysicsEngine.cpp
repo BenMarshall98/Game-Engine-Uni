@@ -107,7 +107,7 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(const float mass, glm::vec3 & posit
 	}
 	else
 	{
-		//rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+		rigidBody->setCollisionFlags(rigidBody->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 	}
 
 	if (!collisionResponse)

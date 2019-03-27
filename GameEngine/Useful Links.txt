@@ -36,6 +36,7 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: config file audio engine
 
 //TODO: Adaptive Velocity for the AI pathfollowing and pathfinding
+//TODO: kinetic objects in bullet
 
 //TODO: create the render manager
 //DONE: Rename mesh to something else

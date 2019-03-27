@@ -4,7 +4,7 @@
     "Window": "GLFW",
     "Fullscreen": false,
     "Size": [ 800, 600 ],
-    "FramerateLock": 30
+    "FramerateLock": 60
   },
   "GraphicsDriver": "OpenGL330",
   "AudioDriver": "irrKlang",
