@@ -22,7 +22,6 @@ private:
 	//static void SimpleFormatExists(const string & fileName, const string & fileType);
 	static int FindInVector(std::vector<std::string> & list, const std::string & toFind);
 	static StaticModel * LoadOBJ(const std::string & fileName);
-	static StaticModel * LoadSME(const std::string & fileName);
 	static AnimatedModel * LoadDAE(const std::string & fileName);
 
 	static void TangentSpace(std::vector<int> & indices, std::vector<glm::vec3> & vertex, std::vector<glm::vec2> & texture, std::vector<glm::vec3> & tangents/*, vector<vec3> & bitangents*/);

@@ -21,28 +21,30 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //DONE: move bone mats out of the rigged animation
 //DONE: Give the option to output log to a file instead of cout
 
+//DONE: create the render manager
+//DONE: Rename mesh to something else
+//DONE: OpenGL330 TextRender
+//DONE: Render manager location
+//DONE: Render manager VAO
+
+//DONE: deal with removing audio in the resource manager when refactoring the audio manager
+//DONE? look at the lifetime of the audio engine
+//DONE: config file audio engine
+
 //NOT POSSIBLE: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 
 //TODO: work on the animation model, see if that can be fixed
 //TODO: build a animation system (for coins and the like)
 
 //TODO: work on a menu system (config file?)
+//TODO: Gamepad input
 
 //TODO: build methods to control the camera using input
 
-//TODO: look at the lifetime of the audio engine
 //TODO: pause and unpause music when in pause menu
-//TODO: deal with removing audio in the resource manager when refactoring the audio manager
-//TODO: config file audio engine
 
 //TODO: Adaptive Velocity for the AI pathfollowing and pathfinding
 //TODO: kinetic objects in bullet
-
-//TODO: create the render manager
-//DONE: Rename mesh to something else
-//DONE: OpenGL330 TextRender
-//DONE: Render manager location
-//TODO: Render manager VAO
 
 file:///C:/Users/538704/source/repos/Game-Engine/irrKlang-64bit-1.6.0/doc/cpp/index.html#changingSounds
 

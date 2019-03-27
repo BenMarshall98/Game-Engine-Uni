@@ -3,6 +3,7 @@
 #include "PhysicsManager.h"
 #include "RenderManager.h"
 #include "SceneManager.h"
+#include "AudioManager.h"
 #include "Window.h"
 #include "glm/glm.hpp"
 #include <iostream>
@@ -66,6 +67,7 @@ void ConfigLoader::LoadEngineConfig(std::string & fileName)
 	PhysicsManager::SetPhysicsEngine(physicsEngine);
 	RenderManager::SetRenderEngine(graphicsDriver);
 	SceneManager::InitWindow(window);
+	AudioManager::InitAudioEngineName(audioDriver);
 
 	Window::InitFullScreen(fullscreen);
 	Window::InitHeight(windowSize.y);

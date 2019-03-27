@@ -12,15 +12,9 @@
 
 iModel * ModelLoader::LoadModel(const std::string & fileName)
 {
-
-	//TODO Add more file types (COLLADA and custom animated model file format)
 	if (EndsWith(fileName, ".obj"))
 	{
 		return LoadOBJ(fileName);
-	}
-	else if (EndsWith(fileName, ".sme"))
-	{
-		return LoadSME(fileName);
 	}
 	else if (EndsWith(fileName, ".dae"))
 	{
@@ -167,12 +161,6 @@ int ModelLoader::FindInVector(std::vector<std::string> & list, const std::string
 		}
 	}
 	return -1;
-}
-
-StaticModel * ModelLoader::LoadSME(const std::string & fileName)
-{
-	//fileName = ""; //TODO: Remove this line, this was only placed to remove a parasoft issue
-	return nullptr;
 }
 
 AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)

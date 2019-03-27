@@ -27,6 +27,7 @@
 #include "MenuScene.h"
 #include "GameScene.h"
 #include "RenderManager.h"
+#include "Input.h"
 #include <sstream>
 
 extern "C"
@@ -120,7 +121,13 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	lua_register(luaVM, "AddComponentTexture", lua_AddComponentTexture);
 	lua_register(luaVM, "FinishEntity", lua_FinishEntity);
 
+	lua_register(luaVM, "PauseSound", lua_PauseSound);
+
 	lua_register(luaVM, "DisplayText", lua_DisplayText);
+	lua_register(luaVM, "DisplaySize", lua_DisplaySize);
+	lua_register(luaVM, "FullScreen", lua_FullScreen);
+	lua_register(luaVM, "SetFramerate", lua_SetFramerate);
+	lua_register(luaVM, "SetController", lua_SetController);
 	
 	std::string file = "Scripts/Vector3.lua";
 	LoadLuaFromFile(file);
@@ -2657,6 +2664,23 @@ int ScriptingManager::lua_FinishEntity(lua_State * const luaState)
 	return 0;
 }
 
+int ScriptingManager::lua_PauseSound(lua_State * luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: PauseSound");
+		lua_error(luaState);
+	}
+
+	bool pauseState = lua_toboolean(luaState, 1);
+
+	AudioManager::Instance()->PauseSounds(pauseState);
+
+	return 0;
+}
+
 int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2691,6 +2715,73 @@ int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 
 	const PixelLocation pixelLocation = RenderManager::Instance()->CalculateTextSize(displayText, location, fontSize, align);
 	RenderManager::Instance()->RenderText(displayText, pixelLocation, colour);
+
+	return 0;
+}
+
+int ScriptingManager::lua_DisplaySize(lua_State * luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 2)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: DisplaySize");
+		lua_error(luaState);
+	}
+
+	int width = lua_tonumber(luaState, 1);
+	int height = lua_tonumber(luaState, 2);
+
+	SceneManager::Instance()->ChangeSize(width, height);
+
+	return 0;
+}
+
+int ScriptingManager::lua_FullScreen(lua_State * luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 0)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: FullScreen");
+		lua_error(luaState);
+	}
+
+	SceneManager::Instance()->FullScreen();
+
+	return 0;
+}
+
+int ScriptingManager::lua_SetFramerate(lua_State * luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: SetFramerate");
+		lua_error(luaState);
+	}
+
+	int FPS = lua_tointeger(luaState, 1);
+
+	Window::SetFrameRate(FPS);
+
+	return 0;
+}
+
+int ScriptingManager::lua_SetController(lua_State * luaState)
+{
+	const int numberOfArgs = lua_gettop(luaState);
+
+	if (numberOfArgs != 1)
+	{
+		lua_pushstring(luaState, "Wrong Number Of Args: SetController");
+		lua_error(luaState);
+	}
+
+	std::string controller = lua_tostring(luaState, 1);
+
+	Input::ControllerSetup(controller);
 
 	return 0;
 }

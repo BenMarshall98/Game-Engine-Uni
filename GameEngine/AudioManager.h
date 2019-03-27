@@ -1,8 +1,5 @@
 #pragma once
 
-#pragma comment(lib, "../irrKlang-64bit-1.6.0/lib/Winx64-visualStudio/irrKlang.lib")
-
-#include "irrKlang-64bit-1.6.0/include/irrKlang.h"
 #include <string>
 #include "glm/glm.hpp"
 #include <vector>
@@ -10,6 +7,9 @@
 #include "Entity.h"
 #include "LocationSound.h"
 #include "EntitySound.h"
+
+#include "AudioEngine.h"
+#include "irrKlangEngine.h"
 
 enum class AudioPlayback
 {
@@ -22,22 +22,37 @@ enum class AudioPlayback
 class AudioManager
 {
 private:
-	std::vector<void *> cameraSounds;
+	std::vector<Source *> cameraSounds;
 	std::vector<LocationSound *> locationSounds;
 	std::vector<EntitySound *> entitySounds;
 
-	irrklang::ISoundEngine * engine;
+	static AudioEngine * audioEngine;
+
+	static std::string audioName;
 
 	static AudioManager * instance;
 	
 	AudioManager();
 
 public:
+
+	static void InitAudioEngineName(std::string pAudioName)
+	{
+		audioName = pAudioName;
+	}
+
 	static inline AudioManager * Instance()
 	{
 		if (instance == nullptr)
 		{
 			instance = new AudioManager();
+		}
+		if (audioEngine == nullptr)
+		{
+			if (audioName == "irrKlang")
+			{
+				audioEngine = new irrKlangEngine();
+			}
 		}
 		return instance;
 	}
@@ -46,18 +61,41 @@ public:
 	AudioManager& operator=(const AudioManager&) = delete;
 
 	void Update();
-	void Clear();
 
-	void * GenerateBuffer(const std::string & fileName);
-	void * GenerateSource(void * buffer);
+	inline void Clear()
+	{
+		audioEngine->Clear();
+	}
 
-	void DeleteBuffer(void * const buffer) const;
-	void DeleteSource(void * const source) const;
-	void UpdateComponentSound(void * const source, const glm::vec3 & position, AudioPlayback playback) const;
+	inline Buffer * GenerateBuffer(const std::string & fileName)
+	{
+		return audioEngine->GenerateBuffer(fileName);
+	}
 
+	inline Source * GenerateSource(Buffer * buffer)
+	{
+		return audioEngine->GenerateSource(buffer);
+	}
+
+	inline void DeleteBuffer(Buffer * const buffer) const
+	{
+		audioEngine->DeleteBuffer(buffer);
+	}
+
+	inline void DeleteSource(Source * const source) const
+	{
+		audioEngine->DeleteSource(source);
+	}
+
+	void UpdateComponentSound(Source * const source, const glm::vec3 & position, AudioPlayback playback) const;
 	void PlayAudio(const std::string & sound);
 	void PlayAudioAtLocation(const std::string & sound, const glm::vec3 & location);
 	void PlayAudioAtEntityLocation(const std::string & sound, Entity * const entity);
 	~AudioManager();
+
+	inline void PauseSounds(bool pauseState)
+	{
+		audioEngine->PauseSounds(pauseState);
+	}
 };
 

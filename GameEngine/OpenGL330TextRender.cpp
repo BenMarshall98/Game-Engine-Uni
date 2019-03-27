@@ -10,7 +10,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-OpenGL330TextRender::OpenGL330TextRender() : VAO(0), VBO(0)
+OpenGL330TextRender::OpenGL330TextRender() : VAO(0), VBO(0), VAOBuffer(nullptr)
 {
 	ResourceManager::LoadShader("TextShader", "TextVertex.vert", "TextFragment.frag");
 	shader = ResourceManager::GetShader("TextShader");
@@ -68,13 +68,15 @@ OpenGL330TextRender::OpenGL330TextRender() : VAO(0), VBO(0)
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	RenderManager::Instance()->BindVertexArray(VAO);
+
+	VAOBuffer = new OpenGL330VertexBuffer(VAO);
+	RenderManager::Instance()->BindVertexArray(VAOBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	RenderManager::Instance()->BindVertexArray(0);
+	RenderManager::Instance()->BindVertexArray(zeroBuffer);
 }
 
 
@@ -112,7 +114,7 @@ void OpenGL330TextRender::RenderText(const std::string & text, const PixelLocati
 	UniformLocation * textLocation = RenderManager::Instance()->GetUniformLocation(shader, "text");
 	RenderManager::Instance()->UseTexture(textLocation, nullptr, 0);
 
-	RenderManager::Instance()->BindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAOBuffer);
 
 	float x = pPixelLocation.location.x;
 	const float y = pPixelLocation.location.y;
@@ -151,6 +153,6 @@ void OpenGL330TextRender::RenderText(const std::string & text, const PixelLocati
 		x += (ch->Advance >> 6) * pPixelLocation.scale;
 	}
 
-	RenderManager::Instance()->BindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAOBuffer);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

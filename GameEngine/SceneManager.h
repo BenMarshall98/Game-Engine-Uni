@@ -93,5 +93,15 @@ public:
 
 		return std::cout;
 	}
+
+	inline void ChangeSize(float width, float height)
+	{
+		window->ChangeSize(width, height);
+	}
+
+	inline void FullScreen()
+	{
+		window->Fullscreen();
+	}
 };
 

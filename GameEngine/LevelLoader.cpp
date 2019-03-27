@@ -365,8 +365,6 @@ void LevelLoader::LoadPerspectiveJSON(const rapidjson::Value& Perspective)
 	const float minDist = Perspective["MinDistance"].GetFloat();
 	const float maxDist = Perspective["MaxDistance"].GetFloat();
 
-	//TODO: get projection into a camera manager
-
 	if (type == "Perspective")
 	{
 		Projection * const projection = new Projection(ProjectionType::Perspective, GLFWWindow::GetWidth(), GLFWWindow::GetHeight(),  minDist, maxDist);
@@ -381,8 +379,6 @@ void LevelLoader::LoadPerspectiveJSON(const rapidjson::Value& Perspective)
 
 void LevelLoader::LoadCameraJSON(const rapidjson::Value& pCamera)
 {
-	//TODO: get camera into a camera manager
-
 	const std::string type = pCamera["Type"].GetString();
 
 	const float minDist = pCamera["MinDistance"].GetFloat();

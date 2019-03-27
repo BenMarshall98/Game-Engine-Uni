@@ -2,6 +2,7 @@
 
 #include "TextRender.h"
 #include "OpenGL.h"
+#include "OpenGL330VertexBuffer.h"
 
 struct OpenGL330Character : public Character {
 	unsigned int TextureID;
@@ -16,6 +17,9 @@ class OpenGL330TextRender : public TextRender
 private: 
 	unsigned int VAO;
 	unsigned int VBO;
+	OpenGL330VertexBuffer * zeroBuffer = new OpenGL330VertexBuffer(0);
+	OpenGL330VertexBuffer * VAOBuffer;
+
 public:
 	OpenGL330TextRender();
 	~OpenGL330TextRender();

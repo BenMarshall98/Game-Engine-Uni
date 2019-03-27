@@ -258,7 +258,11 @@
   <ItemGroup>
     <None Include="3DLevelConfig.json" />
     <None Include="3DLevelGuardFunctions.lua" />
+    <None Include="ControllerSetup.json" />
+    <None Include="ControllerSetupMenu.lua" />
     <None Include="EngineConfig.json" />
+    <None Include="FramerateMenu.lua" />
+    <None Include="FramerateSetup.json" />
     <None Include="GameChoosing.json" />
     <None Include="GameChoosing.lua" />
     <None Include="HitBoxMainMenu.json" />
@@ -281,12 +285,15 @@
     <None Include="Models\untitled2.dae" />
     <None Include="Models\untitled3.dae" />
     <None Include="Options.json" />
+    <None Include="OptionsMenu.lua" />
     <None Include="packages.config" />
     <None Include="Pause.json" />
     <None Include="PauseMenu.lua" />
     <None Include="PlatformerCoinFunctions.lua" />
     <None Include="PlatformerLevelConfig.json" />
     <None Include="PlatformerSceneFunctions.lua" />
+    <None Include="ScreenSizeMenu.lua" />
+    <None Include="ScreenSizeSetup.json" />
     <None Include="Shaders\RiggedFragment.frag" />
     <None Include="Shaders\RiggedPointShadow.frag" />
     <None Include="Shaders\RiggedPointShadow.geom" />

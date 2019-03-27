@@ -118,6 +118,30 @@
     <Filter Include="Config Loader">
       <UniqueIdentifier>{b3a95129-23ce-42cd-af13-16bbd28d9632}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render Manager\GenericRender\VertexBuffer">
+      <UniqueIdentifier>{a47430d2-53e6-493d-a755-8b39d96e7f4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render Manager\OpenGL330\VertexBuffer">
+      <UniqueIdentifier>{fabf555c-35ca-45fe-bd62-87d0291d3db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Manager\GenericAudioEngine">
+      <UniqueIdentifier>{26660197-2036-4a2a-991b-27be52d83500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Manager\GenericAudioEngine\Source">
+      <UniqueIdentifier>{3d5f1dd7-eb77-4b63-83ed-eef52e0dd8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Manager\GenericAudioEngine\Buffer">
+      <UniqueIdentifier>{019e7457-94e5-4c83-be8b-981b0994a3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Manager\irrKlangAudioEngine">
+      <UniqueIdentifier>{21087e80-ac37-4dd7-b4c4-4c46f9fe91a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Manager\irrKlangAudioEngine\Source">
+      <UniqueIdentifier>{b8dd46ad-416a-4f1b-87c4-7361c5310552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Manager\irrKlangAudioEngine\Buffer">
+      <UniqueIdentifier>{18a66bc3-19d4-4c42-89ae-1c88e57ca852}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -401,6 +425,30 @@
     </ClCompile>
     <ClCompile Include="ConfigLoader.cpp">
       <Filter>Config Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Render Manager\GenericRender\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL330VertexBuffer.cpp">
+      <Filter>Render Manager\OpenGL330\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Audio Manager\GenericAudioEngine\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Audio Manager\GenericAudioEngine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioEngine.cpp">
+      <Filter>Audio Manager\GenericAudioEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="irrKlangBuffer.cpp">
+      <Filter>Audio Manager\irrKlangAudioEngine\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="irrKlangSource.cpp">
+      <Filter>Audio Manager\irrKlangAudioEngine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="irrKlangEngine.cpp">
+      <Filter>Audio Manager\irrKlangAudioEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -686,6 +734,30 @@
     </ClInclude>
     <ClInclude Include="ConfigLoader.h">
       <Filter>Config Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Render Manager\GenericRender\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL330VertexBuffer.h">
+      <Filter>Render Manager\OpenGL330\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>Audio Manager\GenericAudioEngine\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Audio Manager\GenericAudioEngine\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioEngine.h">
+      <Filter>Audio Manager\GenericAudioEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="irrKlangBuffer.h">
+      <Filter>Audio Manager\irrKlangAudioEngine\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="irrKlangSource.h">
+      <Filter>Audio Manager\irrKlangAudioEngine\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="irrKlangEngine.h">
+      <Filter>Audio Manager\irrKlangAudioEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

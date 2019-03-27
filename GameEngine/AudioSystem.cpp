@@ -18,7 +18,7 @@ void AudioSystem::Action(float timePeriod)
 		iComponent * const componentAudio = entityManager->GetComponentOfEntity(EntityList[i], ComponentType::COMPONENT_AUDIO);
 
 		const glm::vec3 position = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
-		void * const source = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioSource();
+		Source * const source = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioSource();
 		const AudioPlayback playback = dynamic_cast<ComponentAudio *>(componentAudio)->GetUpdateAudioPlayback();
 
 		Audio(position, source, playback);
@@ -27,7 +27,7 @@ void AudioSystem::Action(float timePeriod)
 	}
 }
 
-void AudioSystem::Audio(const glm::vec3 & position, void * const source, const AudioPlayback playback)
+void AudioSystem::Audio(const glm::vec3 & position, Source * const source, const AudioPlayback playback)
 {
 	AudioManager::Instance()->UpdateComponentSound(source, position, playback);
 }

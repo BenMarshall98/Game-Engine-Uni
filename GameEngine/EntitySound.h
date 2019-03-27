@@ -1,16 +1,17 @@
 #pragma once
 
 #include "Entity.h"
+#include "Source.h"
 
 class EntitySound
 {
 private:
-	void * source;
+	Source * source;
 	Entity * entity;
 
 public:
 
-	explicit EntitySound(void * const pSource, Entity * const pEntity) :
+	explicit EntitySound(Source * const pSource, Entity * const pEntity) :
 		source(pSource), entity(pEntity) {}
 
 	~EntitySound();
@@ -18,7 +19,7 @@ public:
 	EntitySound(const EntitySound&) = delete;
 	EntitySound& operator=(const EntitySound&) = delete;
 
-	inline void * GetSource() const
+	inline Source * GetSource() const
 	{
 		return source;
 	}

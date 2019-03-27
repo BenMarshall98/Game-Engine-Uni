@@ -1,10 +1,13 @@
 #pragma once
+
+#include <string>
+
 class Input
 {
 protected:
-	bool mouseAllowed = true;
-	bool keyboardAllowed = true;
-	bool gamepadAllowed = true;
+	static bool mouseAllowed;
+	static bool keyboardAllowed;
+	static bool gamepadAllowed;
 
 public:
 	Input();
@@ -17,5 +20,7 @@ public:
 	void AllowMouseInput(bool allowMouse);
 	void AllowKeyboardInput(bool allowKeyboard);
 	void AllowGamePadInput(bool allowGamePad);
+
+	static void ControllerSetup(std::string controller);
 };
 

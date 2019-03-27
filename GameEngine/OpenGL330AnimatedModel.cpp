@@ -4,7 +4,7 @@
 #include "RenderManager.h"
 
 OpenGL330AnimatedModel::OpenGL330AnimatedModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec3> & pNormal, const std::vector<glm::vec2> & pTextures, const std::vector<glm::vec4> & pWeights, const std::vector<glm::ivec4> & pIds, const std::vector<int> & pIndices) :
-	AnimatedModelMesh(pVertex, pNormal, pTextures, pWeights, pIds, pIndices), VAO(0), EBO(0), VBO{0,0,0,0,0}
+	AnimatedModelMesh(pVertex, pNormal, pTextures, pWeights, pIds, pIndices), VAO(0), EBO(0), VBO{0,0,0,0,0}, VAOBuffer(nullptr)
 {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(5, VBO);
@@ -48,6 +48,8 @@ OpenGL330AnimatedModel::OpenGL330AnimatedModel(const std::vector<glm::vec3> & pV
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
+
+	VAOBuffer = new OpenGL330VertexBuffer(VAO);
 }
 
 OpenGL330AnimatedModel::~OpenGL330AnimatedModel()
@@ -59,6 +61,6 @@ OpenGL330AnimatedModel::~OpenGL330AnimatedModel()
 
 void OpenGL330AnimatedModel::Render()
 {
-	RenderManager::Instance()->BindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAOBuffer);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 }

@@ -6,61 +6,44 @@
 #include <fstream>
 
 AudioManager * AudioManager::instance = nullptr;
+AudioEngine * AudioManager::audioEngine = nullptr;
+
+std::string AudioManager::audioName = "irrKlang";
 
 AudioManager::AudioManager()
 {
-	engine = irrklang::createIrrKlangDevice();
 }
-
 
 AudioManager::~AudioManager()
 {
 	Clear();
-	//TODO: Find out why this does not work -- engine->drop();
 	instance = nullptr;
 }
 
-void * AudioManager::GenerateBuffer(const std::string & fileName)
+void AudioManager::UpdateComponentSound(Source * const pSource, const glm::vec3 & position, const AudioPlayback playback) const
 {
-	irrklang::ISoundSource * const buffer = engine->addSoundSourceFromFile(fileName.c_str());
-
-	return buffer;
-}
-
-void * AudioManager::GenerateSource(void * const pBuffer)
-{
-	irrklang::ISoundSource * const mBuffer = static_cast<irrklang::ISoundSource *>(pBuffer);
-	irrklang::ISound * const source = engine->play3D(mBuffer, irrklang::vec3df(0, 0, 0), false, true, true);
-
-	return source;
-}
-
-void AudioManager::UpdateComponentSound(void * const pSource, const glm::vec3 & position, const AudioPlayback playback) const
-{
-	irrklang::ISound * const mSource = static_cast<irrklang::ISound *>(pSource);
-
-	if (!mSource)
+	if (!pSource)
 	{
 		return;
 	}
 	
-	mSource->setPosition(irrklang::vec3df(position.x, position.y, position.z));
+	pSource->SetPosition(position);
 
 	if (playback == AudioPlayback::PAUSE)
 	{
-		mSource->setIsPaused();
+		pSource->SetIsPaused();
 	}
 	else if (playback == AudioPlayback::STOP)
 	{
-		mSource->setIsPaused();
-		mSource->setPlayPosition(0);
+		pSource->SetIsPaused();
+		pSource->SetPlayPosition(0);
 	}
 	else if (playback == AudioPlayback::PLAY)
 	{
-		if (mSource->getIsPaused())
+		if (pSource->GetIsPaused())
 		{
-			mSource->setIsPaused(false);
-			mSource->setIsLooped(true);
+			pSource->SetIsPaused(false);
+			pSource->SetIsLooped(true);
 		}
 	}
 }
@@ -73,14 +56,13 @@ void AudioManager::Update()
 	const glm::vec3 up = camera->GetUp();
 	const glm::vec3 lookAt = camera->GetLookAt();
 
-	engine->setListenerPosition(irrklang::vec3df(pos.x, pos.y, pos.z), irrklang::vec3df(lookAt.x, lookAt.y, lookAt.z),
-		irrklang::vec3df(0, 0, 0), irrklang::vec3df(up.x, up.y, up.z));
+	audioEngine->SetListenerPosition(pos, lookAt, up);
 
 	for (int i = 0; i < cameraSounds.size(); i++)
 	{
-		irrklang::ISound * const source = static_cast<irrklang::ISound *>(cameraSounds.at(i));
+		Source * const source = cameraSounds.at(i);
 
-		if (source->isFinished())
+		if (source->IsFinished())
 		{
 			DeleteSource(source);
 			cameraSounds.erase(cameraSounds.begin() + i);
@@ -88,14 +70,14 @@ void AudioManager::Update()
 			continue;
 		}
 
-		source->setPosition(irrklang::vec3df(pos.x, pos.y, pos.z));
+		source->SetPosition(pos);
 	}
 
 	for (int i = 0; i < locationSounds.size(); i++)
 	{
-		irrklang::ISound * const source = static_cast<irrklang::ISound *>(locationSounds.at(i)->GetSource());
+		Source * const source = locationSounds.at(i)->GetSource();
 		
-		if (source->isFinished())
+		if (source->IsFinished())
 		{
 			DeleteSource(source);
 			delete locationSounds.at(i);
@@ -107,9 +89,9 @@ void AudioManager::Update()
 
 	for (int i = 0; i < entitySounds.size(); i++)
 	{
-		irrklang::ISound * const source = static_cast<irrklang::ISound *>(entitySounds.at(i)->GetSource());
+		Source * const source = entitySounds.at(i)->GetSource();
 
-		if (source->isFinished())
+		if (source->IsFinished())
 		{
 			DeleteSource(source);
 			delete entitySounds.at(i);
@@ -122,41 +104,32 @@ void AudioManager::Update()
 
 		const glm::vec3 entPos = dynamic_cast<ComponentPosition *>(componentPosition)->GetUpdatePosition();
 
-		source->setPosition(irrklang::vec3df(entPos.x, entPos.y, entPos.z));
+		source->SetPosition(entPos);
 	}
-}
-
-void AudioManager::Clear()
-{
-	engine->stopAllSounds();
 }
 
 void AudioManager::PlayAudio(const std::string & sound)
 {
-	void * const preSource = ResourceManager::GetAudio(sound);
+	Source * const source = ResourceManager::GetAudio(sound);
 
-	irrklang::ISound * const source = static_cast<irrklang::ISound *>(preSource);
-
-	source->setIsPaused(false);
+	source->SetIsPaused(false);
 
 	Camera * const camera = CameraManager::Instance()->GetCamera();
 
 	const glm::vec3 pos = camera->GetPosition();
 
-	source->setPosition(irrklang::vec3df(pos.x, pos.y, pos.z));
+	source->SetPosition(pos);
 
 	cameraSounds.push_back(source);
 }
 
 void AudioManager::PlayAudioAtLocation(const std::string & sound, const glm::vec3 & location)
 {
-	void * const preSource = ResourceManager::GetAudio(sound);
+	Source * const source = ResourceManager::GetAudio(sound);
 
-	irrklang::ISound * const source = static_cast<irrklang::ISound *>(preSource);
+	source->SetIsPaused(false);
 
-	source->setIsPaused(false);
-
-	source->setPosition(irrklang::vec3df(location.x, location.y, location.z));
+	source->SetPosition(location);
 
 	LocationSound * const locSound = new LocationSound(source, location);
 
@@ -165,32 +138,18 @@ void AudioManager::PlayAudioAtLocation(const std::string & sound, const glm::vec
 
 void AudioManager::PlayAudioAtEntityLocation(const std::string & sound, Entity * const entity)
 {
-	void * const preSource = ResourceManager::GetAudio(sound);
-
-	irrklang::ISound * const source = static_cast<irrklang::ISound *>(preSource);
+	Source * const source = ResourceManager::GetAudio(sound);
 	
-	source->setIsPaused(false);
+	source->SetIsPaused(false);
 
 	iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(entity, ComponentType::COMPONENT_POSITION);
 
 	const glm::vec3 pos = dynamic_cast<ComponentPosition * >(componentPosition)->GetUpdatePosition();
 
-	source->setPosition(irrklang::vec3df(pos.x, pos.y, pos.z));
+	source->SetPosition(pos);
 
 	EntitySound * const entSound = new EntitySound(source, entity);
 	
 	entitySounds.push_back(entSound);
 }
 
-void AudioManager::DeleteSource(void * const pSource) const
-{
-	irrklang::ISound * const mSource = static_cast<irrklang::ISound *>(pSource);
-	mSource->stop();
-	mSource->drop();
-}
-
-void AudioManager::DeleteBuffer(void * const pBuffer) const
-{
-	irrklang::ISoundSource * const mBuffer = static_cast<irrklang::ISoundSource *>(pBuffer);
-	mBuffer->drop();
-}

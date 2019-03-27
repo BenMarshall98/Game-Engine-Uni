@@ -1,5 +1,5 @@
 {
-  "Script": "OptionsMenu.lua",
+  "Script": "ScreenSizeMenu.lua",
   "Background-Colour": [ 0, 0, 0 ],
   "MenuItems": [
     {
@@ -12,43 +12,43 @@
     },
     {
       "Type": "Button",
-      "Text": "Controller Setup",
+      "Text": "800 x 600",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 50 ],
-      "Function": "ControllerSetup"
+      "Function": "Size800x600"
     },
     {
       "Type": "Button",
-      "Text": "Screen Size",
+      "Text": "1200 x 900",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 60 ],
-      "Function": "ScreenSizeSetup"
+      "Function": "Size1200x900"
     },
     {
       "Type": "Button",
-      "Text": "Framerate",
+      "Text": "Fullscreen",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 70 ],
-      "Function": "FramerateSetup"
+      "Function": "SizeFullscreen"
     },
     {
       "Type": "Button",
-      "Text": "Exit Options",
+      "Text": "Return To Options",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 80 ],
-      "Function": "ExitOptions"
+      "Function": "ReturnOptions"
     }
   ]
 }

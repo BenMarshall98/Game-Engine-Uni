@@ -4,7 +4,6 @@
 #include "Window.h"
 #include <GLFW/glfw3.h>
 
-//TODO: Make the Window generic
 class GLFWWindow : public Window
 {
 private:

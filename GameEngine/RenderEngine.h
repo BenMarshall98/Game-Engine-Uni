@@ -8,6 +8,7 @@
 #include "FrameBuffer.h"
 #include "glm/glm.hpp"
 #include "TextRender.h"
+#include "VertexBuffer.h"
 #include <vector>
 
 class RenderEngine
@@ -37,7 +38,7 @@ public:
 	virtual void ClearFrameBuffer() = 0;
 	virtual void CullFace(const std::string & cullType) = 0;
 	virtual void ClearColor(const glm::vec4 & colour) = 0;
-	virtual void BindVertexArray(int VAO) = 0;
+	virtual void BindVertexArray(VertexBuffer * VAO) = 0;
 	virtual void InitialiseTextRender() = 0;
 
 	inline void RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)

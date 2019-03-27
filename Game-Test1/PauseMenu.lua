@@ -1,4 +1,5 @@
 function ResumeGame()
+	PauseSound(false)
 	CloseScene()
 end
 

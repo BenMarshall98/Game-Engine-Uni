@@ -1,9 +1,11 @@
 #pragma once
 
 #include "AnimatedModelMesh.h"
+#include "OpenGL330VertexBuffer.h"
 class OpenGL330AnimatedModel : public AnimatedModelMesh
 {
 private:
+	OpenGL330VertexBuffer * VAOBuffer;
 	unsigned int VAO, VBO[5], EBO;
 
 public:

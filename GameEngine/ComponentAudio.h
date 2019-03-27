@@ -8,7 +8,7 @@ class ComponentAudio : public iComponent
 {
 private:
 	AudioPlayback mPlayback;
-	void * mSource;
+	Source * mSource;
 
 public:
 	ComponentAudio(const AudioPlayback pPlayback, const std::string & audioName);
@@ -29,7 +29,7 @@ public:
 		mPlayback = pPlayback;
 	}
 
-	inline void * GetUpdateAudioSource() const
+	inline Source * GetUpdateAudioSource() const
 	{
 		return mSource;
 	}

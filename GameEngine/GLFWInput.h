@@ -3,7 +3,6 @@
 #include "Input.h"
 #include <GLFW/glfw3.h>
 
-//TODO: Make the input generic
 class GLFWInput : public Input
 {
 private:

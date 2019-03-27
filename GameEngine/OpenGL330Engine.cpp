@@ -126,13 +126,13 @@ void OpenGL330Engine::ClearColor(const glm::vec4 & colour)
 	glClearColor(colour.x, colour.y, colour.z, colour.w);
 }
 
-void OpenGL330Engine::BindVertexArray(int VAO)
+void OpenGL330Engine::BindVertexArray(VertexBuffer * VAO)
 {
-	static int lastVAO = -1;
+	static VertexBuffer * lastVAO = nullptr;
 
 	if (lastVAO != VAO)
 	{
-		glBindVertexArray(VAO);
+		VAO->UseVertexBuffer();
 		lastVAO = VAO;
 	}
 }

@@ -52,6 +52,7 @@ void GameScene::Update()
 
 		if (inputValue > 0.2)
 		{
+			AudioManager::Instance()->PauseSounds(true);
 			SceneManager::Instance()->NewScene(new MenuScene("Pause.json"));
 			delay = 10;
 		}

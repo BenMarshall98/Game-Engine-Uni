@@ -3,6 +3,8 @@
 #include "iModel.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Buffer.h"
+#include "Source.h"
 
 #include <map>
 #include <vector>
@@ -19,7 +21,7 @@ class ResourceManager
 		static std::map<std::string, iModel *> modelList;
 		static std::map<std::string, Texture *> textureList;
 		static std::map<std::string, Shader *> shaderList;
-		static std::map<std::string, void *> audioBufferList;
+		static std::map<std::string, Buffer *> audioBufferList;
 
 		static std::map<std::string, int> modelUsage;
 		static std::map<std::string, int> textureUsage;
@@ -37,7 +39,7 @@ class ResourceManager
 		static iModel * GetModel(const std::string & model);
 		static Shader * GetShader(const std::string & shader);
 		static Texture * GetTexture(const std::string & texture);
-		static void * GetAudio(const std::string & audio);
+		static Source * GetAudio(const std::string & audio);
 
 		static void RemoveModel(const iModel * const model);
 		static void RemoveShader(const Shader * const shader);

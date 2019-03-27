@@ -14,7 +14,7 @@ std::vector<std::string> ResourceManager::usedAudios;
 std::map<std::string, iModel *> ResourceManager::modelList;
 std::map<std::string, Texture *> ResourceManager::textureList;
 std::map<std::string, Shader *> ResourceManager::shaderList;
-std::map<std::string, void *> ResourceManager::audioBufferList;
+std::map<std::string, Buffer *> ResourceManager::audioBufferList;
 
 std::map<std::string, int> ResourceManager::modelUsage;
 std::map<std::string, int> ResourceManager::audioBufferUsage;
@@ -128,7 +128,7 @@ void ResourceManager::LoadAudio(const std::string & audioName, const std::string
 		return;
 	}
 
-	void * buffer = AudioManager::Instance()->GenerateBuffer(fileName);
+	Buffer * buffer = AudioManager::Instance()->GenerateBuffer(fileName);
 
 	if (!buffer)
 	{
@@ -136,7 +136,7 @@ void ResourceManager::LoadAudio(const std::string & audioName, const std::string
 	}
 
 	audioBufferUsage.insert(std::pair<std::string, int>(audioName, 0));
-	audioBufferList.insert(std::pair<std::string, void *>(audioName, buffer));
+	audioBufferList.insert(std::pair<std::string, Buffer *>(audioName, buffer));
 }
 
 iModel * ResourceManager::GetModel(const std::string & model)
@@ -178,15 +178,15 @@ Texture * ResourceManager::GetTexture(const std::string & texture)
 	return nullptr;
 }
 
-void * ResourceManager::GetAudio(const std::string & audio)
+Source * ResourceManager::GetAudio(const std::string & audio)
 {
-	const std::map<std::string, void *>::iterator it = audioBufferList.find(audio);
+	const std::map<std::string, Buffer *>::iterator it = audioBufferList.find(audio);
 	const std::map<std::string, int>::iterator count = audioBufferUsage.find(audio);
 
 	if (it != audioBufferList.end())
 	{
 		count->second++;
-		void * const source = AudioManager::Instance()->GenerateSource(it->second);
+		Source * const source = AudioManager::Instance()->GenerateSource(it->second);
 		return source;
 	}
 	return nullptr;
@@ -260,7 +260,7 @@ void ResourceManager::RemoveTexture(const Texture * const texture)
 
 void ResourceManager::RemoveAudio(const void * const audio)
 {
-	std::map<std::string, void *>::iterator it;
+	std::map<std::string, Buffer *>::iterator it;
 	std::string audioName = "";
 
 	for (it = audioBufferList.begin(); it != audioBufferList.end(); it++)
@@ -358,30 +358,6 @@ void ResourceManager::ClearResources()
 			}
 		}
 	}
-
-	{
-		std::map<std::string, void *>::iterator it;
-
-		for (it = audioBufferList.begin(); it != audioBufferList.end();)
-		{
-			const std::map<std::string, int>::iterator count = audioBufferUsage.find(it->first);
-
-			if (count->second == 0)
-			{
-				AudioManager::Instance()->DeleteBuffer(it->second);
-				it->second = nullptr;
-
-				audioBufferList.erase(it);
-				audioBufferUsage.erase(count);
-
-				it = audioBufferList.begin();
-			}
-			else
-			{
-				it++;
-			}
-		}
-	}
 }
 
 void ResourceManager::FinalClearResources()
@@ -428,7 +404,7 @@ void ResourceManager::FinalClearResources()
 	}
 
 	{
-		std::map<std::string, void *>::iterator it;
+		std::map<std::string, Buffer *>::iterator it;
 
 		for (it = audioBufferList.begin(); it != audioBufferList.end(); it++)
 		{

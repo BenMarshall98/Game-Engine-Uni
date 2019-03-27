@@ -135,9 +135,11 @@
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="AnimNode.cpp" />
     <ClCompile Include="ArtificialIntelligenceSystem.cpp" />
+    <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="BulletPhysicsEngine.cpp" />
     <ClCompile Include="BulletRigidBody.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -178,6 +180,9 @@
     </ClCompile>
     <ClCompile Include="InputMapping.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="irrKlangBuffer.cpp" />
+    <ClCompile Include="irrKlangEngine.cpp" />
+    <ClCompile Include="irrKlangSource.cpp" />
     <ClCompile Include="iScene.cpp" />
     <ClCompile Include="iSystem.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
@@ -199,6 +204,7 @@
     <ClCompile Include="OpenGL330TextRender.cpp" />
     <ClCompile Include="OpenGL330Texture.cpp" />
     <ClCompile Include="OpenGL330UniformLocation.cpp" />
+    <ClCompile Include="OpenGL330VertexBuffer.cpp" />
     <ClCompile Include="PathFinding.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
@@ -217,6 +223,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ShadowSystem.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="StaticModel.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Text.cpp" />
@@ -224,6 +231,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UniformLocation.cpp" />
     <ClCompile Include="Vec3AnimKey.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,9 +241,11 @@
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="AnimNode.h" />
     <ClInclude Include="ArtificialIntelligenceSystem.h" />
+    <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="Bone.h" />
+    <ClInclude Include="Buffer.h" />
     <ClInclude Include="BulletPhysicsEngine.h" />
     <ClInclude Include="BulletRigidBody.h" />
     <ClInclude Include="Button.h" />
@@ -275,6 +285,9 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputMapping.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="irrKlangBuffer.h" />
+    <ClInclude Include="irrKlangEngine.h" />
+    <ClInclude Include="irrKlangSource.h" />
     <ClInclude Include="iScene.h" />
     <ClInclude Include="iSystem.h" />
     <ClInclude Include="LevelLoader.h" />
@@ -296,6 +309,7 @@
     <ClInclude Include="OpenGL330TextRender.h" />
     <ClInclude Include="OpenGL330Texture.h" />
     <ClInclude Include="OpenGL330UniformLocation.h" />
+    <ClInclude Include="OpenGL330VertexBuffer.h" />
     <ClInclude Include="PathFinding.h" />
     <ClInclude Include="PathFollowing.h" />
     <ClInclude Include="PhysicsEngine.h" />
@@ -314,6 +328,7 @@
     <ClInclude Include="ScriptingManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShadowSystem.h" />
+    <ClInclude Include="Source.h" />
     <ClInclude Include="StaticModel.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Text.h" />
@@ -321,6 +336,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UniformLocation.h" />
     <ClInclude Include="Vec3AnimKey.h" />
+    <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

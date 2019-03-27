@@ -26,7 +26,7 @@ public:
 	void ClearFrameBuffer() override;
 	void CullFace(const std::string & cullType) override;
 	void ClearColor(const glm::vec4 & colour) override;
-	void BindVertexArray(int VAO) override;
+	void BindVertexArray(VertexBuffer * VAO) override;
 	void InitialiseTextRender() override;
 };
 

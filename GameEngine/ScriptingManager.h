@@ -88,7 +88,13 @@ private:
 	static int lua_AddComponentTexture(lua_State * luaState);
 	static int lua_FinishEntity(lua_State * luaState);
 
+	static int lua_PauseSound(lua_State * luaState);
+
 	static int lua_DisplayText(lua_State * luaState);
+	static int lua_DisplaySize(lua_State * luaState);
+	static int lua_FullScreen(lua_State * luaState);
+	static int lua_SetFramerate(lua_State * luaState);
+	static int lua_SetController(lua_State * luaState);
 
 	ScriptingManager();
 

@@ -1,5 +1,5 @@
 {
-  "Script": "OptionsMenu.lua",
+  "Script": "ControllerSetupMenu.lua",
   "Background-Colour": [ 0, 0, 0 ],
   "MenuItems": [
     {
@@ -12,43 +12,43 @@
     },
     {
       "Type": "Button",
-      "Text": "Controller Setup",
+      "Text": "Keyboard Only",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 50 ],
-      "Function": "ControllerSetup"
+      "Function": "KeyboardOnly"
     },
     {
       "Type": "Button",
-      "Text": "Screen Size",
+      "Text": "Keyboard and Mouse",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 60 ],
-      "Function": "ScreenSizeSetup"
+      "Function": "KeyboardAndMouse"
     },
     {
       "Type": "Button",
-      "Text": "Framerate",
+      "Text": "Gamepad Only",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 70 ],
-      "Function": "FramerateSetup"
+      "Function": "Gamepad"
     },
     {
       "Type": "Button",
-      "Text": "Exit Options",
+      "Text": "Return To Options",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 80 ],
-      "Function": "ExitOptions"
+      "Function": "ReturnOptions"
     }
   ]
 }

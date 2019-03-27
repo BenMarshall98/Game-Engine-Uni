@@ -158,7 +158,7 @@ public:
 		engine->ClearColor(colour);
 	}
 
-	inline void BindVertexArray(int VAO)
+	inline void BindVertexArray(VertexBuffer * VAO)
 	{
 		engine->BindVertexArray(VAO);
 	}

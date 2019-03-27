@@ -1,5 +1,5 @@
 {
-  "Script": "OptionsMenu.lua",
+  "Script": "FramerateMenu.lua",
   "Background-Colour": [ 0, 0, 0 ],
   "MenuItems": [
     {
@@ -12,43 +12,43 @@
     },
     {
       "Type": "Button",
-      "Text": "Controller Setup",
+      "Text": "30 FPS",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 50 ],
-      "Function": "ControllerSetup"
+      "Function": "SetTo30"
     },
     {
       "Type": "Button",
-      "Text": "Screen Size",
+      "Text": "60 FPS",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 60 ],
-      "Function": "ScreenSizeSetup"
+      "Function": "SetTo60"
     },
     {
       "Type": "Button",
-      "Text": "Framerate",
+      "Text": "120 FPS",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 70 ],
-      "Function": "FramerateSetup"
+      "Function": "SetTo120"
     },
     {
       "Type": "Button",
-      "Text": "Exit Options",
+      "Text": "Return To Options",
       "Align": "Centre",
       "FontSize": 7.5,
       "FontColour": [ 255, 255, 255 ],
       "Highlighted": [ 128, 128, 128 ],
       "Location": [ 50, 80 ],
-      "Function": "ExitOptions"
+      "Function": "ReturnOptions"
     }
   ]
 }

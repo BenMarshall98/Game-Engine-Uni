@@ -3,7 +3,7 @@
 #include "RenderManager.h"
 
 OpenGL330StaticModel::OpenGL330StaticModel(const std::vector<glm::vec3> & pVertex, const std::vector<glm::vec2> & pTexture, const std::vector<glm::vec3> & pNormal, const std::vector<int> & pIndices, const std::vector<glm::vec3> & pTangents) :
-	StaticModel(pVertex, pTexture, pNormal, pIndices, pTangents), VAO(0), EBO(0), VBO{ 0,0,0,0,0 }
+	StaticModel(pVertex, pTexture, pNormal, pIndices, pTangents), VAO(0), EBO(0), VBO{ 0,0,0,0,0 }, VAOBuffer(nullptr)
 {
 	//The following code is based from learnopengl
 	glGenVertexArrays(1, &VAO);
@@ -42,11 +42,13 @@ OpenGL330StaticModel::OpenGL330StaticModel(const std::vector<glm::vec3> & pVerte
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * mIndices.size(), &mIndices[0], GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
+
+	VAOBuffer = new OpenGL330VertexBuffer(VAO);
 }
 
 void OpenGL330StaticModel::Render(Shader * shader)
 {
-	RenderManager::Instance()->BindVertexArray(VAO);
+	RenderManager::Instance()->BindVertexArray(VAOBuffer);
 	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
