@@ -20,7 +20,7 @@ public:
 	~GLFWWindow() override;
 
 	void Load() override;
-	void LimitFPS(float FPS) override;
+	void LimitFPS() override;
 	void WindowEvents() override;
 	bool IsRunning() override;
 

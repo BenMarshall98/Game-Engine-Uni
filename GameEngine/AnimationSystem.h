@@ -8,7 +8,7 @@
 class AnimationSystem : public iSystem
 {
 private:
-	static void Animation(const std::string & function, Entity * entity);
+	static void Animation(const std::string & function, Entity * entity, float timePeriod);
 
 public:
 	AnimationSystem();
@@ -16,7 +16,7 @@ public:
 	AnimationSystem& operator=(const AnimationSystem&) = delete;
 	AnimationSystem(AnimationSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 
 	~AnimationSystem();
 };

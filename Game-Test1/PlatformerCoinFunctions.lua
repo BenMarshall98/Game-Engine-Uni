@@ -11,7 +11,7 @@ function SpinCoin(entity, deltaTime)
 	local ComponentState = GetComponentState(entity)
 
 	local currentDirection = GetValue(ComponentState, "CurrentDirection", "float", 0)
-	currentDirection = currentDirection + (deltaTime * 150 * math.pi / 180)
+	currentDirection = currentDirection + (1 * math.pi / 180)
 	SetValue(ComponentState, "CurrentDirection", currentDirection)
 	local up = Vector3:new(0, 1, 0)
 	local direction = Quaternion:angleAxis(currentDirection, up)

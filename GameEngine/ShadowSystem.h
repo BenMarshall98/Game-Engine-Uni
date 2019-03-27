@@ -27,7 +27,7 @@ public:
 	ShadowSystem& operator=(const ShadowSystem&) = delete;
 	ShadowSystem(ShadowSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 
 	~ShadowSystem();
 };

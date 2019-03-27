@@ -40,7 +40,7 @@ void PhysicsSystem::AddEntity(Entity * const pEntity)
 	}
 }
 
-void PhysicsSystem::Action(void)
+void PhysicsSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < newEntities.size(); i++)
@@ -63,7 +63,7 @@ void PhysicsSystem::Action(void)
 
 	newEntities.clear();
 
-	physicsManager->Update(1 / 60.0);
+	physicsManager->Update(timePeriod);
 
 	for (int i = 0; i < EntityList.size(); i++)
 	{

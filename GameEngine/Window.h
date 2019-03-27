@@ -5,13 +5,14 @@ protected:
 	static int width;
 	static int height;
 	static bool fullScreen;
+	static int FPS;
 
 public:
 	Window();
 	virtual ~Window();
 
 	virtual void Load() = 0;
-	virtual void LimitFPS(float FPS) = 0;
+	virtual void LimitFPS() = 0;
 	virtual void WindowEvents() = 0;
 	virtual bool IsRunning() = 0;
 	virtual void ChangeSize(float width, float height) = 0;
@@ -40,6 +41,16 @@ public:
 	static void InitFullScreen(bool pFullscreen)
 	{
 		fullScreen = pFullscreen;
+	}
+
+	static void SetFrameRate(int pFrameRate)
+	{
+		FPS = pFrameRate;
+	}
+
+	static int GetFrameRate()
+	{
+		return FPS;
 	}
 };
 

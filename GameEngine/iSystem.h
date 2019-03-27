@@ -16,7 +16,7 @@ public:
 	iSystem& operator=(const iSystem&) = delete;
 	iSystem(iSystem&) = delete;
 
-	virtual void Action() = 0;
+	virtual void Action(float timePeriod) = 0;
 
 	virtual void RemoveEntity(Entity * pEntity);
 	virtual void AddEntity(Entity * pEntity);

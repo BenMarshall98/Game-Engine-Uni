@@ -19,6 +19,6 @@ public:
 	AudioSystem& operator=(const AudioSystem&) = delete;
 	AudioSystem(AudioSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 };
 

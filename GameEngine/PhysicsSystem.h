@@ -24,7 +24,7 @@ public:
 	PhysicsSystem& operator=(const PhysicsSystem&) = delete;
 	PhysicsSystem(PhysicsSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 	void AddEntity(Entity * pEntity) override;
 	
 	~PhysicsSystem();

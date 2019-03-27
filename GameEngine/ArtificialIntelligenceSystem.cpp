@@ -12,7 +12,7 @@ ArtificialIntelligenceSystem::ArtificialIntelligenceSystem() : iSystem(std::vect
 {
 }
 
-void ArtificialIntelligenceSystem::Action(void)
+void ArtificialIntelligenceSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
@@ -21,13 +21,13 @@ void ArtificialIntelligenceSystem::Action(void)
 
 		ComponentArtificalIntelligence * const intelligence = dynamic_cast<ComponentArtificalIntelligence *>(componentIntelligence);
 
-		Intelligence(intelligence, EntityList[i]);
+		Intelligence(intelligence, EntityList[i], timePeriod);
 	}
 }
 
-void ArtificialIntelligenceSystem::Intelligence(ComponentArtificalIntelligence * const intelligence, Entity * const pEntity)
+void ArtificialIntelligenceSystem::Intelligence(ComponentArtificalIntelligence * const intelligence, Entity * const pEntity, float timePeriod)
 {
-	intelligence->ResolveAI(pEntity);
+	intelligence->ResolveAI(pEntity, timePeriod);
 }
 
 ArtificialIntelligenceSystem::~ArtificialIntelligenceSystem()

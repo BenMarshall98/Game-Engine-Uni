@@ -59,7 +59,7 @@ glm::vec3 AIStateMachine::GetNearestPath(const glm::vec3 & position)
 	return pathFollower->GetNearestPath(position);
 }
 
-void AIStateMachine::ResolveStates(Entity * const thisEntity, Entity * const target)
+void AIStateMachine::ResolveStates(Entity * const thisEntity, Entity * const target, float timePeriod)
 {
-	ScriptingManager::Instance()->RunScriptForStateAI(startFunction, thisEntity, target, this, (1 / 60.0));
+	ScriptingManager::Instance()->RunScriptForStateAI(startFunction, thisEntity, target, this, timePeriod);
 }

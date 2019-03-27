@@ -9,7 +9,7 @@ AudioSystem::AudioSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
-void AudioSystem::Action(void)
+void AudioSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)

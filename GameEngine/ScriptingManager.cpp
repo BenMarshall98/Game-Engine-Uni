@@ -2751,11 +2751,11 @@ void ScriptingManager::RunScriptFromScene(const std::string & function)
 	}
 }
 
-void ScriptingManager::RunScriptFromAnimation(const std::string & function, Entity * const entity)
+void ScriptingManager::RunScriptFromAnimation(const std::string & function, Entity * const entity, float timePeriod)
 {
 	lua_getglobal(luaVM, function.c_str());
 	lua_pushlightuserdata(luaVM, entity);
-	lua_pushnumber(luaVM, (1.0 / 60.0));
+	lua_pushnumber(luaVM, timePeriod);
 
 	if (lua_pcall(luaVM, 2, 0, 0) != 0)
 	{

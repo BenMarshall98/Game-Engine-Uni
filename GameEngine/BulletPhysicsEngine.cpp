@@ -128,7 +128,9 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(const float mass, glm::vec3 & posit
 
 void BulletPhysicsEngine::Update(const float pDeltaTime)
 {
-	dynamicsWorld->stepSimulation(pDeltaTime, 5, pDeltaTime / 5);
+	const float resolution = (1.0 / 300.0);
+	int steps = pDeltaTime / resolution;
+	dynamicsWorld->stepSimulation(pDeltaTime, steps, resolution);
 }
 
 bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper * const obj1, const int id1, const int index1, const btCollisionObjectWrapper * const obj2, const int id2, const int index2)

@@ -26,7 +26,7 @@ ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoor
 	}
 }
 
-void ShadowSystem::Action(void)
+void ShadowSystem::Action(float timePeriod)
 {
 	RenderManager * const renderManager = RenderManager::Instance();
 	EntityManager * const entityManager = EntityManager::Instance();

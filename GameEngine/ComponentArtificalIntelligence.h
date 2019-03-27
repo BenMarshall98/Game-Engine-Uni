@@ -33,11 +33,11 @@ public:
 
 	void RenderSwap() override;
 
-	inline void ResolveAI(Entity * const thisEntity)
+	inline void ResolveAI(Entity * const thisEntity, float timePeriod)
 	{
 		if (aiStateMachine)
 		{
-			aiStateMachine->ResolveStates(thisEntity, target);
+			aiStateMachine->ResolveStates(thisEntity, target, timePeriod);
 		}
 		else
 		{

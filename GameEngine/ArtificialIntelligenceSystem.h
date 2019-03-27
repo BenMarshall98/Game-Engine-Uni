@@ -12,7 +12,7 @@
 class ArtificialIntelligenceSystem : public iSystem
 {
 private:
-	static void Intelligence(ComponentArtificalIntelligence * artificalIntelligence, Entity * pEntity);
+	static void Intelligence(ComponentArtificalIntelligence * artificalIntelligence, Entity * pEntity, float timePeriod);
 public:
 	ArtificialIntelligenceSystem();
 	~ArtificialIntelligenceSystem();
@@ -20,6 +20,6 @@ public:
 	ArtificialIntelligenceSystem& operator=(const ArtificialIntelligenceSystem&) = delete;
 	ArtificialIntelligenceSystem(ArtificialIntelligenceSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 };
 

@@ -7,7 +7,7 @@ PathFollowing::~PathFollowing()
 
 void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
-	const float disVelocity = 200 * (1.0 / 60.0);
+	const float disVelocity = 3.5;
 
 	if (currentNode == -1)
 	{

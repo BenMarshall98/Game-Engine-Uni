@@ -28,7 +28,7 @@ public:
 	RenderSystem& operator=(const RenderSystem&) = delete;
 	RenderSystem(RenderSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 	
 	~RenderSystem();
 };

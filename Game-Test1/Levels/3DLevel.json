@@ -237,7 +237,7 @@
           "CollisionResponse": true,
           "CollisionFunctions": [
             {
-              "EntityType": "BULLET",
+              "EntityType": "EBULLET",
               "Function": "PlayerDown"
             }
           ]
@@ -646,7 +646,7 @@
           "CollisionResponse": true,
           "CollisionFunctions": [
             {
-              "EntityType": "BULLET",
+              "EntityType": "PBULLET",
               "Function": "GuardDown"
             }
           ]
@@ -730,7 +730,7 @@
           "CollisionResponse": true,
           "CollisionFunctions": [
             {
-              "EntityType": "BULLET",
+              "EntityType": "PBULLET",
               "Function": "GuardDown"
             }
           ]
@@ -814,7 +814,7 @@
           "CollisionResponse": true,
           "CollisionFunctions": [
             {
-              "EntityType": "BULLET",
+              "EntityType": "PBULLET",
               "Function": "GuardDown"
             }
           ]
@@ -898,7 +898,7 @@
           "CollisionResponse": true,
           "CollisionFunctions": [
             {
-              "EntityType": "BULLET",
+              "EntityType": "PBULLET",
               "Function": "GuardDown"
             }
           ]

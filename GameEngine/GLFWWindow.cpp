@@ -52,6 +52,7 @@ void GLFWWindow::Load()
 
 	glfwMakeContextCurrent(gameWindow);
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
+	glfwSwapInterval(0);
 
 	InputManager::Instance(new GLFWInput(gameWindow));
 }
@@ -67,7 +68,7 @@ bool GLFWWindow::IsRunning()
 	return !glfwWindowShouldClose(gameWindow);
 }
 
-void GLFWWindow::LimitFPS(const float FPS)
+void GLFWWindow::LimitFPS()
 {
 	double timeLapsed = glfwGetTime();
 
@@ -85,7 +86,7 @@ void GLFWWindow::LimitFPS(const float FPS)
 		count++;
 	}
 
-	if (count == 60)
+	if (count == FPS)
 	{
 		const std::string title = "Game Engine: " + std::to_string((int)average) + "fps";
 		glfwSetWindowTitle(gameWindow, title.c_str());
@@ -93,11 +94,9 @@ void GLFWWindow::LimitFPS(const float FPS)
 		count = 0;
 	}
 
-	//cout << timeLapsed << endl;
-
 	timeLapsed = glfwGetTime();
 
-	const double timeLeft = (1 / FPS) - timeLapsed;
+	const double timeLeft = (1 / (float)FPS) - timeLapsed;
 
 	if (timeLeft > 0)
 	{

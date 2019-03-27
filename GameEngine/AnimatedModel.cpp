@@ -63,7 +63,7 @@ std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 	return boneMats;
 }
 
-std::vector<glm::mat4> AnimatedModel::Update(const std::string & animationName, float & time)
+std::vector<glm::mat4> AnimatedModel::Update(const std::string & animationName, float & time, float timePeriod)
 {
 	Animation * const animation = animations.at(0);
 
@@ -82,7 +82,7 @@ std::vector<glm::mat4> AnimatedModel::Update(const std::string & animationName, 
 		bones.at(i)->UpdateKeyframeTransform(animation, time);
 	}
 
-	time += (1.0 / 60.0);
+	time += timePeriod;
 
 	return UpdateBoneMatsVector();
 }

@@ -11,7 +11,7 @@ InputSystem::InputSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
-void InputSystem::Action(void)
+void InputSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
 	for (int i = 0; i < EntityList.size(); i++)
@@ -20,15 +20,15 @@ void InputSystem::Action(void)
 
 		std::vector<InputFunction *> * const inputs = dynamic_cast<ComponentInput *>(componentInput)->GetUpdateInputs();
 
-		Input(inputs, EntityList[i]);
+		Input(inputs, EntityList[i], timePeriod);
 	}
 }
 
-void InputSystem::Input(std::vector<InputFunction *> * const inputs, Entity * const entity)
+void InputSystem::Input(std::vector<InputFunction *> * const inputs, Entity * const entity, float timePeriod)
 {	
 	for (int i = 0; i < inputs->size(); i++)
 	{
-		inputs->at(i)->Update(entity);
+		inputs->at(i)->Update(entity, timePeriod);
 	}
 }
 

@@ -74,6 +74,6 @@ public:
 
 	std::vector<glm::mat4> UpdateBoneMatsVector();
 
-	std::vector<glm::mat4> Update(const std::string & animation, float & time);
+	std::vector<glm::mat4> Update(const std::string & animation, float & time, float timePeriod);
 
 };

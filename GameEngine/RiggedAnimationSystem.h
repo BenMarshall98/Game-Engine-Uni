@@ -10,7 +10,7 @@
 class RiggedAnimationSystem : public iSystem
 {
 private:
-	static void Animate(AnimatedModel * animatedModel, ComponentRiggedAnimation * riggedAnimation);
+	static void Animate(AnimatedModel * animatedModel, ComponentRiggedAnimation * riggedAnimation, float timePeriod);
 	
 public:
 	RiggedAnimationSystem();
@@ -19,6 +19,6 @@ public:
 	RiggedAnimationSystem& operator=(const RiggedAnimationSystem&) = delete;
 	RiggedAnimationSystem(RiggedAnimationSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 };
 

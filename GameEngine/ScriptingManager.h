@@ -117,7 +117,7 @@ public:
 
 	void RunScriptFromScene(const std::string & function);
 
-	void RunScriptFromAnimation(const std::string & function, Entity * entity);
+	void RunScriptFromAnimation(const std::string & function, Entity * entity, float timePeriod);
 
 	~ScriptingManager();
 };

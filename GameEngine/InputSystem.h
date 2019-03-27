@@ -10,7 +10,7 @@
 class InputSystem : public iSystem
 {
 private:
-	static void Input(std::vector<InputFunction *> * inputs, Entity * entity);
+	static void Input(std::vector<InputFunction *> * inputs, Entity * entity, float timePeriod);
 
 public:
 	InputSystem();
@@ -18,7 +18,7 @@ public:
 	InputSystem& operator=(const InputSystem&) = delete;
 	InputSystem(InputSystem&) = delete;
 
-	void Action(void) override;
+	void Action(float timePeriod) override;
 	
 	~InputSystem();
 };

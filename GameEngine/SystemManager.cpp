@@ -1,4 +1,5 @@
 #include "SystemManager.h"
+#include "Window.h"
 
 SystemManager * SystemManager::instance = nullptr;
 
@@ -16,7 +17,7 @@ void SystemManager::Render()
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
 	{
-		RenderSystems.at(i)->Action();
+		RenderSystems.at(i)->Action(1 / (float)Window::GetFrameRate());
 	}
 }
 
@@ -24,7 +25,7 @@ void SystemManager::Update()
 {
 	for (int i = 0; i < UpdateSystems.size(); i++)
 	{
-		UpdateSystems.at(i)->Action();
+		UpdateSystems.at(i)->Action(1 / (float)Window::GetFrameRate());
 	}
 }
 

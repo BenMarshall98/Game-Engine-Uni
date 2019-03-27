@@ -7,10 +7,13 @@
 #include "LoggingManager.h"
 #include <string>
 #include <stack>
+#include <ostream>
+#include <fstream>
 
 class SceneManager
 {
 private:
+	static std::ofstream stream;
 	static SceneManager * instance;
 	static std::string windowName;
 
@@ -74,6 +77,21 @@ public:
 	static void InitWindow(std::string pWindowName)
 	{
 		windowName = pWindowName;
+	}
+
+	static inline void InitFileStream(std::string pLogFile)
+	{
+		stream = std::ofstream(pLogFile);
+	}
+
+	static inline std::ostream& GetStream()
+	{
+		if (stream)
+		{
+			return stream;
+		}
+
+		return std::cout;
 	}
 };
 

@@ -18,7 +18,7 @@ public:
 	{
 		inputFunction = pInputFunction;
 	}
-	void Update(Entity * entity) const;
+	void Update(Entity * entity, float timePeriod) const;
 
 	~InputFunction();
 };

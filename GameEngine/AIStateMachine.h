@@ -54,6 +54,6 @@ public:
 
 	glm::vec3 GetNearestPath(const glm::vec3 & position);
 
-	void ResolveStates(Entity * thisEntity, Entity * target);
+	void ResolveStates(Entity * thisEntity, Entity * target, float timePeriod);
 };
 

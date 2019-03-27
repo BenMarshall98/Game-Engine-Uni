@@ -27,7 +27,7 @@ RenderSystem::RenderSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
-void RenderSystem::Action(void)
+void RenderSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
 	RenderManager::Instance()->SetViewport(GLFWWindow::GetWidth(), GLFWWindow::GetHeight());

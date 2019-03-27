@@ -80,7 +80,7 @@ function ShootPlayer(guardPosition, playerPosition)
 
 	AddComponentPosition(entity, position);
 	AddComponentDirection(entity, direction, 0);
-	AddComponentPhysics(entity, cuboid, 0.1, "BULLET", angularLimits, false, collisionFunctionMap);
+	AddComponentPhysics(entity, cuboid, 0.1, "EBULLET", angularLimits, false, collisionFunctionMap);
 	AddComponentModel(entity, "Bullet");
 	AddComponentNormalTexture(entity, "BoxNormal");
 	AddComponentTexture(entity, "Box");
@@ -113,7 +113,7 @@ function BulletMovement(entity, deltaTime)
 	end
 
 	local velocity = Vector3:new(xDir, yDir, zDir)
-	velocity = velocity:multiply(3000 * deltaTime)
+	velocity = velocity:multiply(50)
 
 	SetVelocity(ComponentPhysics, velocity)
 end

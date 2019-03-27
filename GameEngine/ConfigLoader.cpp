@@ -52,8 +52,16 @@ void ConfigLoader::LoadEngineConfig(std::string & fileName)
 		windowSize[i] = size[i].GetFloat();
 	}
 
+	float framerate = windowSetup["FramerateLock"].GetFloat();
+
 	std::string graphicsDriver = d["GraphicsDriver"].GetString();
 	std::string audioDriver = d["AudioDriver"].GetString();
+
+	if (d.HasMember("LogFile"))
+	{
+		std::string logFile = d["LogFile"].GetString();
+		SceneManager::InitFileStream(logFile);
+	}
 
 	PhysicsManager::SetPhysicsEngine(physicsEngine);
 	RenderManager::SetRenderEngine(graphicsDriver);
@@ -62,6 +70,7 @@ void ConfigLoader::LoadEngineConfig(std::string & fileName)
 	Window::InitFullScreen(fullscreen);
 	Window::InitHeight(windowSize.y);
 	Window::InitWidth(windowSize.x);
+	Window::SetFrameRate(framerate);
 
 	engineConfigFile = fileName;
 }

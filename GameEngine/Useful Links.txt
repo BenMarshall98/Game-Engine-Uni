@@ -19,6 +19,7 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //DONE: Turn componenttypes array into vector and do removing / adding in the isystem class
 //DONE: look at when the 'guard' goes back to its post
 //DONE: move bone mats out of the rigged animation
+//DONE: Give the option to output log to a file instead of cout
 
 //NOT POSSIBLE: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 
@@ -34,13 +35,11 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //TODO: deal with removing audio in the resource manager when refactoring the audio manager
 //TODO: config file audio engine
 
-//TODO: Give the option to output log to a file instead of cout
-
 //TODO: Adaptive Velocity for the AI pathfollowing and pathfinding
 
 //TODO: create the render manager
 //DONE: Rename mesh to something else
-//TODO: OpenGL330 TextRender
+//DONE: OpenGL330 TextRender
 //DONE: Render manager location
 //TODO: Render manager VAO
 

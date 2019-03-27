@@ -9,7 +9,7 @@ function PlayerLeft(entity, inputValue, deltaTime)
 		local ComponentPhysics = GetComponentPhysics(entity)
 		local currentRotation = GetRotation(ComponentPhysics)
 		local y = currentRotation:getX()
-		y = y + (deltaTime * inputValue * 250)
+		y = y + (inputValue * 4)
 		currentRotation:setY(y)
 		SetRotation(ComponentPhysics, currentRotation);
 	end
@@ -20,7 +20,7 @@ function PlayerRight(entity, inputValue, deltaTime)
 		local ComponentPhysics = GetComponentPhysics(entity)
 		local currentRotation = GetRotation(ComponentPhysics)
 		local y = currentRotation:getX()
-		y = y - (deltaTime * inputValue * 250)
+		y = y - (inputValue * 4)
 		currentRotation:setY(y)
 		SetRotation(ComponentPhysics, currentRotation);
 	end
@@ -37,7 +37,7 @@ function PlayerForward(entity, inputValue, deltaTime)
 		local rotationMatrix = CreateRotationMatrix(currentDirection)
 
 		changeVelocity = MultiplyMatrixVector(rotationMatrix, changeVelocity)
-		changeVelocity = changeVelocity:multiply(deltaTime * inputValue * 500)
+		changeVelocity = changeVelocity:multiply(inputValue * 8)
 		currentVelocity = currentVelocity:add(changeVelocity)
 
 		SetVelocity(ComponentPhysics, currentVelocity);
@@ -55,7 +55,7 @@ function PlayerBackward(entity, inputValue, deltaTime)
 		local rotationMatrix = CreateRotationMatrix(currentDirection)
 
 		changeVelocity = MultiplyMatrixVector(rotationMatrix, changeVelocity)
-		changeVelocity = changeVelocity:multiply(deltaTime * inputValue * 500)
+		changeVelocity = changeVelocity:multiply(inputValue * 8)
 		currentVelocity = currentVelocity:add(changeVelocity)
 
 		SetVelocity(ComponentPhysics, currentVelocity);
@@ -68,7 +68,7 @@ function PlayerJump(entity, inputValue, deltaTime)
 		if GetTouchingGround(ComponentPhysics) then
 			local currentImpulse = GetImpulse(ComponentPhysics)
 			local y = currentImpulse:getY()
-			y = y + (deltaTime * inputValue * 100)
+			y = y + (inputValue * 1.5)
 			currentImpulse:setY(y)
 			SetImpulse(ComponentPhysics, currentImpulse)
 		end
@@ -103,7 +103,7 @@ function PlayerShoot(entity, inputValue, deltaTime)
 
 			AddComponentPosition(entity, position);
 			AddComponentDirection(entity, direction, 0);
-			AddComponentPhysics(entity, cuboid, 0.1, "BULLET", angularLimits, false, collisionFunctionMap);
+			AddComponentPhysics(entity, cuboid, 0.1, "PBULLET", angularLimits, false, collisionFunctionMap);
 			AddComponentModel(entity, "Bullet");
 			AddComponentNormalTexture(entity, "BoxNormal");
 			AddComponentTexture(entity, "Box");

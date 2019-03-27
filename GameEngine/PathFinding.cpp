@@ -197,7 +197,7 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 
 	const glm::vec3 norm = normalize(found->position - currentPosition);
 
-	const float disVelocity = (200 * (1.0 / 60.0));
+	const float disVelocity = 3.5;
 	const glm::vec3 velocity = disVelocity * norm;
 
 	physicsComponent->SetUpdateVelocity(velocity);

@@ -12,7 +12,9 @@
 #include "ConfigLoader.h"
 #include "GLFWWindow.h"
 #include "RenderManager.h"
+#include <iostream>
 
+std::ofstream SceneManager::stream; 
 SceneManager * SceneManager::instance = nullptr;
 std::string SceneManager::windowName = "GLFW";
 
@@ -208,7 +210,7 @@ void SceneManager::Run()
 			update.join();
 			Swap();
 			window->WindowEvents();
-			window->LimitFPS(60);
+			window->LimitFPS();
 		}
 
 		if (window->IsRunning())
