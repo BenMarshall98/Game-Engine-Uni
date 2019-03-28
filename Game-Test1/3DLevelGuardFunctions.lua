@@ -191,4 +191,9 @@ function PlayerAnimation(entity, deltaTime)
 		timeTillLose = timeTillLose - deltaTime
 		SetValue(ComponentState, "TimeTillLose", timeTillLose)
 	end
+
+	local timeLastShoot = GetValue(ComponentState, "timeSinceShoot", "float", 0)
+	timeLastShoot = timeLastShoot - deltaTime;
+	SetValue(ComponentState, "timeSinceShoot", timeLastShoot)
 end
+

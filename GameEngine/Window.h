@@ -52,5 +52,10 @@ public:
 	{
 		return FPS;
 	}
+
+	static bool IsFullScreen()
+	{
+		return fullScreen;
+	}
 };
 

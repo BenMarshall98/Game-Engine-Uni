@@ -44,7 +44,7 @@ void GameScene::Render()
 
 void GameScene::Update()
 {
-	static int delay = 0;
+	static int delay = 10 / (60 / (float)Window::GetFrameRate());
 
 	if (delay == 0)
 	{
@@ -54,7 +54,7 @@ void GameScene::Update()
 		{
 			AudioManager::Instance()->PauseSounds(true);
 			SceneManager::Instance()->NewScene(new MenuScene("Pause.json"));
-			delay = 10;
+			delay = 10 / (60 / (float)Window::GetFrameRate());
 		}
 	}
 	else

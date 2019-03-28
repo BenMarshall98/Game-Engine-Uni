@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "SceneManager.h"
 #include "RenderManager.h"
+#include "ConfigLoader.h"
 
 #undef LoadMenu
 
@@ -38,11 +39,11 @@ void MenuScene::Load()
 
 void MenuScene::Update()
 {
-	static int delay = 10;
+	static int delay = 10 / (60 / (float)Window::GetFrameRate());
 
 	if (delay == 0)
 	{
-		delay = 10;
+		delay = 10 / (60 / (float)Window::GetFrameRate());
 		float inputValue = InputManager::Instance()->GetInputValue(downMenu);
 
 		if (inputValue > 0.1)
@@ -154,5 +155,5 @@ void MenuScene::Swap()
 
 void MenuScene::Close()
 {
-
+	ConfigLoader::UpdateLevelConfig();
 }

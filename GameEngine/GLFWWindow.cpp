@@ -54,6 +54,15 @@ void GLFWWindow::Load()
 	glfwSetFramebufferSizeCallback(gameWindow, windowResize);
 	glfwSwapInterval(0);
 
+	if (fullScreen)
+	{
+		Fullscreen();
+	}
+	else
+	{
+		ChangeSize(width, height);
+	}
+
 	InputManager::Instance(new GLFWInput(gameWindow));
 }
 
@@ -108,10 +117,19 @@ void GLFWWindow::LimitFPS()
 
 void GLFWWindow::ChangeSize(const float width, const float height)
 {
-	//TODO: Implement
+	fullScreen = false;
+	GLFWmonitor * monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode * mode = glfwGetVideoMode(monitor);
+	glfwSetWindowMonitor(gameWindow, NULL, 
+		(mode->width / 2.0) - (width / 2),
+		(mode->height / 2.0) - (height / 2),
+		width, height, 0);
 }
 
 void GLFWWindow::Fullscreen()
 {
-	//TODO: Implement
+	fullScreen = true;
+	GLFWmonitor * monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode * mode = glfwGetVideoMode(monitor);
+	glfwSetWindowMonitor(gameWindow, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
 }

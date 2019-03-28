@@ -71,6 +71,38 @@ PixelLocation TextRender::CalculateSize(const std::string & text, const glm::vec
 		};
 		return pixelLocation;
 	}
+	else if (align == "TopLeft")
+	{
+		//TODO: implement
+	}
+	else if (align == "TopMiddle")
+	{
+		//TODO: implement
+	}
+	else if (align == "TopRight")
+	{
+		//TODO: implement
+	}
+	else if (align == "MiddleLeft")
+	{
+		//TODO: implement
+	}
+	else if (align == "MiddleRight")
+	{
+		//TODO: implement
+	}
+	else if (align == "BottomLeft")
+	{
+		//TODO: implement
+	}
+	else if (align == "BottomMiddle")
+	{
+		//TODO: implement
+	}
+	else if (align == "BottomRight")
+	{
+		//TODO: implement
+	}
 
 	return PixelLocation();
 }

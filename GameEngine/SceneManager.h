@@ -27,6 +27,10 @@ private:
 	bool swapSceneBool = false;
 	bool closeSceneBool = false;
 	bool closeWindowBool = false;
+	bool setScreenSize = false;
+	bool setFullscreen = false;
+	int tempWidth;
+	int tempHeight;
 
 	int scenesToClose = 0;
 
@@ -96,12 +100,14 @@ public:
 
 	inline void ChangeSize(float width, float height)
 	{
-		window->ChangeSize(width, height);
+		setScreenSize = true;
+		tempWidth = width;
+		tempHeight = height;
 	}
 
 	inline void FullScreen()
 	{
-		window->Fullscreen();
+		setFullscreen = true;
 	}
 };
 

@@ -2,6 +2,7 @@
 #include "Text.h"
 #include "Button.h"
 #include "ScriptingManager.h"
+#include "ConfigLoader.h"
 #include <fstream>
 
 #undef LoadMenu
@@ -37,6 +38,13 @@ std::vector<MenuItem *> MenuLoader::LoadMenu(std::string & fileName, glm::vec3 &
 		const std::string script = d["Script"].GetString();
 
 		ScriptingManager::Instance()->LoadLuaFromFile(script);
+	}
+
+	if (d.HasMember("Config"))
+	{
+		std::string config = d["Config"].GetString();
+
+		ConfigLoader::LoadLevelConfig(config);
 	}
 
 	if (d.HasMember("Background-Colour"))

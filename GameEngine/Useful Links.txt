@@ -30,18 +30,19 @@ https://www.gamedev.net/articles/programming/general-and-gameplay-programming/th
 //DONE: deal with removing audio in the resource manager when refactoring the audio manager
 //DONE? look at the lifetime of the audio engine
 //DONE: config file audio engine
+//DONE: pause and unpause music when in pause menu
+
+//DONE: work on a menu system (config file?)
 
 //NOT POSSIBLE: Optimise the mesh from assimp, will likly slow down loading but should speed up rendering
 
 //TODO: work on the animation model, see if that can be fixed
 //TODO: build a animation system (for coins and the like)
 
-//TODO: work on a menu system (config file?)
+//TODO: menu positions
 //TODO: Gamepad input
 
 //TODO: build methods to control the camera using input
-
-//TODO: pause and unpause music when in pause menu
 
 //TODO: Adaptive Velocity for the AI pathfollowing and pathfinding
 //TODO: kinetic objects in bullet

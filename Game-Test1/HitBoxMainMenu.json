@@ -1,4 +1,5 @@
 {
+  "Config": "3DLevelConfig.json",
   "Script": "HitBoxMainMenu.lua",
   "Background-Colour": [ 0, 0, 0 ],
   "MenuItems": [

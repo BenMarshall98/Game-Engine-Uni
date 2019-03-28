@@ -1,12 +1,14 @@
 {
-  "PhysicsEngine": "Bullet",
-  "WindowSetup": {
-    "Window": "GLFW",
-    "Fullscreen": false,
-    "Size": [ 800, 600 ],
-    "FramerateLock": 60
-  },
-  "GraphicsDriver": "OpenGL330",
-  "AudioDriver": "irrKlang",
-  "LogFile": "log.txt"
+    "PhysicsEngine": "Bullet",
+    "WindowSetup": {
+        "Window": "GLFW",
+        "Fullscreen": false,
+        "Size": [
+            800.0,
+            600.0
+        ]
+    },
+    "GraphicsDriver": "OpenGL330",
+    "AudioDriver": "irrKlang",
+    "LogFile": "log.txt"
 }

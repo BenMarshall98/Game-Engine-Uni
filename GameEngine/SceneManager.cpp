@@ -25,6 +25,7 @@ SceneManager::SceneManager() : newScene(nullptr), window(nullptr)
 
 SceneManager::~SceneManager()
 {
+	ConfigLoader::UpdateEngineConfig();
 	while (!scenes.empty())
 	{
 		delete scenes.top();
@@ -205,6 +206,16 @@ void SceneManager::Run()
 
 		while (window->IsRunning() && windowRunning)
 		{
+			if (setScreenSize)
+			{
+				window->ChangeSize(tempWidth, tempHeight);
+				setScreenSize = false;
+			}
+			if (setFullscreen)
+			{
+				window->Fullscreen();
+				setFullscreen = false;
+			}
 			std::thread update = std::thread(&SceneManager::Update, this);
 			Render();
 			update.join();

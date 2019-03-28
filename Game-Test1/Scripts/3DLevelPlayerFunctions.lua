@@ -78,19 +78,20 @@ end
 function PlayerShoot(entity, inputValue, deltaTime)
 	if inputValue > 0.2 then
 		local ComponentState = GetComponentState(entity)
-		local timeLastShoot = GetValue(ComponentState, "timeSinceShoot", "float", "0")
+		local timeLastShoot = GetValue(ComponentState, "timeSinceShoot", "float", 0)
 		
 		if timeLastShoot <= 0 then
-			local ComponentPosition = GetComponentPosition(entity)
-			local ComponentDirection = GetComponentDirection(entity)
-			local currentPosition = GetPosition(ComponentPosition)
-			local currentDirection = GetDirection(ComponentDirection)
+			SetValue(ComponentState, "timeSinceShoot", 0.5)
+			local bulletComponentPosition = GetComponentPosition(entity)
+			local bulletComponentDirection = GetComponentDirection(entity)
+			local currentPosition = GetPosition(bulletComponentPosition)
+			local currentDirection = GetDirection(bulletComponentDirection)
 			local changePosition = Vector3:new(1, 0, 0)
 			local rotationMatrix = CreateRotationMatrix(currentDirection)
 
 			changePosition  = MultiplyMatrixVector(rotationMatrix, changePosition)
 
-			local entity = CreateEntity();
+			local bulletEntity = CreateEntity();
 			local position = currentPosition:add(changePosition);
 			local direction = Vector3:new(0, 1, 0);
 			local size = Vector3:new(0.05, 0.05, 0.05);
@@ -101,24 +102,24 @@ function PlayerShoot(entity, inputValue, deltaTime)
 			AddToCollisionFunctionMap(collisionFunctionMap, "PLAYER", "DestroyBullet")
 			AddToCollisionFunctionMap(collisionFunctionMap, "WALL", "DestroyBullet")
 
-			AddComponentPosition(entity, position);
-			AddComponentDirection(entity, direction, 0);
-			AddComponentPhysics(entity, cuboid, 0.1, "PBULLET", angularLimits, false, collisionFunctionMap);
-			AddComponentModel(entity, "Bullet");
-			AddComponentNormalTexture(entity, "BoxNormal");
-			AddComponentTexture(entity, "Box");
-			AddComponentShader(entity, "NormalShader");
-			AddComponentShadowShader(entity, "DirectionalShadow", "PointShadow");
-			AddComponentAnimation(entity, "BulletMovement");
-			AddComponentState(entity);
+			AddComponentPosition(bulletEntity, position);
+			AddComponentDirection(bulletEntity, direction, 0);
+			AddComponentPhysics(bulletEntity, cuboid, 0.1, "PBULLET", angularLimits, false, collisionFunctionMap);
+			AddComponentModel(bulletEntity, "Bullet");
+			AddComponentNormalTexture(bulletEntity, "BoxNormal");
+			AddComponentTexture(bulletEntity, "Box");
+			AddComponentShader(bulletEntity, "NormalShader");
+			AddComponentShadowShader(bulletEntity, "DirectionalShadow", "PointShadow");
+			AddComponentAnimation(bulletEntity, "BulletMovement");
+			AddComponentState(bulletEntity);
 
-			local ComponentState = GetComponentState(entity);
-			SetValue(ComponentState, "xDirection", changePosition:getX())
-			SetValue(ComponentState, "yDirection", changePosition:getY())
-			SetValue(ComponentState, "zDirection", changePosition:getZ())
-			SetValue(ComponentState, "BulletTime", 5)
+			local bulletComponentState = GetComponentState(bulletEntity);
+			SetValue(bulletComponentState, "xDirection", changePosition:getX())
+			SetValue(bulletComponentState, "yDirection", changePosition:getY())
+			SetValue(bulletComponentState, "zDirection", changePosition:getZ())
+			SetValue(bulletComponentState, "BulletTime", 5)
 
-			FinishEntity(entity);
+			FinishEntity(bulletEntity);
 		end
 	end
 end

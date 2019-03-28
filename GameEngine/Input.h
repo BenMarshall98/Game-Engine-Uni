@@ -8,6 +8,7 @@ protected:
 	static bool mouseAllowed;
 	static bool keyboardAllowed;
 	static bool gamepadAllowed;
+	static std::string controller;
 
 public:
 	Input();
@@ -21,6 +22,11 @@ public:
 	void AllowKeyboardInput(bool allowKeyboard);
 	void AllowGamePadInput(bool allowGamePad);
 
-	static void ControllerSetup(std::string controller);
+	static void ControllerSetup(std::string pController);
+
+	static inline std::string GetController()
+	{
+		return controller;
+	}
 };
 

@@ -1,4 +1,5 @@
 {
+  "Config": "PlatformerLevelConfig.json",
   "Script": "SuperWorldMainMenu.lua",
   "Background-Colour": [ 0, 0, 0 ],
   "MenuItems": [

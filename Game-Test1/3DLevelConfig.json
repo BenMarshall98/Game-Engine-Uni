@@ -1,4 +1,9 @@
 {
-  "Gravity": [ 0, -9.81, 0 ],
-  "Controller": "KeyboardOnly"
+    "Gravity": [
+        0,
+        -9.81,
+        0
+    ],
+    "Controller": "KeyboardAndMouse",
+    "FramerateLock": 30.0
 }

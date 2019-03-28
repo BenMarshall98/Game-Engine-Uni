@@ -3,6 +3,7 @@
 bool Input::mouseAllowed = true;
 bool Input::keyboardAllowed = true;
 bool Input::gamepadAllowed = true;
+std::string Input::controller = "";
 
 Input::Input()
 {
@@ -27,24 +28,26 @@ void Input::AllowGamePadInput(const bool allowGamePad)
 	gamepadAllowed = allowGamePad;
 }
 
-void Input::ControllerSetup(std::string controller)
+void Input::ControllerSetup(std::string pController)
 {
-	if (controller == "KeyboardOnly")
+	if (pController == "KeyboardOnly")
 	{
 		mouseAllowed = false;
 		keyboardAllowed = true;
 		gamepadAllowed = false;
 	}
-	else if (controller == "KeyboardAndMouse")
+	else if (pController == "KeyboardAndMouse")
 	{
 		mouseAllowed = true;
 		keyboardAllowed = true;
 		gamepadAllowed = false;
 	}
-	else if (controller == "GamepadOnly")
+	else if (pController == "GamepadOnly")
 	{
 		mouseAllowed = false;
 		keyboardAllowed = false;
 		gamepadAllowed = true;
 	}
+
+	controller = pController;
 }

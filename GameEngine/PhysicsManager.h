@@ -13,7 +13,7 @@ class PhysicsManager
 private:
 	
 	static std::string engineName;
-
+	static glm::vec3 gravity;
 	static PhysicsEngine * engine;
 
 	static PhysicsManager * instance;
@@ -49,6 +49,16 @@ public:
 	PhysicsManager(PhysicsManager&) = delete;
 
 	~PhysicsManager();
+
+	inline static glm::vec3 GetGravity()
+	{
+		return gravity;
+	}
+
+	inline static void SetGravity(glm::vec3 pGravity)
+	{
+		gravity = pGravity;
+	}
 
 	inline RigidBody * AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, const bool collisionResponse, const glm::vec3 & angularLimit)
 	{
