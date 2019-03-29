@@ -277,7 +277,7 @@
               "Function": "PlayerJump",
               "Input": [
                 "KEYBOARD_SPACE",
-                "GAMEPAD_X"
+                "GAMEPAD_A"
               ]
             }
           ]

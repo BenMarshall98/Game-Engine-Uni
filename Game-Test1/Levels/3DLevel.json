@@ -281,13 +281,14 @@
               "Function": "PlayerJump",
               "Input": [
                 "KEYBOARD_SPACE",
-                "GAMEPAD_X"
+                "GAMEPAD_A"
               ]
             },
             {
               "Function": "PlayerShoot",
               "Input": [
-                "KEYBOARD_ENTER"
+                "KEYBOARD_ENTER",
+                "GAMEPAD_RT"
               ]
             }
           ]

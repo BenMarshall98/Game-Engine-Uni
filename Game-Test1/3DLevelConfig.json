@@ -4,6 +4,6 @@
         -9.81,
         0
     ],
-    "Controller": "KeyboardAndMouse",
+    "Controller": "GamepadOnly",
     "FramerateLock": 30.0
 }

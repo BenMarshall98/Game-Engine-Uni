@@ -13,15 +13,20 @@ private:
 
 	std::vector<GameInput> upMenu = {
 		GameInput::KEYBOARD_W,
-		GameInput::KEYBOARD_UP
+		GameInput::KEYBOARD_UP,
+		GameInput::GAMEPAD_UP,
+		GameInput::GAMEPAD_L_UP
 	};
 	std::vector<GameInput> downMenu = {
 		GameInput::KEYBOARD_S,
-		GameInput::KEYBOARD_DOWN
+		GameInput::KEYBOARD_DOWN,
+		GameInput::GAMEPAD_DOWN,
+		GameInput::GAMEPAD_L_DOWN
 	};
 
 	std::vector<GameInput> selectMenu = {
-		GameInput::KEYBOARD_ENTER
+		GameInput::KEYBOARD_ENTER,
+		GameInput::GAMEPAD_A
 	};
 
 	glm::vec3 backgroundColour = glm::vec3(0);

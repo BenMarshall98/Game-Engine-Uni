@@ -85,7 +85,7 @@ public:
 
 	static inline void InitFileStream(std::string pLogFile)
 	{
-		stream = std::ofstream(pLogFile);
+		stream = std::ofstream(pLogFile, std::ios::app);
 	}
 
 	static inline std::ostream& GetStream()

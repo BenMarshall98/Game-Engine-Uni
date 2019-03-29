@@ -10,7 +10,8 @@ protected:
 	std::string fileName;
 
 	std::vector<GameInput> escapeMenu = {
-		GameInput::KEYBOARD_ESCAPE
+		GameInput::KEYBOARD_ESCAPE,
+		GameInput::GAMEPAD_START
 	};
 
 public:
