@@ -1,4 +1,5 @@
 local Vector3 = require("Scripts/Vector3")
+local Quaternion = require("Scripts/Quaternion")
 local guards = 4
 
 function GuardStart(guardEntity, playerEntity, AIStateMachine, deltaTime)
@@ -197,3 +198,19 @@ function PlayerAnimation(entity, deltaTime)
 	SetValue(ComponentState, "timeSinceShoot", timeLastShoot)
 end
 
+function DeleteHeart(entity)
+	DeleteEntity(entity)
+end
+
+function SpinHeart(entity, deltaTime)
+	local ComponentDirection = GetComponentDirection(entity)
+	local ComponentState = GetComponentState(entity)
+
+	local currentDirection = GetValue(ComponentState, "CurrentDirection", "float", 0)
+	currentDirection = currentDirection + (1 * math.pi / 180)
+	SetValue(ComponentState, "CurrentDirection", currentDirection)
+	local up = Vector3:new(0, 1, 0)
+	local direction = Quaternion:angleAxis(currentDirection, up)
+
+	SetDirection(ComponentDirection, direction)
+end

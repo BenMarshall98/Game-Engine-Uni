@@ -299,9 +299,18 @@
     <Object Include="Models\pixelcircleside.obj">
       <Filter>Models</Filter>
     </Object>
+    <Object Include="Models\wall.obj">
+      <Filter>Models</Filter>
+    </Object>
+    <Object Include="Models\heart.obj">
+      <Filter>Models</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <Image Include="\\adir.hull.ac.uk\home\538\538704\Desktop\tiletexture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="HeartNormal.jpg">
       <Filter>Textures</Filter>
     </Image>
   </ItemGroup>

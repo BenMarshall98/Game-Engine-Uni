@@ -32,6 +32,16 @@
       "Texture": "Textures/floorNormal.jpg"
     },
     {
+      "Type": "Texture",
+      "Name": "Heart",
+      "Texture": "Textures/heart.jpg"
+    },
+    {
+      "Type": "Texture",
+      "Name": "HeartNormal",
+      "Texture": "Textures/HeartNormal.jpg"
+    },
+    {
       "Type": "Model",
       "Name": "Cube",
       "Model": "Models/playertest5.dae"
@@ -45,6 +55,11 @@
       "Type": "Model",
       "Name": "Wall",
       "Model": "Models/wall.obj"
+    },
+    {
+      "Type": "Model",
+      "Name": "Heart",
+      "Model": "Models/heart.obj"
     },
     {
       "Type": "Model",
@@ -937,6 +952,65 @@
             "Function": "GuardStart"
           },
           "Target": "Player"
+        }
+      ]
+    },
+    {
+      "Name": "Heart",
+      "Components": [
+        {
+          "Component": "Model",
+          "Model": "Heart"
+        },
+        {
+          "Component": "Shader",
+          "Shader": "NormalShader"
+        },
+        {
+          "Component": "ShadowShader",
+          "Direction": "DirectionalShadow",
+          "Point": "PointShadow"
+        },
+        {
+          "Component": "Position",
+          "Position": [ -14.5, 0.5, 14.5 ]
+        },
+        {
+          "Component": "Direction",
+          "Direction": [ 0, 1, 0 ],
+          "Angle": 0
+        },
+        {
+          "Component": "Texture",
+          "Texture": "Heart"
+        },
+        {
+          "Component": "NormalTexture",
+          "Texture": "HeartNormal"
+        },
+        {
+          "Component": "State"
+        },
+        {
+          "Component": "Physics",
+          "Shape": {
+            "Type": "Sphere",
+            "Radius": 0.5
+          },
+          "Mass": 0,
+          "Type": "COLLECTABLE",
+          "AngularLimit": [ 0.0, 0.0, 0.0 ],
+          "CollisionResponse": false,
+          "CollisionFunctions": [
+            {
+              "EntityType": "PLAYER",
+              "Function": "DeleteHeart"
+            }
+          ]
+        },
+        {
+          "Component": "Animation",
+          "Function": "SpinHeart"
         }
       ]
     }
