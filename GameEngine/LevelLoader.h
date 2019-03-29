@@ -25,7 +25,7 @@ private:
 	static void LoadPerspectiveJSON(const rapidjson::Value& Perspective);
 	static void LoadCameraJSON(const rapidjson::Value& Camera);
 	static void LoadPlatformerMap(const std::string & file, const glm::vec2 & topLeftCoord);
-	static void Load3DMap(const std::string & file, const glm::vec2 & topLeftCoord);
+	static void Load3DMap(const std::string & file, const glm::vec3 & topLeftCoord);
 	static void LoadSystems(const rapidjson::Value& Systems);
 	static std::vector<iSystem *> CreateSystems(const rapidjson::Value& Systems);
 	static void AddComponentsToEntityJSON(Entity * entity, const rapidjson::Value& components);

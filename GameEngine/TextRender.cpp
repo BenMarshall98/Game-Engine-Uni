@@ -73,35 +73,107 @@ PixelLocation TextRender::CalculateSize(const std::string & text, const glm::vec
 	}
 	else if (align == "TopLeft")
 	{
-		//TODO: implement
+		const float xLoc = locX;
+		const float yLoc = locY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "TopMiddle")
 	{
-		//TODO: implement
+		const float xLoc = locX - (sizeX / 2);
+		const float yLoc = locY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "TopRight")
 	{
-		//TODO: implement
+		const float xLoc = locX - sizeX;
+		const float yLoc = locY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "MiddleLeft")
 	{
-		//TODO: implement
+		const float xLoc = locX;
+		const float yLoc = locY - (sizeY / 2) + offsetY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "MiddleRight")
 	{
-		//TODO: implement
+		const float xLoc = locX - sizeX;
+		const float yLoc = locY - (sizeY / 2) + offsetY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "BottomLeft")
 	{
-		//TODO: implement
+		const float xLoc = locX;
+		const float yLoc = locY - sizeY + offsetY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "BottomMiddle")
 	{
-		//TODO: implement
+		const float xLoc = locX - (sizeX / 2);
+		const float yLoc = locY - sizeY + offsetY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 	else if (align == "BottomRight")
 	{
-		//TODO: implement
+		const float xLoc = locX - sizeX;
+		const float yLoc = locY - sizeY + offsetY;
+		const PixelLocation pixelLocation = {
+			glm::vec2(
+				xLoc,
+				yLoc
+			),
+			scale
+		};
+		return pixelLocation;
 	}
 
 	return PixelLocation();

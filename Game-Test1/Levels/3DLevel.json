@@ -43,6 +43,11 @@
     },
     {
       "Type": "Model",
+      "Name": "Wall",
+      "Model": "Models/wall.obj"
+    },
+    {
+      "Type": "Model",
       "Name": "FloorCorner",
       "Model": "Models/pixelcirclecorner.obj"
     },
@@ -147,7 +152,7 @@
       "Components": [
         {
           "Component": "Model",
-          "Model": "AICube"
+          "Model": "Wall"
         },
         {
           "Component": "Shader",
@@ -162,7 +167,7 @@
           "Component": "Physics",
           "Shape": {
             "Type": "Cuboid",
-            "Size": [ 0.5, 0.5, 0.5 ]
+            "Size": [ 0.5, 1.0, 0.5 ]
           },
           "Mass": 0,
           "Type": "WALL",
@@ -939,7 +944,7 @@
   "Map": {
     "Type": "3DLevel",
     "File": "3DLevelFull.txt",
-    "TopLeftCoord": [ -24.5, 24.5 ],
+    "TopLeftCoord": [ -24.5, 1, 24.5 ],
     "View": {
       "Perspective": {
         "Type": "Perspective",

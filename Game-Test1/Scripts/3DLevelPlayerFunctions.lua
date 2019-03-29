@@ -68,7 +68,7 @@ function PlayerJump(entity, inputValue, deltaTime)
 		if GetTouchingGround(ComponentPhysics) then
 			local currentImpulse = GetImpulse(ComponentPhysics)
 			local y = currentImpulse:getY()
-			y = y + (inputValue * 1.5)
+			y = y + (inputValue * 2)
 			currentImpulse:setY(y)
 			SetImpulse(ComponentPhysics, currentImpulse)
 		end

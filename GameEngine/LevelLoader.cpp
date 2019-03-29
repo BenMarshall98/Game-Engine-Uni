@@ -312,21 +312,31 @@ void LevelLoader::LoadMapJSON(const rapidjson::Value& Map)
 	const std::string type = Map["Type"].GetString();
 
 	const std::string file = Map["File"].GetString();
-	glm::vec2 topLeftCoord = glm::vec2(0);
-
-	const rapidjson::Value& position = Map["TopLeftCoord"];
-
-	for (rapidjson::SizeType i = 0; i < position.Size(); i++)
-	{
-		topLeftCoord[i] = position[i].GetFloat();
-	}
+	
 	
 	if (type == "Platformer")
 	{
+		glm::vec2 topLeftCoord = glm::vec2(0);
+
+		const rapidjson::Value& position = Map["TopLeftCoord"];
+
+		for (rapidjson::SizeType i = 0; i < position.Size(); i++)
+		{
+			topLeftCoord[i] = position[i].GetFloat();
+		}
 		LoadPlatformerMap(file, topLeftCoord);
 	}
 	else if (type == "3DLevel")
 	{
+		glm::vec3 topLeftCoord = glm::vec3(0);
+
+		const rapidjson::Value& position = Map["TopLeftCoord"];
+
+		for (rapidjson::SizeType i = 0; i < position.Size(); i++)
+		{
+			topLeftCoord[i] = position[i].GetFloat();
+		}
+
 		Load3DMap(file, topLeftCoord);
 	}
 
@@ -438,10 +448,10 @@ void LevelLoader::LoadPlatformerMap(const std::string & file, const glm::vec2 & 
 	}
 }
 
-void LevelLoader::Load3DMap(const std::string & file, const glm::vec2 & topLeftCoord)
+void LevelLoader::Load3DMap(const std::string & file, const glm::vec3 & topLeftCoord)
 {
 	float x = topLeftCoord.x;
-	float y = topLeftCoord.y;
+	float y = topLeftCoord.z;
 
 	EntityManager * const entityManager = EntityManager::Instance();
 
@@ -465,7 +475,7 @@ void LevelLoader::Load3DMap(const std::string & file, const glm::vec2 & topLeftC
 				Entity * const newEntity = entityManager->CreateEntity();
 				AddComponentsToEntityJSON(newEntity, it->second);
 
-				glm::vec3 position = position = glm::vec3(x, 0.5, y);
+				glm::vec3 position = position = glm::vec3(x, topLeftCoord.y, y);
 
 				entityManager->AddComponentToEntity(newEntity, new ComponentPosition(position));
 			}
