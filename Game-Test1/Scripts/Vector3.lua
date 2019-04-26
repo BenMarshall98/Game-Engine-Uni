@@ -74,9 +74,9 @@ function Vector3:normalise()
 end
 
 function Vector3:dotProduct(pVector)
-	local x = self.x + pVector:getX()
-	local y = self.y + pVector:getY()
-	local z = self.z + pVector:getZ()
+	local x = self.x * pVector:getX()
+	local y = self.y * pVector:getY()
+	local z = self.z * pVector:getZ()
 	return x + y + z
 end
 

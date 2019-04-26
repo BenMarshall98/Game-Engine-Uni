@@ -65,7 +65,16 @@ std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 
 std::vector<glm::mat4> AnimatedModel::Update(const std::string & animationName, float & time, float timePeriod)
 {
-	Animation * const animation = animations.at(0);
+	Animation * animation = animations.at(0);
+
+	for (int i = 0; i < animations.size(); i++)
+	{
+		if (animations.at(i)->GetName() == animationName)
+		{
+			animation = animations.at(i);
+			break;
+		}
+	}
 
 	if (time < animation->GetStartTime())
 	{

@@ -12,12 +12,17 @@ private:
 	std::string mEntityName;
 	int mEntityID;
 
-	std::vector<iComponent *> components;
+	iComponent * components[(int)ComponentType::MAX_SIZE];
 
 public:
-	explicit Entity(const std::string & entityName) : mEntityName(entityName), mEntityID(nextID), components((int)ComponentType::MAX_SIZE, nullptr)
+	explicit Entity(const std::string & entityName) : mEntityName(entityName), mEntityID(nextID)
 	{
 		nextID++;
+
+		for (int i = 0; i < (int)ComponentType::MAX_SIZE; i++)
+		{
+			components[i] = nullptr;
+		}
 	}
 
 	Entity& operator= (const Entity&) = delete;
@@ -36,7 +41,6 @@ public:
 	}
 
 	void AddComponent(iComponent * component);
-	void RemoveComponent(iComponent * component);
 	void Swap();
 	void RemoveAllComponents();
 

@@ -5,5 +5,5 @@
         0
     ],
     "Controller": "KeyboardOnly",
-    "FramerateLock": 30.0
+    "FramerateLock": 60.0
 }

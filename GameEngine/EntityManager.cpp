@@ -51,10 +51,6 @@ void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component
 	entity->AddComponent(component);
 }
 
-void EntityManager::RemoveComponentFromEntity(Entity * const entity, iComponent * const component)
-{
-	entity->RemoveComponent(component);
-}
 
 iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const ComponentType componentName)
 {
