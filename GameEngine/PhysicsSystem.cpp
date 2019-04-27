@@ -16,6 +16,7 @@ PhysicsSystem::PhysicsSystem() : iSystem(std::vector<ComponentType>{
 	newEntities = EntityList;
 }
 
+//Add entity to the system and physics manager
 void PhysicsSystem::AddEntity(Entity * const pEntity)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -40,6 +41,7 @@ void PhysicsSystem::AddEntity(Entity * const pEntity)
 	}
 }
 
+//Applies physics to the entity
 void PhysicsSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -75,6 +77,7 @@ void PhysicsSystem::Action(float timePeriod)
 	}
 }
 
+//Applies physics to the entity
 void PhysicsSystem::Motion(ComponentPosition * const position, ComponentDirection * const direction, ComponentPhysics * const physics)
 {
 	RigidBody * const rigidBody = physics->GetUpdateRigidBody();

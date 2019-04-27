@@ -12,6 +12,7 @@ ArtificialIntelligenceSystem::ArtificialIntelligenceSystem() : iSystem(std::vect
 {
 }
 
+//Gives AI to the entity
 void ArtificialIntelligenceSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -25,6 +26,7 @@ void ArtificialIntelligenceSystem::Action(float timePeriod)
 	}
 }
 
+//Gives AI to the entity
 void ArtificialIntelligenceSystem::Intelligence(ComponentArtificalIntelligence * const intelligence, Entity * const pEntity, float timePeriod)
 {
 	intelligence->ResolveAI(pEntity, timePeriod);

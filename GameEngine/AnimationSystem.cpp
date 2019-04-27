@@ -8,6 +8,7 @@ AnimationSystem::AnimationSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
+//Animates the entity
 void AnimationSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -21,6 +22,7 @@ void AnimationSystem::Action(float timePeriod)
 	}
 }
 
+//Animated the entity
 void AnimationSystem::Animation(const std::string & function, Entity * const entity, float timePeriod)
 {
 	ScriptingManager::Instance()->RunScriptFromAnimation(function, entity, timePeriod);

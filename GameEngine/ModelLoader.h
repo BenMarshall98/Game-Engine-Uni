@@ -36,6 +36,7 @@ private:
 	static void RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * node, Node * parentNode);
 	static void AnimNodeProcess(AnimatedModel * animationModel, const aiScene * scene);
 
+	//Finds bone by name
 	static inline Bone * FindBone(std::vector<Bone *> & bones, const std::string & name)
 	{
 		for (int i = 0; i < bones.size(); i++)
@@ -49,6 +50,7 @@ private:
 		return nullptr;
 	}
 
+	//Finds node by name
 	static inline Node* FindNode(std::vector<Node*> & nodes, const std::string & name)
 	{
 		for (int i = 0; i < nodes.size(); i++)
@@ -62,6 +64,7 @@ private:
 		return nullptr;
 	}
 
+	//Finds AnimNode by name
 	static inline AnimNode* FindAiNodeAnim(std::vector<AnimNode*> & animNodes, const std::string & name)
 	{
 		for (int i = 0; i < animNodes.size(); i++)
@@ -75,6 +78,7 @@ private:
 		return nullptr;
 	}
 
+	//Finds BoneID by name
 	static inline int FindBoneIDByName(std::vector<Bone *> & bones, const std::string & name)
 	{
 		for (int i = 0; i < bones.size(); i++)

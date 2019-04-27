@@ -28,21 +28,25 @@ public:
 	Bone& operator=(const Bone&) = delete;
 	Bone(Bone&) = delete;
 
+	//Sets the parent bone
 	inline void SetParentBone(Bone * const pParentBone)
 	{
 		parentBone = pParentBone;
 	}
 
+	//Gets the bone name
 	inline std::string & GetName()
 	{
 		return name;
 	}
 
+	//Gets the offset matrix
 	inline glm::mat4 & GetOffsetMatrix()
 	{
 		return offsetMatrix;
 	}
 
+	//Gets the related node
 	inline Node * GetNode()
 	{
 		return node;

@@ -27,6 +27,7 @@ RenderSystem::RenderSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
+//Renders the entity
 void RenderSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -69,6 +70,7 @@ void RenderSystem::Action(float timePeriod)
 	RenderManager::Instance()->ClearShader();
 }
 
+//Renders the entity
 void RenderSystem::Render(Shader * const shader, iModel * const model, const glm::vec3 & position, const glm::quat & direction, Texture * const texture, Texture * const normal, const glm::mat4 & perspectiveMatrix, const glm::mat4 & viewMatrix, const glm::vec3 & viewPos, ComponentRiggedAnimation * const  riggedAnimation, bool & updateFirst)
 {
 	static Shader * lastShader = nullptr;

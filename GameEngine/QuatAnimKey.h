@@ -12,11 +12,13 @@ public:
 	QuatAnimKey(const float pTime, glm::quat & pValue) : time(pTime), value(pValue) {}
 	~QuatAnimKey();
 
+	//Gets the key frame time
 	inline float GetTime()
 	{
 		return time;
 	}
 
+	//Gets the key fram value
 	inline glm::quat & GetValue()
 	{
 		return value;

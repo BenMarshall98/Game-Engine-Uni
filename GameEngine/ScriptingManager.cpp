@@ -37,6 +37,7 @@ extern "C"
 	#include "Lua/lualib.h"
 }
 
+//Sets up the LuaVM
 ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 {
 	if (luaVM == nullptr)
@@ -139,6 +140,7 @@ ScriptingManager::ScriptingManager() : luaVM(luaL_newstate())
 	LoadLuaFromFile(file);
 }
 
+//Loads in Lua file
 void ScriptingManager::LoadLuaFromFile(const std::string & file) const
 {
 	int iStatus = luaL_loadfile(luaVM, file.c_str());
@@ -162,6 +164,7 @@ ScriptingManager::~ScriptingManager()
 	lua_close(luaVM);
 }
 
+//Gets the component direction
 int ScriptingManager::lua_GetComponentDirection(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -187,6 +190,7 @@ int ScriptingManager::lua_GetComponentDirection(lua_State * const luaState)
 	return 1;
 }
 
+//Gets the component position
 int ScriptingManager::lua_GetComponentPosition(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -212,6 +216,7 @@ int ScriptingManager::lua_GetComponentPosition(lua_State * const luaState)
 	return 1;
 }
 
+//Gets the physics component of entity
 int ScriptingManager::lua_GetComponentPhysics(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -237,6 +242,7 @@ int ScriptingManager::lua_GetComponentPhysics(lua_State * const luaState)
 	return 1;
 }
 
+//Gets the audio component of entity
 int ScriptingManager::lua_GetComponentAudio(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -262,6 +268,7 @@ int ScriptingManager::lua_GetComponentAudio(lua_State * const luaState)
 	return 1;
 }
 
+//Gets the state component of entity
 int ScriptingManager::lua_GetComponentState(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -287,6 +294,7 @@ int ScriptingManager::lua_GetComponentState(lua_State * const luaState)
 	return 1;
 }
 
+//Gets the position of the position component
 int ScriptingManager::lua_GetPosition(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -327,6 +335,7 @@ int ScriptingManager::lua_GetPosition(lua_State * const luaState)
 	return 1;
 }
 
+//Sets the position of the position commponent
 int ScriptingManager::lua_SetPosition(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -361,6 +370,7 @@ int ScriptingManager::lua_SetPosition(lua_State * const luaState)
 	return 0;
 }
 
+//Gets the velocity of the physics component
 int ScriptingManager::lua_GetVelocity(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -402,6 +412,7 @@ int ScriptingManager::lua_GetVelocity(lua_State * const luaState)
 	return 1;
 }
 
+//Sets the velocity of the physics component
 int ScriptingManager::lua_SetVelocity(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -436,6 +447,7 @@ int ScriptingManager::lua_SetVelocity(lua_State * const luaState)
 	return 0;
 }
 
+//Gets the impluse of the physics component
 int ScriptingManager::lua_GetImpulse(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -477,6 +489,7 @@ int ScriptingManager::lua_GetImpulse(lua_State * const luaState)
 	return 1;
 }
 
+//Sets the impulse of the physics component
 int ScriptingManager::lua_SetImpulse(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -511,6 +524,7 @@ int ScriptingManager::lua_SetImpulse(lua_State * const luaState)
 	return 0;
 }
 
+//Gets the rotation of the physics component
 int ScriptingManager::lua_GetRotation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -552,6 +566,7 @@ int ScriptingManager::lua_GetRotation(lua_State * const luaState)
 	return 1;
 }
 
+//Sets the rotation of the physics component
 int ScriptingManager::lua_SetRotation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -586,6 +601,7 @@ int ScriptingManager::lua_SetRotation(lua_State * const luaState)
 	return 0;
 }
 
+//Gets the direction of the direction component
 int ScriptingManager::lua_GetDirection(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -628,6 +644,7 @@ int ScriptingManager::lua_GetDirection(lua_State * const luaState)
 	return 1;
 }
 
+//Sets the direction of the direction component
 int ScriptingManager::lua_SetDirection(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -663,6 +680,7 @@ int ScriptingManager::lua_SetDirection(lua_State * const luaState)
 	return 0;
 }
 
+//Gets touching ground state from physics component
 int ScriptingManager::lua_GetTouchingGround(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -688,6 +706,7 @@ int ScriptingManager::lua_GetTouchingGround(lua_State * const luaState)
 	return 1;
 }
 
+//Creates translation matrix
 int ScriptingManager::lua_CreateTranslationMatrix(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -736,6 +755,7 @@ int ScriptingManager::lua_CreateTranslationMatrix(lua_State * const luaState)
 	return 1;
 }
 
+//Creates scale matrix
 int ScriptingManager::lua_CreateScaleMatrix(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -784,6 +804,7 @@ int ScriptingManager::lua_CreateScaleMatrix(lua_State * const luaState)
 	return 1;
 }
 
+//Creates rotation matrix
 int ScriptingManager::lua_CreateRotationMatrix(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -834,6 +855,7 @@ int ScriptingManager::lua_CreateRotationMatrix(lua_State * const luaState)
 	return 1;
 }
 
+//Multiply matrices
 int ScriptingManager::lua_MultiplyMatrices(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -948,6 +970,7 @@ int ScriptingManager::lua_MultiplyMatrices(lua_State * const luaState)
 	return 1;
 }
 
+//Multiply matrix and vector
 int ScriptingManager::lua_MultiplyMatrixVector(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1031,6 +1054,7 @@ int ScriptingManager::lua_MultiplyMatrixVector(lua_State * const luaState)
 	return 1;
 }
 
+//Change audio playback state
 int ScriptingManager::lua_ChangePlayback(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1071,6 +1095,7 @@ int ScriptingManager::lua_ChangePlayback(lua_State * const luaState)
 	return 0;
 }
 
+//Play audio at camera location
 int ScriptingManager::lua_PlayAudio(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1088,6 +1113,7 @@ int ScriptingManager::lua_PlayAudio(lua_State * const luaState)
 	return 0;
 }
 
+//Play audio at location
 int ScriptingManager::lua_PlayAudioAtLocation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1117,6 +1143,7 @@ int ScriptingManager::lua_PlayAudioAtLocation(lua_State * const luaState)
 	return 0;
 }
 
+//Play audio at entity location
 int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1142,6 +1169,7 @@ int ScriptingManager::lua_PlayAudioAtEntityLocation(lua_State * const luaState)
 	return 0;
 }
 
+//Delete entity
 int ScriptingManager::lua_DeleteEntity(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1165,6 +1193,7 @@ int ScriptingManager::lua_DeleteEntity(lua_State * const luaState)
 	return 0;
 }
 
+//Gets value from state machine
 int ScriptingManager::lua_GetAIValue(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1225,6 +1254,7 @@ int ScriptingManager::lua_GetAIValue(lua_State * const luaState)
 	return 1;
 }
 
+//Sets value in state machine
 int ScriptingManager::lua_SetAIValue(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1276,6 +1306,7 @@ int ScriptingManager::lua_SetAIValue(lua_State * const luaState)
 	return 0;
 }
 
+//Gets value from state component
 int ScriptingManager::lua_GetValue(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1336,6 +1367,7 @@ int ScriptingManager::lua_GetValue(lua_State * const luaState)
 	return 1;
 }
 
+//Sets value in state component
 int ScriptingManager::lua_SetValue(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1387,6 +1419,7 @@ int ScriptingManager::lua_SetValue(lua_State * const luaState)
 	return 0;
 }
 
+//Checks too see if ray can be drawn between two points
 int ScriptingManager::lua_CanSeePlayer(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1428,6 +1461,7 @@ int ScriptingManager::lua_CanSeePlayer(lua_State * const luaState)
 	return 1;
 }
 
+//Move entity off path follower path
 int ScriptingManager::lua_MoveOffPath(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1451,6 +1485,7 @@ int ScriptingManager::lua_MoveOffPath(lua_State * const luaState)
 	return 0;
 }
 
+//Checks if entity is on path
 int ScriptingManager::lua_OnPath(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1488,6 +1523,7 @@ int ScriptingManager::lua_OnPath(lua_State * const luaState)
 	return 1;
 }
 
+//Moves entity with pathfinding to target or location
 int ScriptingManager::lua_FindAIPath(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1569,6 +1605,7 @@ int ScriptingManager::lua_FindAIPath(lua_State * const luaState)
 	return 0;
 }
 
+//Moves Entity with path follower
 int ScriptingManager::lua_FindPath(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1628,6 +1665,7 @@ int ScriptingManager::lua_FindPath(lua_State * const luaState)
 	return 0;
 }
 
+//Gets nearest path
 int ScriptingManager::lua_GetNearestPath(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1682,6 +1720,7 @@ int ScriptingManager::lua_GetNearestPath(lua_State * const luaState)
 	return 1;
 }
 
+//Creates new game scene
 int ScriptingManager::lua_NewGameScene(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1699,6 +1738,7 @@ int ScriptingManager::lua_NewGameScene(lua_State * const luaState)
 	return 0;
 }
 
+//Creates new menu scene
 int ScriptingManager::lua_NewMenuScene(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1716,6 +1756,7 @@ int ScriptingManager::lua_NewMenuScene(lua_State * const luaState)
 	return 0;
 }
 
+//Swaps to menu scene
 int ScriptingManager::lua_SwapToMenuScene(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1733,6 +1774,7 @@ int ScriptingManager::lua_SwapToMenuScene(lua_State * const luaState)
 	return 0;
 }
 
+//Swaps to game scene
 int ScriptingManager::lua_SwapToGameScene(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1750,6 +1792,7 @@ int ScriptingManager::lua_SwapToGameScene(lua_State * const luaState)
 	return 0;
 }
 
+//Closes N number of scene
 int ScriptingManager::lua_CloseScene(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1772,6 +1815,7 @@ int ScriptingManager::lua_CloseScene(lua_State * const luaState)
 	return 0;
 }
 
+//Closes window
 int ScriptingManager::lua_CloseWindow(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1787,6 +1831,7 @@ int ScriptingManager::lua_CloseWindow(lua_State * const luaState)
 	return 0;
 }
 
+//Creates entity
 int ScriptingManager::lua_CreateEntity(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1811,6 +1856,7 @@ int ScriptingManager::lua_CreateEntity(lua_State * const luaState)
 	return 1;
 }
 
+//Get entity with name
 int ScriptingManager::lua_GetEntity(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1836,6 +1882,7 @@ int ScriptingManager::lua_GetEntity(lua_State * const luaState)
 	return 1;
 }
 
+//Add component animation to entity
 int ScriptingManager::lua_AddComponentAnimation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1861,6 +1908,7 @@ int ScriptingManager::lua_AddComponentAnimation(lua_State * const luaState)
 	return 0;
 }
 
+//Creates AI State machine
 int ScriptingManager::lua_CreateAIStateMachine(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1880,6 +1928,7 @@ int ScriptingManager::lua_CreateAIStateMachine(lua_State * const luaState)
 	return 1;
 }
 
+//Creates pathfinder
 int ScriptingManager::lua_CreatePathFinder(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1905,6 +1954,7 @@ int ScriptingManager::lua_CreatePathFinder(lua_State * const luaState)
 	return 1;
 }
 
+//Creates list of pathnodes
 int ScriptingManager::lua_CreatePathVector(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1922,6 +1972,7 @@ int ScriptingManager::lua_CreatePathVector(lua_State * const luaState)
 	return 1;
 }
 
+//Adds to list of pathnodes
 int ScriptingManager::lua_AddToPathVector(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1957,6 +2008,7 @@ int ScriptingManager::lua_AddToPathVector(lua_State * const luaState)
 	return 0;
 }
 
+//Creates pathfollower
 int ScriptingManager::lua_CreatePathFollower(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -1976,6 +2028,7 @@ int ScriptingManager::lua_CreatePathFollower(lua_State * const luaState)
 	return 1;
 }
 
+//Adds AI component to entity
 int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2040,6 +2093,7 @@ int ScriptingManager::lua_AddComponentArtificalIntelligence(lua_State * const lu
 	return 0;
 }
 
+//Adds audio component to entity
 int ScriptingManager::lua_AddComponentAudio(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2086,6 +2140,7 @@ int ScriptingManager::lua_AddComponentAudio(lua_State * const luaState)
 	return 0;
 }
 
+//Adds direction component to entity
 int ScriptingManager::lua_AddComponentDirection(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2122,6 +2177,7 @@ int ScriptingManager::lua_AddComponentDirection(lua_State * const luaState)
 	return 0;
 }
 
+//Creates input function
 int ScriptingManager::lua_CreateInputFunction(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2141,6 +2197,7 @@ int ScriptingManager::lua_CreateInputFunction(lua_State * const luaState)
 	return 1;
 }
 
+//Adds input to input function
 int ScriptingManager::lua_AddInputToInputFunction(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2168,6 +2225,7 @@ int ScriptingManager::lua_AddInputToInputFunction(lua_State * const luaState)
 	return 0;
 }
 
+//Creates list of input functions
 int ScriptingManager::lua_CreateInputVector(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2185,6 +2243,7 @@ int ScriptingManager::lua_CreateInputVector(lua_State * const luaState)
 	return 1;
 }
 
+//Adds to list of input functions
 int ScriptingManager::lua_AddToInputVector(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2216,6 +2275,7 @@ int ScriptingManager::lua_AddToInputVector(lua_State * const luaState)
 	return 0;
 }
 
+//Adds input component to entity
 int ScriptingManager::lua_AddComponentInput(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2247,6 +2307,7 @@ int ScriptingManager::lua_AddComponentInput(lua_State * const luaState)
 	return 0;
 }
 
+//Adds model component to entity
 int ScriptingManager::lua_AddComponentModel(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2272,6 +2333,7 @@ int ScriptingManager::lua_AddComponentModel(lua_State * const luaState)
 	return 0;
 }
 
+//Adds normal texture component to entity
 int ScriptingManager::lua_AddComponentNormalTexture(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2297,6 +2359,7 @@ int ScriptingManager::lua_AddComponentNormalTexture(lua_State * const luaState)
 	return 0;
 }
 
+//Creates sphere collision shape
 int ScriptingManager::lua_CreateCollisionSphere(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2316,6 +2379,7 @@ int ScriptingManager::lua_CreateCollisionSphere(lua_State * const luaState)
 	return 1;
 }
 
+//Creates cuboid collision shape
 int ScriptingManager::lua_CreateCollisionCuboid(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2345,6 +2409,7 @@ int ScriptingManager::lua_CreateCollisionCuboid(lua_State * const luaState)
 	return 1;
 }
 
+//Creates list of collision functions
 int ScriptingManager::lua_CreateCollisionFunctionMap(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2362,6 +2427,7 @@ int ScriptingManager::lua_CreateCollisionFunctionMap(lua_State * const luaState)
 	return 1;
 }
 
+//Adds to list of collision functions
 int ScriptingManager::lua_AddToCollisionFunctionMap(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2390,6 +2456,7 @@ int ScriptingManager::lua_AddToCollisionFunctionMap(lua_State * const luaState)
 	return 0;
 }
 
+//Adds physics component to entity
 int ScriptingManager::lua_AddComponentPhysics(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2463,6 +2530,7 @@ int ScriptingManager::lua_AddComponentPhysics(lua_State * const luaState)
 	return 0;
 }
 
+//Adds position component to entity
 int ScriptingManager::lua_AddComponentPosition(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2496,6 +2564,7 @@ int ScriptingManager::lua_AddComponentPosition(lua_State * const luaState)
 	return 0;
 }
 
+//Adds rigged animation component to entity
 int ScriptingManager::lua_AddComponentRiggedAnimation(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2542,6 +2611,7 @@ int ScriptingManager::lua_AddComponentRiggedAnimation(lua_State * const luaState
 	return 0;
 }
 
+//Adds shader component to entity
 int ScriptingManager::lua_AddComponentShader(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2567,6 +2637,7 @@ int ScriptingManager::lua_AddComponentShader(lua_State * const luaState)
 	return 0;
 }
 
+//Adds shadow shader component to entity
 int ScriptingManager::lua_AddComponentShadowShader(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2593,6 +2664,7 @@ int ScriptingManager::lua_AddComponentShadowShader(lua_State * const luaState)
 	return 0;
 }
 
+//Adds state component to entity
 int ScriptingManager::lua_AddComponentState(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2616,6 +2688,7 @@ int ScriptingManager::lua_AddComponentState(lua_State * const luaState)
 	return 0;
 }
 
+//Adds texture component to entity
 int ScriptingManager::lua_AddComponentTexture(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2641,6 +2714,7 @@ int ScriptingManager::lua_AddComponentTexture(lua_State * const luaState)
 	return 0;
 }
 
+//Set entity to be updated / finished editing
 int ScriptingManager::lua_FinishEntity(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2664,6 +2738,7 @@ int ScriptingManager::lua_FinishEntity(lua_State * const luaState)
 	return 0;
 }
 
+//Pauses all sound
 int ScriptingManager::lua_PauseSound(lua_State * luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2681,6 +2756,7 @@ int ScriptingManager::lua_PauseSound(lua_State * luaState)
 	return 0;
 }
 
+//Displays text
 int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2719,6 +2795,7 @@ int ScriptingManager::lua_DisplayText(lua_State * const luaState)
 	return 0;
 }
 
+//Sets display size
 int ScriptingManager::lua_DisplaySize(lua_State * luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2737,6 +2814,7 @@ int ScriptingManager::lua_DisplaySize(lua_State * luaState)
 	return 0;
 }
 
+//Sets to fullscreen
 int ScriptingManager::lua_FullScreen(lua_State * luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2752,6 +2830,7 @@ int ScriptingManager::lua_FullScreen(lua_State * luaState)
 	return 0;
 }
 
+//Sets framerate
 int ScriptingManager::lua_SetFramerate(lua_State * luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2769,6 +2848,7 @@ int ScriptingManager::lua_SetFramerate(lua_State * luaState)
 	return 0;
 }
 
+//Set controller
 int ScriptingManager::lua_SetController(lua_State * luaState)
 {
 	const int numberOfArgs = lua_gettop(luaState);
@@ -2786,6 +2866,7 @@ int ScriptingManager::lua_SetController(lua_State * luaState)
 	return 0;
 }
 
+//Runs script due to collision
 void ScriptingManager::RunScriptFromCollision(const std::string & function, Entity * const entity) const
 {
 	lua_getglobal(luaVM, function.c_str());
@@ -2799,6 +2880,7 @@ void ScriptingManager::RunScriptFromCollision(const std::string & function, Enti
 	}
 }
 
+//Runs script due to input
 void ScriptingManager::RunScriptFromInput(const std::string & function, Entity * const entity, const float inputValue, const float deltaTime) const
 {
 	lua_getglobal(luaVM, function.c_str());
@@ -2814,6 +2896,7 @@ void ScriptingManager::RunScriptFromInput(const std::string & function, Entity *
 	}
 }
 
+//Runs script due to state machine
 void ScriptingManager::RunScriptForStateAI(const std::string & function, Entity * const entity1, Entity * const entity2, AIStateMachine * const stateMachine, const float deltaTime) const
 {
 	lua_getglobal(luaVM, function.c_str());
@@ -2830,6 +2913,7 @@ void ScriptingManager::RunScriptForStateAI(const std::string & function, Entity 
 	}
 }
 
+//Runs scene script
 void ScriptingManager::RunScriptFromScene(const std::string & function)
 {
 	lua_getglobal(luaVM, function.c_str());
@@ -2842,6 +2926,7 @@ void ScriptingManager::RunScriptFromScene(const std::string & function)
 	}
 }
 
+//Runs script for animation
 void ScriptingManager::RunScriptFromAnimation(const std::string & function, Entity * const entity, float timePeriod)
 {
 	lua_getglobal(luaVM, function.c_str());

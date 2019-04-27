@@ -21,21 +21,25 @@ public:
 	AnimNode& operator=(const AnimNode&) = delete;
 	AnimNode(AnimNode&) = delete;
 
+	//Gets animnode name
 	inline std::string & GetName()
 	{
 		return name;
 	}
 
+	//Gets position keys
 	inline std::vector<Vec3AnimKey *> & GetPositionKeys()
 	{
 		return PositionKeys;
 	}
 
+	//Gets rotation keys
 	inline std::vector<QuatAnimKey *> & GetRotationKeys()
 	{
 		return RotationKeys;
 	}
 
+	//Gets scale keys
 	inline std::vector<Vec3AnimKey *> & GetScaleKeys()
 	{
 		return ScaleKeys;

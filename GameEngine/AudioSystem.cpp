@@ -9,6 +9,7 @@ AudioSystem::AudioSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
+//Play audio for the entity
 void AudioSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -27,6 +28,7 @@ void AudioSystem::Action(float timePeriod)
 	}
 }
 
+//Plays audio for the entity
 void AudioSystem::Audio(const glm::vec3 & position, Source * const source, const AudioPlayback playback)
 {
 	AudioManager::Instance()->UpdateComponentSound(source, position, playback);

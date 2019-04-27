@@ -26,6 +26,7 @@ ShadowSystem::ShadowSystem(glm::vec3 & topLeftCoord, glm::vec3 & bottomRightCoor
 	}
 }
 
+//Adds shadows to the entity
 void ShadowSystem::Action(float timePeriod)
 {
 	RenderManager * const renderManager = RenderManager::Instance();
@@ -209,6 +210,7 @@ void ShadowSystem::Action(float timePeriod)
 	renderManager->CullFace("Back");
 }
 
+//Directional shadows to the entity
 void ShadowSystem::RenderDirectional(iModel * const model, const glm::mat4 & modelMatrix, const Directional * const directional, Shader * const shadowShader, bool & firstTime)
 {
 	static Shader * lastShader = nullptr;
@@ -235,6 +237,7 @@ void ShadowSystem::RenderDirectional(iModel * const model, const glm::mat4 & mod
 	model->Render(shadowShader);
 }
 
+//Point shadows to the entity
 void ShadowSystem::RenderPoint(iModel * const model, const glm::mat4 & modelMatrix, Shader * const shadowShader, bool & firstTime)
 {
 	static Shader * lastShader = nullptr;

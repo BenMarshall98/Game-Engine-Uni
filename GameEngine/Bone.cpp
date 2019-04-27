@@ -9,6 +9,7 @@ Bone::~Bone()
 
 }
 
+//Finds position based on time
 unsigned int Bone::FindPosition(AnimNode * const animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetPositionKeys().size() - 1; i++)
@@ -21,6 +22,7 @@ unsigned int Bone::FindPosition(AnimNode * const animNode, const float time)
 	return 0;
 }
 
+//Finds rotation based on time
 unsigned int Bone::FindRotation(AnimNode * const animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetRotationKeys().size() - 1; i++)
@@ -34,6 +36,7 @@ unsigned int Bone::FindRotation(AnimNode * const animNode, const float time)
 	return 0;
 }
 
+//Finds scale based on time
 unsigned int Bone::FindScale(AnimNode * const animNode, const float time)
 {
 	for (unsigned int i = 0; i < animNode->GetScaleKeys().size() - 1; i++)
@@ -47,6 +50,7 @@ unsigned int Bone::FindScale(AnimNode * const animNode, const float time)
 	return 0;
 }
 
+//Calculates interpolated position
 glm::vec3 Bone::CalcInterpolatedPosition(AnimNode * const animNode, const float time)
 {
 	if (animNode->GetPositionKeys().size() == 1)
@@ -72,6 +76,7 @@ glm::vec3 Bone::CalcInterpolatedPosition(AnimNode * const animNode, const float 
 	return pos;
 }
 
+//Calculates interpolated scale
 glm::vec3 Bone::CalcInterpolatedScale(AnimNode * const animNode, const float time)
 {
 	if (animNode->GetScaleKeys().size() == 1)
@@ -97,6 +102,7 @@ glm::vec3 Bone::CalcInterpolatedScale(AnimNode * const animNode, const float tim
 	return sca;
 }
 
+//Calculates interpolated rotation
 glm::quat Bone::CalcInterpolatedRotation(AnimNode * const animNode, const float time)
 {
 	if (animNode->GetRotationKeys().size() == 1)
@@ -122,6 +128,7 @@ glm::quat Bone::CalcInterpolatedRotation(AnimNode * const animNode, const float 
 	return rot;
 }
 
+//Updates keyframe transform
 void Bone::UpdateKeyframeTransform(Animation * const animation, const float time)
 {
 	std::map<Animation *, AnimNode *>::iterator it = animNodes.find(animation);
@@ -150,6 +157,7 @@ void Bone::UpdateKeyframeTransform(Animation * const animation, const float time
 	node->SetTransform(mat);
 }
 
+//Gets the concatenated matrix of the parents
 glm::mat4 Bone::GetParentTransforms()
 {
 	Bone * parent = parentBone;

@@ -10,6 +10,7 @@
 
 #include "RenderManager.h"
 
+//Loads in a model
 iModel * ModelLoader::LoadModel(const std::string & fileName)
 {
 	if (EndsWith(fileName, ".obj"))
@@ -40,6 +41,7 @@ void ModelLoader::SimpleFormatExists(const string & fileName, const string & fil
 	}
 }*/
 
+//Loads in OBJ model
 StaticModel * ModelLoader::LoadOBJ(const std::string & fileName)
 {
 	std::ifstream reader(fileName.c_str());
@@ -151,6 +153,8 @@ StaticModel * ModelLoader::LoadOBJ(const std::string & fileName)
 	return RenderManager::Instance()->CreateStaticModel(vertex, texture, normal, indexes, tangents);
 }
 
+
+//Finds the same vector
 int ModelLoader::FindInVector(std::vector<std::string> & list, const std::string & toFind)
 {
 	for (int i = 0; i < list.size(); i++)
@@ -163,6 +167,7 @@ int ModelLoader::FindInVector(std::vector<std::string> & list, const std::string
 	return -1;
 }
 
+//Loads in collada file
 AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 {
 	Assimp::Importer import;
@@ -233,6 +238,7 @@ AnimatedModel * ModelLoader::LoadDAE(const std::string & fileName)
 	return animatedModel;
 }
 
+//Processes the nodes in scene
 void ModelLoader::ProcessNode(aiNode * const node, const aiScene * const scene, AnimatedModel * const animatedModel)
 {
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -247,6 +253,7 @@ void ModelLoader::ProcessNode(aiNode * const node, const aiScene * const scene, 
 	}
 }
 
+//Processes the mesh
 AnimatedModelMesh * ModelLoader::ProcessMesh(const aiNode * const node, const aiMesh * const pMesh, const aiScene * const scene)
 {
 	std::vector<glm::vec3> vertexes;
@@ -323,7 +330,7 @@ AnimatedModelMesh * ModelLoader::ProcessMesh(const aiNode * const node, const ai
 	return RenderManager::Instance()->CreateAnimatedModelMesh(vertexes, normals, textures, Weights, IDs, indices);
 }
 
-
+//Turns Assimp nodes, into game engine nodes
 void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * const pNode, Node * const parentNode)
 {
 	std::string name = pNode->mName.data;
@@ -338,6 +345,7 @@ void ModelLoader::RecursiveNodeProcess(std::vector<Node*> & nodes, aiNode * cons
 	}
 }
 
+//Creates animations
 void ModelLoader::AnimNodeProcess(AnimatedModel * const animationModel, const aiScene * const scene)
 {
 	if (scene->mNumAnimations == 0)
@@ -403,6 +411,7 @@ void ModelLoader::AnimNodeProcess(AnimatedModel * const animationModel, const ai
 	}
 }
 
+//Calculates tangent space
 void ModelLoader::TangentSpace(std::vector<int> & indices, std::vector<glm::vec3> & vertex, std::vector<glm::vec2> & texture, std::vector<glm::vec3> & tangents/*, vector<vec3> & bitangents*/)
 {
 	std::vector<int> numTimesUsed;
@@ -438,6 +447,7 @@ void ModelLoader::TangentSpace(std::vector<int> & indices, std::vector<glm::vec3
 	}
 }
 
+//Calculate tangent
 void ModelLoader::CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & vertex2, const glm::vec3 & vertex3, const glm::vec2 & texture1, const  glm::vec2 & texture2, const glm::vec2 & texture3, glm::vec3 & tangent/*, vec3 & bitangent*/, int & numTimesUsed)
 {
 	const glm::vec3 edge1 = vertex2 - vertex1;
@@ -468,6 +478,7 @@ void ModelLoader::CalculateTangent(const glm::vec3 & vertex1, const glm::vec3 & 
 	numTimesUsed++;
 }
 
+//Turns GLM Mat4 to Assimp Mat4
 aiMatrix4x4 ModelLoader::GLMMat4ToAi(const glm::mat4 & mat)
 {
 	return aiMatrix4x4(mat[0][0], mat[0][1], mat[0][2], mat[0][3],
@@ -476,6 +487,7 @@ aiMatrix4x4 ModelLoader::GLMMat4ToAi(const glm::mat4 & mat)
 		mat[3][0], mat[3][1], mat[3][2], mat[3][3]);
 }
 
+//Turns Assimp Mat4 to GLM Mat4
 glm::mat4 ModelLoader::AiToGLMMat4(const aiMatrix4x4 & mat)
 {
 	glm::mat4 tmp;

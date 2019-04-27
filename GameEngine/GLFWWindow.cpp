@@ -17,6 +17,7 @@ GLFWWindow::~GLFWWindow()
 	glfwTerminate();
 }
 
+//Called when window changes size
 void GLFWWindow::windowResize(GLFWwindow * const window, const int pWidth, const int pHeight)
 {
 	RenderManager::Instance()->SetViewport(pWidth, pHeight);
@@ -26,6 +27,7 @@ void GLFWWindow::windowResize(GLFWwindow * const window, const int pWidth, const
 	sceneManager->Resize(pWidth, pHeight);
 };
 
+//Loads in the window
 void GLFWWindow::Load()
 {
 	/*
@@ -66,17 +68,20 @@ void GLFWWindow::Load()
 	InputManager::Instance(new GLFWInput(gameWindow));
 }
 
+//Sorts out window due to events
 void GLFWWindow::WindowEvents()
 {
 	glfwSwapBuffers(gameWindow);
 	glfwPollEvents();
 }
 
+//Checks if window is running
 bool GLFWWindow::IsRunning()
 {
 	return !glfwWindowShouldClose(gameWindow);
 }
 
+//Limits the FPS
 void GLFWWindow::LimitFPS()
 {
 	double timeLapsed = glfwGetTime();
@@ -115,6 +120,7 @@ void GLFWWindow::LimitFPS()
 	glfwSetTime(0);
 }
 
+//Changes the window size
 void GLFWWindow::ChangeSize(const float width, const float height)
 {
 	fullScreen = false;
@@ -126,6 +132,7 @@ void GLFWWindow::ChangeSize(const float width, const float height)
 		width, height, 0);
 }
 
+//Sets the window to fullscreen
 void GLFWWindow::Fullscreen()
 {
 	fullScreen = true;

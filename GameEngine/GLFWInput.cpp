@@ -5,6 +5,7 @@ GLFWInput::~GLFWInput()
 {
 }
 
+//Gets keyboard input
 float GLFWInput::KeyboardInput(const int key) const
 {
 	if (!keyboardAllowed)
@@ -21,6 +22,7 @@ float GLFWInput::KeyboardInput(const int key) const
 	return 0;
 }
 
+//Gets mouse input
 float GLFWInput::MouseInput(const int key) const 
 {
 	if (!mouseAllowed)
@@ -68,6 +70,7 @@ float GLFWInput::MouseInput(const int key) const
 	}
 }
 
+//Gets gamepad input
 float GLFWInput::GamePadInput(const int key) const
 {
 	if (!gamepadAllowed)

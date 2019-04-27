@@ -21,6 +21,7 @@ std::map<std::string, int> ResourceManager::audioBufferUsage;
 std::map<std::string, int> ResourceManager::shaderUsage;
 std::map<std::string, int> ResourceManager::textureUsage;
 
+//Loads model into game engine
 void ResourceManager::LoadModel(const std::string & modelName, const std::string & fileName)
 {
 	if (find(usedModels.begin(), usedModels.end(), fileName) == usedModels.end())
@@ -50,6 +51,7 @@ void ResourceManager::LoadModel(const std::string & modelName, const std::string
 	modelList.insert(std::pair<std::string, iModel*>(modelName, model));
 }
 
+//Loads texture into game engine
 void ResourceManager::LoadTexture(const std::string & textureName, const std::string & fileName)
 {
 	if (find(usedTextures.begin(), usedTextures.end(), fileName) == usedTextures.end())
@@ -79,6 +81,7 @@ void ResourceManager::LoadTexture(const std::string & textureName, const std::st
 	textureList.insert(std::pair<std::string, Texture *>(textureName, texture));
 }
 
+//Loads shader into game engine
 void ResourceManager::LoadShader(const std::string & shaderName, const std::string & vertexProgram, const std::string & fragmentProgram, const std::string & geometryProgram)
 {
 	const std::string shaderConcat = vertexProgram + fragmentProgram + geometryProgram;
@@ -110,6 +113,7 @@ void ResourceManager::LoadShader(const std::string & shaderName, const std::stri
 	shaderList.insert(std::pair<std::string, Shader *>(shaderName, shader));
 }
 
+//Loads audio into game engine
 void ResourceManager::LoadAudio(const std::string & audioName, const std::string & fileName)
 {
 	if (find(usedAudios.begin(), usedAudios.end(), fileName) == usedAudios.end())
@@ -139,6 +143,7 @@ void ResourceManager::LoadAudio(const std::string & audioName, const std::string
 	audioBufferList.insert(std::pair<std::string, Buffer *>(audioName, buffer));
 }
 
+//Gets model by model identity
 iModel * ResourceManager::GetModel(const std::string & model)
 {
 	const std::map<std::string, iModel *>::iterator it = modelList.find(model);
@@ -152,6 +157,7 @@ iModel * ResourceManager::GetModel(const std::string & model)
 	return nullptr;
 }
 
+//Gets shader by shader identity
 Shader * ResourceManager::GetShader(const std::string & shader)
 {
 	const std::map<std::string, Shader *>::iterator it = shaderList.find(shader);
@@ -165,6 +171,7 @@ Shader * ResourceManager::GetShader(const std::string & shader)
 	return nullptr;
 }
 
+//Gets texture by texture identity
 Texture * ResourceManager::GetTexture(const std::string & texture)
 {
 	const std::map<std::string, Texture *>::iterator it = textureList.find(texture);
@@ -178,6 +185,7 @@ Texture * ResourceManager::GetTexture(const std::string & texture)
 	return nullptr;
 }
 
+//Gets audio by audio identity
 Source * ResourceManager::GetAudio(const std::string & audio)
 {
 	const std::map<std::string, Buffer *>::iterator it = audioBufferList.find(audio);
@@ -192,6 +200,7 @@ Source * ResourceManager::GetAudio(const std::string & audio)
 	return nullptr;
 }
 
+//Removes model
 void ResourceManager::RemoveModel(const iModel * const model)
 {
 	std::map<std::string, iModel *>::iterator it;
@@ -214,6 +223,7 @@ void ResourceManager::RemoveModel(const iModel * const model)
 	}
 }
 
+//Removes Shader
 void ResourceManager::RemoveShader(const Shader * const shader)
 {
 	std::map<std::string, Shader *>::iterator it;
@@ -236,6 +246,7 @@ void ResourceManager::RemoveShader(const Shader * const shader)
 	}
 }
 
+//Removes texture
 void ResourceManager::RemoveTexture(const Texture * const texture)
 {
 	std::map<std::string, Texture *>::iterator it;
@@ -258,6 +269,7 @@ void ResourceManager::RemoveTexture(const Texture * const texture)
 	}
 }
 
+//Removes audio
 void ResourceManager::RemoveAudio(const void * const audio)
 {
 	std::map<std::string, Buffer *>::iterator it;
@@ -280,6 +292,7 @@ void ResourceManager::RemoveAudio(const void * const audio)
 	}
 }
 
+//Removes resources that are unused
 void ResourceManager::ClearResources()
 {
 	usedModels.clear();
@@ -360,6 +373,7 @@ void ResourceManager::ClearResources()
 	}
 }
 
+//Deletes all resources
 void ResourceManager::FinalClearResources()
 {
 	usedModels.clear();

@@ -9,6 +9,7 @@ void AnimatedModel::Render(Shader * shader)
 {
 }
 
+//Renders the animated model
 void AnimatedModel::Render(Shader * shader, const std::vector<glm::mat4> & boneMats)
 {
 	for (int i = 0; i < boneMats.size(); i++)
@@ -23,6 +24,7 @@ void AnimatedModel::Render(Shader * shader, const std::vector<glm::mat4> & boneM
 	}
 }
 
+//Finds a bone by name
 Bone * AnimatedModel::FindBone(const std::string & name)
 {
 	for (int i = 0; i < bones.size(); i++)
@@ -36,6 +38,7 @@ Bone * AnimatedModel::FindBone(const std::string & name)
 	return nullptr;
 }
 
+//Calculates the bone matrices
 std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 {
 	std::vector<glm::mat4> boneMats = std::vector<glm::mat4>();
@@ -63,6 +66,7 @@ std::vector<glm::mat4> AnimatedModel::UpdateBoneMatsVector()
 	return boneMats;
 }
 
+//Updates the animation model, with the given animation
 std::vector<glm::mat4> AnimatedModel::Update(const std::string & animationName, float & time, float timePeriod)
 {
 	Animation * animation = animations.at(0);

@@ -13,21 +13,25 @@ Input::~Input()
 {
 }
 
+//Sets if mouse input is allowed
 void Input::AllowMouseInput(const bool allowMouse)
 {
 	mouseAllowed = allowMouse;
 }
 
+//Sets if keyboard input is allowed
 void Input::AllowKeyboardInput(const bool allowKeyboard)
 {
 	keyboardAllowed = allowKeyboard;
 }
 
+//Sets if gamepad input is allowed
 void Input::AllowGamePadInput(const bool allowGamePad)
 {
 	gamepadAllowed = allowGamePad;
 }
 
+//SEt controller to use
 void Input::ControllerSetup(std::string pController)
 {
 	if (pController == "KeyboardOnly")

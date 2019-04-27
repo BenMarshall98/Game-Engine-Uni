@@ -24,6 +24,7 @@ public:
 
 	static void ControllerSetup(std::string pController);
 
+	//Gets the controller setup
 	static inline std::string GetController()
 	{
 		return controller;

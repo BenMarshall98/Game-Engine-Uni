@@ -13,6 +13,7 @@ SystemManager::~SystemManager()
 	Clear();
 }
 
+//Goes through render systems
 void SystemManager::Render()
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
@@ -21,6 +22,7 @@ void SystemManager::Render()
 	}
 }
 
+//Goes through update systems
 void SystemManager::Update()
 {
 	for (int i = 0; i < UpdateSystems.size(); i++)
@@ -29,6 +31,7 @@ void SystemManager::Update()
 	}
 }
 
+//Removes all systems 
 void SystemManager::Clear()
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
@@ -46,6 +49,7 @@ void SystemManager::Clear()
 	UpdateSystems.clear();
 }
 
+//Removes entity from all systems
 void SystemManager::RemoveEntityFromSystems(Entity * const pEntity)
 {
 	for (int i = 0; i < RenderSystems.size(); i++)
@@ -59,6 +63,7 @@ void SystemManager::RemoveEntityFromSystems(Entity * const pEntity)
 	}
 }
 
+//Adds/update entity to all systems
 void SystemManager::AddEntityToSystems(Entity * const pEntity)
 {
 	for (int i = 0; i < RenderSystems.size(); i++)

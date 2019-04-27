@@ -20,26 +20,31 @@ public:
 	Node& operator=(const Node&) = delete;
 	Node(Node&) = delete;
 
+	//Sets the parent node
 	void SetParent(Node * const pParent)
 	{
 		parent = pParent;
 	}
 
+	//Gets the node name
 	inline std::string & GetName()
 	{
 		return name;
 	}
 
+	//Gets the parent node
 	inline Node * GetParent()
 	{
 		return parent;
 	}
 
+	//Gets the matrix transform
 	inline glm::mat4 & GetTransform()
 	{
 		return transformation;
 	}
 
+	//Sets the matrix transform
 	inline void SetTransform(const glm::mat4 & pTransform)
 	{
 		transformation = pTransform;

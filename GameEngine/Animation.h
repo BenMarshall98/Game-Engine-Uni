@@ -25,21 +25,25 @@ public:
 	Animation& operator=(const Animation&) = delete;
 	Animation(Animation&) = delete;
 
+	//Gets animation name
 	inline std::string & GetName()
 	{
 		return name;
 	}
 
+	//Gets animation start time
 	inline float GetStartTime()
 	{
 		return startTime;
 	}
 
+	//Gets animation end time
 	inline float GetEndTime()
 	{
 		return endTime;
 	}
 
+	//Gets animation nodes
 	inline std::vector<AnimNode *> & GetAnimNodes()
 	{
 		return animNodes;

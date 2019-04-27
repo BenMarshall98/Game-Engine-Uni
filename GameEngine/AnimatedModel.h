@@ -32,36 +32,43 @@ public:
 	AnimatedModel& operator=(const AnimatedModel&) = delete;
 	AnimatedModel(AnimatedModel&) = delete;
 
+	//Adds animation mesh
 	inline void AddMesh(AnimatedModelMesh * const mesh)
 	{
 		meshes.push_back(mesh);
 	}
 
+	//Sets the list of bones
 	inline void SetBones(const std::vector<Bone *> & pBones)
 	{
 		bones = pBones;
 	}
 
+	//Sets the global inverse matrix
 	inline void SetGlobalInverse(const glm::mat4 & pGlobalInverse)
 	{
 		globalInverse = pGlobalInverse;
 	}
 
+	//Sets the list of nodes
 	inline void SetNodes(const std::vector<Node *> & pNodes)
 	{
 		nodes = pNodes;
 	}
 
+	//Gets the animation mesh
 	inline AnimatedModelMesh * GetMesh(const int loc)
 	{
 		return meshes.at(loc);
 	}
 
+	//Adds animation
 	inline void AddAnimation(Animation * const animation)
 	{
 		animations.push_back(animation);
 	}
 
+	//Gets animations
 	inline std::vector<Animation *> GetAnimations()
 	{
 		return animations;

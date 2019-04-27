@@ -11,6 +11,7 @@ InputSystem::InputSystem() : iSystem(std::vector<ComponentType>{
 {
 }
 
+//Moves the entity via input
 void InputSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -24,6 +25,7 @@ void InputSystem::Action(float timePeriod)
 	}
 }
 
+//Moves the entity via input
 void InputSystem::Input(std::vector<InputFunction *> * const inputs, Entity * const entity, float timePeriod)
 {	
 	for (int i = 0; i < inputs->size(); i++)

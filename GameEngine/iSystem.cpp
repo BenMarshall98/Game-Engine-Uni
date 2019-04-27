@@ -10,7 +10,7 @@ iSystem::~iSystem()
 {
 }
 
-
+//Adds entity to the system
 void iSystem::AddEntity(Entity * const pEntity)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -34,6 +34,7 @@ void iSystem::AddEntity(Entity * const pEntity)
 	}
 }
 
+//Removes entity from the system
 void iSystem::RemoveEntity(Entity * const pEntity)
 {
 	const std::vector<Entity *>::iterator it = find(EntityList.begin(), EntityList.end(), pEntity);

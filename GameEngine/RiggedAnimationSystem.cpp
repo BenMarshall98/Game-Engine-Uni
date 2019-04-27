@@ -9,6 +9,7 @@ RiggedAnimationSystem::RiggedAnimationSystem() : iSystem(std::vector<ComponentTy
 {
 }
 
+//Animates the entity
 void RiggedAnimationSystem::Action(float timePeriod)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -25,6 +26,7 @@ void RiggedAnimationSystem::Action(float timePeriod)
 	}
 }
 
+//Animates the entity
 void RiggedAnimationSystem::Animate(AnimatedModel * const animatedModel, ComponentRiggedAnimation * const riggedAnimation, float timePeriod)
 {
 	float time = riggedAnimation->GetTime();
