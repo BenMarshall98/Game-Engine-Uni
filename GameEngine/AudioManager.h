@@ -36,6 +36,7 @@ private:
 
 public:
 
+	//Sets the audio engine to be used
 	static void InitAudioEngineName(std::string pAudioName)
 	{
 		audioName = pAudioName;
@@ -62,26 +63,32 @@ public:
 
 	void Update();
 
+	//Clears the audio engine between scenes
 	inline void Clear()
 	{
 		audioEngine->Clear();
 	}
 
+	//Generates a buffer from audio file
 	inline Buffer * GenerateBuffer(const std::string & fileName)
 	{
 		return audioEngine->GenerateBuffer(fileName);
 	}
 
+	//Generates a source from buffer
 	inline Source * GenerateSource(Buffer * buffer)
 	{
 		return audioEngine->GenerateSource(buffer);
 	}
 
+	//Deletes buffer
 	inline void DeleteBuffer(Buffer * const buffer) const
 	{
 		audioEngine->DeleteBuffer(buffer);
 	}
 
+
+	//Deletes source
 	inline void DeleteSource(Source * const source) const
 	{
 		audioEngine->DeleteSource(source);
@@ -93,6 +100,7 @@ public:
 	void PlayAudioAtEntityLocation(const std::string & sound, Entity * const entity);
 	~AudioManager();
 
+	//Pauses all sounds
 	inline void PauseSounds(bool pauseState)
 	{
 		audioEngine->PauseSounds(pauseState);

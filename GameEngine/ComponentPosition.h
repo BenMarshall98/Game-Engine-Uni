@@ -15,16 +15,19 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the update thread position
 	inline const glm::vec3 & GetUpdatePosition() const
 	{
 		return updatePosition;
 	}
 
+	//Sets the update thread position
 	inline void SetUpdatePosition(const glm::vec3 & pPosition)
 	{
 		updatePosition = pPosition;
 	}
 
+	//Gets the render thread position
 	inline const glm::vec3 & GetRenderPosition() const
 	{
 		return renderPosition;

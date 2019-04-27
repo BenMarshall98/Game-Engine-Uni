@@ -75,16 +75,19 @@ public:
 	LightManager& operator=(const LightManager&) = delete;
 	LightManager(LightManager&) = delete;
 
+	//Gets the rendering spot lights
 	inline std::vector<SpotLight*> & GetRenderSpotLights()
 	{
 		return renderSpotLights;
 	}
 
+	//Gets the rendering point lights
 	inline std::vector<PointLight*> & GetRenderPointLights()
 	{
 		return renderPointLights;
 	}
 
+	//Sets the directional light
 	inline void SetDirectionalLight(const glm::vec3 & pDirection, const glm::vec3 & pLightColour)
 	{
 		delete directional;
@@ -93,22 +96,26 @@ public:
 		directional->lightColour = pLightColour;
 	}
 
+	//Sets the directional light
 	inline void SetDirectionalLight(Directional * const pDirectional)
 	{
 		delete directional;
 		directional = pDirectional;
 	}
 
+	//Adds point light
 	inline void AddPointLight(PointLight * const pPointLight)
 	{
 		pointLights.push_back(pPointLight);
 	}
 
+	//Gets the directional light
 	inline Directional * GetDirectionalLight()
 	{
 		return directional;
 	}
 
+	//Gets the directional light framebuffer
 	inline FrameBuffer * GetDirectionalFramebuffer()
 	{
 		return directionalShadowTexture;
@@ -117,6 +124,7 @@ public:
 	void AddPointLight(const glm::vec3 & pLocation, const glm::vec3 & pLightColour, const float pAttenuation = 0);
 	void RemovePointLight(PointLight * const pPointLight);
 
+	//Adds a spot light
 	inline void AddSpotLight(SpotLight * const pSpotLight)
 	{
 		spotLights.push_back(pSpotLight);

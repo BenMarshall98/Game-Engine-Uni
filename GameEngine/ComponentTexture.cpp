@@ -5,6 +5,7 @@ ComponentTexture::~ComponentTexture()
 	ResourceManager::RemoveTexture(texture);
 }
 
+//Does nothing
 void ComponentTexture::RenderSwap()
 {
 

@@ -7,6 +7,7 @@
 
 #undef LoadMenu
 
+//Loads in menu
 std::vector<MenuItem *> MenuLoader::LoadMenu(std::string & fileName, glm::vec3 & backgroundColour)
 {
 	std::vector<MenuItem *> menuItems;
@@ -66,6 +67,7 @@ std::vector<MenuItem *> MenuLoader::LoadMenu(std::string & fileName, glm::vec3 &
 	return menuItems;
 }
 
+//Loads in menu items
 void MenuLoader::LoadMenuItems(const rapidjson::Value& MenuItems, std::vector<MenuItem *> & menuItemsVec)
 {
 	rapidjson::Value::ConstValueIterator it;
@@ -105,6 +107,7 @@ void MenuLoader::LoadMenuItems(const rapidjson::Value& MenuItems, std::vector<Me
 	}
 }
 
+//Loads in colour
 void MenuLoader::LoadColour(const rapidjson::Value& ColourLoc, glm::vec3 & colour)
 {
 	for (rapidjson::SizeType i = 0; i < ColourLoc.Size(); i++)

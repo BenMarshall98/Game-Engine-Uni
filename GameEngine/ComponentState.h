@@ -13,8 +13,6 @@ public:
 	ComponentState();
 	~ComponentState();
 
-
-
 	std::string GetValue(std::string & valueName, std::string & defaultValue);
 	void SetValue(std::string & valueName, std::string & value);
 

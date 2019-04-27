@@ -7,6 +7,7 @@ BulletRigidBody::~BulletRigidBody()
 	delete rigidBody;
 }
 
+//Gets the position of the rigid body
 glm::vec3 BulletRigidBody::GetPosition()
 {
 	rigidBody->activate();
@@ -17,6 +18,7 @@ glm::vec3 BulletRigidBody::GetPosition()
 	return glm::vec3(origin.x(), origin.y(), origin.z());
 }
 
+//Gets the direction of the rigid body
 glm::quat BulletRigidBody::GetDirection()
 {
 	const btTransform transform = rigidBody->getWorldTransform();
@@ -25,11 +27,13 @@ glm::quat BulletRigidBody::GetDirection()
 	return glm::quat(rotation.w(), rotation.x(), rotation.y(), rotation.z());
 }
 
+//Gets the rigid body
 void * BulletRigidBody::GetRigidBody()
 {
 	return rigidBody;
 }
 
+//Sets the position of the rigid body
 void BulletRigidBody::SetPosition(const glm::vec3 & pPosition)
 {
 	const btVector3 origin(pPosition.x, pPosition.y, pPosition.z);
@@ -39,6 +43,7 @@ void BulletRigidBody::SetPosition(const glm::vec3 & pPosition)
 	rigidBody->setWorldTransform(transform);
 }
 
+//sets the direction of the rigid body
 void BulletRigidBody::SetDirection(const glm::quat & pRotation)
 {
 	const btQuaternion rotation(pRotation.x, pRotation.y, pRotation.z, pRotation.w);
@@ -48,6 +53,7 @@ void BulletRigidBody::SetDirection(const glm::quat & pRotation)
 	rigidBody->setWorldTransform(transform);
 }
 
+//Apply velocity to the rigid body
 void BulletRigidBody::ApplyVelocity(const glm::vec3 & pVelocity)
 {
 	const btVector3 currentVel = rigidBody->getLinearVelocity();
@@ -61,6 +67,7 @@ void BulletRigidBody::ApplyVelocity(const glm::vec3 & pVelocity)
 	rigidBody->setLinearVelocity(vel);
 }
 
+//Apply impulse to the rigid body
 void BulletRigidBody::ApplyImpulse(const glm::vec3 & pImpulse)
 {
 	const btVector3 origin(0.0, 0.0, 0.0);
@@ -68,6 +75,7 @@ void BulletRigidBody::ApplyImpulse(const glm::vec3 & pImpulse)
 	rigidBody->applyImpulse(impulse, origin);
 }
 
+//Apply rotation to the rigid body
 void BulletRigidBody::ApplyRotation(const glm::vec3 & pRotation)
 {
 	const btVector3 currentRot = rigidBody->getAngularVelocity();

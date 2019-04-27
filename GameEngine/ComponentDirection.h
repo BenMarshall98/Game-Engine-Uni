@@ -17,16 +17,19 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the update thread direction
 	inline const glm::quat & GetUpdateDirection() const
 	{
 		return updateDirection;
 	}
 
+	//Sets the update thread direction
 	inline void SetUpdateDirection(const glm::quat & pDirection)
 	{
 		updateDirection = pDirection;
 	}
 
+	//Gets the render thread direction
 	inline const glm::quat & GetRenderDirection() const
 	{
 		return renderDirection;

@@ -2,9 +2,10 @@
 
 CollisionCuboid::~CollisionCuboid()
 {
-	int i = 0;
+
 }
 
+//Gets the collision shape
 Shape CollisionCuboid::GetShape()
 {
 	return Shape::CUBOID;

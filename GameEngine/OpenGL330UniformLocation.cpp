@@ -11,26 +11,31 @@ OpenGL330UniformLocation::~OpenGL330UniformLocation()
 {
 }
 
+//Sets integer in shader
 void OpenGL330UniformLocation::SetUniform1i(const int value)
 {
 	glUniform1i(location, value);
 }
 
+//Sets float in shader
 void OpenGL330UniformLocation::SetUniform1f(const float value)
 {
 	glUniform1f(location, value);
 }
 
+//Sets vec3 in shader
 void OpenGL330UniformLocation::SetUniform3fv(const glm::vec3 & value)
 {
 	glUniform3fv(location, 1, value_ptr(value));
 }
 
+//Sets mat4 in shader
 void OpenGL330UniformLocation::SetUniformMatrix4fv(const glm::mat4 & value, const bool transpose)
 {
 	glUniformMatrix4fv(location, 1, transpose, value_ptr(value));
 }
 
+//Uses texture
 void OpenGL330UniformLocation::UseTexture(const int activeTexture)
 {
 	glUniform1i(location, activeTexture);

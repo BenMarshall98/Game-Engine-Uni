@@ -43,6 +43,7 @@
 #include <fstream>
 #include <iostream>
 
+//Loads in level
 std::string LevelLoader::LoadLevelJSON(std::string & fileName)
 {
 	std::ifstream in(fileName);
@@ -138,6 +139,7 @@ std::string LevelLoader::LoadLevelJSON(std::string & fileName)
 	return "";
 }
 
+//Loads in resources
 void LevelLoader::LoadResourcesJSON(const rapidjson::Value& Resources)
 {
 	rapidjson::Value::ConstValueIterator it;
@@ -180,6 +182,7 @@ void LevelLoader::LoadResourcesJSON(const rapidjson::Value& Resources)
 	}
 }
 
+//Loads in scripts
 void LevelLoader::LoadScriptsJSON(const rapidjson::Value& Scripts)
 {
 	ScriptingManager * const scriptingManager = ScriptingManager::Instance();
@@ -194,6 +197,7 @@ void LevelLoader::LoadScriptsJSON(const rapidjson::Value& Scripts)
 	}
 }
 
+//Loads in Entity template
 void LevelLoader::LoadEntityTemplatesJSON(const rapidjson::Value& EntityTemplates)
 {
 	rapidjson::Value::ConstValueIterator it;
@@ -207,6 +211,7 @@ void LevelLoader::LoadEntityTemplatesJSON(const rapidjson::Value& EntityTemplate
 	}
 }
 
+//Loads in Entity
 void LevelLoader::LoadEntity(const rapidjson::Value& Entities)
 {
 	rapidjson::Value::ConstValueIterator it;
@@ -234,6 +239,7 @@ void LevelLoader::LoadEntity(const rapidjson::Value& Entities)
 	}
 }
 
+//Loads in lights
 void LevelLoader::LoadLights(const rapidjson::Value& Lights)
 {
 	rapidjson::Value::ConstValueIterator it;
@@ -307,6 +313,7 @@ void LevelLoader::LoadLights(const rapidjson::Value& Lights)
 	}
 }
 
+//Loads in map
 void LevelLoader::LoadMapJSON(const rapidjson::Value& Map)
 {
 	const std::string type = Map["Type"].GetString();
@@ -349,6 +356,7 @@ void LevelLoader::LoadMapJSON(const rapidjson::Value& Map)
 	}
 }
 
+//Loads in camera and perspective
 void LevelLoader::LoadViewJSON(const rapidjson::Value& View)
 {
 	if (View.HasMember("Perspective"))
@@ -368,6 +376,7 @@ void LevelLoader::LoadViewJSON(const rapidjson::Value& View)
 	}
 }
 
+//Loads in perspective or orthographic
 void LevelLoader::LoadPerspectiveJSON(const rapidjson::Value& Perspective)
 {
 	const std::string type = Perspective["Type"].GetString();
@@ -387,6 +396,7 @@ void LevelLoader::LoadPerspectiveJSON(const rapidjson::Value& Perspective)
 	}
 }
 
+//Loads in camera
 void LevelLoader::LoadCameraJSON(const rapidjson::Value& pCamera)
 {
 	const std::string type = pCamera["Type"].GetString();
@@ -412,6 +422,7 @@ void LevelLoader::LoadCameraJSON(const rapidjson::Value& pCamera)
 	
 }
 
+//Loads in platformer map
 void LevelLoader::LoadPlatformerMap(const std::string & file, const glm::vec2 & topLeftCoord)
 {
 	int x = topLeftCoord.x;
@@ -448,6 +459,7 @@ void LevelLoader::LoadPlatformerMap(const std::string & file, const glm::vec2 & 
 	}
 }
 
+//Loads in 3D map
 void LevelLoader::Load3DMap(const std::string & file, const glm::vec3 & topLeftCoord)
 {
 	float x = topLeftCoord.x;
@@ -484,6 +496,7 @@ void LevelLoader::Load3DMap(const std::string & file, const glm::vec3 & topLeftC
 	}
 }
 
+//Adds components to the entity
 void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Value& components)
 {
 	EntityManager * const entityManager = EntityManager::Instance();
@@ -744,6 +757,7 @@ void LevelLoader::AddComponentsToEntityJSON(Entity * entity, const rapidjson::Va
 	}
 }
 
+//Creates input functions
 std::vector<InputFunction *> * LevelLoader::LoadInputsJSON(const rapidjson::Value& Inputs)
 {
 	std::vector<InputFunction *> * const playerInputs = new std::vector<InputFunction *>();
@@ -773,6 +787,8 @@ std::vector<InputFunction *> * LevelLoader::LoadInputsJSON(const rapidjson::Valu
 	return playerInputs;
 }
 
+
+//Loads in systems to either render or update
 void LevelLoader::LoadSystems(const rapidjson::Value& Systems)
 {
 	SystemManager * const systemManager = SystemManager::Instance();
@@ -798,6 +814,7 @@ void LevelLoader::LoadSystems(const rapidjson::Value& Systems)
 	}
 }
 
+//Creates the systems
 std::vector<iSystem *> LevelLoader::CreateSystems(const rapidjson::Value& pSystems)
 {
 	std::vector<iSystem *> systems;
@@ -863,6 +880,7 @@ std::vector<iSystem *> LevelLoader::CreateSystems(const rapidjson::Value& pSyste
 	return systems;
 }
 
+//Get line error occured on
 int LevelLoader::GetLine(std::string & file, const int location)
 {
 	int count = 0;

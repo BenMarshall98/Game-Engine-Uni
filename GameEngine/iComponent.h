@@ -33,6 +33,7 @@ public:
 	virtual ~iComponent();
 	virtual void RenderSwap() = 0;
 
+	//Gets the name of the component
 	inline ComponentType GetComponentName()
 	{
 		return componentType;

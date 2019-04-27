@@ -7,6 +7,7 @@ InputManager::~InputManager()
 	delete inputDevice;
 }
 
+//Gets the input value checking gamepad, keyboard, and mouse
 float InputManager::GetInputValue(const std::vector<GameInput> & gameInputs) const
 {
 	float value = 0;

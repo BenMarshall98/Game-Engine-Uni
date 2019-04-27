@@ -12,6 +12,7 @@ public:
 
 	virtual Buffer * GenerateBuffer(const std::string & fileName) = 0;
 	
+	//Generates source from buffer
 	inline Source * GenerateSource(Buffer * buffer)
 	{
 		return buffer->GenerateSource();

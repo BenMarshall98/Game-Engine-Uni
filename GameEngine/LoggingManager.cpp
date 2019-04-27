@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include <ctime>
 
+//Logs a message or error
 void LoggingManager::LogMessage(const MESSAGE_TYPE type, const std::string & message)
 {
 	std::time_t result = std::time(nullptr);

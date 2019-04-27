@@ -11,6 +11,7 @@ ComponentAudio::~ComponentAudio()
 	AudioManager::Instance()->DeleteSource(mSource);
 }
 
+//Does nothing
 void ComponentAudio::RenderSwap()
 {
 

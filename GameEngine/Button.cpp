@@ -12,11 +12,13 @@ Button::~Button()
 {
 }
 
+//Updates the button
 void Button::Update()
 {
 	updateLocation = RenderManager::Instance()->CalculateTextSize(text, location, fontSize, align);
 }
 
+//Renders the button
 void Button::Render()
 {
 	if (renderHighlighted)
@@ -29,21 +31,25 @@ void Button::Render()
 	}
 }
 
+//Seletes the button
 void Button::Select()
 {
 	ScriptingManager::Instance()->RunScriptFromScene(function);
 }
 
+//Highlights the button
 void Button::Highlight()
 {
 	updateHighlighted = true;
 }
 
+//Unhighlights the button
 void Button::UnHighlight()
 {
 	updateHighlighted = false;
 }
 
+//Keeps the button concurrency complient
 void Button::Swap()
 {
 	renderHighlighted = updateHighlighted;

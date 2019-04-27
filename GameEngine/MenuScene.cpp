@@ -24,6 +24,7 @@ MenuScene::~MenuScene()
 	menuItems.clear();
 }
 
+//Loads menu scene
 void MenuScene::Load()
 {
 	menuItems = MenuLoader::LoadMenu(fileName, backgroundColour);
@@ -37,6 +38,7 @@ void MenuScene::Load()
 	}
 }
 
+//Updates menu scene, selects button to highlight / select
 void MenuScene::Update()
 {
 	static int delay = 10 / (60 / (float)Window::GetFrameRate());
@@ -133,6 +135,7 @@ void MenuScene::Update()
 	}
 }
 
+//Renders the menu
 void MenuScene::Render()
 {
 	RenderManager::Instance()->ClearColor(backgroundColour);
@@ -145,6 +148,7 @@ void MenuScene::Render()
 	}
 }
 
+//Keeps the menu scene concurrency complient
 void MenuScene::Swap()
 {
 	for (int i = 0; i < menuItems.size(); i++)
@@ -153,6 +157,7 @@ void MenuScene::Swap()
 	}
 }
 
+//Closes the menu scene
 void MenuScene::Close()
 {
 	ConfigLoader::UpdateLevelConfig();

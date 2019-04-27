@@ -41,11 +41,13 @@ public:
 	virtual void BindVertexArray(VertexBuffer * VAO) = 0;
 	virtual void InitialiseTextRender() = 0;
 
+	//Renders text
 	inline void RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
 	{
 		textRender->RenderText(text, pPixelLocation, colour);
 	}
 
+	//Calculates the text size
 	inline PixelLocation CalculateTextSize(const std::string & text, const glm::vec2 & location, float size, const std::string & align)
 	{
 		return textRender->CalculateSize(text, location, size, align);

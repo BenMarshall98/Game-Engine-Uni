@@ -78,16 +78,19 @@ public:
 
 	void ConfigEngine(std::string configFile);
 
+	//Sets the window creator
 	static void InitWindow(std::string pWindowName)
 	{
 		windowName = pWindowName;
 	}
 
+	//Sets the log file
 	static inline void InitFileStream(std::string pLogFile)
 	{
 		stream = std::ofstream(pLogFile, std::ios::app);
 	}
 
+	//Gets the log stream
 	static inline std::ostream& GetStream()
 	{
 		if (stream)
@@ -98,6 +101,7 @@ public:
 		return std::cout;
 	}
 
+	//Changes the window size
 	inline void ChangeSize(float width, float height)
 	{
 		setScreenSize = true;
@@ -105,6 +109,7 @@ public:
 		tempHeight = height;
 	}
 
+	//Sets the window to fullscreen
 	inline void FullScreen()
 	{
 		setFullscreen = true;

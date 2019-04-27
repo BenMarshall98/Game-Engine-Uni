@@ -14,6 +14,8 @@ public:
 
 	void AddInput(GameInput input);
 	void RemoveInput(GameInput input);
+
+	//Changes the Lua function to be called
 	inline void SwapFunction(const std::string & pInputFunction)
 	{
 		inputFunction = pInputFunction;

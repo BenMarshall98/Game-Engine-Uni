@@ -20,6 +20,7 @@ public:
 
 	static void LogMessage(const MESSAGE_TYPE type, const std::string & message);
 
+	//Returns true, if error has occurred
 	static inline bool HasSevereMessage()
 	{
 		if (hasSevereMessage)

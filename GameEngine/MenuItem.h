@@ -31,6 +31,7 @@ public:
 	virtual void Render() = 0;
 	virtual void Swap() = 0;
 
+	//Gets the menu type
 	inline MenuType GetMenuType()
 	{
 		return menuType;

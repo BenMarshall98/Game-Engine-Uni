@@ -10,30 +10,35 @@ Text::~Text()
 {
 }
 
-
+//Updates the text
 void Text::Update()
 {
 	updateLocation = RenderManager::Instance()->CalculateTextSize(text, location, fontSize, align);
 }
 
+//Renders the text
 void Text::Render()
 {
 	RenderManager::Instance()->RenderText(text, renderLocation, fontColour);
 }
 
+//Keeps the text concurrency complient
 void Text::Swap()
 {
 	renderLocation = updateLocation;
 }
 
+//Does nothing
 void Text::Select()
 {
 }
 
+//Does nothing
 void Text::Highlight()
 {
 }
 
+//Does nothing
 void Text::UnHighlight()
 {
 }

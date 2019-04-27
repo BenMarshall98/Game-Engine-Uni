@@ -11,6 +11,7 @@ public:
 	explicit CollisionCuboid(glm::vec3 & pBoundingBox) : boundingBox(pBoundingBox) {}
 	~CollisionCuboid();
 
+	//GEts the collision shape size
 	inline const glm::vec3 & GetSize() const
 	{
 		return boundingBox;

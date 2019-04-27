@@ -23,15 +23,16 @@ public:
 	AIStateMachine& operator=(const AIStateMachine&) = delete;
 	AIStateMachine(AIStateMachine&) = delete;
 
-	//void TraverseStates(vec3 currentPosition, quat currentDirection, ComponentPhysics * physicsComponent);
 	std::string GetValue(std::string & valueName, std::string & defaultValue);
 	void SetValue(std::string & valueName, std::string & value);
 
+	//Sets the path finder to use
 	inline void SetPathFinder(PathFinding * const pPathFinder)
 	{
 		pathFinder = pPathFinder;
 	}
 
+	//Sets the path follower to use
 	inline void SetPathFollower(PathFollowing * const pPathFollower)
 	{
 		pathFollower = pPathFollower;
@@ -39,6 +40,7 @@ public:
 
 	void MoveOffPath();
 
+	//Checks if entity is on its path
 	inline bool OnPath(const glm::vec3 & position)
 	{
 		if (pathFollower)

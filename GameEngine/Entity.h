@@ -30,11 +30,13 @@ public:
 
 	~Entity();
 
+	//Gets the entity ID
 	inline int GetID() const
 	{
 		return mEntityID;
 	}
 
+	//Gets the entity name
 	inline const std::string & GetName() const
 	{
 		return mEntityName;

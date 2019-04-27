@@ -15,6 +15,7 @@ FollowPlayerCamera::~FollowPlayerCamera()
 {
 }
 
+//Camera is place behind the Entity
 void FollowPlayerCamera::Update()
 {
 	iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(mEntity, ComponentType::COMPONENT_POSITION);

@@ -4,6 +4,7 @@ ComponentShadowShader::~ComponentShadowShader()
 {
 }
 
+//Does nothing
 void ComponentShadowShader::RenderSwap()
 {
 

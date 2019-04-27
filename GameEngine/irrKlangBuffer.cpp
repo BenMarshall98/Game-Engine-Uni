@@ -12,6 +12,7 @@ irrKlangBuffer::~irrKlangBuffer()
 	buffer->drop();
 }
 
+//Builds a new source
 Source * irrKlangBuffer::GenerateSource()
 {
 	Source * source = new irrKlangSource(irrKlangEngine::engine->play3D(buffer, irrklang::vec3df(0, 0, 0), false, true, true));

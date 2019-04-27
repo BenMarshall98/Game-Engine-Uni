@@ -2,6 +2,7 @@
 #include "ComponentPosition.h"
 #include <fstream>
 
+//Creates a map using the given file
 PathFinding::PathFinding(const std::string & pTarget, const std::string & pFile, glm::vec2 & pTopLeftCoord) : topLeftCoord(pTopLeftCoord), target(EntityManager::Instance()->GetEntityByName(pTarget))
 {
 	std::vector<int> line;
@@ -35,11 +36,12 @@ PathFinding::~PathFinding()
 {
 }
 
+//Builds path from the entity to the given target
 void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent, const glm::vec3 & targetLocation)
 {
 	const glm::ivec2 targetMapLoc = CalculateMapLoc(targetLocation);
 
-	if (targetMapLoc.x < 0 || targetMapLoc.y < 0)
+	if (targetMapLoc.x < 0 || targetMapLoc.y < 0) //Works out where the entity and target are according to the map
 	{
 		return;
 	}
@@ -87,7 +89,7 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 		open.erase(open.begin() + loc);
 		closed.push_back(current);
 
-		for (int i = 0; i < directions.size(); i++)
+		for (int i = 0; i < directions.size(); i++) //Builds possible directions
 		{
 			StarNode * successor = new StarNode();
 			successor->parent = current;
@@ -100,6 +102,7 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 
 			const glm::ivec2 successorMapLoc = CalculateMapLoc(successor->position);
 
+			//New node goes through checks to see if it is required
 			if (current->parent && current->parent->position == successor->position)
 			{
 				delete successor;
@@ -168,6 +171,7 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 				}
 			}
 
+			//If it survives the checks add to open list
 			if (successor)
 			{
 				open.push_back(successor);
@@ -175,6 +179,7 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 		}
 	}
 
+	//Checked all node, target not found
 	if (!found)
 	{
 		for (int i = 0; i < open.size(); i++)
@@ -190,11 +195,13 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 		return;
 	}
 
+	//Reverse path nodes
 	while (found->parent->parent)
 	{
 		found = found->parent;
 	}
 
+	//Move to the next path node
 	const glm::vec3 norm = normalize(found->position - currentPosition);
 
 	const float disVelocity = 3.5;
@@ -213,6 +220,7 @@ void PathFinding::BuildPath(const glm::vec3 & currentPosition, const glm::quat &
 	}
 }
 
+//Gets the target position before building path
 void PathFinding::CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
 	iComponent * const positionComponent = EntityManager::Instance()->GetComponentOfEntity(target, ComponentType::COMPONENT_POSITION);
@@ -221,6 +229,7 @@ void PathFinding::CalculatePath(const glm::vec3 & currentPosition, const glm::qu
 	BuildPath(currentPosition, currentDirection, physicsComponent, targetPosition);
 }
 
+//Works out the map location given a position
 glm::ivec2 PathFinding::CalculateMapLoc(const glm::vec3 & position)
 {
 	glm::vec2 mapish = glm::vec2(position.x - topLeftCoord.x, -position.z + topLeftCoord.y);
@@ -232,6 +241,7 @@ glm::ivec2 PathFinding::CalculateMapLoc(const glm::vec3 & position)
 	return value;
 }
 
+//Calls build path
 void PathFinding::CalculatePathToPosition(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent, const glm::vec3 & targetLocation)
 {
 	BuildPath(currentPosition, currentDirection, physicsComponent, targetLocation);

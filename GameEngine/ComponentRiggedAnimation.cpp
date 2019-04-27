@@ -4,6 +4,7 @@ ComponentRiggedAnimation::~ComponentRiggedAnimation()
 {
 }
 
+//Does nothing
 void ComponentRiggedAnimation::RenderSwap()
 {
 }

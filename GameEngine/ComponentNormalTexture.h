@@ -21,6 +21,7 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the render thread texture
 	inline Texture * GetRenderTexture() const
 	{
 		return texture;

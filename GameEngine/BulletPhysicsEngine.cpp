@@ -62,6 +62,7 @@ BulletPhysicsEngine::~BulletPhysicsEngine()
 	delete collisionConfiguration;
 }
 
+//Adds a rigid body to the physics engine
 RigidBody* BulletPhysicsEngine::AddRigidBody(const float mass, glm::vec3 & position, glm::quat & direction, CollisionShape * const shape, Entity * const entity, const bool collisionResponse, const glm::vec3 & angularLimit)
 {
 	btCollisionShape* collisionShape;
@@ -128,6 +129,7 @@ RigidBody* BulletPhysicsEngine::AddRigidBody(const float mass, glm::vec3 & posit
 	return rBody;
 }
 
+//Steps the physics simulation
 void BulletPhysicsEngine::Update(const float pDeltaTime)
 {
 	const float resolution = (1.0 / 300.0);
@@ -135,6 +137,7 @@ void BulletPhysicsEngine::Update(const float pDeltaTime)
 	dynamicsWorld->stepSimulation(pDeltaTime, steps, resolution);
 }
 
+//Called when a collision happens
 bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper * const obj1, const int id1, const int index1, const btCollisionObjectWrapper * const obj2, const int id2, const int index2)
 {
 	Entity * const entity1 = static_cast<Entity *>(obj1->getCollisionObject()->getUserPointer());
@@ -162,6 +165,7 @@ bool BulletPhysicsEngine::collisionCallback(btManifoldPoint& cp, const btCollisi
 	return false;
 }
 
+//Checks if the entity is touching the ground
 bool BulletPhysicsEngine::TouchingGround(const btCollisionObject * const pRigidBody1, const btCollisionObject * const pRigidBody2)
 {
 	const btRigidBody * const rigidBody = dynamic_cast<const btRigidBody *>(pRigidBody1);
@@ -195,6 +199,7 @@ bool BulletPhysicsEngine::TouchingGround(const btCollisionObject * const pRigidB
 	return false;
 }
 
+//Removes the rigid body from the physics engine
 void BulletPhysicsEngine::RemoveRigidBody(RigidBody * const pRigidBody)
 {
 	btRigidBody * const rigidBody = static_cast<btRigidBody *>(pRigidBody->GetRigidBody());
@@ -207,6 +212,7 @@ void BulletPhysicsEngine::RemoveRigidBody(RigidBody * const pRigidBody)
 	dynamicsWorld->removeRigidBody(rigidBody);
 }
 
+//Checks if line can be created between two points
 bool BulletPhysicsEngine::ClearBetweenPoints(const glm::vec3 & position1, const glm::vec3 & position2)
 {
 	const btVector3 rayStart = btVector3(position1.x, position1.y, position1.z);

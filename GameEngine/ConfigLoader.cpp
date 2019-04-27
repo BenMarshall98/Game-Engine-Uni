@@ -17,12 +17,15 @@
 std::string ConfigLoader::engineConfigFile = "";
 std::string ConfigLoader::levelConfigFile = "";
 
+//Loads in engine configuration
 void ConfigLoader::LoadEngineConfig(std::string & fileName)
 {
 	std::ifstream in(fileName);
 
 	std::string fullFile;
 
+
+	//Reads in file
 	while (!in.eof())
 	{
 		const char c = in.get();
@@ -36,6 +39,7 @@ void ConfigLoader::LoadEngineConfig(std::string & fileName)
 	rapidjson::Document d;
 	d.Parse(fullFile.c_str());
 
+	//Checks for errors in syntax
 	if (d.HasParseError())
 	{
 		std::string message = "Error Loading in the Config File";
@@ -79,12 +83,14 @@ void ConfigLoader::LoadEngineConfig(std::string & fileName)
 	engineConfigFile = fileName;
 }
 
+//Loads in level configuration
 void ConfigLoader::LoadLevelConfig(std::string & fileName)
 {
 	std::ifstream in(fileName);
 
 	std::string fullFile;
 
+	//Reads in file
 	while (!in.eof())
 	{
 		const char c = in.get();
@@ -97,7 +103,7 @@ void ConfigLoader::LoadLevelConfig(std::string & fileName)
 
 	rapidjson::Document d;
 	d.Parse(fullFile.c_str());
-
+	 //Checks for errors
 	if (d.HasParseError())
 	{
 		std::string message = "Error Loading in the Config File";
@@ -125,6 +131,7 @@ void ConfigLoader::LoadLevelConfig(std::string & fileName)
 	levelConfigFile = fileName;
 }
 
+//Updates the engine configuration file
 void ConfigLoader::UpdateEngineConfig()
 {
 	if (engineConfigFile == "")
@@ -135,7 +142,7 @@ void ConfigLoader::UpdateEngineConfig()
 	std::ifstream in(engineConfigFile);
 
 	std::string fullFile;
-
+	 //Reads in file
 	while (!in.eof())
 	{
 		const char c = in.get();
@@ -149,6 +156,7 @@ void ConfigLoader::UpdateEngineConfig()
 	rapidjson::Document d;
 	d.Parse(fullFile.c_str());
 
+	//Checks for errors
 	if (d.HasParseError())
 	{
 		std::string message = "Error Loading in the Config File";
@@ -156,6 +164,7 @@ void ConfigLoader::UpdateEngineConfig()
 		return;
 	}
 
+	//Update values
 	rapidjson::Value& windowSetup = d["WindowSetup"];
 
 	rapidjson::Value& fullscreen = windowSetup["Fullscreen"];
@@ -178,6 +187,7 @@ void ConfigLoader::UpdateEngineConfig()
 	d.Accept(writer);
 }
 
+//Updates the level configuration file
 void ConfigLoader::UpdateLevelConfig()
 {
 	if (levelConfigFile == "")
@@ -189,6 +199,7 @@ void ConfigLoader::UpdateLevelConfig()
 
 	std::string fullFile;
 
+	//Reads in file
 	while (!in.eof())
 	{
 		const char c = in.get();
@@ -202,6 +213,7 @@ void ConfigLoader::UpdateLevelConfig()
 	rapidjson::Document d;
 	d.Parse(fullFile.c_str());
 
+	//Checks for errors
 	if (d.HasParseError())
 	{
 		std::string message = "Error Loading in the Config File";
@@ -209,6 +221,7 @@ void ConfigLoader::UpdateLevelConfig()
 		return;
 	}
 
+	//Update Values
 	rapidjson::Value& controller = d["Controller"];
 
 	std::string s = Input::GetController().c_str();

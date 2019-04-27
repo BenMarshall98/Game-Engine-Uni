@@ -20,6 +20,7 @@ AudioManager::~AudioManager()
 	instance = nullptr;
 }
 
+//Updates the source according to values in the audiocomponent
 void AudioManager::UpdateComponentSound(Source * const pSource, const glm::vec3 & position, const AudioPlayback playback) const
 {
 	if (!pSource)
@@ -48,6 +49,7 @@ void AudioManager::UpdateComponentSound(Source * const pSource, const glm::vec3 
 	}
 }
 
+//Makes sure all audio clips managed by audio manager are updated
 void AudioManager::Update()
 {
 	Camera * const camera = CameraManager::Instance()->GetCamera();
@@ -58,10 +60,12 @@ void AudioManager::Update()
 
 	audioEngine->SetListenerPosition(pos, lookAt, up);
 
+	//Keeps the sounds next to the camera
 	for (int i = 0; i < cameraSounds.size(); i++)
 	{
 		Source * const source = cameraSounds.at(i);
 
+		//If finished remove sound
 		if (source->IsFinished())
 		{
 			DeleteSource(source);
@@ -77,6 +81,7 @@ void AudioManager::Update()
 	{
 		Source * const source = locationSounds.at(i)->GetSource();
 		
+		//If finished remove sound
 		if (source->IsFinished())
 		{
 			DeleteSource(source);
@@ -87,10 +92,12 @@ void AudioManager::Update()
 		}
 	}
 
+	//Keeps the sounds next to the entity
 	for (int i = 0; i < entitySounds.size(); i++)
 	{
 		Source * const source = entitySounds.at(i)->GetSource();
 
+		//If finished remove sound
 		if (source->IsFinished())
 		{
 			DeleteSource(source);
@@ -108,6 +115,7 @@ void AudioManager::Update()
 	}
 }
 
+//Plays sound next at the camera location
 void AudioManager::PlayAudio(const std::string & sound)
 {
 	Source * const source = ResourceManager::GetAudio(sound);
@@ -123,6 +131,7 @@ void AudioManager::PlayAudio(const std::string & sound)
 	cameraSounds.push_back(source);
 }
 
+//Plays sound at given location
 void AudioManager::PlayAudioAtLocation(const std::string & sound, const glm::vec3 & location)
 {
 	Source * const source = ResourceManager::GetAudio(sound);
@@ -136,6 +145,7 @@ void AudioManager::PlayAudioAtLocation(const std::string & sound, const glm::vec
 	locationSounds.push_back(locSound);
 }
 
+//Plays sound at the entity location
 void AudioManager::PlayAudioAtEntityLocation(const std::string & sound, Entity * const entity)
 {
 	Source * const source = ResourceManager::GetAudio(sound);

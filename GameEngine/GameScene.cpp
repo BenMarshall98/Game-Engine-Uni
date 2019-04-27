@@ -27,11 +27,13 @@ GameScene::GameScene(const std::string & pFileName) : iScene(pFileName)
 {
 }
 
+//Loads game scene
 void GameScene::Load()
 {
 	function = LevelLoader::LoadLevelJSON(fileName);
 }
 
+//Renders game scene
 void GameScene::Render()
 {
 	RenderManager::Instance()->EnableDepth();
@@ -42,6 +44,7 @@ void GameScene::Render()
 	SystemManager::Instance()->Render();
 }
 
+//Updates game scene
 void GameScene::Update()
 {
 	static int delay = 10 / (60 / (float)Window::GetFrameRate());
@@ -69,6 +72,7 @@ void GameScene::Update()
 	AudioManager::Instance()->Update();
 }
 
+//Closes game scene
 void GameScene::Close()
 {
 	SystemManager::Instance()->Clear();
@@ -80,6 +84,7 @@ void GameScene::Close()
 	ResourceManager::ClearResources();
 }
 
+//Keeps game scene concurrency complient
 void GameScene::Swap()
 {
 	ScriptingManager::Instance()->RunScriptFromScene(function);

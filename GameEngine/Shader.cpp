@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 
+//Reads in the shader
 void Shader::ReadShader(const std::string & fileName, std::string & shaderProgram)
 {
 	std::ifstream reader(fileName.c_str());

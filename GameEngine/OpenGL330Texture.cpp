@@ -13,6 +13,7 @@ OpenGL330Texture::~OpenGL330Texture()
 	glDeleteTextures(1, &mTextureID);
 }
 
+//Loads in texture
 bool OpenGL330Texture::LoadTexture(const std::string & fileName)
 {
 	//The following code is based on: https://learnopengl.com/Getting-started/Textures
@@ -45,6 +46,7 @@ bool OpenGL330Texture::LoadTexture(const std::string & fileName)
 	return success;
 }
 
+//Uses texture
 void OpenGL330Texture::BindTexture()
 {
 	glBindTexture(GL_TEXTURE_2D, mTextureID);

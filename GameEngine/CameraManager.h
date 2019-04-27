@@ -28,22 +28,26 @@ public:
 	CameraManager(const CameraManager&) = delete;
 	CameraManager& operator=(const CameraManager&) = delete;
 
+	//Sets the camera to use
 	inline void SetCamera(Camera * const pCamera)
 	{
 		camera = pCamera;
 	}
 
+	//Sets the projection to use
 	inline void SetProjection(Projection * const pProjection)
 	{
 		projection = pProjection;
 	}
 
+	//Updates the camera and projection matrix
 	inline void Update()
 	{
 		camera->Update();
 		projection->Update();
 	}
 
+	//Deletes the camera and projection
 	inline void Clear()
 	{
 		delete camera;
@@ -54,6 +58,7 @@ public:
 
 	void Resize(float width, float height);
 
+	//Keeps the camera concurrency complient
 	void Swap()
 	{
 		if (camera)
@@ -62,11 +67,13 @@ public:
 		}
 	}
 
+	//Gets the camera
 	inline Camera * GetCamera() const
 	{
 		return camera;
 	}
 
+	//Gets the projection
 	inline Projection * GetProjection() const
 	{
 		return projection;

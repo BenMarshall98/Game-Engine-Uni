@@ -9,6 +9,7 @@ OpenGL330VertexBuffer::~OpenGL330VertexBuffer()
 {
 }
 
+//Uses vertex array buffer
 void OpenGL330VertexBuffer::UseVertexBuffer()
 {
 	glBindVertexArray(VAO);

@@ -17,6 +17,7 @@ public:
 	LocationSound(const LocationSound&) = delete;
 	LocationSound& operator=(const LocationSound&) = delete;
 
+	//Gets the used source
 	inline Source * GetSource() const
 	{
 		return source;

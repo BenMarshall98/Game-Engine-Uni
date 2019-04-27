@@ -20,6 +20,7 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the list of input functions
 	inline std::vector<InputFunction *> * const GetUpdateInputs() const
 	{
 		return inputs;

@@ -21,6 +21,7 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the render thread model
 	inline iModel * GetRenderModel() const
 	{
 		return model;

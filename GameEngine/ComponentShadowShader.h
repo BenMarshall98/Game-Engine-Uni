@@ -25,11 +25,13 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the directional shader
 	inline Shader * GetDirectionalShader() const
 	{
 		return directionShadowShader;
 	}
 
+	//Gets the point shader
 	inline Shader * GetPointShader() const
 	{
 		return pointShadowShader;

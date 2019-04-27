@@ -10,6 +10,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+//Loads in font
 OpenGL330TextRender::OpenGL330TextRender() : VAO(0), VBO(0), VAOBuffer(nullptr)
 {
 	ResourceManager::LoadShader("TextShader", "TextVertex.vert", "TextFragment.frag");
@@ -84,6 +85,7 @@ OpenGL330TextRender::~OpenGL330TextRender()
 {
 }
 
+//Renders Text
 void OpenGL330TextRender::RenderText(const std::string & text, const PixelLocation & pPixelLocation, const glm::vec3 & colour)
 {
 

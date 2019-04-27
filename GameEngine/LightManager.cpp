@@ -35,6 +35,7 @@ LightManager::~LightManager()
 	delete directional;
 }
 
+//Adds a point light
 void LightManager::AddPointLight(const glm::vec3 & pLocation,const glm::vec3 & pLightColour, const float pAttenuation)
 {
 	PointLight * const pointLight = new PointLight();
@@ -44,6 +45,7 @@ void LightManager::AddPointLight(const glm::vec3 & pLocation,const glm::vec3 & p
 	pointLights.push_back(pointLight);
 }
 
+//Removes point light
 void LightManager::RemovePointLight(PointLight * const pPointLight)
 {
 	const std::vector<PointLight *>::iterator iterator = find(pointLights.begin(), pointLights.end(), pPointLight);
@@ -54,6 +56,7 @@ void LightManager::RemovePointLight(PointLight * const pPointLight)
 	}
 }
 
+//Adds a spot light
 void LightManager::AddSpotLight(const glm::vec3 & pLocation, const glm::vec3 & pDirection, const glm::vec3 & pLightColour, const float pAngleInner, const float pAngleOutside)
 {
 	SpotLight * const spotLight = new SpotLight();
@@ -65,6 +68,7 @@ void LightManager::AddSpotLight(const glm::vec3 & pLocation, const glm::vec3 & p
 	spotLights.push_back(spotLight);
 }
 
+//Removes spot light
 void LightManager::RemoveSpotLight(SpotLight * const pSpotLight)
 {
 	const std::vector<SpotLight *>::iterator iterator = find(spotLights.begin(), spotLights.end(), pSpotLight);
@@ -75,6 +79,7 @@ void LightManager::RemoveSpotLight(SpotLight * const pSpotLight)
 	}
 }
 
+//Gets the lights closest to the camera
 void LightManager::Update(const glm::vec3 & pViewLocation)
 {
 	renderPointLights.clear();
@@ -174,6 +179,7 @@ void LightManager::Update(const glm::vec3 & pViewLocation)
 	}
 }
 
+//Renders the closest lights to the camera
 void LightManager::Render(Shader * const pShader)
 {
 	RenderManager * const renderManager = RenderManager::Instance();
@@ -284,6 +290,7 @@ void LightManager::Render(Shader * const pShader)
 	}
 }
 
+//Removes all lights
 void LightManager::Clear()
 {
 	renderSpotLights.clear();

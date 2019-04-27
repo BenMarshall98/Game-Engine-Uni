@@ -3,6 +3,7 @@
 #include "ScriptingManager.h"
 #include <algorithm>
 
+//Adds possible input to the input function
 void InputFunction::AddInput(const GameInput input)
 {
 	if (find(Inputs.begin(), Inputs.end(), input) == Inputs.end())
@@ -12,6 +13,7 @@ void InputFunction::AddInput(const GameInput input)
 	
 }
 
+//Removes possible input from the input function
 void InputFunction::RemoveInput(const GameInput input)
 {
 	std::vector<GameInput>::iterator it;
@@ -24,6 +26,7 @@ void InputFunction::RemoveInput(const GameInput input)
 	}
 }
 
+//Calls Lua function with the input value
 void InputFunction::Update(Entity * const entity, float timePeriod) const
 {
 	InputManager * const inputManager = InputManager::Instance();

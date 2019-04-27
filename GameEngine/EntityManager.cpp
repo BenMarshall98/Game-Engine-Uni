@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 
+//Creates a new entity
 Entity * EntityManager::CreateEntity(const std::string & entityName)
 {
 	Entity * const entity = new Entity(entityName);
@@ -9,6 +10,7 @@ Entity * EntityManager::CreateEntity(const std::string & entityName)
 	return entity;
 }
 
+//Gets entity by its name 
 Entity * EntityManager::GetEntityByName(const std::string & entityName)
 {
 	if (entityName.compare("") == 0)
@@ -27,11 +29,13 @@ Entity * EntityManager::GetEntityByName(const std::string & entityName)
 	return nullptr;
 }
 
+//Sets the entity to be updated in the system list
 void EntityManager::FinishEntity(Entity * const entity)
 {
 	ToUpdateList.push_back(entity);
 }
 
+//Remove entity
 void EntityManager::RemoveEntity(Entity * entity)
 {
 	const std::vector<Entity *>::iterator object = find(EntityList.begin(), EntityList.end(), entity);
@@ -46,17 +50,19 @@ void EntityManager::RemoveEntity(Entity * entity)
 	entity = nullptr;
 }
 
+//Adds component to the game engine
 void EntityManager::AddComponentToEntity(Entity * entity, iComponent * component)
 {
 	entity->AddComponent(component);
 }
 
-
+//Gets component from the entity
 iComponent * EntityManager::GetComponentOfEntity(Entity * const entity, const ComponentType componentName)
 {
 	return entity->GetComponentOfEntity(componentName);
 }
 
+//Checks a list of all entities that contains the required components 
 std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const std::vector<ComponentType> & componentName)
 {
 	std::vector<Entity *> entities;
@@ -84,6 +90,7 @@ std::vector<Entity *> EntityManager::GetAllEntitiesWithComponents(const std::vec
 	return entities;
 }
 
+//Checks to see if entity has required components
 bool EntityManager::CheckEntityHasComponents(Entity * const entity, const std::vector<ComponentType> & componentName)
 {
 	bool containsComponents = true;
@@ -100,6 +107,7 @@ bool EntityManager::CheckEntityHasComponents(Entity * const entity, const std::v
 	return containsComponents;
 }
 
+//Makes sure that the systems are upto date, with new anad deleted entities
 void EntityManager::Update()
 {
 	SystemManager * const systemManager = SystemManager::Instance();
@@ -119,6 +127,7 @@ void EntityManager::Update()
 	ToDeleteList.clear();
 }
 
+//Keeps entities concurrency complient
 void EntityManager::Swap()
 {
 	for (int i = 0; i < EntityList.size(); i++)
@@ -127,6 +136,7 @@ void EntityManager::Swap()
 	}
 }
 
+//Removes all components, ready for the next scene
 void EntityManager::Clear()
 {
 	for (int i = 0; i < EntityList.size(); i++)

@@ -30,6 +30,7 @@ public:
 
 	void CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent);
 
+	//Moves entity off of path
 	inline void MoveOffPath()
 	{
 		onPath = false;

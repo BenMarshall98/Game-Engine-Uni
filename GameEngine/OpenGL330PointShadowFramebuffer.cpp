@@ -33,11 +33,13 @@ OpenGL330PointShadowFramebuffer::~OpenGL330PointShadowFramebuffer()
 {
 }
 
+//Uses framebuffer
 void OpenGL330PointShadowFramebuffer::UseFrameBuffer()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, pointFBO);
 }
 
+//Uses texture
 void OpenGL330PointShadowFramebuffer::BindTexture()
 {
 	glBindTexture(GL_TEXTURE_CUBE_MAP, pointCubemap);

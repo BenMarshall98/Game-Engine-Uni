@@ -13,6 +13,7 @@ FollowPlaneCamera::~FollowPlaneCamera()
 {
 }
 
+//Sets the camera to a location along the XY plane, facing entity
 void FollowPlaneCamera::Update()
 {
 	iComponent * const componentPosition = EntityManager::Instance()->GetComponentOfEntity(mEntity, ComponentType::COMPONENT_POSITION);

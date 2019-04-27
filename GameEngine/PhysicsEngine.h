@@ -17,36 +17,43 @@ public:
 
 	virtual void Update(float pDeltaTime) = 0;
 
+	//Gets the position of the rigid body
 	inline glm::vec3 GetPositionOfRigidBody(RigidBody * const pRigidBody)
 	{
 		return pRigidBody->GetPosition();
 	}
 	
+	//Gets the direction of the rigid body
 	inline glm::quat GetDirectionOfRigidBody(RigidBody * const pRigidBody)
 	{
 		return pRigidBody->GetDirection();
 	}
 
+	//Sets the position of the rigid body
 	inline void SetPositionOfRigidBody(RigidBody * const pRigidBody, const glm::vec3 & pPosition)
 	{
 		pRigidBody->SetPosition(pPosition);
 	}
 
+	//Sets the direction of the rigid body
 	inline void SetDirectionOfRigidBody(RigidBody * const pRigidBody, const glm::quat & pDirection)
 	{
 		pRigidBody->SetDirection(pDirection);
 	}
 
+	//Apply velocity to the rigid body
 	inline void ApplyVelocity(RigidBody * const pRigidBody, const glm::vec3 & velocity)
 	{
 		pRigidBody->ApplyVelocity(velocity);
 	}
 
+	//Apply impulse to the rigid body
 	inline void ApplyImpulse(RigidBody * const pRigidBody, const glm::vec3 & impulse)
 	{
 		pRigidBody->ApplyImpulse(impulse);
 	}
 
+	//Apply rotation to the rigid body
 	inline void ApplyRotation(RigidBody * const pRigidBody, const glm::vec3 & rotation)
 	{
 		pRigidBody->ApplyRotation(rotation);

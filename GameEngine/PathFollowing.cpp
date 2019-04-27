@@ -5,6 +5,7 @@ PathFollowing::~PathFollowing()
 {
 }
 
+//Moves the entity along its path
 void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::quat & currentDirection, ComponentPhysics * const physicsComponent)
 {
 	const float disVelocity = 3.5;
@@ -63,6 +64,7 @@ void PathFollowing::CalculatePath(const glm::vec3 & currentPosition, const glm::
 	//physicsComponent->SetUpdateRotation(rotation);
 }
 
+//Checks to see if Entity is within the radius of a path node
 bool PathFollowing::OnPath(const glm::vec3 & position)
 {
 	if (onPath)
@@ -83,6 +85,7 @@ bool PathFollowing::OnPath(const glm::vec3 & position)
 	return false;
 }
 
+//Gets the nearest node to the entity
 glm::vec3 PathFollowing::GetNearestPath(const glm::vec3 & position)
 {
 	int closestNode = 0;

@@ -19,11 +19,13 @@ public:
 	EntitySound(const EntitySound&) = delete;
 	EntitySound& operator=(const EntitySound&) = delete;
 
+	//Gets the used source
 	inline Source * GetSource() const
 	{
 		return source;
 	}
 
+	//Gets the used entity
 	inline Entity * GetEntity() const
 	{
 		return entity;

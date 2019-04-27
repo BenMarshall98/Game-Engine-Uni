@@ -28,6 +28,7 @@ public:
 
 	float GetInputValue(const std::vector<GameInput> & gameInputs) const;
 
+	//Gets the input class used
 	inline Input * GetInputReader() const
 	{
 		return inputDevice;

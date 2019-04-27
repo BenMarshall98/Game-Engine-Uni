@@ -31,11 +31,13 @@ OpenGL330DirectionalShadowFramebuffer::~OpenGL330DirectionalShadowFramebuffer()
 {
 }
 
+//Uses framebuffer
 void OpenGL330DirectionalShadowFramebuffer::UseFrameBuffer()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 }
 
+//Uses texture
 void OpenGL330DirectionalShadowFramebuffer::BindTexture()
 {
 	glBindTexture(GL_TEXTURE_2D, Texture);

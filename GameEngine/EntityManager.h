@@ -38,6 +38,7 @@ public:
 
 	void FinishEntity(Entity * entity);
 	
+	//Sets the entity to be deleted
 	inline void AddToDeleteList(Entity * const entity)
 	{
 		const std::vector<Entity *>::iterator it = find(ToDeleteList.begin(), ToDeleteList.end(), entity);
@@ -49,7 +50,6 @@ public:
 	}
 
 	void AddComponentToEntity(Entity * entity, iComponent * component);
-	void RemoveComponentFromEntity(Entity * entity, iComponent * component);
 	iComponent * GetComponentOfEntity(Entity * entity, ComponentType componentName);
 	std::vector<Entity *> GetAllEntitiesWithComponents(const std::vector<ComponentType> & componentName);
 	bool CheckEntityHasComponents(Entity * entity, const std::vector<ComponentType> & componentName);

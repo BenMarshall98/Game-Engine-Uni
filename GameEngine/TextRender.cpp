@@ -9,6 +9,7 @@ TextRender::TextRender()
 
 }
 
+//Calculates the pizel size of the text
 PixelLocation TextRender::CalculateSize(const std::string & text, const glm::vec2 & location, const float size, const std::string & align)
 {
 	const float scale = ((size / 100.0) * (float)Window::GetHeight()) / pixelHeight;

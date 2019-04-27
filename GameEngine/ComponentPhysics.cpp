@@ -13,11 +13,13 @@ ComponentPhysics::~ComponentPhysics()
 	delete shape;
 }
 
+//Does nothing
 void ComponentPhysics::RenderSwap()
 {
 
 }
 
+//Adds collision ensuring only one of each collision is stored
 void ComponentPhysics::AddCollision(Entity * physicsComponent, EntityType pEntityType)
 {
 	std::map<Entity *, EntityType>::iterator it;
@@ -29,6 +31,7 @@ void ComponentPhysics::AddCollision(Entity * physicsComponent, EntityType pEntit
 	}
 }
 
+//Calls Lua function according to the Entity Type collided with
 void ComponentPhysics::ResolveCollisions()
 {
 	std::map<Entity *, EntityType>::iterator it;
@@ -51,6 +54,7 @@ void ComponentPhysics::ResolveCollisions()
 	unresolvedCollisions.clear();
 }
 
+//Turns string to EntityType enum
 EntityType ComponentPhysics::StringToEnum(const std::string & entityName)
 {
 	for (int i = 0; i < EntityTypeNames.size(); i++)

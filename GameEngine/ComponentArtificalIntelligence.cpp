@@ -4,6 +4,7 @@ ComponentArtificalIntelligence::~ComponentArtificalIntelligence()
 {
 }
 
+//Does nothing
 void ComponentArtificalIntelligence::RenderSwap()
 {
 

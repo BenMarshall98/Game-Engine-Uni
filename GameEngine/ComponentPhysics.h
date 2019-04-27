@@ -59,6 +59,8 @@ public:
 
 	void AddCollision(Entity * physicsComponent, EntityType entityType);
 	void ResolveCollisions();
+
+	//Keeps component concurrency complient
 	void GroundSwap()
 	{
 		touchingGround = nextTouchingGround;
@@ -67,76 +69,91 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the update thread angular limits
 	inline const glm::vec3 & GetUpdateAngularLimits() const
 	{
 		return angularLimits;
 	}
 
+	//Gets the update thread collision response
 	inline bool GetUpdateCollisionResponse() const
 	{
 		return collisionResponse;
 	}
 
+	//Gets the update thread velocity
 	inline const glm::vec3 & GetUpdateVelocity() const
 	{
 		return velocity;
 	}
 
+	//Sets the update thread velocity
 	inline void SetUpdateVelocity(const glm::vec3 & pVelocity)
 	{
 		velocity = pVelocity;
 	}
 
+	//Gets the update thread impulse
 	inline const glm::vec3 & GetUpdateImpulse() const
 	{
 		return impulse;
 	}
 
+	//Sets the update thread impulse
 	inline void SetUpdateImpulse(const glm::vec3 & pImpulse)
 	{
 		impulse = pImpulse;
 	}
 
+	//Gets the update thread rotation
 	inline const glm::vec3 & GetUpdateRotation() const
 	{
 		return rotation;
 	}
 
+	//Sets the update thread rotation
 	inline void SetUpdateRotation(const glm::vec3 & pRotation)
 	{
 		rotation = pRotation;
 	}
 
+	//Gets the update thread collision shape
 	inline CollisionShape * GetUpdateShape() const
 	{
 		return shape;
 	}
 
+	//Gets the update thread mass
 	inline float GetUpdateMass() const
 	{
 		return mass;
 	}
 
+	//Sets the update thread rigid body
 	inline void SetUpdateRigidBody(RigidBody * const pRigidBody)
 	{
 		rigidBody = pRigidBody;
 	}
 
+	//Gets the update thread rigid body
 	inline RigidBody * GetUpdateRigidBody() const
 	{
 		return rigidBody;
 	}
 
+	//Gets the update thread entity type
 	inline EntityType GetUpdateEntityType() const
 	{
 		return entityType;
 	}
 
+	//Gets the update thread touching ground state
 	inline bool GetUpdateTouchingGround() const
 	{
   		return touchingGround;
 	}
 
+	//Sets the update thread touching ground state
 	inline void SetUpdateTouchingGround(const bool pTouchingGround)
 	{
 		nextTouchingGround = nextTouchingGround || pTouchingGround;

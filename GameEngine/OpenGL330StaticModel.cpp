@@ -46,6 +46,7 @@ OpenGL330StaticModel::OpenGL330StaticModel(const std::vector<glm::vec3> & pVerte
 	VAOBuffer = new OpenGL330VertexBuffer(VAO);
 }
 
+//Renders static model
 void OpenGL330StaticModel::Render(Shader * shader)
 {
 	RenderManager::Instance()->BindVertexArray(VAOBuffer);

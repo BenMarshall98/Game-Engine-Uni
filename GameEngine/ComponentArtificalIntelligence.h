@@ -33,6 +33,7 @@ public:
 
 	void RenderSwap() override;
 
+	//Calls the AI pointer, according to preferance AIStateMachine > PathFinding > PathFollowing
 	inline void ResolveAI(Entity * const thisEntity, float timePeriod)
 	{
 		if (aiStateMachine)

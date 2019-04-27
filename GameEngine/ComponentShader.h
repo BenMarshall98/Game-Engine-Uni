@@ -21,6 +21,7 @@ public:
 
 	void RenderSwap() override;
 
+	//Gets the render thread shader
 	inline Shader * GetRenderShader() const
 	{
 		return shader;

@@ -59,6 +59,7 @@ OpenGL330AnimatedModel::~OpenGL330AnimatedModel()
 	glDeleteBuffers(1, &EBO);
 }
 
+//Renders animation model
 void OpenGL330AnimatedModel::Render()
 {
 	RenderManager::Instance()->BindVertexArray(VAOBuffer);

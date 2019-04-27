@@ -9,10 +9,12 @@ ComponentAnimation::~ComponentAnimation()
 {
 }
 
+//Does nothing
 void ComponentAnimation::RenderSwap()
 {
 }
 
+//Gets the Lua animation function
 std::string & ComponentAnimation::GetFunction()
 {
 	return function;

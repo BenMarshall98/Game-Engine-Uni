@@ -1,12 +1,11 @@
 #include "Projection.h"
 
-
-
 Projection::Projection(const ProjectionType pProjection, const float pWidth, const float pHeight, const float pNear, const float pFar) : projectionType(pProjection), mWidth(pWidth), mHeight(pHeight), mNear(pNear), mFar(pFar)
 {
 	Update();
 }
 
+//Updates the projection matrix
 void Projection::Update()
 {
 	if (mWidth == 0)

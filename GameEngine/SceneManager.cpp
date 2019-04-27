@@ -46,6 +46,7 @@ SceneManager::~SceneManager()
 	delete window;
 }
 
+//Configures the engine
 void SceneManager::ConfigEngine(std::string configFile)
 {
 	ConfigLoader::LoadEngineConfig(configFile);
@@ -59,16 +60,19 @@ void SceneManager::ConfigEngine(std::string configFile)
 	RenderManager::Instance();
 }
 
+//Updates the current scene
 void SceneManager::Update()
 {
 	scenes.top()->Update();
 }
 
+//Renders the current scene
 void SceneManager::Render()
 {
 	scenes.top()->Render();
 }
 
+//Keeps scene concurrency complient
 void SceneManager::Swap()
 {
 	scenes.top()->Swap();
@@ -77,11 +81,13 @@ void SceneManager::Swap()
 	EntityManager::Instance()->Update();
 }
 
+//Resizes the window
 void SceneManager::Resize(const int width, const int height)
 {
 	CameraManager::Instance()->Resize(width, height);
 }
 
+//Creates new scene
 void SceneManager::StartNewScene(iScene * const scene)
 {
 	tempRunning = windowRunning;
@@ -90,6 +96,7 @@ void SceneManager::StartNewScene(iScene * const scene)
 	newSceneBool = true;
 }
 
+//Replaces current scene with another
 void SceneManager::StartSwapScene(iScene * const scene)
 {
 	tempRunning = windowRunning;
@@ -98,6 +105,7 @@ void SceneManager::StartSwapScene(iScene * const scene)
 	swapSceneBool = true;
 }
 
+//Closes N number of scenes
 void SceneManager::StartCloseScene(const int noOfScene)
 {
 	tempRunning = windowRunning;
@@ -106,12 +114,14 @@ void SceneManager::StartCloseScene(const int noOfScene)
 	closeSceneBool = true;
 }
 
+//Closes window
 void SceneManager::StartCloseWindow()
 {
 	windowRunning = false;
 	closeWindowBool = true;
 }
 
+//Finishes create new scene
 void SceneManager::FinishNewScene()
 {
 	scenes.push(newScene);
@@ -126,6 +136,7 @@ void SceneManager::FinishNewScene()
 	newSceneBool = false;
 }
 
+//Finishes replace current scene with another
 void SceneManager::FinishSwapScene()
 {
 	scenes.top()->Close();
@@ -144,6 +155,7 @@ void SceneManager::FinishSwapScene()
 	swapSceneBool = false;
 }
 
+//Finishes close N number of scenes
 void SceneManager::FinishCloseScene()
 {
 	for (int i = 0; i < scenesToClose; i++)
@@ -161,12 +173,14 @@ void SceneManager::FinishCloseScene()
 	closeSceneBool = false;
 }
 
+//Finishes close window
 void SceneManager::FinishCloseWindow()
 {
 	tempRunning = false;
 	closeWindowBool = false;
 }
 
+//Creates new scene
 void SceneManager::NewScene(iScene * const scene)
 {
 	StartNewScene(scene);
@@ -178,21 +192,25 @@ void SceneManager::NewScene(iScene * const scene)
 	}
 }
 
+//Replaces current scene with another
 void SceneManager::SwapScene(iScene * const scene)
 {
 	StartSwapScene(scene);
 }
 
+//Closes N number of scenes
 void SceneManager::CloseScene(const int noOfScenes)
 {
 	StartCloseScene(noOfScenes);
 }
 
+//Closes window
 void SceneManager::CloseWindow()
 {
 	StartCloseWindow();
 }
 
+//Runs the game engine
 void SceneManager::Run()
 {
 	while (tempRunning)

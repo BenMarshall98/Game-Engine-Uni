@@ -9,6 +9,7 @@ ComponentState::~ComponentState()
 {
 }
 
+//Gets the required value by valuename (read variable), creating the value and valuename if it doesn't exist
 std::string ComponentState::GetValue(std::string & valueName, std::string & defaultValue)
 {
 	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
@@ -24,6 +25,7 @@ std::string ComponentState::GetValue(std::string & valueName, std::string & defa
 	}
 }
 
+//Sets valuename to the required value, creating the value and valuename if it doesn't exist
 void ComponentState::SetValue(std::string & valueName, std::string & value)
 {
 	const std::map<std::string, std::string>::iterator it = stateValues.find(valueName);
@@ -38,6 +40,7 @@ void ComponentState::SetValue(std::string & valueName, std::string & value)
 	}
 }
 
+//Does nothing
 void ComponentState::RenderSwap()
 {
 }

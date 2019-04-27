@@ -12,11 +12,13 @@ OpenGL330Shader::~OpenGL330Shader()
 	glDeleteProgram(mShaderID);
 }
 
+//Uses shader
 void OpenGL330Shader::UseShader() const
 {
 	glUseProgram(mShaderID);
 }
 
+//Loads in shader
 bool OpenGL330Shader::LoadShader(const std::string & vertexProgram, const std::string & fragmentProgram, const std::string & geometryProgram)
 {
 	/*
@@ -71,6 +73,7 @@ bool OpenGL330Shader::LoadShader(const std::string & vertexProgram, const std::s
 	return success;
 }
 
+//Compiles shader
 int OpenGL330Shader::CompileShader(const std::string & fileName, const GLenum shaderType)
 {
 	std::string shaderProgram;
@@ -94,6 +97,7 @@ int OpenGL330Shader::CompileShader(const std::string & fileName, const GLenum sh
 	return shader;
 }
 
+//Get uniform location in shader
 UniformLocation * OpenGL330Shader::GetUniformLocation(const std::string & uniformName)
 {
 	int location = glGetUniformLocation(mShaderID, uniformName.c_str());
