@@ -1,6 +1,6 @@
 #pragma once
 
-#pragma comment(lib, "../irrKlang-64bit-1.6.0/lib/Winx64-visualStudio/irrKlang.lib")
+#pragma comment(lib, "../External/irrKlang-64bit-1.6.0/lib/Winx64-visualStudio/irrKlang.lib")
 #include "irrKlang-64bit-1.6.0/include/irrKlang.h"
 
 #include "Buffer.h"

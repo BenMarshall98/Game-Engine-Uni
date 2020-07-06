@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\BulletPhysics\btBulletDynamicsCommon.h"
+#include "BulletPhysics\btBulletDynamicsCommon.h"
 #include "CollisionShape.h"
 #include "glm/glm.hpp"
 #include "Entity.h"

@@ -22,32 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5D68CAE3-7845-4E1F-9CA5-1B560135C1EB}</ProjectGuid>
     <RootNamespace>GameEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\assimp-4.1.0\assimp-4.1.0\include\;$(SolutionDir);$(SolutionDir)\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\External\assimp-4.1.0\assimp-4.1.0\include\;$(SolutionDir)\External;$(SolutionDir)\External\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Link />
@@ -349,23 +349,29 @@
     <Text Include="Useful Links.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Assimp\Assimp.vcxproj">
+    <ProjectReference Include="..\External\Assimp\Assimp.vcxproj">
       <Project>{ddc0cc0b-0fd1-4ac9-8aa7-963855d1f4c3}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\BulletPhysicsEngine\BulletPhysicsEngine.vcxproj">
+    <ProjectReference Include="..\External\BulletPhysicsEngine\BulletPhysicsEngine.vcxproj">
       <Project>{19f0091f-89b9-436b-853d-681658c0672b}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\FreeType\FreeType.vcxproj">
+    <ProjectReference Include="..\External\FreeType\FreeType.vcxproj">
       <Project>{7d5f9dbf-7641-4e1e-b16d-3ac459d251f6}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Lua\Lua.vcxproj">
+    <ProjectReference Include="..\External\IrrXML\IrrXML.vcxproj">
+      <Project>{20893917-90e8-496e-aa80-d2d7eb14326c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\External\Lua\Lua.vcxproj">
       <Project>{7fcce334-42b1-4cf3-8f96-04cafe83f7c0}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\OpenGL\OpenGL.vcxproj">
+    <ProjectReference Include="..\External\OpenGL\OpenGL.vcxproj">
       <Project>{705a2196-0c29-4942-a312-f30eeaf270eb}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\RapidJSON\RapidJSON.vcxproj">
+    <ProjectReference Include="..\External\RapidJSON\RapidJSON.vcxproj">
       <Project>{4e408fff-3aa3-49cf-88ba-903873f1cb44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\External\zlibstatic\zlibstatic.vcxproj">
+      <Project>{6524729b-f799-4c16-8d19-4d0d008633d8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

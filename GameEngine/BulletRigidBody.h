@@ -1,6 +1,6 @@
 #pragma once
 #include "RigidBody.h"
-#include "..\BulletPhysics\btBulletDynamicsCommon.h"
+#include "BulletPhysics\btBulletDynamicsCommon.h"
 
 #include "glm/gtc/quaternion.hpp"
 
